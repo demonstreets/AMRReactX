@@ -52,6 +52,7 @@ mpirun -np 2 ./build/amrreactx inputs/verify_wall_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_box_source_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_auto_dt_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_volume_fraction_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_boundary_faces_3d.in
 ```
 
 Run the Stage 1 verification suite:
@@ -99,6 +100,9 @@ Runtime diagnostics:
 - `adv_cfl_sum`, `max_dir_cfl`: explicit upwind advection stability indicators.
 - `diffusion_number`: explicit centered-diffusion stability indicator.
 - `mass`, `injected`, `outlet`, `balance_error`: scalar mass budget.
+- `outlet_xlo_rate`, `outlet_xhi_rate`, `outlet_ylo_rate`,
+  `outlet_yhi_rate`, `outlet_zlo_rate`, `outlet_zhi_rate`: per-face scalar
+  outlet rates whose sum equals `outlet_rate`.
 - `max_Y`, `max_Y_location`: maximum scalar value and one deterministic cell
   center where it occurs.
 - `max_concentration`: maximum `C_leak_diag` in either mass-fraction or

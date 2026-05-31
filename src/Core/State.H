@@ -42,6 +42,12 @@ enum ConcentrationBasis {
 enum DiagIndex {
     SourceRate = 0,
     OutletRate,
+    OutletXLoRate,
+    OutletXHiRate,
+    OutletYLoRate,
+    OutletYHiRate,
+    OutletZLoRate,
+    OutletZHiRate,
     XMoment,
     YMoment,
     ZMoment,
@@ -114,6 +120,12 @@ struct TransportDiagnostics {
     amrex::Real scalar_mass = 0.0;
     amrex::Real source_rate = 0.0;
     amrex::Real outlet_rate = 0.0;
+    amrex::Real outlet_xlo_rate = 0.0;
+    amrex::Real outlet_xhi_rate = 0.0;
+    amrex::Real outlet_ylo_rate = 0.0;
+    amrex::Real outlet_yhi_rate = 0.0;
+    amrex::Real outlet_zlo_rate = 0.0;
+    amrex::Real outlet_zhi_rate = 0.0;
     amrex::Real x_centroid = 0.0;
     amrex::Real y_centroid = 0.0;
     amrex::Real z_centroid = 0.0;

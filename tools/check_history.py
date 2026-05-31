@@ -22,10 +22,22 @@ def close(value, expected, tol, name):
             f"{name}: got {value:.17g}, expected {expected:.17g} +/- {tol:.3g}")
 
 
+def outlet_face_rate_sum(row):
+    return (row["outlet_xlo_rate"] + row["outlet_xhi_rate"]
+            + row["outlet_ylo_rate"] + row["outlet_yhi_rate"]
+            + row["outlet_zlo_rate"] + row["outlet_zhi_rate"])
+
+
+def check_outlet_rate_decomposition(row, tol=1.0e-12):
+    close(outlet_face_rate_sum(row), row["outlet_rate"], tol,
+          "sum of face outlet rates")
+
+
 def check_case(case, rows):
     require(rows, "history file is empty")
     first = rows[0]
     last = rows[-1]
+    check_outlet_rate_decomposition(last)
 
     if case == "leak":
         close(last["mass"], 0.038577307826430318, 1.0e-9, "leak final mass")
@@ -48,6 +60,7 @@ def check_case(case, rows):
     elif case == "wall":
         close(last["mass"], first["mass"], 1.0e-9, "wall mass conservation")
         close(last["outlet"], 0.0, 1.0e-14, "wall outlet mass")
+        close(last["outlet_zlo_rate"], 0.0, 1.0e-14, "wall zlo outlet rate")
         require(last["centroid_z"] < first["centroid_z"], "wall cloud did not move toward zlo")
         require(abs(last["balance_error"]) < 1.0e-12, "wall balance error too large")
     elif case == "box":
@@ -66,6 +79,16 @@ def check_case(case, rows):
         close(last["max_concentration"], expected_x, 1.0e-12, "volume_fraction max concentration")
         close(last["cloud_volume"], 1.0, 1.0e-12, "volume_fraction cloud volume")
         close(last["flammable_volume"], 1.0, 1.0e-12, "volume_fraction flammable volume")
+    elif case == "boundary_faces":
+        require(last["outlet_yhi_rate"] > 0.0, "boundary_faces yhi outlet rate should be positive")
+        close(last["outlet_xlo_rate"], 0.0, 1.0e-14, "boundary_faces xlo outlet rate")
+        close(last["outlet_xhi_rate"], 0.0, 1.0e-14, "boundary_faces xhi outlet rate")
+        close(last["outlet_ylo_rate"], 0.0, 1.0e-14, "boundary_faces ylo outlet rate")
+        close(last["outlet_zlo_rate"], 0.0, 1.0e-14, "boundary_faces zlo outlet rate")
+        close(last["outlet_zhi_rate"], 0.0, 1.0e-14, "boundary_faces zhi outlet rate")
+        close(last["outlet_rate"], last["outlet_yhi_rate"], 1.0e-14, "boundary_faces total outlet rate")
+        require(last["mass"] < first["mass"], "boundary_faces mass should leave through yhi")
+        require(abs(last["balance_error"]) < 1.0e-9, "boundary_faces balance error too large")
     else:
         raise AssertionError(f"unknown case {case}")
 

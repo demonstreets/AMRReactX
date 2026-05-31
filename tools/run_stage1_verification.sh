@@ -33,5 +33,6 @@ run_case wall inputs/verify_wall_3d.in history_verify_wall.csv
 run_case box inputs/verify_box_source_3d.in history_verify_box_source.csv
 run_case auto_dt inputs/verify_auto_dt_3d.in history_verify_auto_dt.csv
 run_case volume_fraction inputs/verify_volume_fraction_3d.in history_verify_volume_fraction.csv
+run_case boundary_faces inputs/verify_boundary_faces_3d.in history_verify_boundary_faces.csv
 
 echo "Stage 1/2 verification suite passed."

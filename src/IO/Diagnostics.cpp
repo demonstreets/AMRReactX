@@ -80,24 +80,36 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
 
             d(i, j, k, SourceRate) = rho0 * source;
             d(i, j, k, OutletRate) = 0.0;
+            d(i, j, k, OutletXLoRate) = 0.0;
+            d(i, j, k, OutletXHiRate) = 0.0;
+            d(i, j, k, OutletYLoRate) = 0.0;
+            d(i, j, k, OutletYHiRate) = 0.0;
+            d(i, j, k, OutletZLoRate) = 0.0;
+            d(i, j, k, OutletZHiRate) = 0.0;
             if (i == dom_lo[0] && kparams.wind[0] < 0.0 && kparams.bc_lo[0] != BcWall) {
-                d(i, j, k, OutletRate) += rho0 * (-kparams.wind[0]) * y_leak * face_area[0] / cell_volume;
+                d(i, j, k, OutletXLoRate) = rho0 * (-kparams.wind[0]) * y_leak * face_area[0] / cell_volume;
             }
             if (i == dom_hi[0] && kparams.wind[0] > 0.0 && kparams.bc_hi[0] != BcWall) {
-                d(i, j, k, OutletRate) += rho0 * kparams.wind[0] * y_leak * face_area[0] / cell_volume;
+                d(i, j, k, OutletXHiRate) = rho0 * kparams.wind[0] * y_leak * face_area[0] / cell_volume;
             }
             if (j == dom_lo[1] && kparams.wind[1] < 0.0 && kparams.bc_lo[1] != BcWall) {
-                d(i, j, k, OutletRate) += rho0 * (-kparams.wind[1]) * y_leak * face_area[1] / cell_volume;
+                d(i, j, k, OutletYLoRate) = rho0 * (-kparams.wind[1]) * y_leak * face_area[1] / cell_volume;
             }
             if (j == dom_hi[1] && kparams.wind[1] > 0.0 && kparams.bc_hi[1] != BcWall) {
-                d(i, j, k, OutletRate) += rho0 * kparams.wind[1] * y_leak * face_area[1] / cell_volume;
+                d(i, j, k, OutletYHiRate) = rho0 * kparams.wind[1] * y_leak * face_area[1] / cell_volume;
             }
             if (k == dom_lo[2] && kparams.wind[2] < 0.0 && kparams.bc_lo[2] != BcWall) {
-                d(i, j, k, OutletRate) += rho0 * (-kparams.wind[2]) * y_leak * face_area[2] / cell_volume;
+                d(i, j, k, OutletZLoRate) = rho0 * (-kparams.wind[2]) * y_leak * face_area[2] / cell_volume;
             }
             if (k == dom_hi[2] && kparams.wind[2] > 0.0 && kparams.bc_hi[2] != BcWall) {
-                d(i, j, k, OutletRate) += rho0 * kparams.wind[2] * y_leak * face_area[2] / cell_volume;
+                d(i, j, k, OutletZHiRate) = rho0 * kparams.wind[2] * y_leak * face_area[2] / cell_volume;
             }
+            d(i, j, k, OutletRate) = d(i, j, k, OutletXLoRate)
+                                   + d(i, j, k, OutletXHiRate)
+                                   + d(i, j, k, OutletYLoRate)
+                                   + d(i, j, k, OutletYHiRate)
+                                   + d(i, j, k, OutletZLoRate)
+                                   + d(i, j, k, OutletZHiRate);
             d(i, j, k, XMoment) = rho0 * y_leak * x;
             d(i, j, k, YMoment) = rho0 * y_leak * y;
             d(i, j, k, ZMoment) = rho0 * y_leak * z;
@@ -111,6 +123,12 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
     out.scalar_mass = scalar_mass(state, geom, params);
     out.source_rate = diag.sum(SourceRate) * cell_volume;
     out.outlet_rate = diag.sum(OutletRate) * cell_volume;
+    out.outlet_xlo_rate = diag.sum(OutletXLoRate) * cell_volume;
+    out.outlet_xhi_rate = diag.sum(OutletXHiRate) * cell_volume;
+    out.outlet_ylo_rate = diag.sum(OutletYLoRate) * cell_volume;
+    out.outlet_yhi_rate = diag.sum(OutletYHiRate) * cell_volume;
+    out.outlet_zlo_rate = diag.sum(OutletZLoRate) * cell_volume;
+    out.outlet_zhi_rate = diag.sum(OutletZHiRate) * cell_volume;
     const amrex::Real x_moment = diag.sum(XMoment) * cell_volume;
     const amrex::Real y_moment = diag.sum(YMoment) * cell_volume;
     const amrex::Real z_moment = diag.sum(ZMoment) * cell_volume;
@@ -229,6 +247,8 @@ void initialize_history_file(const RuntimeParams& params)
     std::ofstream history(params.history_file);
     history << "step,time,mass,injected,outlet,balance_error,source_rate,outlet_rate,max_Y,"
             << "max_Y_x,max_Y_y,max_Y_z,max_concentration,centroid_x,centroid_y,centroid_z,"
+            << "outlet_xlo_rate,outlet_xhi_rate,outlet_ylo_rate,outlet_yhi_rate,"
+            << "outlet_zlo_rate,outlet_zhi_rate,"
             << "cloud_volume,flammable_volume\n";
 }
 
@@ -248,6 +268,12 @@ void print_diagnostics(int step,
                    << " balance_error " << balance_error
                    << " source_rate " << diag.source_rate
                    << " outlet_rate " << diag.outlet_rate
+                   << " outlet_face_rates xlo " << diag.outlet_xlo_rate
+                   << " xhi " << diag.outlet_xhi_rate
+                   << " ylo " << diag.outlet_ylo_rate
+                   << " yhi " << diag.outlet_yhi_rate
+                   << " zlo " << diag.outlet_zlo_rate
+                   << " zhi " << diag.outlet_zhi_rate
                    << " max_Y " << diag.max_y
                    << " max_Y_location " << diag.max_y_x
                    << " " << diag.max_y_y
@@ -289,6 +315,12 @@ void append_history(int step,
             << diag.x_centroid << ","
             << diag.y_centroid << ","
             << diag.z_centroid << ","
+            << diag.outlet_xlo_rate << ","
+            << diag.outlet_xhi_rate << ","
+            << diag.outlet_ylo_rate << ","
+            << diag.outlet_yhi_rate << ","
+            << diag.outlet_zlo_rate << ","
+            << diag.outlet_zhi_rate << ","
             << diag.cloud_volume << ","
             << diag.flammable_volume << "\n";
 }
