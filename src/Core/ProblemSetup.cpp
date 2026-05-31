@@ -9,6 +9,7 @@
 #include <AMReX_RealBox.H>
 #include <AMReX_Vector.H>
 
+#include <cmath>
 #include <string>
 
 namespace amrreactx {
@@ -69,6 +70,7 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     pp.query("inlet_y", params.inlet_y);
     pp.query("source_sigma", params.source_sigma);
     pp.query("source_strength", params.source_strength);
+    pp.query("source_total_rate", params.source_total_rate);
     pp.query("init_type", params.init_type);
     pp.query("init_sigma", params.init_sigma);
     pp.query("init_amplitude", params.init_amplitude);
@@ -127,6 +129,32 @@ RuntimeParams read_params(const amrex::Geometry& geom)
         params.init_center[d] = init_center[d];
         params.bc_lo[d] = parse_boundary_type(bc_lo[d]);
         params.bc_hi[d] = parse_boundary_type(bc_hi[d]);
+    }
+
+    if (params.source_total_rate >= 0.0) {
+        if (params.rho0 <= 0.0) {
+            amrex::Abort("rho0 must be positive when source_total_rate is used.");
+        }
+        if (params.source_type == SourceBox) {
+            amrex::Real box_volume = 1.0;
+            for (int d = 0; d < AMREX_SPACEDIM; ++d) {
+                const amrex::Real width = params.source_box_hi[d] - params.source_box_lo[d];
+                if (width <= 0.0) {
+                    amrex::Abort("source_box_hi must be greater than source_box_lo when source_total_rate is used.");
+                }
+                box_volume *= width;
+            }
+            params.source_strength = params.source_total_rate / (params.rho0 * box_volume);
+        } else if (params.source_type == SourceGaussian) {
+            if (params.source_sigma <= 0.0) {
+                amrex::Abort("source_sigma must be positive when source_total_rate is used.");
+            }
+            const amrex::Real pi = std::acos(amrex::Real(-1.0));
+            const amrex::Real gaussian_volume =
+                std::pow(amrex::Real(2.0) * pi, amrex::Real(1.5))
+                * std::pow(params.source_sigma, AMREX_SPACEDIM);
+            params.source_strength = params.source_total_rate / (params.rho0 * gaussian_volume);
+        }
     }
 
     return params;

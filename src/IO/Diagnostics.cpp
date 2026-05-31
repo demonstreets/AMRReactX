@@ -191,6 +191,26 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
                      std::numeric_limits<amrex::Real>::max(),
                      std::numeric_limits<amrex::Real>::max())
     };
+    amrex::Real cloud_min[AMREX_SPACEDIM] = {
+        AMREX_D_DECL(std::numeric_limits<amrex::Real>::max(),
+                     std::numeric_limits<amrex::Real>::max(),
+                     std::numeric_limits<amrex::Real>::max())
+    };
+    amrex::Real cloud_max[AMREX_SPACEDIM] = {
+        AMREX_D_DECL(-std::numeric_limits<amrex::Real>::max(),
+                     -std::numeric_limits<amrex::Real>::max(),
+                     -std::numeric_limits<amrex::Real>::max())
+    };
+    amrex::Real flammable_min[AMREX_SPACEDIM] = {
+        AMREX_D_DECL(std::numeric_limits<amrex::Real>::max(),
+                     std::numeric_limits<amrex::Real>::max(),
+                     std::numeric_limits<amrex::Real>::max())
+    };
+    amrex::Real flammable_max[AMREX_SPACEDIM] = {
+        AMREX_D_DECL(-std::numeric_limits<amrex::Real>::max(),
+                     -std::numeric_limits<amrex::Real>::max(),
+                     -std::numeric_limits<amrex::Real>::max())
+    };
     const amrex::Real max_tol = std::max(amrex::Real(1.0e-14), std::abs(out.max_y) * amrex::Real(1.0e-12));
     for (amrex::MFIter mfi(state); mfi.isValid(); ++mfi) {
         const amrex::Box& bx = mfi.validbox();
@@ -212,11 +232,39 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
                             max_location[2] = z;
                         }
                     }
+                    const amrex::Real x = prob_lo[0] + (static_cast<amrex::Real>(i) + 0.5) * dx[0];
+                    const amrex::Real y = prob_lo[1] + (static_cast<amrex::Real>(j) + 0.5) * dx[1];
+                    const amrex::Real z = prob_lo[2] + (static_cast<amrex::Real>(k) + 0.5) * dx[2];
+                    const amrex::Real concentration =
+                        diagnostic_concentration(s(i, j, k, YLeak),
+                                                 params.diagnostic_basis,
+                                                 params.leak_molecular_weight,
+                                                 params.air_molecular_weight);
+                    if (concentration >= params.cloud_threshold) {
+                        cloud_min[0] = std::min(cloud_min[0], x);
+                        cloud_min[1] = std::min(cloud_min[1], y);
+                        cloud_min[2] = std::min(cloud_min[2], z);
+                        cloud_max[0] = std::max(cloud_max[0], x);
+                        cloud_max[1] = std::max(cloud_max[1], y);
+                        cloud_max[2] = std::max(cloud_max[2], z);
+                    }
+                    if (concentration >= params.lel && concentration <= params.uel) {
+                        flammable_min[0] = std::min(flammable_min[0], x);
+                        flammable_min[1] = std::min(flammable_min[1], y);
+                        flammable_min[2] = std::min(flammable_min[2], z);
+                        flammable_max[0] = std::max(flammable_max[0], x);
+                        flammable_max[1] = std::max(flammable_max[1], y);
+                        flammable_max[2] = std::max(flammable_max[2], z);
+                    }
                 }
             }
         }
     }
     amrex::ParallelDescriptor::ReduceRealMin(max_location, AMREX_SPACEDIM);
+    amrex::ParallelDescriptor::ReduceRealMin(cloud_min, AMREX_SPACEDIM);
+    amrex::ParallelDescriptor::ReduceRealMax(cloud_max, AMREX_SPACEDIM);
+    amrex::ParallelDescriptor::ReduceRealMin(flammable_min, AMREX_SPACEDIM);
+    amrex::ParallelDescriptor::ReduceRealMax(flammable_max, AMREX_SPACEDIM);
     if (max_location[0] < std::numeric_limits<amrex::Real>::max()) {
         out.max_y_x = max_location[0];
         out.max_y_y = max_location[1];
@@ -224,6 +272,22 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
     }
     out.cloud_volume = diag.sum(CloudIndicator) * cell_volume;
     out.flammable_volume = diag.sum(FlammableIndicator) * cell_volume;
+    if (out.cloud_volume > 0.0) {
+        out.cloud_x_min = cloud_min[0];
+        out.cloud_x_max = cloud_max[0];
+        out.cloud_y_min = cloud_min[1];
+        out.cloud_y_max = cloud_max[1];
+        out.cloud_z_min = cloud_min[2];
+        out.cloud_z_max = cloud_max[2];
+    }
+    if (out.flammable_volume > 0.0) {
+        out.flammable_x_min = flammable_min[0];
+        out.flammable_x_max = flammable_max[0];
+        out.flammable_y_min = flammable_min[1];
+        out.flammable_y_max = flammable_max[1];
+        out.flammable_z_min = flammable_min[2];
+        out.flammable_z_max = flammable_max[2];
+    }
     return out;
 }
 
@@ -260,6 +324,7 @@ void print_source_report(const RuntimeParams& params)
 {
     amrex::Print() << "scalar_source type " << source_type_name(params.source_type)
                    << " strength " << params.source_strength
+                   << " total_rate " << params.source_total_rate
                    << " center " << params.source_center[0]
                    << " " << params.source_center[1]
                    << " " << params.source_center[2]
@@ -296,7 +361,9 @@ void initialize_history_file(const RuntimeParams& params)
             << "inflow_zlo_rate,inflow_zhi_rate,"
             << "outlet_xlo_rate,outlet_xhi_rate,outlet_ylo_rate,outlet_yhi_rate,"
             << "outlet_zlo_rate,outlet_zhi_rate,"
-            << "cloud_volume,flammable_volume\n";
+            << "cloud_volume,cloud_x_min,cloud_x_max,cloud_y_min,cloud_y_max,cloud_z_min,cloud_z_max,"
+            << "flammable_volume,flammable_x_min,flammable_x_max,flammable_y_min,flammable_y_max,"
+            << "flammable_z_min,flammable_z_max\n";
 }
 
 void print_diagnostics(int step,
@@ -337,7 +404,19 @@ void print_diagnostics(int step,
                    << " " << diag.max_y_z
                    << " max_concentration " << diag.max_concentration
                    << " cloud_volume " << diag.cloud_volume
+                   << " cloud_bounds x " << diag.cloud_x_min
+                   << " " << diag.cloud_x_max
+                   << " y " << diag.cloud_y_min
+                   << " " << diag.cloud_y_max
+                   << " z " << diag.cloud_z_min
+                   << " " << diag.cloud_z_max
                    << " flammable_volume " << diag.flammable_volume
+                   << " flammable_bounds x " << diag.flammable_x_min
+                   << " " << diag.flammable_x_max
+                   << " y " << diag.flammable_y_min
+                   << " " << diag.flammable_y_max
+                   << " z " << diag.flammable_z_min
+                   << " " << diag.flammable_z_max
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -389,7 +468,19 @@ void append_history(int step,
             << diag.outlet_zlo_rate << ","
             << diag.outlet_zhi_rate << ","
             << diag.cloud_volume << ","
-            << diag.flammable_volume << "\n";
+            << diag.cloud_x_min << ","
+            << diag.cloud_x_max << ","
+            << diag.cloud_y_min << ","
+            << diag.cloud_y_max << ","
+            << diag.cloud_z_min << ","
+            << diag.cloud_z_max << ","
+            << diag.flammable_volume << ","
+            << diag.flammable_x_min << ","
+            << diag.flammable_x_max << ","
+            << diag.flammable_y_min << ","
+            << diag.flammable_y_max << ","
+            << diag.flammable_z_min << ","
+            << diag.flammable_z_max << "\n";
 }
 
 void write_plotfile(const amrex::MultiFab& state,

@@ -50,6 +50,7 @@ mpirun -np 2 ./build/amrreactx inputs/verify_advection_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_diffusion_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_wall_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_box_source_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_source_total_rate_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_auto_dt_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_volume_fraction_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_boundary_faces_3d.in
@@ -70,6 +71,9 @@ Useful Stage 1 input parameters:
   `source_sigma`, and `source_strength`.
 - `source_type = box`: uniform box source using `source_box_lo`,
   `source_box_hi`, and `source_strength`.
+- `source_total_rate`: optional engineering total scalar mass release rate. If
+  set to a non-negative value, it overrides `source_strength` by normalizing the
+  selected `gaussian` or `box` source to the requested total rate.
 - `init_type = 0`: start from zero scalar field.
 - `init_type = 1`: start from a Gaussian scalar cloud using `init_center`,
   `init_sigma`, and `init_amplitude`.
@@ -115,6 +119,8 @@ Runtime diagnostics:
 - `centroid`: scalar-cloud center of mass, useful for advection verification.
 - `cloud_volume`: volume where `C_leak_diag >= cloud_threshold`.
 - `flammable_volume`: volume where `lel <= C_leak_diag <= uel`.
+- `cloud_*_min/max`, `flammable_*_min/max`: axis-aligned bounds of the
+  threshold cloud and flammable cloud, reported from cell-center locations.
 
 ## Current Source Layout
 

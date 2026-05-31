@@ -81,6 +81,7 @@ struct RuntimeParams {
     amrex::Real source_box_hi[AMREX_SPACEDIM] = {AMREX_D_DECL(1.1, 2.1, 2.1)};
     amrex::Real source_sigma = 0.15;
     amrex::Real source_strength = 0.2;
+    amrex::Real source_total_rate = -1.0;
     int source_type = SourceGaussian;
     int init_type = Zero;
     amrex::Real init_center[AMREX_SPACEDIM] = {AMREX_D_DECL(2.0, 2.0, 2.0)};
@@ -150,6 +151,18 @@ struct TransportDiagnostics {
     amrex::Real max_concentration = 0.0;
     amrex::Real cloud_volume = 0.0;
     amrex::Real flammable_volume = 0.0;
+    amrex::Real cloud_x_min = 0.0;
+    amrex::Real cloud_x_max = 0.0;
+    amrex::Real cloud_y_min = 0.0;
+    amrex::Real cloud_y_max = 0.0;
+    amrex::Real cloud_z_min = 0.0;
+    amrex::Real cloud_z_max = 0.0;
+    amrex::Real flammable_x_min = 0.0;
+    amrex::Real flammable_x_max = 0.0;
+    amrex::Real flammable_y_min = 0.0;
+    amrex::Real flammable_y_max = 0.0;
+    amrex::Real flammable_z_min = 0.0;
+    amrex::Real flammable_z_max = 0.0;
 };
 
 inline const char* concentration_basis_name(int basis)
