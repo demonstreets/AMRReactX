@@ -35,10 +35,13 @@ int main(int argc, char* argv[])
         amrex::Real injected_mass = 0.0;
         amrex::Real boundary_inflow_mass = 0.0;
         amrex::Real outlet_mass = 0.0;
+        amrex::Real cumulative_restriction_mass_delta = 0.0;
+        amrex::Real cumulative_reflux_mass_delta = 0.0;
         amrreactx::TransportDiagnostics current_diag =
             amrreactx::compute_diagnostics(state, diag, geom, params);
         amrreactx::attach_restriction_diagnostics(current_diag, state, hierarchy, geom, params);
-        amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy, geom, params, 0.0);
+        amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy, geom, params,
+                                               0.0, 0.0);
         amrreactx::attach_coarse_fine_flux_diagnostics(current_diag, state, hierarchy,
                                                        geom, params);
         const amrex::Real initial_mass = current_diag.scalar_mass;
@@ -75,11 +78,19 @@ int main(int argc, char* argv[])
             amrreactx::advance_scalar_amr_hierarchy(hierarchy, old_state, state,
                                                     geom, step_params);
             amrex::Real applied_restriction_mass_delta = 0.0;
+            amrex::Real applied_reflux_mass_delta = 0.0;
             if (step_params.amr_restrict_after_advance != 0) {
                 const amrreactx::AmrMassDiagnostics restriction_update =
                     amrreactx::restrict_scalar_amr_hierarchy_to_coarse(
                         hierarchy, state, geom, step_params);
                 applied_restriction_mass_delta = restriction_update.mass_delta;
+                cumulative_restriction_mass_delta += applied_restriction_mass_delta;
+            }
+            if (step_params.amr_reflux_after_advance != 0) {
+                applied_reflux_mass_delta =
+                    amrreactx::reflux_scalar_amr_hierarchy_to_coarse(
+                        hierarchy, state, geom, step_params);
+                cumulative_reflux_mass_delta += applied_reflux_mass_delta;
             }
             time += step_dt;
 
@@ -94,14 +105,26 @@ int main(int argc, char* argv[])
                                                           geom, step_params);
                 amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy,
                                                        geom, step_params,
-                                                       applied_restriction_mass_delta);
+                                                       applied_restriction_mass_delta,
+                                                       applied_reflux_mass_delta);
                 amrreactx::attach_coarse_fine_flux_diagnostics(current_diag, state, hierarchy,
                                                                geom, step_params);
+                current_diag.amr_cumulative_restriction_mass_delta =
+                    cumulative_restriction_mass_delta;
+                current_diag.amr_cumulative_reflux_mass_delta =
+                    cumulative_reflux_mass_delta;
                 amrreactx::write_plotfile(state, geom, params, step, time, &hierarchy);
                 amrreactx::print_diagnostics(step, time, current_diag, injected_mass,
                                              boundary_inflow_mass, outlet_mass, initial_mass);
                 amrreactx::append_history(step, time, current_diag, injected_mass,
                                           boundary_inflow_mass, outlet_mass, initial_mass, params);
+                if (step_params.amr_regrid_interval > 0
+                    && step % step_params.amr_regrid_interval == 0
+                    && !last_time_step
+                    && step < params.max_step) {
+                    hierarchy = amrreactx::rebuild_scalar_amr_hierarchy(
+                        state, geom, step_params, amrreactx::NumState, 1);
+                }
             }
             if (last_time_step) {
                 break;

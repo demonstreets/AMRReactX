@@ -28,12 +28,21 @@ struct AmrMassDiagnostics {
 struct CoarseFineFluxDiagnostics {
     amrex::Real advective_mismatch = 0.0;
     amrex::Real advective_abs_mismatch = 0.0;
+    amrex::Real diffusive_mismatch = 0.0;
+    amrex::Real diffusive_abs_mismatch = 0.0;
     long long interface_face_count = 0;
+    amrex::Real advective_mismatch_by_face[2 * AMREX_SPACEDIM] = {};
+    amrex::Real advective_abs_mismatch_by_face[2 * AMREX_SPACEDIM] = {};
+    amrex::Real diffusive_mismatch_by_face[2 * AMREX_SPACEDIM] = {};
+    amrex::Real diffusive_abs_mismatch_by_face[2 * AMREX_SPACEDIM] = {};
+    long long interface_face_count_by_face[2 * AMREX_SPACEDIM] = {};
 };
 
 struct CoarseFineFluxRegister {
     amrex::Real advective_mismatch[2 * AMREX_SPACEDIM] = {};
     amrex::Real advective_abs_mismatch[2 * AMREX_SPACEDIM] = {};
+    amrex::Real diffusive_mismatch[2 * AMREX_SPACEDIM] = {};
+    amrex::Real diffusive_abs_mismatch[2 * AMREX_SPACEDIM] = {};
     long long interface_face_count[2 * AMREX_SPACEDIM] = {};
 
     static int face_index(int dir, int side) noexcept
@@ -41,11 +50,14 @@ struct CoarseFineFluxRegister {
         return 2 * dir + (side > 0 ? 1 : 0);
     }
 
-    void add(int dir, int side, amrex::Real mismatch, long long face_count) noexcept
+    void add(int dir, int side, amrex::Real advective, amrex::Real diffusive,
+             long long face_count) noexcept
     {
         const int idx = face_index(dir, side);
-        advective_mismatch[idx] += mismatch;
-        advective_abs_mismatch[idx] += std::abs(mismatch);
+        advective_mismatch[idx] += advective;
+        advective_abs_mismatch[idx] += std::abs(advective);
+        diffusive_mismatch[idx] += diffusive;
+        diffusive_abs_mismatch[idx] += std::abs(diffusive);
         interface_face_count[idx] += face_count;
     }
 
@@ -54,6 +66,8 @@ struct CoarseFineFluxRegister {
         for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
             advective_mismatch[idx] = 0.0;
             advective_abs_mismatch[idx] = 0.0;
+            diffusive_mismatch[idx] = 0.0;
+            diffusive_abs_mismatch[idx] = 0.0;
             interface_face_count[idx] = 0;
         }
     }
@@ -63,6 +77,8 @@ struct CoarseFineFluxRegister {
         for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
             advective_mismatch[idx] += other.advective_mismatch[idx];
             advective_abs_mismatch[idx] += other.advective_abs_mismatch[idx];
+            diffusive_mismatch[idx] += other.diffusive_mismatch[idx];
+            diffusive_abs_mismatch[idx] += other.diffusive_abs_mismatch[idx];
             interface_face_count[idx] += other.interface_face_count[idx];
         }
     }
@@ -73,7 +89,14 @@ struct CoarseFineFluxRegister {
         for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
             out.advective_mismatch += advective_mismatch[idx];
             out.advective_abs_mismatch += advective_abs_mismatch[idx];
+            out.diffusive_mismatch += diffusive_mismatch[idx];
+            out.diffusive_abs_mismatch += diffusive_abs_mismatch[idx];
             out.interface_face_count += interface_face_count[idx];
+            out.advective_mismatch_by_face[idx] = advective_mismatch[idx];
+            out.advective_abs_mismatch_by_face[idx] = advective_abs_mismatch[idx];
+            out.diffusive_mismatch_by_face[idx] = diffusive_mismatch[idx];
+            out.diffusive_abs_mismatch_by_face[idx] = diffusive_abs_mismatch[idx];
+            out.interface_face_count_by_face[idx] = interface_face_count[idx];
         }
         return out;
     }
@@ -85,6 +108,7 @@ struct ScalarAmrHierarchy {
     amrex::BoxArray level1_box_array;
     amrex::DistributionMapping level1_distribution;
     std::unique_ptr<amrex::MultiFab> level1_state;
+    std::unique_ptr<amrex::MultiFab> level0_reflux_mass;
     AmrTaggingSummary tag_summary;
     CoarseFineFluxRegister last_step_flux_register;
 
@@ -105,6 +129,12 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
                                   const RuntimeParams& params);
 
 AmrMassDiagnostics restrict_scalar_amr_hierarchy_to_coarse(
+    const ScalarAmrHierarchy& hierarchy,
+    amrex::MultiFab& level0_state,
+    const amrex::Geometry& level0_geom,
+    const RuntimeParams& params);
+
+amrex::Real reflux_scalar_amr_hierarchy_to_coarse(
     const ScalarAmrHierarchy& hierarchy,
     amrex::MultiFab& level0_state,
     const amrex::Geometry& level0_geom,

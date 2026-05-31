@@ -15,6 +15,48 @@ cmake --build "${BUILD_DIR}" -j "${JOBS:-4}"
 
 EXE="./${BUILD_DIR}/amrreactx"
 PYTHON="${PYTHON:-python3}"
+CLEAN_PLOTFILES="${CLEAN_PLOTFILES:-1}"
+CLEAN_HISTORIES="${CLEAN_HISTORIES:-1}"
+
+plotfile_prefix_from_input() {
+  local input="$1"
+  awk -F '=' '
+    /^[[:space:]]*plotfile_prefix[[:space:]]*=/ {
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2)
+      print $2
+    }
+  ' "${input}" | tail -n 1
+}
+
+cleanup_plotfiles() {
+  local input="$1"
+  if [[ "${CLEAN_PLOTFILES}" == "0" ]]; then
+    return
+  fi
+
+  local prefix
+  prefix="$(plotfile_prefix_from_input "${input}")"
+  if [[ -z "${prefix}" || "${prefix}" != plt_* ]]; then
+    echo "Skipping plotfile cleanup for ${input}: missing or unexpected prefix '${prefix}'"
+    return
+  fi
+
+  rm -rf -- "${prefix}"*
+}
+
+cleanup_history() {
+  local history="$1"
+  if [[ "${CLEAN_HISTORIES}" == "0" ]]; then
+    return
+  fi
+
+  if [[ -z "${history}" || "${history}" == /* || "${history}" == *".."* || "${history}" != *.csv ]]; then
+    echo "Skipping history cleanup: unexpected path '${history}'"
+    return
+  fi
+
+  rm -f -- "${history}"
+}
 
 run_case() {
   local name="$1"
@@ -24,6 +66,8 @@ run_case() {
   echo "==> Running ${name}"
   mpirun -np "${NP}" "${EXE}" "${input}"
   "${PYTHON}" tools/check_history.py --case "${name}" --history "${history}"
+  cleanup_plotfiles "${input}"
+  cleanup_history "${history}"
 }
 
 run_case leak inputs/leak_3d_open.in history_leak_3d_open.csv

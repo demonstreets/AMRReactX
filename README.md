@@ -3,7 +3,7 @@
 AMRReactX is the working name for a research-oriented AMReX-based compressible
 flow and reacting-flow solver.
 
-The current version has completed Stage 2 and advanced through Stage 3.4 on top of the
+The current version has completed Stage 2 and the scalar AMR Stage 3 plan on top of the
 Stage 1 fixed-wind scalar advection-diffusion leakage model. It includes
 stability checks, mass-balance and engineering diagnostics, explicit scalar
 boundary-condition types, automatic timestep control, volume-fraction
@@ -67,6 +67,10 @@ mpirun -np 2 ./build/amrreactx inputs/verify_open_backflow_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_tagging_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_level1_advance_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_level1_restriction_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_level1_reflux_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_level1_diffusive_reflux_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_level1_regrid_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_level1_regrid_sync_update_3d.in
 ```
 
 Run the Stage 1/2 verification suite:
@@ -78,12 +82,17 @@ bash tools/run_stage2_verification.sh
 The old `tools/run_stage1_verification.sh` entry point is kept as a
 compatibility wrapper.
 
-Run the Stage 1/2 + Stage 3.1/3.2/3.4 and early 3.5 reflux-scaffolding
-verification suite:
+Run the Stage 1/2 + completed Stage 3 verification suite:
 
 ```bash
 bash tools/run_stage3_verification.sh
 ```
+
+Verification plotfile directories are deleted after each case passes so routine
+development runs do not accumulate large AMReX plot outputs. Verification
+history CSV files are also deleted after their checks pass. Set
+`CLEAN_PLOTFILES=0` or `CLEAN_HISTORIES=0` when a passing case's generated
+outputs should be kept for manual inspection.
 
 Useful Stage 1/2 input parameters:
 
@@ -124,9 +133,17 @@ Useful Stage 1/2 input parameters:
 - `tag_buffer`, `tag_ref_ratio`, `tag_max_grid_size`,
   `tag_grid_efficiency`: controls for buffering tags and clustering candidate
   level-1 AMR boxes.
+- `amr_regrid_interval`: optional output-step interval for rebuilding the
+  maintained level-1 hierarchy from current level-0 tagging. The default `0`
+  keeps the initial level-1 patch fixed once created.
 - `amr_restrict_after_advance = 1`: after independent level-1 advance, average
   the level-1 state back onto covered level-0 cells. This restores restriction
-  consistency but does not yet perform refluxing.
+  consistency and can be combined with `amr_reflux_after_advance = 1` for the
+  adjacent coarse-fine flux correction.
+- `amr_reflux_after_advance = 1`: apply scalar coarse-fine reflux corrections
+  to level-0 cells adjacent to the refined patch. Advective and diffusive
+  mismatch mass is accumulated per coarse-fine face during level-1 subcycling
+  and applied to the adjacent level-0 coarse cell.
 - `dt`, `max_step`, `plot_int`: explicit time stepping controls.
 - `use_auto_dt = 1`: choose `dt` from `cfl`, `diff_cfl`, wind, diffusion,
   and grid spacing.
@@ -148,8 +165,8 @@ Runtime diagnostics:
 - `mass`, `injected`, `boundary_inflow`, `outlet`, `balance_error`: scalar
   mass budget.
 - `amr_sync_corrected_balance_error`: mass budget after subtracting the
-  optional AMR restriction-update mass correction. This should stay near zero
-  when `amr_restrict_after_advance` changes covered level-0 cells, while the raw
+  cumulative optional AMR restriction-update and reflux mass corrections. This
+  should stay near zero when AMR synchronization changes level-0 cells, while the raw
   `balance_error` records the unaccounted AMR synchronization drift.
 - `inflow_xlo_rate`, `inflow_xhi_rate`, `inflow_ylo_rate`,
   `inflow_yhi_rate`, `inflow_zlo_rate`, `inflow_zhi_rate`: per-face scalar
@@ -183,18 +200,31 @@ Runtime diagnostics:
 - `amr_level1_mass`, `amr_covered_level0_mass`, `amr_mass_delta`: mass in the
   maintained level-1 state, mass in the covered level-0 cells, and their
   difference.
+- `amr_level1_*_min/max`: physical lower and upper bounds of the maintained
+  level-1 patch, useful for verifying optional regridding.
 - `amr_applied_restriction_mass_delta`: mass correction applied to level 0 by
   the optional restriction update on the most recent output step. This exposes
-  the synchronization drift that future refluxing must remove.
+  the average-down synchronization drift separately from the optional reflux
+  correction.
+- `amr_applied_reflux_mass_delta`: mass correction applied to level 0 by the
+  optional coarse-fine reflux update on the most recent output step.
+- `amr_cumulative_restriction_mass_delta`,
+  `amr_cumulative_reflux_mass_delta`: cumulative AMR synchronization mass
+  corrections used by `amr_sync_corrected_balance_error`.
 - `amr_cf_advective_flux_mismatch`, `amr_cf_advective_abs_mismatch`,
+  `amr_cf_diffusive_flux_mismatch`, `amr_cf_diffusive_abs_mismatch`,
   `amr_cf_interface_face_count`: coarse-fine interface diagnostics comparing
-  level-1 integrated advective scalar flux against the matching level-0 flux.
-  These are observation-only reflux scaffolding diagnostics and do not modify
-  either level.
+  level-1 integrated scalar flux against the matching level-0 flux, split into
+  advective and diffusive contributions.
 - `amr_cf_advective_mismatch_mass`,
-  `amr_cf_advective_abs_mismatch_mass`: fine-substep accumulated coarse-fine
-  advective flux mismatch estimates. These are the first scalar reflux-register
-  mass diagnostics; they are reported but not yet used for correction.
+  `amr_cf_advective_abs_mismatch_mass`,
+  `amr_cf_diffusive_mismatch_mass`,
+  `amr_cf_diffusive_abs_mismatch_mass`: fine-substep accumulated coarse-fine
+  flux mismatch estimates. The signed advective plus diffusive mismatch drives
+  the optional per-face reflux correction.
+- The same coarse-fine mismatch diagnostics are also written with `_xlo`,
+  `_xhi`, `_ylo`, `_yhi`, `_zlo`, and `_zhi` suffixes so reflux work can verify
+  which coarse-fine patch side contributes each mismatch.
 
 ## Current Source Layout
 

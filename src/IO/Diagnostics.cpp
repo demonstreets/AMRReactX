@@ -54,6 +54,27 @@ void fill_diagnostic_plot_components(amrex::MultiFab& plot_state,
     }
 }
 
+void fill_level1_bounds(TransportDiagnostics& diag,
+                        const ScalarAmrHierarchy& hierarchy)
+{
+    if (!hierarchy.has_level1()) {
+        return;
+    }
+
+    amrex::Box level1_box = hierarchy.level1_box_array.minimalBox();
+    level1_box &= hierarchy.level1_geom.Domain();
+    const auto prob_lo = hierarchy.level1_geom.ProbLoArray();
+    const auto dx = hierarchy.level1_geom.CellSizeArray();
+    const auto lo = level1_box.smallEnd();
+    const auto hi = level1_box.bigEnd();
+    diag.amr_level1_x_min = prob_lo[0] + static_cast<amrex::Real>(lo[0]) * dx[0];
+    diag.amr_level1_x_max = prob_lo[0] + static_cast<amrex::Real>(hi[0] + 1) * dx[0];
+    diag.amr_level1_y_min = prob_lo[1] + static_cast<amrex::Real>(lo[1]) * dx[1];
+    diag.amr_level1_y_max = prob_lo[1] + static_cast<amrex::Real>(hi[1] + 1) * dx[1];
+    diag.amr_level1_z_min = prob_lo[2] + static_cast<amrex::Real>(lo[2]) * dx[2];
+    diag.amr_level1_z_max = prob_lo[2] + static_cast<amrex::Real>(hi[2] + 1) * dx[2];
+}
+
 } // namespace
 
 amrex::Real scalar_mass(const amrex::MultiFab& state,
@@ -412,8 +433,11 @@ void print_tagging_report(const RuntimeParams& params)
                    << " tag_ref_ratio " << params.tag_ref_ratio
                    << " tag_max_grid_size " << params.tag_max_grid_size
                    << " tag_grid_efficiency " << params.tag_grid_efficiency
+                   << " amr_regrid_interval " << params.amr_regrid_interval
                    << " amr_restrict_after_advance "
-                   << params.amr_restrict_after_advance << "\n";
+                   << params.amr_restrict_after_advance
+                   << " amr_reflux_after_advance "
+                   << params.amr_reflux_after_advance << "\n";
 }
 
 void initialize_history_file(const RuntimeParams& params)
@@ -437,15 +461,79 @@ void initialize_history_file(const RuntimeParams& params)
             << "tag_grad_y_volume,tag_source_volume,tag_refine_volume,"
             << "tag_refine_cell_count,tag_cluster_count,"
             << "tag_candidate_level1_cell_count,tag_candidate_level1_volume,"
+            << "amr_level1_x_min,amr_level1_x_max,"
+            << "amr_level1_y_min,amr_level1_y_max,"
+            << "amr_level1_z_min,amr_level1_z_max,"
             << "amr_restrict_max_abs_y_error,amr_restrict_l1_y_error,"
             << "amr_restrict_coarse_cell_count,amr_level1_mass,"
             << "amr_covered_level0_mass,amr_mass_delta,"
             << "amr_applied_restriction_mass_delta,"
+            << "amr_applied_reflux_mass_delta,"
+            << "amr_cumulative_restriction_mass_delta,"
+            << "amr_cumulative_reflux_mass_delta,"
             << "amr_cf_advective_flux_mismatch,"
             << "amr_cf_advective_abs_mismatch,"
+            << "amr_cf_diffusive_flux_mismatch,"
+            << "amr_cf_diffusive_abs_mismatch,"
             << "amr_cf_advective_mismatch_mass,"
             << "amr_cf_advective_abs_mismatch_mass,"
+            << "amr_cf_diffusive_mismatch_mass,"
+            << "amr_cf_diffusive_abs_mismatch_mass,"
             << "amr_cf_interface_face_count,"
+            << "amr_cf_advective_flux_mismatch_xlo,"
+            << "amr_cf_advective_flux_mismatch_xhi,"
+            << "amr_cf_advective_flux_mismatch_ylo,"
+            << "amr_cf_advective_flux_mismatch_yhi,"
+            << "amr_cf_advective_flux_mismatch_zlo,"
+            << "amr_cf_advective_flux_mismatch_zhi,"
+            << "amr_cf_advective_abs_mismatch_xlo,"
+            << "amr_cf_advective_abs_mismatch_xhi,"
+            << "amr_cf_advective_abs_mismatch_ylo,"
+            << "amr_cf_advective_abs_mismatch_yhi,"
+            << "amr_cf_advective_abs_mismatch_zlo,"
+            << "amr_cf_advective_abs_mismatch_zhi,"
+            << "amr_cf_diffusive_flux_mismatch_xlo,"
+            << "amr_cf_diffusive_flux_mismatch_xhi,"
+            << "amr_cf_diffusive_flux_mismatch_ylo,"
+            << "amr_cf_diffusive_flux_mismatch_yhi,"
+            << "amr_cf_diffusive_flux_mismatch_zlo,"
+            << "amr_cf_diffusive_flux_mismatch_zhi,"
+            << "amr_cf_diffusive_abs_mismatch_xlo,"
+            << "amr_cf_diffusive_abs_mismatch_xhi,"
+            << "amr_cf_diffusive_abs_mismatch_ylo,"
+            << "amr_cf_diffusive_abs_mismatch_yhi,"
+            << "amr_cf_diffusive_abs_mismatch_zlo,"
+            << "amr_cf_diffusive_abs_mismatch_zhi,"
+            << "amr_cf_advective_mismatch_mass_xlo,"
+            << "amr_cf_advective_mismatch_mass_xhi,"
+            << "amr_cf_advective_mismatch_mass_ylo,"
+            << "amr_cf_advective_mismatch_mass_yhi,"
+            << "amr_cf_advective_mismatch_mass_zlo,"
+            << "amr_cf_advective_mismatch_mass_zhi,"
+            << "amr_cf_advective_abs_mismatch_mass_xlo,"
+            << "amr_cf_advective_abs_mismatch_mass_xhi,"
+            << "amr_cf_advective_abs_mismatch_mass_ylo,"
+            << "amr_cf_advective_abs_mismatch_mass_yhi,"
+            << "amr_cf_advective_abs_mismatch_mass_zlo,"
+            << "amr_cf_advective_abs_mismatch_mass_zhi,"
+            << "amr_cf_diffusive_mismatch_mass_xlo,"
+            << "amr_cf_diffusive_mismatch_mass_xhi,"
+            << "amr_cf_diffusive_mismatch_mass_ylo,"
+            << "amr_cf_diffusive_mismatch_mass_yhi,"
+            << "amr_cf_diffusive_mismatch_mass_zlo,"
+            << "amr_cf_diffusive_mismatch_mass_zhi,"
+            << "amr_cf_diffusive_abs_mismatch_mass_xlo,"
+            << "amr_cf_diffusive_abs_mismatch_mass_xhi,"
+            << "amr_cf_diffusive_abs_mismatch_mass_ylo,"
+            << "amr_cf_diffusive_abs_mismatch_mass_yhi,"
+            << "amr_cf_diffusive_abs_mismatch_mass_zlo,"
+            << "amr_cf_diffusive_abs_mismatch_mass_zhi,"
+            << "amr_cf_interface_face_count_xlo,"
+            << "amr_cf_interface_face_count_xhi,"
+            << "amr_cf_interface_face_count_ylo,"
+            << "amr_cf_interface_face_count_yhi,"
+            << "amr_cf_interface_face_count_zlo,"
+            << "amr_cf_interface_face_count_zhi,"
             << "amr_sync_corrected_balance_error\n";
 }
 
@@ -460,7 +548,8 @@ void print_diagnostics(int step,
     const amrex::Real balance_error =
         diag.scalar_mass - initial_mass - injected_mass - boundary_inflow_mass + outlet_mass;
     const amrex::Real amr_sync_corrected_balance_error =
-        balance_error - diag.amr_applied_restriction_mass_delta;
+        balance_error - diag.amr_cumulative_restriction_mass_delta
+        - diag.amr_cumulative_reflux_mass_delta;
     amrex::Print() << "step " << step
                    << " time " << time
                    << " mass " << diag.scalar_mass
@@ -515,6 +604,12 @@ void print_diagnostics(int step,
                    << " tagged_cells " << diag.tag_refine_cell_count
                    << " fine_cells " << diag.tag_candidate_level1_cell_count
                    << " volume " << diag.tag_candidate_level1_volume
+                   << " amr_level1_bounds x " << diag.amr_level1_x_min
+                   << " " << diag.amr_level1_x_max
+                   << " y " << diag.amr_level1_y_min
+                   << " " << diag.amr_level1_y_max
+                   << " z " << diag.amr_level1_z_min
+                   << " " << diag.amr_level1_z_max
                    << " amr_restrict max_abs_y_error " << diag.amr_restrict_max_abs_y_error
                    << " l1_y_error " << diag.amr_restrict_l1_y_error
                    << " coarse_cells " << diag.amr_restrict_coarse_cell_count
@@ -523,16 +618,37 @@ void print_diagnostics(int step,
                    << " delta " << diag.amr_mass_delta
                    << " applied_restriction_delta "
                    << diag.amr_applied_restriction_mass_delta
+                   << " applied_reflux_delta "
+                   << diag.amr_applied_reflux_mass_delta
+                   << " cumulative_restriction_delta "
+                   << diag.amr_cumulative_restriction_mass_delta
+                   << " cumulative_reflux_delta "
+                   << diag.amr_cumulative_reflux_mass_delta
                    << " cf_advective_flux_mismatch "
                    << diag.amr_cf_advective_flux_mismatch
                    << " cf_advective_abs_mismatch "
                    << diag.amr_cf_advective_abs_mismatch
+                   << " cf_diffusive_flux_mismatch "
+                   << diag.amr_cf_diffusive_flux_mismatch
+                   << " cf_diffusive_abs_mismatch "
+                   << diag.amr_cf_diffusive_abs_mismatch
                    << " cf_advective_mismatch_mass "
                    << diag.amr_cf_advective_mismatch_mass
                    << " cf_advective_abs_mismatch_mass "
                    << diag.amr_cf_advective_abs_mismatch_mass
+                   << " cf_diffusive_mismatch_mass "
+                   << diag.amr_cf_diffusive_mismatch_mass
+                   << " cf_diffusive_abs_mismatch_mass "
+                   << diag.amr_cf_diffusive_abs_mismatch_mass
                    << " cf_interface_faces "
                    << diag.amr_cf_interface_face_count
+                   << " cf_face_mismatch xlo "
+                   << diag.amr_cf_advective_flux_mismatch_face[0]
+                   << " xhi " << diag.amr_cf_advective_flux_mismatch_face[1]
+                   << " ylo " << diag.amr_cf_advective_flux_mismatch_face[2]
+                   << " yhi " << diag.amr_cf_advective_flux_mismatch_face[3]
+                   << " zlo " << diag.amr_cf_advective_flux_mismatch_face[4]
+                   << " zhi " << diag.amr_cf_advective_flux_mismatch_face[5]
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -553,7 +669,8 @@ void append_history(int step,
     const amrex::Real balance_error =
         diag.scalar_mass - initial_mass - injected_mass - boundary_inflow_mass + outlet_mass;
     const amrex::Real amr_sync_corrected_balance_error =
-        balance_error - diag.amr_applied_restriction_mass_delta;
+        balance_error - diag.amr_cumulative_restriction_mass_delta
+        - diag.amr_cumulative_reflux_mass_delta;
     std::ofstream history(params.history_file, std::ios::app);
     history << step << ","
             << std::setprecision(17) << time << ","
@@ -610,6 +727,12 @@ void append_history(int step,
             << diag.tag_cluster_count << ","
             << diag.tag_candidate_level1_cell_count << ","
             << diag.tag_candidate_level1_volume << ","
+            << diag.amr_level1_x_min << ","
+            << diag.amr_level1_x_max << ","
+            << diag.amr_level1_y_min << ","
+            << diag.amr_level1_y_max << ","
+            << diag.amr_level1_z_min << ","
+            << diag.amr_level1_z_max << ","
             << diag.amr_restrict_max_abs_y_error << ","
             << diag.amr_restrict_l1_y_error << ","
             << diag.amr_restrict_coarse_cell_count << ","
@@ -617,11 +740,72 @@ void append_history(int step,
             << diag.amr_covered_level0_mass << ","
             << diag.amr_mass_delta << ","
             << diag.amr_applied_restriction_mass_delta << ","
+            << diag.amr_applied_reflux_mass_delta << ","
+            << diag.amr_cumulative_restriction_mass_delta << ","
+            << diag.amr_cumulative_reflux_mass_delta << ","
             << diag.amr_cf_advective_flux_mismatch << ","
             << diag.amr_cf_advective_abs_mismatch << ","
+            << diag.amr_cf_diffusive_flux_mismatch << ","
+            << diag.amr_cf_diffusive_abs_mismatch << ","
             << diag.amr_cf_advective_mismatch_mass << ","
             << diag.amr_cf_advective_abs_mismatch_mass << ","
+            << diag.amr_cf_diffusive_mismatch_mass << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass << ","
             << diag.amr_cf_interface_face_count << ","
+            << diag.amr_cf_advective_flux_mismatch_face[0] << ","
+            << diag.amr_cf_advective_flux_mismatch_face[1] << ","
+            << diag.amr_cf_advective_flux_mismatch_face[2] << ","
+            << diag.amr_cf_advective_flux_mismatch_face[3] << ","
+            << diag.amr_cf_advective_flux_mismatch_face[4] << ","
+            << diag.amr_cf_advective_flux_mismatch_face[5] << ","
+            << diag.amr_cf_advective_abs_mismatch_face[0] << ","
+            << diag.amr_cf_advective_abs_mismatch_face[1] << ","
+            << diag.amr_cf_advective_abs_mismatch_face[2] << ","
+            << diag.amr_cf_advective_abs_mismatch_face[3] << ","
+            << diag.amr_cf_advective_abs_mismatch_face[4] << ","
+            << diag.amr_cf_advective_abs_mismatch_face[5] << ","
+            << diag.amr_cf_diffusive_flux_mismatch_face[0] << ","
+            << diag.amr_cf_diffusive_flux_mismatch_face[1] << ","
+            << diag.amr_cf_diffusive_flux_mismatch_face[2] << ","
+            << diag.amr_cf_diffusive_flux_mismatch_face[3] << ","
+            << diag.amr_cf_diffusive_flux_mismatch_face[4] << ","
+            << diag.amr_cf_diffusive_flux_mismatch_face[5] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_face[0] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_face[1] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_face[2] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_face[3] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_face[4] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_face[5] << ","
+            << diag.amr_cf_advective_mismatch_mass_face[0] << ","
+            << diag.amr_cf_advective_mismatch_mass_face[1] << ","
+            << diag.amr_cf_advective_mismatch_mass_face[2] << ","
+            << diag.amr_cf_advective_mismatch_mass_face[3] << ","
+            << diag.amr_cf_advective_mismatch_mass_face[4] << ","
+            << diag.amr_cf_advective_mismatch_mass_face[5] << ","
+            << diag.amr_cf_advective_abs_mismatch_mass_face[0] << ","
+            << diag.amr_cf_advective_abs_mismatch_mass_face[1] << ","
+            << diag.amr_cf_advective_abs_mismatch_mass_face[2] << ","
+            << diag.amr_cf_advective_abs_mismatch_mass_face[3] << ","
+            << diag.amr_cf_advective_abs_mismatch_mass_face[4] << ","
+            << diag.amr_cf_advective_abs_mismatch_mass_face[5] << ","
+            << diag.amr_cf_diffusive_mismatch_mass_face[0] << ","
+            << diag.amr_cf_diffusive_mismatch_mass_face[1] << ","
+            << diag.amr_cf_diffusive_mismatch_mass_face[2] << ","
+            << diag.amr_cf_diffusive_mismatch_mass_face[3] << ","
+            << diag.amr_cf_diffusive_mismatch_mass_face[4] << ","
+            << diag.amr_cf_diffusive_mismatch_mass_face[5] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass_face[0] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass_face[1] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass_face[2] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass_face[3] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass_face[4] << ","
+            << diag.amr_cf_diffusive_abs_mismatch_mass_face[5] << ","
+            << diag.amr_cf_interface_face_count_face[0] << ","
+            << diag.amr_cf_interface_face_count_face[1] << ","
+            << diag.amr_cf_interface_face_count_face[2] << ","
+            << diag.amr_cf_interface_face_count_face[3] << ","
+            << diag.amr_cf_interface_face_count_face[4] << ","
+            << diag.amr_cf_interface_face_count_face[5] << ","
             << amr_sync_corrected_balance_error << "\n";
 }
 
@@ -643,14 +827,17 @@ void attach_amr_mass_diagnostics(TransportDiagnostics& diag,
                                  const ScalarAmrHierarchy& hierarchy,
                                  const amrex::Geometry& level0_geom,
                                  const RuntimeParams& params,
-                                 amrex::Real applied_restriction_mass_delta)
+                                 amrex::Real applied_restriction_mass_delta,
+                                 amrex::Real applied_reflux_mass_delta)
 {
     const AmrMassDiagnostics mass =
         compute_amr_mass_diagnostics(level0_state, hierarchy, level0_geom, params);
+    fill_level1_bounds(diag, hierarchy);
     diag.amr_level1_mass = mass.level1_mass;
     diag.amr_covered_level0_mass = mass.covered_level0_mass;
     diag.amr_mass_delta = mass.mass_delta;
     diag.amr_applied_restriction_mass_delta = applied_restriction_mass_delta;
+    diag.amr_applied_reflux_mass_delta = applied_reflux_mass_delta;
 }
 
 void attach_coarse_fine_flux_diagnostics(TransportDiagnostics& diag,
@@ -666,12 +853,49 @@ void attach_coarse_fine_flux_diagnostics(TransportDiagnostics& diag,
         static_cast<amrex::Long>(accumulated_flux.interface_face_count);
     amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.advective_mismatch);
     amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.advective_abs_mismatch);
+    amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.diffusive_mismatch);
+    amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.diffusive_abs_mismatch);
     amrex::ParallelDescriptor::ReduceLongSum(accumulated_face_count);
+    for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
+        amrex::Long face_count =
+            static_cast<amrex::Long>(accumulated_flux.interface_face_count_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.advective_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.advective_abs_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.diffusive_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.diffusive_abs_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceLongSum(face_count);
+        accumulated_flux.interface_face_count_by_face[idx] =
+            static_cast<long long>(face_count);
+    }
     diag.amr_cf_advective_flux_mismatch = flux.advective_mismatch;
     diag.amr_cf_advective_abs_mismatch = flux.advective_abs_mismatch;
+    diag.amr_cf_diffusive_flux_mismatch = flux.diffusive_mismatch;
+    diag.amr_cf_diffusive_abs_mismatch = flux.diffusive_abs_mismatch;
     diag.amr_cf_advective_mismatch_mass = accumulated_flux.advective_mismatch;
     diag.amr_cf_advective_abs_mismatch_mass = accumulated_flux.advective_abs_mismatch;
+    diag.amr_cf_diffusive_mismatch_mass = accumulated_flux.diffusive_mismatch;
+    diag.amr_cf_diffusive_abs_mismatch_mass = accumulated_flux.diffusive_abs_mismatch;
     diag.amr_cf_interface_face_count = flux.interface_face_count;
+    for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
+        diag.amr_cf_advective_flux_mismatch_face[idx] =
+            flux.advective_mismatch_by_face[idx];
+        diag.amr_cf_advective_abs_mismatch_face[idx] =
+            flux.advective_abs_mismatch_by_face[idx];
+        diag.amr_cf_diffusive_flux_mismatch_face[idx] =
+            flux.diffusive_mismatch_by_face[idx];
+        diag.amr_cf_diffusive_abs_mismatch_face[idx] =
+            flux.diffusive_abs_mismatch_by_face[idx];
+        diag.amr_cf_advective_mismatch_mass_face[idx] =
+            accumulated_flux.advective_mismatch_by_face[idx];
+        diag.amr_cf_advective_abs_mismatch_mass_face[idx] =
+            accumulated_flux.advective_abs_mismatch_by_face[idx];
+        diag.amr_cf_diffusive_mismatch_mass_face[idx] =
+            accumulated_flux.diffusive_mismatch_by_face[idx];
+        diag.amr_cf_diffusive_abs_mismatch_mass_face[idx] =
+            accumulated_flux.diffusive_abs_mismatch_by_face[idx];
+        diag.amr_cf_interface_face_count_face[idx] =
+            flux.interface_face_count_by_face[idx];
+    }
 }
 
 void write_plotfile(const amrex::MultiFab& state,

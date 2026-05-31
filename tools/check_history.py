@@ -45,6 +45,57 @@ def check_inflow_rate_decomposition(row, tol=1.0e-12):
           "sum of face boundary inflow rates")
 
 
+def cf_face_sum(row, stem):
+    return (row[f"{stem}_xlo"] + row[f"{stem}_xhi"]
+            + row[f"{stem}_ylo"] + row[f"{stem}_yhi"]
+            + row[f"{stem}_zlo"] + row[f"{stem}_zhi"])
+
+
+def check_coarse_fine_flux_decomposition(row, tol=1.0e-12):
+    close(cf_face_sum(row, "amr_cf_advective_flux_mismatch"),
+          row["amr_cf_advective_flux_mismatch"], tol,
+          "sum of coarse-fine advective flux mismatch faces")
+    close(cf_face_sum(row, "amr_cf_advective_abs_mismatch"),
+          row["amr_cf_advective_abs_mismatch"], tol,
+          "sum of coarse-fine absolute advective flux mismatch faces")
+    close(cf_face_sum(row, "amr_cf_diffusive_flux_mismatch"),
+          row["amr_cf_diffusive_flux_mismatch"], tol,
+          "sum of coarse-fine diffusive flux mismatch faces")
+    close(cf_face_sum(row, "amr_cf_diffusive_abs_mismatch"),
+          row["amr_cf_diffusive_abs_mismatch"], tol,
+          "sum of coarse-fine absolute diffusive flux mismatch faces")
+    close(cf_face_sum(row, "amr_cf_advective_mismatch_mass"),
+          row["amr_cf_advective_mismatch_mass"], tol,
+          "sum of coarse-fine advective mismatch mass faces")
+    close(cf_face_sum(row, "amr_cf_advective_abs_mismatch_mass"),
+          row["amr_cf_advective_abs_mismatch_mass"], tol,
+          "sum of coarse-fine absolute advective mismatch mass faces")
+    close(cf_face_sum(row, "amr_cf_diffusive_mismatch_mass"),
+          row["amr_cf_diffusive_mismatch_mass"], tol,
+          "sum of coarse-fine diffusive mismatch mass faces")
+    close(cf_face_sum(row, "amr_cf_diffusive_abs_mismatch_mass"),
+          row["amr_cf_diffusive_abs_mismatch_mass"], tol,
+          "sum of coarse-fine absolute diffusive mismatch mass faces")
+    close(cf_face_sum(row, "amr_cf_interface_face_count"),
+          row["amr_cf_interface_face_count"], 0.0,
+          "sum of coarse-fine interface face counts")
+
+
+def expected_reflux_mass_correction(row):
+    return (-(row["amr_cf_advective_mismatch_mass_xlo"]
+              + row["amr_cf_diffusive_mismatch_mass_xlo"])
+            + row["amr_cf_advective_mismatch_mass_xhi"]
+            + row["amr_cf_diffusive_mismatch_mass_xhi"]
+            - row["amr_cf_advective_mismatch_mass_ylo"]
+            - row["amr_cf_diffusive_mismatch_mass_ylo"]
+            + row["amr_cf_advective_mismatch_mass_yhi"]
+            + row["amr_cf_diffusive_mismatch_mass_yhi"]
+            - row["amr_cf_advective_mismatch_mass_zlo"]
+            - row["amr_cf_diffusive_mismatch_mass_zlo"]
+            + row["amr_cf_advective_mismatch_mass_zhi"]
+            + row["amr_cf_diffusive_mismatch_mass_zhi"])
+
+
 def check_multilevel_plotfile(path, expected_finest_level):
     header = Path(path) / "Header"
     require(header.exists(), f"plotfile header does not exist: {header}")
@@ -63,6 +114,7 @@ def check_case(case, rows):
     last = rows[-1]
     check_outlet_rate_decomposition(last)
     check_inflow_rate_decomposition(last)
+    check_coarse_fine_flux_decomposition(last)
 
     if case == "leak":
         close(last["mass"], 0.038577307826430318, 1.0e-9, "leak final mass")
@@ -227,6 +279,99 @@ def check_case(case, rows):
         close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
               "restriction sync-corrected balance should close")
         check_multilevel_plotfile("plt_verify_level1_restriction_update_00001", 1)
+    elif case == "level1_reflux_update":
+        require(len(rows) == 2,
+                "level1_reflux_update should write initial and step-1 rows")
+        close(first["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "initial reflux-update max Y error")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "reflux-updated max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "reflux-updated L1 Y error")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "reflux update should report coarse-fine interface faces")
+        require(last["amr_cf_advective_abs_mismatch_mass"] > 0.0,
+                "reflux update should retain accumulated mismatch diagnostics")
+        require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,
+                "reflux update should include the restriction mass correction")
+        require(abs(last["amr_applied_reflux_mass_delta"]) > 1.0e-10,
+                "reflux update should apply a reflux mass correction")
+        close(last["amr_applied_reflux_mass_delta"],
+              expected_reflux_mass_correction(last), 1.0e-12,
+              "applied reflux correction should match signed face mismatch correction")
+        close(last["balance_error"],
+              last["amr_applied_restriction_mass_delta"] + last["amr_applied_reflux_mass_delta"],
+              1.0e-12, "reflux balance drift should equal applied AMR corrections")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "reflux sync-corrected balance should close")
+        check_multilevel_plotfile("plt_verify_level1_reflux_update_00001", 1)
+    elif case == "level1_diffusive_reflux_update":
+        require(len(rows) == 2,
+                "level1_diffusive_reflux_update should write initial and step-1 rows")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "diffusive reflux-updated max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "diffusive reflux-updated L1 Y error")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "diffusive reflux update should report coarse-fine interface faces")
+        close(last["amr_cf_advective_mismatch_mass"], 0.0, 1.0e-14,
+              "diffusive reflux update should have no advective mismatch mass")
+        require(last["amr_cf_diffusive_abs_mismatch_mass"] > 1.0e-10,
+                "diffusive reflux update should retain diffusive mismatch diagnostics")
+        require(abs(last["amr_applied_reflux_mass_delta"]) > 1.0e-10,
+                "diffusive reflux update should apply a reflux mass correction")
+        close(last["amr_applied_reflux_mass_delta"],
+              expected_reflux_mass_correction(last), 1.0e-12,
+              "applied diffusive reflux correction should match signed face mismatch correction")
+        close(last["balance_error"],
+              last["amr_applied_restriction_mass_delta"] + last["amr_applied_reflux_mass_delta"],
+              1.0e-12, "diffusive reflux balance drift should equal applied AMR corrections")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "diffusive reflux sync-corrected balance should close")
+        check_multilevel_plotfile("plt_verify_level1_diffusive_reflux_update_00001", 1)
+    elif case == "level1_regrid_update":
+        require(len(rows) == 9,
+                "level1_regrid_update should write initial plus eight step rows")
+        require(first["amr_level1_x_max"] > first["amr_level1_x_min"],
+                "initial regrid case should have a level-1 patch")
+        require(last["amr_level1_x_min"] > first["amr_level1_x_min"] + 0.2,
+                "regridded level-1 patch should move toward positive x")
+        require(last["amr_level1_x_max"] > first["amr_level1_x_max"] + 0.2,
+                "regridded level-1 upper bound should move toward positive x")
+        close(last["amr_level1_y_min"], first["amr_level1_y_min"], 1.0e-12,
+              "regridded level-1 y min should remain centered")
+        close(last["amr_level1_y_max"], first["amr_level1_y_max"], 1.0e-12,
+              "regridded level-1 y max should remain centered")
+        require(last["amr_restrict_coarse_cell_count"] > 0.0,
+                "regridded hierarchy should cover coarse cells")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "regridded hierarchy should report coarse-fine interface faces")
+        require(last["centroid_x"] > first["centroid_x"] + 0.35,
+                "regrid verification cloud should advect in x")
+        check_multilevel_plotfile("plt_verify_level1_regrid_update_00008", 1)
+    elif case == "level1_regrid_sync_update":
+        require(len(rows) == 8,
+                "level1_regrid_sync_update should write initial plus seven step rows")
+        require(last["amr_level1_x_min"] > first["amr_level1_x_min"] + 0.2,
+                "regrid-sync level-1 patch should move toward positive x")
+        require(last["amr_level1_x_max"] > first["amr_level1_x_max"] + 0.2,
+                "regrid-sync level-1 upper bound should move toward positive x")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "regrid-sync max Y restriction error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "regrid-sync L1 Y restriction error")
+        require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,
+                "regrid-sync should apply average-down mass corrections")
+        require(abs(last["amr_applied_reflux_mass_delta"]) > 1.0e-10,
+                "regrid-sync should apply reflux mass corrections")
+        close(last["balance_error"],
+              last["amr_cumulative_restriction_mass_delta"] + last["amr_cumulative_reflux_mass_delta"],
+              1.0e-12, "regrid-sync balance drift should equal cumulative AMR corrections")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "regrid-sync corrected balance should close")
+        require(last["centroid_x"] > first["centroid_x"] + 0.3,
+                "regrid-sync cloud should advect in x")
+        check_multilevel_plotfile("plt_verify_level1_regrid_sync_update_00007", 1)
     else:
         raise AssertionError(f"unknown case {case}")
 

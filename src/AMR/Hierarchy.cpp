@@ -17,6 +17,13 @@ namespace amrreactx {
 
 namespace {
 
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
+amrex::Real scalar_diffusive_flux(amrex::Real ylo, amrex::Real yhi,
+                                  amrex::Real diffusion, amrex::Real dx) noexcept
+{
+    return -diffusion * (yhi - ylo) / dx;
+}
+
 void fill_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
                                     amrex::MultiFab& fine_state,
                                     const amrex::Geometry& coarse_geom,
@@ -142,7 +149,8 @@ CoarseFineFluxRegister build_coarse_fine_flux_register(
     const ScalarAmrHierarchy& hierarchy,
     const amrex::Geometry& level0_geom,
     const RuntimeParams& params,
-    amrex::Real scale)
+    amrex::Real scale,
+    amrex::MultiFab* reflux_mass = nullptr)
 {
     CoarseFineFluxRegister flux_register;
     if (!hierarchy.has_level1()) {
@@ -193,6 +201,10 @@ CoarseFineFluxRegister build_coarse_fine_flux_register(
     for (amrex::MFIter mfi(fine_patch); mfi.isValid(); ++mfi) {
         const amrex::Array4<const amrex::Real> fine = fine_patch.const_array(mfi);
         const amrex::Array4<const amrex::Real> coarse = coarse_patch.const_array(mfi);
+        amrex::Array4<amrex::Real> reflux;
+        if (reflux_mass != nullptr) {
+            reflux = reflux_mass->array(mfi);
+        }
         for (int dir = 0; dir < AMREX_SPACEDIM; ++dir) {
             for (int side = -1; side <= 1; side += 2) {
                 if ((side < 0 && fine_lo[dir] == fine_dom_lo[dir])
@@ -201,6 +213,8 @@ CoarseFineFluxRegister build_coarse_fine_flux_register(
                 }
                 amrex::Real side_fine_flux = 0.0;
                 amrex::Real side_coarse_flux = 0.0;
+                amrex::Real side_fine_diffusive_flux = 0.0;
+                amrex::Real side_coarse_diffusive_flux = 0.0;
                 long long side_face_count = 0;
 
                 const int cface = side < 0 ? coarse_lo[dir] : coarse_hi[dir] + 1;
@@ -227,9 +241,18 @@ CoarseFineFluxRegister build_coarse_fine_flux_register(
                             const amrex::Real coarse_scalar_flux =
                                 scalar_advective_flux(coarse_lo_y, coarse_hi_y,
                                                       params.wind[dir]);
-                            side_coarse_flux +=
+                            const amrex::Real coarse_mass_flux =
                                 params.rho0 * coarse_scalar_flux * coarse_area[dir];
+                            side_coarse_flux += coarse_mass_flux;
+                            const amrex::Real coarse_diffusive_mass_flux =
+                                params.rho0
+                                * scalar_diffusive_flux(coarse_lo_y, coarse_hi_y,
+                                                        params.diffusion, coarse_dx[dir])
+                                * coarse_area[dir];
+                            side_coarse_diffusive_flux += coarse_diffusive_mass_flux;
 
+                            amrex::Real fine_mass_flux = 0.0;
+                            amrex::Real fine_diffusive_mass_flux = 0.0;
                             for (int kk = 0; kk < ref_ratio; ++kk) {
                                 for (int jj = 0; jj < ref_ratio; ++jj) {
                                     for (int ii = 0; ii < ref_ratio; ++ii) {
@@ -257,9 +280,34 @@ CoarseFineFluxRegister build_coarse_fine_flux_register(
                                         const amrex::Real fine_scalar_flux =
                                             scalar_advective_flux(fine_lo_y, fine_hi_y,
                                                                   params.wind[dir]);
-                                        side_fine_flux +=
+                                        fine_mass_flux +=
                                             params.rho0 * fine_scalar_flux * fine_area[dir];
+                                        fine_diffusive_mass_flux +=
+                                            params.rho0
+                                            * scalar_diffusive_flux(fine_lo_y, fine_hi_y,
+                                                                    params.diffusion,
+                                                                    fine_dx[dir])
+                                            * fine_area[dir];
                                     }
+                                }
+                            }
+                            side_fine_flux += fine_mass_flux;
+                            side_fine_diffusive_flux += fine_diffusive_mass_flux;
+                            if (reflux_mass != nullptr) {
+                                int target[AMREX_SPACEDIM] = {AMREX_D_DECL(ci, cj, ck)};
+                                target[dir] = side < 0 ? cface - 1 : cface;
+                                const bool target_in_domain =
+                                    target[0] >= coarse_dom_lo[0] && target[0] <= coarse_dom_hi[0]
+                                 && target[1] >= coarse_dom_lo[1] && target[1] <= coarse_dom_hi[1]
+                                 && target[2] >= coarse_dom_lo[2] && target[2] <= coarse_dom_hi[2];
+                                if (target_in_domain) {
+                                    const amrex::Real mismatch =
+                                        scale * (fine_mass_flux + fine_diffusive_mass_flux
+                                                 - coarse_mass_flux
+                                                 - coarse_diffusive_mass_flux);
+                                    const amrex::Real correction =
+                                        side < 0 ? -mismatch : mismatch;
+                                    reflux(target[0], target[1], target[2], 0) += correction;
                                 }
                             }
                             ++side_face_count;
@@ -267,8 +315,12 @@ CoarseFineFluxRegister build_coarse_fine_flux_register(
                     }
                 }
 
-                const amrex::Real mismatch = scale * (side_fine_flux - side_coarse_flux);
-                flux_register.add(dir, side, mismatch, side_face_count);
+                const amrex::Real advective_mismatch =
+                    scale * (side_fine_flux - side_coarse_flux);
+                const amrex::Real diffusive_mismatch =
+                    scale * (side_fine_diffusive_flux - side_coarse_diffusive_flux);
+                flux_register.add(dir, side, advective_mismatch,
+                                  diffusive_mismatch, side_face_count);
             }
         }
     }
@@ -311,6 +363,18 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
     RuntimeParams fine_params = params;
     fine_params.dt = params.dt / static_cast<amrex::Real>(nsubsteps);
     hierarchy.last_step_flux_register.reset();
+    const amrex::Box fine_domain = hierarchy.level1_geom.Domain();
+    amrex::Box fine_patch_box = hierarchy.level1_box_array.minimalBox();
+    fine_patch_box &= fine_domain;
+    amrex::Box coarse_reflux_box = fine_patch_box;
+    coarse_reflux_box.coarsen(params.tag_ref_ratio);
+    coarse_reflux_box.grow(1);
+    coarse_reflux_box &= level0_geom.Domain();
+    amrex::BoxArray reflux_ba(coarse_reflux_box);
+    hierarchy.level0_reflux_mass =
+        std::make_unique<amrex::MultiFab>(reflux_ba, amrex::DistributionMapping(reflux_ba),
+                                          1, 0);
+    hierarchy.level0_reflux_mass->setVal(0.0);
 
     amrex::MultiFab level1_next(hierarchy.level1_state->boxArray(),
                                 hierarchy.level1_state->DistributionMap(),
@@ -339,7 +403,8 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
                                      level0_flux_state, level0_geom, end_alpha);
         const CoarseFineFluxRegister substep_flux_register =
             build_coarse_fine_flux_register(level0_flux_state, hierarchy,
-                                            level0_geom, params, fine_params.dt);
+                                            level0_geom, params, fine_params.dt,
+                                            hierarchy.level0_reflux_mass.get());
         hierarchy.last_step_flux_register.add_register(substep_flux_register);
     }
 }
@@ -391,6 +456,43 @@ AmrMassDiagnostics restrict_scalar_amr_hierarchy_to_coarse(
 
     level0_state.ParallelCopy(restricted, 0, 0, level0_state.nComp(), 0, 0);
     return mass_before;
+}
+
+amrex::Real reflux_scalar_amr_hierarchy_to_coarse(
+    const ScalarAmrHierarchy& hierarchy,
+    amrex::MultiFab& level0_state,
+    const amrex::Geometry& level0_geom,
+    const RuntimeParams& params)
+{
+    if (!hierarchy.has_level1() || hierarchy.level0_reflux_mass == nullptr) {
+        return 0.0;
+    }
+
+    const auto coarse_dx = level0_geom.CellSizeArray();
+    const amrex::Real coarse_cell_volume =
+        AMREX_D_TERM(coarse_dx[0], * coarse_dx[1], * coarse_dx[2]);
+    const amrex::Real inv_rho_volume = 1.0 / (params.rho0 * coarse_cell_volume);
+
+    amrex::MultiFab reflux_on_level0(level0_state.boxArray(),
+                                     level0_state.DistributionMap(),
+                                     1,
+                                     0);
+    reflux_on_level0.setVal(0.0);
+    reflux_on_level0.ParallelCopy(*hierarchy.level0_reflux_mass, 0, 0, 1,
+                                  0, 0, level0_geom.periodicity());
+    const amrex::Real applied_mass_delta = reflux_on_level0.sum(0);
+
+    for (amrex::MFIter mfi(level0_state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<amrex::Real> state = level0_state.array(mfi);
+        const amrex::Array4<const amrex::Real> reflux =
+            reflux_on_level0.const_array(mfi);
+        amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+            state(i, j, k, YLeak) += reflux(i, j, k, 0) * inv_rho_volume;
+        });
+    }
+
+    return applied_mass_delta;
 }
 
 ScalarAmrHierarchy rebuild_scalar_amr_hierarchy(const amrex::MultiFab& level0_state,
@@ -535,7 +637,19 @@ CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
     amrex::Long interface_face_count = static_cast<amrex::Long>(out.interface_face_count);
     amrex::ParallelDescriptor::ReduceRealSum(out.advective_mismatch);
     amrex::ParallelDescriptor::ReduceRealSum(out.advective_abs_mismatch);
+    amrex::ParallelDescriptor::ReduceRealSum(out.diffusive_mismatch);
+    amrex::ParallelDescriptor::ReduceRealSum(out.diffusive_abs_mismatch);
     amrex::ParallelDescriptor::ReduceLongSum(interface_face_count);
+    for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
+        amrex::Long face_count =
+            static_cast<amrex::Long>(out.interface_face_count_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(out.advective_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(out.advective_abs_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(out.diffusive_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceRealSum(out.diffusive_abs_mismatch_by_face[idx]);
+        amrex::ParallelDescriptor::ReduceLongSum(face_count);
+        out.interface_face_count_by_face[idx] = static_cast<long long>(face_count);
+    }
     out.interface_face_count = static_cast<long long>(interface_face_count);
     return out;
 }
