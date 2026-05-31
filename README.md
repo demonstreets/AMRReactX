@@ -192,10 +192,9 @@ Runtime diagnostics:
   These are observation-only reflux scaffolding diagnostics and do not modify
   either level.
 - `amr_cf_advective_mismatch_mass`,
-  `amr_cf_advective_abs_mismatch_mass`: end-of-step coarse-fine advective flux
-  mismatch estimates multiplied by the coarse timestep. These are the first
-  scalar reflux-register mass diagnostics; they are reported but not yet used
-  for correction.
+  `amr_cf_advective_abs_mismatch_mass`: fine-substep accumulated coarse-fine
+  advective flux mismatch estimates. These are the first scalar reflux-register
+  mass diagnostics; they are reported but not yet used for correction.
 
 ## Current Source Layout
 

@@ -113,6 +113,30 @@ void fill_refined_level_from_coarse_time_interpolated(
     }
 }
 
+void fill_time_interpolated_state(const amrex::MultiFab& old_state,
+                                  const amrex::MultiFab& new_state,
+                                  amrex::MultiFab& interpolated_state,
+                                  const amrex::Geometry& geom,
+                                  amrex::Real alpha)
+{
+    const amrex::Real old_weight = 1.0 - alpha;
+    for (amrex::MFIter mfi(interpolated_state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<const amrex::Real> old_arr = old_state.const_array(mfi);
+        const amrex::Array4<const amrex::Real> new_arr = new_state.const_array(mfi);
+        const amrex::Array4<amrex::Real> interp = interpolated_state.array(mfi);
+        const int ncomp = interpolated_state.nComp();
+        for (int comp = 0; comp < ncomp; ++comp) {
+            amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+                interp(i, j, k, comp) =
+                    old_weight * old_arr(i, j, k, comp)
+                    + alpha * new_arr(i, j, k, comp);
+            });
+        }
+    }
+    interpolated_state.FillBoundary(geom.periodicity());
+}
+
 CoarseFineFluxRegister build_coarse_fine_flux_register(
     const amrex::MultiFab& level0_state,
     const ScalarAmrHierarchy& hierarchy,
@@ -292,6 +316,10 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
                                 hierarchy.level1_state->DistributionMap(),
                                 hierarchy.level1_state->nComp(),
                                 hierarchy.level1_state->nGrow());
+    amrex::MultiFab level0_flux_state(level0_old_state.boxArray(),
+                                      level0_old_state.DistributionMap(),
+                                      level0_old_state.nComp(),
+                                      level0_old_state.nGrow());
     for (int substep = 0; substep < nsubsteps; ++substep) {
         const amrex::Real alpha =
             static_cast<amrex::Real>(substep) / static_cast<amrex::Real>(nsubsteps);
@@ -307,11 +335,13 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
         fill_refined_level_from_coarse_time_interpolated(
             level0_old_state, level0_new_state, *hierarchy.level1_state,
             level0_geom, params.tag_ref_ratio, end_alpha);
+        fill_time_interpolated_state(level0_old_state, level0_new_state,
+                                     level0_flux_state, level0_geom, end_alpha);
+        const CoarseFineFluxRegister substep_flux_register =
+            build_coarse_fine_flux_register(level0_flux_state, hierarchy,
+                                            level0_geom, params, fine_params.dt);
+        hierarchy.last_step_flux_register.add_register(substep_flux_register);
     }
-    const CoarseFineFluxRegister end_step_flux_register =
-        build_coarse_fine_flux_register(level0_new_state, hierarchy,
-                                        level0_geom, params, params.dt);
-    hierarchy.last_step_flux_register.add_register(end_step_flux_register);
 }
 
 AmrMassDiagnostics restrict_scalar_amr_hierarchy_to_coarse(
