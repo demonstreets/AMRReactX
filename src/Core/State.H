@@ -48,6 +48,13 @@ enum DiagIndex {
     OutletYHiRate,
     OutletZLoRate,
     OutletZHiRate,
+    InflowRate,
+    InflowXLoRate,
+    InflowXHiRate,
+    InflowYLoRate,
+    InflowYHiRate,
+    InflowZLoRate,
+    InflowZHiRate,
     XMoment,
     YMoment,
     ZMoment,
@@ -126,6 +133,13 @@ struct TransportDiagnostics {
     amrex::Real outlet_yhi_rate = 0.0;
     amrex::Real outlet_zlo_rate = 0.0;
     amrex::Real outlet_zhi_rate = 0.0;
+    amrex::Real boundary_inflow_rate = 0.0;
+    amrex::Real inflow_xlo_rate = 0.0;
+    amrex::Real inflow_xhi_rate = 0.0;
+    amrex::Real inflow_ylo_rate = 0.0;
+    amrex::Real inflow_yhi_rate = 0.0;
+    amrex::Real inflow_zlo_rate = 0.0;
+    amrex::Real inflow_zhi_rate = 0.0;
     amrex::Real x_centroid = 0.0;
     amrex::Real y_centroid = 0.0;
     amrex::Real z_centroid = 0.0;

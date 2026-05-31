@@ -26,6 +26,7 @@ void print_diagnostics(int step,
                        amrex::Real time,
                        const TransportDiagnostics& diag,
                        amrex::Real injected_mass,
+                       amrex::Real boundary_inflow_mass,
                        amrex::Real outlet_mass,
                        amrex::Real initial_mass);
 
@@ -33,6 +34,7 @@ void append_history(int step,
                     amrex::Real time,
                     const TransportDiagnostics& diag,
                     amrex::Real injected_mass,
+                    amrex::Real boundary_inflow_mass,
                     amrex::Real outlet_mass,
                     amrex::Real initial_mass,
                     const RuntimeParams& params);

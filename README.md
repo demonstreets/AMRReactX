@@ -53,6 +53,7 @@ mpirun -np 2 ./build/amrreactx inputs/verify_box_source_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_auto_dt_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_volume_fraction_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_boundary_faces_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_inlet_scalar_3d.in
 ```
 
 Run the Stage 1 verification suite:
@@ -99,7 +100,11 @@ Runtime diagnostics:
 
 - `adv_cfl_sum`, `max_dir_cfl`: explicit upwind advection stability indicators.
 - `diffusion_number`: explicit centered-diffusion stability indicator.
-- `mass`, `injected`, `outlet`, `balance_error`: scalar mass budget.
+- `mass`, `injected`, `boundary_inflow`, `outlet`, `balance_error`: scalar
+  mass budget.
+- `inflow_xlo_rate`, `inflow_xhi_rate`, `inflow_ylo_rate`,
+  `inflow_yhi_rate`, `inflow_zlo_rate`, `inflow_zhi_rate`: per-face scalar
+  boundary-inflow rates whose sum equals `boundary_inflow_rate`.
 - `outlet_xlo_rate`, `outlet_xhi_rate`, `outlet_ylo_rate`,
   `outlet_yhi_rate`, `outlet_zlo_rate`, `outlet_zhi_rate`: per-face scalar
   outlet rates whose sum equals `outlet_rate`.

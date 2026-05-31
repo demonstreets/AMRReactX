@@ -28,9 +28,20 @@ def outlet_face_rate_sum(row):
             + row["outlet_zlo_rate"] + row["outlet_zhi_rate"])
 
 
+def inflow_face_rate_sum(row):
+    return (row["inflow_xlo_rate"] + row["inflow_xhi_rate"]
+            + row["inflow_ylo_rate"] + row["inflow_yhi_rate"]
+            + row["inflow_zlo_rate"] + row["inflow_zhi_rate"])
+
+
 def check_outlet_rate_decomposition(row, tol=1.0e-12):
     close(outlet_face_rate_sum(row), row["outlet_rate"], tol,
           "sum of face outlet rates")
+
+
+def check_inflow_rate_decomposition(row, tol=1.0e-12):
+    close(inflow_face_rate_sum(row), row["boundary_inflow_rate"], tol,
+          "sum of face boundary inflow rates")
 
 
 def check_case(case, rows):
@@ -38,6 +49,7 @@ def check_case(case, rows):
     first = rows[0]
     last = rows[-1]
     check_outlet_rate_decomposition(last)
+    check_inflow_rate_decomposition(last)
 
     if case == "leak":
         close(last["mass"], 0.038577307826430318, 1.0e-9, "leak final mass")
@@ -89,6 +101,13 @@ def check_case(case, rows):
         close(last["outlet_rate"], last["outlet_yhi_rate"], 1.0e-14, "boundary_faces total outlet rate")
         require(last["mass"] < first["mass"], "boundary_faces mass should leave through yhi")
         require(abs(last["balance_error"]) < 1.0e-9, "boundary_faces balance error too large")
+    elif case == "inlet_scalar":
+        close(last["boundary_inflow_rate"], 1.6, 1.0e-12, "inlet_scalar boundary inflow rate")
+        close(last["inflow_xlo_rate"], 1.6, 1.0e-12, "inlet_scalar xlo inflow rate")
+        close(last["boundary_inflow"], 0.64, 1.0e-12, "inlet_scalar accumulated boundary inflow")
+        close(last["mass"], 0.64, 1.0e-12, "inlet_scalar final mass")
+        close(last["outlet"], 0.0, 1.0e-14, "inlet_scalar outlet mass")
+        require(abs(last["balance_error"]) < 1.0e-12, "inlet_scalar balance error too large")
     else:
         raise AssertionError(f"unknown case {case}")
 

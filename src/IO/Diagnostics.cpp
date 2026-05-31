@@ -86,23 +86,54 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
             d(i, j, k, OutletYHiRate) = 0.0;
             d(i, j, k, OutletZLoRate) = 0.0;
             d(i, j, k, OutletZHiRate) = 0.0;
+            d(i, j, k, InflowRate) = 0.0;
+            d(i, j, k, InflowXLoRate) = 0.0;
+            d(i, j, k, InflowXHiRate) = 0.0;
+            d(i, j, k, InflowYLoRate) = 0.0;
+            d(i, j, k, InflowYHiRate) = 0.0;
+            d(i, j, k, InflowZLoRate) = 0.0;
+            d(i, j, k, InflowZHiRate) = 0.0;
             if (i == dom_lo[0] && kparams.wind[0] < 0.0 && kparams.bc_lo[0] != BcWall) {
                 d(i, j, k, OutletXLoRate) = rho0 * (-kparams.wind[0]) * y_leak * face_area[0] / cell_volume;
+            }
+            if (i == dom_lo[0] && kparams.wind[0] > 0.0 && kparams.bc_lo[0] != BcWall) {
+                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_lo[0], kparams);
+                d(i, j, k, InflowXLoRate) = rho0 * kparams.wind[0] * exterior_y * face_area[0] / cell_volume;
             }
             if (i == dom_hi[0] && kparams.wind[0] > 0.0 && kparams.bc_hi[0] != BcWall) {
                 d(i, j, k, OutletXHiRate) = rho0 * kparams.wind[0] * y_leak * face_area[0] / cell_volume;
             }
+            if (i == dom_hi[0] && kparams.wind[0] < 0.0 && kparams.bc_hi[0] != BcWall) {
+                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_hi[0], kparams);
+                d(i, j, k, InflowXHiRate) = rho0 * (-kparams.wind[0]) * exterior_y * face_area[0] / cell_volume;
+            }
             if (j == dom_lo[1] && kparams.wind[1] < 0.0 && kparams.bc_lo[1] != BcWall) {
                 d(i, j, k, OutletYLoRate) = rho0 * (-kparams.wind[1]) * y_leak * face_area[1] / cell_volume;
+            }
+            if (j == dom_lo[1] && kparams.wind[1] > 0.0 && kparams.bc_lo[1] != BcWall) {
+                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_lo[1], kparams);
+                d(i, j, k, InflowYLoRate) = rho0 * kparams.wind[1] * exterior_y * face_area[1] / cell_volume;
             }
             if (j == dom_hi[1] && kparams.wind[1] > 0.0 && kparams.bc_hi[1] != BcWall) {
                 d(i, j, k, OutletYHiRate) = rho0 * kparams.wind[1] * y_leak * face_area[1] / cell_volume;
             }
+            if (j == dom_hi[1] && kparams.wind[1] < 0.0 && kparams.bc_hi[1] != BcWall) {
+                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_hi[1], kparams);
+                d(i, j, k, InflowYHiRate) = rho0 * (-kparams.wind[1]) * exterior_y * face_area[1] / cell_volume;
+            }
             if (k == dom_lo[2] && kparams.wind[2] < 0.0 && kparams.bc_lo[2] != BcWall) {
                 d(i, j, k, OutletZLoRate) = rho0 * (-kparams.wind[2]) * y_leak * face_area[2] / cell_volume;
             }
+            if (k == dom_lo[2] && kparams.wind[2] > 0.0 && kparams.bc_lo[2] != BcWall) {
+                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_lo[2], kparams);
+                d(i, j, k, InflowZLoRate) = rho0 * kparams.wind[2] * exterior_y * face_area[2] / cell_volume;
+            }
             if (k == dom_hi[2] && kparams.wind[2] > 0.0 && kparams.bc_hi[2] != BcWall) {
                 d(i, j, k, OutletZHiRate) = rho0 * kparams.wind[2] * y_leak * face_area[2] / cell_volume;
+            }
+            if (k == dom_hi[2] && kparams.wind[2] < 0.0 && kparams.bc_hi[2] != BcWall) {
+                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_hi[2], kparams);
+                d(i, j, k, InflowZHiRate) = rho0 * (-kparams.wind[2]) * exterior_y * face_area[2] / cell_volume;
             }
             d(i, j, k, OutletRate) = d(i, j, k, OutletXLoRate)
                                    + d(i, j, k, OutletXHiRate)
@@ -110,6 +141,12 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
                                    + d(i, j, k, OutletYHiRate)
                                    + d(i, j, k, OutletZLoRate)
                                    + d(i, j, k, OutletZHiRate);
+            d(i, j, k, InflowRate) = d(i, j, k, InflowXLoRate)
+                                   + d(i, j, k, InflowXHiRate)
+                                   + d(i, j, k, InflowYLoRate)
+                                   + d(i, j, k, InflowYHiRate)
+                                   + d(i, j, k, InflowZLoRate)
+                                   + d(i, j, k, InflowZHiRate);
             d(i, j, k, XMoment) = rho0 * y_leak * x;
             d(i, j, k, YMoment) = rho0 * y_leak * y;
             d(i, j, k, ZMoment) = rho0 * y_leak * z;
@@ -129,6 +166,13 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
     out.outlet_yhi_rate = diag.sum(OutletYHiRate) * cell_volume;
     out.outlet_zlo_rate = diag.sum(OutletZLoRate) * cell_volume;
     out.outlet_zhi_rate = diag.sum(OutletZHiRate) * cell_volume;
+    out.boundary_inflow_rate = diag.sum(InflowRate) * cell_volume;
+    out.inflow_xlo_rate = diag.sum(InflowXLoRate) * cell_volume;
+    out.inflow_xhi_rate = diag.sum(InflowXHiRate) * cell_volume;
+    out.inflow_ylo_rate = diag.sum(InflowYLoRate) * cell_volume;
+    out.inflow_yhi_rate = diag.sum(InflowYHiRate) * cell_volume;
+    out.inflow_zlo_rate = diag.sum(InflowZLoRate) * cell_volume;
+    out.inflow_zhi_rate = diag.sum(InflowZHiRate) * cell_volume;
     const amrex::Real x_moment = diag.sum(XMoment) * cell_volume;
     const amrex::Real y_moment = diag.sum(YMoment) * cell_volume;
     const amrex::Real z_moment = diag.sum(ZMoment) * cell_volume;
@@ -245,8 +289,11 @@ void initialize_history_file(const RuntimeParams& params)
         return;
     }
     std::ofstream history(params.history_file);
-    history << "step,time,mass,injected,outlet,balance_error,source_rate,outlet_rate,max_Y,"
+    history << "step,time,mass,injected,boundary_inflow,outlet,balance_error,"
+            << "source_rate,boundary_inflow_rate,outlet_rate,max_Y,"
             << "max_Y_x,max_Y_y,max_Y_z,max_concentration,centroid_x,centroid_y,centroid_z,"
+            << "inflow_xlo_rate,inflow_xhi_rate,inflow_ylo_rate,inflow_yhi_rate,"
+            << "inflow_zlo_rate,inflow_zhi_rate,"
             << "outlet_xlo_rate,outlet_xhi_rate,outlet_ylo_rate,outlet_yhi_rate,"
             << "outlet_zlo_rate,outlet_zhi_rate,"
             << "cloud_volume,flammable_volume\n";
@@ -256,18 +303,28 @@ void print_diagnostics(int step,
                        amrex::Real time,
                        const TransportDiagnostics& diag,
                        amrex::Real injected_mass,
+                       amrex::Real boundary_inflow_mass,
                        amrex::Real outlet_mass,
                        amrex::Real initial_mass)
 {
-    const amrex::Real balance_error = diag.scalar_mass - initial_mass - injected_mass + outlet_mass;
+    const amrex::Real balance_error =
+        diag.scalar_mass - initial_mass - injected_mass - boundary_inflow_mass + outlet_mass;
     amrex::Print() << "step " << step
                    << " time " << time
                    << " mass " << diag.scalar_mass
                    << " injected " << injected_mass
+                   << " boundary_inflow " << boundary_inflow_mass
                    << " outlet " << outlet_mass
                    << " balance_error " << balance_error
                    << " source_rate " << diag.source_rate
+                   << " boundary_inflow_rate " << diag.boundary_inflow_rate
                    << " outlet_rate " << diag.outlet_rate
+                   << " inflow_face_rates xlo " << diag.inflow_xlo_rate
+                   << " xhi " << diag.inflow_xhi_rate
+                   << " ylo " << diag.inflow_ylo_rate
+                   << " yhi " << diag.inflow_yhi_rate
+                   << " zlo " << diag.inflow_zlo_rate
+                   << " zhi " << diag.inflow_zhi_rate
                    << " outlet_face_rates xlo " << diag.outlet_xlo_rate
                    << " xhi " << diag.outlet_xhi_rate
                    << " ylo " << diag.outlet_ylo_rate
@@ -290,6 +347,7 @@ void append_history(int step,
                     amrex::Real time,
                     const TransportDiagnostics& diag,
                     amrex::Real injected_mass,
+                    amrex::Real boundary_inflow_mass,
                     amrex::Real outlet_mass,
                     amrex::Real initial_mass,
                     const RuntimeParams& params)
@@ -297,15 +355,18 @@ void append_history(int step,
     if (!amrex::ParallelDescriptor::IOProcessor()) {
         return;
     }
-    const amrex::Real balance_error = diag.scalar_mass - initial_mass - injected_mass + outlet_mass;
+    const amrex::Real balance_error =
+        diag.scalar_mass - initial_mass - injected_mass - boundary_inflow_mass + outlet_mass;
     std::ofstream history(params.history_file, std::ios::app);
     history << step << ","
             << std::setprecision(17) << time << ","
             << diag.scalar_mass << ","
             << injected_mass << ","
+            << boundary_inflow_mass << ","
             << outlet_mass << ","
             << balance_error << ","
             << diag.source_rate << ","
+            << diag.boundary_inflow_rate << ","
             << diag.outlet_rate << ","
             << diag.max_y << ","
             << diag.max_y_x << ","
@@ -315,6 +376,12 @@ void append_history(int step,
             << diag.x_centroid << ","
             << diag.y_centroid << ","
             << diag.z_centroid << ","
+            << diag.inflow_xlo_rate << ","
+            << diag.inflow_xhi_rate << ","
+            << diag.inflow_ylo_rate << ","
+            << diag.inflow_yhi_rate << ","
+            << diag.inflow_zlo_rate << ","
+            << diag.inflow_zhi_rate << ","
             << diag.outlet_xlo_rate << ","
             << diag.outlet_xhi_rate << ","
             << diag.outlet_ylo_rate << ","
