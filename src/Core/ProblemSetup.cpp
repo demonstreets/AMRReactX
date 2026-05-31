@@ -68,6 +68,7 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     pp.query("diffusion", params.diffusion);
     pp.query("rho0", params.rho0);
     pp.query("inlet_y", params.inlet_y);
+    pp.query("ambient_y", params.ambient_y);
     pp.query("source_sigma", params.source_sigma);
     pp.query("source_strength", params.source_strength);
     pp.query("source_total_rate", params.source_total_rate);

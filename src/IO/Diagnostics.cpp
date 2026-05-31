@@ -97,42 +97,42 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
                 d(i, j, k, OutletXLoRate) = rho0 * (-kparams.wind[0]) * y_leak * face_area[0] / cell_volume;
             }
             if (i == dom_lo[0] && kparams.wind[0] > 0.0 && kparams.bc_lo[0] != BcWall) {
-                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_lo[0], kparams);
+                const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_lo[0], kparams);
                 d(i, j, k, InflowXLoRate) = rho0 * kparams.wind[0] * exterior_y * face_area[0] / cell_volume;
             }
             if (i == dom_hi[0] && kparams.wind[0] > 0.0 && kparams.bc_hi[0] != BcWall) {
                 d(i, j, k, OutletXHiRate) = rho0 * kparams.wind[0] * y_leak * face_area[0] / cell_volume;
             }
             if (i == dom_hi[0] && kparams.wind[0] < 0.0 && kparams.bc_hi[0] != BcWall) {
-                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_hi[0], kparams);
+                const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_hi[0], kparams);
                 d(i, j, k, InflowXHiRate) = rho0 * (-kparams.wind[0]) * exterior_y * face_area[0] / cell_volume;
             }
             if (j == dom_lo[1] && kparams.wind[1] < 0.0 && kparams.bc_lo[1] != BcWall) {
                 d(i, j, k, OutletYLoRate) = rho0 * (-kparams.wind[1]) * y_leak * face_area[1] / cell_volume;
             }
             if (j == dom_lo[1] && kparams.wind[1] > 0.0 && kparams.bc_lo[1] != BcWall) {
-                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_lo[1], kparams);
+                const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_lo[1], kparams);
                 d(i, j, k, InflowYLoRate) = rho0 * kparams.wind[1] * exterior_y * face_area[1] / cell_volume;
             }
             if (j == dom_hi[1] && kparams.wind[1] > 0.0 && kparams.bc_hi[1] != BcWall) {
                 d(i, j, k, OutletYHiRate) = rho0 * kparams.wind[1] * y_leak * face_area[1] / cell_volume;
             }
             if (j == dom_hi[1] && kparams.wind[1] < 0.0 && kparams.bc_hi[1] != BcWall) {
-                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_hi[1], kparams);
+                const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_hi[1], kparams);
                 d(i, j, k, InflowYHiRate) = rho0 * (-kparams.wind[1]) * exterior_y * face_area[1] / cell_volume;
             }
             if (k == dom_lo[2] && kparams.wind[2] < 0.0 && kparams.bc_lo[2] != BcWall) {
                 d(i, j, k, OutletZLoRate) = rho0 * (-kparams.wind[2]) * y_leak * face_area[2] / cell_volume;
             }
             if (k == dom_lo[2] && kparams.wind[2] > 0.0 && kparams.bc_lo[2] != BcWall) {
-                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_lo[2], kparams);
+                const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_lo[2], kparams);
                 d(i, j, k, InflowZLoRate) = rho0 * kparams.wind[2] * exterior_y * face_area[2] / cell_volume;
             }
             if (k == dom_hi[2] && kparams.wind[2] > 0.0 && kparams.bc_hi[2] != BcWall) {
                 d(i, j, k, OutletZHiRate) = rho0 * kparams.wind[2] * y_leak * face_area[2] / cell_volume;
             }
             if (k == dom_hi[2] && kparams.wind[2] < 0.0 && kparams.bc_hi[2] != BcWall) {
-                const amrex::Real exterior_y = boundary_y(y_leak, kparams.bc_hi[2], kparams);
+                const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_hi[2], kparams);
                 d(i, j, k, InflowZHiRate) = rho0 * (-kparams.wind[2]) * exterior_y * face_area[2] / cell_volume;
             }
             d(i, j, k, OutletRate) = d(i, j, k, OutletXLoRate)
@@ -331,7 +331,8 @@ void print_boundary_report(const RuntimeParams& params)
                    << boundary_type_name(params.bc_hi[0]) << " "
                    << boundary_type_name(params.bc_hi[1]) << " "
                    << boundary_type_name(params.bc_hi[2])
-                   << " inlet_y " << params.inlet_y << "\n";
+                   << " inlet_y " << params.inlet_y
+                   << " ambient_y " << params.ambient_y << "\n";
 }
 
 void print_source_report(const RuntimeParams& params)

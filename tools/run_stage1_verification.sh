@@ -36,5 +36,6 @@ run_case auto_dt inputs/verify_auto_dt_3d.in history_verify_auto_dt.csv
 run_case volume_fraction inputs/verify_volume_fraction_3d.in history_verify_volume_fraction.csv
 run_case boundary_faces inputs/verify_boundary_faces_3d.in history_verify_boundary_faces.csv
 run_case inlet_scalar inputs/verify_inlet_scalar_3d.in history_verify_inlet_scalar.csv
+run_case open_backflow inputs/verify_open_backflow_3d.in history_verify_open_backflow.csv
 
 echo "Stage 1/2 verification suite passed."

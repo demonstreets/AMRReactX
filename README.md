@@ -55,6 +55,7 @@ mpirun -np 2 ./build/amrreactx inputs/verify_auto_dt_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_volume_fraction_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_boundary_faces_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_inlet_scalar_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_open_backflow_3d.in
 ```
 
 Run the Stage 1 verification suite:
@@ -79,6 +80,9 @@ Useful Stage 1 input parameters:
   `init_sigma`, and `init_amplitude`.
 - `bc_lo`, `bc_hi`: scalar boundary types for x/y/z low and high faces.
   Supported values are `inlet`, `outlet`, `wall`, and `open`.
+- `inlet_y`: scalar value imposed at `inlet` boundary inflow.
+- `ambient_y`: scalar value used when `open` or `outlet` boundaries advect
+  back into the domain.
 - `cloud_threshold`: threshold used to report cloud volume.
 - `lel`, `uel`: lower/upper threshold pair used to report flammable cloud
   volume.
@@ -96,8 +100,10 @@ Useful Stage 1 input parameters:
 Boundary-condition meaning:
 
 - `inlet`: Dirichlet scalar value using `inlet_y`.
-- `outlet`: zero-gradient scalar boundary; scalar leaves naturally with outward wind.
-- `open`: zero-gradient scalar boundary, usable for side/top far-field faces.
+- `outlet`: zero-gradient scalar boundary for diffusion/outflow; advective
+  backflow uses `ambient_y`.
+- `open`: zero-gradient scalar boundary for diffusion/outflow, usable for
+  side/top far-field faces; advective backflow uses `ambient_y`.
 - `wall`: zero-gradient scalar diffusion with zero normal advective scalar flux.
 
 Runtime diagnostics:

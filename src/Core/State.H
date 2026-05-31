@@ -79,6 +79,7 @@ struct RuntimeParams {
     amrex::Real diffusion = 0.01;
     amrex::Real rho0 = 1.0;
     amrex::Real inlet_y = 0.0;
+    amrex::Real ambient_y = 0.0;
     amrex::Real wind[AMREX_SPACEDIM] = {AMREX_D_DECL(1.0, 0.0, 0.0)};
     amrex::Real source_center[AMREX_SPACEDIM] = {AMREX_D_DECL(1.0, 2.0, 2.0)};
     amrex::Real source_box_lo[AMREX_SPACEDIM] = {AMREX_D_DECL(0.9, 1.9, 1.9)};
@@ -108,6 +109,7 @@ struct KernelParams {
     amrex::Real diffusion;
     amrex::Real rho0;
     amrex::Real inlet_y;
+    amrex::Real ambient_y;
     amrex::Real wind[AMREX_SPACEDIM];
     amrex::Real source_center[AMREX_SPACEDIM];
     amrex::Real source_box_lo[AMREX_SPACEDIM];
@@ -222,6 +224,7 @@ inline void fill_kernel_params(KernelParams& kparams, const RuntimeParams& param
     kparams.diffusion = params.diffusion;
     kparams.rho0 = params.rho0;
     kparams.inlet_y = params.inlet_y;
+    kparams.ambient_y = params.ambient_y;
     kparams.source_sigma = params.source_sigma;
     kparams.source_strength = params.source_strength;
     kparams.source_type = params.source_type;

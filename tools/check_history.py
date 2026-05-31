@@ -134,6 +134,13 @@ def check_case(case, rows):
         close(last["mass"], 0.64, 1.0e-12, "inlet_scalar final mass")
         close(last["outlet"], 0.0, 1.0e-14, "inlet_scalar outlet mass")
         require(abs(last["balance_error"]) < 1.0e-12, "inlet_scalar balance error too large")
+    elif case == "open_backflow":
+        close(last["boundary_inflow_rate"], 0.0, 1.0e-14, "open_backflow boundary inflow rate")
+        close(last["inflow_xhi_rate"], 0.0, 1.0e-14, "open_backflow xhi inflow rate")
+        close(last["boundary_inflow"], 0.0, 1.0e-14, "open_backflow accumulated boundary inflow")
+        close(last["mass"], first["mass"], 1.0e-9, "open_backflow mass conservation")
+        require(last["centroid_x"] < first["centroid_x"], "open_backflow cloud did not move toward xlo")
+        require(abs(last["balance_error"]) < 1.0e-9, "open_backflow balance error too large")
     else:
         raise AssertionError(f"unknown case {case}")
 
