@@ -67,6 +67,13 @@ enum DiagIndex {
     NumDiag
 };
 
+enum TagIndex {
+    GradYTag = 0,
+    SourceRegionTag,
+    RefineTag,
+    NumTag
+};
+
 struct RuntimeParams {
     int max_grid_size = 32;
     int max_step = 80;
@@ -100,6 +107,15 @@ struct RuntimeParams {
     amrex::Real leak_molecular_weight = 16.04;
     amrex::Real air_molecular_weight = 28.97;
     int diagnostic_basis = BasisMassFraction;
+    int tagging_enabled = 0;
+    amrex::Real tag_grad_y = 0.05;
+    int tag_source_region = 0;
+    amrex::Real tag_source_radius = -1.0;
+    amrex::Real tag_source_box_buffer = 0.0;
+    int tag_buffer = 1;
+    int tag_ref_ratio = 2;
+    int tag_max_grid_size = 16;
+    amrex::Real tag_grid_efficiency = 0.7;
     std::string history_file = "history.csv";
     std::string plotfile_prefix = "plt_leak";
 };
@@ -173,6 +189,13 @@ struct TransportDiagnostics {
     amrex::Real flammable_y_max = 0.0;
     amrex::Real flammable_z_min = 0.0;
     amrex::Real flammable_z_max = 0.0;
+    amrex::Real tag_grad_y_volume = 0.0;
+    amrex::Real tag_source_volume = 0.0;
+    amrex::Real tag_refine_volume = 0.0;
+    amrex::Real tag_candidate_level1_volume = 0.0;
+    long long tag_refine_cell_count = 0;
+    long long tag_cluster_count = 0;
+    long long tag_candidate_level1_cell_count = 0;
 };
 
 inline const char* concentration_basis_name(int basis)

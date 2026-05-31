@@ -20,6 +20,7 @@ void print_stability_report(const StabilityInfo& info);
 void print_boundary_report(const RuntimeParams& params);
 void print_source_report(const RuntimeParams& params);
 void print_concentration_report(const RuntimeParams& params);
+void print_tagging_report(const RuntimeParams& params);
 void initialize_history_file(const RuntimeParams& params);
 
 void print_diagnostics(int step,

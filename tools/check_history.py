@@ -4,6 +4,7 @@ import argparse
 import csv
 import math
 import sys
+from pathlib import Path
 
 
 def read_rows(path):
@@ -42,6 +43,18 @@ def check_outlet_rate_decomposition(row, tol=1.0e-12):
 def check_inflow_rate_decomposition(row, tol=1.0e-12):
     close(inflow_face_rate_sum(row), row["boundary_inflow_rate"], tol,
           "sum of face boundary inflow rates")
+
+
+def check_multilevel_plotfile(path, expected_finest_level):
+    header = Path(path) / "Header"
+    require(header.exists(), f"plotfile header does not exist: {header}")
+    lines = header.read_text().splitlines()
+    require(len(lines) > 13, f"plotfile header is too short: {header}")
+    ncomp = int(lines[1])
+    finest_level = int(lines[4 + ncomp])
+    close(finest_level, expected_finest_level, 0.0, "plotfile finest AMR level")
+    require((Path(path) / f"Level_{expected_finest_level}").exists(),
+            f"plotfile is missing Level_{expected_finest_level}")
 
 
 def check_case(case, rows):
@@ -141,6 +154,20 @@ def check_case(case, rows):
         close(last["mass"], first["mass"], 1.0e-9, "open_backflow mass conservation")
         require(last["centroid_x"] < first["centroid_x"], "open_backflow cloud did not move toward xlo")
         require(abs(last["balance_error"]) < 1.0e-9, "open_backflow balance error too large")
+    elif case == "tagging":
+        close(last["tag_source_volume"], 1.0, 1.0e-12, "tagging source volume")
+        require(last["tag_grad_y_volume"] > 0.0, "tagging gradient volume should be positive")
+        require(last["tag_refine_volume"] >= last["tag_source_volume"],
+                "tagging refine volume should include source tags")
+        require(last["tag_refine_volume"] >= last["tag_grad_y_volume"],
+                "tagging refine volume should include gradient tags")
+        require(last["tag_refine_cell_count"] > 0.0, "tagging should collate tagged cells")
+        require(last["tag_cluster_count"] > 0.0, "tagging should produce candidate boxes")
+        require(last["tag_candidate_level1_cell_count"] > 0.0,
+                "tagging should produce candidate level-1 cells")
+        require(last["tag_candidate_level1_volume"] >= last["tag_refine_volume"],
+                "candidate level-1 volume should cover refine tags")
+        check_multilevel_plotfile("plt_verify_tagging_00000", 1)
     else:
         raise AssertionError(f"unknown case {case}")
 

@@ -80,6 +80,15 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     pp.query("uel", params.uel);
     pp.query("leak_molecular_weight", params.leak_molecular_weight);
     pp.query("air_molecular_weight", params.air_molecular_weight);
+    pp.query("tagging_enabled", params.tagging_enabled);
+    pp.query("tag_grad_y", params.tag_grad_y);
+    pp.query("tag_source_region", params.tag_source_region);
+    pp.query("tag_source_radius", params.tag_source_radius);
+    pp.query("tag_source_box_buffer", params.tag_source_box_buffer);
+    pp.query("tag_buffer", params.tag_buffer);
+    pp.query("tag_ref_ratio", params.tag_ref_ratio);
+    pp.query("tag_max_grid_size", params.tag_max_grid_size);
+    pp.query("tag_grid_efficiency", params.tag_grid_efficiency);
     pp.query("history_file", params.history_file);
     pp.query("plotfile_prefix", params.plotfile_prefix);
     std::string source_type = source_type_name(params.source_type);

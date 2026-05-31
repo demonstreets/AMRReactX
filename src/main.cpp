@@ -36,11 +36,12 @@ int main(int argc, char* argv[])
         amrreactx::initialize_history_file(params);
         amrreactx::write_plotfile(state, geom, params, 0, time);
 
-        amrex::Print() << "AMRReactX Stage 1 scalar transport\n";
+        amrex::Print() << "AMRReactX scalar transport\n";
         amrex::Print() << "MPI ranks: " << amrex::ParallelDescriptor::NProcs() << "\n";
         amrreactx::print_boundary_report(params);
         amrreactx::print_source_report(params);
         amrreactx::print_concentration_report(params);
+        amrreactx::print_tagging_report(params);
         amrreactx::print_stability_report(amrreactx::compute_stability(geom, params));
         amrreactx::print_diagnostics(0, time, current_diag, injected_mass,
                                      boundary_inflow_mass, outlet_mass, initial_mass);

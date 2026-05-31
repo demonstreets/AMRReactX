@@ -1,13 +1,16 @@
 #include "IO/Diagnostics.H"
 
 #include "AMR/BoundaryConditions.H"
+#include "AMR/Tagging.H"
 #include "Physics/SourceTerms.H"
 
 #include <AMReX_Array4.H>
 #include <AMReX_Box.H>
+#include <AMReX_DistributionMapping.H>
 #include <AMReX_MFIter.H>
 #include <AMReX_ParallelDescriptor.H>
 #include <AMReX_PlotFileUtil.H>
+#include <AMReX_RealBox.H>
 #include <AMReX_Vector.H>
 
 #include <cmath>
@@ -26,6 +29,60 @@ std::string plotfile_name(const std::string& prefix, int step)
     std::ostringstream os;
     os << prefix << std::setw(5) << std::setfill('0') << step;
     return os.str();
+}
+
+amrex::Vector<std::string> plot_var_names()
+{
+    return {"rho", "u", "v", "w", "Y_leak", "C_leak_diag",
+            "tag_grad_y", "tag_source", "tag_refine"};
+}
+
+void fill_diagnostic_plot_components(amrex::MultiFab& plot_state,
+                                     const RuntimeParams& params)
+{
+    for (amrex::MFIter mfi(plot_state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<amrex::Real> p = plot_state.array(mfi);
+        const int basis = params.diagnostic_basis;
+        const amrex::Real leak_mw = params.leak_molecular_weight;
+        const amrex::Real air_mw = params.air_molecular_weight;
+
+        amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+            p(i, j, k, NumState) = diagnostic_concentration(p(i, j, k, YLeak),
+                                                            basis, leak_mw, air_mw);
+        });
+    }
+}
+
+amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio)
+{
+    const amrex::Box fine_domain = amrex::refine(geom.Domain(), ref_ratio);
+    const amrex::RealBox real_box(geom.ProbLo(), geom.ProbHi());
+    amrex::Vector<int> is_periodic(AMREX_SPACEDIM, 0);
+    for (int d = 0; d < AMREX_SPACEDIM; ++d) {
+        is_periodic[d] = geom.isPeriodic(d) ? 1 : 0;
+    }
+    return amrex::Geometry(fine_domain, &real_box, geom.Coord(), is_periodic.data());
+}
+
+void initialize_level1_from_level0(const amrex::MultiFab& coarse_for_fine,
+                                   amrex::MultiFab& fine_plot_state,
+                                   int ref_ratio)
+{
+    for (amrex::MFIter mfi(fine_plot_state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<amrex::Real> fine = fine_plot_state.array(mfi);
+        const int ncomp = fine_plot_state.nComp();
+        const amrex::Array4<const amrex::Real> coarse = coarse_for_fine.const_array(mfi);
+        for (int comp = 0; comp < ncomp; ++comp) {
+            amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+                fine(i, j, k, comp) = coarse(i / ref_ratio,
+                                             j / ref_ratio,
+                                             k / ref_ratio,
+                                             comp);
+            });
+        }
+    }
 }
 
 } // namespace
@@ -302,6 +359,18 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
         out.flammable_z_min = flammable_min[2];
         out.flammable_z_max = flammable_max[2];
     }
+    if (params.tagging_enabled != 0) {
+        amrex::MultiFab tags(state.boxArray(), state.DistributionMap(), NumTag, 0);
+        fill_tagging_indicators(state, tags, geom, params);
+        out.tag_grad_y_volume = tags.sum(GradYTag) * cell_volume;
+        out.tag_source_volume = tags.sum(SourceRegionTag) * cell_volume;
+        out.tag_refine_volume = tags.sum(RefineTag) * cell_volume;
+        const AmrTaggingSummary tag_summary = build_candidate_level1_grids(tags, geom, params);
+        out.tag_refine_cell_count = tag_summary.refine_cell_count;
+        out.tag_cluster_count = tag_summary.cluster_count;
+        out.tag_candidate_level1_cell_count = tag_summary.candidate_level1_cell_count;
+        out.tag_candidate_level1_volume = tag_summary.candidate_level1_volume;
+    }
     return out;
 }
 
@@ -363,6 +432,19 @@ void print_concentration_report(const RuntimeParams& params)
                    << " air_molecular_weight " << params.air_molecular_weight << "\n";
 }
 
+void print_tagging_report(const RuntimeParams& params)
+{
+    amrex::Print() << "amr_tagging enabled " << params.tagging_enabled
+                   << " tag_grad_y " << params.tag_grad_y
+                   << " tag_source_region " << params.tag_source_region
+                   << " tag_source_radius " << params.tag_source_radius
+                   << " tag_source_box_buffer " << params.tag_source_box_buffer
+                   << " tag_buffer " << params.tag_buffer
+                   << " tag_ref_ratio " << params.tag_ref_ratio
+                   << " tag_max_grid_size " << params.tag_max_grid_size
+                   << " tag_grid_efficiency " << params.tag_grid_efficiency << "\n";
+}
+
 void initialize_history_file(const RuntimeParams& params)
 {
     if (!amrex::ParallelDescriptor::IOProcessor()) {
@@ -380,7 +462,10 @@ void initialize_history_file(const RuntimeParams& params)
             << "cloud_x_min,cloud_x_max,cloud_y_min,cloud_y_max,cloud_z_min,cloud_z_max,"
             << "flammable_volume,flammable_mass,flammable_mean_concentration,"
             << "flammable_x_min,flammable_x_max,flammable_y_min,flammable_y_max,"
-            << "flammable_z_min,flammable_z_max\n";
+            << "flammable_z_min,flammable_z_max,"
+            << "tag_grad_y_volume,tag_source_volume,tag_refine_volume,"
+            << "tag_refine_cell_count,tag_cluster_count,"
+            << "tag_candidate_level1_cell_count,tag_candidate_level1_volume\n";
 }
 
 void print_diagnostics(int step,
@@ -438,6 +523,13 @@ void print_diagnostics(int step,
                    << " " << diag.flammable_z_max
                    << " flammable_mass " << diag.flammable_mass
                    << " flammable_mean_concentration " << diag.flammable_mean_concentration
+                   << " tag_volumes grad_y " << diag.tag_grad_y_volume
+                   << " source " << diag.tag_source_volume
+                   << " refine " << diag.tag_refine_volume
+                   << " tag_candidate_level1 boxes " << diag.tag_cluster_count
+                   << " tagged_cells " << diag.tag_refine_cell_count
+                   << " fine_cells " << diag.tag_candidate_level1_cell_count
+                   << " volume " << diag.tag_candidate_level1_volume
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -505,7 +597,14 @@ void append_history(int step,
             << diag.flammable_y_min << ","
             << diag.flammable_y_max << ","
             << diag.flammable_z_min << ","
-            << diag.flammable_z_max << "\n";
+            << diag.flammable_z_max << ","
+            << diag.tag_grad_y_volume << ","
+            << diag.tag_source_volume << ","
+            << diag.tag_refine_volume << ","
+            << diag.tag_refine_cell_count << ","
+            << diag.tag_cluster_count << ","
+            << diag.tag_candidate_level1_cell_count << ","
+            << diag.tag_candidate_level1_volume << "\n";
 }
 
 void write_plotfile(const amrex::MultiFab& state,
@@ -514,27 +613,37 @@ void write_plotfile(const amrex::MultiFab& state,
                     int step,
                     amrex::Real time)
 {
-    amrex::MultiFab plot_state(state.boxArray(), state.DistributionMap(), NumState + 1, 0);
+    amrex::MultiFab tags(state.boxArray(), state.DistributionMap(), NumTag, 0);
+    fill_tagging_indicators(state, tags, geom, params);
+    const CandidateLevel1Grids candidate = make_candidate_level1_grids(tags, geom, params);
+
+    amrex::MultiFab plot_state(state.boxArray(), state.DistributionMap(), NumState + 1 + NumTag, 0);
     amrex::MultiFab::Copy(plot_state, state, 0, 0, NumState, 0);
+    amrex::MultiFab::Copy(plot_state, tags, 0, NumState + 1, NumTag, 0);
+    fill_diagnostic_plot_components(plot_state, params);
 
-    for (amrex::MFIter mfi(plot_state); mfi.isValid(); ++mfi) {
-        const amrex::Box& bx = mfi.validbox();
-        const amrex::Array4<amrex::Real> p = plot_state.array(mfi);
-        const int basis = params.diagnostic_basis;
-        const amrex::Real leak_mw = params.leak_molecular_weight;
-        const amrex::Real air_mw = params.air_molecular_weight;
-
-        amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
-            p(i, j, k, NumState) = diagnostic_concentration(p(i, j, k, YLeak),
-                                                            basis, leak_mw, air_mw);
-        });
+    const amrex::Vector<std::string> var_names = plot_var_names();
+    const std::string name = plotfile_name(params.plotfile_prefix, step);
+    if (candidate.summary.cluster_count == 0) {
+        amrex::WriteSingleLevelPlotfile(name, plot_state, var_names, geom, time, step);
+        return;
     }
 
-    const amrex::Vector<std::string> var_names{
-        "rho", "u", "v", "w", "Y_leak", "C_leak_diag"
-    };
-    amrex::WriteSingleLevelPlotfile(plotfile_name(params.plotfile_prefix, step),
-                                    plot_state, var_names, geom, time, step);
+    const amrex::DistributionMapping fine_dm(candidate.box_array);
+    amrex::BoxArray coarse_for_fine_ba = candidate.box_array;
+    coarse_for_fine_ba.coarsen(params.tag_ref_ratio);
+    amrex::MultiFab coarse_for_fine(coarse_for_fine_ba, fine_dm, plot_state.nComp(), 0);
+    coarse_for_fine.ParallelCopy(plot_state, 0, 0, plot_state.nComp(), 0, 0, geom.periodicity());
+
+    amrex::MultiFab fine_plot_state(candidate.box_array, fine_dm, plot_state.nComp(), 0);
+    initialize_level1_from_level0(coarse_for_fine, fine_plot_state, params.tag_ref_ratio);
+    const amrex::Geometry fine_geom = make_refined_geometry(geom, params.tag_ref_ratio);
+
+    const amrex::Vector<const amrex::MultiFab*> mfs{&plot_state, &fine_plot_state};
+    const amrex::Vector<amrex::Geometry> geoms{geom, fine_geom};
+    const amrex::Vector<int> level_steps{step, step};
+    const amrex::Vector<amrex::IntVect> ref_ratio{amrex::IntVect(params.tag_ref_ratio)};
+    amrex::WriteMultiLevelPlotfile(name, 2, mfs, var_names, geoms, time, level_steps, ref_ratio);
 }
 
 } // namespace amrreactx

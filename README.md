@@ -3,17 +3,19 @@
 AMRReactX is the working name for a research-oriented AMReX-based compressible
 flow and reacting-flow solver.
 
-The current version is Stage 1 of the solver: a fixed-wind scalar
-advection-diffusion leakage model with an explicit finite-volume update and a
-selectable leakage source. It includes stability checks, mass-balance and
-engineering diagnostics, explicit scalar boundary-condition types, automatic
-timestep control, and a Stage 1/2 verification suite. It writes AMReX plotfiles
+The current version has completed Stage 2 and started Stage 3.1/3.2 on top of the
+Stage 1 fixed-wind scalar advection-diffusion leakage model. It includes
+stability checks, mass-balance and engineering diagnostics, explicit scalar
+boundary-condition types, automatic timestep control, volume-fraction
+diagnostics, source total-rate normalization, open-boundary ambient backflow
+handling, and initial scalar AMR tagging indicators. It writes AMReX plotfiles
 with:
 
 - `rho`: density
 - `u`, `v`, `w`: velocity components
 - `Y_leak`: leaked-gas mass-fraction-like scalar
 - `C_leak_diag`: concentration in the selected diagnostic basis
+- `tag_grad_y`, `tag_source`, `tag_refine`: Stage 3.1 AMR tagging indicators
 
 This first program verifies the development chain and starts the leakage
 transport physics:
@@ -42,6 +44,9 @@ mpirun -np 2 ./build/amrreactx inputs/leak_3d_open.in
 
 The output directories are named from `plotfile_prefix`, for example
 `plt_leak_00000`, `plt_leak_00030`, and so on.
+When AMR tagging is enabled and candidate level-1 boxes are produced, the same
+plotfile path is written as a two-level AMReX plotfile with a piecewise-constant
+level-1 initialization from level 0.
 
 Verification cases:
 
@@ -56,15 +61,25 @@ mpirun -np 2 ./build/amrreactx inputs/verify_volume_fraction_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_boundary_faces_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_inlet_scalar_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_open_backflow_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_tagging_3d.in
 ```
 
-Run the Stage 1 verification suite:
+Run the Stage 1/2 verification suite:
 
 ```bash
-bash tools/run_stage1_verification.sh
+bash tools/run_stage2_verification.sh
 ```
 
-Useful Stage 1 input parameters:
+The old `tools/run_stage1_verification.sh` entry point is kept as a
+compatibility wrapper.
+
+Run the Stage 1/2 + Stage 3.1/3.2 verification suite:
+
+```bash
+bash tools/run_stage3_verification.sh
+```
+
+Useful Stage 1/2 input parameters:
 
 - `wind`: prescribed velocity vector.
 - `diffusion`: scalar diffusivity.
@@ -92,6 +107,17 @@ Useful Stage 1 input parameters:
   using `leak_molecular_weight` and `air_molecular_weight` before applying
   `cloud_threshold`, `lel`, and `uel`.
 - `history_file`: CSV time-history output path.
+- `tagging_enabled = 1`: write Stage 3 tagging indicators and tag-volume
+  diagnostics.
+- `tag_grad_y`: threshold for concentration-gradient tagging based on
+  `|grad Y_leak|`.
+- `tag_source_region = 1`: tag the current source region for AMR source
+  near-field refinement.
+- `tag_source_radius`, `tag_source_box_buffer`: optional source-region tagging
+  controls for Gaussian and box sources.
+- `tag_buffer`, `tag_ref_ratio`, `tag_max_grid_size`,
+  `tag_grid_efficiency`: controls for buffering tags and clustering candidate
+  level-1 AMR boxes.
 - `dt`, `max_step`, `plot_int`: explicit time stepping controls.
 - `use_auto_dt = 1`: choose `dt` from `cfl`, `diff_cfl`, wind, diffusion,
   and grid spacing.
@@ -131,12 +157,19 @@ Runtime diagnostics:
   diagnostic concentration inside those regions.
 - `cloud_*_min/max`, `flammable_*_min/max`: axis-aligned bounds of the
   threshold cloud and flammable cloud, reported from cell-center locations.
+- `tag_grad_y_volume`, `tag_source_volume`, `tag_refine_volume`: Stage 3
+  single-level AMR tagging diagnostics.
+- `tag_refine_cell_count`, `tag_cluster_count`,
+  `tag_candidate_level1_cell_count`, `tag_candidate_level1_volume`: Stage 3
+  candidate level-1 grid diagnostics generated from global tagged bounds.
 
 ## Current Source Layout
 
 - `src/main.cpp`: program orchestration.
 - `src/Core`: runtime parameters, state indices, and AMReX geometry/input setup.
 - `src/AMR`: scalar boundary-condition definitions and face flux helpers.
+- `src/AMR/Tagging.*`: Stage 3 scalar-gradient and source-region tagging
+  indicators.
 - `src/Numerics`: scalar initialization, explicit advection-diffusion update, and
   stability metrics.
 - `src/IO`: plotfile output and runtime diagnostics.
