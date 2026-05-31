@@ -580,7 +580,8 @@ void write_plotfile(const amrex::MultiFab& state,
                     const amrex::Geometry& geom,
                     const RuntimeParams& params,
                     int step,
-                    amrex::Real time)
+                    amrex::Real time,
+                    const ScalarAmrHierarchy* hierarchy)
 {
     amrex::MultiFab tags(state.boxArray(), state.DistributionMap(), NumTag, 0);
     fill_tagging_indicators(state, tags, geom, params);
@@ -593,6 +594,29 @@ void write_plotfile(const amrex::MultiFab& state,
 
     const amrex::Vector<std::string> var_names = plot_var_names();
     const std::string name = plotfile_name(params.plotfile_prefix, step);
+    if (hierarchy != nullptr && hierarchy->has_level1()) {
+        amrex::MultiFab fine_tags(hierarchy->level1_state->boxArray(),
+                                  hierarchy->level1_state->DistributionMap(),
+                                  NumTag,
+                                  0);
+        fill_tagging_indicators(*hierarchy->level1_state, fine_tags, hierarchy->level1_geom, params);
+
+        amrex::MultiFab fine_plot_state(hierarchy->level1_state->boxArray(),
+                                        hierarchy->level1_state->DistributionMap(),
+                                        plot_state.nComp(),
+                                        0);
+        amrex::MultiFab::Copy(fine_plot_state, *hierarchy->level1_state, 0, 0, NumState, 0);
+        amrex::MultiFab::Copy(fine_plot_state, fine_tags, 0, NumState + 1, NumTag, 0);
+        fill_diagnostic_plot_components(fine_plot_state, params);
+
+        const amrex::Vector<const amrex::MultiFab*> mfs{&plot_state, &fine_plot_state};
+        const amrex::Vector<amrex::Geometry> geoms{geom, hierarchy->level1_geom};
+        const amrex::Vector<int> level_steps{step, step};
+        const amrex::Vector<amrex::IntVect> ref_ratio{amrex::IntVect(params.tag_ref_ratio)};
+        amrex::WriteMultiLevelPlotfile(name, 2, mfs, var_names, geoms, time, level_steps, ref_ratio);
+        return;
+    }
+
     if (candidate.summary.cluster_count == 0) {
         amrex::WriteSingleLevelPlotfile(name, plot_state, var_names, geom, time, step);
         return;

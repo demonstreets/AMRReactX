@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AMR/Hierarchy.H"
 #include "Core/State.H"
 
 #include <AMReX_Geometry.H>
@@ -44,6 +45,7 @@ void write_plotfile(const amrex::MultiFab& state,
                     const amrex::Geometry& geom,
                     const RuntimeParams& params,
                     int step,
-                    amrex::Real time);
+                    amrex::Real time,
+                    const ScalarAmrHierarchy* hierarchy = nullptr);
 
 } // namespace amrreactx

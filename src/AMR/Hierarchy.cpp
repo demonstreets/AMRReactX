@@ -50,4 +50,34 @@ void initialize_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
     }
 }
 
+ScalarAmrHierarchy rebuild_scalar_amr_hierarchy(const amrex::MultiFab& level0_state,
+                                                const amrex::Geometry& level0_geom,
+                                                const RuntimeParams& params,
+                                                int ncomp,
+                                                int ngrow)
+{
+    ScalarAmrHierarchy hierarchy;
+    if (params.tagging_enabled == 0) {
+        return hierarchy;
+    }
+
+    amrex::MultiFab tags(level0_state.boxArray(), level0_state.DistributionMap(), NumTag, 0);
+    fill_tagging_indicators(level0_state, tags, level0_geom, params);
+    const CandidateLevel1Grids candidate = make_candidate_level1_grids(tags, level0_geom, params);
+    hierarchy.tag_summary = candidate.summary;
+    if (candidate.summary.cluster_count == 0) {
+        return hierarchy;
+    }
+
+    hierarchy.finest_level = 1;
+    hierarchy.level1_geom = make_refined_geometry(level0_geom, params.tag_ref_ratio);
+    hierarchy.level1_box_array = candidate.box_array;
+    hierarchy.level1_distribution = amrex::DistributionMapping(hierarchy.level1_box_array);
+    hierarchy.level1_state = std::make_unique<amrex::MultiFab>(
+        hierarchy.level1_box_array, hierarchy.level1_distribution, ncomp, ngrow);
+    initialize_refined_level_from_coarse(level0_state, *hierarchy.level1_state,
+                                         level0_geom, params.tag_ref_ratio);
+    return hierarchy;
+}
+
 } // namespace amrreactx

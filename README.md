@@ -46,7 +46,9 @@ The output directories are named from `plotfile_prefix`, for example
 `plt_leak_00000`, `plt_leak_00030`, and so on.
 When AMR tagging is enabled and candidate level-1 boxes are produced, the same
 plotfile path is written as a two-level AMReX plotfile with a piecewise-constant
-level-1 initialization from level 0.
+level-1 initialization from level 0. The level-1 state is maintained through the
+AMR hierarchy helper before plotfile output; it is not advanced independently
+yet.
 
 Verification cases:
 

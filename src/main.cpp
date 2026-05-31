@@ -1,3 +1,4 @@
+#include "AMR/Hierarchy.H"
 #include "Core/ProblemSetup.H"
 #include "Core/State.H"
 #include "IO/Diagnostics.H"
@@ -25,6 +26,9 @@ int main(int argc, char* argv[])
         amrex::MultiFab next_state(ba, dm, amrreactx::NumState, 1);
         amrex::MultiFab diag(ba, dm, amrreactx::NumDiag, 0);
         amrreactx::initialize_state(state, geom, params);
+        amrreactx::ScalarAmrHierarchy hierarchy =
+            amrreactx::rebuild_scalar_amr_hierarchy(state, geom, params,
+                                                    amrreactx::NumState, 1);
 
         amrex::Real time = 0.0;
         amrex::Real injected_mass = 0.0;
@@ -34,7 +38,7 @@ int main(int argc, char* argv[])
             amrreactx::compute_diagnostics(state, diag, geom, params);
         const amrex::Real initial_mass = current_diag.scalar_mass;
         amrreactx::initialize_history_file(params);
-        amrreactx::write_plotfile(state, geom, params, 0, time);
+        amrreactx::write_plotfile(state, geom, params, 0, time, &hierarchy);
 
         amrex::Print() << "AMRReactX scalar transport\n";
         amrex::Print() << "MPI ranks: " << amrex::ParallelDescriptor::NProcs() << "\n";
@@ -67,7 +71,9 @@ int main(int argc, char* argv[])
             const bool last_time_step = params.stop_time >= 0.0 && time >= params.stop_time;
             if (step % params.plot_int == 0 || step == params.max_step || last_time_step) {
                 current_diag = amrreactx::compute_diagnostics(state, diag, geom, step_params);
-                amrreactx::write_plotfile(state, geom, params, step, time);
+                hierarchy = amrreactx::rebuild_scalar_amr_hierarchy(state, geom, step_params,
+                                                                    amrreactx::NumState, 1);
+                amrreactx::write_plotfile(state, geom, params, step, time, &hierarchy);
                 amrreactx::print_diagnostics(step, time, current_diag, injected_mass,
                                              boundary_inflow_mass, outlet_mass, initial_mass);
                 amrreactx::append_history(step, time, current_diag, injected_mass,
