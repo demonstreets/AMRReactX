@@ -107,22 +107,22 @@ void advance_scalar(amrex::MultiFab& state,
 
             const amrex::Real fxp = (i == dom_hi[0])
                 ? face_flux(yc, kparams.wind[0], bcxhi, 1, kparams)
-                : (kparams.wind[0] >= 0.0 ? kparams.wind[0] * yc : kparams.wind[0] * ypx);
+                : scalar_advective_flux(yc, ypx, kparams.wind[0]);
             const amrex::Real fxm = (i == dom_lo[0])
                 ? face_flux(yc, kparams.wind[0], bcxlo, -1, kparams)
-                : (kparams.wind[0] >= 0.0 ? kparams.wind[0] * ymx : kparams.wind[0] * yc);
+                : scalar_advective_flux(ymx, yc, kparams.wind[0]);
             const amrex::Real fyp = (j == dom_hi[1])
                 ? face_flux(yc, kparams.wind[1], bcyhi, 1, kparams)
-                : (kparams.wind[1] >= 0.0 ? kparams.wind[1] * yc : kparams.wind[1] * ypy);
+                : scalar_advective_flux(yc, ypy, kparams.wind[1]);
             const amrex::Real fym = (j == dom_lo[1])
                 ? face_flux(yc, kparams.wind[1], bcylo, -1, kparams)
-                : (kparams.wind[1] >= 0.0 ? kparams.wind[1] * ymy : kparams.wind[1] * yc);
+                : scalar_advective_flux(ymy, yc, kparams.wind[1]);
             const amrex::Real fzp = (k == dom_hi[2])
                 ? face_flux(yc, kparams.wind[2], bczhi, 1, kparams)
-                : (kparams.wind[2] >= 0.0 ? kparams.wind[2] * yc : kparams.wind[2] * ypz);
+                : scalar_advective_flux(yc, ypz, kparams.wind[2]);
             const amrex::Real fzm = (k == dom_lo[2])
                 ? face_flux(yc, kparams.wind[2], bczlo, -1, kparams)
-                : (kparams.wind[2] >= 0.0 ? kparams.wind[2] * ymz : kparams.wind[2] * yc);
+                : scalar_advective_flux(ymz, yc, kparams.wind[2]);
 
             const amrex::Real adv = -((fxp - fxm) / dx[0]
                                     + (fyp - fym) / dx[1]

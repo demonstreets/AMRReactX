@@ -439,9 +439,8 @@ CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
                             const amrex::Real coarse_hi_y =
                                 coarse(chi[0], chi[1], chi[2], YLeak);
                             const amrex::Real coarse_scalar_flux =
-                                params.wind[dir] >= 0.0
-                                    ? params.wind[dir] * coarse_lo_y
-                                    : params.wind[dir] * coarse_hi_y;
+                                scalar_advective_flux(coarse_lo_y, coarse_hi_y,
+                                                      params.wind[dir]);
                             side_coarse_flux +=
                                 params.rho0 * coarse_scalar_flux * coarse_area[dir];
 
@@ -475,9 +474,8 @@ CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
                                         const amrex::Real fine_hi_y =
                                             fine(fhi[0], fhi[1], fhi[2], YLeak);
                                         const amrex::Real fine_scalar_flux =
-                                            params.wind[dir] >= 0.0
-                                                ? params.wind[dir] * fine_lo_y
-                                                : params.wind[dir] * fine_hi_y;
+                                            scalar_advective_flux(fine_lo_y, fine_hi_y,
+                                                                  params.wind[dir]);
                                         side_fine_flux +=
                                             params.rho0 * fine_scalar_flux * fine_area[dir];
                                     }
