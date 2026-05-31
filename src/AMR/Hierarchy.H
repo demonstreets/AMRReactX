@@ -34,6 +34,12 @@ struct AmrMassDiagnostics {
     amrex::Real mass_delta = 0.0;
 };
 
+struct CoarseFineFluxDiagnostics {
+    amrex::Real advective_mismatch = 0.0;
+    amrex::Real advective_abs_mismatch = 0.0;
+    long long interface_face_count = 0;
+};
+
 amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio);
 
 void initialize_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
@@ -68,5 +74,11 @@ AmrMassDiagnostics compute_amr_mass_diagnostics(const amrex::MultiFab& level0_st
                                                 const ScalarAmrHierarchy& hierarchy,
                                                 const amrex::Geometry& level0_geom,
                                                 const RuntimeParams& params);
+
+CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
+    const amrex::MultiFab& level0_state,
+    const ScalarAmrHierarchy& hierarchy,
+    const amrex::Geometry& level0_geom,
+    const RuntimeParams& params);
 
 } // namespace amrreactx

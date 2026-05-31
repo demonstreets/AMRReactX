@@ -441,6 +441,9 @@ void initialize_history_file(const RuntimeParams& params)
             << "amr_restrict_coarse_cell_count,amr_level1_mass,"
             << "amr_covered_level0_mass,amr_mass_delta,"
             << "amr_applied_restriction_mass_delta,"
+            << "amr_cf_advective_flux_mismatch,"
+            << "amr_cf_advective_abs_mismatch,"
+            << "amr_cf_interface_face_count,"
             << "amr_sync_corrected_balance_error\n";
 }
 
@@ -518,6 +521,12 @@ void print_diagnostics(int step,
                    << " delta " << diag.amr_mass_delta
                    << " applied_restriction_delta "
                    << diag.amr_applied_restriction_mass_delta
+                   << " cf_advective_flux_mismatch "
+                   << diag.amr_cf_advective_flux_mismatch
+                   << " cf_advective_abs_mismatch "
+                   << diag.amr_cf_advective_abs_mismatch
+                   << " cf_interface_faces "
+                   << diag.amr_cf_interface_face_count
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -602,6 +611,9 @@ void append_history(int step,
             << diag.amr_covered_level0_mass << ","
             << diag.amr_mass_delta << ","
             << diag.amr_applied_restriction_mass_delta << ","
+            << diag.amr_cf_advective_flux_mismatch << ","
+            << diag.amr_cf_advective_abs_mismatch << ","
+            << diag.amr_cf_interface_face_count << ","
             << amr_sync_corrected_balance_error << "\n";
 }
 
@@ -631,6 +643,19 @@ void attach_amr_mass_diagnostics(TransportDiagnostics& diag,
     diag.amr_covered_level0_mass = mass.covered_level0_mass;
     diag.amr_mass_delta = mass.mass_delta;
     diag.amr_applied_restriction_mass_delta = applied_restriction_mass_delta;
+}
+
+void attach_coarse_fine_flux_diagnostics(TransportDiagnostics& diag,
+                                         const amrex::MultiFab& level0_state,
+                                         const ScalarAmrHierarchy& hierarchy,
+                                         const amrex::Geometry& level0_geom,
+                                         const RuntimeParams& params)
+{
+    const CoarseFineFluxDiagnostics flux =
+        compute_coarse_fine_flux_diagnostics(level0_state, hierarchy, level0_geom, params);
+    diag.amr_cf_advective_flux_mismatch = flux.advective_mismatch;
+    diag.amr_cf_advective_abs_mismatch = flux.advective_abs_mismatch;
+    diag.amr_cf_interface_face_count = flux.interface_face_count;
 }
 
 void write_plotfile(const amrex::MultiFab& state,

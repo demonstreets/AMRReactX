@@ -163,6 +163,9 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
         amrex::MultiFab::Copy(*hierarchy.level1_state, level1_next, 0, 0,
                               hierarchy.level1_state->nComp(), 0);
     }
+    fill_refined_level_from_coarse_time_interpolated(
+        level0_old_state, level0_new_state, *hierarchy.level1_state,
+        level0_geom, params.tag_ref_ratio, 1.0);
 }
 
 AmrMassDiagnostics restrict_scalar_amr_hierarchy_to_coarse(
@@ -341,6 +344,163 @@ AmrMassDiagnostics compute_amr_mass_diagnostics(const amrex::MultiFab& level0_st
     out.covered_level0_mass =
         params.rho0 * covered_level0.sum(YLeak) * coarse_cell_volume;
     out.mass_delta = out.level1_mass - out.covered_level0_mass;
+    return out;
+}
+
+CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
+    const amrex::MultiFab& level0_state,
+    const ScalarAmrHierarchy& hierarchy,
+    const amrex::Geometry& level0_geom,
+    const RuntimeParams& params)
+{
+    CoarseFineFluxDiagnostics out;
+    if (!hierarchy.has_level1()) {
+        return out;
+    }
+
+    const int ref_ratio = params.tag_ref_ratio;
+    const amrex::Box fine_domain = hierarchy.level1_geom.Domain();
+    const amrex::Box coarse_domain = level0_geom.Domain();
+    amrex::Box fine_patch_box = hierarchy.level1_box_array.minimalBox();
+    fine_patch_box &= fine_domain;
+    amrex::Box coarse_patch_box = fine_patch_box;
+    coarse_patch_box.coarsen(ref_ratio);
+
+    amrex::BoxArray fine_patch_ba(fine_patch_box);
+    const amrex::DistributionMapping fine_dm(fine_patch_ba);
+    amrex::MultiFab fine_patch(fine_patch_ba, fine_dm, NumState, 1);
+    fine_patch.ParallelCopy(*hierarchy.level1_state, 0, 0, NumState,
+                            1, 1, hierarchy.level1_geom.periodicity());
+
+    amrex::BoxArray coarse_patch_ba(coarse_patch_box);
+    amrex::MultiFab coarse_patch(coarse_patch_ba, fine_dm, NumState, 1);
+    coarse_patch.ParallelCopy(level0_state, 0, 0, NumState,
+                              1, 1, level0_geom.periodicity());
+
+    const auto fine_dx = hierarchy.level1_geom.CellSizeArray();
+    const auto coarse_dx = level0_geom.CellSizeArray();
+    const amrex::Real fine_area[AMREX_SPACEDIM] = {
+        AMREX_D_DECL(fine_dx[1] * fine_dx[2],
+                     fine_dx[0] * fine_dx[2],
+                     fine_dx[0] * fine_dx[1])
+    };
+    const amrex::Real coarse_area[AMREX_SPACEDIM] = {
+        AMREX_D_DECL(coarse_dx[1] * coarse_dx[2],
+                     coarse_dx[0] * coarse_dx[2],
+                     coarse_dx[0] * coarse_dx[1])
+    };
+
+    const auto fine_lo = fine_patch_box.smallEnd();
+    const auto fine_hi = fine_patch_box.bigEnd();
+    const auto coarse_lo = coarse_patch_box.smallEnd();
+    const auto coarse_hi = coarse_patch_box.bigEnd();
+    const auto fine_dom_lo = fine_domain.smallEnd();
+    const auto fine_dom_hi = fine_domain.bigEnd();
+    const auto coarse_dom_lo = coarse_domain.smallEnd();
+    const auto coarse_dom_hi = coarse_domain.bigEnd();
+
+    for (amrex::MFIter mfi(fine_patch); mfi.isValid(); ++mfi) {
+        const amrex::Array4<const amrex::Real> fine = fine_patch.const_array(mfi);
+        const amrex::Array4<const amrex::Real> coarse = coarse_patch.const_array(mfi);
+        for (int dir = 0; dir < AMREX_SPACEDIM; ++dir) {
+            for (int side = -1; side <= 1; side += 2) {
+                if ((side < 0 && fine_lo[dir] == fine_dom_lo[dir])
+                    || (side > 0 && fine_hi[dir] == fine_dom_hi[dir])) {
+                    continue;
+                }
+                amrex::Real side_fine_flux = 0.0;
+                amrex::Real side_coarse_flux = 0.0;
+                long long side_face_count = 0;
+
+                const int cface = side < 0 ? coarse_lo[dir] : coarse_hi[dir] + 1;
+                const int fface = side < 0 ? fine_lo[dir] : fine_hi[dir] + 1;
+                for (int ck = coarse_lo[2]; ck <= coarse_hi[2]; ++ck) {
+                    for (int cj = coarse_lo[1]; cj <= coarse_hi[1]; ++cj) {
+                        for (int ci = coarse_lo[0]; ci <= coarse_hi[0]; ++ci) {
+                            int cidx[AMREX_SPACEDIM] = {AMREX_D_DECL(ci, cj, ck)};
+                            if (cidx[dir] != (side < 0 ? coarse_lo[dir] : coarse_hi[dir])) {
+                                continue;
+                            }
+
+                            int clo[AMREX_SPACEDIM] = {AMREX_D_DECL(ci, cj, ck)};
+                            int chi[AMREX_SPACEDIM] = {AMREX_D_DECL(ci, cj, ck)};
+                            if (side < 0) {
+                                clo[dir] = cface - 1;
+                                chi[dir] = cface;
+                            } else {
+                                clo[dir] = cface - 1;
+                                chi[dir] = cface;
+                            }
+                            if (clo[dir] < coarse_dom_lo[dir] || chi[dir] > coarse_dom_hi[dir]) {
+                                continue;
+                            }
+                            const amrex::Real coarse_lo_y =
+                                coarse(clo[0], clo[1], clo[2], YLeak);
+                            const amrex::Real coarse_hi_y =
+                                coarse(chi[0], chi[1], chi[2], YLeak);
+                            const amrex::Real coarse_scalar_flux =
+                                params.wind[dir] >= 0.0
+                                    ? params.wind[dir] * coarse_lo_y
+                                    : params.wind[dir] * coarse_hi_y;
+                            side_coarse_flux +=
+                                params.rho0 * coarse_scalar_flux * coarse_area[dir];
+
+                            for (int kk = 0; kk < ref_ratio; ++kk) {
+                                for (int jj = 0; jj < ref_ratio; ++jj) {
+                                    for (int ii = 0; ii < ref_ratio; ++ii) {
+                                        int fcell[AMREX_SPACEDIM] = {
+                                            AMREX_D_DECL(ref_ratio * ci + ii,
+                                                         ref_ratio * cj + jj,
+                                                         ref_ratio * ck + kk)
+                                        };
+                                        if (fcell[dir] != (side < 0 ? fine_lo[dir] : fine_hi[dir])) {
+                                            continue;
+                                        }
+
+                                        int flo[AMREX_SPACEDIM] = {
+                                            AMREX_D_DECL(fcell[0], fcell[1], fcell[2])
+                                        };
+                                        int fhi[AMREX_SPACEDIM] = {
+                                            AMREX_D_DECL(fcell[0], fcell[1], fcell[2])
+                                        };
+                                        if (side < 0) {
+                                            flo[dir] = fface - 1;
+                                            fhi[dir] = fface;
+                                        } else {
+                                            flo[dir] = fface - 1;
+                                            fhi[dir] = fface;
+                                        }
+                                        const amrex::Real fine_lo_y =
+                                            fine(flo[0], flo[1], flo[2], YLeak);
+                                        const amrex::Real fine_hi_y =
+                                            fine(fhi[0], fhi[1], fhi[2], YLeak);
+                                        const amrex::Real fine_scalar_flux =
+                                            params.wind[dir] >= 0.0
+                                                ? params.wind[dir] * fine_lo_y
+                                                : params.wind[dir] * fine_hi_y;
+                                        side_fine_flux +=
+                                            params.rho0 * fine_scalar_flux * fine_area[dir];
+                                    }
+                                }
+                            }
+                            ++side_face_count;
+                        }
+                    }
+                }
+
+                const amrex::Real mismatch = side_fine_flux - side_coarse_flux;
+                out.advective_mismatch += mismatch;
+                out.advective_abs_mismatch += std::abs(mismatch);
+                out.interface_face_count += side_face_count;
+            }
+        }
+    }
+
+    amrex::Long interface_face_count = static_cast<amrex::Long>(out.interface_face_count);
+    amrex::ParallelDescriptor::ReduceRealSum(out.advective_mismatch);
+    amrex::ParallelDescriptor::ReduceRealSum(out.advective_abs_mismatch);
+    amrex::ParallelDescriptor::ReduceLongSum(interface_face_count);
+    out.interface_face_count = static_cast<long long>(interface_face_count);
     return out;
 }
 

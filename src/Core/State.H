@@ -200,7 +200,10 @@ struct TransportDiagnostics {
     amrex::Real amr_covered_level0_mass = 0.0;
     amrex::Real amr_mass_delta = 0.0;
     amrex::Real amr_applied_restriction_mass_delta = 0.0;
+    amrex::Real amr_cf_advective_flux_mismatch = 0.0;
+    amrex::Real amr_cf_advective_abs_mismatch = 0.0;
     long long amr_restrict_coarse_cell_count = 0;
+    long long amr_cf_interface_face_count = 0;
     long long tag_refine_cell_count = 0;
     long long tag_cluster_count = 0;
     long long tag_candidate_level1_cell_count = 0;

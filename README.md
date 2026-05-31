@@ -185,6 +185,11 @@ Runtime diagnostics:
 - `amr_applied_restriction_mass_delta`: mass correction applied to level 0 by
   the optional restriction update on the most recent output step. This exposes
   the synchronization drift that future refluxing must remove.
+- `amr_cf_advective_flux_mismatch`, `amr_cf_advective_abs_mismatch`,
+  `amr_cf_interface_face_count`: coarse-fine interface diagnostics comparing
+  level-1 integrated advective scalar flux against the matching level-0 flux.
+  These are observation-only reflux scaffolding diagnostics and do not modify
+  either level.
 
 ## Current Source Layout
 

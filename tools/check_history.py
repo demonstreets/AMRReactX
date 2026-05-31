@@ -184,6 +184,12 @@ def check_case(case, rows):
                 "advanced level1 state should have nonzero L1 restriction error")
         require(last["amr_restrict_coarse_cell_count"] > 0.0,
                 "level1 restriction should cover coarse cells")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "level1 advance should report coarse-fine interface faces")
+        require(last["amr_cf_advective_abs_mismatch"] > 0.0,
+                "level1 advance should report a coarse-fine advective flux mismatch")
+        require(abs(last["amr_cf_advective_flux_mismatch"]) > 0.0,
+                "level1 advance signed coarse-fine flux mismatch should be nonzero")
         require(abs(last["amr_mass_delta"]) > 1.0e-10,
                 "advanced level1 state should report a nonzero AMR mass delta")
         close(last["amr_applied_restriction_mass_delta"], 0.0, 1.0e-14,
@@ -202,6 +208,10 @@ def check_case(case, rows):
               "restriction-updated L1 Y error")
         require(last["amr_restrict_coarse_cell_count"] > 0.0,
                 "restriction update should cover coarse cells")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "restriction update should report coarse-fine interface faces")
+        require(last["amr_cf_advective_abs_mismatch"] > 0.0,
+                "restriction update should retain a measurable coarse-fine flux mismatch")
         close(last["amr_mass_delta"], 0.0, 1.0e-14,
               "restriction update should remove current AMR mass delta")
         require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,

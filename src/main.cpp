@@ -39,6 +39,8 @@ int main(int argc, char* argv[])
             amrreactx::compute_diagnostics(state, diag, geom, params);
         amrreactx::attach_restriction_diagnostics(current_diag, state, hierarchy, geom, params);
         amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy, geom, params, 0.0);
+        amrreactx::attach_coarse_fine_flux_diagnostics(current_diag, state, hierarchy,
+                                                       geom, params);
         const amrex::Real initial_mass = current_diag.scalar_mass;
         amrreactx::initialize_history_file(params);
         amrreactx::write_plotfile(state, geom, params, 0, time, &hierarchy);
@@ -93,6 +95,8 @@ int main(int argc, char* argv[])
                 amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy,
                                                        geom, step_params,
                                                        applied_restriction_mass_delta);
+                amrreactx::attach_coarse_fine_flux_diagnostics(current_diag, state, hierarchy,
+                                                               geom, step_params);
                 amrreactx::write_plotfile(state, geom, params, step, time, &hierarchy);
                 amrreactx::print_diagnostics(step, time, current_diag, injected_mass,
                                              boundary_inflow_mass, outlet_mass, initial_mass);
