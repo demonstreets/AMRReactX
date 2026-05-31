@@ -434,7 +434,9 @@ void initialize_history_file(const RuntimeParams& params)
             << "flammable_z_min,flammable_z_max,"
             << "tag_grad_y_volume,tag_source_volume,tag_refine_volume,"
             << "tag_refine_cell_count,tag_cluster_count,"
-            << "tag_candidate_level1_cell_count,tag_candidate_level1_volume\n";
+            << "tag_candidate_level1_cell_count,tag_candidate_level1_volume,"
+            << "amr_restrict_max_abs_y_error,amr_restrict_l1_y_error,"
+            << "amr_restrict_coarse_cell_count\n";
 }
 
 void print_diagnostics(int step,
@@ -499,6 +501,9 @@ void print_diagnostics(int step,
                    << " tagged_cells " << diag.tag_refine_cell_count
                    << " fine_cells " << diag.tag_candidate_level1_cell_count
                    << " volume " << diag.tag_candidate_level1_volume
+                   << " amr_restrict max_abs_y_error " << diag.amr_restrict_max_abs_y_error
+                   << " l1_y_error " << diag.amr_restrict_l1_y_error
+                   << " coarse_cells " << diag.amr_restrict_coarse_cell_count
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -573,7 +578,23 @@ void append_history(int step,
             << diag.tag_refine_cell_count << ","
             << diag.tag_cluster_count << ","
             << diag.tag_candidate_level1_cell_count << ","
-            << diag.tag_candidate_level1_volume << "\n";
+            << diag.tag_candidate_level1_volume << ","
+            << diag.amr_restrict_max_abs_y_error << ","
+            << diag.amr_restrict_l1_y_error << ","
+            << diag.amr_restrict_coarse_cell_count << "\n";
+}
+
+void attach_restriction_diagnostics(TransportDiagnostics& diag,
+                                    const amrex::MultiFab& level0_state,
+                                    const ScalarAmrHierarchy& hierarchy,
+                                    const amrex::Geometry& level0_geom,
+                                    const RuntimeParams& params)
+{
+    const RestrictionDiagnostics restriction =
+        compute_restriction_diagnostics(level0_state, hierarchy, level0_geom, params.tag_ref_ratio);
+    diag.amr_restrict_max_abs_y_error = restriction.max_abs_y_error;
+    diag.amr_restrict_l1_y_error = restriction.l1_y_error;
+    diag.amr_restrict_coarse_cell_count = restriction.coarse_cell_count;
 }
 
 void write_plotfile(const amrex::MultiFab& state,

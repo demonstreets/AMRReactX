@@ -48,4 +48,10 @@ void write_plotfile(const amrex::MultiFab& state,
                     amrex::Real time,
                     const ScalarAmrHierarchy* hierarchy = nullptr);
 
+void attach_restriction_diagnostics(TransportDiagnostics& diag,
+                                    const amrex::MultiFab& level0_state,
+                                    const ScalarAmrHierarchy& hierarchy,
+                                    const amrex::Geometry& level0_geom,
+                                    const RuntimeParams& params);
+
 } // namespace amrreactx

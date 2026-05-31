@@ -193,6 +193,9 @@ struct TransportDiagnostics {
     amrex::Real tag_source_volume = 0.0;
     amrex::Real tag_refine_volume = 0.0;
     amrex::Real tag_candidate_level1_volume = 0.0;
+    amrex::Real amr_restrict_max_abs_y_error = 0.0;
+    amrex::Real amr_restrict_l1_y_error = 0.0;
+    long long amr_restrict_coarse_cell_count = 0;
     long long tag_refine_cell_count = 0;
     long long tag_cluster_count = 0;
     long long tag_candidate_level1_cell_count = 0;

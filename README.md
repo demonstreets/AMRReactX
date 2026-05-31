@@ -164,6 +164,9 @@ Runtime diagnostics:
 - `tag_refine_cell_count`, `tag_cluster_count`,
   `tag_candidate_level1_cell_count`, `tag_candidate_level1_volume`: Stage 3
   candidate level-1 grid diagnostics generated from global tagged bounds.
+- `amr_restrict_max_abs_y_error`, `amr_restrict_l1_y_error`,
+  `amr_restrict_coarse_cell_count`: consistency diagnostics from restricting
+  initialized level-1 `Y_leak` back onto the covered level-0 cells.
 
 ## Current Source Layout
 

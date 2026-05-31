@@ -22,6 +22,12 @@ struct ScalarAmrHierarchy {
     bool has_level1() const noexcept { return finest_level >= 1 && level1_state != nullptr; }
 };
 
+struct RestrictionDiagnostics {
+    amrex::Real max_abs_y_error = 0.0;
+    amrex::Real l1_y_error = 0.0;
+    long long coarse_cell_count = 0;
+};
+
 amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio);
 
 void initialize_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
@@ -34,5 +40,10 @@ ScalarAmrHierarchy rebuild_scalar_amr_hierarchy(const amrex::MultiFab& level0_st
                                                 const RuntimeParams& params,
                                                 int ncomp,
                                                 int ngrow);
+
+RestrictionDiagnostics compute_restriction_diagnostics(const amrex::MultiFab& level0_state,
+                                                       const ScalarAmrHierarchy& hierarchy,
+                                                       const amrex::Geometry& level0_geom,
+                                                       int ref_ratio);
 
 } // namespace amrreactx

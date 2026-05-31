@@ -167,6 +167,12 @@ def check_case(case, rows):
                 "tagging should produce candidate level-1 cells")
         require(last["tag_candidate_level1_volume"] >= last["tag_refine_volume"],
                 "candidate level-1 volume should cover refine tags")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "tagging AMR restriction max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "tagging AMR restriction L1 Y error")
+        require(last["amr_restrict_coarse_cell_count"] > 0.0,
+                "tagging AMR restriction should cover coarse cells")
         check_multilevel_plotfile("plt_verify_tagging_00000", 1)
     else:
         raise AssertionError(f"unknown case {case}")
