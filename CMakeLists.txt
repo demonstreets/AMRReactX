@@ -11,6 +11,7 @@ find_package(AMReX REQUIRED)
 add_executable(amrreactx
     src/main.cpp
     src/AMR/BoundaryConditions.cpp
+    src/AMR/Hierarchy.cpp
     src/AMR/Tagging.cpp
     src/Core/ProblemSetup.cpp
     src/IO/Diagnostics.cpp

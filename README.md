@@ -168,6 +168,8 @@ Runtime diagnostics:
 - `src/main.cpp`: program orchestration.
 - `src/Core`: runtime parameters, state indices, and AMReX geometry/input setup.
 - `src/AMR`: scalar boundary-condition definitions and face flux helpers.
+- `src/AMR/Hierarchy.*`: AMR hierarchy helpers for refined geometry creation
+  and coarse-to-fine initialization.
 - `src/AMR/Tagging.*`: Stage 3 scalar-gradient and source-region tagging
   indicators.
 - `src/Numerics`: scalar initialization, explicit advection-diffusion update, and

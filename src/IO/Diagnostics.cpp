@@ -1,6 +1,7 @@
 #include "IO/Diagnostics.H"
 
 #include "AMR/BoundaryConditions.H"
+#include "AMR/Hierarchy.H"
 #include "AMR/Tagging.H"
 #include "Physics/SourceTerms.H"
 
@@ -10,7 +11,6 @@
 #include <AMReX_MFIter.H>
 #include <AMReX_ParallelDescriptor.H>
 #include <AMReX_PlotFileUtil.H>
-#include <AMReX_RealBox.H>
 #include <AMReX_Vector.H>
 
 #include <cmath>
@@ -51,37 +51,6 @@ void fill_diagnostic_plot_components(amrex::MultiFab& plot_state,
             p(i, j, k, NumState) = diagnostic_concentration(p(i, j, k, YLeak),
                                                             basis, leak_mw, air_mw);
         });
-    }
-}
-
-amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio)
-{
-    const amrex::Box fine_domain = amrex::refine(geom.Domain(), ref_ratio);
-    const amrex::RealBox real_box(geom.ProbLo(), geom.ProbHi());
-    amrex::Vector<int> is_periodic(AMREX_SPACEDIM, 0);
-    for (int d = 0; d < AMREX_SPACEDIM; ++d) {
-        is_periodic[d] = geom.isPeriodic(d) ? 1 : 0;
-    }
-    return amrex::Geometry(fine_domain, &real_box, geom.Coord(), is_periodic.data());
-}
-
-void initialize_level1_from_level0(const amrex::MultiFab& coarse_for_fine,
-                                   amrex::MultiFab& fine_plot_state,
-                                   int ref_ratio)
-{
-    for (amrex::MFIter mfi(fine_plot_state); mfi.isValid(); ++mfi) {
-        const amrex::Box& bx = mfi.validbox();
-        const amrex::Array4<amrex::Real> fine = fine_plot_state.array(mfi);
-        const int ncomp = fine_plot_state.nComp();
-        const amrex::Array4<const amrex::Real> coarse = coarse_for_fine.const_array(mfi);
-        for (int comp = 0; comp < ncomp; ++comp) {
-            amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
-                fine(i, j, k, comp) = coarse(i / ref_ratio,
-                                             j / ref_ratio,
-                                             k / ref_ratio,
-                                             comp);
-            });
-        }
     }
 }
 
@@ -630,13 +599,8 @@ void write_plotfile(const amrex::MultiFab& state,
     }
 
     const amrex::DistributionMapping fine_dm(candidate.box_array);
-    amrex::BoxArray coarse_for_fine_ba = candidate.box_array;
-    coarse_for_fine_ba.coarsen(params.tag_ref_ratio);
-    amrex::MultiFab coarse_for_fine(coarse_for_fine_ba, fine_dm, plot_state.nComp(), 0);
-    coarse_for_fine.ParallelCopy(plot_state, 0, 0, plot_state.nComp(), 0, 0, geom.periodicity());
-
     amrex::MultiFab fine_plot_state(candidate.box_array, fine_dm, plot_state.nComp(), 0);
-    initialize_level1_from_level0(coarse_for_fine, fine_plot_state, params.tag_ref_ratio);
+    initialize_refined_level_from_coarse(plot_state, fine_plot_state, geom, params.tag_ref_ratio);
     const amrex::Geometry fine_geom = make_refined_geometry(geom, params.tag_ref_ratio);
 
     const amrex::Vector<const amrex::MultiFab*> mfs{&plot_state, &fine_plot_state};
