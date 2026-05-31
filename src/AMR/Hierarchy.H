@@ -6,7 +6,9 @@
 #include <AMReX_DistributionMapping.H>
 #include <AMReX_Geometry.H>
 #include <AMReX_MultiFab.H>
+#include <AMReX_SPACE.H>
 
+#include <cmath>
 #include <memory>
 
 namespace amrreactx {
@@ -38,6 +40,36 @@ struct CoarseFineFluxDiagnostics {
     amrex::Real advective_mismatch = 0.0;
     amrex::Real advective_abs_mismatch = 0.0;
     long long interface_face_count = 0;
+};
+
+struct CoarseFineFluxRegister {
+    amrex::Real advective_mismatch[2 * AMREX_SPACEDIM] = {};
+    amrex::Real advective_abs_mismatch[2 * AMREX_SPACEDIM] = {};
+    long long interface_face_count[2 * AMREX_SPACEDIM] = {};
+
+    static int face_index(int dir, int side) noexcept
+    {
+        return 2 * dir + (side > 0 ? 1 : 0);
+    }
+
+    void add(int dir, int side, amrex::Real mismatch, long long face_count) noexcept
+    {
+        const int idx = face_index(dir, side);
+        advective_mismatch[idx] += mismatch;
+        advective_abs_mismatch[idx] += std::abs(mismatch);
+        interface_face_count[idx] += face_count;
+    }
+
+    CoarseFineFluxDiagnostics totals() const noexcept
+    {
+        CoarseFineFluxDiagnostics out;
+        for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
+            out.advective_mismatch += advective_mismatch[idx];
+            out.advective_abs_mismatch += advective_abs_mismatch[idx];
+            out.interface_face_count += interface_face_count[idx];
+        }
+        return out;
+    }
 };
 
 amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio);

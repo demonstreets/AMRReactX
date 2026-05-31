@@ -353,10 +353,10 @@ CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
     const amrex::Geometry& level0_geom,
     const RuntimeParams& params)
 {
-    CoarseFineFluxDiagnostics out;
     if (!hierarchy.has_level1()) {
-        return out;
+        return {};
     }
+    CoarseFineFluxRegister flux_register;
 
     const int ref_ratio = params.tag_ref_ratio;
     const amrex::Box fine_domain = hierarchy.level1_geom.Domain();
@@ -487,13 +487,12 @@ CoarseFineFluxDiagnostics compute_coarse_fine_flux_diagnostics(
                 }
 
                 const amrex::Real mismatch = side_fine_flux - side_coarse_flux;
-                out.advective_mismatch += mismatch;
-                out.advective_abs_mismatch += std::abs(mismatch);
-                out.interface_face_count += side_face_count;
+                flux_register.add(dir, side, mismatch, side_face_count);
             }
         }
     }
 
+    CoarseFineFluxDiagnostics out = flux_register.totals();
     amrex::Long interface_face_count = static_cast<amrex::Long>(out.interface_face_count);
     amrex::ParallelDescriptor::ReduceRealSum(out.advective_mismatch);
     amrex::ParallelDescriptor::ReduceRealSum(out.advective_abs_mismatch);
