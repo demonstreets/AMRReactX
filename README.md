@@ -3,7 +3,7 @@
 AMRReactX is the working name for a research-oriented AMReX-based compressible
 flow and reacting-flow solver.
 
-The current version has completed Stage 2 and started Stage 3.1/3.2 on top of the
+The current version has completed Stage 2 and advanced through Stage 3.4 on top of the
 Stage 1 fixed-wind scalar advection-diffusion leakage model. It includes
 stability checks, mass-balance and engineering diagnostics, explicit scalar
 boundary-condition types, automatic timestep control, volume-fraction
@@ -78,7 +78,8 @@ bash tools/run_stage2_verification.sh
 The old `tools/run_stage1_verification.sh` entry point is kept as a
 compatibility wrapper.
 
-Run the Stage 1/2 + Stage 3.1/3.2/3.4 verification suite:
+Run the Stage 1/2 + Stage 3.1/3.2/3.4 and early 3.5 reflux-scaffolding
+verification suite:
 
 ```bash
 bash tools/run_stage3_verification.sh
@@ -190,6 +191,11 @@ Runtime diagnostics:
   level-1 integrated advective scalar flux against the matching level-0 flux.
   These are observation-only reflux scaffolding diagnostics and do not modify
   either level.
+- `amr_cf_advective_mismatch_mass`,
+  `amr_cf_advective_abs_mismatch_mass`: end-of-step coarse-fine advective flux
+  mismatch estimates multiplied by the coarse timestep. These are the first
+  scalar reflux-register mass diagnostics; they are reported but not yet used
+  for correction.
 
 ## Current Source Layout
 

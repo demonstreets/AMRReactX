@@ -443,6 +443,8 @@ void initialize_history_file(const RuntimeParams& params)
             << "amr_applied_restriction_mass_delta,"
             << "amr_cf_advective_flux_mismatch,"
             << "amr_cf_advective_abs_mismatch,"
+            << "amr_cf_advective_mismatch_mass,"
+            << "amr_cf_advective_abs_mismatch_mass,"
             << "amr_cf_interface_face_count,"
             << "amr_sync_corrected_balance_error\n";
 }
@@ -525,6 +527,10 @@ void print_diagnostics(int step,
                    << diag.amr_cf_advective_flux_mismatch
                    << " cf_advective_abs_mismatch "
                    << diag.amr_cf_advective_abs_mismatch
+                   << " cf_advective_mismatch_mass "
+                   << diag.amr_cf_advective_mismatch_mass
+                   << " cf_advective_abs_mismatch_mass "
+                   << diag.amr_cf_advective_abs_mismatch_mass
                    << " cf_interface_faces "
                    << diag.amr_cf_interface_face_count
                    << " centroid " << diag.x_centroid
@@ -613,6 +619,8 @@ void append_history(int step,
             << diag.amr_applied_restriction_mass_delta << ","
             << diag.amr_cf_advective_flux_mismatch << ","
             << diag.amr_cf_advective_abs_mismatch << ","
+            << diag.amr_cf_advective_mismatch_mass << ","
+            << diag.amr_cf_advective_abs_mismatch_mass << ","
             << diag.amr_cf_interface_face_count << ","
             << amr_sync_corrected_balance_error << "\n";
 }
@@ -653,8 +661,16 @@ void attach_coarse_fine_flux_diagnostics(TransportDiagnostics& diag,
 {
     const CoarseFineFluxDiagnostics flux =
         compute_coarse_fine_flux_diagnostics(level0_state, hierarchy, level0_geom, params);
+    CoarseFineFluxDiagnostics accumulated_flux = hierarchy.last_step_flux_register.totals();
+    amrex::Long accumulated_face_count =
+        static_cast<amrex::Long>(accumulated_flux.interface_face_count);
+    amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.advective_mismatch);
+    amrex::ParallelDescriptor::ReduceRealSum(accumulated_flux.advective_abs_mismatch);
+    amrex::ParallelDescriptor::ReduceLongSum(accumulated_face_count);
     diag.amr_cf_advective_flux_mismatch = flux.advective_mismatch;
     diag.amr_cf_advective_abs_mismatch = flux.advective_abs_mismatch;
+    diag.amr_cf_advective_mismatch_mass = accumulated_flux.advective_mismatch;
+    diag.amr_cf_advective_abs_mismatch_mass = accumulated_flux.advective_abs_mismatch;
     diag.amr_cf_interface_face_count = flux.interface_face_count;
 }
 

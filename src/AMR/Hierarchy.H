@@ -13,17 +13,6 @@
 
 namespace amrreactx {
 
-struct ScalarAmrHierarchy {
-    int finest_level = 0;
-    amrex::Geometry level1_geom;
-    amrex::BoxArray level1_box_array;
-    amrex::DistributionMapping level1_distribution;
-    std::unique_ptr<amrex::MultiFab> level1_state;
-    AmrTaggingSummary tag_summary;
-
-    bool has_level1() const noexcept { return finest_level >= 1 && level1_state != nullptr; }
-};
-
 struct RestrictionDiagnostics {
     amrex::Real max_abs_y_error = 0.0;
     amrex::Real l1_y_error = 0.0;
@@ -60,6 +49,24 @@ struct CoarseFineFluxRegister {
         interface_face_count[idx] += face_count;
     }
 
+    void reset() noexcept
+    {
+        for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
+            advective_mismatch[idx] = 0.0;
+            advective_abs_mismatch[idx] = 0.0;
+            interface_face_count[idx] = 0;
+        }
+    }
+
+    void add_register(const CoarseFineFluxRegister& other) noexcept
+    {
+        for (int idx = 0; idx < 2 * AMREX_SPACEDIM; ++idx) {
+            advective_mismatch[idx] += other.advective_mismatch[idx];
+            advective_abs_mismatch[idx] += other.advective_abs_mismatch[idx];
+            interface_face_count[idx] += other.interface_face_count[idx];
+        }
+    }
+
     CoarseFineFluxDiagnostics totals() const noexcept
     {
         CoarseFineFluxDiagnostics out;
@@ -70,6 +77,18 @@ struct CoarseFineFluxRegister {
         }
         return out;
     }
+};
+
+struct ScalarAmrHierarchy {
+    int finest_level = 0;
+    amrex::Geometry level1_geom;
+    amrex::BoxArray level1_box_array;
+    amrex::DistributionMapping level1_distribution;
+    std::unique_ptr<amrex::MultiFab> level1_state;
+    AmrTaggingSummary tag_summary;
+    CoarseFineFluxRegister last_step_flux_register;
+
+    bool has_level1() const noexcept { return finest_level >= 1 && level1_state != nullptr; }
 };
 
 amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio);

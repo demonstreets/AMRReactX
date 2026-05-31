@@ -190,6 +190,10 @@ def check_case(case, rows):
                 "level1 advance should report a coarse-fine advective flux mismatch")
         require(abs(last["amr_cf_advective_flux_mismatch"]) > 0.0,
                 "level1 advance signed coarse-fine flux mismatch should be nonzero")
+        require(last["amr_cf_advective_abs_mismatch_mass"] > 0.0,
+                "level1 advance should accumulate a coarse-fine mismatch mass estimate")
+        require(abs(last["amr_cf_advective_mismatch_mass"]) > 0.0,
+                "level1 advance signed coarse-fine mismatch mass should be nonzero")
         require(abs(last["amr_mass_delta"]) > 1.0e-10,
                 "advanced level1 state should report a nonzero AMR mass delta")
         close(last["amr_applied_restriction_mass_delta"], 0.0, 1.0e-14,
@@ -212,6 +216,8 @@ def check_case(case, rows):
                 "restriction update should report coarse-fine interface faces")
         require(last["amr_cf_advective_abs_mismatch"] > 0.0,
                 "restriction update should retain a measurable coarse-fine flux mismatch")
+        require(last["amr_cf_advective_abs_mismatch_mass"] > 0.0,
+                "restriction update should report a coarse-fine mismatch mass estimate")
         close(last["amr_mass_delta"], 0.0, 1.0e-14,
               "restriction update should remove current AMR mass delta")
         require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,

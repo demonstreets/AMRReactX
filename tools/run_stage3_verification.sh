@@ -41,4 +41,4 @@ run_case tagging inputs/verify_tagging_3d.in history_verify_tagging.csv
 run_case level1_advance inputs/verify_level1_advance_3d.in history_verify_level1_advance.csv
 run_case level1_restriction_update inputs/verify_level1_restriction_update_3d.in history_verify_level1_restriction_update.csv
 
-echo "Stage 1/2 + Stage 3.1/3.2/3.4 verification suite passed."
+echo "Stage 1/2 + Stage 3.1/3.2/3.4 + early 3.5 verification suite passed."
