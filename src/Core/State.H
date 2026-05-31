@@ -116,6 +116,7 @@ struct RuntimeParams {
     int tag_ref_ratio = 2;
     int tag_max_grid_size = 16;
     amrex::Real tag_grid_efficiency = 0.7;
+    int amr_restrict_after_advance = 0;
     std::string history_file = "history.csv";
     std::string plotfile_prefix = "plt_leak";
 };
@@ -195,6 +196,10 @@ struct TransportDiagnostics {
     amrex::Real tag_candidate_level1_volume = 0.0;
     amrex::Real amr_restrict_max_abs_y_error = 0.0;
     amrex::Real amr_restrict_l1_y_error = 0.0;
+    amrex::Real amr_level1_mass = 0.0;
+    amrex::Real amr_covered_level0_mass = 0.0;
+    amrex::Real amr_mass_delta = 0.0;
+    amrex::Real amr_applied_restriction_mass_delta = 0.0;
     long long amr_restrict_coarse_cell_count = 0;
     long long tag_refine_cell_count = 0;
     long long tag_cluster_count = 0;

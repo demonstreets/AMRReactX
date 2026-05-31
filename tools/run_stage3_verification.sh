@@ -38,5 +38,7 @@ run_case boundary_faces inputs/verify_boundary_faces_3d.in history_verify_bounda
 run_case inlet_scalar inputs/verify_inlet_scalar_3d.in history_verify_inlet_scalar.csv
 run_case open_backflow inputs/verify_open_backflow_3d.in history_verify_open_backflow.csv
 run_case tagging inputs/verify_tagging_3d.in history_verify_tagging.csv
+run_case level1_advance inputs/verify_level1_advance_3d.in history_verify_level1_advance.csv
+run_case level1_restriction_update inputs/verify_level1_restriction_update_3d.in history_verify_level1_restriction_update.csv
 
-echo "Stage 1/2 + Stage 3.1/3.2 verification suite passed."
+echo "Stage 1/2 + Stage 3.1/3.2/3.4 verification suite passed."

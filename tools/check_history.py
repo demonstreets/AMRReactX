@@ -174,6 +174,43 @@ def check_case(case, rows):
         require(last["amr_restrict_coarse_cell_count"] > 0.0,
                 "tagging AMR restriction should cover coarse cells")
         check_multilevel_plotfile("plt_verify_tagging_00000", 1)
+    elif case == "level1_advance":
+        require(len(rows) == 2, "level1_advance should write initial and step-1 rows")
+        close(first["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "initial level1 restriction max Y error")
+        require(last["amr_restrict_max_abs_y_error"] > 1.0e-8,
+                "advanced level1 state should diverge measurably from coarse restriction")
+        require(last["amr_restrict_l1_y_error"] > 1.0e-10,
+                "advanced level1 state should have nonzero L1 restriction error")
+        require(last["amr_restrict_coarse_cell_count"] > 0.0,
+                "level1 restriction should cover coarse cells")
+        require(abs(last["amr_mass_delta"]) > 1.0e-10,
+                "advanced level1 state should report a nonzero AMR mass delta")
+        close(last["amr_applied_restriction_mass_delta"], 0.0, 1.0e-14,
+              "level1_advance should not apply restriction mass correction")
+        close(last["amr_sync_corrected_balance_error"], last["balance_error"],
+              1.0e-14, "level1_advance corrected balance should match raw balance")
+        check_multilevel_plotfile("plt_verify_level1_advance_00001", 1)
+    elif case == "level1_restriction_update":
+        require(len(rows) == 2,
+                "level1_restriction_update should write initial and step-1 rows")
+        close(first["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "initial restriction-update max Y error")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "restriction-updated max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "restriction-updated L1 Y error")
+        require(last["amr_restrict_coarse_cell_count"] > 0.0,
+                "restriction update should cover coarse cells")
+        close(last["amr_mass_delta"], 0.0, 1.0e-14,
+              "restriction update should remove current AMR mass delta")
+        require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,
+                "restriction update should report an applied mass correction")
+        close(last["amr_applied_restriction_mass_delta"], last["balance_error"],
+              1.0e-12, "restriction mass correction should match balance drift")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "restriction sync-corrected balance should close")
+        check_multilevel_plotfile("plt_verify_level1_restriction_update_00001", 1)
     else:
         raise AssertionError(f"unknown case {case}")
 

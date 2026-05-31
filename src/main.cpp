@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
         amrreactx::TransportDiagnostics current_diag =
             amrreactx::compute_diagnostics(state, diag, geom, params);
         amrreactx::attach_restriction_diagnostics(current_diag, state, hierarchy, geom, params);
+        amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy, geom, params, 0.0);
         const amrex::Real initial_mass = current_diag.scalar_mass;
         amrreactx::initialize_history_file(params);
         amrreactx::write_plotfile(state, geom, params, 0, time, &hierarchy);
@@ -67,15 +68,28 @@ int main(int argc, char* argv[])
             outlet_mass += current_diag.outlet_rate * step_dt;
             amrreactx::advance_scalar(state, next_state, geom, step_params);
             amrex::MultiFab::Copy(state, next_state, 0, 0, amrreactx::NumState, 0);
+            amrreactx::advance_scalar_amr_hierarchy(hierarchy, state, geom, step_params);
+            amrex::Real applied_restriction_mass_delta = 0.0;
+            if (step_params.amr_restrict_after_advance != 0) {
+                const amrreactx::AmrMassDiagnostics restriction_update =
+                    amrreactx::restrict_scalar_amr_hierarchy_to_coarse(
+                        hierarchy, state, geom, step_params);
+                applied_restriction_mass_delta = restriction_update.mass_delta;
+            }
             time += step_dt;
 
             const bool last_time_step = params.stop_time >= 0.0 && time >= params.stop_time;
             if (step % params.plot_int == 0 || step == params.max_step || last_time_step) {
                 current_diag = amrreactx::compute_diagnostics(state, diag, geom, step_params);
-                hierarchy = amrreactx::rebuild_scalar_amr_hierarchy(state, geom, step_params,
-                                                                    amrreactx::NumState, 1);
+                if (!hierarchy.has_level1()) {
+                    hierarchy = amrreactx::rebuild_scalar_amr_hierarchy(state, geom, step_params,
+                                                                        amrreactx::NumState, 1);
+                }
                 amrreactx::attach_restriction_diagnostics(current_diag, state, hierarchy,
                                                           geom, step_params);
+                amrreactx::attach_amr_mass_diagnostics(current_diag, state, hierarchy,
+                                                       geom, step_params,
+                                                       applied_restriction_mass_delta);
                 amrreactx::write_plotfile(state, geom, params, step, time, &hierarchy);
                 amrreactx::print_diagnostics(step, time, current_diag, injected_mass,
                                              boundary_inflow_mass, outlet_mass, initial_mass);

@@ -54,4 +54,11 @@ void attach_restriction_diagnostics(TransportDiagnostics& diag,
                                     const amrex::Geometry& level0_geom,
                                     const RuntimeParams& params);
 
+void attach_amr_mass_diagnostics(TransportDiagnostics& diag,
+                                 const amrex::MultiFab& level0_state,
+                                 const ScalarAmrHierarchy& hierarchy,
+                                 const amrex::Geometry& level0_geom,
+                                 const RuntimeParams& params,
+                                 amrex::Real applied_restriction_mass_delta);
+
 } // namespace amrreactx

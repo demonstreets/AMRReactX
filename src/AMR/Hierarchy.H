@@ -28,12 +28,29 @@ struct RestrictionDiagnostics {
     long long coarse_cell_count = 0;
 };
 
+struct AmrMassDiagnostics {
+    amrex::Real level1_mass = 0.0;
+    amrex::Real covered_level0_mass = 0.0;
+    amrex::Real mass_delta = 0.0;
+};
+
 amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio);
 
 void initialize_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
                                           amrex::MultiFab& fine_state,
                                           const amrex::Geometry& coarse_geom,
                                           int ref_ratio);
+
+void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
+                                  const amrex::MultiFab& level0_state,
+                                  const amrex::Geometry& level0_geom,
+                                  const RuntimeParams& params);
+
+AmrMassDiagnostics restrict_scalar_amr_hierarchy_to_coarse(
+    const ScalarAmrHierarchy& hierarchy,
+    amrex::MultiFab& level0_state,
+    const amrex::Geometry& level0_geom,
+    const RuntimeParams& params);
 
 ScalarAmrHierarchy rebuild_scalar_amr_hierarchy(const amrex::MultiFab& level0_state,
                                                 const amrex::Geometry& level0_geom,
@@ -45,5 +62,10 @@ RestrictionDiagnostics compute_restriction_diagnostics(const amrex::MultiFab& le
                                                        const ScalarAmrHierarchy& hierarchy,
                                                        const amrex::Geometry& level0_geom,
                                                        int ref_ratio);
+
+AmrMassDiagnostics compute_amr_mass_diagnostics(const amrex::MultiFab& level0_state,
+                                                const ScalarAmrHierarchy& hierarchy,
+                                                const amrex::Geometry& level0_geom,
+                                                const RuntimeParams& params);
 
 } // namespace amrreactx

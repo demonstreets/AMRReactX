@@ -411,7 +411,9 @@ void print_tagging_report(const RuntimeParams& params)
                    << " tag_buffer " << params.tag_buffer
                    << " tag_ref_ratio " << params.tag_ref_ratio
                    << " tag_max_grid_size " << params.tag_max_grid_size
-                   << " tag_grid_efficiency " << params.tag_grid_efficiency << "\n";
+                   << " tag_grid_efficiency " << params.tag_grid_efficiency
+                   << " amr_restrict_after_advance "
+                   << params.amr_restrict_after_advance << "\n";
 }
 
 void initialize_history_file(const RuntimeParams& params)
@@ -436,7 +438,10 @@ void initialize_history_file(const RuntimeParams& params)
             << "tag_refine_cell_count,tag_cluster_count,"
             << "tag_candidate_level1_cell_count,tag_candidate_level1_volume,"
             << "amr_restrict_max_abs_y_error,amr_restrict_l1_y_error,"
-            << "amr_restrict_coarse_cell_count\n";
+            << "amr_restrict_coarse_cell_count,amr_level1_mass,"
+            << "amr_covered_level0_mass,amr_mass_delta,"
+            << "amr_applied_restriction_mass_delta,"
+            << "amr_sync_corrected_balance_error\n";
 }
 
 void print_diagnostics(int step,
@@ -449,6 +454,8 @@ void print_diagnostics(int step,
 {
     const amrex::Real balance_error =
         diag.scalar_mass - initial_mass - injected_mass - boundary_inflow_mass + outlet_mass;
+    const amrex::Real amr_sync_corrected_balance_error =
+        balance_error - diag.amr_applied_restriction_mass_delta;
     amrex::Print() << "step " << step
                    << " time " << time
                    << " mass " << diag.scalar_mass
@@ -456,6 +463,8 @@ void print_diagnostics(int step,
                    << " boundary_inflow " << boundary_inflow_mass
                    << " outlet " << outlet_mass
                    << " balance_error " << balance_error
+                   << " amr_sync_corrected_balance_error "
+                   << amr_sync_corrected_balance_error
                    << " source_rate " << diag.source_rate
                    << " boundary_inflow_rate " << diag.boundary_inflow_rate
                    << " outlet_rate " << diag.outlet_rate
@@ -504,6 +513,11 @@ void print_diagnostics(int step,
                    << " amr_restrict max_abs_y_error " << diag.amr_restrict_max_abs_y_error
                    << " l1_y_error " << diag.amr_restrict_l1_y_error
                    << " coarse_cells " << diag.amr_restrict_coarse_cell_count
+                   << " amr_mass level1 " << diag.amr_level1_mass
+                   << " covered_level0 " << diag.amr_covered_level0_mass
+                   << " delta " << diag.amr_mass_delta
+                   << " applied_restriction_delta "
+                   << diag.amr_applied_restriction_mass_delta
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -523,6 +537,8 @@ void append_history(int step,
     }
     const amrex::Real balance_error =
         diag.scalar_mass - initial_mass - injected_mass - boundary_inflow_mass + outlet_mass;
+    const amrex::Real amr_sync_corrected_balance_error =
+        balance_error - diag.amr_applied_restriction_mass_delta;
     std::ofstream history(params.history_file, std::ios::app);
     history << step << ","
             << std::setprecision(17) << time << ","
@@ -581,7 +597,12 @@ void append_history(int step,
             << diag.tag_candidate_level1_volume << ","
             << diag.amr_restrict_max_abs_y_error << ","
             << diag.amr_restrict_l1_y_error << ","
-            << diag.amr_restrict_coarse_cell_count << "\n";
+            << diag.amr_restrict_coarse_cell_count << ","
+            << diag.amr_level1_mass << ","
+            << diag.amr_covered_level0_mass << ","
+            << diag.amr_mass_delta << ","
+            << diag.amr_applied_restriction_mass_delta << ","
+            << amr_sync_corrected_balance_error << "\n";
 }
 
 void attach_restriction_diagnostics(TransportDiagnostics& diag,
@@ -595,6 +616,21 @@ void attach_restriction_diagnostics(TransportDiagnostics& diag,
     diag.amr_restrict_max_abs_y_error = restriction.max_abs_y_error;
     diag.amr_restrict_l1_y_error = restriction.l1_y_error;
     diag.amr_restrict_coarse_cell_count = restriction.coarse_cell_count;
+}
+
+void attach_amr_mass_diagnostics(TransportDiagnostics& diag,
+                                 const amrex::MultiFab& level0_state,
+                                 const ScalarAmrHierarchy& hierarchy,
+                                 const amrex::Geometry& level0_geom,
+                                 const RuntimeParams& params,
+                                 amrex::Real applied_restriction_mass_delta)
+{
+    const AmrMassDiagnostics mass =
+        compute_amr_mass_diagnostics(level0_state, hierarchy, level0_geom, params);
+    diag.amr_level1_mass = mass.level1_mass;
+    diag.amr_covered_level0_mass = mass.covered_level0_mass;
+    diag.amr_mass_delta = mass.mass_delta;
+    diag.amr_applied_restriction_mass_delta = applied_restriction_mass_delta;
 }
 
 void write_plotfile(const amrex::MultiFab& state,

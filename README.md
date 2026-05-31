@@ -47,8 +47,9 @@ The output directories are named from `plotfile_prefix`, for example
 When AMR tagging is enabled and candidate level-1 boxes are produced, the same
 plotfile path is written as a two-level AMReX plotfile with a piecewise-constant
 level-1 initialization from level 0. The level-1 state is maintained through the
-AMR hierarchy helper before plotfile output; it is not advanced independently
-yet.
+AMR hierarchy helper, advanced independently with `tag_ref_ratio` substeps per
+level-0 step, and can optionally be restricted back onto covered level-0 cells
+with `amr_restrict_after_advance = 1`.
 
 Verification cases:
 
@@ -64,6 +65,8 @@ mpirun -np 2 ./build/amrreactx inputs/verify_boundary_faces_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_inlet_scalar_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_open_backflow_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_tagging_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_level1_advance_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_level1_restriction_update_3d.in
 ```
 
 Run the Stage 1/2 verification suite:
@@ -75,7 +78,7 @@ bash tools/run_stage2_verification.sh
 The old `tools/run_stage1_verification.sh` entry point is kept as a
 compatibility wrapper.
 
-Run the Stage 1/2 + Stage 3.1/3.2 verification suite:
+Run the Stage 1/2 + Stage 3.1/3.2/3.4 verification suite:
 
 ```bash
 bash tools/run_stage3_verification.sh
@@ -120,6 +123,9 @@ Useful Stage 1/2 input parameters:
 - `tag_buffer`, `tag_ref_ratio`, `tag_max_grid_size`,
   `tag_grid_efficiency`: controls for buffering tags and clustering candidate
   level-1 AMR boxes.
+- `amr_restrict_after_advance = 1`: after independent level-1 advance, average
+  the level-1 state back onto covered level-0 cells. This restores restriction
+  consistency but does not yet perform refluxing.
 - `dt`, `max_step`, `plot_int`: explicit time stepping controls.
 - `use_auto_dt = 1`: choose `dt` from `cfl`, `diff_cfl`, wind, diffusion,
   and grid spacing.
@@ -140,6 +146,10 @@ Runtime diagnostics:
 - `diffusion_number`: explicit centered-diffusion stability indicator.
 - `mass`, `injected`, `boundary_inflow`, `outlet`, `balance_error`: scalar
   mass budget.
+- `amr_sync_corrected_balance_error`: mass budget after subtracting the
+  optional AMR restriction-update mass correction. This should stay near zero
+  when `amr_restrict_after_advance` changes covered level-0 cells, while the raw
+  `balance_error` records the unaccounted AMR synchronization drift.
 - `inflow_xlo_rate`, `inflow_xhi_rate`, `inflow_ylo_rate`,
   `inflow_yhi_rate`, `inflow_zlo_rate`, `inflow_zhi_rate`: per-face scalar
   boundary-inflow rates whose sum equals `boundary_inflow_rate`.
@@ -166,15 +176,23 @@ Runtime diagnostics:
   candidate level-1 grid diagnostics generated from global tagged bounds.
 - `amr_restrict_max_abs_y_error`, `amr_restrict_l1_y_error`,
   `amr_restrict_coarse_cell_count`: consistency diagnostics from restricting
-  initialized level-1 `Y_leak` back onto the covered level-0 cells.
+  level-1 `Y_leak` back onto the covered level-0 cells. These are intentionally
+  nonzero after independent fine-level advance unless
+  `amr_restrict_after_advance` is enabled.
+- `amr_level1_mass`, `amr_covered_level0_mass`, `amr_mass_delta`: mass in the
+  maintained level-1 state, mass in the covered level-0 cells, and their
+  difference.
+- `amr_applied_restriction_mass_delta`: mass correction applied to level 0 by
+  the optional restriction update on the most recent output step. This exposes
+  the synchronization drift that future refluxing must remove.
 
 ## Current Source Layout
 
 - `src/main.cpp`: program orchestration.
 - `src/Core`: runtime parameters, state indices, and AMReX geometry/input setup.
 - `src/AMR`: scalar boundary-condition definitions and face flux helpers.
-- `src/AMR/Hierarchy.*`: AMR hierarchy helpers for refined geometry creation
-  and coarse-to-fine initialization.
+- `src/AMR/Hierarchy.*`: AMR hierarchy helpers for refined geometry creation,
+  coarse-to-fine initialization, level-1 advance, and restriction update.
 - `src/AMR/Tagging.*`: Stage 3 scalar-gradient and source-region tagging
   indicators.
 - `src/Numerics`: scalar initialization, explicit advection-diffusion update, and

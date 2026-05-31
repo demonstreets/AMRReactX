@@ -89,6 +89,7 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     pp.query("tag_ref_ratio", params.tag_ref_ratio);
     pp.query("tag_max_grid_size", params.tag_max_grid_size);
     pp.query("tag_grid_efficiency", params.tag_grid_efficiency);
+    pp.query("amr_restrict_after_advance", params.amr_restrict_after_advance);
     pp.query("history_file", params.history_file);
     pp.query("plotfile_prefix", params.plotfile_prefix);
     std::string source_type = source_type_name(params.source_type);
