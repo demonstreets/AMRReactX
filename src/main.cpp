@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
         const amrex::DistributionMapping dm(ba);
 
         amrex::MultiFab state(ba, dm, amrreactx::NumState, 1);
+        amrex::MultiFab old_state(ba, dm, amrreactx::NumState, 1);
         amrex::MultiFab next_state(ba, dm, amrreactx::NumState, 1);
         amrex::MultiFab diag(ba, dm, amrreactx::NumDiag, 0);
         amrreactx::initialize_state(state, geom, params);
@@ -66,9 +67,11 @@ int main(int argc, char* argv[])
             injected_mass += current_diag.source_rate * step_dt;
             boundary_inflow_mass += current_diag.boundary_inflow_rate * step_dt;
             outlet_mass += current_diag.outlet_rate * step_dt;
+            amrex::MultiFab::Copy(old_state, state, 0, 0, amrreactx::NumState, 0);
             amrreactx::advance_scalar(state, next_state, geom, step_params);
             amrex::MultiFab::Copy(state, next_state, 0, 0, amrreactx::NumState, 0);
-            amrreactx::advance_scalar_amr_hierarchy(hierarchy, state, geom, step_params);
+            amrreactx::advance_scalar_amr_hierarchy(hierarchy, old_state, state,
+                                                    geom, step_params);
             amrex::Real applied_restriction_mass_delta = 0.0;
             if (step_params.amr_restrict_after_advance != 0) {
                 const amrreactx::AmrMassDiagnostics restriction_update =

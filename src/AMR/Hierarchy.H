@@ -42,7 +42,8 @@ void initialize_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
                                           int ref_ratio);
 
 void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
-                                  const amrex::MultiFab& level0_state,
+                                  const amrex::MultiFab& level0_old_state,
+                                  const amrex::MultiFab& level0_new_state,
                                   const amrex::Geometry& level0_geom,
                                   const RuntimeParams& params);
 

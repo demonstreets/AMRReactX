@@ -58,6 +58,61 @@ void fill_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
     }
 }
 
+void fill_refined_level_from_coarse_time_interpolated(
+    const amrex::MultiFab& coarse_old_state,
+    const amrex::MultiFab& coarse_new_state,
+    amrex::MultiFab& fine_state,
+    const amrex::Geometry& coarse_geom,
+    int ref_ratio,
+    amrex::Real alpha)
+{
+    amrex::BoxArray coarse_for_fine_ba = fine_state.boxArray();
+    coarse_for_fine_ba.coarsen(ref_ratio);
+    amrex::MultiFab coarse_old_for_fine(coarse_for_fine_ba,
+                                        fine_state.DistributionMap(),
+                                        coarse_old_state.nComp(),
+                                        fine_state.nGrow());
+    amrex::MultiFab coarse_new_for_fine(coarse_for_fine_ba,
+                                        fine_state.DistributionMap(),
+                                        coarse_new_state.nComp(),
+                                        fine_state.nGrow());
+    coarse_old_for_fine.ParallelCopy(coarse_old_state, 0, 0, coarse_old_state.nComp(),
+                                     0, fine_state.nGrow(), coarse_geom.periodicity());
+    coarse_new_for_fine.ParallelCopy(coarse_new_state, 0, 0, coarse_new_state.nComp(),
+                                     0, fine_state.nGrow(), coarse_geom.periodicity());
+
+    const amrex::Box fine_domain = amrex::refine(coarse_geom.Domain(), ref_ratio);
+    const amrex::Real old_weight = 1.0 - alpha;
+    for (amrex::MFIter mfi(fine_state); mfi.isValid(); ++mfi) {
+        const amrex::Box grown_box = amrex::grow(mfi.validbox(), fine_state.nGrow())
+            & fine_domain;
+        const amrex::Box valid_box = mfi.validbox();
+        const auto valid_lo = valid_box.smallEnd();
+        const auto valid_hi = valid_box.bigEnd();
+        const amrex::Array4<amrex::Real> fine = fine_state.array(mfi);
+        const amrex::Array4<const amrex::Real> coarse_old =
+            coarse_old_for_fine.const_array(mfi);
+        const amrex::Array4<const amrex::Real> coarse_new =
+            coarse_new_for_fine.const_array(mfi);
+        const int ncomp = fine_state.nComp();
+        for (int comp = 0; comp < ncomp; ++comp) {
+            amrex::ParallelFor(grown_box, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+                const bool in_valid = i >= valid_lo[0] && i <= valid_hi[0]
+                                   && j >= valid_lo[1] && j <= valid_hi[1]
+                                   && k >= valid_lo[2] && k <= valid_hi[2];
+                if (!in_valid) {
+                    const int ci = i / ref_ratio;
+                    const int cj = j / ref_ratio;
+                    const int ck = k / ref_ratio;
+                    fine(i, j, k, comp) =
+                        old_weight * coarse_old(ci, cj, ck, comp)
+                        + alpha * coarse_new(ci, cj, ck, comp);
+                }
+            });
+        }
+    }
+}
+
 } // namespace
 
 amrex::Geometry make_refined_geometry(const amrex::Geometry& geom, int ref_ratio)
@@ -80,7 +135,8 @@ void initialize_refined_level_from_coarse(const amrex::MultiFab& coarse_state,
 }
 
 void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
-                                  const amrex::MultiFab& level0_state,
+                                  const amrex::MultiFab& level0_old_state,
+                                  const amrex::MultiFab& level0_new_state,
                                   const amrex::Geometry& level0_geom,
                                   const RuntimeParams& params)
 {
@@ -97,8 +153,11 @@ void advance_scalar_amr_hierarchy(ScalarAmrHierarchy& hierarchy,
                                 hierarchy.level1_state->nComp(),
                                 hierarchy.level1_state->nGrow());
     for (int substep = 0; substep < nsubsteps; ++substep) {
-        fill_refined_level_from_coarse(level0_state, *hierarchy.level1_state,
-                                       level0_geom, params.tag_ref_ratio, false);
+        const amrex::Real alpha =
+            static_cast<amrex::Real>(substep) / static_cast<amrex::Real>(nsubsteps);
+        fill_refined_level_from_coarse_time_interpolated(
+            level0_old_state, level0_new_state, *hierarchy.level1_state,
+            level0_geom, params.tag_ref_ratio, alpha);
         advance_scalar(*hierarchy.level1_state, level1_next,
                        hierarchy.level1_geom, fine_params);
         amrex::MultiFab::Copy(*hierarchy.level1_state, level1_next, 0, 0,
