@@ -1,0 +1,33 @@
+# 3D open-space near-ground leakage plume.
+# Domain: x streamwise, y lateral, z vertical. Wind enters at xlo and exits xhi.
+
+n_cell = 160 80 48
+prob_lo = 0.0 0.0 0.0
+prob_hi = 20.0 10.0 6.0
+max_grid_size = 32
+
+max_step = 240
+dt = 0.01
+plot_int = 60
+use_auto_dt = 0
+
+rho0 = 1.0
+wind = 1.2 0.0 0.0
+diffusion = 0.025
+inlet_y = 0.0
+bc_lo = inlet open wall
+bc_hi = outlet open open
+
+source_type = gaussian
+source_center = 1.5 5.0 0.45
+source_sigma = 0.22
+source_strength = 0.50
+
+init_type = 0
+
+cloud_threshold = 0.005
+lel = 0.03
+uel = 0.12
+history_file = history_scene_near_ground_leak_3d.csv
+
+plotfile_prefix = plt_scene_leak_

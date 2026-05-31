@@ -1,0 +1,38 @@
+# Stage 2 verification: engineering diagnostics based on gas volume fraction.
+# A box source reaches Y_leak = 0.04 in a unit-volume region by t = 0.4.
+# Methane-like molecular weight converts this to X_leak ~= 0.06996.
+
+n_cell = 32 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 4.0 4.0 4.0
+max_grid_size = 16
+
+max_step = 40
+dt = 0.01
+plot_int = 10
+
+rho0 = 1.0
+wind = 0.0 0.0 0.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = open open open
+bc_hi = open open open
+
+source_type = box
+source_center = 2.0 2.0 2.0
+source_box_lo = 1.5 1.5 1.5
+source_box_hi = 2.5 2.5 2.5
+source_sigma = 0.2
+source_strength = 0.1
+
+init_type = 0
+
+diagnostic_basis = volume_fraction
+leak_molecular_weight = 16.04
+air_molecular_weight = 28.97
+cloud_threshold = 0.05
+lel = 0.05
+uel = 0.15
+history_file = history_verify_volume_fraction.csv
+
+plotfile_prefix = plt_verify_volume_fraction_

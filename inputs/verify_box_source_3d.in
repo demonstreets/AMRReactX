@@ -1,0 +1,34 @@
+# Stage 1.4 verification: box source in a still domain.
+# Expected behavior: mass equals accumulated injected mass to roundoff.
+
+n_cell = 32 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 4.0 4.0 4.0
+max_grid_size = 16
+
+max_step = 40
+dt = 0.01
+plot_int = 10
+
+rho0 = 1.0
+wind = 0.0 0.0 0.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = open open open
+bc_hi = open open open
+
+source_type = box
+source_center = 2.0 2.0 2.0
+source_box_lo = 1.5 1.5 1.5
+source_box_hi = 2.5 2.5 2.5
+source_sigma = 0.2
+source_strength = 0.1
+
+init_type = 0
+
+cloud_threshold = 0.01
+lel = 0.02
+uel = 0.05
+history_file = history_verify_box_source.csv
+
+plotfile_prefix = plt_verify_box_source_

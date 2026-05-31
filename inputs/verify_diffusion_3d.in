@@ -1,0 +1,32 @@
+# Stage 1.1 verification: pure diffusion of an initial Gaussian cloud.
+# Expected behavior: scalar mass stays nearly constant, max_Y decays, and the
+# centroid remains fixed.
+
+n_cell = 64 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 8.0 4.0 4.0
+max_grid_size = 32
+
+max_step = 100
+dt = 0.01
+plot_int = 25
+
+rho0 = 1.0
+wind = 0.0 0.0 0.0
+diffusion = 0.01
+inlet_y = 0.0
+bc_lo = open open open
+bc_hi = open open open
+
+source_center = 1.0 2.0 2.0
+source_sigma = 0.2
+source_strength = 0.0
+source_type = gaussian
+
+init_type = 1
+init_center = 4.0 2.0 2.0
+init_sigma = 0.35
+init_amplitude = 0.2
+
+history_file = history_verify_diffusion.csv
+plotfile_prefix = plt_verify_diff_

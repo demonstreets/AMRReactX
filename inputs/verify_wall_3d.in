@@ -1,0 +1,32 @@
+# Stage 1.2 verification: scalar cloud advects toward a wall.
+# Expected behavior: no scalar outlet through the zlo wall and total mass stays
+# conserved, though the first-order solution piles up near the wall.
+
+n_cell = 48 48 48
+prob_lo = 0.0 0.0 0.0
+prob_hi = 4.0 4.0 4.0
+max_grid_size = 24
+
+max_step = 80
+dt = 0.005
+plot_int = 20
+
+rho0 = 1.0
+wind = 0.0 0.0 -1.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = open open wall
+bc_hi = open open open
+
+source_center = 2.0 2.0 2.0
+source_sigma = 0.2
+source_strength = 0.0
+source_type = gaussian
+
+init_type = 1
+init_center = 2.0 2.0 1.2
+init_sigma = 0.25
+init_amplitude = 0.2
+
+history_file = history_verify_wall.csv
+plotfile_prefix = plt_verify_wall_

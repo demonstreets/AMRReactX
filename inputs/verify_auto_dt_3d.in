@@ -1,0 +1,39 @@
+# Stage 1.6 verification: automatic dt selection.
+# The input dt is intentionally too large; use_auto_dt should reduce it.
+
+n_cell = 64 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 8.0 4.0 4.0
+max_grid_size = 32
+
+max_step = 100
+dt = 1.0
+stop_time = 0.4
+plot_int = 1
+use_auto_dt = 1
+cfl = 0.5
+diff_cfl = 0.25
+
+rho0 = 1.0
+wind = 1.0 0.0 0.0
+diffusion = 0.01
+inlet_y = 0.0
+bc_lo = inlet open open
+bc_hi = outlet open open
+
+source_type = gaussian
+source_center = 1.0 2.0 2.0
+source_sigma = 0.2
+source_strength = 0.0
+
+init_type = 1
+init_center = 2.0 2.0 2.0
+init_sigma = 0.35
+init_amplitude = 0.2
+
+cloud_threshold = 0.01
+lel = 0.05
+uel = 0.15
+history_file = history_verify_auto_dt.csv
+
+plotfile_prefix = plt_verify_auto_dt_

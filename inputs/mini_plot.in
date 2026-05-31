@@ -1,0 +1,10 @@
+# Minimal AMReX/MPI smoke test for AMRReactX.
+# This is not a flow solver yet. It initializes a gas-cloud-like field and
+# writes a plotfile so that we can verify AMReX, MPI, CMake, and visualization.
+
+n_cell = 64 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 8.0 4.0 4.0
+max_grid_size = 32
+
+plotfile = plt_mini_leak

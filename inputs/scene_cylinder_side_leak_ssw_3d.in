@@ -1,0 +1,38 @@
+# 3D leakage source placed on the side surface of a vertical cylinder.
+# Coordinates: x east, y north, z vertical.
+# Wind is meteorological SSW: coming from SSW and blowing toward NNE.
+# Stage 1 note: the cylinder defines leak location only; it is not yet an
+# embedded-boundary obstacle.
+
+n_cell = 96 128 48
+prob_lo = 0.0 0.0 0.0
+prob_hi = 12.0 16.0 6.0
+max_grid_size = 32
+
+max_step = 300
+dt = 0.01
+plot_int = 75
+use_auto_dt = 0
+
+rho0 = 1.0
+wind = 0.4592201188 1.108655439 0.0
+diffusion = 0.025
+inlet_y = 0.0
+bc_lo = inlet inlet wall
+bc_hi = outlet outlet open
+
+# Cylinder center = (4.0, 5.0), radius = 1.0 m.
+# SSW side point = center + radius * (-0.382683, -0.923880).
+source_type = gaussian
+source_center = 3.617316568 4.076120467 0.75
+source_sigma = 0.18
+source_strength = 0.50
+
+init_type = 0
+
+cloud_threshold = 0.005
+lel = 0.03
+uel = 0.12
+history_file = history_scene_cylinder_side_leak_ssw_3d.csv
+
+plotfile_prefix = plt_cylinder_ssw_leak_
