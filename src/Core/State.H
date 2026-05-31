@@ -60,6 +60,10 @@ enum DiagIndex {
     ZMoment,
     CloudIndicator,
     FlammableIndicator,
+    CloudMassDensity,
+    FlammableMassDensity,
+    CloudConcentrationSum,
+    FlammableConcentrationSum,
     NumDiag
 };
 
@@ -151,6 +155,10 @@ struct TransportDiagnostics {
     amrex::Real max_concentration = 0.0;
     amrex::Real cloud_volume = 0.0;
     amrex::Real flammable_volume = 0.0;
+    amrex::Real cloud_mass = 0.0;
+    amrex::Real flammable_mass = 0.0;
+    amrex::Real cloud_mean_concentration = 0.0;
+    amrex::Real flammable_mean_concentration = 0.0;
     amrex::Real cloud_x_min = 0.0;
     amrex::Real cloud_x_max = 0.0;
     amrex::Real cloud_y_min = 0.0;

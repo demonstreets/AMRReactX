@@ -80,14 +80,22 @@ def check_case(case, rows):
         close(last["mass"], 0.04, 1.0e-12, "box final mass")
         close(last["injected"], 0.04, 1.0e-12, "box injected mass")
         close(last["cloud_volume"], 1.0, 1.0e-12, "box cloud volume")
+        close(last["cloud_mass"], 0.04, 1.0e-12, "box cloud mass")
+        close(last["cloud_mean_concentration"], 0.04, 1.0e-12, "box cloud mean concentration")
         close(last["cloud_x_min"], 1.5625, 1.0e-12, "box cloud x min")
         close(last["cloud_x_max"], 2.4375, 1.0e-12, "box cloud x max")
+        close(last["flammable_mass"], 0.04, 1.0e-12, "box flammable mass")
+        close(last["flammable_mean_concentration"], 0.04, 1.0e-12,
+              "box flammable mean concentration")
         require(abs(last["balance_error"]) < 1.0e-12, "box balance error too large")
     elif case == "source_total_rate":
         close(last["source_rate"], 0.2, 1.0e-12, "source_total_rate source_rate")
         close(last["mass"], 0.08, 1.0e-12, "source_total_rate final mass")
         close(last["injected"], 0.08, 1.0e-12, "source_total_rate injected mass")
         close(last["cloud_volume"], 8.0, 1.0e-12, "source_total_rate cloud volume")
+        close(last["cloud_mass"], 0.08, 1.0e-12, "source_total_rate cloud mass")
+        close(last["cloud_mean_concentration"], 0.01, 1.0e-12,
+              "source_total_rate cloud mean concentration")
         close(last["cloud_x_min"], 1.0625, 1.0e-12, "source_total_rate cloud x min")
         close(last["cloud_x_max"], 2.9375, 1.0e-12, "source_total_rate cloud x max")
         close(last["cloud_y_min"], 1.0625, 1.0e-12, "source_total_rate cloud y min")
@@ -95,6 +103,9 @@ def check_case(case, rows):
         close(last["cloud_z_min"], 1.0625, 1.0e-12, "source_total_rate cloud z min")
         close(last["cloud_z_max"], 2.9375, 1.0e-12, "source_total_rate cloud z max")
         close(last["flammable_volume"], 8.0, 1.0e-12, "source_total_rate flammable volume")
+        close(last["flammable_mass"], 0.08, 1.0e-12, "source_total_rate flammable mass")
+        close(last["flammable_mean_concentration"], 0.01, 1.0e-12,
+              "source_total_rate flammable mean concentration")
         require(abs(last["balance_error"]) < 1.0e-12, "source_total_rate balance error too large")
     elif case == "auto_dt":
         close(last["time"], 0.4, 1.0e-12, "auto_dt stop time")

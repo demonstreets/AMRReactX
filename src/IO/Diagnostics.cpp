@@ -153,6 +153,10 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
             d(i, j, k, CloudIndicator) = concentration >= cloud_threshold ? 1.0 : 0.0;
             d(i, j, k, FlammableIndicator) =
                 (concentration >= lel && concentration <= uel) ? 1.0 : 0.0;
+            d(i, j, k, CloudMassDensity) = d(i, j, k, CloudIndicator) * rho0 * y_leak;
+            d(i, j, k, FlammableMassDensity) = d(i, j, k, FlammableIndicator) * rho0 * y_leak;
+            d(i, j, k, CloudConcentrationSum) = d(i, j, k, CloudIndicator) * concentration;
+            d(i, j, k, FlammableConcentrationSum) = d(i, j, k, FlammableIndicator) * concentration;
         });
     }
 
@@ -272,6 +276,16 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
     }
     out.cloud_volume = diag.sum(CloudIndicator) * cell_volume;
     out.flammable_volume = diag.sum(FlammableIndicator) * cell_volume;
+    out.cloud_mass = diag.sum(CloudMassDensity) * cell_volume;
+    out.flammable_mass = diag.sum(FlammableMassDensity) * cell_volume;
+    if (out.cloud_volume > 0.0) {
+        out.cloud_mean_concentration =
+            diag.sum(CloudConcentrationSum) * cell_volume / out.cloud_volume;
+    }
+    if (out.flammable_volume > 0.0) {
+        out.flammable_mean_concentration =
+            diag.sum(FlammableConcentrationSum) * cell_volume / out.flammable_volume;
+    }
     if (out.cloud_volume > 0.0) {
         out.cloud_x_min = cloud_min[0];
         out.cloud_x_max = cloud_max[0];
@@ -361,8 +375,10 @@ void initialize_history_file(const RuntimeParams& params)
             << "inflow_zlo_rate,inflow_zhi_rate,"
             << "outlet_xlo_rate,outlet_xhi_rate,outlet_ylo_rate,outlet_yhi_rate,"
             << "outlet_zlo_rate,outlet_zhi_rate,"
-            << "cloud_volume,cloud_x_min,cloud_x_max,cloud_y_min,cloud_y_max,cloud_z_min,cloud_z_max,"
-            << "flammable_volume,flammable_x_min,flammable_x_max,flammable_y_min,flammable_y_max,"
+            << "cloud_volume,cloud_mass,cloud_mean_concentration,"
+            << "cloud_x_min,cloud_x_max,cloud_y_min,cloud_y_max,cloud_z_min,cloud_z_max,"
+            << "flammable_volume,flammable_mass,flammable_mean_concentration,"
+            << "flammable_x_min,flammable_x_max,flammable_y_min,flammable_y_max,"
             << "flammable_z_min,flammable_z_max\n";
 }
 
@@ -410,6 +426,8 @@ void print_diagnostics(int step,
                    << " " << diag.cloud_y_max
                    << " z " << diag.cloud_z_min
                    << " " << diag.cloud_z_max
+                   << " cloud_mass " << diag.cloud_mass
+                   << " cloud_mean_concentration " << diag.cloud_mean_concentration
                    << " flammable_volume " << diag.flammable_volume
                    << " flammable_bounds x " << diag.flammable_x_min
                    << " " << diag.flammable_x_max
@@ -417,6 +435,8 @@ void print_diagnostics(int step,
                    << " " << diag.flammable_y_max
                    << " z " << diag.flammable_z_min
                    << " " << diag.flammable_z_max
+                   << " flammable_mass " << diag.flammable_mass
+                   << " flammable_mean_concentration " << diag.flammable_mean_concentration
                    << " centroid " << diag.x_centroid
                    << " " << diag.y_centroid
                    << " " << diag.z_centroid << "\n";
@@ -468,6 +488,8 @@ void append_history(int step,
             << diag.outlet_zlo_rate << ","
             << diag.outlet_zhi_rate << ","
             << diag.cloud_volume << ","
+            << diag.cloud_mass << ","
+            << diag.cloud_mean_concentration << ","
             << diag.cloud_x_min << ","
             << diag.cloud_x_max << ","
             << diag.cloud_y_min << ","
@@ -475,6 +497,8 @@ void append_history(int step,
             << diag.cloud_z_min << ","
             << diag.cloud_z_max << ","
             << diag.flammable_volume << ","
+            << diag.flammable_mass << ","
+            << diag.flammable_mean_concentration << ","
             << diag.flammable_x_min << ","
             << diag.flammable_x_max << ","
             << diag.flammable_y_min << ","

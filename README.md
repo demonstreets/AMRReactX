@@ -119,6 +119,10 @@ Runtime diagnostics:
 - `centroid`: scalar-cloud center of mass, useful for advection verification.
 - `cloud_volume`: volume where `C_leak_diag >= cloud_threshold`.
 - `flammable_volume`: volume where `lel <= C_leak_diag <= uel`.
+- `cloud_mass`, `flammable_mass`: leaked scalar mass inside the threshold
+  cloud and the flammable band.
+- `cloud_mean_concentration`, `flammable_mean_concentration`: volume-averaged
+  diagnostic concentration inside those regions.
 - `cloud_*_min/max`, `flammable_*_min/max`: axis-aligned bounds of the
   threshold cloud and flammable cloud, reported from cell-center locations.
 
