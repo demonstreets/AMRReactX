@@ -128,6 +128,193 @@ def check_case(case, rows):
         close(last["centroid_y"], 2.0, 1.0e-12, "advection centroid_y")
         close(last["centroid_z"], 2.0, 1.0e-12, "advection centroid_z")
         require(abs(last["balance_error"]) < 1.0e-9, "advection balance error too large")
+    elif case == "porosity_obstacle":
+        close(last["mass"], first["mass"], 1.0e-9, "porosity obstacle mass conservation")
+        close(last["porosity_min"], 0.0, 1.0e-14, "porosity obstacle minimum porosity")
+        require(last["porosity_mean"] < 1.0, "porosity obstacle should reduce mean porosity")
+        require(last["solid_volume"] > 1.0, "porosity obstacle solid volume should be nonzero")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity obstacle solid scalar mass")
+        require(last["centroid_x"] < 2.79,
+                "porosity obstacle should slow the advecting cloud relative to uniform wind")
+        require(abs(last["balance_error"]) < 1.0e-9,
+                "porosity obstacle balance error too large")
+        check_multilevel_plotfile("plt_verify_porosity_obstacle_00080", 0)
+    elif case == "porosity_source_total_rate":
+        close(last["source_rate"], 0.2, 1.0e-12,
+              "porosity source total-rate source_rate")
+        close(last["mass"], 0.08, 1.0e-12,
+              "porosity source total-rate final mass")
+        close(last["injected"], 0.08, 1.0e-12,
+              "porosity source total-rate injected mass")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity source total-rate solid scalar mass")
+        require(last["solid_volume"] > 0.9,
+                "porosity source total-rate should have a solid obstacle core")
+        require(abs(last["balance_error"]) < 1.0e-12,
+                "porosity source total-rate balance error too large")
+        check_multilevel_plotfile("plt_verify_porosity_source_total_rate_00040", 0)
+    elif case == "porosity_cylinder":
+        close(last["mass"], first["mass"], 1.0e-9, "porosity cylinder mass conservation")
+        close(last["porosity_min"], 0.0, 1.0e-14, "porosity cylinder minimum porosity")
+        require(last["porosity_mean"] < 1.0, "porosity cylinder should reduce mean porosity")
+        require(last["solid_volume"] > 1.0, "porosity cylinder solid volume should be nonzero")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity cylinder solid scalar mass")
+        require(last["centroid_x"] < 2.79,
+                "porosity cylinder should slow the advecting cloud relative to uniform wind")
+        require(abs(last["balance_error"]) < 1.0e-9,
+                "porosity cylinder balance error too large")
+        check_multilevel_plotfile("plt_verify_porosity_cylinder_00080", 0)
+    elif case == "porosity_tagging":
+        require(len(rows) == 1, "porosity tagging should write only the initial row")
+        close(last["mass"], 0.0, 1.0e-14, "porosity tagging initial mass")
+        require(last["tag_porosity_volume"] > 0.0,
+                "porosity tagging should mark the obstacle interface")
+        close(last["tag_grad_y_volume"], 0.0, 1.0e-14,
+              "porosity tagging should not need scalar-gradient tags")
+        close(last["tag_source_volume"], 0.0, 1.0e-14,
+              "porosity tagging should not need source-region tags")
+        close(last["tag_refine_volume"], last["tag_porosity_volume"], 1.0e-12,
+              "porosity tagging refine volume should come from porosity tags")
+        require(last["tag_cluster_count"] > 0.0,
+                "porosity tagging should produce candidate boxes")
+        require(last["tag_candidate_level1_cell_count"] > 0.0,
+                "porosity tagging should produce candidate level-1 cells")
+        require(last["tag_candidate_level1_volume"] >= last["tag_refine_volume"],
+                "porosity tagging candidate level-1 volume should cover porosity tags")
+        check_multilevel_plotfile("plt_verify_porosity_tagging_00000", 1)
+    elif case == "porosity_level1_advance":
+        require(len(rows) == 2,
+                "porosity level1 advance should write initial and step-1 rows")
+        require(first["tag_porosity_volume"] > 0.0,
+                "porosity level1 advance should mark the initial obstacle interface")
+        require(last["tag_porosity_volume"] > 0.0,
+                "porosity level1 advance should keep porosity interface tags")
+        close(last["tag_grad_y_volume"], 0.0, 1.0e-14,
+              "porosity level1 advance should not need scalar-gradient tags")
+        close(last["tag_source_volume"], 0.0, 1.0e-14,
+              "porosity level1 advance should not need source-region tags")
+        require(last["tag_refine_volume"] >= last["tag_porosity_volume"],
+                "porosity level1 advance refine tags should include porosity tags")
+        require(last["tag_cluster_count"] > 0.0,
+                "porosity level1 advance should produce candidate boxes")
+        require(last["tag_candidate_level1_cell_count"] > 0.0,
+                "porosity level1 advance should produce candidate level-1 cells")
+        require(last["amr_restrict_coarse_cell_count"] > 0.0,
+                "porosity level1 advance should cover coarse cells with level 1")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "porosity level1 advance should report coarse-fine interface faces")
+        require(last["amr_level1_solid_volume"] > 0.0,
+                "porosity level1 advance should cover solid cells on level 1")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 advance solid scalar mass")
+        close(last["amr_level1_solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 advance fine solid scalar mass")
+        require(abs(last["balance_error"]) < 1.0e-9,
+                "porosity level1 advance balance error too large")
+        check_multilevel_plotfile("plt_verify_porosity_level1_advance_00001", 1)
+    elif case == "porosity_level1_restriction_update":
+        require(len(rows) == 2,
+                "porosity level1 restriction should write initial and step-1 rows")
+        require(last["tag_porosity_volume"] > 0.0,
+                "porosity level1 restriction should keep porosity interface tags")
+        close(last["tag_grad_y_volume"], 0.0, 1.0e-14,
+              "porosity level1 restriction should not need scalar-gradient tags")
+        close(last["tag_source_volume"], 0.0, 1.0e-14,
+              "porosity level1 restriction should not need source-region tags")
+        require(last["amr_level1_solid_volume"] > 0.0,
+                "porosity level1 restriction should cover solid cells on level 1")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 restriction solid scalar mass")
+        close(last["amr_level1_solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 restriction fine solid scalar mass")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "porosity level1 restriction max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "porosity level1 restriction L1 Y error")
+        close(last["amr_mass_delta"], 0.0, 1.0e-14,
+              "porosity level1 restriction should remove current AMR mass delta")
+        require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,
+                "porosity level1 restriction should report an applied mass correction")
+        close(last["amr_applied_restriction_mass_delta"], last["balance_error"],
+              1.0e-12, "porosity restriction mass correction should match balance drift")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "porosity restriction sync-corrected balance should close")
+        check_multilevel_plotfile("plt_verify_porosity_level1_restriction_update_00001", 1)
+    elif case == "porosity_level1_reflux_update":
+        require(len(rows) == 2,
+                "porosity level1 reflux should write initial and step-1 rows")
+        require(last["tag_porosity_volume"] > 0.0,
+                "porosity level1 reflux should keep porosity interface tags")
+        close(last["tag_grad_y_volume"], 0.0, 1.0e-14,
+              "porosity level1 reflux should not need scalar-gradient tags")
+        close(last["tag_source_volume"], 0.0, 1.0e-14,
+              "porosity level1 reflux should not need source-region tags")
+        require(last["amr_level1_solid_volume"] > 0.0,
+                "porosity level1 reflux should cover solid cells on level 1")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 reflux solid scalar mass")
+        close(last["amr_level1_solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 reflux fine solid scalar mass")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "porosity level1 reflux max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "porosity level1 reflux L1 Y error")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "porosity level1 reflux should report coarse-fine interface faces")
+        require(last["amr_cf_advective_abs_mismatch_mass"] > 0.0,
+                "porosity level1 reflux should retain accumulated mismatch diagnostics")
+        require(abs(last["amr_applied_restriction_mass_delta"]) > 1.0e-10,
+                "porosity level1 reflux should include the restriction mass correction")
+        require(abs(last["amr_applied_reflux_mass_delta"]) > 1.0e-15,
+                "porosity level1 reflux should apply a reflux mass correction")
+        close(last["amr_applied_reflux_mass_delta"],
+              expected_reflux_mass_correction(last), 1.0e-12,
+              "porosity applied reflux correction should match signed face mismatch correction")
+        close(last["balance_error"],
+              last["amr_applied_restriction_mass_delta"] + last["amr_applied_reflux_mass_delta"],
+              1.0e-12, "porosity reflux balance drift should equal applied AMR corrections")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "porosity reflux sync-corrected balance should close")
+        check_multilevel_plotfile("plt_verify_porosity_level1_reflux_update_00001", 1)
+    elif case == "porosity_level1_diffusive_reflux_update":
+        require(len(rows) == 2,
+                "porosity level1 diffusive reflux should write initial and step-1 rows")
+        require(last["tag_porosity_volume"] > 0.0,
+                "porosity level1 diffusive reflux should keep porosity interface tags")
+        close(last["tag_grad_y_volume"], 0.0, 1.0e-14,
+              "porosity level1 diffusive reflux should not need scalar-gradient tags")
+        close(last["tag_source_volume"], 0.0, 1.0e-14,
+              "porosity level1 diffusive reflux should not need source-region tags")
+        require(last["amr_level1_solid_volume"] > 0.0,
+                "porosity level1 diffusive reflux should cover solid cells on level 1")
+        close(last["solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 diffusive reflux solid scalar mass")
+        close(last["amr_level1_solid_scalar_mass"], 0.0, 1.0e-14,
+              "porosity level1 diffusive reflux fine solid scalar mass")
+        close(last["amr_restrict_max_abs_y_error"], 0.0, 1.0e-14,
+              "porosity level1 diffusive reflux max Y error")
+        close(last["amr_restrict_l1_y_error"], 0.0, 1.0e-14,
+              "porosity level1 diffusive reflux L1 Y error")
+        require(last["amr_cf_interface_face_count"] > 0.0,
+                "porosity diffusive reflux should report coarse-fine interface faces")
+        close(last["amr_cf_advective_mismatch_mass"], 0.0, 1.0e-14,
+              "porosity diffusive reflux should have no advective mismatch mass")
+        require(last["amr_cf_diffusive_abs_mismatch_mass"] > 1.0e-14,
+                "porosity diffusive reflux should retain diffusive mismatch diagnostics")
+        require(abs(last["amr_applied_reflux_mass_delta"]) > 1.0e-15,
+                "porosity diffusive reflux should apply a reflux mass correction")
+        close(last["amr_applied_reflux_mass_delta"],
+              expected_reflux_mass_correction(last), 1.0e-12,
+              "porosity applied diffusive reflux correction should match signed face mismatch correction")
+        close(last["balance_error"],
+              last["amr_applied_restriction_mass_delta"] + last["amr_applied_reflux_mass_delta"],
+              1.0e-12,
+              "porosity diffusive reflux balance drift should equal applied AMR corrections")
+        close(last["amr_sync_corrected_balance_error"], 0.0, 1.0e-12,
+              "porosity diffusive reflux sync-corrected balance should close")
+        check_multilevel_plotfile("plt_verify_porosity_level1_diffusive_reflux_update_00001", 1)
     elif case == "diffusion":
         close(last["mass"], first["mass"], 1.0e-9, "diffusion mass conservation")
         close(last["centroid_x"], 4.0, 1.0e-12, "diffusion centroid_x")

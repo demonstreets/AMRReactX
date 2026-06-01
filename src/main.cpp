@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
         amrex::Print() << "MPI ranks: " << amrex::ParallelDescriptor::NProcs() << "\n";
         amrreactx::print_boundary_report(params);
         amrreactx::print_source_report(params);
+        amrreactx::print_porosity_report(params);
         amrreactx::print_concentration_report(params);
         amrreactx::print_tagging_report(params);
         amrreactx::print_stability_report(amrreactx::compute_stability(geom, params));

@@ -33,8 +33,8 @@ std::string plotfile_name(const std::string& prefix, int step)
 
 amrex::Vector<std::string> plot_var_names()
 {
-    return {"rho", "u", "v", "w", "Y_leak", "C_leak_diag",
-            "tag_grad_y", "tag_source", "tag_refine"};
+    return {"rho", "u", "v", "w", "Y_leak", "porosity", "C_leak_diag",
+            "tag_grad_y", "tag_source", "tag_porosity", "tag_refine"};
 }
 
 void fill_diagnostic_plot_components(amrex::MultiFab& plot_state,
@@ -73,6 +73,44 @@ void fill_level1_bounds(TransportDiagnostics& diag,
     diag.amr_level1_y_max = prob_lo[1] + static_cast<amrex::Real>(hi[1] + 1) * dx[1];
     diag.amr_level1_z_min = prob_lo[2] + static_cast<amrex::Real>(lo[2]) * dx[2];
     diag.amr_level1_z_max = prob_lo[2] + static_cast<amrex::Real>(hi[2] + 1) * dx[2];
+}
+
+struct SolidRegionDiagnostics {
+    amrex::Real volume = 0.0;
+    amrex::Real scalar_mass = 0.0;
+};
+
+SolidRegionDiagnostics solid_region_diagnostics(const amrex::MultiFab& state,
+                                                const amrex::Geometry& geom,
+                                                const RuntimeParams& params)
+{
+    constexpr amrex::Real solid_porosity_cutoff = 1.0e-12;
+    const auto dx = geom.CellSizeArray();
+    const amrex::Real cell_volume = AMREX_D_TERM(dx[0], * dx[1], * dx[2]);
+    amrex::Long solid_cell_count = 0;
+    amrex::Real solid_scalar_sum = 0.0;
+    for (amrex::MFIter mfi(state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<const amrex::Real> s = state.const_array(mfi);
+        const auto lo = bx.smallEnd();
+        const auto hi = bx.bigEnd();
+        for (int k = lo[2]; k <= hi[2]; ++k) {
+            for (int j = lo[1]; j <= hi[1]; ++j) {
+                for (int i = lo[0]; i <= hi[0]; ++i) {
+                    if (s(i, j, k, Porosity) <= solid_porosity_cutoff) {
+                        ++solid_cell_count;
+                        solid_scalar_sum += s(i, j, k, YLeak);
+                    }
+                }
+            }
+        }
+    }
+    amrex::ParallelDescriptor::ReduceLongSum(solid_cell_count);
+    amrex::ParallelDescriptor::ReduceRealSum(solid_scalar_sum);
+    SolidRegionDiagnostics out;
+    out.volume = static_cast<amrex::Real>(solid_cell_count) * cell_volume;
+    out.scalar_mass = params.rho0 * solid_scalar_sum * cell_volume;
+    return out;
 }
 
 } // namespace
@@ -122,8 +160,12 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
             const amrex::Real y_leak = s(i, j, k, YLeak);
             const amrex::Real concentration =
                 diagnostic_concentration(y_leak, diagnostic_basis, leak_mw, air_mw);
+            const amrex::Real u = s(i, j, k, Uvel);
+            const amrex::Real v = s(i, j, k, Vvel);
+            const amrex::Real w = s(i, j, k, Wvel);
+            const amrex::Real porosity = s(i, j, k, Porosity);
 
-            const amrex::Real source = scalar_source(x, y, z, kparams);
+            const amrex::Real source = porosity * scalar_source(x, y, z, kparams);
 
             d(i, j, k, SourceRate) = rho0 * source;
             d(i, j, k, OutletRate) = 0.0;
@@ -140,47 +182,47 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
             d(i, j, k, InflowYHiRate) = 0.0;
             d(i, j, k, InflowZLoRate) = 0.0;
             d(i, j, k, InflowZHiRate) = 0.0;
-            if (i == dom_lo[0] && kparams.wind[0] < 0.0 && kparams.bc_lo[0] != BcWall) {
-                d(i, j, k, OutletXLoRate) = rho0 * (-kparams.wind[0]) * y_leak * face_area[0] / cell_volume;
+            if (i == dom_lo[0] && u < 0.0 && kparams.bc_lo[0] != BcWall) {
+                d(i, j, k, OutletXLoRate) = rho0 * (-u) * y_leak * face_area[0] / cell_volume;
             }
-            if (i == dom_lo[0] && kparams.wind[0] > 0.0 && kparams.bc_lo[0] != BcWall) {
+            if (i == dom_lo[0] && u > 0.0 && kparams.bc_lo[0] != BcWall) {
                 const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_lo[0], kparams);
-                d(i, j, k, InflowXLoRate) = rho0 * kparams.wind[0] * exterior_y * face_area[0] / cell_volume;
+                d(i, j, k, InflowXLoRate) = rho0 * u * exterior_y * face_area[0] / cell_volume;
             }
-            if (i == dom_hi[0] && kparams.wind[0] > 0.0 && kparams.bc_hi[0] != BcWall) {
-                d(i, j, k, OutletXHiRate) = rho0 * kparams.wind[0] * y_leak * face_area[0] / cell_volume;
+            if (i == dom_hi[0] && u > 0.0 && kparams.bc_hi[0] != BcWall) {
+                d(i, j, k, OutletXHiRate) = rho0 * u * y_leak * face_area[0] / cell_volume;
             }
-            if (i == dom_hi[0] && kparams.wind[0] < 0.0 && kparams.bc_hi[0] != BcWall) {
+            if (i == dom_hi[0] && u < 0.0 && kparams.bc_hi[0] != BcWall) {
                 const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_hi[0], kparams);
-                d(i, j, k, InflowXHiRate) = rho0 * (-kparams.wind[0]) * exterior_y * face_area[0] / cell_volume;
+                d(i, j, k, InflowXHiRate) = rho0 * (-u) * exterior_y * face_area[0] / cell_volume;
             }
-            if (j == dom_lo[1] && kparams.wind[1] < 0.0 && kparams.bc_lo[1] != BcWall) {
-                d(i, j, k, OutletYLoRate) = rho0 * (-kparams.wind[1]) * y_leak * face_area[1] / cell_volume;
+            if (j == dom_lo[1] && v < 0.0 && kparams.bc_lo[1] != BcWall) {
+                d(i, j, k, OutletYLoRate) = rho0 * (-v) * y_leak * face_area[1] / cell_volume;
             }
-            if (j == dom_lo[1] && kparams.wind[1] > 0.0 && kparams.bc_lo[1] != BcWall) {
+            if (j == dom_lo[1] && v > 0.0 && kparams.bc_lo[1] != BcWall) {
                 const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_lo[1], kparams);
-                d(i, j, k, InflowYLoRate) = rho0 * kparams.wind[1] * exterior_y * face_area[1] / cell_volume;
+                d(i, j, k, InflowYLoRate) = rho0 * v * exterior_y * face_area[1] / cell_volume;
             }
-            if (j == dom_hi[1] && kparams.wind[1] > 0.0 && kparams.bc_hi[1] != BcWall) {
-                d(i, j, k, OutletYHiRate) = rho0 * kparams.wind[1] * y_leak * face_area[1] / cell_volume;
+            if (j == dom_hi[1] && v > 0.0 && kparams.bc_hi[1] != BcWall) {
+                d(i, j, k, OutletYHiRate) = rho0 * v * y_leak * face_area[1] / cell_volume;
             }
-            if (j == dom_hi[1] && kparams.wind[1] < 0.0 && kparams.bc_hi[1] != BcWall) {
+            if (j == dom_hi[1] && v < 0.0 && kparams.bc_hi[1] != BcWall) {
                 const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_hi[1], kparams);
-                d(i, j, k, InflowYHiRate) = rho0 * (-kparams.wind[1]) * exterior_y * face_area[1] / cell_volume;
+                d(i, j, k, InflowYHiRate) = rho0 * (-v) * exterior_y * face_area[1] / cell_volume;
             }
-            if (k == dom_lo[2] && kparams.wind[2] < 0.0 && kparams.bc_lo[2] != BcWall) {
-                d(i, j, k, OutletZLoRate) = rho0 * (-kparams.wind[2]) * y_leak * face_area[2] / cell_volume;
+            if (k == dom_lo[2] && w < 0.0 && kparams.bc_lo[2] != BcWall) {
+                d(i, j, k, OutletZLoRate) = rho0 * (-w) * y_leak * face_area[2] / cell_volume;
             }
-            if (k == dom_lo[2] && kparams.wind[2] > 0.0 && kparams.bc_lo[2] != BcWall) {
+            if (k == dom_lo[2] && w > 0.0 && kparams.bc_lo[2] != BcWall) {
                 const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_lo[2], kparams);
-                d(i, j, k, InflowZLoRate) = rho0 * kparams.wind[2] * exterior_y * face_area[2] / cell_volume;
+                d(i, j, k, InflowZLoRate) = rho0 * w * exterior_y * face_area[2] / cell_volume;
             }
-            if (k == dom_hi[2] && kparams.wind[2] > 0.0 && kparams.bc_hi[2] != BcWall) {
-                d(i, j, k, OutletZHiRate) = rho0 * kparams.wind[2] * y_leak * face_area[2] / cell_volume;
+            if (k == dom_hi[2] && w > 0.0 && kparams.bc_hi[2] != BcWall) {
+                d(i, j, k, OutletZHiRate) = rho0 * w * y_leak * face_area[2] / cell_volume;
             }
-            if (k == dom_hi[2] && kparams.wind[2] < 0.0 && kparams.bc_hi[2] != BcWall) {
+            if (k == dom_hi[2] && w < 0.0 && kparams.bc_hi[2] != BcWall) {
                 const amrex::Real exterior_y = boundary_advective_y(y_leak, kparams.bc_hi[2], kparams);
-                d(i, j, k, InflowZHiRate) = rho0 * (-kparams.wind[2]) * exterior_y * face_area[2] / cell_volume;
+                d(i, j, k, InflowZHiRate) = rho0 * (-w) * exterior_y * face_area[2] / cell_volume;
             }
             d(i, j, k, OutletRate) = d(i, j, k, OutletXLoRate)
                                    + d(i, j, k, OutletXHiRate)
@@ -237,6 +279,10 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
                                                      params.diagnostic_basis,
                                                      params.leak_molecular_weight,
                                                      params.air_molecular_weight);
+    const amrex::Real total_volume =
+        AMREX_D_TERM(geom.ProbLength(0), * geom.ProbLength(1), * geom.ProbLength(2));
+    out.porosity_min = state.min(Porosity);
+    out.porosity_mean = state.sum(Porosity) * cell_volume / total_volume;
     amrex::Real max_location[AMREX_SPACEDIM] = {
         AMREX_D_DECL(std::numeric_limits<amrex::Real>::max(),
                      std::numeric_limits<amrex::Real>::max(),
@@ -349,11 +395,49 @@ TransportDiagnostics compute_diagnostics(const amrex::MultiFab& state,
         out.flammable_z_min = flammable_min[2];
         out.flammable_z_max = flammable_max[2];
     }
+    constexpr amrex::Real solid_porosity_cutoff = 1.0e-12;
+    amrex::Long solid_cell_count = 0;
+    for (amrex::MFIter mfi(state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<const amrex::Real> s = state.const_array(mfi);
+        const auto lo = bx.smallEnd();
+        const auto hi = bx.bigEnd();
+        for (int k = lo[2]; k <= hi[2]; ++k) {
+            for (int j = lo[1]; j <= hi[1]; ++j) {
+                for (int i = lo[0]; i <= hi[0]; ++i) {
+                    if (s(i, j, k, Porosity) <= solid_porosity_cutoff) {
+                        ++solid_cell_count;
+                    }
+                }
+            }
+        }
+    }
+    amrex::ParallelDescriptor::ReduceLongSum(solid_cell_count);
+    out.solid_volume = static_cast<amrex::Real>(solid_cell_count) * cell_volume;
+    amrex::Real solid_scalar_sum = 0.0;
+    for (amrex::MFIter mfi(state); mfi.isValid(); ++mfi) {
+        const amrex::Box& bx = mfi.validbox();
+        const amrex::Array4<const amrex::Real> s = state.const_array(mfi);
+        const auto lo = bx.smallEnd();
+        const auto hi = bx.bigEnd();
+        for (int k = lo[2]; k <= hi[2]; ++k) {
+            for (int j = lo[1]; j <= hi[1]; ++j) {
+                for (int i = lo[0]; i <= hi[0]; ++i) {
+                    if (s(i, j, k, Porosity) <= solid_porosity_cutoff) {
+                        solid_scalar_sum += s(i, j, k, YLeak);
+                    }
+                }
+            }
+        }
+    }
+    amrex::ParallelDescriptor::ReduceRealSum(solid_scalar_sum);
+    out.solid_scalar_mass = rho0 * solid_scalar_sum * cell_volume;
     if (params.tagging_enabled != 0) {
         amrex::MultiFab tags(state.boxArray(), state.DistributionMap(), NumTag, 0);
         fill_tagging_indicators(state, tags, geom, params);
         out.tag_grad_y_volume = tags.sum(GradYTag) * cell_volume;
         out.tag_source_volume = tags.sum(SourceRegionTag) * cell_volume;
+        out.tag_porosity_volume = tags.sum(PorosityInterfaceTag) * cell_volume;
         out.tag_refine_volume = tags.sum(RefineTag) * cell_volume;
         const AmrTaggingSummary tag_summary = build_candidate_level1_grids(tags, geom, params);
         out.tag_refine_cell_count = tag_summary.refine_cell_count;
@@ -411,6 +495,33 @@ void print_source_report(const RuntimeParams& params)
                    << " " << params.source_box_hi[2] << "\n";
 }
 
+void print_porosity_report(const RuntimeParams& params)
+{
+    amrex::Print() << "stage4_porosity enabled " << params.porosity_enabled
+                   << " type " << porosity_type_name(params.porosity_type)
+                   << " box_lo " << params.porosity_box_lo[0]
+                   << " " << params.porosity_box_lo[1]
+                   << " " << params.porosity_box_lo[2]
+                   << " box_hi " << params.porosity_box_hi[0]
+                   << " " << params.porosity_box_hi[1]
+                   << " " << params.porosity_box_hi[2]
+                   << " cylinder_center "
+                   << params.porosity_cylinder_center[0]
+                   << " " << params.porosity_cylinder_center[1]
+                   << " " << params.porosity_cylinder_center[2]
+                   << " cylinder_radius "
+                   << params.porosity_cylinder_radius
+                   << " cylinder_axis "
+                   << params.porosity_cylinder_axis
+                   << " cylinder_axis_lo "
+                   << params.porosity_cylinder_axis_lo
+                   << " cylinder_axis_hi "
+                   << params.porosity_cylinder_axis_hi
+                   << " transition " << params.porosity_transition
+                   << " solid_value " << params.porosity_solid_value
+                   << " resistance " << params.porosity_resistance << "\n";
+}
+
 void print_concentration_report(const RuntimeParams& params)
 {
     amrex::Print() << "engineering_diagnostics basis "
@@ -429,6 +540,10 @@ void print_tagging_report(const RuntimeParams& params)
                    << " tag_source_region " << params.tag_source_region
                    << " tag_source_radius " << params.tag_source_radius
                    << " tag_source_box_buffer " << params.tag_source_box_buffer
+                   << " tag_porosity_interface "
+                   << params.tag_porosity_interface
+                   << " tag_porosity_threshold "
+                   << params.tag_porosity_threshold
                    << " tag_buffer " << params.tag_buffer
                    << " tag_ref_ratio " << params.tag_ref_ratio
                    << " tag_max_grid_size " << params.tag_max_grid_size
@@ -458,7 +573,8 @@ void initialize_history_file(const RuntimeParams& params)
             << "flammable_volume,flammable_mass,flammable_mean_concentration,"
             << "flammable_x_min,flammable_x_max,flammable_y_min,flammable_y_max,"
             << "flammable_z_min,flammable_z_max,"
-            << "tag_grad_y_volume,tag_source_volume,tag_refine_volume,"
+            << "porosity_min,porosity_mean,solid_volume,solid_scalar_mass,"
+            << "tag_grad_y_volume,tag_source_volume,tag_porosity_volume,tag_refine_volume,"
             << "tag_refine_cell_count,tag_cluster_count,"
             << "tag_candidate_level1_cell_count,tag_candidate_level1_volume,"
             << "amr_level1_x_min,amr_level1_x_max,"
@@ -466,6 +582,7 @@ void initialize_history_file(const RuntimeParams& params)
             << "amr_level1_z_min,amr_level1_z_max,"
             << "amr_restrict_max_abs_y_error,amr_restrict_l1_y_error,"
             << "amr_restrict_coarse_cell_count,amr_level1_mass,"
+            << "amr_level1_solid_volume,amr_level1_solid_scalar_mass,"
             << "amr_covered_level0_mass,amr_mass_delta,"
             << "amr_applied_restriction_mass_delta,"
             << "amr_applied_reflux_mass_delta,"
@@ -597,8 +714,13 @@ void print_diagnostics(int step,
                    << " " << diag.flammable_z_max
                    << " flammable_mass " << diag.flammable_mass
                    << " flammable_mean_concentration " << diag.flammable_mean_concentration
+                   << " porosity_min " << diag.porosity_min
+                   << " porosity_mean " << diag.porosity_mean
+                   << " solid_volume " << diag.solid_volume
+                   << " solid_scalar_mass " << diag.solid_scalar_mass
                    << " tag_volumes grad_y " << diag.tag_grad_y_volume
                    << " source " << diag.tag_source_volume
+                   << " porosity " << diag.tag_porosity_volume
                    << " refine " << diag.tag_refine_volume
                    << " tag_candidate_level1 boxes " << diag.tag_cluster_count
                    << " tagged_cells " << diag.tag_refine_cell_count
@@ -614,6 +736,10 @@ void print_diagnostics(int step,
                    << " l1_y_error " << diag.amr_restrict_l1_y_error
                    << " coarse_cells " << diag.amr_restrict_coarse_cell_count
                    << " amr_mass level1 " << diag.amr_level1_mass
+                   << " level1_solid_volume "
+                   << diag.amr_level1_solid_volume
+                   << " level1_solid_scalar_mass "
+                   << diag.amr_level1_solid_scalar_mass
                    << " covered_level0 " << diag.amr_covered_level0_mass
                    << " delta " << diag.amr_mass_delta
                    << " applied_restriction_delta "
@@ -720,8 +846,13 @@ void append_history(int step,
             << diag.flammable_y_max << ","
             << diag.flammable_z_min << ","
             << diag.flammable_z_max << ","
+            << diag.porosity_min << ","
+            << diag.porosity_mean << ","
+            << diag.solid_volume << ","
+            << diag.solid_scalar_mass << ","
             << diag.tag_grad_y_volume << ","
             << diag.tag_source_volume << ","
+            << diag.tag_porosity_volume << ","
             << diag.tag_refine_volume << ","
             << diag.tag_refine_cell_count << ","
             << diag.tag_cluster_count << ","
@@ -737,6 +868,8 @@ void append_history(int step,
             << diag.amr_restrict_l1_y_error << ","
             << diag.amr_restrict_coarse_cell_count << ","
             << diag.amr_level1_mass << ","
+            << diag.amr_level1_solid_volume << ","
+            << diag.amr_level1_solid_scalar_mass << ","
             << diag.amr_covered_level0_mass << ","
             << diag.amr_mass_delta << ","
             << diag.amr_applied_restriction_mass_delta << ","
@@ -834,6 +967,12 @@ void attach_amr_mass_diagnostics(TransportDiagnostics& diag,
         compute_amr_mass_diagnostics(level0_state, hierarchy, level0_geom, params);
     fill_level1_bounds(diag, hierarchy);
     diag.amr_level1_mass = mass.level1_mass;
+    if (hierarchy.has_level1()) {
+        const SolidRegionDiagnostics solid =
+            solid_region_diagnostics(*hierarchy.level1_state, hierarchy.level1_geom, params);
+        diag.amr_level1_solid_volume = solid.volume;
+        diag.amr_level1_solid_scalar_mass = solid.scalar_mass;
+    }
     diag.amr_covered_level0_mass = mass.covered_level0_mass;
     diag.amr_mass_delta = mass.mass_delta;
     diag.amr_applied_restriction_mass_delta = applied_restriction_mass_delta;

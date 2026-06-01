@@ -9,10 +9,42 @@
 #include <AMReX_RealBox.H>
 #include <AMReX_Vector.H>
 
+#include <algorithm>
 #include <cmath>
 #include <string>
 
 namespace amrreactx {
+
+namespace {
+
+amrex::Real source_shape_volume_integral(const amrex::Geometry& geom,
+                                         const RuntimeParams& params)
+{
+    KernelParams kparams{};
+    fill_kernel_params(kparams, params);
+
+    const auto dx = geom.CellSizeArray();
+    const auto prob_lo = geom.ProbLoArray();
+    const auto dom_lo = geom.Domain().smallEnd();
+    const auto dom_hi = geom.Domain().bigEnd();
+    const amrex::Real cell_volume = AMREX_D_TERM(dx[0], * dx[1], * dx[2]);
+
+    amrex::Real integral = 0.0;
+    for (int k = dom_lo[2]; k <= dom_hi[2]; ++k) {
+        for (int j = dom_lo[1]; j <= dom_hi[1]; ++j) {
+            for (int i = dom_lo[0]; i <= dom_hi[0]; ++i) {
+                const amrex::Real x = prob_lo[0] + (static_cast<amrex::Real>(i) + 0.5) * dx[0];
+                const amrex::Real y = prob_lo[1] + (static_cast<amrex::Real>(j) + 0.5) * dx[1];
+                const amrex::Real z = prob_lo[2] + (static_cast<amrex::Real>(k) + 0.5) * dx[2];
+                const amrex::Real porosity = porosity_at(x, y, z, kparams);
+                integral += porosity * scalar_source_shape(x, y, z, kparams) * cell_volume;
+            }
+        }
+    }
+    return integral;
+}
+
+} // namespace
 
 amrex::Geometry make_geometry()
 {
@@ -52,7 +84,17 @@ RuntimeParams read_params(const amrex::Geometry& geom)
         const amrex::Real half_width = 0.025 * (prob_hi[d] - prob_lo[d]);
         params.source_box_lo[d] = params.source_center[d] - half_width;
         params.source_box_hi[d] = params.source_center[d] + half_width;
+        const amrex::Real obstacle_half_width = 0.1 * (prob_hi[d] - prob_lo[d]);
+        const amrex::Real obstacle_center = 0.5 * (prob_lo[d] + prob_hi[d]);
+        params.porosity_box_lo[d] = obstacle_center - obstacle_half_width;
+        params.porosity_box_hi[d] = obstacle_center + obstacle_half_width;
+        params.porosity_cylinder_center[d] = obstacle_center;
     }
+    params.porosity_cylinder_radius =
+        0.1 * std::min(prob_hi[0] - prob_lo[0], prob_hi[1] - prob_lo[1]);
+    params.porosity_cylinder_axis_lo = prob_lo[2] + 0.25 * (prob_hi[2] - prob_lo[2]);
+    params.porosity_cylinder_axis_hi = prob_lo[2] + 0.75 * (prob_hi[2] - prob_lo[2]);
+    params.porosity_transition = 2.0 * geom.CellSize(0);
     params.init_center[0] = prob_lo[0] + 0.25 * (prob_hi[0] - prob_lo[0]);
     params.init_sigma = 0.05 * (prob_hi[0] - prob_lo[0]);
 
@@ -72,6 +114,20 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     pp.query("source_sigma", params.source_sigma);
     pp.query("source_strength", params.source_strength);
     pp.query("source_total_rate", params.source_total_rate);
+    pp.query("porosity_enabled", params.porosity_enabled);
+    std::string porosity_type = porosity_type_name(params.porosity_type);
+    pp.query("porosity_type", porosity_type);
+    params.porosity_type = parse_porosity_type(porosity_type);
+    if (params.porosity_type < 0) {
+        amrex::Abort("Unknown porosity_type: " + porosity_type);
+    }
+    pp.query("porosity_cylinder_radius", params.porosity_cylinder_radius);
+    pp.query("porosity_cylinder_axis", params.porosity_cylinder_axis);
+    pp.query("porosity_cylinder_axis_lo", params.porosity_cylinder_axis_lo);
+    pp.query("porosity_cylinder_axis_hi", params.porosity_cylinder_axis_hi);
+    pp.query("porosity_transition", params.porosity_transition);
+    pp.query("porosity_solid_value", params.porosity_solid_value);
+    pp.query("porosity_resistance", params.porosity_resistance);
     pp.query("init_type", params.init_type);
     pp.query("init_sigma", params.init_sigma);
     pp.query("init_amplitude", params.init_amplitude);
@@ -85,6 +141,8 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     pp.query("tag_source_region", params.tag_source_region);
     pp.query("tag_source_radius", params.tag_source_radius);
     pp.query("tag_source_box_buffer", params.tag_source_box_buffer);
+    pp.query("tag_porosity_interface", params.tag_porosity_interface);
+    pp.query("tag_porosity_threshold", params.tag_porosity_threshold);
     pp.query("tag_buffer", params.tag_buffer);
     pp.query("tag_ref_ratio", params.tag_ref_ratio);
     pp.query("tag_max_grid_size", params.tag_max_grid_size);
@@ -111,18 +169,27 @@ RuntimeParams read_params(const amrex::Geometry& geom)
     amrex::Vector<amrex::Real> source_center(AMREX_SPACEDIM);
     amrex::Vector<amrex::Real> source_box_lo(AMREX_SPACEDIM);
     amrex::Vector<amrex::Real> source_box_hi(AMREX_SPACEDIM);
+    amrex::Vector<amrex::Real> porosity_box_lo(AMREX_SPACEDIM);
+    amrex::Vector<amrex::Real> porosity_box_hi(AMREX_SPACEDIM);
+    amrex::Vector<amrex::Real> porosity_cylinder_center(AMREX_SPACEDIM);
     amrex::Vector<amrex::Real> init_center(AMREX_SPACEDIM);
     for (int d = 0; d < AMREX_SPACEDIM; ++d) {
         wind[d] = params.wind[d];
         source_center[d] = params.source_center[d];
         source_box_lo[d] = params.source_box_lo[d];
         source_box_hi[d] = params.source_box_hi[d];
+        porosity_box_lo[d] = params.porosity_box_lo[d];
+        porosity_box_hi[d] = params.porosity_box_hi[d];
+        porosity_cylinder_center[d] = params.porosity_cylinder_center[d];
         init_center[d] = params.init_center[d];
     }
     pp.queryarr("wind", wind, 0, AMREX_SPACEDIM);
     pp.queryarr("source_center", source_center, 0, AMREX_SPACEDIM);
     pp.queryarr("source_box_lo", source_box_lo, 0, AMREX_SPACEDIM);
     pp.queryarr("source_box_hi", source_box_hi, 0, AMREX_SPACEDIM);
+    pp.queryarr("porosity_box_lo", porosity_box_lo, 0, AMREX_SPACEDIM);
+    pp.queryarr("porosity_box_hi", porosity_box_hi, 0, AMREX_SPACEDIM);
+    pp.queryarr("porosity_cylinder_center", porosity_cylinder_center, 0, AMREX_SPACEDIM);
     pp.queryarr("init_center", init_center, 0, AMREX_SPACEDIM);
 
     amrex::Vector<std::string> bc_lo(AMREX_SPACEDIM);
@@ -139,16 +206,60 @@ RuntimeParams read_params(const amrex::Geometry& geom)
         params.source_center[d] = source_center[d];
         params.source_box_lo[d] = source_box_lo[d];
         params.source_box_hi[d] = source_box_hi[d];
+        params.porosity_box_lo[d] = porosity_box_lo[d];
+        params.porosity_box_hi[d] = porosity_box_hi[d];
+        params.porosity_cylinder_center[d] = porosity_cylinder_center[d];
         params.init_center[d] = init_center[d];
         params.bc_lo[d] = parse_boundary_type(bc_lo[d]);
         params.bc_hi[d] = parse_boundary_type(bc_hi[d]);
+    }
+
+    if (params.porosity_enabled != 0) {
+        if (params.porosity_solid_value < 0.0 || params.porosity_solid_value > 1.0) {
+            amrex::Abort("porosity_solid_value must be in [0, 1].");
+        }
+        if (params.porosity_transition < 0.0) {
+            amrex::Abort("porosity_transition must be non-negative.");
+        }
+        if (params.porosity_resistance < 0.0) {
+            amrex::Abort("porosity_resistance must be non-negative.");
+        }
+        if (params.porosity_type == PorosityBox) {
+            for (int d = 0; d < AMREX_SPACEDIM; ++d) {
+                if (params.porosity_box_hi[d] <= params.porosity_box_lo[d]) {
+                    amrex::Abort("porosity_box_hi must be greater than porosity_box_lo.");
+                }
+            }
+        } else if (params.porosity_type == PorosityCylinder) {
+            if (params.porosity_cylinder_radius <= 0.0) {
+                amrex::Abort("porosity_cylinder_radius must be positive.");
+            }
+            if (params.porosity_cylinder_axis < 0
+                || params.porosity_cylinder_axis >= AMREX_SPACEDIM) {
+                amrex::Abort("porosity_cylinder_axis is outside valid coordinate directions.");
+            }
+            if (params.porosity_cylinder_axis_hi <= params.porosity_cylinder_axis_lo) {
+                amrex::Abort("porosity_cylinder_axis_hi must be greater than porosity_cylinder_axis_lo.");
+            }
+        }
+    }
+    if (params.tag_porosity_threshold < 0.0) {
+        amrex::Abort("tag_porosity_threshold must be non-negative.");
     }
 
     if (params.source_total_rate >= 0.0) {
         if (params.rho0 <= 0.0) {
             amrex::Abort("rho0 must be positive when source_total_rate is used.");
         }
-        if (params.source_type == SourceBox) {
+        if (params.porosity_enabled != 0) {
+            const amrex::Real accessible_source_volume =
+                source_shape_volume_integral(geom, params);
+            if (accessible_source_volume <= 0.0) {
+                amrex::Abort("source_total_rate has no accessible porosity-weighted source volume.");
+            }
+            params.source_strength =
+                params.source_total_rate / (params.rho0 * accessible_source_volume);
+        } else if (params.source_type == SourceBox) {
             amrex::Real box_volume = 1.0;
             for (int d = 0; d < AMREX_SPACEDIM; ++d) {
                 const amrex::Real width = params.source_box_hi[d] - params.source_box_lo[d];

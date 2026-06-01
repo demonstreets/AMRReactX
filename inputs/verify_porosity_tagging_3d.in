@@ -1,0 +1,47 @@
+# Stage 4 verification: AMR tagging of a porosity obstacle interface.
+# This case does not advance in time; it verifies that the static porosity
+# interface alone can generate candidate level-1 boxes for geometric refinement.
+
+n_cell = 48 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 6.0 4.0 4.0
+max_grid_size = 16
+
+max_step = 0
+dt = 0.01
+plot_int = 1
+
+rho0 = 1.0
+wind = 0.0 0.0 0.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = open open open
+bc_hi = open open open
+
+source_strength = 0.0
+source_type = gaussian
+
+porosity_enabled = 1
+porosity_type = cylinder
+porosity_cylinder_center = 3.0 2.0 2.0
+porosity_cylinder_radius = 0.6
+porosity_cylinder_axis = 2
+porosity_cylinder_axis_lo = 1.0
+porosity_cylinder_axis_hi = 3.0
+porosity_transition = 0.25
+porosity_solid_value = 0.0
+porosity_resistance = 100.0
+
+tagging_enabled = 1
+tag_grad_y = 1.0
+tag_source_region = 0
+tag_porosity_interface = 1
+tag_porosity_threshold = 0.1
+tag_buffer = 1
+tag_ref_ratio = 2
+tag_max_grid_size = 16
+
+init_type = 0
+
+history_file = history_verify_porosity_tagging.csv
+plotfile_prefix = plt_verify_porosity_tagging_

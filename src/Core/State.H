@@ -4,6 +4,7 @@
 #include <AMReX_REAL.H>
 #include <AMReX_SPACE.H>
 
+#include <cmath>
 #include <string>
 
 namespace amrreactx {
@@ -14,6 +15,7 @@ enum StateIndex {
     Vvel,
     Wvel,
     YLeak,
+    Porosity,
     NumState
 };
 
@@ -37,6 +39,11 @@ enum SourceType {
 enum ConcentrationBasis {
     BasisMassFraction = 0,
     BasisVolumeFraction
+};
+
+enum PorosityType {
+    PorosityBox = 0,
+    PorosityCylinder
 };
 
 enum DiagIndex {
@@ -70,6 +77,7 @@ enum DiagIndex {
 enum TagIndex {
     GradYTag = 0,
     SourceRegionTag,
+    PorosityInterfaceTag,
     RefineTag,
     NumTag
 };
@@ -95,6 +103,18 @@ struct RuntimeParams {
     amrex::Real source_strength = 0.2;
     amrex::Real source_total_rate = -1.0;
     int source_type = SourceGaussian;
+    int porosity_enabled = 0;
+    int porosity_type = PorosityBox;
+    amrex::Real porosity_box_lo[AMREX_SPACEDIM] = {AMREX_D_DECL(1.5, 1.5, 1.5)};
+    amrex::Real porosity_box_hi[AMREX_SPACEDIM] = {AMREX_D_DECL(2.5, 2.5, 2.5)};
+    amrex::Real porosity_cylinder_center[AMREX_SPACEDIM] = {AMREX_D_DECL(2.0, 2.0, 2.0)};
+    amrex::Real porosity_cylinder_radius = 0.5;
+    int porosity_cylinder_axis = 2;
+    amrex::Real porosity_cylinder_axis_lo = 1.0;
+    amrex::Real porosity_cylinder_axis_hi = 3.0;
+    amrex::Real porosity_transition = 0.0;
+    amrex::Real porosity_solid_value = 0.0;
+    amrex::Real porosity_resistance = 100.0;
     int init_type = Zero;
     amrex::Real init_center[AMREX_SPACEDIM] = {AMREX_D_DECL(2.0, 2.0, 2.0)};
     amrex::Real init_sigma = 0.25;
@@ -112,6 +132,8 @@ struct RuntimeParams {
     int tag_source_region = 0;
     amrex::Real tag_source_radius = -1.0;
     amrex::Real tag_source_box_buffer = 0.0;
+    int tag_porosity_interface = 0;
+    amrex::Real tag_porosity_threshold = 0.1;
     int tag_buffer = 1;
     int tag_ref_ratio = 2;
     int tag_max_grid_size = 16;
@@ -136,6 +158,18 @@ struct KernelParams {
     amrex::Real source_sigma;
     amrex::Real source_strength;
     int source_type;
+    int porosity_enabled;
+    int porosity_type;
+    amrex::Real porosity_box_lo[AMREX_SPACEDIM];
+    amrex::Real porosity_box_hi[AMREX_SPACEDIM];
+    amrex::Real porosity_cylinder_center[AMREX_SPACEDIM];
+    amrex::Real porosity_cylinder_radius;
+    int porosity_cylinder_axis;
+    amrex::Real porosity_cylinder_axis_lo;
+    amrex::Real porosity_cylinder_axis_hi;
+    amrex::Real porosity_transition;
+    amrex::Real porosity_solid_value;
+    amrex::Real porosity_resistance;
     int bc_lo[AMREX_SPACEDIM];
     int bc_hi[AMREX_SPACEDIM];
 };
@@ -192,8 +226,13 @@ struct TransportDiagnostics {
     amrex::Real flammable_y_max = 0.0;
     amrex::Real flammable_z_min = 0.0;
     amrex::Real flammable_z_max = 0.0;
+    amrex::Real porosity_min = 1.0;
+    amrex::Real porosity_mean = 1.0;
+    amrex::Real solid_volume = 0.0;
+    amrex::Real solid_scalar_mass = 0.0;
     amrex::Real tag_grad_y_volume = 0.0;
     amrex::Real tag_source_volume = 0.0;
+    amrex::Real tag_porosity_volume = 0.0;
     amrex::Real tag_refine_volume = 0.0;
     amrex::Real tag_candidate_level1_volume = 0.0;
     amrex::Real amr_level1_x_min = 0.0;
@@ -205,6 +244,8 @@ struct TransportDiagnostics {
     amrex::Real amr_restrict_max_abs_y_error = 0.0;
     amrex::Real amr_restrict_l1_y_error = 0.0;
     amrex::Real amr_level1_mass = 0.0;
+    amrex::Real amr_level1_solid_volume = 0.0;
+    amrex::Real amr_level1_solid_scalar_mass = 0.0;
     amrex::Real amr_covered_level0_mass = 0.0;
     amrex::Real amr_mass_delta = 0.0;
     amrex::Real amr_applied_restriction_mass_delta = 0.0;
@@ -251,6 +292,22 @@ inline int parse_concentration_basis(const std::string& name)
     return -1;
 }
 
+inline const char* porosity_type_name(int type)
+{
+    return type == PorosityCylinder ? "cylinder" : "box";
+}
+
+inline int parse_porosity_type(const std::string& name)
+{
+    if (name == "box") {
+        return PorosityBox;
+    }
+    if (name == "cylinder") {
+        return PorosityCylinder;
+    }
+    return -1;
+}
+
 AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
 amrex::Real leak_volume_fraction(amrex::Real y_leak,
                                  amrex::Real leak_mw,
@@ -278,6 +335,105 @@ amrex::Real diagnostic_concentration(amrex::Real y_leak,
         : y_leak;
 }
 
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
+amrex::Real smoothstep01(amrex::Real x) noexcept
+{
+    if (x <= 0.0) {
+        return 0.0;
+    }
+    if (x >= 1.0) {
+        return 1.0;
+    }
+    return x * x * (3.0 - 2.0 * x);
+}
+
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
+amrex::Real porosity_at(amrex::Real x,
+                        amrex::Real y,
+                        amrex::Real z,
+                        const KernelParams& params) noexcept
+{
+    if (params.porosity_enabled == 0) {
+        return 1.0;
+    }
+
+    const amrex::Real p[AMREX_SPACEDIM] = {AMREX_D_DECL(x, y, z)};
+    if (params.porosity_type == PorosityCylinder) {
+        const int axis = params.porosity_cylinder_axis;
+        const int r0 = (axis + 1) % AMREX_SPACEDIM;
+        const int r1 = (axis + 2) % AMREX_SPACEDIM;
+        const amrex::Real radial0 = p[r0] - params.porosity_cylinder_center[r0];
+        const amrex::Real radial1 = p[r1] - params.porosity_cylinder_center[r1];
+        const amrex::Real radial_distance =
+            std::sqrt(radial0 * radial0 + radial1 * radial1);
+        const bool inside_radial = radial_distance <= params.porosity_cylinder_radius;
+        const bool inside_axis = p[axis] >= params.porosity_cylinder_axis_lo
+                              && p[axis] <= params.porosity_cylinder_axis_hi;
+        if (inside_radial && inside_axis) {
+            return params.porosity_solid_value;
+        }
+
+        const amrex::Real radial_delta =
+            radial_distance > params.porosity_cylinder_radius
+                ? radial_distance - params.porosity_cylinder_radius
+                : 0.0;
+        amrex::Real axis_delta = 0.0;
+        if (p[axis] < params.porosity_cylinder_axis_lo) {
+            axis_delta = params.porosity_cylinder_axis_lo - p[axis];
+        } else if (p[axis] > params.porosity_cylinder_axis_hi) {
+            axis_delta = p[axis] - params.porosity_cylinder_axis_hi;
+        }
+        const amrex::Real outside_distance =
+            std::sqrt(radial_delta * radial_delta + axis_delta * axis_delta);
+        if (params.porosity_transition <= 0.0
+            || outside_distance >= params.porosity_transition) {
+            return 1.0;
+        }
+        const amrex::Real blend = smoothstep01(outside_distance / params.porosity_transition);
+        return params.porosity_solid_value
+            + (1.0 - params.porosity_solid_value) * blend;
+    }
+
+    amrex::Real outside_distance = 0.0;
+    bool inside = true;
+    for (int d = 0; d < AMREX_SPACEDIM; ++d) {
+        amrex::Real delta = 0.0;
+        if (p[d] < params.porosity_box_lo[d]) {
+            delta = params.porosity_box_lo[d] - p[d];
+            inside = false;
+        } else if (p[d] > params.porosity_box_hi[d]) {
+            delta = p[d] - params.porosity_box_hi[d];
+            inside = false;
+        }
+        outside_distance += delta * delta;
+    }
+    if (inside) {
+        return params.porosity_solid_value;
+    }
+    outside_distance = std::sqrt(outside_distance);
+    if (params.porosity_transition <= 0.0
+        || outside_distance >= params.porosity_transition) {
+        return 1.0;
+    }
+    const amrex::Real blend = smoothstep01(outside_distance / params.porosity_transition);
+    return params.porosity_solid_value
+        + (1.0 - params.porosity_solid_value) * blend;
+}
+
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
+amrex::Real velocity_factor_from_porosity(amrex::Real porosity,
+                                          const KernelParams& params) noexcept
+{
+    if (params.porosity_enabled == 0) {
+        return 1.0;
+    }
+    if (porosity <= 0.0) {
+        return 0.0;
+    }
+    const amrex::Real drag = params.porosity_resistance * (1.0 - porosity);
+    return porosity / (porosity + drag);
+}
+
 inline void fill_kernel_params(KernelParams& kparams, const RuntimeParams& params)
 {
     kparams.dt = params.dt;
@@ -288,11 +444,23 @@ inline void fill_kernel_params(KernelParams& kparams, const RuntimeParams& param
     kparams.source_sigma = params.source_sigma;
     kparams.source_strength = params.source_strength;
     kparams.source_type = params.source_type;
+    kparams.porosity_enabled = params.porosity_enabled;
+    kparams.porosity_type = params.porosity_type;
+    kparams.porosity_cylinder_radius = params.porosity_cylinder_radius;
+    kparams.porosity_cylinder_axis = params.porosity_cylinder_axis;
+    kparams.porosity_cylinder_axis_lo = params.porosity_cylinder_axis_lo;
+    kparams.porosity_cylinder_axis_hi = params.porosity_cylinder_axis_hi;
+    kparams.porosity_transition = params.porosity_transition;
+    kparams.porosity_solid_value = params.porosity_solid_value;
+    kparams.porosity_resistance = params.porosity_resistance;
     for (int d = 0; d < AMREX_SPACEDIM; ++d) {
         kparams.wind[d] = params.wind[d];
         kparams.source_center[d] = params.source_center[d];
         kparams.source_box_lo[d] = params.source_box_lo[d];
         kparams.source_box_hi[d] = params.source_box_hi[d];
+        kparams.porosity_box_lo[d] = params.porosity_box_lo[d];
+        kparams.porosity_box_hi[d] = params.porosity_box_hi[d];
+        kparams.porosity_cylinder_center[d] = params.porosity_cylinder_center[d];
         kparams.bc_lo[d] = params.bc_lo[d];
         kparams.bc_hi[d] = params.bc_hi[d];
     }

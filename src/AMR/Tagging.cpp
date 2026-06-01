@@ -32,6 +32,8 @@ void fill_tagging_indicators(const amrex::MultiFab& state,
     const auto dom_hi = geom.Domain().bigEnd();
     const amrex::Real grad_threshold = params.tag_grad_y;
     const int tag_source_region = params.tag_source_region;
+    const int tag_porosity_interface = params.tag_porosity_interface;
+    const amrex::Real porosity_threshold = params.tag_porosity_threshold;
     const int source_type = params.source_type;
     const amrex::Real source_x = params.source_center[0];
     const amrex::Real source_y = params.source_center[1];
@@ -54,12 +56,19 @@ void fill_tagging_indicators(const amrex::MultiFab& state,
 
         amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
             const amrex::Real yc = s(i, j, k, YLeak);
+            const amrex::Real pc = s(i, j, k, Porosity);
             const amrex::Real ymx = (i == dom_lo[0]) ? yc : s(i - 1, j, k, YLeak);
             const amrex::Real ypx = (i == dom_hi[0]) ? yc : s(i + 1, j, k, YLeak);
             const amrex::Real ymy = (j == dom_lo[1]) ? yc : s(i, j - 1, k, YLeak);
             const amrex::Real ypy = (j == dom_hi[1]) ? yc : s(i, j + 1, k, YLeak);
             const amrex::Real ymz = (k == dom_lo[2]) ? yc : s(i, j, k - 1, YLeak);
             const amrex::Real ypz = (k == dom_hi[2]) ? yc : s(i, j, k + 1, YLeak);
+            const amrex::Real pmx = (i == dom_lo[0]) ? pc : s(i - 1, j, k, Porosity);
+            const amrex::Real ppx = (i == dom_hi[0]) ? pc : s(i + 1, j, k, Porosity);
+            const amrex::Real pmy = (j == dom_lo[1]) ? pc : s(i, j - 1, k, Porosity);
+            const amrex::Real ppy = (j == dom_hi[1]) ? pc : s(i, j + 1, k, Porosity);
+            const amrex::Real pmz = (k == dom_lo[2]) ? pc : s(i, j, k - 1, Porosity);
+            const amrex::Real ppz = (k == dom_hi[2]) ? pc : s(i, j, k + 1, Porosity);
 
             const amrex::Real gx = (ypx - ymx) / (2.0 * dx[0]);
             const amrex::Real gy = (ypy - ymy) / (2.0 * dx[1]);
@@ -85,9 +94,25 @@ void fill_tagging_indicators(const amrex::MultiFab& state,
                 }
             }
 
+            amrex::Real porosity_tag = 0.0;
+            if (tag_porosity_interface != 0) {
+                amrex::Real porosity_jump = std::abs(pc - pmx);
+                porosity_jump = std::max(porosity_jump, std::abs(pc - ppx));
+                porosity_jump = std::max(porosity_jump, std::abs(pc - pmy));
+                porosity_jump = std::max(porosity_jump, std::abs(pc - ppy));
+                porosity_jump = std::max(porosity_jump, std::abs(pc - pmz));
+                porosity_jump = std::max(porosity_jump, std::abs(pc - ppz));
+                const bool transition_cell = pc > porosity_threshold
+                                          && pc < 1.0 - porosity_threshold;
+                porosity_tag = (porosity_jump >= porosity_threshold || transition_cell)
+                    ? 1.0 : 0.0;
+            }
+
             tag(i, j, k, GradYTag) = grad_tag;
             tag(i, j, k, SourceRegionTag) = source_tag;
-            tag(i, j, k, RefineTag) = (grad_tag > 0.0 || source_tag > 0.0) ? 1.0 : 0.0;
+            tag(i, j, k, PorosityInterfaceTag) = porosity_tag;
+            tag(i, j, k, RefineTag) =
+                (grad_tag > 0.0 || source_tag > 0.0 || porosity_tag > 0.0) ? 1.0 : 0.0;
         });
     }
 }

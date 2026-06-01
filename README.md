@@ -3,19 +3,23 @@
 AMRReactX is the working name for a research-oriented AMReX-based compressible
 flow and reacting-flow solver.
 
-The current version has completed Stage 2 and the scalar AMR Stage 3 plan on top of the
-Stage 1 fixed-wind scalar advection-diffusion leakage model. It includes
+The current version has completed Stage 2, the scalar AMR Stage 3 plan, and the
+Stage 4 porosity fallback on top of the Stage 1 fixed-wind scalar
+advection-diffusion leakage model. It includes
 stability checks, mass-balance and engineering diagnostics, explicit scalar
 boundary-condition types, automatic timestep control, volume-fraction
 diagnostics, source total-rate normalization, open-boundary ambient backflow
-handling, and initial scalar AMR tagging indicators. It writes AMReX plotfiles
-with:
+handling, scalar AMR tagging indicators, and a Stage 4 static porosity-obstacle
+model for full-volume-grid engineering obstacle studies. It writes AMReX
+plotfiles with:
 
 - `rho`: density
 - `u`, `v`, `w`: velocity components
 - `Y_leak`: leaked-gas mass-fraction-like scalar
+- `porosity`: Stage 4 static porosity field
 - `C_leak_diag`: concentration in the selected diagnostic basis
 - `tag_grad_y`, `tag_source`, `tag_refine`: Stage 3.1 AMR tagging indicators
+- `tag_porosity`: Stage 4 porosity-interface tagging indicator
 
 This first program verifies the development chain and starts the leakage
 transport physics:
@@ -71,6 +75,14 @@ mpirun -np 2 ./build/amrreactx inputs/verify_level1_reflux_update_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_level1_diffusive_reflux_update_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_level1_regrid_update_3d.in
 mpirun -np 2 ./build/amrreactx inputs/verify_level1_regrid_sync_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_obstacle_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_source_total_rate_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_cylinder_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_tagging_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_level1_advance_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_level1_restriction_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_level1_reflux_update_3d.in
+mpirun -np 2 ./build/amrreactx inputs/verify_porosity_level1_diffusive_reflux_update_3d.in
 ```
 
 Run the Stage 1/2 verification suite:
@@ -88,6 +100,16 @@ Run the Stage 1/2 + completed Stage 3 verification suite:
 bash tools/run_stage3_verification.sh
 ```
 
+Run the completed Stage 4 porosity-fallback verification suite:
+
+```bash
+bash tools/run_stage4_verification.sh
+```
+
+Stage 4 is documented in [docs/STAGE4_POROSITY_FALLBACK.md](docs/STAGE4_POROSITY_FALLBACK.md).
+It is a full-volume-grid porosity fallback for EB small-cell stability work,
+not a complete embedded-boundary implementation.
+
 Verification plotfile directories are deleted after each case passes so routine
 development runs do not accumulate large AMReX plot outputs. Verification
 history CSV files are also deleted after their checks pass. Set
@@ -104,7 +126,10 @@ Useful Stage 1/2 input parameters:
   `source_box_hi`, and `source_strength`.
 - `source_total_rate`: optional engineering total scalar mass release rate. If
   set to a non-negative value, it overrides `source_strength` by normalizing the
-  selected `gaussian` or `box` source to the requested total rate.
+  selected `gaussian` or `box` source to the requested total rate. When
+  `porosity_enabled = 1`, this normalization is performed over the
+  porosity-weighted accessible source volume so the requested rate is not
+  deposited into the solid core.
 - `init_type = 0`: start from zero scalar field.
 - `init_type = 1`: start from a Gaussian scalar cloud using `init_center`,
   `init_sigma`, and `init_amplitude`.
@@ -130,6 +155,10 @@ Useful Stage 1/2 input parameters:
   near-field refinement.
 - `tag_source_radius`, `tag_source_box_buffer`: optional source-region tagging
   controls for Gaussian and box sources.
+- `tag_porosity_interface = 1`: tag Stage 4 porosity interfaces and transition
+  cells for candidate AMR refinement.
+- `tag_porosity_threshold`: porosity jump/transition threshold used by
+  `tag_porosity_interface`.
 - `tag_buffer`, `tag_ref_ratio`, `tag_max_grid_size`,
   `tag_grid_efficiency`: controls for buffering tags and clustering candidate
   level-1 AMR boxes.
@@ -144,6 +173,20 @@ Useful Stage 1/2 input parameters:
   to level-0 cells adjacent to the refined patch. Advective and diffusive
   mismatch mass is accumulated per coarse-fine face during level-1 subcycling
   and applied to the adjacent level-0 coarse cell.
+- `porosity_enabled = 1`: enable the Stage 4 static porosity-obstacle model.
+- `porosity_type = box`: use an axis-aligned box obstacle.
+- `porosity_box_lo`, `porosity_box_hi`: axis-aligned obstacle box.
+- `porosity_type = cylinder`: use a finite cylindrical obstacle, useful for
+  near-term tank-like EB fallback studies.
+- `porosity_cylinder_center`, `porosity_cylinder_radius`,
+  `porosity_cylinder_axis`, `porosity_cylinder_axis_lo`,
+  `porosity_cylinder_axis_hi`: finite-cylinder geometry controls.
+- `porosity_transition`: smooth transition thickness outside the obstacle box.
+- `porosity_solid_value`: porosity inside the obstacle core, typically `0`.
+- `porosity_resistance`: velocity damping strength in partially porous cells.
+  Scalar advection and diffusion use the face aperture implied by neighboring
+  porosity values, and scalar source deposition is suppressed in low-porosity
+  cells.
 - `dt`, `max_step`, `plot_int`: explicit time stepping controls.
 - `use_auto_dt = 1`: choose `dt` from `cfl`, `diff_cfl`, wind, diffusion,
   and grid spacing.
@@ -187,8 +230,11 @@ Runtime diagnostics:
   diagnostic concentration inside those regions.
 - `cloud_*_min/max`, `flammable_*_min/max`: axis-aligned bounds of the
   threshold cloud and flammable cloud, reported from cell-center locations.
-- `tag_grad_y_volume`, `tag_source_volume`, `tag_refine_volume`: Stage 3
-  single-level AMR tagging diagnostics.
+- `porosity_min`, `porosity_mean`, `solid_volume`, `solid_scalar_mass`: Stage 4
+  porosity-obstacle diagnostics. `solid_volume` and `solid_scalar_mass`
+  diagnose the near-zero-porosity obstacle core.
+- `tag_grad_y_volume`, `tag_source_volume`, `tag_porosity_volume`,
+  `tag_refine_volume`: Stage 3/4 single-level AMR tagging diagnostics.
 - `tag_refine_cell_count`, `tag_cluster_count`,
   `tag_candidate_level1_cell_count`, `tag_candidate_level1_volume`: Stage 3
   candidate level-1 grid diagnostics generated from global tagged bounds.
@@ -197,8 +243,11 @@ Runtime diagnostics:
   level-1 `Y_leak` back onto the covered level-0 cells. These are intentionally
   nonzero after independent fine-level advance unless
   `amr_restrict_after_advance` is enabled.
-- `amr_level1_mass`, `amr_covered_level0_mass`, `amr_mass_delta`: mass in the
-  maintained level-1 state, mass in the covered level-0 cells, and their
+- `amr_level1_mass`, `amr_level1_solid_volume`,
+  `amr_level1_solid_scalar_mass`, `amr_covered_level0_mass`,
+  `amr_mass_delta`: mass in the maintained level-1 state, fine-level
+  near-zero-porosity volume, scalar mass inside those fine-level solid cells,
+  mass in the covered level-0 cells, and the level-1/covered-level-0 mass
   difference.
 - `amr_level1_*_min/max`: physical lower and upper bounds of the maintained
   level-1 patch, useful for verifying optional regridding.

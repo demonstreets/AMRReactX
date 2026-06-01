@@ -28,6 +28,12 @@ amrex::Real limited_y(amrex::Real y) noexcept
     return y;
 }
 
+AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
+amrex::Real face_aperture(amrex::Real left_porosity, amrex::Real right_porosity) noexcept
+{
+    return std::min(left_porosity, right_porosity);
+}
+
 } // namespace
 
 void initialize_state(amrex::MultiFab& state, const amrex::Geometry& geom, const RuntimeParams& params)
@@ -44,6 +50,8 @@ void initialize_state(amrex::MultiFab& state, const amrex::Geometry& geom, const
     const amrex::Real init_z = params.init_center[2];
     const amrex::Real init_sigma = params.init_sigma;
     const amrex::Real init_amplitude = params.init_amplitude;
+    KernelParams kparams{};
+    fill_kernel_params(kparams, params);
 
     for (amrex::MFIter mfi(state); mfi.isValid(); ++mfi) {
         const amrex::Box& bx = mfi.validbox();
@@ -51,20 +59,24 @@ void initialize_state(amrex::MultiFab& state, const amrex::Geometry& geom, const
 
         amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
             amrex::Real y_leak = 0.0;
+            const amrex::Real x = prob_lo[0] + (static_cast<amrex::Real>(i) + 0.5) * dx[0];
+            const amrex::Real y = prob_lo[1] + (static_cast<amrex::Real>(j) + 0.5) * dx[1];
+            const amrex::Real z = prob_lo[2] + (static_cast<amrex::Real>(k) + 0.5) * dx[2];
             if (init_type == Gaussian) {
-                const amrex::Real x = prob_lo[0] + (static_cast<amrex::Real>(i) + 0.5) * dx[0];
-                const amrex::Real y = prob_lo[1] + (static_cast<amrex::Real>(j) + 0.5) * dx[1];
-                const amrex::Real z = prob_lo[2] + (static_cast<amrex::Real>(k) + 0.5) * dx[2];
                 const amrex::Real r2 = (x - init_x) * (x - init_x)
                                      + (y - init_y) * (y - init_y)
                                      + (z - init_z) * (z - init_z);
                 y_leak = init_amplitude * std::exp(-r2 / (2.0 * init_sigma * init_sigma));
             }
+            const amrex::Real porosity = porosity_at(x, y, z, kparams);
+            const amrex::Real velocity_factor = velocity_factor_from_porosity(porosity, kparams);
+            y_leak *= porosity;
             arr(i, j, k, Rho) = rho0;
-            arr(i, j, k, Uvel) = wind_x;
-            arr(i, j, k, Vvel) = wind_y;
-            arr(i, j, k, Wvel) = wind_z;
+            arr(i, j, k, Uvel) = velocity_factor * wind_x;
+            arr(i, j, k, Vvel) = velocity_factor * wind_y;
+            arr(i, j, k, Wvel) = velocity_factor * wind_z;
             arr(i, j, k, YLeak) = y_leak;
+            arr(i, j, k, Porosity) = porosity;
         });
     }
 }
@@ -91,6 +103,7 @@ void advance_scalar(amrex::MultiFab& state,
 
         amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
             const amrex::Real yc = s(i, j, k, YLeak);
+            const amrex::Real pc = s(i, j, k, Porosity);
 
             const int bcxlo = kparams.bc_lo[0];
             const int bcxhi = kparams.bc_hi[0];
@@ -105,44 +118,77 @@ void advance_scalar(amrex::MultiFab& state,
             const amrex::Real ymz = (k == dom_lo[2]) ? boundary_y(yc, bczlo, kparams) : s(i, j, k - 1, YLeak);
             const amrex::Real ypz = (k == dom_hi[2]) ? boundary_y(yc, bczhi, kparams) : s(i, j, k + 1, YLeak);
 
+            const amrex::Real pmx = (i == dom_lo[0])
+                ? pc : face_aperture(s(i - 1, j, k, Porosity), pc);
+            const amrex::Real ppx = (i == dom_hi[0])
+                ? pc : face_aperture(pc, s(i + 1, j, k, Porosity));
+            const amrex::Real pmy = (j == dom_lo[1])
+                ? pc : face_aperture(s(i, j - 1, k, Porosity), pc);
+            const amrex::Real ppy = (j == dom_hi[1])
+                ? pc : face_aperture(pc, s(i, j + 1, k, Porosity));
+            const amrex::Real pmz = (k == dom_lo[2])
+                ? pc : face_aperture(s(i, j, k - 1, Porosity), pc);
+            const amrex::Real ppz = (k == dom_hi[2])
+                ? pc : face_aperture(pc, s(i, j, k + 1, Porosity));
+
+            const amrex::Real umx = pmx * ((i == dom_lo[0])
+                ? s(i, j, k, Uvel)
+                : 0.5 * (s(i - 1, j, k, Uvel) + s(i, j, k, Uvel)));
+            const amrex::Real upx = ppx * ((i == dom_hi[0])
+                ? s(i, j, k, Uvel)
+                : 0.5 * (s(i, j, k, Uvel) + s(i + 1, j, k, Uvel)));
+            const amrex::Real vmy = pmy * ((j == dom_lo[1])
+                ? s(i, j, k, Vvel)
+                : 0.5 * (s(i, j - 1, k, Vvel) + s(i, j, k, Vvel)));
+            const amrex::Real vpy = ppy * ((j == dom_hi[1])
+                ? s(i, j, k, Vvel)
+                : 0.5 * (s(i, j, k, Vvel) + s(i, j + 1, k, Vvel)));
+            const amrex::Real wmz = pmz * ((k == dom_lo[2])
+                ? s(i, j, k, Wvel)
+                : 0.5 * (s(i, j, k - 1, Wvel) + s(i, j, k, Wvel)));
+            const amrex::Real wpz = ppz * ((k == dom_hi[2])
+                ? s(i, j, k, Wvel)
+                : 0.5 * (s(i, j, k, Wvel) + s(i, j, k + 1, Wvel)));
+
             const amrex::Real fxp = (i == dom_hi[0])
-                ? face_flux(yc, kparams.wind[0], bcxhi, 1, kparams)
-                : scalar_advective_flux(yc, ypx, kparams.wind[0]);
+                ? face_flux(yc, upx, bcxhi, 1, kparams)
+                : scalar_advective_flux(yc, ypx, upx);
             const amrex::Real fxm = (i == dom_lo[0])
-                ? face_flux(yc, kparams.wind[0], bcxlo, -1, kparams)
-                : scalar_advective_flux(ymx, yc, kparams.wind[0]);
+                ? face_flux(yc, umx, bcxlo, -1, kparams)
+                : scalar_advective_flux(ymx, yc, umx);
             const amrex::Real fyp = (j == dom_hi[1])
-                ? face_flux(yc, kparams.wind[1], bcyhi, 1, kparams)
-                : scalar_advective_flux(yc, ypy, kparams.wind[1]);
+                ? face_flux(yc, vpy, bcyhi, 1, kparams)
+                : scalar_advective_flux(yc, ypy, vpy);
             const amrex::Real fym = (j == dom_lo[1])
-                ? face_flux(yc, kparams.wind[1], bcylo, -1, kparams)
-                : scalar_advective_flux(ymy, yc, kparams.wind[1]);
+                ? face_flux(yc, vmy, bcylo, -1, kparams)
+                : scalar_advective_flux(ymy, yc, vmy);
             const amrex::Real fzp = (k == dom_hi[2])
-                ? face_flux(yc, kparams.wind[2], bczhi, 1, kparams)
-                : scalar_advective_flux(yc, ypz, kparams.wind[2]);
+                ? face_flux(yc, wpz, bczhi, 1, kparams)
+                : scalar_advective_flux(yc, ypz, wpz);
             const amrex::Real fzm = (k == dom_lo[2])
-                ? face_flux(yc, kparams.wind[2], bczlo, -1, kparams)
-                : scalar_advective_flux(ymz, yc, kparams.wind[2]);
+                ? face_flux(yc, wmz, bczlo, -1, kparams)
+                : scalar_advective_flux(ymz, yc, wmz);
 
             const amrex::Real adv = -((fxp - fxm) / dx[0]
                                     + (fyp - fym) / dx[1]
                                     + (fzp - fzm) / dx[2]);
 
             const amrex::Real diff = kparams.diffusion
-                * ((ypx - 2.0 * yc + ymx) / (dx[0] * dx[0])
-                 + (ypy - 2.0 * yc + ymy) / (dx[1] * dx[1])
-                 + (ypz - 2.0 * yc + ymz) / (dx[2] * dx[2]));
+                * ((ppx * (ypx - yc) - pmx * (yc - ymx)) / (dx[0] * dx[0])
+                 + (ppy * (ypy - yc) - pmy * (yc - ymy)) / (dx[1] * dx[1])
+                 + (ppz * (ypz - yc) - pmz * (yc - ymz)) / (dx[2] * dx[2]));
 
             const amrex::Real x = prob_lo[0] + (static_cast<amrex::Real>(i) + 0.5) * dx[0];
             const amrex::Real y = prob_lo[1] + (static_cast<amrex::Real>(j) + 0.5) * dx[1];
             const amrex::Real z = prob_lo[2] + (static_cast<amrex::Real>(k) + 0.5) * dx[2];
-            const amrex::Real source = scalar_source(x, y, z, kparams);
+            const amrex::Real source = pc * scalar_source(x, y, z, kparams);
 
             n(i, j, k, Rho) = kparams.rho0;
-            n(i, j, k, Uvel) = kparams.wind[0];
-            n(i, j, k, Vvel) = kparams.wind[1];
-            n(i, j, k, Wvel) = kparams.wind[2];
+            n(i, j, k, Uvel) = s(i, j, k, Uvel);
+            n(i, j, k, Vvel) = s(i, j, k, Vvel);
+            n(i, j, k, Wvel) = s(i, j, k, Wvel);
             n(i, j, k, YLeak) = limited_y(yc + kparams.dt * (adv + diff + source));
+            n(i, j, k, Porosity) = pc;
         });
     }
 }

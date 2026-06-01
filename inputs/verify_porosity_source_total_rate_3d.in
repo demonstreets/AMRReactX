@@ -1,0 +1,40 @@
+# Stage 4 verification: total-rate source normalization with a porous obstacle.
+# The source box overlaps a zero-porosity obstacle core. The requested total
+# rate should still be deposited into the accessible source volume only.
+
+n_cell = 32 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 4.0 4.0 4.0
+max_grid_size = 16
+
+max_step = 40
+dt = 0.01
+plot_int = 40
+
+rho0 = 1.0
+wind = 0.0 0.0 0.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = open open open
+bc_hi = open open open
+
+source_type = box
+source_box_lo = 1.0 1.0 1.0
+source_box_hi = 3.0 3.0 3.0
+source_strength = 1.0
+source_total_rate = 0.2
+
+porosity_enabled = 1
+porosity_box_lo = 1.0 1.0 1.0
+porosity_box_hi = 2.0 2.0 2.0
+porosity_transition = 0.0
+porosity_solid_value = 0.0
+porosity_resistance = 100.0
+
+init_type = 0
+
+cloud_threshold = 0.005
+lel = 0.005
+uel = 0.02
+history_file = history_verify_porosity_source_total_rate.csv
+plotfile_prefix = plt_verify_porosity_source_total_rate_

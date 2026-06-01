@@ -1,0 +1,41 @@
+# Stage 4 verification: passive cloud transport through a static cylindrical
+# porosity obstacle. This is the geometry path intended for near-term tank-like
+# EB fallback studies.
+
+n_cell = 96 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 12.0 4.0 4.0
+max_grid_size = 32
+
+max_step = 80
+dt = 0.01
+plot_int = 80
+
+rho0 = 1.0
+wind = 1.0 0.0 0.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = inlet open open
+bc_hi = outlet open open
+
+source_strength = 0.0
+source_type = gaussian
+
+porosity_enabled = 1
+porosity_type = cylinder
+porosity_cylinder_center = 3.8 2.0 2.0
+porosity_cylinder_radius = 0.6
+porosity_cylinder_axis = 2
+porosity_cylinder_axis_lo = 1.25
+porosity_cylinder_axis_hi = 2.75
+porosity_transition = 0.25
+porosity_solid_value = 0.0
+porosity_resistance = 100.0
+
+init_type = 1
+init_center = 2.0 2.0 2.0
+init_sigma = 0.35
+init_amplitude = 0.2
+
+history_file = history_verify_porosity_cylinder.csv
+plotfile_prefix = plt_verify_porosity_cylinder_

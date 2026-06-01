@@ -1,0 +1,38 @@
+# Stage 4 verification: passive cloud transport through a static porous obstacle.
+# Expected behavior: the local velocity field is damped in the obstacle region,
+# porosity diagnostics report a nontrivial solid volume, and scalar mass remains
+# conservative before the cloud reaches the outlet.
+
+n_cell = 96 32 32
+prob_lo = 0.0 0.0 0.0
+prob_hi = 12.0 4.0 4.0
+max_grid_size = 32
+
+max_step = 80
+dt = 0.01
+plot_int = 80
+
+rho0 = 1.0
+wind = 1.0 0.0 0.0
+diffusion = 0.0
+inlet_y = 0.0
+bc_lo = inlet open open
+bc_hi = outlet open open
+
+source_strength = 0.0
+source_type = gaussian
+
+porosity_enabled = 1
+porosity_box_lo = 3.5 1.25 1.25
+porosity_box_hi = 4.5 2.75 2.75
+porosity_transition = 0.25
+porosity_solid_value = 0.0
+porosity_resistance = 100.0
+
+init_type = 1
+init_center = 2.0 2.0 2.0
+init_sigma = 0.35
+init_amplitude = 0.2
+
+history_file = history_verify_porosity_obstacle.csv
+plotfile_prefix = plt_verify_porosity_obstacle_
