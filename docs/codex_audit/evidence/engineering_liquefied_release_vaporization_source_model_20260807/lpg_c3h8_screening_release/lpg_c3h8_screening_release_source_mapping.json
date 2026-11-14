@@ -1,0 +1,186 @@
+{
+  "applied_replacements": {
+    "prob.fuel_species": "C3H8",
+    "prob.leak_T": "300",
+    "prob.leak_model": "fixed_mass_flow",
+    "prob.leak_radius": "0.08",
+    "prob.leak_rate": "0.512131259169",
+    "prob.leak_schedule_count": "9",
+    "prob.leak_schedule_radius": "0.08 0.08 0.08 0.08 0.08 0.08 0.08 0.08 0.08",
+    "prob.leak_schedule_rates": "0.619441342912 0.565907179551 0.512131259169 0.458055472151 0.403597350797 0.34863392207 0.292969196794 0.236259771348 0.177808381046",
+    "prob.leak_schedule_temperatures": "300 300 300 300 300 300 300 300 300",
+    "prob.leak_schedule_times": "0 1 2 3 4 5 6 7 8",
+    "prob.leak_schedule_vel_x": "17.2034944549 15.7167117384 14.2232148017 12.7213897899 11.2089463609 9.68246923416 8.13651528135 6.56154729227 4.93820041617",
+    "prob.leak_schedule_vel_y": "0 0 0 0 0 0 0 0 0",
+    "prob.leak_schedule_vel_z": "0 0 0 0 0 0 0 0 0",
+    "prob.leak_schedule_x": "0.55 0.55 0.55 0.55 0.55 0.55 0.55 0.55 0.55",
+    "prob.leak_schedule_y": "0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5",
+    "prob.leak_schedule_z": "0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5",
+    "prob.leak_vel_x": "14.2232148017",
+    "prob.leak_vel_y": "0",
+    "prob.leak_vel_z": "0",
+    "prob.leak_xc": "0.55",
+    "prob.leak_yc": "0.5",
+    "prob.leak_zc": "0.5"
+  },
+  "base_input": "examples/engineering/h2_leak_3d/input.codex_gasified_lpg_c3h8_surrogate_smoke",
+  "evidence_files": [
+    {
+      "label": "source_csv",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv",
+      "sha256": "0302c9a31e12e8c5cb402d3231dec46323b3852b56e2ed27049c7766ca7dc706"
+    },
+    {
+      "label": "base_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lpg_c3h8_surrogate_smoke",
+      "sha256": "1e407c81e42744b0e1625b03d3c840cc3761e8b6ee572551878ef9a7796c0828"
+    },
+    {
+      "label": "output_input",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/input.lpg_c3h8_screening_release.generated",
+      "sha256": "70576ce522a71de1dd45156dd85c0c65dcb2d849d4b10f7c29440ccc0e9fd177"
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:30+00:00",
+  "limitations": {
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_liquid_phase_change": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "mapping": "external vaporization/blowdown model supplies gas-phase mdot(t)/T/species"
+  },
+  "output_input": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/input.lpg_c3h8_screening_release.generated",
+  "sample": {
+    "fuel_species": "C3H8",
+    "leak_vel_x_m_s": 14.2232148017,
+    "leak_vel_y_m_s": 0.0,
+    "leak_vel_z_m_s": 0.0,
+    "mdot_kg_s": 0.512131259169,
+    "source_pressure_Pa": 101325.0,
+    "source_radius_m": 0.08,
+    "source_x_m": 0.55,
+    "source_y_m": 0.5,
+    "source_z_m": 0.5,
+    "time_s": 2.0,
+    "vapor_T_K": 300.0
+  },
+  "sample_time_s": 2.0,
+  "schema_version": 1,
+  "source_csv": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv",
+  "source_time_series": {
+    "emitted_to_input": true,
+    "fuel_species": "C3H8",
+    "interpolation": "PeleLMeX linearly interpolates prob.leak_schedule_rates and prob.leak_schedule_temperatures at the step midpoint for fixed_mass_flow",
+    "leak_vel_x_m_s": [
+      17.2034944549,
+      15.7167117384,
+      14.2232148017,
+      12.7213897899,
+      11.2089463609,
+      9.68246923416,
+      8.13651528135,
+      6.56154729227,
+      4.93820041617
+    ],
+    "leak_vel_y_m_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leak_vel_z_m_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mdot_kg_s": [
+      0.619441342912,
+      0.565907179551,
+      0.512131259169,
+      0.458055472151,
+      0.403597350797,
+      0.34863392207,
+      0.292969196794,
+      0.236259771348,
+      0.177808381046
+    ],
+    "point_count": 9,
+    "source_radius_m": [
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08,
+      0.08
+    ],
+    "source_x_m": [
+      0.55,
+      0.55,
+      0.55,
+      0.55,
+      0.55,
+      0.55,
+      0.55,
+      0.55,
+      0.55
+    ],
+    "source_y_m": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "source_z_m": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "time_s": [
+      0.0,
+      1.0,
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0
+    ],
+    "vapor_T_K": [
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0
+    ]
+  },
+  "status": "PASS-EXTERNAL-VAPORIZATION-SOURCE-INPUT"
+}

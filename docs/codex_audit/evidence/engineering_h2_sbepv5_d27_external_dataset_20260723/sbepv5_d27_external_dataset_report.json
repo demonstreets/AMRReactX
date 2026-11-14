@@ -1,0 +1,56 @@
+{
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "blocking_gaps": [
+    "sbepv5_dataset_ingestion_not_passed",
+    "dataset_metadata_json_missing",
+    "sensor_coordinates_csv_missing",
+    "baffle_geometry_csv_missing",
+    "experimental_timeseries_csv_missing",
+    "plume_observation_not_case_matched_to_sbepv5_d27",
+    "plume_observation_time_end_before_sbepv5_120s"
+  ],
+  "candidate_metric_count": 0,
+  "candidate_metric_summary": {},
+  "clears_reference_data_blocker": false,
+  "current_inputs": {
+    "dataset_ingestion_passed": false,
+    "plume_observation_case_matched_to_sbepv5": false,
+    "plume_observation_passed": true,
+    "plume_observation_time_end_s": 0.20000000000000015,
+    "scout_report_passed": true
+  },
+  "dataset_ingestion_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json",
+  "evidence_files": [
+    {
+      "label": "dataset_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json",
+      "sha256": "51a726d2e60369c484ff63e0c6a96bd3ef8c2e91f10d7c23de0cd283d8d257b4",
+      "size_bytes": 3288
+    },
+    {
+      "label": "scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json",
+      "sha256": "c542c808e81dc86f53d389036941d9bbdd56dd2db2a41e9ad05e45f2e807b3de",
+      "size_bytes": 14733
+    },
+    {
+      "label": "plume_observation_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json",
+      "sha256": "45ff3306c5de60d952db0836c44068e3ce3ed74d68e1bcdb787dc182d21741c2",
+      "size_bytes": 2433
+    }
+  ],
+  "external_dataset_json": null,
+  "external_dataset_written": false,
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This builder prepares the external plume dataset JSON consumed by the official reference-agreement report.",
+    "The builder report itself does not clear the reference-data blocker.",
+    "External validation is only claimed after the official reference-agreement report passes with the generated dataset JSON."
+  ],
+  "plume_observation_report": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json",
+  "schema_version": 1,
+  "scout_report": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json",
+  "status": "NOT_READY-SBEPV5-D27-EXTERNAL-PLUME-DATASET",
+  "title": "HySafe SBEPV5 D27 External Plume Dataset Builder"
+}

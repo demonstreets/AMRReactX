@@ -1,0 +1,66 @@
+{
+  "evidence_files": [
+    {
+      "label": "problem_header",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "smoke_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_valve_schedule_smoke",
+      "sha256": "2ec292da7ea6d657225968eed63d4c8b26b0ee437e99bb549d222b5e49c92af0",
+      "size_bytes": 1449
+    },
+    {
+      "label": "smoke_log",
+      "path": "docs/codex_audit/evidence/engineering_fixed_mass_flow_valve_schedule_20260806/fixed_mass_flow_valve_schedule_smoke.log",
+      "sha256": "c4408a7f1cae07c2cdb93d65e3c73d2a8d6f4f71bff9bf8c21bbae3eb14984fa",
+      "size_bytes": 8385
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:38+00:00",
+  "log_samples": {
+    "effective_mdots": [
+      0.0,
+      0.0,
+      1.666666667e-06,
+      5e-06,
+      8.333333333e-06,
+      1e-05
+    ],
+    "first_schedule_line": "H2 leak fixed-mass-flow schedule: time=0, dt=1e-05, reference_leak_rate=1e-05, valve_scheduled=1, valve_open_time=1e-05, valve_ramp_time=3e-05, valve_fraction_start=0, valve_fraction_mid=0, valve_fraction_end=0, effective_mdot=0",
+    "last_schedule_line": "H2 leak fixed-mass-flow schedule: time=4e-05, dt=1e-05, reference_leak_rate=1e-05, valve_scheduled=1, valve_open_time=1e-05, valve_ramp_time=3e-05, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=1e-05",
+    "valve_fractions": [
+      0.0,
+      0.0,
+      0.1666666667,
+      0.5,
+      0.8333333333,
+      1.0
+    ]
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-FIXED-MASS-FLOW-VALVE-SCHEDULE",
+  "summary": {
+    "applied_mdot_matches_effective_mdot": true,
+    "applying_line_count": 6,
+    "bad_log_tokens": [],
+    "effective_mdot_max": 1e-05,
+    "effective_mdot_min": 0.0,
+    "effective_mdot_varies": true,
+    "fixed_mass_flow_valve_schedule_ready": true,
+    "input_uses_fixed_model": true,
+    "input_uses_scheduled_valve": true,
+    "leak_source_line_count": 6,
+    "log_has_no_abort_or_nan": true,
+    "nonzero_effective_mdot_count": 4,
+    "schedule_reaches_closed": true,
+    "schedule_reaches_open": true,
+    "scheduled_log_line_count": 6,
+    "source_prints_schedule": true,
+    "source_scales_fixed_mdot": true,
+    "valve_fraction_max": 1.0,
+    "valve_fraction_min": 0.0
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "case": "academic_bench2gpu_hotspot_lidryer_detonation_single_cuda",
+  "cuda_devices": 1,
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run.log",
+      "sha256": "323368cf87fb8d735f7416f70269265e65de226c8459a9c412a90de73bfc140d"
+    },
+    {
+      "label": "launcher_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/launcher.log",
+      "sha256": "6a2ffb1e272c21fce19b90aa8c932fc5d061594623153ecb6060c4c85a8b0633"
+    },
+    {
+      "label": "input",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/input.codex_academic_gas_detonation_single_cuda",
+      "sha256": "127025a6d5f77038308a47209e5df33a6341c23b2c87f1993dd890006b951921"
+    },
+    {
+      "label": "source_input",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/source_input.codex_academic_bench2gpu_detonation_mpi_cuda",
+      "sha256": "f72ed62b730a9aa03702bc09dd30c288bf76c74f60124feba299fc1b523059b7"
+    },
+    {
+      "label": "initial_condition_summary",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/ic.txt",
+      "sha256": "86fd5f64fdf0bf4fe7864d494f6f18e9064b8699f5ce3bdce209d9d3d4470e27"
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/plt00000/Header",
+      "sha256": "99f544d56e2c282c0e6f2ae714e2193ca310e92794a55e8cd2538fa61a28b992"
+    },
+    {
+      "label": "plt00040_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/plt00040/Header",
+      "sha256": "6f1dba7bc6d3e8bf9a61b73e8874dba466917a8b70f4773dcca38a06991e3d4b"
+    },
+    {
+      "label": "plt00040_job_info",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/plt00040/job_info",
+      "sha256": "d6553a535683e5bf3049788d7bf3a06d1e2db6f50af49dff6619deee7603a15f"
+    },
+    {
+      "label": "reused_executable",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/run/PeleC3d.gnu.MPI.CUDA.ex",
+      "sha256": "f744de6ea2d745d54f4eaef149d850449dfdba1efda294a4c9e9bc241b7670ee"
+    }
+  ],
+  "evidence_hash": "323368cf87fb8d735f7416f70269265e65de226c8459a9c412a90de73bfc140d",
+  "final_time": 1.8535905659764919e-06,
+  "initial_time": 0.0,
+  "limitations": [
+    "40-step academic gas detonation single-CUDA runtime gate; not a full grid-convergence study.",
+    "Hotspot detonation initialization is used as a robust GPU execution and reacting-flow stability gate."
+  ],
+  "max_step": 40,
+  "mpi_launcher": "OpenMPI mpirun",
+  "mpi_ranks": 1,
+  "plot_variables": [
+    "density",
+    "Temp",
+    "rho_H2",
+    "rho_O2",
+    "rho_H2O",
+    "rho_H",
+    "rho_O",
+    "rho_OH",
+    "rho_HO2",
+    "rho_H2O2",
+    "rho_N2",
+    "Y(H2)",
+    "Y(O2)",
+    "Y(H2O)",
+    "Y(H)",
+    "Y(O)",
+    "Y(OH)",
+    "Y(HO2)",
+    "Y(H2O2)",
+    "Y(N2)",
+    "x_velocity",
+    "y_velocity",
+    "z_velocity"
+  ],
+  "ready": true,
+  "run_root": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803",
+  "scope": "gas-phase H2/O2 detonation single-CUDA runtime gate",
+  "status": "PASS-ACADEMIC-GAS-DETONATION-SINGLE-CUDA",
+  "summary": {
+    "academic_gas_detonation_single_cuda_ready": true,
+    "amrex_finalized": true,
+    "critical_plot_variables_present": true,
+    "cuda_devices": 1,
+    "final_time": 1.8535905659764919e-06,
+    "initial_time": 0.0,
+    "max_step": 40,
+    "mpi_ranks": 1,
+    "reaction_solver_marker_present": true,
+    "time_advanced": true
+  },
+  "validated_capabilities": {
+    "gas_phase_detonation_hotspot": true,
+    "h2_o2_lidryer_mechanism": true,
+    "pelec_reacting_solver": true,
+    "single_cuda_device": true,
+    "single_gpu_reacting_detonation_runtime": true,
+    "single_mpi_rank": true
+  }
+}

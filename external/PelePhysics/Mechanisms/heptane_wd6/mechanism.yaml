@@ -1,0 +1,154 @@
+description: "Westbrook-Dryer 1981 global n-heptane mechanism: fuel oxidation plus forward/reverse CO oxidation. Separate validation model, not the 88-species skeletal mechanism."
+generator: YamlWriter
+cantera-version: 3.2.0
+git-commit: 4a8358e
+date: Thu Sep 10 14:15:20 2026
+kinetic_equilibrium_note: The empirical CO reverse rate is specified independently; kinetic equilibrium is not identical to thermodynamic Gibbs equilibrium.
+thermodynamic_source: Six unmodified species from the existing PelePhysics heptane_lu_88sk mechanism; original WD paper did not supply these NASA polynomials.
+reference: C. K. Westbrook and F. L. Dryer, Combustion Science and Technology 27 (1981) 31-43, DOI 10.1080/00102208108946970, Table IV and Eqs. 9-11.
+phases:
+  - name: gas
+    thermo: ideal-gas
+    elements: [C, H, O, N]
+    species: [nc7h16, o2, co, h2o, co2, n2]
+    kinetics: bulk
+    transport: mixture-averaged
+    state:
+      T: 300.0
+      density: 0.602411210001077890
+      Y: {n2: 0.737642294490761130, nc7h16: 0.0382763747924221437,
+      o2: 0.224081330716816546}
+species:
+  - name: nc7h16
+    composition: {C: 7.0, H: 16.0}
+    thermo:
+      model: NASA7
+      temperature-ranges: [300.0, 1391.0, 5000.0]
+      data:
+        - [-1.26836186999999989, 0.0854355819999999960, -5.25346786e-05,
+        1.62945720999999989e-08, -2.02394925000000005e-12,
+        -2.56586565000000010e+04, 35.3732911999999970]
+        - [22.2148968999999994, 0.0347675750000000020, -1.18407129000000006e-05,
+        1.83298478e-09, -1.06130266e-13, -3.42760080999999991e+04,
+        -92.3040196000000037]
+      note: 7/19/0therm
+    transport:
+      model: gas
+      geometry: nonlinear
+      diameter: 6.25300000000000011
+      well-depth: 459.600000000000023
+      rotational-relaxation: 1.0
+  - name: o2
+    composition: {O: 2.0}
+    thermo:
+      model: NASA7
+      temperature-ranges: [300.0, 1000.0, 5000.0]
+      data:
+        - [3.212936, 1.127486e-03, -5.75615000000000036e-07,
+        1.31387700000000009e-09, -8.76855400000000032e-13, -1005.249,
+        6.03473799999999994]
+        - [3.697578, 6.135197e-04, -1.258842e-07, 1.775281e-11,
+        -1.13643500000000009e-15, -1233.93000000000006, 3.18916600000000017]
+      note: '121386'
+    transport:
+      model: gas
+      geometry: linear
+      diameter: 3.45800000000000018
+      well-depth: 107.400000000000006
+      polarizability: 1.60000000000000009
+      rotational-relaxation: 3.79999999999999982
+  - name: co
+    composition: {C: 1.0, O: 1.0}
+    thermo:
+      model: NASA7
+      temperature-ranges: [300.0, 1000.0, 5000.0]
+      data:
+        - [3.26245200000000013, 1.51194099999999994e-03, -3.88175500000000007e-06,
+        5.58194400000000030e-09, -2.47495099999999984e-12,
+        -1.43105400000000009e+04, 4.848897]
+        - [3.02507800000000016, 1.442689e-03, -5.63082800000000029e-07,
+        1.018581e-10, -6.91095199999999965e-15, -1.426835e+04,
+        6.10821799999999993]
+      note: '121286'
+    transport:
+      model: gas
+      geometry: linear
+      diameter: 3.64999999999999991
+      well-depth: 98.0999999999999943
+      polarizability: 1.95000000000000018
+      rotational-relaxation: 1.8
+  - name: h2o
+    composition: {H: 2.0, O: 1.0}
+    thermo:
+      model: NASA7
+      temperature-ranges: [300.0, 1000.0, 5000.0]
+      data:
+        - [3.38684200000000013, 3.47498200000000016e-03, -6.35469600000000022e-06,
+        6.96858099999999984e-09, -2.50658800000000018e-12,
+        -3.02081100000000006e+04, 2.590233]
+        - [2.67214600000000013, 3.05629299999999986e-03, -8.73026000000000025e-07,
+        1.20099600000000006e-10, -6.39161799999999988e-15,
+        -2.98992099999999991e+04, 6.86281699999999972]
+      note: '20387'
+    transport:
+      model: gas
+      geometry: nonlinear
+      diameter: 2.60500000000000043
+      well-depth: 572.399999999999977
+      dipole: 1.84399999999999986
+      rotational-relaxation: 4.0
+  - name: co2
+    composition: {C: 1.0, O: 2.0}
+    thermo:
+      model: NASA7
+      temperature-ranges: [300.0, 1000.0, 5000.0]
+      data:
+        - [2.275725, 9.92207200000000053e-03, -1.04091100000000007e-05,
+        6.86668699999999986e-09, -2.11728e-12, -4.83731399999999994e+04,
+        10.18849]
+        - [4.45362300000000033, 3.140169e-03, -1.278411e-06,
+        2.39399699999999977e-10, -1.669033e-14, -4.89669599999999991e+04,
+        -0.955395899999999965]
+      note: '121286'
+    transport:
+      model: gas
+      geometry: linear
+      diameter: 3.76299999999999990
+      well-depth: 244.0
+      polarizability: 2.65000000000000036
+      rotational-relaxation: 2.10000000000000009
+  - name: n2
+    composition: {N: 2.0}
+    thermo:
+      model: NASA7
+      temperature-ranges: [300.0, 1000.0, 5000.0]
+      data:
+        - [3.29867700000000008, 1.40824000000000006e-03, -3.96322199999999978e-06,
+        5.64151500000000024e-09, -2.44485500000000009e-12, -1020.9,
+        3.95037200000000022]
+        - [2.92663999999999991, 1.48797699999999992e-03, -5.68476099999999954e-07,
+        1.009704e-10, -6.75335099999999980e-15, -922.797699999999963,
+        5.98052799999999962]
+      note: '121286'
+    transport:
+      model: gas
+      geometry: linear
+      diameter: 3.621
+      well-depth: 97.5300000000000011
+      polarizability: 1.76
+      rotational-relaxation: 4.0
+reactions:
+  - equation: nc7h16 + 7.5 o2 => 7 co + 8 h2o
+    rate-constant: {A: 3.54275034869919968e+09, b: 0.0, Ea: 1.2552e+08}
+    orders:
+      nc7h16: 0.25
+      o2: 1.5
+  - equation: co + 0.5 o2 => co2
+    rate-constant: {A: 2.23872113856833789e+12, b: 0.0, Ea: 1.67360000000000030e+08}
+    orders:
+      co: 1.0
+      h2o: 0.5
+      o2: 0.25
+    nonreactant-orders: true
+  - equation: co2 => co + 0.5 o2
+    rate-constant: {A: 5.0e+08, b: 0.0, Ea: 1.67360000000000030e+08}

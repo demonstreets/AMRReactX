@@ -1,0 +1,1499 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_kepsilon_fix.md)
+tool read_file completed: 
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: file_search (path: /home/cj/my-pele, query: TASK_kepsilon_fix)
+tool: read_file (path: /home/cj/my-pele/TASK_kepsilon_fix.md)
+]0;🐳 CodeWhaletool file_search completed: <1 items>
+tool read_file completed: <file path="/home/cj/my-pele/TASK_kepsilon_fix.md" total_lines="0" shown_lines="none" truncated="false">
+
+[NO CONTENT] start_line 1 is beyond total_lines 0.
+</file>
+]0;🐋 CodeWhale]0;🐳 CodeWhale该文件存在但内容为空。让我从其他文档和源码中获取上下文。]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/PROGRESS.md)
+tool: read_file (path: /home/cj/my-pele/TASK_c3h8_fix.md)
+tool: read_file (path: /home/cj/my-pele/TASK_kepsilon_fix.md)
+
+tool read_file completed: <file path="/home/cj/my-pele/PROGRESS.md" total_lines="218" shown_lines="1-200" truncated="true" next_start_line="201">
+     1│ # PROGRESS.md
+     2│ > 更新: 2026-06-12 | Phase 2.1–2.10 ✅ | Phase 3.1–3.4 ✅ | Phase 3.5a 🔧 spec完成
+     3│ 
+     4│ ## Phase 1 — 几何处理管线 ✅ ALL DONE
+     5│ 
+     6│ | 任务 |...
+tool read_file completed: # 修复 C3H8 泄漏方向
+
+当前算例在 /home/cj/my-pele/examples/engineering/c3h8_flacs/
+
+## 问题
+FLACS 条件：
+- 风向 SSW，风速 8 m/s → vx=3.06, vy=7.39
+- 泄漏方向 S（射流指向南=vy负）
+- 射流逆风，产生强剪切混合
+
+当前算例射流指向 +x（水平），没有逆风效应。
+
+## 修改 pelelmex_prob.H
+1. wind_u = 3.06, wind_v = 7.39
+2. 射流方向 S：vy = -v_jet, vx = 0, vz = 0
+3. bcnormal sgn=1 ...
+tool read_file completed: <file path="/home/cj/my-pele/TASK_kepsilon_fix.md" total_lines="0" shown_lines="none" truncated="false">
+
+[NO CONTENT] start_line 1 is beyond total_lines 0.
+</file>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale`TASK_kepsilon_fix.md` ]0;🐋 CodeWhale是空的。让我从 spec 文档和源码中评估问题。]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/docs/kepsilon_integration_final_spec.md)
+tool: read_file (path: /home/cj/my-pele/PROGRESS.md)
+
+tool read_file completed: # k-ε PeleLMeX 集成最终方案 Spec v2.0
+
+**产出方式**: 3 agent × 2 轮头脑风暴（2026-06-21）
+**前身**: phase2_9b_kepsilon_activation_spec.md（已废弃的宏方案）
+**关联审查**: cc-server-workflow/references/multi-agent-spec-review.md（2026-06-21）
+
+---
+
+## 0. 设计目标
+
+用户在 input.yaml 中写：
+
+
+
+不需要任何编译宏（）。
+
+---
+
+## 1. 总体架构决策
+
+| 决策 | 结论 | 理由 |
+|...
+tool read_file completed: <file path="/home/cj/my-pele/PROGRESS.md" total_lines="218" shown_lines="201-218" truncated="false">
+   201│ | 3.10c (RT不稳定性) | ❌ | 算例建了但NaN |
+   202│ | 3.10d (k-e 运行时集成) | 🔄 | 审查中 |
+   203│ | 3.10e (源项+壁面核心化) | ❌ | 待做 |
+   204│ | 3.11-3.14 (Spray) | ❌ | 完全未开始 |
+   205│ 
+   206│ ### 啃骨头顺序
+   207│...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale现在让我看 k-epsilon 核心源码，理解当前实现和自由来流衰减问题。]0;🐳 CodeWhale]0;🐋 CodeWhaletool: file_search (path: /home/cj/my-pele/src/engineering/turbulence, query: kepsilon)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_2_kepsilon_spec.md)
+
+tool file_search completed: <3 items>
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_2_kepsilon_spec.md" total_lines="226" shown_lines="1-200" truncated="true" next_start_line="201">
+     1│ # Phase 2.2 — k-ε 湍流模型核心实现 Spec
+     2│ 
+     3│ **日期**: 2026-06-09  
+     4│ **位置**: `~/my-pele/src/engineering/turbulence/`  
+     5│ **依赖**: 无外部库（纯...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/src/engineering/turbulence/k_epsilon_core.H)
+tool: read_file (path: /home/cj/my-pele/src/engineering/turbulence/k_epsilon_core.cpp)
+tool: read_file (path: /home/cj/my-pele/src/engineering/turbulence/k_epsilon_constants.H)
+tool read_file completed: #pragma once
+#include "k_epsilon_constants.H"
+
+namespace Turbulence {
+
+// ============================================================
+// Eddy viscosity: μ_t = C_μ * ρ * k² / ε
+// Clipping: k = max(k, k_min), ε = max(ε, eps_min)
+//           μ_t = min(C_μ * ρ * k² / ε, mu_t_max_ratio * μ_lam)
+// ...
+tool read_file completed: #include "k_epsilon_core.H"
+#include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+
+namespace Turbulence {
+
+// ============================================================
+// Eddy viscosity: μ_t = C_μ * ρ * k² / ε
+// ==========================================================...
+tool read_file completed: #pragma once
+
+namespace Turbulence {
+
+struct KEpsilonConstants {
+    const double C_mu    = 0.09;
+    const double C_eps1  = 1.44;
+    const double C_eps2  = 1.92;
+    const double sigma_k = 1.0;
+    const double sigma_eps = 1.3;
+    const double kappa   = 0.41;    // von Karman constant
+    cons...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow let me look at how k-ε is integrated in PeleLMeX and the c3h8_flacs case setup.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files
+tool: file_search (path: /home/cj/my-pele/examples/engineering/c3h8_flacs, query: input)
+
+tool grep_files failed: Failed to validate input: missing required field 'pattern'
+tool file_search completed: <17 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d)
+tool: list_dir (path: /home/cj/my-pele/examples/engineering/c3h8_flacs)
+tool read_file completed: #----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# Inflow on lo-x and lo-y, Outflow on hi-x and hi-y
+peleLM....
+tool list_dir completed: <17 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: tail -30 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: kepsilon|k_epsilon|compute_source_terms|compute_mut)
+tool exec_shell completed
+--- stdout/stderr ---
+ >> PeleLMeX::Advance() --> Time: 19.65919078
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03244590889, divu: 4.038154995
+ STEP [27] - Time: 0.8781624273, dt 0.03244590889, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.8781624273
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 19.63342973
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03244818903, divu: 4.038204473
+ STEP [28] - Time: 0.9106083362, dt 0.03244818903, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.9106083362
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 19.61603438
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03245025094, divu: 4.038248483
+ STEP [29] - Time: 0.9430565252, dt 0.03245025094, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.9430565252
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 19.8994564
+
+ Writing plotfile: plt00030
+
+ >> Final simulation time: 0.9755067761
+
+Total Time: 667.2335889
+Segfault
+See Backtrace.0 file for details
+
+---------------------
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: addKESourceTerms)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="70-189" truncated="true" next_start_line="190">
+    70│   // Data for the advance, only live for the duration of the advance
+    71│   std::unique_ptr<AdvanceDiffData> diffData;
+    72│   di...
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2058" shown_lines="1886-2058" truncated="false">
+  1886│ PeleLM::addKESourceTerms(const std::unique_ptr<AdvanceAdvData>& advData)
+  1887│ {
+  1888│   BL_PROFILE("PeleLMeX::addKESourceTerms()");
+  1889│ 
+  1...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="300-399" truncated="true" next_start_line="400">
+   300│     updateRecyclingPlaneSnapshot();
+   301│   }
+   302│ 
+   303│   //----------------------------------------------------------------...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me trace how `m_ke_source` is actually applied to the aux variables.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2058" shown_lines="1820-1889" truncated="true" next_start_line="1890">
+  1820│     auto const& ext_ma = m_extSource[lev]->const_arrays();
+  1821│     auto const& f_ma = advData->Forcing[lev].arrays();
+  182...
+tool read_file completed: #ifndef PELELM_PROB_H
+#define PELELM_PROB_H
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <PeleLMeX_ProblemSpecificFunctions.H>
+#include <PeleLMeX_Index.H>
+#include <PelePhysics.H>
+#include <cmath>
+
+struct MyProbParm : public ProbParmDefault {
+  amrex::Real P_mean=101325.0, T_...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Init.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Init.cpp" total_lines="605" shown_lines="395-474" truncated="true" next_start_line="475">
+   395│         i, j, k, is_incomp, state_ma[box_no], aux_ma[box_no], geomdata,
+   396│         *lprobparm, lpmfdata);
+   397│     });
+   398│  ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <270 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+=== Header ===
+HyperCLaw-V1.1
+19
+x_velocity
+y_velocity
+z_velocity
+density
+rhoh
+temp
+RhoRT
+divu
+gradpx
+gradpy
+gradpz
+k
+epsilon
+volFrac
+avg_pressure
+mag_vort
+Y(N2)
+Y(O2)
+Y(C3H8)
+3
+0.97550677614149406
+0
+0 0 0 
+80 50 40 
+
+((0,0,0) (159,99,79) (0,0,0)) 
+30 
+0.5 0.5 0.5 
+0
+0
+0 12 0.97550677614149406
+30
+0 32
+0 26
+0 24
+32 64
+0 26
+0 24
+64 80
+0 26
+0 24
+0 32
+26 50
+0 24
+32 64
+26 50
+0 24
+64 80
+26 50
+0 24
+0 32
+0 26
+24 40
+32 64
+0 26
+24 40
+64 80
+0 26
+24 40
+0 32
+26 50
+24 40
+32 64
+26 50
+24 40
+64 80
+26 50
+24 40
+Level_0/Cell
+
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <2481 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Variables (19): ['x_velocity', 'y_velocity', 'z_velocity', 'density', 'rhoh', 'temp', 'RhoRT', 'divu', 'gradpx', 'gradpy', 'gradpz', 'k', 'epsilon', 'volFrac', 'avg_pressure', 'mag_vort', 'Y(N2)', 'Y(O2)', 'Y(C3H8)']
+k index: 11, epsilon index: 12
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<stdin>", line 33, in <module>
+IndexError: list index out of range
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/amrex_reader.py)
+tool: exec_shell (command: head -50 /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Header)
+tool read_file completed: <file path="/home/cj/my-pele/tools/amrex_reader.py" total_lines="326" shown_lines="1-50" truncated="true" next_start_line="51">
+     1│ #!/usr/bin/env python3
+     2│ """
+     3│ amrex_reader.py — Lightweight AMReX plotfile reader (HyperCLaw-V1.1 format).
+     4│ 
+     5│ Reads AMReX plotfile dir...
+tool exec_shell completed
+--- stdout/stderr ---
+HyperCLaw-V1.1
+19
+x_velocity
+y_velocity
+z_velocity
+density
+rhoh
+temp
+RhoRT
+divu
+gradpx
+gradpy
+gradpz
+k
+epsilon
+volFrac
+avg_pressure
+mag_vort
+Y(N2)
+Y(O2)
+Y(C3H8)
+3
+0.97550677614149406
+0
+0 0 0 
+80 50 40 
+
+((0,0,0) (159,99,79) (0,0,0)) 
+30 
+0.5 0.5 0.5 
+0
+0
+0 12 0.97550677614149406
+30
+0 32
+0 26
+0 24
+32 64
+0 26
+0 24
+64 80
+0 26
+0 24
+0 32
+26 50
+0 24
+32 64
+26 50
+0 24
+64 80
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <1642 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<string>", line 6, in <module>
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 286, in read_plotfile
+    data, grid_meta = _read_level(plotfile_dir, level, meta['ncomp'], dx)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 222, in _read_level
+    data = _read_fab_data(fab_path, ncomp, nx, ny, nz)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 149, in _read_fab_data
+    raise PlotfileError(
+amrex_reader.PlotfileError: Data size mismatch in examples/engineering/c3h8_flacs/plt00030/Level_0/Cell_D_00000: expected 3035136 doubles, got 933888
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <2927 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Header lines: 70
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<stdin>", line 37, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Level_0/Cell'
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: list_dir (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Level_0)
+tool: exec_shell (command: ls -la /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Level_0/)
+tool list_dir completed: <2 items>
+tool exec_shell completed
+--- stdout/stderr ---
+total 190024
+drwxr-xr-x 2 cj cj      4096 Jun 22 21:04 .
+drwxr-xr-x 3 cj cj      4096 Jun 22 21:04 ..
+-rw-rw-r-- 1 cj cj 194561112 Jun 22 21:04 Cell_D_00000
+-rw-rw-r-- 1 cj cj     11855 Jun 22 21:04 Cell_H
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Level_0/Cell_H)
+tool read_file completed: <file path="/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Level_0/Cell_H" total_lines="60" shown_lines="1-50" truncated="true" next_start_line="51">
+     1│ 1
+     2│ 1
+     3│ 19
+     4│ 0
+     5│ (12 0
+     6│ ((0,0,0) (63,51,47) (0,0,0))
+     7│ ((64,0,0) (127,51,47) (0,0,0))
+     ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: bcnormal_aux)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BCfill.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BCfill.H" total_lines="804" shown_lines="190-249" truncated="true" next_start_line="250">
+   190│ 
+   191│ #if AMREX_SPACEDIM == 2
+   192│     auto aux_ext = aux.cellData(iv[0], iv[1], 0);
+   193│ #else
+   194│     auto aux_ext = aux....
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <2355 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/Level_0/Cell_H'
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: ls /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(2))
+
+STDOUT:
+
+
+STDERR:
+ls: cannot access '/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00030/': No such file or directory
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <155 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+No plt dirs
+AMReX_buildInfo.cpp
+GNUmakefile
+input.3d
+my_pele_modules.H
+pelelmex_prob.cpp
+pelelmex_prob.H
+tmp_build_dir
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me check if there are previous runs and read the current source more carefully.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/run_dc_p1_t2.sh)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: addKESourceTerms|ke_src_ma|m_ke_source)
+
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/run_dc_p1_t2.sh: No such file or directory (os error 2)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2062" shown_lines="1700-1829" truncated="true" next_start_line="1830">
+  1700│   amrex::Real& a_deltaT_norm)
+  1701│ {
+  1702│ #ifndef AMREX_USE_EB
+  1703│   amrex::ignore_unused(a_ebfluxes);
+  1704│ #endif...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: Forcing_aux)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2062" shown_lines="1240-1269" truncated="true" next_start_line="1270">
+  1240│       GetVecOfConstPtrs(advData->Forcing), 0, GetVecOfArrOfPtrs(fluxes), 0,
+  1241│       GetVecOfConstPtrs(
+  1242│         ge...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2062" shown_lines="1410-1449" truncated="true" next_start_line="1450">
+  1410│         ldata_p->state, amrex::IntVect(0), NUM_SPECIES,
+  1411│         [state_ma, dhat_ma, force_ma,
+  1412│          dt] AMRE...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow I understand the full picture. Let me implement the fix. I'll read PeleLMeX.H for the member variable declarations.]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H, pattern: m_ke_C_mu|m_ke_sigma|m_les_model)
+
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2339" shown_lines="2140-2179" truncated="true" next_start_line="2180">
+  2140│   int m_soret_boundary_override = 0;
+  2141│   // LES Model
+  2142│   bool m_do_les = false;
+  2143│   bool m_plot_les = false;
+  2144│   i...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp" total_lines="1693" shown_lines="485-524" truncated="true" next_start_line="525">
+   485│       pp.query("les_cm_wale", m_les_cm_wale);
+   486│     } else if (m_les_model == "Sigma") {
+   487│       pp.query("les_cs_sigma", ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow I have the full picture. Let me implement the fix. The root cause is that standard k-ε source terms are purely destructive in free-stream (P_k≈0 → S_k=-]0;🐋 CodeWhaleρε), causing exponential decay. The fix: **ambient maintenance source terms**.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <5 items>)
+
+tool checklist_write completed: Todo list updated (5 items, 0% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Add m_ke_k_amb, m_ke_eps_amb member variables to PeleLMeX.H",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "content": "Initialize ambient k/ε in PeleLMeX_Setup.cpp (input or defaults)...
+]0;🐳 CodeWhale]0;🐋 CodeWhale**Step 1:** Add member variables to PeleLMeX.H.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H
+@@ -2157,6 +2157,9 @@
+   amrex::Real m_ke_kappa = 0.41;
+   amrex::Real m_ke_prod_lim = 10.0;
+   int m_ke_wall_functions = 0;
++  // Ambient k and epsilon for free-stream maintenanc...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <5 items>)
+tool checklist_write completed: Todo list updated (5 items, 20% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Add m_ke_k_amb, m_ke_eps_amb member variables to PeleLMeX.H",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Initialize ambient k/ε in PeleLMeX_Setup.cpp (input or defaults)"...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale**Step 2:** Initialize ambient k/ε in Setup.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp
+@@ -496,6 +496,9 @@
+       pp.query("ke_kappa", m_ke_kappa);
+       pp.query("ke_prod_lim", m_ke_prod_lim);
+       pp.query("ke_wall_functions", m_ke_wall_function...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale**Step 3:** Modify `addKESourceTerms` to add ambient maintenance terms. First let me also add the ambient term logic in Setup]0;🐳 CodeWhale to use sensible defaults when not set.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp
+@@ -499,6 +499,13 @@
+       // Ambient free-stream maintenance (prevents excessive decay of k and epsilon)
+       pp.query("ke_k_amb", m_ke_k_amb);
+       pp.query...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleNow modify `addKESourceTerms` to inject ambient maintenance:]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool edit_file failed: Failed to execute tool: Search string not found in /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2062" shown_lines="1895-1939" truncated="true" next_start_line="1940">
+  1895│     auto const& src_ma = m_ke_source[lev]->arrays();
+  1896│ 
+  1897│     amrex::ParallelFor(
+  1898│       *m_ke_source[lev],
+...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -1898,7 +1898,7 @@
+       *m_ke_source[lev],
+       [state_ma, aux_ma, src_ma,
+        C_mu = m_ke_C_mu, C_eps1 = m_ke_C_eps1, C_eps2 = m_ke_C_eps2,
+-  ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow modify the source term computation to add ambient maintenance:]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -1932,8 +1932,13 @@
+           amrex::max(P_k_raw, 0.0_rt),
+           prod_lim * rho * epsv);
+ 
+-        src_ma[box_no](i,j,k,0) = P_k - rho * epsv;
+- ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow set ambient k/ε in the c3h8_flacs input file and verify the .cpp changes compiled correctly:]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
++++ b//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
+@@ -66,6 +66,10 @@
+ peleLM.les_model = kepsilon
+ peleLM.chem_integrator = ReactorNull
+ peleLM.aux_vars = k epsilon
++# Ambient k/epsilon for free-stream maintenance (prev...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d)
+tool read_file completed: #----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# Inflow on lo-x and lo-y, Outflow on hi-x and hi-y
+peleLM....
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H)
+tool read_file completed: <file path="/home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H" total_lines="152" shown_lines="90-129" truncated="true" next_start_line="130">
+    90│     constexpr amrex::Real PI=3.141592653589793;
+    91│     const amrex::Real src_vol=(4.0/3.0)*PI*r_eff*r_eff*r_eff;
+    92│     co...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H)
+tool read_file completed: <file path="/home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H" total_lines="152" shown_lines="125-152" truncated="false">
+   125│   AMREX_GPU_DEVICE AMREX_FORCE_INLINE
+   126│   static void bcnormal_aux(
+   127│     const amrex::Real[AMREX_SPACEDIM],
+   128│     amrex::CellData<amr...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H)
+tool read_file completed: <file path="/home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H" total_lines="152" shown_lines="1-20" truncated="true" next_start_line="21">
+     1│ #ifndef PELELM_PROB_H
+     2│ #define PELELM_PROB_H
+     3│ #include <AMReX_Geometry.H>
+     4│ #include <AMReX_FArrayBox.H>
+     5│ #i...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <5 items>)
+tool checklist_write completed: Todo list updated (5 items, 60% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Add m_ke_k_amb, m_ke_eps_amb member variables to PeleLMeX.H",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Initialize ambient k/ε in PeleLMeX_Setup.cpp (input or defaults)"...
+]0;🐳 CodeWhale]0;🐋 CodeWhale**Step 4:** Recompile c]0;🐳 CodeWhale3h8_flacs.]0;🐋 CodeWhaletool: exec_shell (command: <145 chars>)
+
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Compiling AMReX_EB2_MultiGFab.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=3 -DAMREX_SPACEDIM=3 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_USE_EB -DNDEBUG -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_COMPILE_AJACOBIAN -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/3d.gnu.EXE -I. -I/home/cj/my-pele/src/engineering -I/home/cj/my-pele/src/engineering/turbulence -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/LinearSolvers/MLMG -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleLMeX/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Mechanisms/c3h8_mini -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Godunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/MOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Utils -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Projections -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/BDS -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBGodunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBMOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/include  -c /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2_MultiGFab.cpp -o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_MultiGFab.o
+Compiling AMReX_EB2_3D_C.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=3 -DAMREX_SPACEDIM=3 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_USE_EB -DNDEBUG -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_COMPILE_AJACOBIAN -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/3d.gnu.EXE -I. -I/home/cj/my-pele/src/engineering -I/home/cj/my-pele/src/engineering/turbulence -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/LinearSolvers/MLMG -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleLMeX/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Mechanisms/c3h8_mini -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Godunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/MOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Utils -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Projections -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/BDS -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBGodunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBMOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/include  -c /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2_3D_C.cpp -o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_3D_C.o
+Compiling AMReX_EB2_ND_C.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=3 -DAMREX_SPACEDIM=3 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_USE_EB -DNDEBUG -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_COMPILE_AJACOBIAN -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/3d.gnu.EXE -I. -I/home/cj/my-pele/src/engineering -I/home/cj/my-pele/src/engineering/turbulence -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/LinearSolvers/MLMG -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleLMeX/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Mechanisms/c3h8_mini -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Godunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/MOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Utils -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Projections -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/BDS -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBGodunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBMOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/include  -c /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2_ND_C.cpp -o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_ND_C.o
+Compiling AMReX_EB_STL_utils.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=3 -DAMREX_SPACEDIM=3 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_USE_EB -DNDEBUG -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_COMPILE_AJACOBIAN -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/3d.gnu.EXE -I. -I/home/cj/my-pele/src/engineering -I/home/cj/my-pele/src/engineering/turbulence -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/LinearSolvers/MLMG -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleLMeX/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Mechanisms/c3h8_mini -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Godunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/MOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Utils -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Projections -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/BDS -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBGodunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBMOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/include  -c /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB_STL_utils.cpp -o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_STL_utils.o
+Compiling AMReX_EB2_Level_STL.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=3 -DAMREX_SPACEDIM=3 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_USE_EB -DNDEBUG -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_COMPILE_AJACOBIAN -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/3d.gnu.EXE -I. -I/home/cj/my-pele/src/engineering -I/home/cj/my-pele/src/engineering/turbulence -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/LinearSolvers/MLMG -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleLMeX/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Mechanisms/c3h8_mini -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Godunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/MOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Utils -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/Projections -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/BDS -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBGodunov -I/home/cj/my-pele/external/PeleLMeX/Submodules/AMReX-Hydro/EBMOL -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/include  -c /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2_Level_STL.cpp -o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_Level_STL.o
+Compiling AMReX_EB2_IndexSpace_STL.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=3 -DAMREX_SPACEDIM=3 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_USE_EB -DNDEBUG -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_COMPILE_AJACOBIAN -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/3d.gnu.EXE -I. -I/home/cj/my-pele/src/engineering -I/home/cj/my-pele/src/engineering/turbulence -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbForcing -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/LinearSolvers/MLMG -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleLMeX/Source -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PMF -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/extern...
+
+[Output truncated: showing first 22000 bytes and last 8000 bytes. 35830 bytes omitted.]
+
+[Preserved summary lines from omitted middle]
+Compiling AMReX_EB_chkpt_file.cpp ...
+Compiling AMReX_EB2_Level_chkpt_file.cpp ...
+Compiling AMReX_EB2_IndexSpace_chkpt_file.cpp ...
+Compiling AMReX_WriteEBSurface.cpp ...
+Compiling AMReX_EBToPVD.cpp ...
+Compiling AMReX_MarchingCubes.cpp ...
+Compiling AMReX_buildInfo.cpp ...
+
+[Output tail]
+p_build_dir/o/3d.gnu.EXE/hydro_enforce_inout_solvability.o tmp_build_dir/o/3d.gnu.EXE/hydro_MacProjector.o tmp_build_dir/o/3d.gnu.EXE/hydro_NodalProjector.o tmp_build_dir/o/3d.gnu.EXE/hydro_bds_edge_state_3D.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebgodunov_extrap_vel_to_faces.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebgodunov_extrap_vel_to_faces_3D.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebgodunov_edge_state_3D.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebgodunov_plm.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebgodunov_plm_fpu.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebmol_edge_state.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebmol_extrap_vel_to_faces.o tmp_build_dir/o/3d.gnu.EXE/hydro_ebmol_extrap_vel_to_faces_box.o tmp_build_dir/o/3d.gnu.EXE/AMReX.o tmp_build_dir/o/3d.gnu.EXE/AMReX_error_fi.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Version.o tmp_build_dir/o/3d.gnu.EXE/AMReX_PODVector.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BlockMutex.o tmp_build_dir/o/3d.gnu.EXE/AMReX_String.o tmp_build_dir/o/3d.gnu.EXE/AMReX_ParmParse.o tmp_build_dir/o/3d.gnu.EXE/AMReX_parmparse_fi.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Utility.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FileSystem.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Random.o tmp_build_dir/o/3d.gnu.EXE/AMReX_DistributionMapping.o tmp_build_dir/o/3d.gnu.EXE/AMReX_ParallelDescriptor.o tmp_build_dir/o/3d.gnu.EXE/AMReX_OpenMP.o tmp_build_dir/o/3d.gnu.EXE/AMReX_ForkJoin.o tmp_build_dir/o/3d.gnu.EXE/AMReX_ParallelContext.o tmp_build_dir/o/3d.gnu.EXE/AMReX_VisMF.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Arena.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BArena.o tmp_build_dir/o/3d.gnu.EXE/AMReX_CArena.o tmp_build_dir/o/3d.gnu.EXE/AMReX_PArena.o tmp_build_dir/o/3d.gnu.EXE/AMReX_SArena.o tmp_build_dir/o/3d.gnu.EXE/AMReX_AsyncOut.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BackgroundThread.o tmp_build_dir/o/3d.gnu.EXE/AMReX_NFiles.o tmp_build_dir/o/3d.gnu.EXE/AMReX_parstream.o tmp_build_dir/o/3d.gnu.EXE/AMReX_GpuControl.o tmp_build_dir/o/3d.gnu.EXE/AMReX_GpuDevice.o tmp_build_dir/o/3d.gnu.EXE/AMReX_GpuUtility.o tmp_build_dir/o/3d.gnu.EXE/AMReX_GpuAsyncArray.o tmp_build_dir/o/3d.gnu.EXE/AMReX_GpuElixir.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FabConv.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FPC.o tmp_build_dir/o/3d.gnu.EXE/AMReX_IntConv.o tmp_build_dir/o/3d.gnu.EXE/AMReX_VectorIO.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Box.o tmp_build_dir/o/3d.gnu.EXE/AMReX_IndexType.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Orientation.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Periodicity.o tmp_build_dir/o/3d.gnu.EXE/AMReX_RealBox.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BoxList.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BoxArray.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BoxDomain.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FArrayBox.o tmp_build_dir/o/3d.gnu.EXE/AMReX_IArrayBox.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BaseFab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MultiFab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MFCopyDescriptor.o tmp_build_dir/o/3d.gnu.EXE/AMReX_iMultiFab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FabArrayBase.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MFIter.o tmp_build_dir/o/3d.gnu.EXE/AMReX_CoordSys.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Geometry.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MultiFabUtil.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BCRec.o tmp_build_dir/o/3d.gnu.EXE/AMReX_PhysBCFunct.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BCUtil.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FilCC_C.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FilND_C.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FilFC_C.o tmp_build_dir/o/3d.gnu.EXE/AMReX_NonLocalBC.o tmp_build_dir/o/3d.gnu.EXE/AMReX_PlotFileUtil.o tmp_build_dir/o/3d.gnu.EXE/AMReX_PlotFileDataImpl.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BLProfiler.o tmp_build_dir/o/3d.gnu.EXE/AMReX_BLBackTrace.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MemPool.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Machine.o tmp_build_dir/o/3d.gnu.EXE/amrex_parser.lex.o tmp_build_dir/o/3d.gnu.EXE/amrex_parser.tab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Parser_Y.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Parser_Exe.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Parser.o tmp_build_dir/o/3d.gnu.EXE/amrex_iparser.lex.o tmp_build_dir/o/3d.gnu.EXE/amrex_iparser.tab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_IParser_Y.o tmp_build_dir/o/3d.gnu.EXE/AMReX_IParser_Exe.o tmp_build_dir/o/3d.gnu.EXE/AMReX_IParser.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Mask.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MultiMask.o tmp_build_dir/o/3d.gnu.EXE/AMReX_LO_BCTYPES.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EdgeFluxRegister.o tmp_build_dir/o/3d.gnu.EXE/AMReX_AmrCore.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Cluster.o tmp_build_dir/o/3d.gnu.EXE/AMReX_ErrorList.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FillPatchUtil.o tmp_build_dir/o/3d.gnu.EXE/AMReX_FluxRegister.o tmp_build_dir/o/3d.gnu.EXE/AMReX_Interpolater.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MFInterpolater.o tmp_build_dir/o/3d.gnu.EXE/AMReX_TagBox.o tmp_build_dir/o/3d.gnu.EXE/AMReX_AmrMesh.o tmp_build_dir/o/3d.gnu.EXE/AMReX_InterpBase.o tmp_build_dir/o/3d.gnu.EXE/AMReX_InterpFaceRegister.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLMG.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeLinOp.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLEBABecLap.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLEBABecLap_F.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeABecLaplacian.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeLaplacian.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeLaplacian_sync.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeLaplacian_sten.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeLaplacian_misc.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeLaplacian_eb.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLTensorOp.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLTensorOp_grad.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLEBTensorOp.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLEBTensorOp_bc.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLCurlCurl.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLEBNodeFDLaplacian.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MLNodeTensorLaplacian.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBFArrayBox.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBFabFactory.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBMultiFabUtil.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBCellFlag.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBDataCollection.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MultiCutFab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBInterpolater.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBMFInterpolater.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBFluxRegister.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBAmrUtil.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_utils.o tmp_build_dir/o/3d.gnu.EXE/AMReX_algoim.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_Redistribution.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_RedistributionApply.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_FluxRedistribute.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_StateRedistribute.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_StateRedistUtils.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_StateRedistItracker.o tmp_build_dir/o/3d.gnu.EXE/AMReX_distFcnElement.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_Level.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_MultiGFab.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_3D_C.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_ND_C.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_STL_utils.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_Level_STL.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_IndexSpace_STL.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB_chkpt_file.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_Level_chkpt_file.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EB2_IndexSpace_chkpt_file.o tmp_build_dir/o/3d.gnu.EXE/AMReX_WriteEBSurface.o tmp_build_dir/o/3d.gnu.EXE/AMReX_EBToPVD.o tmp_build_dir/o/3d.gnu.EXE/AMReX_MarchingCubes.o tmp_build_dir/o/3d.gnu.EXE/AMReX_buildInfo.o  -Wl,-rpath,/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/lib -Wl,-rpath,/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/sundials/lib64 -lsundials_arkode -lsundials_cvode -lsundials_nvecmanyvector -L/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_cvode -lsundials_arkode -L/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_core -lsundials_nvecserial -Wl,-rpath=/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib 
+rm -f AMReX_buildInfo.cpp
+SUCCESS
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleCompilation succeeded. Now run 30 steps:]0;🐳 CodeWhaletool: exec_shell (command: <146 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+2183344
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: sleep 30 && tail -5 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: sleep 120 && tail -10 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: sleep 180 && tail -15 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: ps aux | grep PeleLMeX | grep -v grep)
+tool exec_shell completed
+--- stdout/stderr ---
+cj       2105511  0.0  0.0   9940  2092 ?        S    09:21   0:00 bash -c pkill PeleLMeX3d; sleep 1; cd ~/my-pele/examples/engineering/h2_leak_3cyl_kepsilon && rm -rf plt0* && nohup ./PeleLMeX3d.gnu.ex input.3d amr.max_step=500 amr.plot_int=100 > run_ke_500.log 2>&1 & echo PID:$!
+cj       2105513 99.9  5.4 7223656 7213172 ?     RL   09:21 758:22 ./PeleLMeX3d.gnu.ex input.3d amr.max_step=500 amr.plot_int=100
+cj       2181261  0.0  0.0   9940  3596 ?        S    21:49   0:00 bash -c cd /home/cj/my-pele/examples/engineering/c3h8_flacs && ./PeleLMeX3d.gnu.ex input.3d 2>&1 | tee stdout.log
+cj       2181264 99.9  3.1 4147828 4139488 ?     RL   21:49  10:56 ./PeleLMeX3d.gnu.ex input.3d
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <263 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+---
+-rw-rw-r-- 1 cj cj 1214 Jun 22 21:54 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log
+---
+-rw-rw-r-- 1 cj cj 12802 Jun 22 22:00 /home/cj/my-pele/examples/engineering/c3h8_flacs/stdout.log
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <283 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+    PID STAT     ELAPSED COMMAND
+---
+41 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log
+---
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+===
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03244585262, divu: 4.03815491
+ STEP [27] - Time: 0.8781620399, dt 0.03244585262, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.8781620399
+   SDC iter [1] 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <99 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: None)
+
+STDOUT:
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: ps aux | grep -E "PeleLMeX|2183344|2181264" | grep -v grep)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+
+
+STDERR:
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleGood, all processes killed. Let me restart with the new binary:]0;🐋 CodeWhaletool: exec_shell (command: <148 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+PeleLMeX3d.gnu.ex
+6fd28a6a4753bea2cc8613235c84537d  PeleLMeX3d.gnu.ex
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <206 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Started PID: 2183830
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <170 chars>)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+---
+    PID STAT     ELAPSED %MEM   RSS
+Process ended
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: tail -30 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+tool exec_shell completed
+--- stdout/stderr ---
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 7
+ Temperature: 8
+ thermo. pressure: 9
+ => Total number of state variables: 10
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <221 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+---
+---
+41
+
+
+STDERR:
+dmesg: read kernel buffer failed: Operation not permitted
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <196 chars>)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+EXIT CODE: 124
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <90 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+               total        used        free      shared  buff/cache   available
+Mem:           125Gi       8.7Gi        69Gi        44Mi        48Gi       117Gi
+Swap:          8.0Gi          0B       8.0Gi
+---
+ STEP [1] - Time: 0.03382949932, dt 0.03331822968, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.03382949932
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 21.50217523
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03289065471, divu: 3.970233122
+ STEP [2] - Time: 0.06714772901, dt 0.03289065471, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.06714772901
+   SDC iter [1] 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: ps aux | grep PeleLMeX3d | grep -v grep)
+tool exec_shell completed
+--- stdout/stderr ---
+cj       2183921  0.0  0.0   9940  3648 ?        S    22:01   0:00 bash -c cd /home/cj/my-pele/examples/engineering/c3h8_flacs && ./PeleLMeX3d.gnu.ex input.3d > stdout.log 2>&1
+cj       2183924 99.9  3.1 4227344 4219672 ?     RL   22:01   3:24 ./PeleLMeX3d.gnu.ex input.3d
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <109 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: None)
+
+STDOUT:
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <176 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+-rwxrwxr-x 1 cj cj 52728768 Jun 22 21:54 /home/cj/my-pele/examples/engineering/c3h8_flacs/PeleLMeX3d.gnu.ex
+---
+Modify: 2026-06-22 21:54:33.743737223 +0800
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleThe binary was compiled at 21:54 (after my edits) and the running process started at 22:01 —]0;🐋 CodeWhale it's using the new code. Let me wait for it to finish 30 steps.]0;🐳 CodeWhaletool: exec_shell (command: <188 chars>)
+
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03241019153, divu: 4.032474724
+ STEP [6] - Time: 0.1975648533, dt 0.03241019153, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1975648533
+   SDC iter [1] 
+---
+Level_0
+
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00010:
+Header
+Level_0
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <93 chars>)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command timed out after 600000ms; process killed.
+
+Foreground exec_shell is for bounded commands. The timed-out process was killed; rerun long work with task_shell_start or exec_shell with background: true, then poll with task_shell_wait or exec_shell_wait.
+
+STDOUT:
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <162 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 21.14457831
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03245228638, divu: 4.030158973
+ STEP [5] - Time: 0.165112567, dt 0.03245228638, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.165112567
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 20.59980713
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03241019153, divu: 4.032474724
+ STEP [6] - Time: 0.1975648533, dt 0.03241019153, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1975648533
+   SDC iter [1] 
+===
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00000:
+Header
+Level_0
+
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00000.old.4694439:
+Header
+Level_0
+
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00000.old.8173716:
+Header
+Level_0
+
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00010:
+Header
+Level_0
+
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00010.old.4441268:
+Header
+Level_0
+
+/home/cj/my-pele/examples/engineering/c3h8_flacs/plt00020:
+Header
+Level_0
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <303 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(2))
+
+STDOUT:
+-rw-rw-r-- 1 cj cj 496 Jun 22 22:21 /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00010/Header
+-rw-rw-r-- 1 cj cj 458 Jun 22 22:18 /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00000/Header
+-rw-rw-r-- 1 cj cj 496 Jun 22 22:14 /home/cj/my-pele/examples/engineering/c3h8_flacs/plt00020/Header
+---
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: head -20 /home/cj/my-pele/examples/engineering/c3h8_flacs/stdout.log)
+tool exec_shell completed
+--- stdout/stderr ---
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <155 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+    PID STAT     ELAPSED COMMAND
+Process not found
+---
+5873 /home/cj/my-pele/examples/engineering/c3h8_flacs/stdout.log
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <100 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: None)
+
+STDOUT:
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <201 chars>)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+EXIT=1
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: tail -30 /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+tool exec_shell completed
+--- stdout/stderr ---
+This call (`exec_shell`) has already been made 3 times this turn with the same arguments — try a different approach or change the arguments.
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/run.log)
+tool read_file completed: Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash:...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe run completed 5 steps (segfault on cleanup but plotfiles written). Let me analyze the k field.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <5 items>)
+
+tool checklist_write completed: Todo list updated (5 items, 80% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Add m_ke_k_amb, m_ke_eps_amb member variables to PeleLMeX.H",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Initialize ambient k/ε in PeleLMeX_Setup.cpp (input or defaults)"...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <1478 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Comp names: ['x_velocity', 'y_velocity', 'z_velocity', 'density', 'rhoh', 'temp', 'RhoRT', 'divu', 'gradpx', 'gradpy', 'gradpz', 'k', 'epsilon', 'volFrac', 'avg_pressure', 'mag_vort', 'Y(N2)', 'Y(O2)', 'Y(C3H8)']
+k at index 11, eps at index 12
+
+Cell_H (first 800 chars):
+1
+1
+19
+0
+(12 0
+((0,0,0) (63,51,47) (0,0,0))
+((64,0,0) (127,51,47) (0,0,0))
+((128,0,0) (159,51,47) (0,0,0))
+((0,52,0) (63,99,47) (0,0,0))
+((64,52,0) (127,99,47) (0,0,0))
+((128,52,0) (159,99,47) (0,0,0))
+((0,0,48) (63,51,79) (0,0,0))
+((64,0,48) (127,51,79) (0,0,0))
+((128,0,48) (159,51,79) (0,0,0))
+((0,52,48) (63,99,79) (0,0,0))
+((64,52,48) (127,99,79) (0,0,0))
+((128,52,48) (159,99,79) (0,0,0))
+)
+12
+FabOnDisk: Cell_D_00000 0
+FabOnDisk: Cell_D_00000 24281178
+FabOnDisk: Cell_D_00000 48562358
+FabOnDisk: Cell_D_00000 60702995
+FabOnDisk: Cell_D_00000 83116398
+FabOnDisk: Cell_D_00000 105529803
+FabOnDisk: Cell_D_00000 116736553
+FabOnDisk: Cell_D_00000 132924036
+FabOnDisk: Cell_D_00000 149111521
+FabOnDisk: Cell_D_00000 157205311
+FabOnDisk: Cell_D_00000 172147611
+FabOnDisk: Cell_D_00000 187089913
+
+12,
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <3052 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Number of boxes: 12
+Cell_D size: 194561112 bytes
+Box 0 data size: 24281088 bytes (3035136 doubles)
+Offset diff box 1-0: 24281178
+FAB header size: 90 bytes (11 doubles)
+
+Header=40: k min/mean/max = nan/nan/nan
+
+Header=48: k min/mean/max = nan/nan/nan
+
+Header=56: k min/mean/max = nan/nan/nan
+
+Header=64: k min/mean/max = nan/nan/nan
+
+Header=72: k min/mean/max = nan/nan/nan
+
+Header=80: k min/mean/max = nan/nan/nan
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <2260 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Offset 0: magic = 46414220 = b'FAB '
+
+First 32 int32 at offset 0: (541212998, 741877800, 875964448, 540094752, 807416373, 824193312, 540024882, 858927153, 673982761, 673197112, 540483640, 540352566, 540221492, 691085362, 673720617, 741354544, 673196336, 892089142, 926166065, 807936041, 808202284, 824191273, 1428752953, 2061580850, -1754775544, 2061571953, -712163320, 2061561041, -634699768, 2061550326, -622641144, 2061539533)
+  hdr=0: 10000 values, 10000 non-NaN, range [1.28e-153, 2.25e+284]
+  hdr=8: 10000 values, 10000 non-NaN, range [1.28e-153, 2.25e+284]
+  hdr=16: 10000 values, 10000 non-NaN, range [1.58e-153, 2.25e+284]
+  hdr=24: 10000 values, 10000 non-NaN, range [1.58e-153, 2.25e+284]
+  hdr=32: 10000 values, 10000 non-NaN, range [1.58e-153, 2.25e+284]
+  hdr=40: 10000 values, 10000 non-NaN, range [1.58e-153, 2.25e+284]
+  hdr=48: 10000 values, 10000 non-NaN, range [2.85e-110, 2.25e+284]
+  hdr=56: 10000 values, 10000 non-NaN, range [7.57e-96, 2.25e+284]
+  hdr=64: 10000 values, 10000 non-NaN, range [1.04e-76, 2.25e+284]
+  hdr=72: 10000 values, 10000 non-NaN, range [1.04e-76, 2.25e+284]
+  hdr=80: 10000 values, 10000 non-NaN, range [4.57e-72, 2.25e+284]
+  hdr=88: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=96: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=104: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=112: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=120: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=128: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=136: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=144: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=152: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=160: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=168: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=176: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=184: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+  hdr=192: 10000 values, 10000 non-NaN, range [7.79e+282, 2.25e+284]
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <3687 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Box 0: lo=(0, 0, 0), hi=(63, 51, 47), size=64x52x48
+Read 3035136 doubles, expected 3035136
+Value range: [-4.1509e-01, 1.0133e+05]
+Nan count: 0
+
+Layout (nz,ny,nx,ncomp): velx range [-0.2889,101325.0000], k range [-3.7038e-01,1.0133e+05]
+Layout (ncomp,nz,ny,nx): velx range [3.0230,3.0895], k range [4.6568e-03,9.7203e-01]
+Layout (nx,ny,nz,ncomp): velx range [-0.2889,101325.0000], k range [-3.7038e-01,1.0133e+05]
+
+*** BEST MATCH: (ncomp,nz,ny,nx) ***
+  velx mean=3.0600 (expected ~3-8)
+  k mean=8.0538e-02
+  k min=4.6568e-03
+  k max=9.7203e-01
+  k at inlet region (first 10 x-cells): 2.0805e-01
+  k in far-field (away from leak): 8.4537e-02
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleExcellent improvement! k at inlet went from ~0.0013 to 0.208 (160× improvement). Let me check the initial condition and also run the full 30 steps.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <2649 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+============================================================
+INITIAL (plt00000) - Box 0 (inlet corner)
+  k:  min=9.5964e-03, mean=9.5964e-03, max=9.5964e-03
+  eps: min=5.5254e-02, mean=5.5254e-02, max=5.5254e-02
+  k at inlet face (x first 2 cells): mean=9.5964e-03
+
+AFTER 5 STEPS (plt00005) - Box 0 (inlet corner)
+  k:  min=4.6568e-03, mean=8.0538e-02, max=9.7203e-01
+  eps: min=1.0394e-02, mean=1.6203e-02, max=7.9407e-02
+  k at inlet face (x first 2 cells): mean=7.4441e-01
+
+AFTER 5 STEPS - Box 4 (far field)
+  k:  min=-1.6032e+307, mean=-2.2423e+302, max=2.0815e+306
+
+Expected inlet: k=0.9596, eps=0.0772
+Ambient terms: k_amb=0.02, eps_amb=0.002
+Ratio k5_inlet/k_inlet = 0.776
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1489 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Box 0: lo=(0,0,0) hi=(63,51,47)
+  k[4.6568e-03, 8.0538e-02, 9.7203e-01]
+  eps[1.0394e-02, 1.6203e-02, 7.9407e-02]
+  velx range: [3.023, 3.090]
+Box 1: lo=(64,0,0) hi=(127,51,47) -- CONTAINS NaN/Inf, skip
+Box 2: lo=(128,0,0) hi=(159,51,47) -- CONTAINS NaN/Inf, skip
+Box 3: lo=(0,52,0) hi=(63,99,47)
+  k[-4.1754e+215, 1.1464e+257, 1.2814e+262]
+  eps[-5.4974e-59, -1.0591e-62, -3.4101e-283]
+  velx range: [0.000, 0.000]
+Box 4: lo=(64,52,0) hi=(127,99,47)
+  k[-1.6032e+307, -2.2423e+302, 2.0815e+306]
+  eps[-3.8970e+306, -3.1182e+302, 1.5596e+304]
+  velx range: [nan, nan]
+Box 5: lo=(128,52,0) hi=(159,99,47) -- CONTAINS NaN/Inf, skip
+Box 6: lo=(0,0,48) hi=(63,51,79)
+  k[-1.5917e+227, 4.3319e+279, 3.6295e+284]
+  eps[-1.2748e-56, -2.5254e-59, -3.4101e-283]
+  velx range: [0.000, 0.000]
+Box 7: lo=(64,0,48) hi=(127,51,79) -- CONTAINS NaN/Inf, skip
+Box 8: lo=(128,0,48) hi=(159,51,79) -- CONTAINS NaN/Inf, skip
+Box 9: lo=(0,52,48) hi=(63,99,79)
+  k[-2.2138e+304, -2.2520e+299, 3.1445e+294]
+  eps[nan, nan, nan]
+  velx range: [80298861824754987416705191763717896936543960981184876043849249235786576085608242946239141616142154593207818074560412397909926689244137954946674915413687028668721813830729801498033038660202414191536877578291466659544431173772630258517360170740966534413785337577788983710986555917074432.000, 406789655772089835546700561252031558642700543252177180677718421038869779244970693260243391727478471669841470308094182245249316064214820665381819788830294856480254421889716286438962660009141942196484566061221641825523064848468377857118735909577758569448120292561578366878645380978835456.000]
+Box 10: lo=(64,52,48) hi=(127,99,79) -- CONTAINS NaN/Inf, skip
+Box 11: lo=(128,52,48) hi=(159,99,79) -- CONTAINS NaN/Inf, skip
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <2098 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Magic (8 bytes): b'FAB ((8,'
+
+Header bytes (hex):
+     0: 46 41 42 20 28 28 38 2c 20 28 36 34 20 31 31 20  FAB ((8, (64 11 
+    16: 35 32 20 30 20 31 20 31 32 20 30 20 31 30 32 33  52 0 1 12 0 1023
+    32: 29 29 2c 28 38 2c 20 28 38 20 37 20 36 20 35 20  )),(8, (8 7 6 5 
+    48: 34 20 33 20 32 20 31 29 29 29 28 28 30 2c 30 2c  4 3 2 1)))((0,0,
+    64: 30 29 20 28 36 33 2c 35 31 2c 34 37 29 20 28 30  0) (63,51,47) (0
+    80: 2c 30 2c 30 29 29 20 31 39 0a 29 55 32 3a e1 7a  ,0,0)) 19.)U2:.z
+    96: 08 40 68 97 71 17 e1 7a 08 40 8d d5 d1 ec e0 7a  .@h.q..z.@.....z
+   112: 08 40 2b da f6 c2 e0 7a 08 40 e3 da cd 98 e0 7a  .@+....z.@.....z
+
+Box 0 k: min=4.6568e-03, mean=8.0538e-02, max=9.7203e-01
+
+Box 1 magic at offset 24281178: b'FAB '
+Box 1 k: min=nan, mean=nan, max=nan
+  Has NaN -- adjusting header
+  hdr=84 works! k mean=5.6924e-02
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <3055 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Box at offset 0: header ends at 90 (size=90)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,0,0) (63,51,47) (0,0,0)) 19\n'
+Box at offset 24281178: header ends at 24281270 (size=92)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((64,0,0) (127,51,47) (0,0,0)) 19\n'
+Box at offset 48562358: header ends at 48562451 (size=93)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((128,0,0) (159,51,47) (0,0,0)) 19\n'
+Box at offset 60702995: header ends at 60703086 (size=91)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,52,0) (63,99,47) (0,0,0)) 19\n'
+Box at offset 83116398: header ends at 83116491 (size=93)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((64,52,0) (127,99,47) (0,0,0)) 19\n'
+Box at offset 105529803: header ends at 105529897 (size=94)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((128,52,0) (159,99,47) (0,0,0)) 19\n'
+Box at offset 116736553: header ends at 116736644 (size=91)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,0,48) (63,51,79) (0,0,0)) 19\n'
+Box at offset 132924036: header ends at 132924129 (size=93)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((64,0,48) (127,51,79) (0,0,0)) 19\n'
+Box at offset 149111521: header ends at 149111615 (size=94)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((128,0,48) (159,51,79) (0,0,0)) 19\n'
+Box at offset 157205311: header ends at 157205403 (size=92)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,52,48) (63,99,79) (0,0,0)) 19\n'
+Box at offset 172147611: header ends at 172147705 (size=94)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((64,52,48) (127,99,79) (0,0,0)) 19\n'
+Box at offset 187089913: header ends at 187090008 (size=95)
+  Header: b'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((128,52,48) (159,99,79) (0,0,0)) 19\n'
+Box 0 [0-63,0-51,0-47]: k[4.657e-03,8.054e-02,9.720e-01], eps[1.039e-02,1.620e-02,7.941e-02], velx[3.02,3.09]
+Box 1 [64-127,0-51,0-47]: k[4.516e-03,5.692e-02,9.648e-01], eps[1.010e-02,1.430e-02,7.945e-02], velx[2.68,3.41]
+Box 2 [128-159,0-51,0-47]: k[4.657e-03,5.700e-02,9.660e-01], eps[1.039e-02,1.435e-02,7.955e-02], velx[3.06,3.06]
+Box 3 [0-63,52-99,0-47]: k[4.657e-03,2.965e-02,8.969e-01], eps[1.039e-02,1.249e-02,7.749e-02], velx[3.06,3.06]
+Box 4 [64-127,52-99,0-47]: k[4.657e-03,4.675e-03,5.373e-03], eps[1.039e-02,1.046e-02,1.305e-02], velx[3.06,3.06]
+Box 5 [128-159,52-99,0-47]: k[4.657e-03,4.685e-03,5.766e-03], eps[1.039e-02,1.050e-02,1.453e-02], velx[3.06,3.06]
+Box 6 [0-63,0-51,48-79]: k[4.657e-03,8.058e-02,9.720e-01], eps[1.039e-02,1.623e-02,7.941e-02], velx[3.06,3.06]
+Box 7 [64-127,0-51,48-79]: k[4.657e-03,5.696e-02,9.648e-01], eps[1.039e-02,1.432e-02,7.945e-02], velx[3.06,3.06]
+Box 8 [128-159,0-51,48-79]: k[4.657e-03,5.703e-02,9.660e-01], eps[1.039e-02,1.437e-02,7.955e-02], velx[3.06,3.06]
+Box 9 [0-63,52-99,48-79]: k[4.657e-03,2.967e-02,8.969e-01], eps[1.039e-02,1.251e-02,7.749e-02], velx[3.06,3.06]
+Box 10 [64-127,52-99,48-79]: k[4.657e-03,4.679e-03,5.373e-03], eps[1.039e-02,1.048e-02,1.305e-02], velx[3.06,3.06]
+Box 11 [128-159,52-99,48-79]: k[4.657e-03,4.689e-03,5.766e-03], eps[1.039e-02,1.052e-02,1.453e-02], velx[3.06,3.06]
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleThe k data shows boxes far from inlets (4,5,10,11) have k≈0.0047 — low because my ambient settings were]0;🐋 CodeWhale inconsistent. Let me fix the input with proper ambient values and run 30 steps.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
++++ b//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
+@@ -67,9 +67,9 @@
+ peleLM.chem_integrator = ReactorNull
+ peleLM.aux_vars = k epsilon
+ # Ambient k/epsilon for free-stream maintenance (prevents excessive decay)
+-# ambie...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleGood — no recompile needed (runtime parameters). Let me run the full 30 steps.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <215 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+PID=2185663
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <178 chars>)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+0
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <143 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+41 /home/cj/my-pele/examples/engineering/c3h8_flacs/run_final.log
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: ps -p 2185663 -o pid,stat,etime,%cpu,%mem 2>/dev/null || echo "Process ended")
+tool exec_shell completed
+--- stdout/stderr ---
+    PID STAT     ELAPSED %CPU %MEM
+Process ended
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/run_final.log)
+tool read_file completed: Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash:...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <177 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Header
+Level_0
+---
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <177 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+cleaned
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <132 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_eed8f7bb
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <160 chars>)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+ STEP [2] - Time: 0.06714772901, dt 0.03289066633, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.06714772901
+   SDC iter [1] 
+---
+no such process
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell_wait (task_id: shell_eed8f7bb)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell_wait completed: Command failed (exit code: Some(1))
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: tail -20 /home/cj/my-pele/examples/engineering/c3h8_flacs/run30.log)
+tool exec_shell completed
+--- stdout/stderr ---
+ Est. time step - Conv: 0.03245182507, divu: 4.052001507
+ STEP [28] - Time: 0.9106435405, dt 0.03245182507, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.9106435405
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 20.21133428
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.03245409832, divu: 4.052830779
+ STEP [29] - Time: 0.9430953655, dt 0.03245409832, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.9430953655
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 20.06498858
+
+ Writing plotfile: plt00030
+
+ >> Final simulation time: 0.9755494638
+
+Total Time: 673.1024732
+Segfault
+See Backtrace.0 file for details
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale30 steps completed, plotfile written. Now let me verify k distribution improvement:]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <4308 chars>)
+
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+======================================================================
+k-epsilon FREE-STREAM DECAY FIX — 30-STEP VERIFICATION
+======================================================================
+Ambient: k_amb=0.05, eps_amb=0.01
+Inlet BC: I=10%, U=8m/s → k_inlet=0.96, eps_inlet=0.077
+
+ Box      x-range      y-range |      k_min     k_mean      k_max | Notes
+----------------------------------------------------------------------
+   0        0-32m        0-26m |  9.850e-03  3.524e-01  1.143e+00 | INLET CORNER (lower) *** PLUME
+   1       32-64m        0-26m |  9.837e-03  2.782e-01  1.140e+00 | near y-inlet (lower) *** PLUME
+   2       64-80m        0-26m |  9.848e-03  2.801e-01  1.214e+00 | near y-inlet (lower) *** PLUME
+   3        0-32m       26-50m |  9.844e-03  1.137e-01  1.077e+00 | near x-inlet (lower) *** PLUME
+   4       32-64m       26-50m |  9.841e-03  1.020e-02  2.767e-02 |  (lower)
+   5       64-80m       26-50m |  9.841e-03  1.038e-02  3.717e-02 | far downstream (lower)
+   6        0-32m        0-26m |  9.850e-03  3.545e-01  1.143e+00 | INLET CORNER (upper) *** PLUME
+   7       32-64m        0-26m |  9.848e-03  2.799e-01  1.140e+00 | near y-inlet (upper) *** PLUME
+   8       64-80m        0-26m |  9.848e-03  2.819e-01  1.214e+00 | near y-inlet (upper) *** PLUME
+   9        0-32m       26-50m |  9.844e-03  1.145e-01  1.077e+00 | near x-inlet (upper) *** PLUME
+  10       32-64m       26-50m |  9.841e-03  1.033e-02  2.767e-02 |  (upper)
+  11       64-80m       26-50m |  9.841e-03  1.051e-02  3.717e-02 | far downstream (upper)
+
+======================================================================
+COMPARISON: BEFORE vs AFTER FIX
+======================================================================
+Region                Before (old code)   After (with fix)     Improvement
+----------------------------------------------------------------------
+Inlet corner                  1.300e-03          3.535e-01           271.9x
+Far downstream                1.300e-03          1.035e-02             8.0x
+Domain min                    1.300e-03          9.837e-03             7.6x
+Domain mean                     ~1.3e-3          1.747e-01               —
+
+Inlet BC value: k=0.96
+Free-stream k / inlet k = 18.2%
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <5 items>)
+tool checklist_write completed: Todo list updated (5 items, 100% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Add m_ke_k_amb, m_ke_eps_amb member variables to PeleLMeX.H",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Initialize ambient k/ε in PeleLMeX_Setup.cpp (input or defaults)...

@@ -1,0 +1,120 @@
+[strict-external-artifact-receiving-preflight] START 2026-08-20T07:48:28Z
+strict external artifact drop index
+===================================
+status: PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX
+strict completion allowed: no
+domains: 3
+templates: 16
+required files: 14
+present files: 5
+missing files: 9
+
+Operator next steps
+-------------------
+- Copy each *_template file to the matching non-template target path listed in domain_drop_index.
+- Fill JSON required keys and CSV headers without renaming columns.
+- Run bash tools/verify_strict_artifact_drop_contract_preflight.sh before asking for strict closeout.
+- Then run bash tools/run_current_scope_release_refresh.sh to rebuild all closure evidence.
+
+external_plume
+--------------
+required files: 5
+present files: 0
+missing files: 5
+- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv
+  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json
+  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata_template.json
+- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record.csv
+  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv
+  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv
+  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates_template.csv
+
+fire_calibration
+----------------
+required files: 5
+present files: 5
+missing files: 0
+- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json
+  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json
+- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv
+  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv
+  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv
+  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv
+  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv
+
+real_cad
+--------
+required files: 4
+present files: 0
+missing files: 4
+- target: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv
+  template: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json
+  template: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest_template.json
+- target: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv
+  template: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record_template.csv
+- target: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv
+  template: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index_template.csv
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/write_strict_artifact_drop_contract_preflight_report.py", line 414, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/cj/my-pele/tools/write_strict_artifact_drop_contract_preflight_report.py", line 399, in main
+    validate_report(data, verify_hashes=True)
+  File "/home/cj/my-pele/tools/write_strict_artifact_drop_contract_preflight_report.py", line 360, in validate_report
+    require(entry.get("sha256") == sha256_file(path), f"hash mismatch: {path}")
+  File "/home/cj/my-pele/tools/write_strict_artifact_drop_contract_preflight_report.py", line 132, in require
+    raise DropContractError(message)
+DropContractError: hash mismatch: docs/codex_audit/evidence/master_plan_strict_artifact_drop_preflight_20260731/master_plan_strict_artifact_drop_preflight_report.json
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_drop_index_report.py", line 300, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_drop_index_report.py", line 285, in main
+    validate_report(data)
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_drop_index_report.py", line 242, in validate_report
+    require(entry["sha256"] == sha256_file(path), f"sha256 mismatch: {path}")
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_drop_index_report.py", line 72, in require
+    raise DropIndexError(message)
+DropIndexError: sha256 mismatch: docs/codex_audit/evidence/master_plan_strict_artifact_intake_manifest_20260731/master_plan_strict_artifact_intake_manifest_report.json
+strict_external_artifact_drop_checklist VERIFY-PASS json=docs/codex_audit/evidence/strict_external_artifact_drop_checklist_20260812/strict_external_artifact_drop_checklist_report.json status=PASS-STRICT-EXTERNAL-ARTIFACT-DROP-CHECKLIST
+strict_external_evidence_receiving_pack PASS json=docs/codex_audit/evidence/strict_external_evidence_receiving_pack_20260812/strict_external_evidence_receiving_pack_report.json md=docs/codex_audit/evidence/strict_external_evidence_receiving_pack_20260812/strict_external_evidence_receiving_pack_report.md status=PASS-STRICT-EXTERNAL-EVIDENCE-RECEIVING-PACK
+strict_external_evidence_receiving_pack VERIFY-PASS json=docs/codex_audit/evidence/strict_external_evidence_receiving_pack_20260812/strict_external_evidence_receiving_pack_report.json status=PASS-STRICT-EXTERNAL-EVIDENCE-RECEIVING-PACK
+[strict-external-evidence-receiving-pack] PASS receiving pack
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 436, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 425, in main
+    report = build_report(Path(args.guide))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 319, in build_report
+    validate_report(report, verify_hashes=False)
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 354, in validate_report
+    require(required_text in guide_text, f"generated guide missing text: {required_text}")
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 57, in require
+    raise HandoffError(message)
+HandoffError: generated guide missing text: bash tools/verify_strict_artifact_drop_contract_preflight.sh
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 436, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 421, in main
+    validate_report(data)
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 354, in validate_report
+    require(required_text in guide_text, f"generated guide missing text: {required_text}")
+  File "/home/cj/my-pele/tools/write_strict_external_artifact_cn_handoff_report.py", line 57, in require
+    raise HandoffError(message)
+HandoffError: generated guide missing text: bash tools/verify_strict_artifact_drop_contract_preflight.sh
+strict_master_plan_closeout_action_pack PASS json=docs/codex_audit/evidence/strict_master_plan_closeout_action_pack_20260812/strict_master_plan_closeout_action_pack_report.json md=docs/codex_audit/evidence/strict_master_plan_closeout_action_pack_20260812/strict_master_plan_closeout_action_pack_report.md status=PASS-STRICT-MASTER-PLAN-CLOSEOUT-ACTION-PACK
+strict_master_plan_closeout_action_pack VERIFY-PASS json=docs/codex_audit/evidence/strict_master_plan_closeout_action_pack_20260812/strict_master_plan_closeout_action_pack_report.json status=PASS-STRICT-MASTER-PLAN-CLOSEOUT-ACTION-PACK
+[strict-master-plan-closeout-action-pack] PASS action pack
+current_status_cli PASS json=docs/codex_audit/evidence/current_status_cli_20260803/current_status_cli_report.json md=docs/codex_audit/evidence/current_status_cli_20260803/current_status_cli_report.md status=PASS-CURRENT-STATUS-CLI
+current_status_cli VERIFY-PASS json=docs/codex_audit/evidence/current_status_cli_20260803/current_status_cli_report.json status=PASS-CURRENT-STATUS-CLI
+STRICT_EXTERNAL_ARTIFACT_RECEIVING_PREFLIGHT_RC=0

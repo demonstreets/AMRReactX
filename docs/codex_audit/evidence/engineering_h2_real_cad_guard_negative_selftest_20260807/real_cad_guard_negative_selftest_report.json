@@ -1,0 +1,211 @@
+{
+  "evidence_files": [
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "c627b4e4eb0a9018976c609c2e801c21a5abcc6e8c90e1c3bd295fc80ca27ac6",
+      "size_bytes": 5093
+    },
+    {
+      "label": "real_cad_intake_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "sha256": "da94058dd5d7517d0fc2f961cfa6e618141e90f7afe560d71cf0dc4d7b637ca9",
+      "size_bytes": 6969
+    },
+    {
+      "label": "real_cad_boundary_tag_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_boundary_tag_contract_20260724/real_cad_boundary_tag_contract_report.json",
+      "sha256": "813cae304daa336538e7960fc3e3e333e0bc82245e11fde885fe7f9139e959ad",
+      "size_bytes": 5060
+    },
+    {
+      "label": "strict_real_cad_update_report",
+      "path": "docs/codex_audit/evidence/master_plan_strict_real_cad_update_20260731/master_plan_strict_real_cad_update_report.json",
+      "sha256": "63940225914f49df9c81b8c323ffd8bb414d1323717c92c8482285370caeb9b3",
+      "size_bytes": 4359
+    },
+    {
+      "label": "synthetic_manifest_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/synthetic_manifest/real_cad_cleanup_manifest.json",
+      "sha256": "bf176bd6eb19168f25b45791687cb26b47d830cc1c489ad78a9873a0d4eb6ddf",
+      "size_bytes": 3432
+    },
+    {
+      "label": "missing_provenance_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/missing_provenance/real_cad_cleanup_manifest.json",
+      "sha256": "ee87df966fd80914acc0a4966b820d52fec4780900336df2d85b2250d987f3a3",
+      "size_bytes": 3412
+    },
+    {
+      "label": "bad_hash_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/bad_hash/real_cad_cleanup_manifest.json",
+      "sha256": "903b888324127d5cfe5d86a0404e9e48f980bb90931f0588dc80b8f00d5592a3",
+      "size_bytes": 3373
+    },
+    {
+      "label": "too_few_geometries_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/too_few_geometries/real_cad_cleanup_manifest.json",
+      "sha256": "b03e8da155ce3eceb7774e4d5bf2a9780ecd10b7b6808de367418f7ca4ef034c",
+      "size_bytes": 1517
+    },
+    {
+      "label": "data_room_bad_hash_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/data_room_bad_hash/real_cad_data_room_index.csv",
+      "sha256": "1ba2d8568912e0a2c552cb3d706094ad9dc06553145fe93a48554b65518c3c41",
+      "size_bytes": 837
+    },
+    {
+      "label": "cleanup_quality_false_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/cleanup_quality_false/real_cad_cleanup_quality_record.csv",
+      "sha256": "fe1af9388c7dd1bac0fbe82d19c8ef6c6545b43b3e3de4f40322555555fcf302",
+      "size_bytes": 367
+    },
+    {
+      "label": "boundary_placeholder_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/boundary_placeholder/real_cad_boundary_tags.csv",
+      "sha256": "5849e662823f75a728c80c01cec47d007e76b4484d6c9cea63958814c04d808d",
+      "size_bytes": 398
+    },
+    {
+      "label": "boundary_missing_release_fixture",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/boundary_missing_release/real_cad_boundary_tags.csv",
+      "sha256": "bcaf025f76d8704b5f38ac7e57b2b1a7c20a64eb07b3c59683af89504d092afa",
+      "size_bytes": 396
+    }
+  ],
+  "fixture_root": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures",
+  "generated_at_utc": "2026-08-20T10:01:25+00:00",
+  "limitations": [
+    "This is a guard selftest. It does not provide real source CAD or clear the strict real-CAD blocker.",
+    "Positive controls only prove the default reports remain non-claiming until controlled real CAD is supplied."
+  ],
+  "negative_cases": [
+    {
+      "case": "manifest_synthetic_true",
+      "diagnostic": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/synthetic_manifest/real_cad_cleanup_manifest.json must explicitly be non-synthetic",
+      "expected_fragment": "non-synthetic",
+      "expected_fragment_seen": true,
+      "rejected": true
+    },
+    {
+      "case": "manifest_missing_provenance_revision",
+      "diagnostic": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/missing_provenance/real_cad_cleanup_manifest.json missing provenance.revision",
+      "expected_fragment": "provenance.revision",
+      "expected_fragment_seen": true,
+      "rejected": true
+    },
+    {
+      "case": "manifest_source_hash_mismatch",
+      "diagnostic": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/bad_hash/real_cad_cleanup_manifest.json:tank_001:source_cad hash mismatch for docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/bad_hash/source_cad/tank_001.step",
+      "expected_fragment": "hash mismatch",
+      "expected_fragment_seen": true,
+      "rejected": true
+    },
+    {
+      "case": "manifest_large_layout_too_few_geometries",
+      "diagnostic": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/too_few_geometries/real_cad_cleanup_manifest.json large-layout CAD evidence requires at least three geometries",
+      "expected_fragment": "at least three geometries",
+      "expected_fragment_seen": true,
+      "rejected": true
+    },
+    {
+      "case": "data_room_index_bad_sha256",
+      "diagnostic": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/data_room_bad_hash/real_cad_data_room_index.csv row 1 invalid sha256",
+      "expected_fragment": "invalid sha256",
+      "expected_fragment_seen": true,
+      "rejected": true
+    },
+    {
+      "case": "cleanup_quality_false_watertight",
+      "diagnostic": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/cleanup_quality_false/real_cad_cleanup_quality_record.csv row 1 cleanup check must be true: watertight_or_closed_surface",
+      "expected_fragment": "cleanup check must be true",
+      "expected_fragment_seen": true,
+      "rejected": true
+    },
+    {
+      "case": "boundary_tags_placeholder_reviewer",
+      "diagnostic": "placeholder_marker:row1:tank_001",
+      "expected_fragment": "placeholder_marker",
+      "expected_fragment_seen": true,
+      "rejected": true,
+      "summary": {
+        "bc_types": [
+          "inlet",
+          "no_slip_wall",
+          "outlet"
+        ],
+        "engineering_roles": [
+          "outflow_or_vent",
+          "release_or_inlet",
+          "wall_or_obstacle"
+        ],
+        "label_count": 3,
+        "missing_manifest_labels": [],
+        "patch_count": 3,
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/boundary_placeholder/real_cad_boundary_tags.csv",
+        "required_manifest_label_count": 3,
+        "row_count": 3,
+        "sha256": "5849e662823f75a728c80c01cec47d007e76b4484d6c9cea63958814c04d808d"
+      }
+    },
+    {
+      "case": "boundary_tags_missing_release_role",
+      "diagnostic": "missing_release_or_inlet_role",
+      "expected_fragment": "missing_release_or_inlet_role",
+      "expected_fragment_seen": true,
+      "rejected": true,
+      "summary": {
+        "bc_types": [
+          "inlet",
+          "no_slip_wall",
+          "outlet"
+        ],
+        "engineering_roles": [
+          "outflow_or_vent",
+          "wall_or_obstacle"
+        ],
+        "label_count": 3,
+        "missing_manifest_labels": [],
+        "patch_count": 3,
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/fixtures/boundary_missing_release/real_cad_boundary_tags.csv",
+        "required_manifest_label_count": 3,
+        "row_count": 3,
+        "sha256": "bcaf025f76d8704b5f38ac7e57b2b1a7c20a64eb07b3c59683af89504d092afa"
+      }
+    }
+  ],
+  "positive_controls": [
+    {
+      "case": "default_cleanup_package_does_not_clear_blocker",
+      "passed": true
+    },
+    {
+      "case": "default_boundary_contract_does_not_clear_credit",
+      "passed": true
+    },
+    {
+      "case": "strict_real_cad_update_keeps_blocker_open",
+      "passed": true
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-REAL-CAD-GUARD-NEGATIVE-SELFTEST",
+  "summary": {
+    "expected_fragment_seen_count": 8,
+    "failed_negative_count": 0,
+    "guards_boundary_missing_required_role": true,
+    "guards_boundary_placeholder": true,
+    "guards_cleanup_quality_false_check": true,
+    "guards_data_room_bad_hash": true,
+    "guards_large_layout_too_few_geometries": true,
+    "guards_missing_provenance": true,
+    "guards_source_hash_mismatch": true,
+    "guards_synthetic_manifest": true,
+    "negative_case_count": 8,
+    "negative_rejected_count": 8,
+    "positive_control_count": 3,
+    "positive_control_pass_count": 3,
+    "real_cad_guard_negative_selftest_ready": true,
+    "strict_real_cad_blocker_cleared": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "1",
+    "bash",
+    "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_reg10_wet_2d_2800x800_gpu_probe_v1/bind_rank.sh",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_reg10_v12d.gnu.MPI.CUDA.ex",
+    "inputs"
+  ],
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_reg10_v12d.gnu.MPI.CUDA.ex",
+  "mechanism": "heptane_wd6",
+  "species_names": [
+    "nc7h16",
+    "o2",
+    "co",
+    "h2o",
+    "co2",
+    "n2"
+  ],
+  "binary_sha256": "25c378ec8f37cfe6f6e7e0be6df4a29b4fafaf59029f1c45ddf4742415b0d05c",
+  "profile_sha256": "9c3f0df46dc3750ded867ee4dc45c5096aa1d7706de319e51ad30cfbc423719b",
+  "input_sha256": "1fde40eccd264fbdb2d60436e3c8c3e6d4eae0981a87828547d9a6d44b669444",
+  "gas_phi": 0.6000000000000001,
+  "liquid_phi": 0.4,
+  "diameter_um": 10.0,
+  "effective_depth_cm": 0.005,
+  "liquid_mass_density_g_cm3": 1.537207816877185e-05,
+  "parcel_count": 1587200,
+  "real_droplets_per_parcel": 0.00538569612449747,
+  "transverse_boundary": "slip walls",
+  "chemistry_transport_split": "strang",
+  "reference": "/home/cj/my-pele/repair_validation/twophase_20260910/reference_wd6_v1",
+  "linear_solver": "custom_direct",
+  "wd6_concentration_epsilon_mol_m3": 1e-10,
+  "output_interval_s": 2e-06,
+  "history_output_interval_s": 1e-06,
+  "trial": "five-step fine-grid memory preflight; not full propagation validation"
+}

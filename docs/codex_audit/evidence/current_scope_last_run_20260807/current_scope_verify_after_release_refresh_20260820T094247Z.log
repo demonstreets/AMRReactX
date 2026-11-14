@@ -1,0 +1,65 @@
+[current-scope] check machine-local path hygiene
+machine_local_paths FAIL findings=31 scanned_files=1452
+examples/academic/detonation_2D/README_中文快速教程.md:3: home-path: /home/cj
+  目录：`/home/cj/my-pele/examples/academic/detonation_2D`
+examples/academic/detonation_2D/README_中文快速教程.md:24: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:88: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:118: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:125: home-path: /home/cj
+  cd /home/cj/my-pele/examples/academic/detonation_2D
+examples/academic/detonation_2D/README_中文快速教程.md:127: tmp-path: /tmp/my_detonation_cpu_run
+  mkdir -p /tmp/my_detonation_cpu_run
+examples/academic/detonation_2D/README_中文快速教程.md:128: tmp-path: /tmp/my_detonation_cpu_run
+  cd /tmp/my_detonation_cpu_run
+examples/academic/detonation_2D/README_中文快速教程.md:129: home-path: /home/cj
+  /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex \
+examples/academic/detonation_2D/README_中文快速教程.md:130: home-path: /home/cj
+  /home/cj/my-pele/examples/academic/detonation_2D/inputs.my_detonation_wave
+examples/academic/detonation_2D/README_中文快速教程.md:138: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:145: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:152: home-path: /home/cj
+  cd /home/cj/my-pele/examples/academic/detonation_2D
+examples/academic/detonation_2D/README_中文快速教程.md:154: tmp-path: /tmp/my_detonation_mpi_run
+  mkdir -p /tmp/my_detonation_mpi_run
+examples/academic/detonation_2D/README_中文快速教程.md:155: tmp-path: /tmp/my_detonation_mpi_run/
+  cp inputs.my_detonation_wave /tmp/my_detonation_mpi_run/
+examples/academic/detonation_2D/README_中文快速教程.md:156: tmp-path: /tmp/my_detonation_mpi_run/
+  cp codex_deton2d_mpi2d.gnu.MPI.ex /tmp/my_detonation_mpi_run/
+examples/academic/detonation_2D/README_中文快速教程.md:157: tmp-path: /tmp/my_detonation_mpi_run
+  cd /tmp/my_detonation_mpi_run
+examples/academic/detonation_2D/README_中文快速教程.md:164: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:173: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:184: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/academic/detonation_2D/README_中文快速教程.md:220: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:3: home-path: /home/cj
+  目录：`/home/cj/my-pele/examples/engineering/h2_leak_3d`
+examples/engineering/h2_leak_3d/README_中文快速教程.md:22: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:84: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:112: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:131: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:139: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:156: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:163: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:186: home-path: /home/cj
+  cd /home/cj/my-pele
+examples/engineering/h2_leak_3d/README_中文快速教程.md:222: home-path: /home/cj
+  cd /home/cj/my-pele
+tools/write_sundials_local_link_audit_report.py:24: tmp-path: /tmp/sundials-6.7.0
+  EXPECTED_TRACKED_TARGET = "/tmp/sundials-6.7.0"
+CURRENT_SCOPE_RC=1

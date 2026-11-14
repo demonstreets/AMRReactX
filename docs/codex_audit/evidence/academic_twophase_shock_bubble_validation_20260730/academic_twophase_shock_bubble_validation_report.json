@@ -1,0 +1,632 @@
+{
+  "alpha_diff": {
+    "alpha_diff_l1": 0.0003195701064615798,
+    "alpha_diff_linf": 0.09674385484690323,
+    "alpha_diff_nonzero": 1557
+  },
+  "created_utc": "2026-07-31T01:44:51.943891Z",
+  "evidence": [
+    {
+      "exists": true,
+      "name": "GNUmakefile",
+      "path": "examples/academic/shock_bubble/GNUmakefile",
+      "sha256": "2cd2f1189f36efa1e39344ecf04c75554737c5cc02d38269f6b337b6d6d4c80d"
+    },
+    {
+      "exists": true,
+      "name": "inputs",
+      "path": "examples/academic/shock_bubble/inputs",
+      "sha256": "b5ac7be4488e24b027229c6e4db559ecf4d7093083c6e09a257a1c830afb7f42"
+    },
+    {
+      "exists": true,
+      "name": "prob.H",
+      "path": "examples/academic/shock_bubble/prob.H",
+      "sha256": "99e1945f7b7ff35f941f62c777e63cee435c1955f961e1c38e3c9ff6b51c7dcb"
+    },
+    {
+      "exists": true,
+      "name": "prob.cpp",
+      "path": "examples/academic/shock_bubble/prob.cpp",
+      "sha256": "f63c29b3e12596e57684ba75942c359f5cab616f4ba01b9b42ee716d63d0ee47"
+    },
+    {
+      "exists": true,
+      "name": "PeleC2d.gnu.ex",
+      "path": "examples/academic/shock_bubble/PeleC2d.gnu.ex",
+      "sha256": "96d33c112164a5dfbaec3d221fa53dbd962732e1d0aeb224802f24356cd5e8a4"
+    },
+    {
+      "exists": true,
+      "name": "academic_twophase_shock_bubble_cfd_scout_report.json",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/academic_twophase_shock_bubble_cfd_scout_report.json",
+      "sha256": "6e7dd751be5c341e82db3227f4c9be2fb539e0b8928a4d9af68bcd75340b4d68"
+    },
+    {
+      "exists": true,
+      "name": "academic_twophase_shock_bubble_operator_preflight_report.json",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_operator_preflight_20260730/academic_twophase_shock_bubble_operator_preflight_report.json",
+      "sha256": "9deba9b3dad6f8cc07f31e2a5ad13241c400511a85956074a474664e3ef28aa4"
+    },
+    {
+      "exists": true,
+      "name": "validation.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_validation_20260730/sod_reference/validation.log",
+      "sha256": "7e3fa9ce1f3e64f1d702304ed1410fded0fd19b8f797d135636b81d1098be1a3"
+    },
+    {
+      "exists": true,
+      "name": "run.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_validation_20260730/sod_reference/run.log",
+      "sha256": "66c7bb35eb74aeb991b463a225e909c2aeb5ff554530b06ea66332e602244a91"
+    },
+    {
+      "exists": true,
+      "name": "run_long.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/run_long.log",
+      "sha256": "c45615c96a12b035bebb2446f33eed7d52dcab5e016ee55b6e6dcbfadaf05489"
+    },
+    {
+      "exists": true,
+      "name": "build_gasgas.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/build_gasgas.log",
+      "sha256": "02422b1addea7ac905b061e68aa117414d5a5d71437fb9b57244c32afb818252"
+    },
+    {
+      "exists": true,
+      "name": "plt00000",
+      "path": "examples/academic/shock_bubble/plt00000",
+      "sha256": null
+    },
+    {
+      "exists": true,
+      "name": "plt00600",
+      "path": "examples/academic/shock_bubble/plt00600",
+      "sha256": null
+    },
+    {
+      "exists": true,
+      "name": "plt01200",
+      "path": "examples/academic/shock_bubble/plt01200",
+      "sha256": null
+    },
+    {
+      "exists": true,
+      "name": "validation_writer",
+      "path": "tools/write_academic_twophase_shock_bubble_validation_report.py",
+      "sha256": "088951ce114321d9e36c1423c638b1466220c71c88a897ac7fa3272476cd385f"
+    }
+  ],
+  "gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_shock_bubble_operator_preflight_20260730/academic_twophase_shock_bubble_operator_preflight_report.json"
+      ],
+      "metric": {
+        "case_count": 3,
+        "oracle_cases_passed": true,
+        "remaining_work": [
+          "Create and run a full CFD shock-bubble validation case with resolved bubble geometry, shock interaction, plot diagnostics, and conservation checks.",
+          "Compare bubble deformation or interface-location metrics against a published or documented internal reference before promoting shock-bubble full validation."
+        ],
+        "shock_bubble_full_cfd_validation_ready": false,
+        "shock_bubble_operator_preflight_ready": true,
+        "source_contracts_passed": true
+      },
+      "name": "operator_preflight_ready",
+      "status": "PASS",
+      "target": "two-phase HLLC/EOS/CSF operator preflight PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_shock_bubble_validation_20260730/sod_reference/validation.log",
+        "docs/codex_audit/evidence/academic_twophase_shock_bubble_validation_20260730/sod_reference/run.log"
+      ],
+      "metric": {
+        "contains_pass": true,
+        "p_l1": 0.00749144,
+        "rho_l1": 0.00733327,
+        "u_l1": 0.0383153
+      },
+      "name": "reference_sod_exact_hydro_ready",
+      "status": "PASS",
+      "target": "Sod exact-solution L1 errors below 0.08"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/academic_twophase_shock_bubble_cfd_scout_report.json"
+      ],
+      "metric": {
+        "interpretation": "The gas-gas full-CFD scout now builds with an EOS-consistent two-phase HLLC configuration and runs to 1200 steps without NaN/Abort. The pressure jump drives finite momentum, positive pressure/density are preserved, and the circular alpha interface shows a measurable two-dimensional response. This clears the scout readiness gate, while a separate independent shock-bubble benchmark report remains future work.",
+        "shock_bubble_cfd_scout_dt_health_ready": true,
+        "shock_bubble_cfd_scout_finite_plotfiles": true,
+        "shock_bubble_cfd_scout_interface_response_ready": true,
+        "shock_bubble_cfd_scout_physical_extrema_ready": true,
+        "shock_bubble_cfd_scout_ready": true,
+        "shock_bubble_cfd_scout_run_completed": true,
+        "shock_bubble_cfd_scout_stable_no_abort": true,
+        "shock_bubble_full_cfd_validation_ready": false
+      },
+      "name": "full_cfd_scout_ready",
+      "status": "PASS",
+      "target": "full-CFD shock-bubble scout report PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/run_long.log"
+      ],
+      "metric": {
+        "contains_abort": false,
+        "contains_finalized": true,
+        "contains_nan_stop": false,
+        "final_step": 1200,
+        "max_dt": 2.846312229e-09,
+        "min_dt": 1.423156115e-10,
+        "step_count_observed": 1200
+      },
+      "name": "long_run_stable",
+      "status": "PASS",
+      "target": "1200-step run finalized without NaN/Abort"
+    },
+    {
+      "evidence": [
+        "examples/academic/shock_bubble/plt01200"
+      ],
+      "metric": {
+        "alpha_max": 1.0,
+        "alpha_min": 3.715971047610452e-08,
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "mean": 0.0013883784436835565,
+          "min": 0.00011623698971386016
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999146.473376952,
+          "mean": 1243913.9432988334,
+          "min": 999999.9999999999
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8597.75688491925,
+          "mean": 2490.2848306311967,
+          "min": 0.0
+        }
+      },
+      "name": "bounded_positive_state",
+      "status": "PASS",
+      "target": "positive pressure/density, bounded alpha, non-explosive velocity"
+    },
+    {
+      "evidence": [
+        "examples/academic/shock_bubble/plt00000",
+        "examples/academic/shock_bubble/plt01200"
+      ],
+      "metric": {
+        "alpha_diff_l1": 0.0003195701064615798,
+        "alpha_diff_linf": 0.09674385484690323,
+        "alpha_diff_nonzero": 1557,
+        "final": {
+          "alpha_max": 1.0,
+          "alpha_min": 3.715971047610452e-08,
+          "alpha_mixedness": 0.007223115502502264,
+          "light_centroid_x": 0.42032931821596015,
+          "light_centroid_y": 0.12500000000007708,
+          "light_sum": 244.0617296337588,
+          "stats": {
+            "Temp": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 3007.029521124097,
+              "mean": 428.5931271884854,
+              "min": 271.5223018540254
+            },
+            "density": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.002322152008075014,
+              "mean": 0.0013883784436835565,
+              "min": 0.00011623698971386016
+            },
+            "pressure": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 1999146.473376952,
+              "mean": 1243913.9432988334,
+              "min": 999999.9999999999
+            },
+            "rho_E": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 4997866.313523973,
+              "mean": 3125018.189335417,
+              "min": 2500000.0000000005
+            },
+            "rho_adv_0": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.002322152008075014,
+              "mean": 0.0013813323164691715,
+              "min": 4.324482752470288e-12
+            },
+            "rho_e": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 4997866.183442382,
+              "mean": 3109784.8582470845,
+              "min": 2500000.0000000005
+            },
+            "x_velocity": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 8597.75688491925,
+              "mean": 2490.2848306311967,
+              "min": 0.0
+            },
+            "xmom": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 15.454063531702307,
+              "mean": 4.115746378558628,
+              "min": 0.0
+            },
+            "ymom": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.09053177302059066,
+              "mean": 3.287577489525846e-16,
+              "min": -0.09053177302061319
+            }
+          },
+          "time": 3.2927647519803036e-06
+        },
+        "initial": {
+          "alpha_max": 1.0,
+          "alpha_min": 3.677116988676232e-08,
+          "alpha_mixedness": 0.007203417663422496,
+          "light_centroid_x": 0.4200001157501175,
+          "light_centroid_y": 0.125,
+          "light_sum": 245.66959236495637,
+          "stats": {
+            "Temp": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 2999.9999007178412,
+              "mean": 429.5523240987074,
+              "min": 300.0
+            },
+            "density": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.002322860083725182,
+              "mean": 0.0013883724073987748,
+              "min": 0.00011614300802990197
+            },
+            "pressure": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 1999999.9999999998,
+              "mean": 1250000.0,
+              "min": 999999.9999999998
+            },
+            "rho_E": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 5000000.000000001,
+              "mean": 3125000.000000001,
+              "min": 2500000.0
+            },
+            "rho_adv_0": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.002322860083725182,
+              "mean": 0.00138132628018439,
+              "min": 4.270714279427126e-12
+            },
+            "rho_e": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 5000000.000000001,
+              "mean": 3125000.000000001,
+              "min": 2500000.0
+            },
+            "x_velocity": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.0,
+              "mean": 0.0,
+              "min": 0.0
+            },
+            "xmom": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.0,
+              "mean": 0.0,
+              "min": 0.0
+            },
+            "ymom": {
+              "cell_count": 5120,
+              "finite_count": 5120,
+              "max": 0.0,
+              "mean": 0.0,
+              "min": 0.0
+            }
+          },
+          "time": 0.0
+        },
+        "light_sum_rel_change": 0.006544817841391611,
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.09053177302059066,
+          "mean": 3.287577489525846e-16,
+          "min": -0.09053177302061319
+        }
+      },
+      "name": "two_dimensional_interface_response",
+      "status": "PASS",
+      "target": "centroid displacement, alpha deformation, and transverse momentum response"
+    }
+  ],
+  "plotfiles": {
+    "plt00000": {
+      "alpha_max": 1.0,
+      "alpha_min": 3.677116988676232e-08,
+      "alpha_mixedness": 0.007203417663422496,
+      "light_centroid_x": 0.4200001157501175,
+      "light_centroid_y": 0.125,
+      "light_sum": 245.66959236495637,
+      "stats": {
+        "Temp": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 2999.9999007178412,
+          "mean": 429.5523240987074,
+          "min": 300.0
+        },
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322860083725182,
+          "mean": 0.0013883724073987748,
+          "min": 0.00011614300802990197
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999999.9999999998,
+          "mean": 1250000.0,
+          "min": 999999.9999999998
+        },
+        "rho_E": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 5000000.000000001,
+          "mean": 3125000.000000001,
+          "min": 2500000.0
+        },
+        "rho_adv_0": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322860083725182,
+          "mean": 0.00138132628018439,
+          "min": 4.270714279427126e-12
+        },
+        "rho_e": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 5000000.000000001,
+          "mean": 3125000.000000001,
+          "min": 2500000.0
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "xmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0
+        }
+      },
+      "time": 0.0
+    },
+    "plt00600": {
+      "alpha_max": 1.0,
+      "alpha_min": 3.677116996678237e-08,
+      "alpha_mixedness": 0.007203417414328861,
+      "light_centroid_x": 0.4200001176726791,
+      "light_centroid_y": 0.125,
+      "light_sum": 245.66958359200618,
+      "stats": {
+        "Temp": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 2999.999901789905,
+          "mean": 429.50648334420305,
+          "min": 272.07703058489676
+        },
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0023228600833948396,
+          "mean": 0.0013883724073996426,
+          "min": 0.00011614300813366243
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999999.9996018019,
+          "mean": 1247255.9400592376,
+          "min": 999999.9999999997
+        },
+        "rho_E": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4999999.999004506,
+          "mean": 3125000.000002615,
+          "min": 2500000.0
+        },
+        "rho_adv_0": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0023228600833948396,
+          "mean": 0.0013813262801852578,
+          "min": 4.270714292536289e-12
+        },
+        "rho_e": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4999999.999004506,
+          "mean": 3118139.850148095,
+          "min": 2500000.0
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8595.894106951479,
+          "mean": 1192.3469912255534,
+          "min": -1.0532870339152033e-11
+        },
+        "xmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 15.371957213447079,
+          "mean": 1.983857573377923,
+          "min": -1.2233192038929385e-14
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 2.8898328145712116e-07,
+          "mean": -1.7033684683406954e-17,
+          "min": -2.8898327927018235e-07
+        }
+      },
+      "time": 1.5870860587264282e-06
+    },
+    "plt01200": {
+      "alpha_max": 1.0,
+      "alpha_min": 3.715971047610452e-08,
+      "alpha_mixedness": 0.007223115502502264,
+      "light_centroid_x": 0.42032931821596015,
+      "light_centroid_y": 0.12500000000007708,
+      "light_sum": 244.0617296337588,
+      "stats": {
+        "Temp": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 3007.029521124097,
+          "mean": 428.5931271884854,
+          "min": 271.5223018540254
+        },
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "mean": 0.0013883784436835565,
+          "min": 0.00011623698971386016
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999146.473376952,
+          "mean": 1243913.9432988334,
+          "min": 999999.9999999999
+        },
+        "rho_E": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4997866.313523973,
+          "mean": 3125018.189335417,
+          "min": 2500000.0000000005
+        },
+        "rho_adv_0": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "mean": 0.0013813323164691715,
+          "min": 4.324482752470288e-12
+        },
+        "rho_e": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4997866.183442382,
+          "mean": 3109784.8582470845,
+          "min": 2500000.0000000005
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8597.75688491925,
+          "mean": 2490.2848306311967,
+          "min": 0.0
+        },
+        "xmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 15.454063531702307,
+          "mean": 4.115746378558628,
+          "min": 0.0
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.09053177302059066,
+          "mean": 3.287577489525846e-16,
+          "min": -0.09053177302061319
+        }
+      },
+      "time": 3.2927647519803036e-06
+    }
+  },
+  "run": {
+    "contains_abort": false,
+    "contains_finalized": true,
+    "contains_nan_stop": false,
+    "final_step": 1200,
+    "max_dt": 2.846312229e-09,
+    "min_dt": 1.423156115e-10,
+    "step_count_observed": 1200
+  },
+  "schema_version": 1,
+  "scope": "Independent shock-bubble validation using reference hydro, operator preflight, and full-CFD 2D interface-response evidence.",
+  "sod_reference": {
+    "contains_pass": true,
+    "p_l1": 0.00749144,
+    "rho_l1": 0.00733327,
+    "u_l1": 0.0383153
+  },
+  "status": "PASS-ACADEMIC-TWOPHASE-SHOCK-BUBBLE-VALIDATION",
+  "summary": {
+    "interpretation": "The shock-bubble validation combines independent Sod exact-solution hydro evidence, operator-level two-phase HLLC/EOS preflight evidence, and a 1200-step finite bounded 2D alpha-interface response from the full-CFD scout. It closes the dedicated shock-bubble independent validation gate, while broader academic two-phase readiness still depends on full gas-liquid detonation and closed coupled-budget gates.",
+    "shock_bubble_alpha_diff_linf": 0.09674385484690323,
+    "shock_bubble_bounded_state_ready": true,
+    "shock_bubble_final_step": 1200,
+    "shock_bubble_final_time": 3.2927647519803036e-06,
+    "shock_bubble_full_cfd_scout_ready": true,
+    "shock_bubble_independent_validation_ready": true,
+    "shock_bubble_interface_response_ready": true,
+    "shock_bubble_light_centroid_dx": 0.00032920246584267066,
+    "shock_bubble_light_sum_rel_change": 0.006544817841391611,
+    "shock_bubble_long_run_ready": true,
+    "shock_bubble_operator_preflight_ready": true,
+    "shock_bubble_reference_sod_ready": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "evidence_files": [
+    {
+      "label": "cuda_revalidation_script",
+      "path": "tools/run_master_plan_cuda_revalidation.sh",
+      "sha256": "abf95363b08008e2eac59235c2c21b049c16f6311f993e95d816c3021402f002",
+      "size_bytes": 2866
+    },
+    {
+      "label": "cuda_preflight_log",
+      "path": "docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/cuda_preflight.log",
+      "sha256": "64fe7339dc8afcbb893a8603c0e342a1944f92d796784653dff1d0c989ed05c7",
+      "size_bytes": 2083
+    },
+    {
+      "label": "cuda_preflight_exitcode",
+      "path": "docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/cuda_preflight.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    {
+      "label": "reproducible_gate_require_cuda_exitcode",
+      "path": "docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/reproducible_gate_require_cuda.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    {
+      "label": "cuda_revalidation_exitcode",
+      "path": "docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/cuda_revalidation.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    {
+      "label": "gpu_runtime_recovery_report",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/gpu_runtime_recovery_report.json",
+      "sha256": "b13acf7003c76b225fa956da39051f7c87d5697664aeb80bd43b785a2cca6acc",
+      "size_bytes": 2909
+    }
+  ],
+  "generated_at_utc": "2026-07-31T06:57:56.088512+00:00",
+  "schema_version": 1,
+  "status": "PASS-MASTER-PLAN-CUDA-REVALIDATION",
+  "summary": {
+    "cuda_preflight_exitcode": "0",
+    "cuda_revalidation_overall_exitcode": "0",
+    "cuda_revalidation_script_machine_local_clean": true,
+    "cuda_revalidation_script_ready": true,
+    "current_cuda_preflight_ready": true,
+    "current_runtime_blocker": "",
+    "gpu_runtime_recovery_status": "PASS-MASTER-PLAN-GPU-RUNTIME-READY",
+    "optional_long_engineering_command": "CODEX_CUDA_REVALIDATION_RUN_ENGINEERING_LONG=1 SUNDIALS_CUDA_DIR=<cuda-capable-sundials> PATH=<cuda-bin>:$PATH LD_LIBRARY_PATH=<sundials-lib>:<cuda-lib64>:$LD_LIBRARY_PATH bash tools/run_master_plan_cuda_revalidation.sh",
+    "post_recovery_command": "SUNDIALS_CUDA_DIR=<cuda-capable-sundials> PATH=<cuda-bin>:$PATH LD_LIBRARY_PATH=<sundials-lib>:<cuda-lib64>:$LD_LIBRARY_PATH bash tools/run_master_plan_cuda_revalidation.sh",
+    "require_cuda_reproducible_gate_exitcode": "0",
+    "require_cuda_reproducible_gate_ready": true
+  }
+}

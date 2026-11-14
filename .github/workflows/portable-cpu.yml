@@ -1,0 +1,29 @@
+name: Portable CPU validation
+on:
+  push:
+    branches: ['codex/my-pele-portable-*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  relocate-build-run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install documented prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ gfortran libyaml-cpp-dev python3-numpy python3-scipy python3-yaml
+      - name: Build both solvers and run tests in clean hosted environment
+        env:
+          JOBS: '4'
+        run: bash tools/validate_portable_cpu.sh "$RUNNER_TEMP/portable-build"
+      - name: Save validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portable-cpu-evidence
+          path: |
+            ${{ runner.temp }}/portable-build/logs
+            ${{ runner.temp }}/portable-build/validation.json

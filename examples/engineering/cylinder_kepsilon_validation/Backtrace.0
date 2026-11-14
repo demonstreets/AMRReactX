@@ -1,0 +1,33 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX3d.gnu.ex(+0x72dc16) [0x58a0f618bc16]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleLMeX3d.gnu.ex(+0x7329c4) [0x58a0f61909c4]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /lib/x86_64-linux-gnu/libc.so.6(+0x45330) [0x742080645330]
+
+ 3: ./PeleLMeX3d.gnu.ex(+0x6e1fa) [0x58a0f5acc1fa]
+    PeleLM::~PeleLM() at /home/cj/my-pele/examples/engineering/cylinder_kepsilon_validation/../../../external/PeleLMeX/Source/PeleLMeX.cpp:24 (discriminator 1)
+
+ 4: ./PeleLMeX3d.gnu.ex(+0x50c67) [0x58a0f5aaec67]
+    main at /home/cj/my-pele/examples/engineering/cylinder_kepsilon_validation/../../../external/PeleLMeX/Source/main.cpp:77
+
+ 5: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x74208062a1ca]
+
+ 6: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x74208062a28b]
+
+ 7: ./PeleLMeX3d.gnu.ex(+0x59c85) [0x58a0f5ab7c85]
+    ?? ??:0
+

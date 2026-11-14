@@ -1,0 +1,140 @@
+{
+  "case": "academic_shock_droplet_reacting_spray_detonation_mpi_cuda_300step",
+  "cuda_devices": 2,
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/run.log",
+      "sha256": "d30a8c184fe44ccb0c388054362b4643fae2e93f000d07dc46a176c5efb755fc"
+    },
+    {
+      "label": "launcher_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_launcher.log",
+      "sha256": "cf4d84ad2247d38eddc8b4ec314be60dce1f730868f491a973a9b3f64ca4cbb8"
+    },
+    {
+      "label": "input",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/inputs",
+      "sha256": "6fc732a55cfad9da3c01d2cd7cbe0f8af1cc2397ebf7ce8d6035bb67f5ac3b17"
+    },
+    {
+      "label": "executable",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/PeleC2d.gnu.MPI.CUDA.ex",
+      "sha256": "025557eed698ee01720dbc9bc582f45c5db87f1257982ff092827d9ad237b61e"
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/plt00000/Header",
+      "sha256": "7a8772846d6afcf1ee32865242743a1a75a990b53a823db5e132d5e8b014a01b"
+    },
+    {
+      "label": "plt00300_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/plt00300/Header",
+      "sha256": "e6d93faa23efb212be05babdb643e00fe7fa8c87de8673bfe857c9f464de2418"
+    },
+    {
+      "label": "plt00300_job_info",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/plt00300/job_info",
+      "sha256": "cbd1c006b39a88e20836ba90c4afa35816b65fe240fd1f9f560aace97e8229ff"
+    },
+    {
+      "label": "particle_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/plt00300/particles/Header",
+      "sha256": "f460ddf893f4c008f485e72400b08390fa07de0626076e6bf9dc1669fb76791a"
+    },
+    {
+      "label": "particle_tile_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/plt00300/particles/Level_0/Particle_H",
+      "sha256": "663731612e94952bf10d018222121c21c8da7bb05e83f4f94604b60332c44d90"
+    },
+    {
+      "label": "particle_data_0",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step/plt00300/particles/Level_0/DATA_00001",
+      "sha256": "a61c416f6113736d31ad45d6a268e23c1ebb8eee0e9f18b7fc4b04df99e044f3"
+    }
+  ],
+  "evidence_hash": "d30a8c184fe44ccb0c388054362b4643fae2e93f000d07dc46a176c5efb755fc",
+  "final_plot_step": 300,
+  "final_time": 1.0297073565689976e-05,
+  "initial_time": 0.0,
+  "limitations": [
+    "Reduced-resolution 300-step stability gate; not a grid-converged quantitative two-phase detonation validation.",
+    "This strengthens the CUDA/MPI+CUDA runtime evidence beyond the 40-step scout while preserving the need for later long-duration production validation if required."
+  ],
+  "max_step": 300,
+  "mpi_ranks": 2,
+  "particle_data_file_count": 1,
+  "plot_interval": 50,
+  "plot_variables": [
+    "density",
+    "xmom",
+    "ymom",
+    "zmom",
+    "rho_E",
+    "rho_e",
+    "Temp",
+    "rho_NC7H16",
+    "rho_O2",
+    "rho_N2",
+    "rho_omega_NC7H16",
+    "rho_omega_O2",
+    "rho_omega_N2",
+    "rhoe_dot",
+    "heatRelease",
+    "pressure",
+    "Y(NC7H16)",
+    "Y(O2)",
+    "Y(N2)",
+    "x_velocity",
+    "y_velocity",
+    "spray_mass",
+    "spray_density",
+    "spray_num",
+    "spray_vol",
+    "spray_surf_area",
+    "spray_vol_frac",
+    "d10",
+    "d32",
+    "wall_film_hght",
+    "wall_film_mass",
+    "spray_temp",
+    "num_parcels",
+    "spray_x_vel",
+    "spray_y_vel",
+    "spray_rho_src",
+    "spray_xmom_src",
+    "spray_ymom_src",
+    "spray_eng_src",
+    "spray_rhoY_NC7H16_src"
+  ],
+  "plotfile_count": 7,
+  "ready": true,
+  "run_dir": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/mpi_cuda_reacting_spray_detonation_300step",
+  "run_root": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803",
+  "scope": "300-step heptane-air droplet/spray reacting detonation MPI+CUDA stability gate",
+  "status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-LONG",
+  "summary": {
+    "academic_gas_liquid_detonation_mpi_cuda_long_ready": true,
+    "amrex_finalized": true,
+    "cuda_devices": 2,
+    "final_time": 1.0297073565689976e-05,
+    "max_step": 300,
+    "mpi_cuda_reacting_spray_300step_ready": true,
+    "mpi_ranks": 2,
+    "plot_interval": 50,
+    "plotfile_count": 7,
+    "reaction_solver_marker_present": true,
+    "spray_particle_output_present": true,
+    "spray_source_terms_present": true,
+    "time_advanced": true
+  },
+  "validated_capabilities": {
+    "evaporation_mass_momentum_energy_source_terms": true,
+    "gas_liquid_reacting_spray_shock_detonation_long_window": true,
+    "heptane_air_reaction": true,
+    "khrt_breakup_configuration": true,
+    "mpi_cuda_2rank_2device": true,
+    "pelec_spray_particles": true,
+    "sustained_300step_execution": true
+  }
+}

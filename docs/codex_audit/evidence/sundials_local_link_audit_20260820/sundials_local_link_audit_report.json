@@ -1,0 +1,123 @@
+{
+  "cuda_sundials_candidates": [
+    {
+      "cuda_sundials_install_ready": true,
+      "exists": true,
+      "kind": "directory",
+      "markers": {
+        "CMakeLists.txt": false,
+        "include": true,
+        "include/sundials": true,
+        "lib": true,
+        "lib64": false,
+        "src": false
+      },
+      "path": "/home/cj/local/sundials-cuda"
+    },
+    {
+      "cuda_sundials_install_ready": true,
+      "exists": true,
+      "kind": "directory",
+      "markers": {
+        "CMakeLists.txt": false,
+        "include": true,
+        "include/sundials": true,
+        "lib": true,
+        "lib64": false,
+        "src": false
+      },
+      "path": "/home/cj/.local/sundials-cuda-6.4.1"
+    },
+    {
+      "cuda_sundials_install_ready": false,
+      "exists": false,
+      "kind": "missing",
+      "markers": {
+        "CMakeLists.txt": false,
+        "include": false,
+        "include/sundials": false,
+        "lib": false,
+        "lib64": false,
+        "src": false
+      },
+      "path": "/tmp/sundials-6.7.0"
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:12:04+00:00",
+  "hashed_artifacts": [
+    {
+      "path": "tools/write_sundials_local_link_audit_report.py",
+      "sha256": "94c438f8289aa60407f016306b56958d9907c11b6b79f3d76a44937d23f2f290",
+      "size_bytes": 12293
+    },
+    {
+      "path": "tools/verify_sundials_local_link_audit.sh",
+      "sha256": "8876eb40e45275dc714109ce82fd6c00a0c7107dba7c6ccc268fa9d80bf21046",
+      "size_bytes": 269
+    },
+    {
+      "path": "tools/codex_setup_cuda126_sundials_env.sh",
+      "sha256": "08a9863237ee1bdaffef69ff02650604d00aba825ec4f35283784be19065376c",
+      "size_bytes": 890
+    },
+    {
+      "path": "tools/check_machine_local_paths.py",
+      "sha256": "60da7f63b160b4cb520bd1d882d99f784a7b50934df398850c84faf2e51d41b2",
+      "size_bytes": 5753
+    }
+  ],
+  "operator_guidance": [
+    "Do not delete or replace external/PelePhysics/Submodules/sundials from this report alone.",
+    "If packaging source, resolve the tracked symlink versus replacement directory deliberately.",
+    "CUDA smoke scripts may still pass when SUNDIALS_CUDA_DIR points to a separate ready install.",
+    "After manual dependency repair, rerun this audit and the current worktree review queue."
+  ],
+  "repo_link": {
+    "current": {
+      "exists": true,
+      "kind": "directory",
+      "mode_octal": "0o775",
+      "path": "external/PelePhysics/Submodules/sundials",
+      "size_bytes": 4096
+    },
+    "expected_target": {
+      "exists": false,
+      "kind": "missing",
+      "markers": {
+        "CMakeLists.txt": false,
+        "include": false,
+        "include/sundials": false,
+        "lib": false,
+        "lib64": false,
+        "src": false
+      },
+      "path": "/tmp/sundials-6.7.0"
+    },
+    "tracked": {
+      "mode": "120000",
+      "path": "external/PelePhysics/Submodules/sundials",
+      "target": "/tmp/sundials-6.7.0"
+    }
+  },
+  "schema_version": 1,
+  "scope": "non-destructive audit of the repository SUNDIALS symlink and CUDA SUNDIALS candidates",
+  "status": "PASS-SUNDIALS-LOCAL-LINK-AUDIT",
+  "summary": {
+    "audit_ready": true,
+    "cleanup_performed": false,
+    "cuda_sundials_ready_candidate_count": 2,
+    "current_git_xy": " D",
+    "current_is_expected_symlink": false,
+    "current_replacement_kind": "directory",
+    "current_scope_cuda_validation_can_use_alternate_sundials_dir": true,
+    "expected_target_exists": false,
+    "expected_tracked_mode": "120000",
+    "expected_tracked_target": "/tmp/sundials-6.7.0",
+    "local_link_drift_present": true,
+    "restore_requires_explicit_operator_review": true,
+    "safe_to_auto_restore": false,
+    "tracked_mode": "120000",
+    "tracked_symlink_ok": true,
+    "tracked_target": "/tmp/sundials-6.7.0"
+  }
+}

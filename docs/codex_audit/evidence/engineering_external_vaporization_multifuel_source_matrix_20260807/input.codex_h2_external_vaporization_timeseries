@@ -1,0 +1,64 @@
+# Codex fixed-mass-flow external mdot time-series smoke.
+# Verifies linearly interpolated gas-source mdot(t) for external vaporization
+# or blowdown models that provide a gas-phase mass-flow table.
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 1.0 0.5 0.5
+
+peleLM.lo_bc = Inflow SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc = Outflow SlipWallAdiab SlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.n_cell = 16 8 8
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 16
+amr.max_step = 6
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-5
+amr.cfl = 0.5
+amr.plot_int = -1
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 0.2
+prob.wind_v = 0.0
+prob.fuel_species = H2
+prob.leak_xc = 0.51
+prob.leak_yc = 0.24
+prob.leak_zc = 0.23
+prob.leak_rate = 0.00045
+prob.leak_radius = 0.12
+prob.leak_vel_x = 0.35
+prob.leak_vel_y = -0.02
+prob.leak_vel_z = 0.04
+prob.leak_T = 315
+prob.leak_model = fixed_mass_flow
+prob.leak_schedule_count = 4
+prob.leak_schedule_times = 0 0.25 0.75 1.5
+prob.leak_schedule_rates = 0 0.0002 0.00045 0.0003
+prob.leak_schedule_temperatures = 285 300 315 295
+prob.leak_schedule_vel_x = 0.2 0.6 0.35 0.1
+prob.leak_schedule_vel_y = 0 0.05 -0.02 0.02
+prob.leak_schedule_vel_z = 0 0 0.04 0.02
+prob.leak_schedule_radius = 0.08 0.095 0.12 0.1
+prob.leak_schedule_x = 0.42 0.46 0.51 0.57
+prob.leak_schedule_y = 0.25 0.27 0.24 0.26
+prob.leak_schedule_z = 0.2 0.21 0.23 0.22
+
+eb2.geom_type = all_regular
+
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

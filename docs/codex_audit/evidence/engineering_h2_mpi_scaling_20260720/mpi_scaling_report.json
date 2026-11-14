@@ -1,0 +1,169 @@
+{
+  "criteria": {
+    "max_amr_overhead_ratio": 4.0,
+    "max_hazard_rel_spread": 1e-10,
+    "require_finest_fabs_at_least_ranks": true,
+    "require_runtime_improvement_4_to_16": true
+  },
+  "evidence_files": [
+    {
+      "label": "production_mesh_4rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_scout_20260720/production_mesh_scout_report.json",
+      "sha256": "ea806a6dd56bb0ed2c2465291fa109ec866edc92f2b1f40721af3d66927f1a52",
+      "size_bytes": 9199
+    },
+    {
+      "label": "production_mesh_8rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/production_mesh_8rank_scout_report.json",
+      "sha256": "6b4c05d1d48a02057d144188e39cf24875b94cb043a01db0d276e3ec228704c1",
+      "size_bytes": 9446
+    },
+    {
+      "label": "production_mesh_16rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json",
+      "sha256": "976464cb31a86f6cc4570ba55e913a8cbfbe4b8701bbf1f315e6c13d58ffeb85",
+      "size_bytes": 9489
+    },
+    {
+      "label": "production_mesh_4rank_case_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_scout_20260720/files/engineering_case_report.json",
+      "sha256": "87e92bde8929c2bbd1ce966a91545b77fc3087fe176108b259e0be79e8308c4d",
+      "size_bytes": 11172
+    },
+    {
+      "label": "production_mesh_8rank_case_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/files/engineering_case_report.json",
+      "sha256": "8f7a51aaf6440aca2dc85c0dc3351fa97e5a964cf04fe258a7e31713f9494d4c",
+      "size_bytes": 11172
+    },
+    {
+      "label": "production_mesh_16rank_case_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/files/engineering_case_report.json",
+      "sha256": "b690854ed0bf4157f9c6fbb032383f51152c01d889b85c4c4235cf00343561aa",
+      "size_bytes": 11311
+    }
+  ],
+  "generated_at_utc": "2026-07-20T07:23:36+00:00",
+  "limitations": [
+    "This is a short interactive production-mesh scaling scout, not a scheduler-managed performance study.",
+    "It verifies rank consistency, bounded AMR-vs-baseline hazard drift, FAB distribution, and runtime improvement from 4 to 16 ranks on one synthetic H2 leak case.",
+    "It does not prove production-size scaling, queue/affinity behavior, hybrid MPI/OpenMP safety, overnight stability, real-CAD geometry, or external reference-data agreement."
+  ],
+  "rank_rows": [
+    {
+      "advance_seconds_ratio": 1.74036467,
+      "amr_advance_seconds": 119.957525,
+      "amr_equivalent_fine_cell_count": 524288,
+      "amr_fabs": "[(0, 16), (1, 12)]",
+      "amr_finest_fab_count": 12,
+      "amr_parallel_efficiency_vs_4rank": 1.0,
+      "amr_plotfiles": 5,
+      "amr_speedup_vs_4rank": 1.0,
+      "base_cell_count": 65536,
+      "baseline_advance_seconds": 68.9266607,
+      "baseline_fabs": "[(0, 16)]",
+      "baseline_finest_fab_count": 16,
+      "baseline_parallel_efficiency_vs_4rank": 1.0,
+      "baseline_plotfiles": 5,
+      "baseline_speedup_vs_4rank": 1.0,
+      "case": "h2-open-domain-plan-amr-mpi-production-mesh-scout",
+      "case_report_path": "docs/codex_audit/evidence/engineering_h2_production_mesh_scout_20260720/files/engineering_case_report.json",
+      "case_report_sha256": "87e92bde8929c2bbd1ce966a91545b77fc3087fe176108b259e0be79e8308c4d",
+      "centroid_abs_diff": 0.000315499,
+      "cloud_rel_diff": 0.0380952381,
+      "downstream_abs_diff": 0.002609223,
+      "final_plotfile_bytes_ratio": 1.57063401,
+      "max_step": 120,
+      "mean_ncells_ratio": 1.41002604,
+      "peak_rel_diff": 0.0431073584,
+      "ranks": 4,
+      "report_path": "docs/codex_audit/evidence/engineering_h2_production_mesh_scout_20260720/production_mesh_scout_report.json",
+      "report_sha256": "ea806a6dd56bb0ed2c2465291fa109ec866edc92f2b1f40721af3d66927f1a52",
+      "status": "PASS-SCOUT"
+    },
+    {
+      "advance_seconds_ratio": 1.83771921,
+      "amr_advance_seconds": 73.9074107,
+      "amr_equivalent_fine_cell_count": 524288,
+      "amr_fabs": "[(0, 16), (1, 12)]",
+      "amr_finest_fab_count": 12,
+      "amr_parallel_efficiency_vs_4rank": 0.811539220924161,
+      "amr_plotfiles": 5,
+      "amr_speedup_vs_4rank": 1.623078441848322,
+      "base_cell_count": 65536,
+      "baseline_advance_seconds": 40.2169222,
+      "baseline_fabs": "[(0, 16)]",
+      "baseline_finest_fab_count": 16,
+      "baseline_parallel_efficiency_vs_4rank": 0.8569360474332867,
+      "baseline_plotfiles": 5,
+      "baseline_speedup_vs_4rank": 1.7138720948665733,
+      "case": "h2-open-domain-plan-amr-mpi-production-mesh-8rank-scout",
+      "case_report_path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/files/engineering_case_report.json",
+      "case_report_sha256": "8f7a51aaf6440aca2dc85c0dc3351fa97e5a964cf04fe258a7e31713f9494d4c",
+      "centroid_abs_diff": 0.000315499,
+      "cloud_rel_diff": 0.0380952381,
+      "downstream_abs_diff": 0.002609223,
+      "final_plotfile_bytes_ratio": 1.57063332,
+      "max_step": 120,
+      "mean_ncells_ratio": 1.41002604,
+      "peak_rel_diff": 0.0431073584,
+      "ranks": 8,
+      "report_path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/production_mesh_8rank_scout_report.json",
+      "report_sha256": "6b4c05d1d48a02057d144188e39cf24875b94cb043a01db0d276e3ec228704c1",
+      "status": "PASS-SCOUT"
+    },
+    {
+      "advance_seconds_ratio": 1.73497799,
+      "amr_advance_seconds": 65.6828723,
+      "amr_equivalent_fine_cell_count": 524288,
+      "amr_fabs": "[(0, 128), (1, 73)]",
+      "amr_finest_fab_count": 73,
+      "amr_parallel_efficiency_vs_4rank": 0.45657840773202607,
+      "amr_plotfiles": 5,
+      "amr_speedup_vs_4rank": 1.8263136309281043,
+      "base_cell_count": 65536,
+      "baseline_advance_seconds": 37.8580436,
+      "baseline_fabs": "[(0, 128)]",
+      "baseline_finest_fab_count": 128,
+      "baseline_parallel_efficiency_vs_4rank": 0.45516523138559645,
+      "baseline_plotfiles": 5,
+      "baseline_speedup_vs_4rank": 1.8206609255423858,
+      "case": "h2-open-domain-plan-amr-mpi-production-mesh-16rank-scout",
+      "case_report_path": "docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/files/engineering_case_report.json",
+      "case_report_sha256": "b690854ed0bf4157f9c6fbb032383f51152c01d889b85c4c4235cf00343561aa",
+      "centroid_abs_diff": 0.000315499,
+      "cloud_rel_diff": 0.0380952381,
+      "downstream_abs_diff": 0.002609223,
+      "final_plotfile_bytes_ratio": 1.57040264,
+      "max_step": 120,
+      "mean_ncells_ratio": 1.41002604,
+      "peak_rel_diff": 0.0431073584,
+      "ranks": 16,
+      "report_path": "docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json",
+      "report_sha256": "976464cb31a86f6cc4570ba55e913a8cbfbe4b8701bbf1f315e6c13d58ffeb85",
+      "status": "PASS-SCOUT"
+    }
+  ],
+  "rank_series": [
+    4,
+    8,
+    16
+  ],
+  "scaling_type": "engineering-h2-production-mesh-amr-mpi-short-scout",
+  "schema_version": 1,
+  "status": "PASS-SCALING-SCOUT",
+  "summary": {
+    "amr_efficiency_4_to_16": 0.45657840773202607,
+    "amr_equivalent_fine_cell_count": 524288,
+    "amr_speedup_4_to_16": 1.8263136309281043,
+    "base_cell_count": 65536,
+    "baseline_efficiency_4_to_16": 0.45516523138559645,
+    "baseline_speedup_4_to_16": 1.8206609255423858,
+    "cloud_rel_diff_spread": 0.0,
+    "max_advance_seconds_ratio": 1.83771921,
+    "max_step": 120,
+    "peak_rel_diff_spread": 0.0,
+    "rank16_amr_finest_fab_count": 73,
+    "rank_count": 3
+  }
+}

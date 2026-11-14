@@ -1,0 +1,51 @@
+# Codex DataverseNO refined near-source projection probe.
+# Purpose: represent the 4.6 mm experimental H2 orifice radius on a
+# dx=0.0125 m local grid with the source center exactly on a cell center.
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.39375 0.35625 0.73125
+geometry.prob_hi     = 0.79375 0.55625 0.83125
+
+peleLM.lo_bc = Outflow NoSlipWallAdiab NoSlipWallAdiab
+peleLM.hi_bc = Outflow NoSlipWallAdiab NoSlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.n_cell = 32 16 8
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 32
+amr.max_step = 1000
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-7
+amr.cfl = 0.25
+amr.plot_int = 250
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 293.0
+prob.wind_u = 0.0
+prob.wind_v = 0.0
+prob.leak_xc = 0.50
+prob.leak_yc = 0.45
+prob.leak_zc = 0.775
+prob.leak_rate = 9.152681907312e-04
+prob.leak_radius = 2.300000000000e-03
+prob.leak_vel_x = 6.567687631723e+02
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 293.0
+
+eb2.geom_type = all_regular
+
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

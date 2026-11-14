@@ -1,0 +1,136 @@
+{
+  "applied_replacements": {
+    "prob.fuel_species": "CH4",
+    "prob.leak_T": "300",
+    "prob.leak_model": "fixed_mass_flow",
+    "prob.leak_radius": "0.1",
+    "prob.leak_rate": "0.0008",
+    "prob.leak_schedule_count": "4",
+    "prob.leak_schedule_radius": "0.1 0.1 0.1 0.1",
+    "prob.leak_schedule_rates": "0 0.0005 0.0008 0.0004",
+    "prob.leak_schedule_temperatures": "300 300 300 300",
+    "prob.leak_schedule_times": "0 0.5 2 5",
+    "prob.leak_schedule_vel_x": "0.5 0.5 0.5 0.5",
+    "prob.leak_schedule_vel_y": "0 0 0 0",
+    "prob.leak_schedule_vel_z": "0 0 0 0",
+    "prob.leak_schedule_x": "0.55 0.55 0.55 0.55",
+    "prob.leak_schedule_y": "0.5 0.5 0.5 0.5",
+    "prob.leak_schedule_z": "0.5 0.5 0.5 0.5",
+    "prob.leak_vel_x": "0.5",
+    "prob.leak_vel_y": "0",
+    "prob.leak_vel_z": "0",
+    "prob.leak_xc": "0.55",
+    "prob.leak_yc": "0.5",
+    "prob.leak_zc": "0.5"
+  },
+  "base_input": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+  "evidence_files": [
+    {
+      "label": "source_csv",
+      "path": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+      "sha256": "15aa5d14fb2ca7b5d1fb2c78b1126f4e4c8b25474096b2bdb73ca6fbde558116"
+    },
+    {
+      "label": "base_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+      "sha256": "639f22b5006f42c36ff3d112cbca721c07092f2dceb13b754c923aac1d48a435"
+    },
+    {
+      "label": "output_input",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/positive/codex_lng_external_vaporization_source_template.input",
+      "sha256": "9a108aba11fda3cc58a96b9daab8db5862c5fdda40c658775f71c6c96ddc6fe7"
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:37+00:00",
+  "limitations": {
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_liquid_phase_change": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "mapping": "external vaporization/blowdown model supplies gas-phase mdot(t)/T/species"
+  },
+  "output_input": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/positive/codex_lng_external_vaporization_source_template.input",
+  "sample": {
+    "fuel_species": "CH4",
+    "leak_vel_x_m_s": 0.5,
+    "leak_vel_y_m_s": 0.0,
+    "leak_vel_z_m_s": 0.0,
+    "mdot_kg_s": 0.0008,
+    "source_pressure_Pa": 101325.0,
+    "source_radius_m": 0.1,
+    "source_x_m": 0.55,
+    "source_y_m": 0.5,
+    "source_z_m": 0.5,
+    "time_s": 2.0,
+    "vapor_T_K": 300.0
+  },
+  "sample_time_s": 2.0,
+  "schema_version": 1,
+  "source_csv": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+  "source_time_series": {
+    "emitted_to_input": true,
+    "fuel_species": "CH4",
+    "interpolation": "PeleLMeX linearly interpolates prob.leak_schedule_rates and prob.leak_schedule_temperatures at the step midpoint for fixed_mass_flow",
+    "leak_vel_x_m_s": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "leak_vel_y_m_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "leak_vel_z_m_s": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mdot_kg_s": [
+      0.0,
+      0.0005,
+      0.0008,
+      0.0004
+    ],
+    "point_count": 4,
+    "source_radius_m": [
+      0.1,
+      0.1,
+      0.1,
+      0.1
+    ],
+    "source_x_m": [
+      0.55,
+      0.55,
+      0.55,
+      0.55
+    ],
+    "source_y_m": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "source_z_m": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "time_s": [
+      0.0,
+      0.5,
+      2.0,
+      5.0
+    ],
+    "vapor_T_K": [
+      300.0,
+      300.0,
+      300.0,
+      300.0
+    ]
+  },
+  "status": "PASS-EXTERNAL-VAPORIZATION-SOURCE-INPUT"
+}

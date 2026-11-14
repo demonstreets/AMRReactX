@@ -1,0 +1,181 @@
+{
+  "decision": "direct_engineering_pipe_rack_reacting_mpi_cuda_checkpoint_restart_pass",
+  "evidence_files": [
+    {
+      "label": "restart_summary",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/restart_summary.json",
+      "sha256": "86f93672189d239d2e7857ef09f74eab4df310fa50a6c9d861b0ebf76bdeff3c",
+      "size_bytes": 4619
+    },
+    {
+      "label": "initial_run_log",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/initial_run.log",
+      "sha256": "6c6083e90ab9a17bb590b5fff10b508ae20f7bc195f0dbff809c8d7da9be66c4",
+      "size_bytes": 173839
+    },
+    {
+      "label": "restart_run_log",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/restart.log",
+      "sha256": "7c046b11e1941fe63c8be2c35c71c656e00858a609e940bb793c3fdfbbd9d78f",
+      "size_bytes": 228728
+    },
+    {
+      "label": "restart_command",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/restart_command.txt",
+      "sha256": "030b7a3d8af60138038ea00439499b212a297eb24fb1eb97cbc33fad9a89d6ef",
+      "size_bytes": 287
+    },
+    {
+      "label": "restart_checkpoint_header",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/run/chk00225/Header",
+      "sha256": "eca550b6c4ff82e1246571e73b4674ba54f778b18c5884e155d2476357070f3c",
+      "size_bytes": 471
+    },
+    {
+      "label": "final_plot_header",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/run/plt00525/Header",
+      "sha256": "bd0626ad95d26356b9b33dc1f01598a85b64efc8080cef02d99c5404a226be6d",
+      "size_bytes": 448
+    },
+    {
+      "label": "input",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/run/input.codex_pipe_rack_reacting_single_cuda_20step",
+      "sha256": "ceabc9094f59c1f9fdca5279401acebe6fcc49f61ec6eb070e86c4520ecaec5e",
+      "size_bytes": 2067
+    },
+    {
+      "label": "initial_summary",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525/initial_summary.json",
+      "sha256": "7b3008f4756ec73b81b8e22984806df7bc3f038f8a2ca563371c65ea9238e8fe",
+      "size_bytes": 3652
+    },
+    {
+      "label": "restart_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh",
+      "sha256": "4b5a67e19a26c7488af3bcbc6d0d14e248ad0398b8fb7a93ea2995ada8b848b3",
+      "size_bytes": 10906
+    },
+    {
+      "label": "base_reacting_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "sha256": "5775a41a957358e2ab57e0724aa15a2687054a832ba2f23ef11727e09bbbacb8",
+      "size_bytes": 14994
+    }
+  ],
+  "generated_at_utc": "2026-07-27T07:36:51+00:00",
+  "limitations": [
+    "Checkpoint/restart is validated for this synthetic pipe-rack fire gate, not every plant layout.",
+    "The gate proves restartability and continued post-restart reaction on MPI+CUDA; it is not calibrated fire-consequence validation."
+  ],
+  "reaction_history": [
+    {
+      "heat_release_abs_max": 14531385.280980572,
+      "ir_h2_abs_max": 0.1241006863245131,
+      "plotfile": "plt00000",
+      "post_restart": false,
+      "temp_max": 2000.0,
+      "time": 0.0,
+      "y_h2o_max": 0.0
+    },
+    {
+      "heat_release_abs_max": 9811520.947844595,
+      "ir_h2_abs_max": 1.4309887538376667,
+      "plotfile": "plt00075",
+      "post_restart": false,
+      "temp_max": 1999.9531803626924,
+      "time": 7.500000000000005e-07,
+      "y_h2o_max": 1.4102502932666507e-05
+    },
+    {
+      "heat_release_abs_max": 52318016.01339077,
+      "ir_h2_abs_max": 13.953060102765354,
+      "plotfile": "plt00150",
+      "post_restart": false,
+      "temp_max": 1999.9901569712708,
+      "time": 1.4999999999999956e-06,
+      "y_h2o_max": 0.00020297529102202648
+    },
+    {
+      "heat_release_abs_max": 629823583.0913175,
+      "ir_h2_abs_max": 127.07260705893329,
+      "plotfile": "plt00225",
+      "post_restart": false,
+      "temp_max": 2000.8417013195035,
+      "time": 2.2499999999999886e-06,
+      "y_h2o_max": 0.001993830787372594
+    },
+    {
+      "heat_release_abs_max": 4833459589.092264,
+      "ir_h2_abs_max": 958.018842245421,
+      "plotfile": "plt00300",
+      "post_restart": true,
+      "temp_max": 2008.3583086059512,
+      "time": 2.9999999999999814e-06,
+      "y_h2o_max": 0.01689275211049817
+    },
+    {
+      "heat_release_abs_max": 12708304118.840809,
+      "ir_h2_abs_max": 2158.3444980872177,
+      "plotfile": "plt00375",
+      "post_restart": true,
+      "temp_max": 2041.2000420312486,
+      "time": 3.7499999999999743e-06,
+      "y_h2o_max": 0.07987026079514978
+    },
+    {
+      "heat_release_abs_max": 12531664094.820662,
+      "ir_h2_abs_max": 406.15181614674793,
+      "plotfile": "plt00450",
+      "post_restart": true,
+      "temp_max": 2085.6556276100496,
+      "time": 4.499999999999967e-06,
+      "y_h2o_max": 0.12611349360812343
+    },
+    {
+      "heat_release_abs_max": 11826584652.173246,
+      "ir_h2_abs_max": 28.361253145579397,
+      "plotfile": "plt00525",
+      "post_restart": true,
+      "temp_max": 2129.3994181856547,
+      "time": 5.24999999999996e-06,
+      "y_h2o_max": 0.13344498290244958
+    }
+  ],
+  "restart_checks": {
+    "checkpoint_time": 2.2499999999999886e-06,
+    "checkpoint_y_h2o_max": 0.001993830787372594,
+    "cuda_devices": 2,
+    "final_step": 525,
+    "final_time": 5.24999999999996e-06,
+    "final_y_h2o_max": 0.13344498290244958,
+    "initial_step": 225,
+    "mpi_ranks": 2,
+    "n_cell": "64 32 32",
+    "plotfiles": [
+      "plt00000",
+      "plt00075",
+      "plt00150",
+      "plt00225",
+      "plt00300",
+      "plt00375",
+      "plt00450",
+      "plt00525"
+    ],
+    "post_restart_sustained_output_count": 4
+  },
+  "run_root": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_restart_20260727_64x32x32_225to525",
+  "schema_version": 1,
+  "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-MPI-CUDA-RESTART-SUSTAINED",
+  "title": "H2 Pipe-Rack Reacting MPI+CUDA Restart Evidence",
+  "validated_capabilities": {
+    "calibrated_fire_or_blast_model": false,
+    "checkpoint_written": true,
+    "cvode_gmres": true,
+    "largegrid_64x32x32": true,
+    "mpi_cuda_parallel": true,
+    "pipe_rack_stl_obstacles": true,
+    "post_restart_sustained_fire_development": true,
+    "reactor_cvode": true,
+    "restart_from_checkpoint": true
+  }
+}

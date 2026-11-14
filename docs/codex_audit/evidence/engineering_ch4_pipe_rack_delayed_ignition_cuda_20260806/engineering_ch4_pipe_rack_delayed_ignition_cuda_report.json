@@ -1,0 +1,169 @@
+{
+  "decision": "ch4_delayed_ignition_leak_obstacle_reacting_single_gpu_pass",
+  "evidence_files": [
+    {
+      "label": "staged_summary",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/summary.json",
+      "sha256": "43dd2075a9561a48cc38bbbab304d80e3b85cd582d7605cb128c13dbf2816823",
+      "size_bytes": 6591
+    },
+    {
+      "label": "staged_run_log",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/run.log",
+      "sha256": "0b4a44d203d3064594ae33da3ce7db6414b3def6bac8e93cab935d950a90ea5f",
+      "size_bytes": 115501
+    },
+    {
+      "label": "staged_input",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/input.codex_ch4_pipe_rack_delayed_ignition_single_cuda_120step",
+      "sha256": "96403fa9a65bd0119a09fbdf2f8bf97b752c9f5f7e5d4ef82234262efb8dd83a",
+      "size_bytes": 2226
+    },
+    {
+      "label": "cube_obstacle_stl",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/codex_cube_block.stl",
+      "sha256": "592fa3d7fb200f836370bd2acad3348b1cae57a58b22b65c93af7be0649a1dc0",
+      "size_bytes": 684
+    },
+    {
+      "label": "vertical_cylinder_stl",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/codex_vertical_cylinder.stl",
+      "sha256": "63c597dcedd3c2e0b2bc922285caf2f2d32bbd3e919534971aec84dc4316a563",
+      "size_bytes": 4884
+    },
+    {
+      "label": "pipe_rack_stl",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/codex_pipe_rack.stl",
+      "sha256": "9b165dd4047a06d991ac6e91d7b4a1a6e0e894111c94b3fc541006ec39f9cf45",
+      "size_bytes": 51284
+    },
+    {
+      "label": "merged_pipe_rack_stl",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/codex_merged_pipe_rack_obstacles.stl",
+      "sha256": "7862d8d94760cffec12db46628b483f9a4cd57a0b34f9a2c9628200885c50f05",
+      "size_bytes": 56684
+    },
+    {
+      "label": "plt00000_header_initial",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/plt00000/Header",
+      "sha256": "8fd730fa9ce0fe954910fcb9227e3fbfb4279c1d39f2a92f90531e89acc8681e",
+      "size_bytes": 523
+    },
+    {
+      "label": "plt00020_header_ignition_start",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/plt00020/Header",
+      "sha256": "0fa172275547b2f415fb890a86b63a9f74477a8a9c7fb737189037ca9255b60b",
+      "size_bytes": 567
+    },
+    {
+      "label": "plt00030_header_ignition_window",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/plt00030/Header",
+      "sha256": "9421044ef1152c48337fbfc3b293e4908eba69724799b0344a2909f21e0b0512",
+      "size_bytes": 567
+    },
+    {
+      "label": "plt00040_header_post_ignition",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/plt00040/Header",
+      "sha256": "862223b7ceb322ec2f9a6f87b92e119a90495e8f4b84c65a0ee113fafd8cb72a",
+      "size_bytes": 567
+    },
+    {
+      "label": "plt00120_header_final",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence/plt00120/Header",
+      "sha256": "0a59570849d215ef82702d1fa5bc0006f449cef58d7a29836f4492e6748cae1e",
+      "size_bytes": 569
+    },
+    {
+      "label": "engineering_leak_prob_h",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "engineering_leak_prob_cpp",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.cpp",
+      "sha256": "e75c504b2ca2973e37e6977677b90cbfc9e9cf6b4b37f99f96da64b66f71fc78",
+      "size_bytes": 24604
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:27+00:00",
+  "input_summary": {
+    "chem_integrator": "ReactorCvode",
+    "cloud_yfuel": 0.055,
+    "cloud_yn2": 0.725,
+    "cloud_yo2": 0.22,
+    "cvode_solve_type": "GMRES",
+    "fuel_species": "CH4",
+    "ignition_duration": 2e-07,
+    "ignition_hotspot": false,
+    "ignition_power": 10000000000.0,
+    "ignition_source": true,
+    "ignition_start_time": 2e-07,
+    "max_step": 120,
+    "n_cell": "32 16 16",
+    "obstacle_geometry": "stl",
+    "obstacle_stl_files": "codex_cube_block.stl codex_vertical_cylinder.stl codex_pipe_rack.stl",
+    "plot_int": 10
+  },
+  "limitations": [
+    "This is a reduced CH4 single-CUDA fire probe, not a calibrated natural-gas/LNG production validation.",
+    "CPU/MPI, MPI+CUDA, and multi-GPU CH4 fire campaigns remain required before a broad CH4 production claim.",
+    "The geometry is synthetic cube/cylinder/pipe-rack STL, not a real cleaned plant CAD import.",
+    "Radiation, overpressure, and LNG vaporization/phase-change consequences are outside this probe."
+  ],
+  "negative_window_evidence": {
+    "accepted_stable_window": "1e10",
+    "too_high_ignition_power_1e11": "deltaT_iters_not_converged",
+    "too_low_ignition_power_1e9": "stable_but_no_ignition"
+  },
+  "run_summary": {
+    "chemistry_model": "CH4_lean",
+    "cuda_devices": 1,
+    "max_step": 120,
+    "mpi_ranks": 1,
+    "plotfiles": [
+      "plt00000",
+      "plt00010",
+      "plt00020",
+      "plt00030",
+      "plt00040",
+      "plt00050",
+      "plt00060",
+      "plt00070",
+      "plt00080",
+      "plt00090",
+      "plt00100",
+      "plt00110",
+      "plt00120"
+    ],
+    "sustained_reaction_checks": {
+      "final_time": 1.1999999999999985e-06,
+      "final_y_co2_max": 1.0067558862639717e-08,
+      "final_y_h2o_max": 0.00031772118433880467,
+      "initial_y_co2_max": 0.0,
+      "initial_y_h2o_max": 0.0,
+      "max_heat_release_abs": 20910500003.683613,
+      "max_ir_ch4_abs": 850.6214193169556,
+      "max_temp": 2938.763581674555,
+      "min_sustained_outputs": 4,
+      "sustained_output_count": 9
+    }
+  },
+  "schema_version": 1,
+  "source_run_root": "/tmp/codex_ch4_pipe_rack_delayed_ignition_single_cuda_p1e10_20260806",
+  "staged_evidence_root": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/runtime_evidence",
+  "status": "PASS-CH4-PIPE-RACK-DELAYED-IGNITION-SINGLE-CUDA",
+  "title": "Engineering CH4 Pipe-Rack Delayed-Ignition Single-CUDA Probe",
+  "validated_capabilities": {
+    "ch4_leak_source": true,
+    "cvode_gmres": true,
+    "delayed_ignition_timed_energy_source": true,
+    "initial_flammable_cloud": true,
+    "initial_hotspot_not_used": true,
+    "no_nan_inf_or_solver_abort": true,
+    "pipe_rack_stl_obstacles": true,
+    "reactor_cvode": true,
+    "single_gpu_cuda": true,
+    "sustained_post_ignition_fire_development": true
+  }
+}

@@ -1,0 +1,27 @@
+# CGS Fuego N2/stiffened-gas contact; inviscid EOS/transport verification.
+# Liquid parameters define a mathematical caloric EOS, not an experimental fit.
+geometry.prob_lo = 0 0
+geometry.prob_hi = 1 1
+geometry.is_periodic = 1 1
+geometry.coord_sys = 0
+amr.n_cell = 32 32
+amr.max_grid_size = 16
+amr.max_level = 0
+tp.gas_eos = fuego
+tp.liquid_gamma = 4.4
+tp.liquid_pinf = 6.e9
+tp.liquid_cv = 5883333.333333333
+tp.liquid_reference_energy = 0
+tp.shape = circle
+tp.pressure = 1.e6
+tp.gas_density = 0.001123
+tp.liquid_density = 1
+tp.center = 0.5 0.5
+tp.radius = 0.15
+tp.velocity = 1.e5 5.e4
+tp.cfl = 0.3
+tp.stop_time = 2.e-5
+tp.max_step = 4000
+tp.plot_int = 1000
+tp.check_int = 0
+amrex.abort_on_unused_inputs = 1

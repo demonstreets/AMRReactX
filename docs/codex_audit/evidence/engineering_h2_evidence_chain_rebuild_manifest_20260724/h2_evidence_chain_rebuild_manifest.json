@@ -1,0 +1,74 @@
+{
+  "all_expected_rebuild_commands_present": true,
+  "bootstrap_ctest_evidence_status": "PASS",
+  "bootstrap_ctest_skipped": false,
+  "bootstrap_ctest_tests": 22,
+  "bootstrap_report_cycle_broken": true,
+  "bootstrap_returncode_zero": true,
+  "bootstrap_verification_log": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_bootstrap_20260724.log",
+  "bootstrap_verifier_passed": true,
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_evidence_chain_rebuild_script",
+      "path": "tools/rebuild_engineering_h2_evidence_chain.sh",
+      "sha256": "177e730483bd43b84ba4bf1a819e682730cec8dc5edf895321b8f40e91f07d35",
+      "size_bytes": 9858
+    },
+    {
+      "label": "engineering_h2_rebuild_bootstrap_verification_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_bootstrap_20260724.log",
+      "sha256": "ae78e53a508267f79d2e836f7f2230d712177c92d9f15f6791eb4d223ff83423",
+      "size_bytes": 55231
+    }
+  ],
+  "expected_rebuild_command_count": 60,
+  "generated_at_utc": "2026-08-20T10:11:17+00:00",
+  "limitations": [
+    "This manifest proves the reproducible rebuild path and bootstrap verifier result; it does not provide external CAD, SBEPV5, or calibrated fire data.",
+    "Production readiness still depends on clearing the remaining external-data blockers and rerunning the full verifier."
+  ],
+  "missing_rebuild_commands": [],
+  "quality_gate_matrix": [
+    {
+      "evidence": "tools/rebuild_engineering_h2_evidence_chain.sh",
+      "gap": "",
+      "name": "rebuild_script_present",
+      "status": "PASS"
+    },
+    {
+      "evidence": "60/60 command(s)",
+      "gap": "",
+      "name": "expected_rebuild_commands_present",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_bootstrap_20260724.log",
+      "gap": "",
+      "name": "bootstrap_log_passed",
+      "status": "PASS"
+    },
+    {
+      "evidence": "ctest_status=PASS ctest_tests=22",
+      "gap": "",
+      "name": "bootstrap_ctest_evidence_recorded",
+      "status": "PASS"
+    },
+    {
+      "evidence": "bootstrap verifier skips production evidence report before regenerating it",
+      "gap": "",
+      "name": "bootstrap_report_cycle_broken",
+      "status": "PASS"
+    },
+    {
+      "evidence": "rebuild manifest is reproducibility evidence only",
+      "gap": "",
+      "name": "does_not_clear_production_blockers",
+      "status": "PASS"
+    }
+  ],
+  "rebuild_script": "tools/rebuild_engineering_h2_evidence_chain.sh",
+  "schema_version": 5,
+  "status": "PASS-H2-EVIDENCE-CHAIN-REBUILD-MANIFEST",
+  "title": "Engineering H2 Evidence Chain Rebuild Manifest"
+}

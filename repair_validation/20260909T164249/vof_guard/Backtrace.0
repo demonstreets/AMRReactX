@@ -1,0 +1,43 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x25a256) [0x5ffba4d59256]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x25f004) [0x5ffba4d5e004]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x49b160) [0x5ffba4f9a160]
+    PeleC::read_params() at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/PeleC.cpp:315
+
+ 3: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x5313e4) [0x5ffba50303e4]
+    PeleC::check_params() at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/Setup.cpp:125
+ (inlined by) PeleC::variableSetUp() at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/Setup.cpp:195
+
+ 4: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x2ab5e0) [0x5ffba4daa5e0]
+    amrex::Amr::InitAmr() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:291
+
+ 5: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x2adf0b) [0x5ffba4dacf0b]
+    amrex::Amr::Amr(amrex::LevelBld*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:264
+
+ 6: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x42386) [0x5ffba4b41386]
+    PeleCAmr::Amr(amrex::LevelBld*) at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/PeleCAmr.H:20 (discriminator 1)
+ (inlined by) std::__detail::_MakeUniq<PeleCAmr>::__single_object std::make_unique<PeleCAmr, amrex::LevelBld*>(amrex::LevelBld*&&) at /usr/include/c++/13/bits/unique_ptr.h:1070 (discriminator 1)
+ (inlined by) main at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/main.cpp:175 (discriminator 1)
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x721c56c2a1ca]
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x721c56c2a28b]
+
+ 9: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x43745) [0x5ffba4b42745]
+    ?? ??:0
+

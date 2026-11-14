@@ -1,0 +1,67 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "1",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_stoich_v12d.gnu.MPI.CUDA.ex",
+    "inputs"
+  ],
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_stoich_v12d.gnu.MPI.CUDA.ex",
+  "mechanism": "heptane_wd6",
+  "species_names": [
+    "nc7h16",
+    "o2",
+    "co",
+    "h2o",
+    "co2",
+    "n2"
+  ],
+  "binary_sha256": "bf81156edc44d138a4cd09cc520db98dd5bc8c3bee74b84563e6dec659738443",
+  "profile_sha256": "9c3f0df46dc3750ded867ee4dc45c5096aa1d7706de319e51ad30cfbc423719b",
+  "input_sha256": "07c8b061516e14d775016fe34ad27f182887320653b7082000cf15dfc494f821",
+  "gas_phi": 0.6000000000000001,
+  "liquid_phi": 0.4,
+  "diameter_um": 10.0,
+  "effective_depth_cm": 0.005,
+  "liquid_mass_density_g_cm3": 1.537207816877185e-05,
+  "parcel_count": 1587200,
+  "real_droplets_per_parcel": 0.00538569612449747,
+  "transverse_boundary": "slip walls",
+  "chemistry_transport_split": "strang",
+  "reference": "/home/cj/my-pele/repair_validation/twophase_20260910/reference_wd6_v1",
+  "linear_solver": "custom_direct",
+  "wd6_concentration_epsilon_mol_m3": 1e-10,
+  "output_interval_s": 2e-06,
+  "chemistry_tile_size": null,
+  "cell_chemistry_integrator": "wd6_extrapolated",
+  "cell_chemistry_rtol": 0.0001,
+  "cell_chemistry_atol_y": 1e-13,
+  "history_output_interval_s": 1e-06,
+  "restart_from": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/chk12551",
+  "previous_run": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_wet_2d_2800x800_cfl20_tol4_gpu_v2",
+  "wd6_linear_algebra": "stoichiometric_rank2",
+  "device": 1,
+  "history_scope": "New per-step maxima begin at restart; previous state trajectory retained separately.",
+  "continuation_of": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_continuation_v1",
+  "previous_runs": [
+    "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_wet_2d_2800x800_cfl20_tol4_gpu_v2",
+    "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_continuation_v1"
+  ],
+  "gpu_devices": [
+    1
+  ],
+  "ranks": 1,
+  "max_grid_size": [
+    400,
+    400
+  ],
+  "partition_validation": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_fine_wet_gpu_partition_comparison_v1/comparison.json",
+  "reason": "Two GPUs became available; same-model 20-step partition comparison passed. Resume original saved production state with unchanged physical grid, CFL, chemistry and requested 50-microsecond end time.",
+  "executable_sha256": "bf81156edc44d138a4cd09cc520db98dd5bc8c3bee74b84563e6dec659738443",
+  "cfl": 0.2,
+  "diagnostics": false,
+  "test_mode": "smoke",
+  "requested_time_s": 5e-05,
+  "requested_max_step": 12561,
+  "purpose": "Repeated unchanged arithmetic and diagnostics-disabled roundoff control"
+}

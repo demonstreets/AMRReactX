@@ -1,0 +1,137 @@
+{
+  "reference": {
+    "CJ_equilibrium_sound_speed_m_s": 910.7741894255707,
+    "CJ_wave_relative_speed_m_s": 910.7742107293395,
+    "CJ_sonic_relative_error": 2.3390835003114267e-08,
+    "rtol": 2e-09,
+    "speed_ratio": 1.00001,
+    "max_mass_flux_relative_residual": 4.733657534269756e-16,
+    "max_momentum_relative_residual": 3.239471037186926e-13,
+    "max_energy_relative_residual": 7.287380247917404e-09,
+    "Tmin_K": 1318.8539945757211,
+    "Tmax_K": 2331.08454847725,
+    "fuel_conversion_distance_m": {
+      "0.1": 0.0016312479022669274,
+      "0.5": 0.00447433892319932,
+      "0.9": 0.009566017122995804,
+      "0.99": 0.013233579673774726
+    }
+  },
+  "reference_characteristics": {
+    "fuel_conversion_interpolated": {
+      "0.1": {
+        "distance_m": 0.0016299157760725175,
+        "estimated_residence_s": 5.984120469804309e-06
+      },
+      "0.5": {
+        "distance_m": 0.004461511243320307,
+        "estimated_residence_s": 1.6390728469837746e-05
+      },
+      "0.9": {
+        "distance_m": 0.009538008848145875,
+        "estimated_residence_s": 3.475921729846092e-05
+      },
+      "0.99": {
+        "distance_m": 0.013194659793923525,
+        "estimated_residence_s": 4.73750354916254e-05
+      }
+    },
+    "thermal_half_level_K": 1833.9895349553262,
+    "thermal_half": {
+      "distance_m": 0.017818325543780246,
+      "estimated_residence_s": 6.116582464133989e-05
+    },
+    "residence_method": "Trapezoidal integral of dx/(D-u) over the exported reference; approximate diagnostic, not additional ODE solve.",
+    "reference_end": {
+      "x_m": 0.04706597141485648,
+      "T_K": 2331.08454847725,
+      "p_Pa": 789291.3338263897,
+      "rho_kg_m3": 1.16326903625475
+    },
+    "equilibrium_CJ": {
+      "T_K": 2310.309970708936,
+      "p_Pa": 707670.8575541514,
+      "rho_kg_m3": 1.0547712295913354,
+      "D_m_s": 1594.688840749402
+    },
+    "reversible_reactions": 11,
+    "reaction_count": 729,
+    "maximum_reference_lab_characteristic_m_s": 2015.3754926928007,
+    "minimum_common_thermo_temperature_K": 300.0,
+    "maximum_common_thermo_temperature_K": 3000.0
+  },
+  "rows": [
+    {
+      "name": "planar_600_cfl20_v1",
+      "nx": 600,
+      "dx_mm": 0.19999999999999998,
+      "cfl": 0.2,
+      "end_time_us": 12.0,
+      "speed_m_s": 1594.6634728096876,
+      "speed_error_percent": -0.0015907767751399682,
+      "speed_8_12_m_s": 1595.0057692021894,
+      "position_fit_rms_um": 0.5479998064104308,
+      "fuel_half_mm": 2.706031857080025,
+      "fuel_half_error_percent": -39.347191803417594,
+      "thermal_half_mm": 18.224865338304607,
+      "thermal_half_error_percent": 2.281582483861788,
+      "frozen_peak_error_percent": 0.09496275786604613,
+      "Tmax_K": 2346.3015048592442,
+      "p_L1_percent": 0.6642931841056174,
+      "T_L1_percent": 0.28365606581353786,
+      "rho_L1_percent": 0.8223610284886967,
+      "u_L1_percent": 0.22963651769350352,
+      "Y_fuel_MAE": 0.0012891962033327348,
+      "Y_o2_MAE": 0.00032141998346334584,
+      "Y_co2_MAE": 9.628419692726378e-06,
+      "Y_h2o_MAE": 0.0001853928137712605,
+      "p_wide_L1_percent": 0.5614649130430993,
+      "T_wide_L1_percent": 0.6387910034997193,
+      "rho_wide_L1_percent": 0.7924901803671076,
+      "u_wide_L1_percent": 0.34592413648806775,
+      "mass_balance_relative": 4.988115025351707e-09,
+      "energy_balance_relative": 1.846194879560636e-07,
+      "max_species_sum_error": 1.84297022087776e-14,
+      "nonfinite": 0,
+      "transverse_relative_spread": 0.0,
+      "exit_code": 0
+    },
+    {
+      "name": "planar_1200_cfl20_v1",
+      "nx": 1200,
+      "dx_mm": 0.09999999999999999,
+      "cfl": 0.2,
+      "end_time_us": 12.0,
+      "speed_m_s": 1595.1484384780542,
+      "speed_error_percent": 0.028820527046269362,
+      "speed_8_12_m_s": 1595.602328940763,
+      "position_fit_rms_um": 0.7595410601886141,
+      "fuel_half_mm": 2.9086711750731835,
+      "fuel_half_error_percent": -34.80524834655537,
+      "thermal_half_mm": 17.923125648678276,
+      "thermal_half_error_percent": 0.5881591097913974,
+      "frozen_peak_error_percent": 0.04690036212908755,
+      "Tmax_K": 2346.2661584115726,
+      "p_L1_percent": 0.2606551664510973,
+      "T_L1_percent": 0.1325907760445997,
+      "rho_L1_percent": 0.3885193585805081,
+      "u_L1_percent": 0.08989899383318056,
+      "Y_fuel_MAE": 0.000769419955210323,
+      "Y_o2_MAE": 0.00017323170512687245,
+      "Y_co2_MAE": 4.33471162381221e-06,
+      "Y_h2o_MAE": 0.00010039884717031465,
+      "p_wide_L1_percent": 0.19254602263780976,
+      "T_wide_L1_percent": 0.21121280169335357,
+      "rho_wide_L1_percent": 0.30692724355673034,
+      "u_wide_L1_percent": 0.11621074047796921,
+      "mass_balance_relative": 3.172407446044297e-09,
+      "energy_balance_relative": 1.8463319327634404e-07,
+      "max_species_sum_error": 4.1300296516055823e-14,
+      "nonfinite": 0,
+      "transverse_relative_spread": 0.0,
+      "exit_code": 0
+    }
+  ],
+  "status": "incomplete",
+  "scope": "Short-duration planar reactive-Euler consistency check using native CPU heptane_lu_88sk; not a long-time stability, GPU, WD6, spray, diffusion or AMR validation."
+}

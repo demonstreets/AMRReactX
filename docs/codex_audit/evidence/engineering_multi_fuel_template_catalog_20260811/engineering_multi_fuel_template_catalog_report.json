@@ -1,0 +1,155 @@
+{
+  "csv_template": {
+    "columns": [
+      "time_s",
+      "mdot_kg_s",
+      "vapor_T_K",
+      "fuel_species",
+      "leak_vel_x_m_s",
+      "leak_vel_y_m_s",
+      "leak_vel_z_m_s",
+      "source_radius_m",
+      "source_x_m",
+      "source_y_m",
+      "source_z_m",
+      "source_pressure_Pa"
+    ],
+    "mdot_nonnegative": true,
+    "missing_columns": [],
+    "path": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+    "radius_positive": true,
+    "ready": true,
+    "row_count": 4,
+    "sha256": "15aa5d14fb2ca7b5d1fb2c78b1126f4e4c8b25474096b2bdb73ca6fbde558116",
+    "species": [
+      "CH4"
+    ],
+    "times_monotonic": true
+  },
+  "evidence_files": [
+    {
+      "label": "h2_fixed_mass_flow_timeseries",
+      "path": "examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_timeseries_smoke",
+      "sha256": "4a9be3e042435ec58d67da7c8765e0daf4ed02241a30cf12bc4551db791a9de8",
+      "size_bytes": 1828
+    },
+    {
+      "label": "h2_fixed_mass_flow_valve_schedule",
+      "path": "examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_valve_schedule_smoke",
+      "sha256": "2ec292da7ea6d657225968eed63d4c8b26b0ee437e99bb549d222b5e49c92af0",
+      "size_bytes": 1449
+    },
+    {
+      "label": "gasified_lng_ch4_cold_source",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+      "sha256": "639f22b5006f42c36ff3d112cbca721c07092f2dceb13b754c923aac1d48a435",
+      "size_bytes": 2315
+    },
+    {
+      "label": "gasified_lng_ch4_warmed_fire",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_warmed_fire_surrogate_mpicuda_500step",
+      "sha256": "6a1faab20f4892cec8ccc440b7ff93b9b6a62299c3330c3b645be6e8c8a7e712",
+      "size_bytes": 2440
+    },
+    {
+      "label": "gasified_lpg_c3h8_fire",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lpg_c3h8_surrogate_smoke",
+      "sha256": "1e407c81e42744b0e1625b03d3c840cc3761e8b6ee572551878ef9a7796c0828",
+      "size_bytes": 2325
+    },
+    {
+      "label": "lng_external_vaporization_csv_template",
+      "path": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+      "sha256": "15aa5d14fb2ca7b5d1fb2c78b1126f4e4c8b25474096b2bdb73ca6fbde558116",
+      "size_bytes": 405
+    }
+  ],
+  "findings": {
+    "csv_missing_columns": [],
+    "failed_templates": []
+  },
+  "generated_at_utc": "2026-08-20T10:00:45.945437+00:00",
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-MULTI-FUEL-TEMPLATE-CATALOG",
+  "summary": {
+    "cfd_internal_liquid_phase_change_claim_allowed": false,
+    "csv_template_ready": true,
+    "csv_template_row_count": 4,
+    "csv_template_species": [
+      "CH4"
+    ],
+    "failed_template_count": 0,
+    "fuel_species_seen": [
+      "C3H8",
+      "CH4",
+      "H2"
+    ],
+    "gasified_lng_lpg_surrogate_template_count": 3,
+    "liquefied_nonclaim_comments_present": true,
+    "multi_fuel_template_catalog_ready": true,
+    "ready_template_count": 5,
+    "template_count": 5
+  },
+  "templates": [
+    {
+      "claim_boundary": "gas_time_series",
+      "expected_fuel_species": "H2",
+      "fuel_species": "H2",
+      "mismatches": {},
+      "missing_keys": [],
+      "missing_nonclaim_terms": [],
+      "name": "h2_fixed_mass_flow_timeseries",
+      "path": "examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_timeseries_smoke",
+      "ready": true,
+      "sha256": "4a9be3e042435ec58d67da7c8765e0daf4ed02241a30cf12bc4551db791a9de8"
+    },
+    {
+      "claim_boundary": "gas_valve_schedule",
+      "expected_fuel_species": "H2",
+      "fuel_species": "H2",
+      "mismatches": {},
+      "missing_keys": [],
+      "missing_nonclaim_terms": [],
+      "name": "h2_fixed_mass_flow_valve_schedule",
+      "path": "examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_valve_schedule_smoke",
+      "ready": true,
+      "sha256": "2ec292da7ea6d657225968eed63d4c8b26b0ee437e99bb549d222b5e49c92af0"
+    },
+    {
+      "claim_boundary": "gasified_lng_surrogate_not_liquid_phase_change",
+      "expected_fuel_species": "CH4",
+      "fuel_species": "CH4",
+      "mismatches": {},
+      "missing_keys": [],
+      "missing_nonclaim_terms": [],
+      "name": "gasified_lng_ch4_cold_source",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+      "ready": true,
+      "sha256": "639f22b5006f42c36ff3d112cbca721c07092f2dceb13b754c923aac1d48a435"
+    },
+    {
+      "claim_boundary": "gasified_lng_warmed_fire_surrogate_not_liquid_phase_change",
+      "expected_fuel_species": "CH4",
+      "fuel_species": "CH4",
+      "mismatches": {},
+      "missing_keys": [],
+      "missing_nonclaim_terms": [],
+      "name": "gasified_lng_ch4_warmed_fire",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_warmed_fire_surrogate_mpicuda_500step",
+      "ready": true,
+      "sha256": "6a1faab20f4892cec8ccc440b7ff93b9b6a62299c3330c3b645be6e8c8a7e712"
+    },
+    {
+      "claim_boundary": "gasified_lpg_surrogate_not_liquid_phase_change",
+      "expected_fuel_species": "C3H8",
+      "fuel_species": "C3H8",
+      "mismatches": {},
+      "missing_keys": [],
+      "missing_nonclaim_terms": [],
+      "name": "gasified_lpg_c3h8_fire",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lpg_c3h8_surrogate_smoke",
+      "ready": true,
+      "sha256": "1e407c81e42744b0e1625b03d3c840cc3761e8b6ee572551878ef9a7796c0828"
+    }
+  ]
+}

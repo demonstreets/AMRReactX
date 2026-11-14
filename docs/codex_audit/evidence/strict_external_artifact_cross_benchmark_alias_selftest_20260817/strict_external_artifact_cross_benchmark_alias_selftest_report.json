@@ -1,0 +1,124 @@
+{
+  "alias_cases": [
+    {
+      "case_id": "dataverse_metadata_as_sbepv5_dataset_metadata",
+      "decision": "REJECT",
+      "reasons": [
+        "source_raw_case_id_is_dataverse_not_hysafe_sbepv5_d27",
+        "metadata_benchmark_id_not_equal_hysafe_sbepv5_d27",
+        "source_dataset_doi_is_for_open_channel_dataverse_case"
+      ],
+      "source_path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_case_metadata.json",
+      "target_label": "external_plume.dataset_metadata"
+    },
+    {
+      "case_id": "dataverse_sensor_coordinates_as_sbepv5_sensor_coordinates",
+      "decision": "REJECT",
+      "reasons": [
+        "sensor_coordinate_schema_missing_reliability_and_digitization_uncertainty_m",
+        "source_sensor_layout_has_29_dataverse_sensors_not_12_sbepv5_gas_sensors",
+        "coordinate_convention_and_article_doi_do_not_match_sbepv5_d27"
+      ],
+      "source_path": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_sensor_coordinates.csv",
+      "target_label": "external_plume.sensor_coordinates"
+    },
+    {
+      "case_id": "dataverse_geometry_metadata_as_sbepv5_baffle_geometry",
+      "decision": "REJECT",
+      "reasons": [
+        "source_contains_open_channel_dimensions_not_four_sbepv5_baffle_bounds",
+        "no_baffle_id_or_per_baffle_min_max_columns",
+        "known_obstacle_summary_explicitly_says_component_bounds_not_encoded"
+      ],
+      "source_path": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_geometry_metadata.json",
+      "target_label": "external_plume.baffle_geometry"
+    },
+    {
+      "case_id": "dataverse_timeseries_as_sbepv5_experimental_timeseries",
+      "decision": "REJECT",
+      "reasons": [
+        "timeseries_header_uses_sensor_nn_H2_vol_percent_not_Gas01_to_Gas12_vol_percent",
+        "source_has_29_dataverse_sensor_columns_not_12_sbepv5_columns",
+        "source_article_and_dataset_doi_are_not_sbepv5_d27"
+      ],
+      "source_path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_timeseries_wide.csv",
+      "target_label": "external_plume.experimental_timeseries"
+    },
+    {
+      "case_id": "dataverse_reference_package_as_sbepv5_digitization_uncertainty_record",
+      "decision": "REJECT",
+      "reasons": [
+        "reference_package_report_is_not_a_digitization_uncertainty_csv",
+        "no_per_artifact_method_axis_calibration_uncertainty_review_status_rows",
+        "dataverse_machine_readable_source_does_not_document_sbepv5_curve_digitization"
+      ],
+      "source_path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_open_channel_reference_package_report.json",
+      "target_label": "external_plume.digitization_uncertainty_record"
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "strict_external_evidence_receiving_pack",
+      "path": "docs/codex_audit/evidence/strict_external_evidence_receiving_pack_20260812/strict_external_evidence_receiving_pack_report.json",
+      "sha256": "6c343fad91cf9e34f0fae670c368978a96f53c60e7206a783371a63944045600",
+      "size_bytes": 15842
+    },
+    {
+      "label": "strict_external_artifact_drop_index",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_drop_index_20260812/strict_external_artifact_drop_index_report.json",
+      "sha256": "19237e2158bc59f9df0e466a4b76ecca166ea0c06541dfac6b953a11dceec858",
+      "size_bytes": 14242
+    },
+    {
+      "label": "dataverse_reference_case_metadata",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_case_metadata.json",
+      "sha256": "daf146d544d60044057cc2c7e9bec1ca7b9e2403d96737f11370a8d566283894",
+      "size_bytes": 2418
+    },
+    {
+      "label": "dataverse_reference_timeseries_wide",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_timeseries_wide.csv",
+      "sha256": "46de351eb9a2b4c22d6e213d9c00a967b34829a120e990c1d283b5074ae2053f",
+      "size_bytes": 693641
+    },
+    {
+      "label": "dataverse_open_channel_reference_package_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_open_channel_reference_package_report.json",
+      "sha256": "1a22b8c0dc839122e9b1b895f8059e698c5c25266af30dbd62a09b735d284476",
+      "size_bytes": 8831
+    },
+    {
+      "label": "dataverse_geometry_metadata",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_geometry_metadata.json",
+      "sha256": "bbbe73bc564b5a19a60d9fa0baa1446e31f4821c6a071bb3d605d8386fa40449",
+      "size_bytes": 926
+    },
+    {
+      "label": "dataverse_sensor_coordinates",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_sensor_coordinates.csv",
+      "sha256": "a0a2f3fd6aa1c1c618ff1177383b4bcfa84e799cfa238f08053db762d6b2f394",
+      "size_bytes": 4773
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:28.506569+00:00",
+  "schema_version": 1,
+  "scope": "negative selftest preventing Dataverse open-channel evidence from satisfying SBEPV5 D27 strict plume artifacts",
+  "status": "PASS-STRICT-EXTERNAL-ARTIFACT-CROSS-BENCHMARK-ALIAS-SELFTEST",
+  "summary": {
+    "alias_accepted_count": 0,
+    "alias_case_count": 5,
+    "alias_rejected_count": 5,
+    "dataverse_sensor_column_count": 29,
+    "does_not_create_or_copy_target_artifacts": true,
+    "protected_domain": "external_plume",
+    "protected_target_count": 5,
+    "sbepv5_required_gas_column_count": 12,
+    "sbepv5_required_gas_columns_present_in_dataverse_timeseries": false,
+    "source_benchmark_id": "dataverse_open_channel_h2",
+    "strict_completion_allowed": false,
+    "strict_external_artifact_cross_benchmark_alias_selftest_ready": true,
+    "strict_master_plan_still_open": true,
+    "target_artifacts_currently_present_count": 0,
+    "target_benchmark_id": "hysafe_sbepv5_d27"
+  }
+}

@@ -1,0 +1,41 @@
+# Codex PeleC 2-rank MPI+CUDA H2/O2 reacting smoke.
+max_step = 5
+stop_time = 1.0e-7
+
+geometry.is_periodic = 0 0 1
+geometry.coord_sys = 0
+geometry.prob_lo = 0.0 0.0 0.0
+geometry.prob_hi = 3.0 2.0 0.16
+amr.n_cell = 48 16 4
+
+pelec.lo_bc = "NoSlipWall" "NoSlipWall" "Interior"
+pelec.hi_bc = "FOExtrap"     "NoSlipWall" "Interior"
+
+pelec.do_hydro = 1
+pelec.do_react = 1
+pelec.chem_integrator = "ReactorRK64"
+pelec.allow_negative_energy = 1
+pelec.ppm_type = 0
+pelec.weno_scheme = 1
+pelec.cfl = 0.05
+pelec.plm_iorder = 2
+pelec.use_flattening = 1
+
+amrex.the_arena_init_size = 0
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 32
+amr.checkpoint_files_output = 0
+amr.plot_int = 1
+amr.plot_vars = density Temp pressure rho_H2 rho_O2 rho_H2O rho_H rho_O rho_OH rho_HO2 rho_H2O2 rho_N2
+amr.derive_plot_vars = x_velocity y_velocity z_velocity
+pelec.plot_massfrac = 1
+
+prob.p_0 = 2.0e5
+prob.T_0 = 300.0
+prob.T_hot = 2214.0
+prob.p_hot = 1.8e7
+prob.r_hot = 0.55
+prob.u_hot = 2.84e5
+
+amrex.abort_on_unused_inputs = 1

@@ -1,0 +1,79 @@
+# ------------------  INPUTS: 1D ZND Detonation  -------------------
+max_step = 80
+stop_time = 5.0e-7
+
+# PROBLEM SIZE & GEOMETRY
+geometry.is_periodic = 1 1 1
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 1.0 0.02 0.02
+amr.n_cell = 192 8 8
+
+# BC
+pelec.lo_bc = "Interior" "Interior" "Interior"
+pelec.hi_bc = "Interior" "Interior" "Interior"
+
+# PHYSICS
+pelec.do_hydro = 1
+pelec.do_react = 1
+pelec.diffuse_vel = 0
+pelec.diffuse_temp = 0
+pelec.diffuse_spec = 0
+pelec.diffuse_enth = 0
+
+# Chemistry integrator
+pelec.chem_integrator = "ReactorCvode"
+cvode.solve_type = dense_direct
+cvode.rtol = 1e-6
+cvode.atol = 1e-10
+
+# NUMERICS
+pelec.ppm_type = 1
+pelec.use_hybrid_weno = 1
+pelec.weno_scheme = 1
+pelec.cfl = 0.3
+pelec.init_shrink = 0.1
+pelec.change_max = 1.1
+pelec.dt_cutoff = 5.e-20
+
+# AMR
+amr.max_level = 0
+amr.ref_ratio = 2
+amr.regrid_int = 2
+amr.blocking_factor = 4
+amr.max_grid_size = 64
+amr.n_error_buf = 2 2 2 2
+
+# TAGGING
+tagging.dengrad = 0.05
+tagging.max_dengrad_lev = 1
+tagging.pressgrad = 0.25
+tagging.max_pressgrad_lev = 1
+tagging.tempgrad = 50
+tagging.max_tempgrad_lev = 1
+
+# DIAGNOSTICS
+pelec.sum_interval = 1
+pelec.v = 1
+amr.v = 1
+
+# CHECKPOINT
+amr.check_file = chk
+amr.check_int = -1
+
+# PLOTFILES
+amr.plot_file = plt
+amr.plot_int = 80
+amr.plot_vars = density Temp pressure
+amr.derive_plot_vars = x_velocity y_velocity z_velocity
+pelec.plot_massfrac = 1
+pelec.plot_rhoy = 0
+
+# PROBLEM PARAMETERS
+prob.rho_l = 2.4e-3
+prob.p_l = 1.8e7
+# prob.T_l is computed by EY2T from (rho_l, p_l, Y) — do not specify here
+prob.rho_r = 8.5e-4
+prob.p_r = 1.013e6
+prob.T_r = 300.0
+prob.x_split = 0.1

@@ -1,0 +1,158 @@
+{
+  "nvcc": {
+    "command": [
+      "/home/cj/local/cuda-12.6/bin/nvcc",
+      "--version"
+    ],
+    "exit": 0,
+    "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Tue_Oct_29_23:50:19_PDT_2024\nCuda compilation tools, release 12.6, V12.6.85\nBuild cuda_12.6.r12.6/compiler.35059454_0\n",
+    "stderr": ""
+  },
+  "g++": {
+    "command": [
+      "g++",
+      "--version"
+    ],
+    "exit": 0,
+    "stdout": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": ""
+  },
+  "mpi": {
+    "command": [
+      "mpirun",
+      "--version"
+    ],
+    "exit": 0,
+    "stdout": "mpirun (Open MPI) 4.1.6\n\nReport bugs to http://www.open-mpi.org/community/help/\n",
+    "stderr": ""
+  },
+  "ldd": {
+    "command": [
+      "ldd",
+      "/home/cj/my-pele/examples/academic/bench_2gpu/repair_20260909_hotspot_v53d.gnu.MPI.CUDA.ex"
+    ],
+    "exit": 0,
+    "stdout": "\tlinux-vdso.so.1 (0x0000734020c9c000)\n\tlibmpi.so.40 => /lib/x86_64-linux-gnu/libmpi.so.40 (0x0000734014ece000)\n\tlibsundials_arkode.so.5 => /home/cj/local/sundials-cuda/lib/libsundials_arkode.so.5 (0x0000734014df6000)\n\tlibsundials_cvode.so.6 => /home/cj/local/sundials-cuda/lib/libsundials_cvode.so.6 (0x0000734020c11000)\n\tlibsundials_nveccuda.so.6 => /home/cj/local/sundials-cuda/lib/libsundials_nveccuda.so.6 (0x0000734014ce6000)\n\tlibcurand.so.10 => /usr/local/cuda/targets/x86_64-linux/lib/libcurand.so.10 (0x000073400e800000)\n\tlibcusparse.so.12 => /usr/local/cuda/targets/x86_64-linux/lib/libcusparse.so.12 (0x0000733ffce00000)\n\tlibcusolver.so.11 => /usr/local/cuda/targets/x86_64-linux/lib/libcusolver.so.11 (0x0000733ff3a00000)\n\tlibsundials_sunlinsolcusolversp.so.4 => /home/cj/local/sundials-cuda/lib/libsundials_sunlinsolcusolversp.so.4 (0x0000733ffcd37000)\n\tlibsundials_sunmatrixcusparse.so.4 => /home/cj/local/sundials-cuda/lib/libsundials_sunmatrixcusparse.so.4 (0x0000733ff392d000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x0000733ff3600000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x0000733ff3517000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x0000734020bdf000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x0000733ff3200000)\n\t/lib64/ld-linux-x86-64.so.2 (0x0000734020c9e000)\n\tlibopen-rte.so.40 => /lib/x86_64-linux-gnu/libopen-rte.so.40 (0x0000733ff345b000)\n\tlibopen-pal.so.40 => /lib/x86_64-linux-gnu/libopen-pal.so.40 (0x0000733ff314c000)\n\tlibhwloc.so.15 => /lib/x86_64-linux-gnu/libhwloc.so.15 (0x0000734014c85000)\n\tlibrt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x0000734020bd8000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x0000734020bd3000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x0000734020bce000)\n\tlibnvJitLink.so.12 => /usr/local/cuda/targets/x86_64-linux/lib/libnvJitLink.so.12 (0x0000733fefe00000)\n\tlibcublas.so.12 => /usr/local/cuda/targets/x86_64-linux/lib/libcublas.so.12 (0x0000733fe9400000)\n\tlibcublasLt.so.12 => /usr/local/cuda/targets/x86_64-linux/lib/libcublasLt.so.12 (0x0000733fc7a00000)\n\tlibz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x0000734020bb0000)\n\tlibevent_core-2.1.so.7 => /lib/x86_64-linux-gnu/libevent_core-2.1.so.7 (0x0000734014c50000)\n\tlibevent_pthreads-2.1.so.7 => /lib/x86_64-linux-gnu/libevent_pthreads-2.1.so.7 (0x0000734020bab000)\n\tlibudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x0000733ff38fa000)\n\tlibcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x0000734014c43000)\n",
+    "stderr": ""
+  },
+  "gpu": {
+    "command": [
+      "nvidia-smi",
+      "--query-gpu=uuid,name,driver_version",
+      "--format=csv,noheader"
+    ],
+    "exit": 0,
+    "stdout": "GPU-5fbbf974-c67d-b1c0-ce02-522476d212c7, Tesla P100-PCIE-16GB, 580.173.02\nGPU-709ba18a-8879-8407-cc6f-9af43df9f9eb, Tesla P100-PCIE-16GB, 580.173.02\n",
+    "stderr": ""
+  },
+  "shared_libraries": {
+    "/lib/x86_64-linux-gnu/libmpi.so.40": {
+      "size_bytes": 1182056,
+      "sha256": "9055018b12757e830591aa0283e485e471f1f2a06d3bc0dd5fb35ab00386c172"
+    },
+    "/home/cj/local/sundials-cuda/lib/libsundials_arkode.so.5": {
+      "size_bytes": 971840,
+      "sha256": "6b2a7715cf8d99825454c9a85422feb31461a7cdd40a84a94ae5ab94b9d87fd1"
+    },
+    "/home/cj/local/sundials-cuda/lib/libsundials_cvode.so.6": {
+      "size_bytes": 453872,
+      "sha256": "ceb13854d2c495067d8c3bbbf8da7d0e325aefb2baa91cb25591093d288c9c8c"
+    },
+    "/home/cj/local/sundials-cuda/lib/libsundials_nveccuda.so.6": {
+      "size_bytes": 1428128,
+      "sha256": "94a89b43f7082db432bab6f86299dbcfe3165cadcf6ca33a486359459584045f"
+    },
+    "/usr/local/cuda/targets/x86_64-linux/lib/libcurand.so.10": {
+      "size_bytes": 96472496,
+      "sha256": "12411c1e921cd3cac4e0d2f58024a3e6bbb7cea584d5cd768ad908ec762c5545"
+    },
+    "/usr/local/cuda/targets/x86_64-linux/lib/libcusparse.so.12": {
+      "size_bytes": 293490680,
+      "sha256": "58ffc54edb1d007f56a1718aaadcb30f45bbf662f43515920ea8ff094304bdbf"
+    },
+    "/usr/local/cuda/targets/x86_64-linux/lib/libcusolver.so.11": {
+      "size_bytes": 152064832,
+      "sha256": "a14bb8ed706fcbe10a33291358c0b62ade3762d2388698cebbacd02e4d43117f"
+    },
+    "/home/cj/local/sundials-cuda/lib/libsundials_sunlinsolcusolversp.so.4": {
+      "size_bytes": 1113232,
+      "sha256": "28e8a97a954b7ad61341e43fa33831ed124488259b74a6f1449edd98325fdfca"
+    },
+    "/home/cj/local/sundials-cuda/lib/libsundials_sunmatrixcusparse.so.4": {
+      "size_bytes": 1160648,
+      "sha256": "f66cd3bb9e082a7bd59e9a29900996339c8b9ccee3f877d38888e09c42ba3c6d"
+    },
+    "/lib/x86_64-linux-gnu/libstdc++.so.6": {
+      "size_bytes": 2592224,
+      "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11"
+    },
+    "/lib/x86_64-linux-gnu/libm.so.6": {
+      "size_bytes": 952616,
+      "sha256": "e9c4b28d340e415b8137480ec442662f981e1399386c5931dae0e886e3639e91"
+    },
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1": {
+      "size_bytes": 183024,
+      "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb"
+    },
+    "/lib/x86_64-linux-gnu/libc.so.6": {
+      "size_bytes": 2125328,
+      "sha256": "8db37cf3f2169f59a0f07ef1fea308c35656668c64c8ff294e1860f4121eb161"
+    },
+    "/lib/x86_64-linux-gnu/libopen-rte.so.40": {
+      "size_bytes": 757352,
+      "sha256": "26467e1da428d31dab924ddbc50bc6ade75da47dbb82c77498a5f127a5466ba7"
+    },
+    "/lib/x86_64-linux-gnu/libopen-pal.so.40": {
+      "size_bytes": 704192,
+      "sha256": "59c4d9b111cd3ec326a4df475a338daae050496087c67e86956187056fdc3051"
+    },
+    "/lib/x86_64-linux-gnu/libhwloc.so.15": {
+      "size_bytes": 392576,
+      "sha256": "86dff44a023254d997cea910b9a51f35afefe6780f4b5530f974a2009ba47487"
+    },
+    "/lib/x86_64-linux-gnu/librt.so.1": {
+      "size_bytes": 14624,
+      "sha256": "c6e6288545e24b0b3cfbf33320bda9236521625d8c3d628f3444f1ed40e5c7c5"
+    },
+    "/lib/x86_64-linux-gnu/libpthread.so.0": {
+      "size_bytes": 14408,
+      "sha256": "a27ffa9bf233d61a5f02ddb0cf770dd6579021afc1aa8aec0fb58ee4a965281a"
+    },
+    "/lib/x86_64-linux-gnu/libdl.so.2": {
+      "size_bytes": 14408,
+      "sha256": "292d5f5af2e7360b3e18c56591a4960115373ecf40627660f9149b6c68a33f80"
+    },
+    "/usr/local/cuda/targets/x86_64-linux/lib/libnvJitLink.so.12": {
+      "size_bytes": 50418984,
+      "sha256": "7023ef7e1fda9dd82a82d84682b7dc1600bf42ad36310786181e9df7d968ac23"
+    },
+    "/usr/local/cuda/targets/x86_64-linux/lib/libcublas.so.12": {
+      "size_bytes": 108244960,
+      "sha256": "d9343511e1d2ed51e4d65fa94a25cb8f73b0ebc5ae5487da794e18e6950c98dc"
+    },
+    "/usr/local/cuda/targets/x86_64-linux/lib/libcublasLt.so.12": {
+      "size_bytes": 491106832,
+      "sha256": "a4ddaed1410acc604815f0e84cdd6c4a70c61cfd2b95dc96360f0799169f0374"
+    },
+    "/lib/x86_64-linux-gnu/libz.so.1": {
+      "size_bytes": 113000,
+      "sha256": "86200da370f20476a2507e9097a789b5ef97269b4ca8d5e164ad82dab9d99892"
+    },
+    "/lib/x86_64-linux-gnu/libevent_core-2.1.so.7": {
+      "size_bytes": 215216,
+      "sha256": "92084a8c9d5655496edb225606022376c7ce584dff69d5127fbae11261f8fc37"
+    },
+    "/lib/x86_64-linux-gnu/libevent_pthreads-2.1.so.7": {
+      "size_bytes": 14256,
+      "sha256": "d428cc6b9e6af9d14aad44977984f15babdb33fdbe66fc202b3eac6eea7380a9"
+    },
+    "/lib/x86_64-linux-gnu/libudev.so.1": {
+      "size_bytes": 207288,
+      "sha256": "4298228175fa62a36af88b1afd4406cdd8b1bf166621f957d0dbbde45a698fe5"
+    },
+    "/lib/x86_64-linux-gnu/libcap.so.2": {
+      "size_bytes": 51536,
+      "sha256": "6ac6abc86ac891c6e13486470e26f1d939f47fda9e6b5d5508a7f5ec881adc84"
+    }
+  }
+}

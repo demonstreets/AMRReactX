@@ -1,0 +1,86 @@
+{
+  "claim_boundary": [
+    "This proves a reusable plotfile sensor-sampling output path.",
+    "It proves linear interpolation for non-cell-center synthetic sensor coordinates.",
+    "It uses synthetic in-domain sensor locations, not EXP002 sensor coordinates.",
+    "It samples avg_pressure as a pressure proxy and does not claim calibrated overpressure agreement.",
+    "It does not address calibrated radiation agreement."
+  ],
+  "evidence_files": [
+    {
+      "label": "plotfile_sensor_extractor",
+      "path": "tools/codex_extract_plotfile_sensor_timeseries.py",
+      "sha256": "c68a6933c41fd278aa0eb31e070f74a0041802a2b950109ccb0fda412841b418",
+      "size_bytes": 11561
+    },
+    {
+      "label": "sensor_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/synthetic_pressure_sensor_locations.csv",
+      "sha256": "0a630f1b11b0a2409d8dabfe38641650f222bb37fb5a40016badd7a6693f7f42",
+      "size_bytes": 301
+    },
+    {
+      "label": "timeseries_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/synthetic_pressure_sensor_timeseries.csv",
+      "sha256": "f8a60525f4cf4593f0f051a4408b9a1766f7bcd4da63b3df8002edcb983e6c05",
+      "size_bytes": 1490
+    },
+    {
+      "label": "extractor_json",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/plotfile_sensor_timeseries_extraction_report.json",
+      "sha256": "5645aedd56d13f1d594f8dbbf61e18977e3247c27414db04c5b0c90423fe7cc4",
+      "size_bytes": 1933
+    },
+    {
+      "label": "extractor_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/extractor.log",
+      "sha256": "9a51d9c06c4e05cedbc9f549b6d96e76084dcf93658728c91069dbdc3c7d3b1e",
+      "size_bytes": 304
+    },
+    {
+      "label": "plt00000_header",
+      "path": "examples/engineering/h2_leak_3d/plt00000/Header",
+      "sha256": "89ab7be4c90837bb429804029c4750e3506cb7508996499da4a1835328952de8",
+      "size_bytes": 297
+    },
+    {
+      "label": "plt00001_header",
+      "path": "examples/engineering/h2_leak_3d/plt00001/Header",
+      "sha256": "053185b1e74f34741c4011654b4c4be5894d87cab369da8395b795d5c4b50e67",
+      "size_bytes": 339
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:58+00:00",
+  "output_files": {
+    "extractor_json": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/plotfile_sensor_timeseries_extraction_report.json",
+    "extractor_log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/extractor.log",
+    "sensor_csv": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/synthetic_pressure_sensor_locations.csv",
+    "timeseries_csv": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/synthetic_pressure_sensor_timeseries.csv"
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-PLOTFILE-SENSOR-SAMPLING-CONTRACT",
+  "summary": {
+    "case_aligned_pressure_sensor_agreement": false,
+    "current_outputs_sufficient_for_exp002_pressure_agreement": false,
+    "finite_value_count": 32,
+    "linear_interpolation_used": true,
+    "max_abs_avg_pressure_proxy": 29.039442555078775,
+    "max_nearest_cell_distance_m": 0.05412658773652741,
+    "plotfile_count": 2,
+    "plotfile_sensor_sampling_contract_ready": true,
+    "pressure_sensor_timeseries_path_ready": true,
+    "radiation_agreement_executed": false,
+    "row_count": 8,
+    "sampling_mode": "linear",
+    "sensor_count": 4,
+    "strict_fire_calibration_blocker_cleared": false,
+    "time_count": 2,
+    "uses_non_cell_center_sensor_coordinates": true,
+    "uses_synthetic_sensor_coordinates": true,
+    "variables": [
+      "avg_pressure",
+      "temp",
+      "Y(H2)"
+    ]
+  }
+}

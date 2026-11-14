@@ -1,0 +1,235 @@
+{
+  "bfs_validator": {
+    "notes": [
+      "X_R/H = 5.94 (ref 6.26, dev -5.0%) \u2014 PASS",
+      "Recirculation zone length = 5.74H \u2014 PASS"
+    ],
+    "returncode": 0,
+    "stdout": "Reading plotfile: docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/prodlim16_profile_exp020_4rank_5000_20260723/plt04309\n  Time: 0.5000\n  Grid: 208 x 56\n\nExtracting Cf along bottom wall...\n  Reattachment: X_R = 0.22649 m  (X_R/H = 5.94)\n  Recirculation zone length: 5.74H\n\nExtracting velocity profiles...\n  x/H =  -4.0: U_max = 16.10 m/s\n  x/H =   0.0: U_max = 15.82 m/s\n  x/H =   2.0: U_max = 15.64 m/s\n  x/H =   4.0: U_max = 15.40 m/s\n  x/H =   6.0: U_max = 15.14 m/s\n  x/H =   8.0: U_max = 14.92 m/s\n  x/H =  10.0: U_max = 14.75 m/s\n  x/H =  15.0: U_max = 14.52 m/s\n\nExtracting step-face Cp...\n  Cp on step face: -0.040 to -0.038\n\n============================================================\n  BACKWARD-FACING STEP VALIDATION REPORT\n============================================================\n\n  Parameters:\n    H = 0.0381 m\n    U_ref = 13.5 m/s\n    Re_H = 34214\n\n  Reattachment:\n    X_R/H = 5.94\n    Reference: 6.26 \u00b1 0.63\n\n  Recirculation zone:\n    Length = 5.74H\n    Minimum required: 3.0H\n\n  Notes:\n    - X_R/H = 5.94 (ref 6.26, dev -5.0%) \u2014 PASS\n    - Recirculation zone length = 5.74H \u2014 PASS\n\n  VERDICT: PASS\n============================================================\n"
+  },
+  "blocking_gaps": [],
+  "diagnostic_gaps": [
+    "bfs_loglaw_profile_plotfile_validation_failed"
+  ],
+  "evidence_files": [
+    {
+      "label": "validate_bfs.py",
+      "path": "tools/validate_bfs.py",
+      "sha256": "d489e4a7d8c3dfccdfee1bc466f36da534d3048fbe337f943475a8e299f2ab88",
+      "size_bytes": 14130
+    },
+    {
+      "label": "validate_bfs_loglaw_profile_plotfile.py",
+      "path": "tools/validate_bfs_loglaw_profile_plotfile.py",
+      "sha256": "5a519165b673a0dc9573e4e2c1ee2e1e3557c748bf04cf8438aa3cde74c299b3",
+      "size_bytes": 2466
+    },
+    {
+      "label": "codex_scout_engineering_bfs_kepsilon_sensitivity.sh",
+      "path": "tools/codex_scout_engineering_bfs_kepsilon_sensitivity.sh",
+      "sha256": "a1fcf8f6292eb66f8ecfba17616cddf2416520dd54095dfa4e2bdb8a9578a624",
+      "size_bytes": 4204
+    },
+    {
+      "label": "bfs_kepsilon_preflight_refined_208x56_lowcfl_5000step_reference_attempt",
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_208_lowcfl_5000_report.json",
+      "sha256": "ba29ad9b9c632233da45d927d09ea997fc51ea6db9dea501022e0f43655ce4f9",
+      "size_bytes": 2153
+    },
+    {
+      "label": "bfs_kepsilon_preflight_base_104x28_current_input",
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_base_report.json",
+      "sha256": "c7e250d780e7b16a9cffb9cdd57489488917cf23151e1696d5ea59a4fb602afe",
+      "size_bytes": 2130
+    },
+    {
+      "label": "bfs_kepsilon_preflight_refined_208x56_default_cfl",
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_208_default_report.json",
+      "sha256": "f90276b5b47f064a06173cefb49427b59504f0ad7d18be06cbd617ca8ae47d71",
+      "size_bytes": 2131
+    },
+    {
+      "label": "bfs_kepsilon_preflight_refined_208x56_lowcfl_500step",
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_208_lowcfl_report.json",
+      "sha256": "8f5572d1e8d2c82688c5ea619afbc8ba4fe0eb5b9571a3b57f4577a5d4b2f50e",
+      "size_bytes": 2134
+    },
+    {
+      "label": "plotfile_header",
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/prodlim16_profile_exp020_4rank_5000_20260723/plt04309/Header",
+      "sha256": "e510f6f4cbf45747ff59602cba5f0e8db8e7942e39d337e7e642de06dbab361e",
+      "size_bytes": 425
+    }
+  ],
+  "generated_at_utc": "2026-07-23T06:24:20+00:00",
+  "limitations": [
+    "Current plotfile is treated as evidence of the present BFS validation state, not as a production-qualified turbulent BFS benchmark.",
+    "PASS requires BFS reattachment and recirculation reference validation to pass on an adequate engineering grid.",
+    "The preflight reports check input-deck readiness before launching expensive refined-grid or parallel runs.",
+    "The log-law profile validator is retained as a diagnostic because the evolved EB-BFS plotfile is not an initial analytic log-law profile.",
+    "Sensitivity-case directories under /tmp are summarized when present but are not required as durable release evidence."
+  ],
+  "loglaw_validator": {
+    "command": [
+      "/usr/bin/python3",
+      "tools/validate_bfs_loglaw_profile_plotfile.py",
+      "--plotfile",
+      "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/prodlim16_profile_exp020_4rank_5000_20260723/plt04309"
+    ],
+    "linf": 15.4519819,
+    "passed": false,
+    "returncode": 1,
+    "stdout": "bfs_loglaw_profile_plotfile_validation FAIL x_velocity profile mismatch linf=1.54519819e+01"
+  },
+  "plotfile": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/prodlim16_profile_exp020_4rank_5000_20260723/plt04309",
+  "plotfile_header_first_line": "HyperCLaw-V1.1",
+  "plotfile_header_sha256": "e510f6f4cbf45747ff59602cba5f0e8db8e7942e39d337e7e642de06dbab361e",
+  "preflight_reports": [
+    {
+      "blocking_gaps": [],
+      "blocks_production_readiness": false,
+      "cells_per_step_height": 6.096000000000001,
+      "cfl": 0.05,
+      "diagnostic_gaps": [],
+      "dt_shrink": 0.001,
+      "exists": true,
+      "grid_nx": 208,
+      "grid_ny": 56,
+      "high_nan_risk_refined_grid": false,
+      "input_file": "examples/engineering/backward_facing_step/input.yaml",
+      "label": "refined_208x56_lowcfl_5000step_reference_attempt",
+      "max_step": 5000,
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_208_lowcfl_5000_report.json",
+      "sha256": "ba29ad9b9c632233da45d927d09ea997fc51ea6db9dea501022e0f43655ce4f9",
+      "status": "PASS-BFS-KEPSILON-PREFLIGHT",
+      "stop_time": 0.5
+    },
+    {
+      "blocking_gaps": [],
+      "blocks_production_readiness": false,
+      "cells_per_step_height": 6.096000000000001,
+      "cfl": 0.05,
+      "diagnostic_gaps": [],
+      "dt_shrink": 0.001,
+      "exists": true,
+      "grid_nx": 208,
+      "grid_ny": 56,
+      "high_nan_risk_refined_grid": false,
+      "input_file": "examples/engineering/backward_facing_step/input.yaml",
+      "label": "base_104x28_current_input",
+      "max_step": 5000,
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_base_report.json",
+      "sha256": "c7e250d780e7b16a9cffb9cdd57489488917cf23151e1696d5ea59a4fb602afe",
+      "status": "PASS-BFS-KEPSILON-PREFLIGHT",
+      "stop_time": 0.5
+    },
+    {
+      "blocking_gaps": [],
+      "blocks_production_readiness": false,
+      "cells_per_step_height": 6.096000000000001,
+      "cfl": 0.05,
+      "diagnostic_gaps": [],
+      "dt_shrink": 0.001,
+      "exists": true,
+      "grid_nx": 208,
+      "grid_ny": 56,
+      "high_nan_risk_refined_grid": false,
+      "input_file": "examples/engineering/backward_facing_step/input.yaml",
+      "label": "refined_208x56_default_cfl",
+      "max_step": 5000,
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_208_default_report.json",
+      "sha256": "f90276b5b47f064a06173cefb49427b59504f0ad7d18be06cbd617ca8ae47d71",
+      "status": "PASS-BFS-KEPSILON-PREFLIGHT",
+      "stop_time": 0.5
+    },
+    {
+      "blocking_gaps": [],
+      "blocks_production_readiness": false,
+      "cells_per_step_height": 6.096000000000001,
+      "cfl": 0.05,
+      "diagnostic_gaps": [],
+      "dt_shrink": 0.001,
+      "exists": true,
+      "grid_nx": 208,
+      "grid_ny": 56,
+      "high_nan_risk_refined_grid": false,
+      "input_file": "examples/engineering/backward_facing_step/input.yaml",
+      "label": "refined_208x56_lowcfl_500step",
+      "max_step": 5000,
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_preflight_208_lowcfl_report.json",
+      "sha256": "8f5572d1e8d2c82688c5ea619afbc8ba4fe0eb5b9571a3b57f4577a5d4b2f50e",
+      "status": "PASS-BFS-KEPSILON-PREFLIGHT",
+      "stop_time": 0.5
+    }
+  ],
+  "reference_case": {
+    "minimum_recirculation_length_h": 3.0,
+    "name": "Backward-Facing Step turbulent flow",
+    "reference": "Driver and Seegmiller (1985), reattachment length X_R/H approx 6.26",
+    "required_xr_h": 6.26,
+    "xr_relative_tolerance": 0.1
+  },
+  "schema_version": 1,
+  "sensitivity_cases": [
+    {
+      "amrex_finalized": false,
+      "bfs_validator_error": "Single-level plotfile contains uncovered or non-finite cells",
+      "exists": true,
+      "label": "208x56_4rank_default_cfl",
+      "last_time_seen": 0.0,
+      "latest_plotfile": "/tmp/codex_bfs_refine_208x56_4rank_20260721/plt_ref00001",
+      "max_step_seen": 0,
+      "nan_abort": true,
+      "path": "/tmp/codex_bfs_refine_208x56_4rank_20260721",
+      "run_log_exists": true,
+      "run_log_sha256": "6569b03d5647fb97c701ed9146f0e9fb328f286f1b849328bf906fac60504e97",
+      "sigabrt": true,
+      "status": "FAIL-NAN",
+      "unused_parmparse_variables": false
+    },
+    {
+      "amrex_finalized": true,
+      "bfs_validator_returncode": 1,
+      "bfs_validator_stdout": "Reading plotfile: /tmp/codex_bfs_refine_208x56_serial_cfl005_20260721/plt_ref00500\n  Time: 0.0071\n  Grid: 208 x 56\n\nExtracting Cf along bottom wall...\n  Reattachment: X_R = 0.04805 m  (X_R/H = 1.26)\n  Recirculation zone length: 1.15H\n\nExtracting velocity profiles...\n  x/H =  -4.0: U_max = 14.13 m/s\n  x/H =   0.0: U_max = 15.79 m/s\n  x/H =   2.0: U_max = 12.79 m/s\n  x/H =   4.0: U_max = 12.51 m/s\n  x/H =   6.0: U_max = 12.31 m/s\n  x/H =   8.0: U_max = 12.18 m/s\n  x/H =  10.0: U_max = 12.11 m/s\n  x/H =  15.0: U_max = 12.04 m/s\n\nExtracting step-face Cp...\n  Cp on step face: -0.492 to -0.330\n\n============================================================\n  BACKWARD-FACING STEP VALIDATION REPORT\n============================================================\n\n  Parameters:\n    H = 0.0381 m\n    U_ref = 13.5 m/s\n    Re_H = 34214\n\n  Reattachment:\n    X_R/H = 1.26\n    Reference: 6.26 \u00b1 0.63\n\n  Recirculation zone:\n    Length = 1.15H\n    Minimum required: 3.0H\n\n  Notes:\n    - X_R/H = 1.26 \u2014 FAIL\n    - Recirculation zone length = 1.15H \u2014 FAIL\n\n  VERDICT: FAIL\n============================================================\n",
+      "bfs_validator_verdict": "FAIL",
+      "exists": true,
+      "label": "208x56_serial_cfl005_500step",
+      "last_time_seen": 0.007105879625,
+      "latest_plotfile": "/tmp/codex_bfs_refine_208x56_serial_cfl005_20260721/plt_ref00500",
+      "max_step_seen": 499,
+      "nan_abort": false,
+      "path": "/tmp/codex_bfs_refine_208x56_serial_cfl005_20260721",
+      "reattachment_x_h": 1.261198811146003,
+      "recirculation_length_h": 1.1482939632545934,
+      "run_log_exists": true,
+      "run_log_sha256": "13a856cd2e8cc4c435145b53aae669ba2aa5e6f7a686e9358a91f8672a724d7a",
+      "sigabrt": false,
+      "status": "COMPLETE-SCOUT",
+      "unused_parmparse_variables": true
+    }
+  ],
+  "status": "PASS-BFS-KEPSILON-REFERENCE",
+  "summary": {
+    "bfs_validator_returncode": 0,
+    "bfs_validator_verdict": "PASS",
+    "blocks_production_readiness": false,
+    "cf_finite_count": 184,
+    "cf_max": 0.0010260513623040212,
+    "cf_min": -0.0003882920175031383,
+    "cf_sample_count": 208,
+    "grid_nx": 208,
+    "grid_ny": 56,
+    "loglaw_linf": 15.4519819,
+    "loglaw_passed": false,
+    "loglaw_validator_returncode": 1,
+    "preflight_case_ready": true,
+    "preflight_pass_count": 4,
+    "preflight_report_count": 4,
+    "reattachment_x_h": 5.944509505537611,
+    "recirculation_length_h": 5.741469816272965,
+    "sensitivity_case_count": 2,
+    "status": "PASS-BFS-KEPSILON-REFERENCE",
+    "time": 0.5
+  },
+  "title": "Engineering BFS k-epsilon Reference Validation"
+}

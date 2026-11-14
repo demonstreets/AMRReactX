@@ -1,0 +1,342 @@
+{
+  "benchmark_pre_ingestion_gaps": [
+    "dataset_metadata_json_missing",
+    "sensor_coordinates_csv_missing",
+    "baffle_geometry_csv_missing",
+    "experimental_timeseries_csv_missing"
+  ],
+  "benchmark_spec_report": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_spec_20260723/hysafe_sbepv5_d27_benchmark_spec_report.json",
+  "blocking_gaps": [
+    "case_matched_external_plume_dataset_not_ingested",
+    "external_plume_quality_gates_not_all_passed"
+  ],
+  "candidate_public_benchmarks": [
+    {
+      "available_evidence": [
+        "1.20 m x 0.20 m x 0.90 m baffled compartment geometry",
+        "pure H2 horizontal release for 60 s through a 12 mm nozzle",
+        "1.15 normal L/s release rate and 10.17 m/s exit velocity",
+        "12 rear-wall H2 concentration sensors; reliable sensor subset identified",
+        "published arrival-time and concentration-history comparison plots"
+      ],
+      "doi_or_secondary": "ICHS 2007 proceedings; public repository metadata",
+      "id": "hysafe_sbepv5_d27",
+      "required_program_outputs": [
+        "case-matched baffled-box geometry and vent opening",
+        "transient point-probe/sensor concentration sampling at the 12 monitor locations",
+        "digitized experimental concentration traces or accepted tabular data",
+        "arrival-time and concentration tolerance checks for reliable sensors"
+      ],
+      "source_type": "literature_digitized",
+      "title": "HySafe CFD validation benchmark SBEPV5, GexCon D27",
+      "url": "https://publikationen.bibliothek.kit.edu/230068969"
+    },
+    {
+      "available_evidence": [
+        "open-space LH2 release experiment with concentration sensors",
+        "reported 180 kg release over 38 s through a 0.25 m2 vent area",
+        "reported farthest downwind flammable-cloud distance and height"
+      ],
+      "doi_or_secondary": "Applied Sciences 14(9), 3645",
+      "id": "large_volume_lh2_open_space_2024",
+      "required_program_outputs": [
+        "cryogenic liquid-hydrogen source model or justified gas-equivalent surrogate",
+        "flammable-cloud maximum downwind distance and vertical extent over time",
+        "case-matched wind and terrain/substrate conditions",
+        "radiation/consequence coupling kept separate from plume-shape validation"
+      ],
+      "source_type": "field_test",
+      "title": "Large-volume liquid hydrogen release in open space",
+      "url": "https://www.mdpi.com/2076-3417/14/9/3645"
+    }
+  ],
+  "case_package_preflight_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_preflight_20260723/sbepv5_d27_case_package_preflight_report.json",
+  "case_package_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json",
+  "clears_reference_data_blocker": false,
+  "current_outputs": {
+    "amr_final_flammable_planes_available": true,
+    "amr_lel_cloud_volume_available": true,
+    "amr_peak_x_available": true,
+    "case_matched_external_dataset_ingested": false,
+    "case_matched_pelelmex_input_template_available": true,
+    "case_package_preflight_report_available": true,
+    "case_package_reference_source_resolution_ready": true,
+    "case_package_report_available": true,
+    "case_package_runnable": false,
+    "case_spec_report_available": true,
+    "dataset_ingestion_report_available": true,
+    "dataset_metadata_available": false,
+    "digitization_preflight_available": true,
+    "digitization_preflight_missing_artifact_count": 4,
+    "digitized_experimental_timeseries_available": false,
+    "exact_baffle_geometry_available": false,
+    "exact_sensor_coordinates_available": false,
+    "external_dataset_builder_report_available": true,
+    "external_plume_dataset_json_written": false,
+    "external_plume_shape_dataset_agreement": false,
+    "literature_metric_anchor_available": true,
+    "literature_metric_missing_artifact_count": 2,
+    "literature_metric_preflight_available": true,
+    "literature_metric_ready_for_reference_agreement_consumption": false,
+    "maximum_downwind_extent_available": true,
+    "maximum_vertical_extent_available": true,
+    "plume_observation_report_available": true,
+    "public_source_missing_artifact_count": 4,
+    "public_source_triage_available": true,
+    "release_geometry_metadata_available": true,
+    "reliable_sensor_subset_declared": true,
+    "sbepv5_d27_program_scout_baffle_stl_count": 4,
+    "sbepv5_d27_program_scout_cuda_run": true,
+    "sbepv5_d27_program_scout_plotfile_count": 5,
+    "sbepv5_d27_program_scout_run_available": true,
+    "sbepv5_d27_program_scout_sensor_timeseries_rows": 60,
+    "sensor_timeseries_sampling_available": true,
+    "threshold_reference_agreement": true
+  },
+  "d27_program_scout_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/sbepv5_d27_scout_run_report.json",
+  "dataset_ingestion_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json",
+  "digitization_missing_artifacts": [
+    {
+      "artifact": "dataset_metadata.json",
+      "required_action": "replace the metadata template with URL/DOI, source file hash, digitization method, uncertainty basis, and case-alignment booleans"
+    },
+    {
+      "artifact": "sensor_coordinates.csv",
+      "required_action": "digitize or obtain Gas01..Gas12 coordinates with reliability tags and <=0.02 m uncertainty"
+    },
+    {
+      "artifact": "baffle_geometry.csv",
+      "required_action": "digitize or obtain baffles 1..4 bounds with source basis and <=0.02 m uncertainty"
+    },
+    {
+      "artifact": "experimental_timeseries.csv",
+      "required_action": "obtain original Excel or digitize Gas01..Gas12 concentration histories through at least 120 s"
+    }
+  ],
+  "digitization_preflight_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json",
+  "evidence_files": [
+    {
+      "label": "external_plume_intake_checklist",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_intake_checklist.csv",
+      "sha256": "96a76631eee62cb4a2521be5ca416530cc3b41309e6d87ae61befbf1b017d4f2",
+      "size_bytes": 1376
+    },
+    {
+      "label": "reference_agreement_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json",
+      "sha256": "fab9d5b2ecb52b40765c57fc5b662c65ec061ffb881d9ddb339adef23c579daa",
+      "size_bytes": 7775
+    },
+    {
+      "label": "plume_observation_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json",
+      "sha256": "45ff3306c5de60d952db0836c44068e3ce3ed74d68e1bcdb787dc182d21741c2",
+      "size_bytes": 2433
+    },
+    {
+      "label": "benchmark_spec_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_spec_20260723/hysafe_sbepv5_d27_benchmark_spec_report.json",
+      "sha256": "edacc94c2996c3a2f1dab3c9b57dc887c69a15b4811cbf3e0cf402d7cae7c739",
+      "size_bytes": 5247
+    },
+    {
+      "label": "public_source_triage_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json",
+      "sha256": "a2489e6fd7cfc17b40047c514d62b1823c9cb1de29feda431d5f6a9e433a4cdf",
+      "size_bytes": 12608
+    },
+    {
+      "label": "digitization_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json",
+      "sha256": "dc9d74003eee5c1e6ef267c6c30fe5b179494bbee7b36323b15d7413ef0a6c17",
+      "size_bytes": 7659
+    },
+    {
+      "label": "literature_metric_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_literature_metric_preflight_20260724/sbepv5_d27_literature_metric_preflight_report.json",
+      "sha256": "76658b4be1388062431b2114359bed4d4e26ff1871edd6ae67415b3569bc1226",
+      "size_bytes": 4892
+    },
+    {
+      "label": "dataset_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json",
+      "sha256": "51a726d2e60369c484ff63e0c6a96bd3ef8c2e91f10d7c23de0cd283d8d257b4",
+      "size_bytes": 3288
+    },
+    {
+      "label": "case_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json",
+      "sha256": "d8d79d2129aa82f3d88dcee01c28767ff6eef7a545d15bbcad3a8070ac141817",
+      "size_bytes": 6686
+    },
+    {
+      "label": "case_package_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_preflight_20260723/sbepv5_d27_case_package_preflight_report.json",
+      "sha256": "95f3ecf3d97cb2ecd20e5e07a38446e63817e21ae43a6dcf763bc484588c439a",
+      "size_bytes": 5843
+    },
+    {
+      "label": "external_dataset_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_external_dataset_20260723/sbepv5_d27_external_dataset_report.json",
+      "sha256": "daf0c3915e8b3bf0bd549c71300fba4ed280ffde3e4abccb4c7ded9eec0d0c07",
+      "size_bytes": 2697
+    },
+    {
+      "label": "d27_program_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/sbepv5_d27_scout_run_report.json",
+      "sha256": "318d098a7a77cb7b500e006dc2b1c5d47d6bf1b18141f6449a984dad13d71111",
+      "size_bytes": 4573
+    }
+  ],
+  "external_dataset_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_external_dataset_20260723/sbepv5_d27_external_dataset_report.json",
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This readiness report does not clear the production reference-data blocker.",
+    "It records public benchmark candidates and machine-checkable output gaps before experimental agreement can be claimed."
+  ],
+  "literature_metric_missing_artifacts": [
+    {
+      "artifact": "experimental_timeseries.csv",
+      "required_action": "ingest original Excel or reviewed digitized curves for Gas01..Gas12 through at least 120 s"
+    },
+    {
+      "artifact": "literature_metric_acceptance_overlay.json",
+      "required_action": "after program sensor probes exist, compare Gas09/Gas10 arrival-time metrics to reported intervals"
+    }
+  ],
+  "literature_metric_preflight_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_literature_metric_preflight_20260724/sbepv5_d27_literature_metric_preflight_report.json",
+  "next_required_artifacts": [
+    "case-matched PeleLMeX input and geometry generated from the selected benchmark specification",
+    "exact SBEPV5 D27 baffle placement/wall attachment and sensor coordinates replacing the program-scout approximations",
+    "exact sensor and baffle coordinates digitized from source figures or original tabular data",
+    "program sensor probes compared against SBEPV5 Gas09/Gas10 literature arrival-time anchors",
+    "digitized or tabulated experimental dataset with source metadata and uncertainty/tolerances",
+    "official h2_reference_agreement_report regenerated with --external-plume-dataset-json"
+  ],
+  "plume_observation_report": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json",
+  "public_source_missing_artifacts": [
+    {
+      "artifact": "sensor_coordinates.csv",
+      "required_action": "digitize Figure 4/source figure or obtain original tabular sensor coordinates",
+      "why_missing": "public figure/transcript identifies layout and reliable sensors but no machine-readable exact coordinates are attached"
+    },
+    {
+      "artifact": "baffle_geometry.csv",
+      "required_action": "digitize Figure 2/source geometry or obtain original CAD/table",
+      "why_missing": "public text gives count and plate dimensions but exact baffle bounds still require figure digitization/original geometry"
+    },
+    {
+      "artifact": "experimental_timeseries.csv",
+      "required_action": "obtain original Excel data or digitize published curves with source and uncertainty metadata",
+      "why_missing": "paper reports MS Excel dataset and plots but no local accepted 12-sensor CSV/Excel file is ingested"
+    },
+    {
+      "artifact": "dataset_metadata.json",
+      "required_action": "record URL/DOI, source file hashes, digitization method, uncertainty, and case-alignment booleans",
+      "why_missing": "dataset source hashes and digitization provenance cannot be completed until source data files are local"
+    }
+  ],
+  "public_source_triage_report": "docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "public-source triage report fixes source registry and acquisition gaps",
+      "gap": "",
+      "name": "public_source_triage_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "SBEPV5 D27 digitization templates and source triage are available",
+      "gap": "",
+      "name": "digitization_preflight_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "SBEPV5 D27 literature-level arrival and priority sensor metric anchors are available",
+      "gap": "",
+      "name": "literature_metric_preflight_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "SBEPV5 D27 benchmark spec report passed",
+      "gap": "",
+      "name": "benchmark_spec_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "case scaffold package report passed",
+      "gap": "",
+      "name": "case_package_scaffold_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "case package preflight passed and reference sources resolve",
+      "gap": "",
+      "name": "case_package_preflight_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide all source data and generated geometry/input artifacts required to run the SBEPV5 case.",
+      "name": "case_package_runnable",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "D27-style program-side CUDA scout ran with baffles, sensors, plume extents and copied evidence",
+      "gap": "",
+      "name": "d27_program_scout_runnable",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide dataset_metadata.json with benchmark id, source URL/DOI, digitization metadata, and source hash.",
+      "name": "dataset_metadata_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide sensor_coordinates.csv for Gas01..Gas12 with reliability/source basis/uncertainty.",
+      "name": "exact_sensor_coordinates_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide baffle_geometry.csv for baffles 1..4 with source basis and uncertainty.",
+      "name": "exact_baffle_geometry_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide experimental_timeseries.csv covering Gas01..Gas12 through at least 120 s.",
+      "name": "digitized_experimental_timeseries_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "program plume observation includes sensor time series",
+      "gap": "",
+      "name": "program_sensor_sampling_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "program plume observation includes downwind and vertical extents",
+      "gap": "",
+      "name": "program_extent_metrics_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "External dataset builder must write the shape-agreement dataset JSON.",
+      "name": "external_dataset_json_written",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Regenerate h2_reference_agreement_report with the generated external plume dataset JSON and passing checks.",
+      "name": "reference_agreement_uses_external_shape_dataset",
+      "status": "MISSING"
+    }
+  ],
+  "reference_agreement_report": "docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json",
+  "schema_version": 6,
+  "status": "NOT_READY-EXTERNAL-PLUME-BENCHMARK",
+  "title": "Engineering H2 External Plume Benchmark Readiness"
+}

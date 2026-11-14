@@ -1,0 +1,159 @@
+{
+  "blocking_gaps": [
+    "fire_calibration_metadata_case_alignment_release_or_cloud_mass_not_true",
+    "fire_calibration_metadata_case_alignment_ignition_or_burn_basis_not_true",
+    "fire_calibration_metadata_case_alignment_boundary_conditions_not_true"
+  ],
+  "clears_fire_consequence_blocker": false,
+  "current_inputs": {
+    "metadata_alignment_missing_or_false": [
+      "release_or_cloud_mass",
+      "ignition_or_burn_basis",
+      "boundary_conditions"
+    ],
+    "metadata_available": false,
+    "metadata_file_present": true,
+    "metadata_strict_schema_and_alignment_ready": false,
+    "overpressure_metrics_available": true,
+    "overpressure_metrics_file_present": true,
+    "radiation_metrics_available": true,
+    "radiation_metrics_file_present": true
+  },
+  "dataset_root": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset",
+  "evidence_files": [
+    {
+      "label": "fire_consequence_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "radiation_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    },
+    {
+      "label": "overpressure_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv",
+      "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613",
+      "size_bytes": 1208
+    }
+  ],
+  "fire_consequence_report": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This report validates availability and schema of external fire/blast calibration data.",
+    "It does not calibrate the model or clear the fire-consequence blocker.",
+    "The fire consequence metrics report must still pass with --calibration-dataset-json before production credit is claimed."
+  ],
+  "metadata_summary": {
+    "case": "engineering_h2_fire_consequence_metric_artifacts",
+    "case_alignment": {
+      "boundary_conditions": false,
+      "fuel": true,
+      "ignition_or_burn_basis": false,
+      "overpressure_measurement_basis": true,
+      "radiation_measurement_basis": true,
+      "release_or_cloud_mass": false
+    },
+    "source": {
+      "doi": "10.18710/X044QK",
+      "notes": "Radiation metrics use MDPI Applied Sciences 14(16):7098 anchors; overpressure metrics use DataverseNO DOI 10.18710/X044QK EXP002 reduced pressure channels. The two metric families are retained as partial strict artifacts and do not by themselves prove full fire calibration closure.",
+      "title": "MDPI hydrogen jet-fire radiation anchors and Dataverse EXP002 overpressure anchors",
+      "url": "https://www.mdpi.com/2076-3417/14/16/7098"
+    },
+    "source_type": "literature_digitized"
+  },
+  "overpressure_summary": {
+    "distance_range_m": [
+      0.29,
+      0.29
+    ],
+    "metric_ids": [
+      "exp002_pressure_channel_2",
+      "exp002_pressure_channel_3",
+      "exp002_pressure_channel_4",
+      "exp002_pressure_channel_5"
+    ],
+    "reference_value_range": [
+      0.511295923456,
+      2.74740300775
+    ],
+    "row_count": 4,
+    "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613"
+  },
+  "radiation_summary": {
+    "distance_range_m": [
+      0.23,
+      0.5
+    ],
+    "metric_ids": [
+      "mdpi_jet_fire_1p5mm_0p6mpa_0p23m",
+      "mdpi_jet_fire_1p5mm_0p6mpa_0p50m",
+      "mdpi_jet_fire_max_1p2mm_0p23m",
+      "mdpi_jet_fire_max_2p0mm_0p23m"
+    ],
+    "reference_value_range": [
+      412.1,
+      3378.1
+    ],
+    "row_count": 4,
+    "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1"
+  },
+  "received_dataset_files": [
+    {
+      "label": "fire_calibration_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+      "sha256": "0afea84c6f6f671c9b0f2e87291c41ededbb567963fa09d4ed49a60104b44445",
+      "size_bytes": 1186
+    },
+    {
+      "label": "radiation_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    },
+    {
+      "label": "overpressure_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv",
+      "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613",
+      "size_bytes": 1208
+    }
+  ],
+  "required_dataset_files": {
+    "calibration_metadata_json": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+    "overpressure_metrics_csv": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv",
+    "radiation_metrics_csv": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv"
+  },
+  "schema_requirements": {
+    "calibration_metadata_required_alignment": [
+      "fuel",
+      "release_or_cloud_mass",
+      "ignition_or_burn_basis",
+      "radiation_measurement_basis",
+      "overpressure_measurement_basis",
+      "boundary_conditions"
+    ],
+    "content_quality_gate_level": "strict-v1-placeholder-free-and-non-synthetic",
+    "overpressure_metrics_csv_columns": [
+      "metric_id",
+      "distance_m",
+      "reference_overpressure_kpa",
+      "tolerance_abs_kpa",
+      "tolerance_rel",
+      "source_basis"
+    ],
+    "radiation_metrics_csv_columns": [
+      "metric_id",
+      "distance_m",
+      "reference_flux_w_m2",
+      "tolerance_abs_w_m2",
+      "tolerance_rel",
+      "source_basis"
+    ]
+  },
+  "schema_version": 2,
+  "status": "NOT_READY-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+  "title": "Engineering H2 Fire Calibration Dataset Ingestion"
+}

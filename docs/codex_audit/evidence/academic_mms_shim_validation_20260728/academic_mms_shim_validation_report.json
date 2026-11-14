@@ -1,0 +1,143 @@
+{
+  "case": {
+    "backend": "CPU-serial",
+    "build_log": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/build.log",
+    "case_name": "mms_constant_state_shim_8cell_2step",
+    "dimension": 3,
+    "input_file": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/run/input.codex_mms_shim",
+    "masa_shim_home": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/masa_shim",
+    "max_step": 2,
+    "n_cell": [
+      8,
+      8,
+      8
+    ],
+    "role": "academic_mms_constant_state_wiring_validation",
+    "run_log": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/run.log",
+    "run_returncode": 0,
+    "solver": "PeleC",
+    "uses_external_masa": false,
+    "validation_log": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/validation.log",
+    "validation_returncode": 0
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/case_summary.json",
+      "sha256": "e98b12a6e4eb306af089339293e5d8b4537d0a2047b90cfe9e680e22b56d9e33",
+      "size_bytes": 989
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/run/input.codex_mms_shim",
+      "sha256": "43d746851ad483695267510f6bbd3303c246de6d417edd832c783bda3773b200",
+      "size_bytes": 2241
+    },
+    {
+      "label": "masa_shim_header",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/masa_shim/include/masa.h",
+      "sha256": "306134283a558e64bbe0521b3f550adf4b0b0db6329302117ba4fe288fb3a5b7",
+      "size_bytes": 1379
+    },
+    {
+      "label": "masa_shim_static_library",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/masa_shim/lib/libmasa.a",
+      "sha256": "6006fb84fa4a04830924fa648d52c129235e6e2e5eeef0931549a48c11b47287",
+      "size_bytes": 1508
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/build.log",
+      "sha256": "48d1d836f56470f8682109ad8e84c2f0b9fc86f3711280c1876018d8c26620cc",
+      "size_bytes": 174763
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/run.log",
+      "sha256": "45a25fca6f93a6acd467b42ca3b908b51061b01e646a5ea48b6e5e774e355304",
+      "size_bytes": 4049
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/validation.log",
+      "sha256": "81039151dedf1cb64e99eca55d2993995fe7cc79cf75b228b72a1d491b5d3b8c",
+      "size_bytes": 212
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_mms_shim_validation.sh",
+      "sha256": "e5dba12068b49b3ae773dc28d6130a0f0060f6b2ce6ce98523f111c334433ef7",
+      "size_bytes": 8860
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_mms_shim_validation_report.py",
+      "sha256": "9ea0c9b7286b089641915ff402bbb83ab0e12210cc76aa49e5c114fbf07bfeb0",
+      "size_bytes": 13040
+    }
+  ],
+  "generated_at_utc": "2026-07-29T00:58:28+00:00",
+  "limitations": [
+    "This is a constant-state MMS wiring validation, not the nonlinear MASA/MetaPhysicL manufactured-solution benchmark shipped with PeleC.",
+    "The current server has no MASA installation and GitHub access timed out during dependency probing, so external MASA benchmark coverage remains incomplete.",
+    "The report intentionally sets clears_nonlinear_masa_mms_benchmark=false to prevent overclaiming QLT-03 closure."
+  ],
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/masa_shim/include/masa.h",
+        "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/masa_shim/lib/libmasa.a"
+      ],
+      "gap": "",
+      "name": "local_masa_compatible_shim_built",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/build.log",
+        "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/run.log"
+      ],
+      "gap": "",
+      "name": "pelec_mms_regtest_builds_with_masa_interface",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/validation.log"
+      ],
+      "gap": "",
+      "name": "mms_constant_state_errors_and_residuals_roundoff",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_shim_validation_20260728/mms_constant_state_shim_8cell_2step/case_summary.json"
+      ],
+      "gap": "",
+      "name": "scope_guard_does_not_claim_nonlinear_masa_benchmark",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "PeleC MMS RegTest wiring validation with a generated local MASA-compatible constant-state shim: compile/link, do_mms runtime path, MMS diagnostics, clean finalization, and roundoff-level constant-state errors/residuals",
+  "status": "PASS-ACADEMIC-MMS-SHIM-VALIDATION",
+  "summary": {
+    "blocking_reasons": [],
+    "clears_nonlinear_masa_mms_benchmark": false,
+    "clears_qlt_03_mms_wiring_gap": true,
+    "max_error": 0.0,
+    "max_residual": 0.0,
+    "p_mms_error": 0.0,
+    "rhoE_residual": 0.0,
+    "rho_mms_error": 0.0,
+    "rho_residual": 0.0,
+    "rhou_residual": 0.0,
+    "rhov_residual": 0.0,
+    "rhow_residual": 0.0,
+    "u_mms_error": 0.0,
+    "uses_external_masa": false,
+    "v_mms_error": 0.0,
+    "w_mms_error": 0.0
+  },
+  "title": "Academic MMS Shim Validation"
+}

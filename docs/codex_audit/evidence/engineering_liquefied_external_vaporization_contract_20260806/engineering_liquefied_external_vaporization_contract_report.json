@@ -1,0 +1,118 @@
+{
+  "conversion": {
+    "command": "/usr/bin/python3 tools/codex_make_external_vaporization_source_input.py --source-csv examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv --base-input examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke --time 2.0 --output-input docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/input.codex_lng_external_vaporization_source_t2s --output-json docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/external_vaporization_source_mapping_t2s.json",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "external_vaporization_source_input PASS input=docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/input.codex_lng_external_vaporization_source_t2s json=docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/external_vaporization_source_mapping_t2s.json"
+  },
+  "evidence_files": [
+    {
+      "label": "contract_doc",
+      "path": "docs/codex_audit/engineering_liquefied_external_vaporization_source_contract.md",
+      "sha256": "d7b33e7de73b870932a717a06efa688b2a3da41f8025eb83f2606045638c3670",
+      "size_bytes": 2712
+    },
+    {
+      "label": "source_csv_template",
+      "path": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+      "sha256": "15aa5d14fb2ca7b5d1fb2c78b1126f4e4c8b25474096b2bdb73ca6fbde558116",
+      "size_bytes": 405
+    },
+    {
+      "label": "base_gasified_lng_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+      "sha256": "639f22b5006f42c36ff3d112cbca721c07092f2dceb13b754c923aac1d48a435",
+      "size_bytes": 2315
+    },
+    {
+      "label": "generated_input",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/input.codex_lng_external_vaporization_source_t2s",
+      "sha256": "9a108aba11fda3cc58a96b9daab8db5862c5fdda40c658775f71c6c96ddc6fe7",
+      "size_bytes": 2800
+    },
+    {
+      "label": "generated_mapping_json",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/external_vaporization_source_mapping_t2s.json",
+      "sha256": "b1fc90f405a134a3a6ecb843feffa47f64f6d9d932e6734e8f14048700d521a7",
+      "size_bytes": 3739
+    },
+    {
+      "label": "converter",
+      "path": "tools/codex_make_external_vaporization_source_input.py",
+      "sha256": "d93abe566025a5aa50881b4f5c9e34cfc2e4cc35c0df4b917e9b422dde448172",
+      "size_bytes": 11494
+    },
+    {
+      "label": "multi_fuel_boundary",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "719661db78e161ed2dff8bca2f1f23a9754ec4fa10c8cc588877254a8318e075",
+      "size_bytes": 19158
+    },
+    {
+      "label": "gasified_surrogate",
+      "path": "docs/codex_audit/evidence/engineering_gasified_lng_lpg_surrogate_20260806/engineering_gasified_lng_lpg_surrogate_report.json",
+      "sha256": "f11e1b65a32fcf713235a377ca68a222d5a059aa165b8be4e30a3c5cdbffc5c5",
+      "size_bytes": 12121
+    },
+    {
+      "label": "fuel_species_guard",
+      "path": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/engineering_fuel_species_guard_report.json",
+      "sha256": "67a3be24acc36e23933d5ce332910844ed13b7acffb07d91db242f6bbc01043d",
+      "size_bytes": 2950
+    },
+    {
+      "label": "pelelmex_prob_cpp",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.cpp",
+      "sha256": "e75c504b2ca2973e37e6977677b90cbfc9e9cf6b4b37f99f96da64b66f71fc78",
+      "size_bytes": 24604
+    },
+    {
+      "label": "pelelmex_prob_h",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:28+00:00",
+  "generated_input_checks": {
+    "sets_ch4_species": true,
+    "sets_fixed_mass_flow": true,
+    "sets_interpolated_rate": true,
+    "sets_schedule_count": true,
+    "sets_schedule_location_x": true,
+    "sets_schedule_location_y": true,
+    "sets_schedule_location_z": true,
+    "sets_schedule_radius": true,
+    "sets_schedule_rates": true,
+    "sets_schedule_temperatures": true,
+    "sets_schedule_times": true,
+    "sets_schedule_velocity_x": true,
+    "sets_schedule_velocity_y": true,
+    "sets_schedule_velocity_z": true,
+    "sets_vapor_temperature": true
+  },
+  "internal_phase_change_hits": [],
+  "missing_contract_snippets": [],
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-LIQUEFIED-EXTERNAL-VAPORIZATION-CONTRACT",
+  "summary": {
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_liquid_phase_change": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "external_vaporization_contract_ready": true,
+    "external_vaporization_source_mapping_ready": true,
+    "geometry_time_series_input_ready": true,
+    "internal_phase_change_model_detected": false,
+    "mdot_time_series_input_ready": true,
+    "mdot_time_series_point_count": 4,
+    "overclaim_prevented": true,
+    "quasi_steady_segment_input_ready": true,
+    "supported_surrogate_species": [
+      "H2",
+      "CH4",
+      "C3H8"
+    ],
+    "vapor_temperature_time_series_input_ready": true,
+    "velocity_time_series_input_ready": true
+  }
+}

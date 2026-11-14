@@ -1,0 +1,79 @@
+{
+  "baseline_reference_errors": {
+    "baseline_t3_final_center_x_drift": 0.20401463328714692,
+    "center_of_mass_y_at_t3_abs_error": 0.08397702843906696,
+    "minimum_circularity_abs_error": 0.19587871606339502
+  },
+  "contracts": {
+    "candidate_compiled": true,
+    "pseudo_levelset_prototype_not_retained": true,
+    "short_window_passed": true,
+    "t3_center_height_worse_than_baseline": true,
+    "t3_circularity_worse_than_baseline": true,
+    "t3_hysing_reference_not_cleared": true,
+    "t3_lateral_drift_improved_but_insufficient": true,
+    "t3_mass_conserved": true,
+    "t3_reached_final_time": true
+  },
+  "decision": {
+    "next_route": "Use this as evidence that curvature geometry alone is not enough in the current diffuse Aux-alpha path. Continue toward pressure-coupled balanced-force treatment and/or a sharper conservative interface representation.",
+    "promote_pseudo_levelset_curvature": false,
+    "rejection_reasons": [
+      "t=3 center-height reference error worsened versus retained baseline",
+      "t=3 minimum-circularity reference error worsened versus retained baseline",
+      "short-window lateral-drift improvement did not translate into Hysing agreement"
+    ]
+  },
+  "scope": "Machine-checkable rejection guard for a default-off QLT-03 pseudo-levelset geometric curvature scheme=3 candidate.",
+  "short_cases": {
+    "pseudo_levelset_buoyant": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.9999995951522977,
+      "alpha_min": 0.0,
+      "center_x_drift": -0.0012328055525640536,
+      "center_x_final": 0.49876719444743595,
+      "center_x_initial": 0.5,
+      "center_y_drift": 0.05268339348830975,
+      "center_y_final": 0.5526833934990293,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 0.9727015803858795,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_buoyant/run/plt00020",
+      "final_time": 0.5,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_buoyant/run/plt00000",
+      "interface_length": 1.621565422761087,
+      "log_bad_tokens": [],
+      "mean_rise_velocity_y": 0.1887128964359529,
+      "plot_step": "plt00020"
+    },
+    "pseudo_levelset_no_gravity": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.9999999878923415,
+      "alpha_min": 0.0,
+      "center_x_drift": -0.0005594239141731849,
+      "center_x_final": 0.4994405760858268,
+      "center_x_initial": 0.5,
+      "center_y_drift": 6.870265065583858e-05,
+      "center_y_final": 0.5000687026613754,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 0.9352652933416975,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_no_gravity/run/plt00024",
+      "final_time": 0.5,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_no_gravity/run/plt00000",
+      "interface_length": 1.686472555592355,
+      "log_bad_tokens": [],
+      "mean_rise_velocity_y": -0.0009247008108406846,
+      "plot_step": "plt00024"
+    }
+  },
+  "short_status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-PSEUDO-LEVELSET-CURVATURE-SHORT",
+  "short_summary": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_short_summary.json",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-PSEUDO-LEVELSET-CURVATURE-TRIAL-REJECTION",
+  "t3_final_center_x_drift": 0.044448362613099035,
+  "t3_reference_errors": {
+    "center_of_mass_y_at_t3_abs_error": 0.270159283992881,
+    "maximum_mean_rise_velocity_abs_error": 0.031607378862968966,
+    "minimum_circularity_abs_error": 0.3086503086706395
+  },
+  "t3_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_t3_20260730/academic_twophase_qlt03_lm_pseudo_levelset_t3_report.json",
+  "t3_status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT"
+}

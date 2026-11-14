@@ -1,0 +1,130 @@
+{
+  "acceptance_policy": {
+    "cpu_gpu_parity_alone_clears_strict_fire_blocker": false,
+    "screening_radiation_proxy_alone_clears_strict_fire_blocker": false,
+    "strict_credit_requires_pressure_agreement": true,
+    "strict_credit_requires_radiation_agreement": true
+  },
+  "evidence_files": [
+    {
+      "label": "strict_fire_calibration_update",
+      "path": "docs/codex_audit/evidence/master_plan_strict_fire_calibration_update_20260731/master_plan_strict_fire_calibration_update_report.json",
+      "sha256": "2c10760f348aad4d160c8c355dce42a6826a73b3ca131eed2b8250bdade5ad23",
+      "size_bytes": 13639
+    },
+    {
+      "label": "candidate_sources",
+      "path": "docs/codex_audit/evidence/h2_fire_calibration_candidate_sources_20260805/h2_fire_calibration_candidate_sources_report.json",
+      "sha256": "a1f2bc31aebe6c4a1c074c25d85d18e35ad37046d8af977fb2b0c0c36ecef930",
+      "size_bytes": 5227
+    },
+    {
+      "label": "exp002_pressure_table",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/h2_fire_exp002_overpressure_calibration_table_report.json",
+      "sha256": "169d4c3ccc1f0f5751094c7388d23b00dec572e4c19b1ecae3fe129030950bc7",
+      "size_bytes": 3677
+    },
+    {
+      "label": "exp002_pressure_contract",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_pressure_comparison_contract_20260805/h2_fire_exp002_pressure_comparison_contract_report.json",
+      "sha256": "9ffbad729ced09cb1f092a643db57cfb93d732bd63987307685fef50dc17b6f8",
+      "size_bytes": 4568
+    },
+    {
+      "label": "exp002_pressure_cfd_proxy",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_pressure_cfd_proxy_20260805/h2_fire_exp002_pressure_cfd_proxy_report.json",
+      "sha256": "ce547ba7c2b1acfb9cc8d8ec9e4777527ceda0173fda8a4f5389e6ca30031a1f",
+      "size_bytes": 3750
+    },
+    {
+      "label": "plotfile_sensor_sampling_contract",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_contract_20260807/h2_fire_plotfile_sensor_sampling_contract_report.json",
+      "sha256": "46baace0976ad6d5ef46487d23ee5f3eadd76c87c59f8e7d040ae2c07f90d6d9",
+      "size_bytes": 3794
+    },
+    {
+      "label": "mdpi_radiation_table",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/h2_fire_mdpi_radiation_calibration_table_report.json",
+      "sha256": "26506a1e7e4d69bb668b74e5429e7aca4015853de14d745f91183c52e687a258",
+      "size_bytes": 3576
+    },
+    {
+      "label": "mdpi_radiation_screening",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_screening_comparison_20260805/h2_fire_mdpi_radiation_screening_comparison_report.json",
+      "sha256": "e7c501063183d3d66281820685ab497d170e53b51ceb798bec68b0e163844ee4",
+      "size_bytes": 5954
+    },
+    {
+      "label": "mdpi_radiation_integrated_proxy",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_integrated_cfd_proxy_20260807/h2_fire_mdpi_radiation_integrated_cfd_proxy_report.json",
+      "sha256": "e909e686213cb8d95483f69d3853354de7b7ac15ba5e5fd96738b45c3bfd929c",
+      "size_bytes": 11219
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:02:01+00:00",
+  "limitations": [
+    "This report budgets the remaining calibration residuals; it does not clear strict fire credit.",
+    "Pressure credit still requires mapped EXP002 sensor time histories and acceptance checks.",
+    "Radiation credit still requires case-aligned radiometer comparisons or a validated radiation closure."
+  ],
+  "missing_artifacts": {
+    "pressure": [
+      "exact EXP002 sensor coordinates and mapping into the CFD geometry",
+      "case-aligned pressure-sensor time histories from Pele plotfiles",
+      "peak overpressure plus arrival-time acceptance against EXP002 channels"
+    ],
+    "radiation": [
+      "case-aligned radiometer geometry/view factors and orientation",
+      "calibrated radiation model or accepted radiative-fraction closure",
+      "radiation target agreement within the MDPI comparison contract tolerances"
+    ]
+  },
+  "pressure_gates": {
+    "candidate_overpressure_available": true,
+    "case_aligned_pressure_agreement": false,
+    "comparison_contract_ready": true,
+    "cpu_gpu_pressure_proxy_parity_passed": true,
+    "outputs_sufficient_for_pressure_agreement": false,
+    "pressure_proxy_extracted": true,
+    "sensor_sampling_contract_ready": true,
+    "target_table_ready": true
+  },
+  "radiation_gates": {
+    "candidate_radiation_available": true,
+    "case_aligned_radiation_agreement": false,
+    "integrated_cfd_proxy_extracted": true,
+    "outputs_sufficient_for_radiation_agreement": false,
+    "screening_all_metrics_passed": false,
+    "screening_comparison_executed": true,
+    "target_table_ready": true,
+    "virtual_radiometer_flux_generated": true
+  },
+  "schema_version": 1,
+  "scope": "strict fire radiation/overpressure calibration residual budget",
+  "status": "TRIAGED-H2-FIRE-CALIBRATION-RESIDUAL-BUDGET",
+  "summary": {
+    "fire_calibration_residual_budget_ready": true,
+    "pressure_agreement_ready": false,
+    "pressure_candidate_available": true,
+    "pressure_case_aligned_agreement": false,
+    "pressure_missing_artifact_count": 3,
+    "pressure_outputs_sufficient_for_agreement": false,
+    "pressure_proxy_cpu_gpu_parity_passed": true,
+    "pressure_proxy_cpu_gpu_rel_diff": 0.0005896548360384903,
+    "production_fire_calibration_claim_allowed": false,
+    "radiation_agreement_ready": false,
+    "radiation_candidate_available": true,
+    "radiation_case_aligned_agreement": false,
+    "radiation_integrated_proxy_extracted": true,
+    "radiation_missing_artifact_count": 3,
+    "radiation_outputs_sufficient_for_agreement": false,
+    "radiation_screening_max_source_reference_ratio": 56.844651728106065,
+    "radiation_screening_metric_fail_count": null,
+    "radiation_screening_metric_pass_count": null,
+    "radiation_screening_min_source_reference_ratio": 16.033150044859376,
+    "radiation_virtual_radiometer_flux_generated": true,
+    "residual_budget_clears_strict_blocker": false,
+    "strict_fire_calibration_blocker_cleared": false,
+    "strict_fire_calibration_status": "TRIAGED-MASTER-PLAN-STRICT-FIRE-CALIBRATION-PARTIAL-DATA-BRIDGED"
+  }
+}

@@ -1,0 +1,3 @@
+gpu_source_audit PASS profile=extended roots=src/academic,src/engineering,src/common,examples/engineering/c3h8_gpu_test files=42 gpu_blocks=36 forbidden_findings=0
+gpu_source_audit NOTE host_only_vector_usage occurrences=50 files=src/academic/vof/PLIC.H,src/common/input_parser/parmparse_writer.H,src/common/input_parser/parmparse_writer.cpp,src/common/input_parser/yaml_parser.cpp,src/common/input_parser/yaml_schema.H,src/engineering/numerics/second_order_advection.H
+gpu_source_audit SCOPE static source audit only; clean CUDA/HIP build and device runtime smoke remain required for GPU PASS

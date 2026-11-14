@@ -1,0 +1,75 @@
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+peleLM.lo_bc = Inflow Inflow SlipWallAdiab
+peleLM.hi_bc = Outflow Outflow SlipWallAdiab
+
+#-------------------------AMR CONTROL----------------------------
+amr.n_cell = 160 100 80
+amr.v               = 1
+amr.max_level       = 0
+amr.ref_ratio       = 2 2
+amr.regrid_int      = 10
+amr.n_error_buf     = 1 1 2 2
+amr.grid_eff        = 0.7
+amr.blocking_factor = 4
+amr.max_grid_size   = 64
+
+#--------------------------- Problem -------------------------------
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 8.485
+prob.wind_v = 8.485
+prob.leak_xc = 33.5
+prob.leak_yc = 15.0
+prob.leak_zc = 15.0
+prob.leak_rate = 0.104
+prob.leak_radius = 1.0
+prob.leak_vel_x = 50.0
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 300.0
+
+#------------  TRANSPORT -----------------
+transport.const_viscosity        = 1.85e-5
+transport.const_bulk_viscosity   = 0.0
+transport.const_conductivity     = 0.0
+transport.const_diffusivity      = 0.001
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterations = 2
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.have_divu = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.use_typ_vals = 1
+peleLM.do_react = 1
+
+amr.plot_int = 100
+amr.max_step = 500
+amr.stop_time = -1.0
+amr.cfl = 0.5
+amr.derive_plot_vars = avg_pressure mag_vort mass_fractions
+
+fabarray.mfiter_tile_size = 1024 1024 1024
+
+#------------------------- EB SETUP -----------------------------
+eb2.geom_type = cylinder
+eb2.small_volfrac = 1.0e-4
+
+#--------------------REFINEMENT CONTROL------------------------
+peleLM.do_les = 1
+peleLM.les_model = Smagorinsky
+peleLM.chem_integrator = ReactorNull
+peleLM.aux_vars = k epsilon
+eb2.cylinder_radius     = 8.0
+eb2.cylinder_direction  = 2
+eb2.cylinder_center     = 25.0 15.0 20.0
+eb2.cylinder.internal_flow    = false
+eb2.cylinder_has_fluid_inside = 0

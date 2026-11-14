@@ -1,0 +1,167 @@
+{
+  "comparisons": [
+    {
+      "agreement_passed": false,
+      "cpu_gpu_proxy_flux_rel_diff": 0.013032966063663056,
+      "cpu_mpi_proxy_flux_w_m2": 150.19191151117516,
+      "distance_m": 0.23,
+      "metric_id": "mdpi_jet_fire_1p5mm_0p6mpa_0p23m",
+      "reference_flux_w_m2": 1360.5,
+      "single_cuda_proxy_flux_w_m2": 148.23446542541333,
+      "single_cuda_proxy_rel_error": 0.8910441268464436,
+      "single_cuda_to_reference_ratio": 0.10895587315355629,
+      "tolerance_abs_w_m2": 590.457,
+      "tolerance_rel": 0.434
+    },
+    {
+      "agreement_passed": false,
+      "cpu_gpu_proxy_flux_rel_diff": 0.013032966063663118,
+      "cpu_mpi_proxy_flux_w_m2": 31.780608475764666,
+      "distance_m": 0.5,
+      "metric_id": "mdpi_jet_fire_1p5mm_0p6mpa_0p50m",
+      "reference_flux_w_m2": 412.1,
+      "single_cuda_proxy_flux_w_m2": 31.36641288401746,
+      "single_cuda_proxy_rel_error": 0.9238864040669317,
+      "single_cuda_to_reference_ratio": 0.07611359593306832,
+      "tolerance_abs_w_m2": 178.8514,
+      "tolerance_rel": 0.434
+    },
+    {
+      "agreement_passed": false,
+      "cpu_gpu_proxy_flux_rel_diff": 0.013032966063663056,
+      "cpu_mpi_proxy_flux_w_m2": 150.19191151117516,
+      "distance_m": 0.23,
+      "metric_id": "mdpi_jet_fire_max_1p2mm_0p23m",
+      "reference_flux_w_m2": 952.8,
+      "single_cuda_proxy_flux_w_m2": 148.23446542541333,
+      "single_cuda_proxy_rel_error": 0.8444222655064931,
+      "single_cuda_to_reference_ratio": 0.15557773449350687,
+      "tolerance_abs_w_m2": 413.5152,
+      "tolerance_rel": 0.434
+    },
+    {
+      "agreement_passed": false,
+      "cpu_gpu_proxy_flux_rel_diff": 0.013032966063663056,
+      "cpu_mpi_proxy_flux_w_m2": 150.19191151117516,
+      "distance_m": 0.23,
+      "metric_id": "mdpi_jet_fire_max_2p0mm_0p23m",
+      "reference_flux_w_m2": 3378.1,
+      "single_cuda_proxy_flux_w_m2": 148.23446542541333,
+      "single_cuda_proxy_rel_error": 0.9561189824382306,
+      "single_cuda_to_reference_ratio": 0.04388101756176944,
+      "tolerance_abs_w_m2": 1466.0954,
+      "tolerance_rel": 0.434
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "single_cuda_delayed_ignition_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/engineering_h2_pipe_rack_delayed_ignition_cuda_report.json",
+      "sha256": "6703e1feb990d9973cd279a68f304cb6b8c80f56612c37249a41f5ecabe79094",
+      "size_bytes": 5205
+    },
+    {
+      "label": "cpu_mpi_delayed_ignition_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/engineering_h2_pipe_rack_delayed_ignition_mpi_report.json",
+      "sha256": "643818c985df181d4e07106b1a344f8b48a1bf0bf3ae85a175ee20264cdd2670",
+      "size_bytes": 4882
+    },
+    {
+      "label": "mdpi_radiation_table",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/h2_fire_mdpi_radiation_calibration_table_report.json",
+      "sha256": "26506a1e7e4d69bb668b74e5429e7aca4015853de14d745f91183c52e687a258",
+      "size_bytes": 3576
+    },
+    {
+      "label": "single_cuda_runtime_summary",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/runtime_evidence/summary.json",
+      "sha256": "5ed8b4a2f85a05986a34672ac7c29667c01042d15fd0b8d46aa31ddfb28b9fef",
+      "size_bytes": 7696
+    },
+    {
+      "label": "cpu_mpi_runtime_summary",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/runtime_evidence/summary.json",
+      "sha256": "3154c9e9d33a2ea1bf5070d3c711d873a6a668b3564029bc6d9644e7b62d6a1d",
+      "size_bytes": 5081
+    },
+    {
+      "label": "mdpi_radiation_metrics_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    },
+    {
+      "label": "comparison_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_cfd_proxy_20260805/mdpi_radiation_cfd_proxy_comparison.csv",
+      "sha256": "2c6f500fdb7476cb48e66227c151bdb355027ff0e85f32df471a121086c4acf2",
+      "size_bytes": 788
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:02:00.457792+00:00",
+  "limitations": [
+    "Uses one-cell peak HeatRelease as a radiation proxy, not integrated flame emissive power.",
+    "Does not model flame surface, soot, gas radiation, view factor, obstruction shielding, or radiometer geometry.",
+    "Does not clear strict MDPI radiation agreement; it only proves a finite CFD-derived observable path."
+  ],
+  "output_files": {
+    "comparison_csv": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_cfd_proxy_20260805/mdpi_radiation_cfd_proxy_comparison.csv"
+  },
+  "proxy_definition": {
+    "formula": "proxy_flux = max_cell_HeatRelease_W_m3 * cell_volume_m3 * radiative_fraction / (4*pi*distance_m^2)",
+    "purpose": "CFD observability and CPU/GPU parity gate; not a flame radiation model",
+    "radiative_fraction": 0.15,
+    "source_field": "HeatRelease abs max from delayed-ignition plotfile reaction history"
+  },
+  "run_proxies": {
+    "cpu_mpi": {
+      "cell_volume_m3": 0.000244140625,
+      "dx_m": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "label": "cpu_mpi",
+      "peak_heat_release_abs_max_w_m3": 2726344.734421696,
+      "peak_plotfile": "plt00040",
+      "peak_time_s": 4.0000000000000025e-07,
+      "proxy_cell_heat_release_w": 665.6115074271719,
+      "proxy_radiative_power_w": 99.84172611407578,
+      "radiative_fraction": 0.15,
+      "report_path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/engineering_h2_pipe_rack_delayed_ignition_mpi_report.json",
+      "runtime_summary_path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/runtime_evidence/summary.json"
+    },
+    "single_cuda": {
+      "cell_volume_m3": 0.000244140625,
+      "dx_m": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "label": "single_cuda",
+      "peak_heat_release_abs_max_w_m3": 2690812.3760201316,
+      "peak_plotfile": "plt00040",
+      "peak_time_s": 4.0000000000000025e-07,
+      "proxy_cell_heat_release_w": 656.93661523929,
+      "proxy_radiative_power_w": 98.54049228589349,
+      "radiative_fraction": 0.15,
+      "report_path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/engineering_h2_pipe_rack_delayed_ignition_cuda_report.json",
+      "runtime_summary_path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/runtime_evidence/summary.json"
+    }
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-MDPI-RADIATION-CFD-PROXY",
+  "summary": {
+    "case_aligned_cfd_radiation_agreement": false,
+    "cfd_proxy_extracted": true,
+    "cpu_gpu_proxy_parity_passed": true,
+    "cpu_gpu_proxy_radiative_power_rel_diff": 0.01303296606366305,
+    "cpu_mpi_proxy_radiative_power_w": 99.84172611407578,
+    "current_outputs_sufficient_for_mdpi_radiation_agreement": false,
+    "mdpi_radiation_metric_count": 4,
+    "proxy_agreement_fail_count": 4,
+    "proxy_agreement_pass_count": 0,
+    "single_cuda_proxy_radiative_power_w": 98.54049228589349,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire MDPI Radiation CFD-Derived Proxy"
+}

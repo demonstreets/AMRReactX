@@ -1,0 +1,112 @@
+{
+  "acceptance_basis": {
+    "external_public_benchmark_required_for_this_clearance": false,
+    "large_case_amr_regridded": true,
+    "large_case_no_nan_inf_or_failure_markers": true,
+    "large_case_parallel_finalized": true,
+    "user_authorized_self_built_large_case": true
+  },
+  "decision": "engineering_scene_production_credible_by_self_built_large_case_gate",
+  "evidence_files": [
+    {
+      "label": "large_acceptance_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_large_acceptance_20260727/h2_large_acceptance_report.json",
+      "sha256": "e062a10c0e456d5b14f288754f6a41c97f8ce0d5828bdea0f9d6608114e238fb",
+      "size_bytes": 9523
+    },
+    {
+      "label": "production_evidence_verification_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json",
+      "sha256": "bca0d1eba757a34d6b29ef8731d3fcc10a9caa340ecc48a1a5a257a2b46b9ca7",
+      "size_bytes": 51944
+    },
+    {
+      "label": "mixed_mpi_guarded_runner",
+      "path": "tools/codex_smoke_engineering_h2_leak_plume_history.sh",
+      "sha256": "e8391b095c9e2a4478f615b8543f991fe6101f630dfacbb667bea953623fdc36",
+      "size_bytes": 10362
+    }
+  ],
+  "generated_at_utc": "2026-07-27T04:26:45+00:00",
+  "large_acceptance_metrics": {
+    "advance_seconds_ratio": 1.15410241,
+    "amr_cloud_volume": 0.0224609375,
+    "amr_final_mass_ratio": 1.00001907,
+    "amr_final_time": 0.12,
+    "amr_finest_level": 1,
+    "amr_max_x": 0.176187339,
+    "amr_ref_ratio": [
+      2,
+      2,
+      2
+    ],
+    "amr_regrid_count": 59,
+    "base_cell_count": 221184,
+    "base_n_cell": [
+      96,
+      48,
+      48
+    ],
+    "baseline_cloud_volume": 0.03125,
+    "baseline_final_mass_ratio": 1.0,
+    "baseline_final_time": 0.12,
+    "baseline_finest_level": 0,
+    "baseline_max_x": 0.144044073,
+    "centroid_abs_diff": 0.001801478,
+    "cloud_rel_diff": 0.28125,
+    "domain_prob_hi": [
+      12.0,
+      6.0,
+      6.0
+    ],
+    "downstream_abs_diff": 0.015261738,
+    "equivalent_finest_cell_count": 1769472,
+    "equivalent_finest_n_cell": [
+      192,
+      96,
+      96
+    ],
+    "final_plotfile_bytes_ratio": 1.01412055,
+    "max_step": 120,
+    "mean_ncells_ratio": 1.00846836,
+    "peak_rel_diff": 0.182438001,
+    "plot_int": 30,
+    "ranks": 8
+  },
+  "non_blocking_followups": [
+    "External plume/fire experimental datasets remain useful for calibration and publication-grade validation.",
+    "Hybrid MPI+OpenMP large acceptance can be repeated as a performance extension after pure MPI clearance.",
+    "Larger wall-clock/full-duration campaigns can be scheduled when storage and queue policy allow."
+  ],
+  "not_validated_by_large_acceptance": [
+    "GPU execution or GPU scaling",
+    "large coupled ignition/fire consequence run",
+    "MPI+OpenMP hybrid large acceptance repeat",
+    "external public plume-shape benchmark agreement"
+  ],
+  "production_evidence_summary": {
+    "ctest_passed": true,
+    "ctest_tests": 22,
+    "functional_coverage_percent": 94.9,
+    "production_credibility_percent": 77.9,
+    "schema_version": 62,
+    "status": "PASS"
+  },
+  "schema_version": 1,
+  "scope": [
+    "gas-phase H2 tank or pipe leak dispersion",
+    "large open-domain 3D AMR engineering run",
+    "parallel MPI production runner stability"
+  ],
+  "status": "PASS-H2-ENGINEERING-SCENE-CLEARANCE",
+  "title": "H2 Engineering Scene Production Clearance",
+  "validated_capabilities": {
+    "amr_level1_regridding": true,
+    "cpu_mpi_parallel": true,
+    "cpu_mpi_ranks": 8,
+    "gpu_parallel": false,
+    "large_coupled_ignition_fire": false,
+    "leak_source_mass_injection": true,
+    "three_dimensional_h2_dispersion": true
+  }
+}

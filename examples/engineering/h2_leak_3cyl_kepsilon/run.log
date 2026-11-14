@@ -1,0 +1,71 @@
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 13
+ Temperature: 14
+ thermo. pressure: 15
+ => Total number of state variables: 16
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 10 0 0 
+	Density:  1.171970349
+	Temp:     300
+	H:        1900.60525
+	Y_H2:     0
+	Y_O2:     0.232909218
+	Y_H2O:    0
+	Y_H:      0
+	Y_O:      0
+	Y_OH:     0
+	Y_HO2:    0
+	Y_H2O2:   0
+	Y_N2:     0.767090782
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 0.025, divu: 1e+20
+ Initial dt: 0.025
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+amrex::Abort::0::getDiffusivity(): LES model is on but cannot provide a turbulent transport coefficient !!!
+SIGABRT
+See Backtrace.0 file for details

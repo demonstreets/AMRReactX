@@ -1,0 +1,342 @@
+{
+  "does_not_apply_copy_actions": true,
+  "does_not_clear_production_blockers": true,
+  "domain_ingestion_plans": [
+    {
+      "artifact_count": 6,
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "copy_actions": [
+        {
+          "artifact": "real_cad_cleanup_manifest.json",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_json:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_manifest.json"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_manifest.json",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json"
+          }
+        },
+        {
+          "artifact": "source_cad/*",
+          "copy_action": {
+            "copy_mode": "directory_contents",
+            "gaps": [
+              "source_cad_file_count:0<3"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/source_cad",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": true,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/source_cad/"
+          }
+        },
+        {
+          "artifact": "cleaned_geometry/*",
+          "copy_action": {
+            "copy_mode": "directory_contents",
+            "gaps": [
+              "cleaned_geometry_file_count:0<3"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/cleaned_geometry",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": true,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/cleaned_geometry/"
+          }
+        },
+        {
+          "artifact": "cleanup_quality_records",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_quality_record.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_quality_record.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv"
+          }
+        },
+        {
+          "artifact": "real_cad_data_room_index.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_data_room_index.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_data_room_index.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv"
+          }
+        },
+        {
+          "artifact": "real_cad_cleanup_quality_record.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_quality_record.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_quality_record.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv"
+          }
+        }
+      ],
+      "domain": "real_cad_cleanup",
+      "domain_quality_gap_count": 0,
+      "domain_quality_gaps": [],
+      "domain_rebuild_command_sequence": [
+        "python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py",
+        "python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py"
+      ],
+      "missing_or_invalid_action_count": 6,
+      "ready_copy_action_count": 0,
+      "ready_for_domain_ingestion": false
+    },
+    {
+      "artifact_count": 4,
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "copy_actions": [
+        {
+          "artifact": "dataset_metadata.json",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_json:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/dataset_metadata.json"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/dataset_metadata.json",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json"
+          }
+        },
+        {
+          "artifact": "sensor_coordinates.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/sensor_coordinates.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/sensor_coordinates.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv"
+          }
+        },
+        {
+          "artifact": "baffle_geometry.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/baffle_geometry.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/baffle_geometry.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv"
+          }
+        },
+        {
+          "artifact": "experimental_timeseries.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/experimental_timeseries.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/experimental_timeseries.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv"
+          }
+        }
+      ],
+      "domain": "external_plume_shape_reference",
+      "domain_quality_gap_count": 0,
+      "domain_quality_gaps": [],
+      "domain_rebuild_command_sequence": [
+        "python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py",
+        "python3 tools/write_engineering_h2_reference_agreement_report.py --external-plume-dataset-json <generated_external_plume_dataset_json>",
+        "python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py"
+      ],
+      "missing_or_invalid_action_count": 4,
+      "ready_copy_action_count": 0,
+      "ready_for_domain_ingestion": false
+    },
+    {
+      "artifact_count": 4,
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "copy_actions": [
+        {
+          "artifact": "calibration_metadata.json",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_json:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/calibration_metadata.json"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/calibration_metadata.json",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json"
+          }
+        },
+        {
+          "artifact": "radiation_metrics.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/radiation_metrics.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/radiation_metrics.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv"
+          }
+        },
+        {
+          "artifact": "overpressure_metrics.csv",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_csv:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/overpressure_metrics.csv"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/overpressure_metrics.csv",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv"
+          }
+        },
+        {
+          "artifact": "calibrated_fire_consequence_report",
+          "copy_action": {
+            "copy_mode": "single_file",
+            "gaps": [
+              "missing_json:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/calibrated_fire_consequence_report.json"
+            ],
+            "source_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/calibrated_fire_consequence_report.json",
+            "source_sha256": null,
+            "source_size_bytes": null,
+            "source_valid": false,
+            "target_is_directory": false,
+            "target_path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json"
+          }
+        }
+      ],
+      "domain": "fire_consequence_calibration",
+      "domain_quality_gap_count": 0,
+      "domain_quality_gaps": [],
+      "domain_rebuild_command_sequence": [
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_package_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_report.py",
+        "python3 tools/write_engineering_h2_fire_consequence_metrics_report.py --calibration-dataset-json <generated_fire_calibration_dataset_json>"
+      ],
+      "missing_or_invalid_action_count": 4,
+      "ready_copy_action_count": 0,
+      "ready_for_domain_ingestion": false
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "external_artifact_drop_validator_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+      "sha256": "0108680ab41342c3dd859bc64c71a245c972089bf2b811e6e8f7665d5448bcb9",
+      "size_bytes": 13866
+    },
+    {
+      "label": "production_blocker_closure_manifest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    }
+  ],
+  "external_artifact_drop_validator_report": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+  "final_rebuild_command_sequence_after_copy": [
+    "python3 tools/write_engineering_production_scorecard.py --output-json docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json --output-md docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.md",
+    "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py",
+    "python3 tools/write_engineering_h2_production_blocker_data_room_report.py",
+    "python3 tools/write_engineering_h2_production_blocker_closure_manifest_report.py",
+    "python3 tools/write_engineering_h2_external_evidence_intake_kit_manifest.py",
+    "python3 tools/write_engineering_h2_external_artifact_drop_validator.py",
+    "python3 tools/write_engineering_h2_external_artifact_ingestion_plan.py",
+    "python3 tools/write_engineering_h2_production_handoff_report.py",
+    "python3 tools/write_engineering_h2_master_plan_traceability_report.py",
+    "bash tools/rebuild_engineering_h2_evidence_chain.sh"
+  ],
+  "generated_at_utc": "2026-08-20T10:07:10+00:00",
+  "limitations": [
+    "This plan records copy targets and rebuild commands only; it does not copy external artifacts.",
+    "Production readiness can only change after a PASS drop is copied into controlled paths and the full rebuild/verifier chain passes."
+  ],
+  "missing_or_invalid_copy_action_count": 14,
+  "production_blocker_closure_manifest_report": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+      "gap": "",
+      "name": "drop_validator_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "gap": "",
+      "name": "closure_manifest_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "plan=14 drop=14",
+      "gap": "",
+      "name": "copy_action_count_matches_drop_artifact_count",
+      "status": "PASS"
+    },
+    {
+      "evidence": "missing_or_invalid_actions=14",
+      "gap": "",
+      "name": "not_ready_preserves_invalid_actions",
+      "status": "PASS"
+    },
+    {
+      "evidence": "plan-only report; no files are copied",
+      "gap": "",
+      "name": "does_not_apply_copy_actions",
+      "status": "PASS"
+    }
+  ],
+  "ready_copy_action_count": 0,
+  "ready_for_controlled_copy": false,
+  "ready_for_domain_ingestion": false,
+  "remaining_blocker_count": 3,
+  "schema_version": 2,
+  "status": "NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN",
+  "title": "Engineering H2 External Artifact Ingestion Plan",
+  "total_copy_action_count": 14
+}

@@ -1,0 +1,269 @@
+{
+  "evidence_files": [
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_twophase_canonical_bubble_rise_reference_report.py",
+      "sha256": "3c3558924241c6dbd5643edb487291a3bb2dad042a420cda9deb4394f287a550",
+      "size_bytes": 16689
+    },
+    {
+      "label": "bubble_rise_validation_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/academic_twophase_bubble_rise_validation_report.json",
+      "sha256": "c8fa8ab6bef801f83f1566082705239258733add3443bc6499b41e67ba533892",
+      "size_bytes": 9759
+    },
+    {
+      "label": "bubble_rise_observables_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/academic_twophase_bubble_rise_observable_timeseries_report.json",
+      "sha256": "c01405a8b8119c1abd16cf2e7f2590da67a31525686df882747a18e780301799",
+      "size_bytes": 16173
+    },
+    {
+      "label": "canonical_bubble_candidate_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_candidate_report.json",
+      "sha256": "77df0630bca374261e63893bb5d68a27c21d7a6b0a4ee93684c1f5e4adabcddc",
+      "size_bytes": 8233
+    },
+    {
+      "label": "bubble_rise_input_file",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run/input.canonical_bubble_rise_candidate",
+      "sha256": "a314e8d2bc9fb9cbac74dcefa96bcfc78658357bfac7a249a69e85e2a28422b5",
+      "size_bytes": 1140
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:08+00:00",
+  "limitations": [
+    "This report intentionally does not promote the current short-time/long-window PeleC bubble response gates into canonical external-reference validation.",
+    "The maintained PeleC case has clean response/stability evidence and sampled observable diagnostics where available, but its current geometry, forcing scale, surface-tension/viscosity contract, and final time do not yet match the Hysing benchmark.",
+    "Clearing QLT-03 canonical credit requires a dedicated case package plus center-of-mass, rise-velocity, circularity, and final-shape comparisons against the reference contract recorded here."
+  ],
+  "quality_gates": [
+    {
+      "metric": 2.0,
+      "name": "domain_aspect_ratio_matches_1x2_column",
+      "status": "PASS",
+      "target": 2.0
+    },
+    {
+      "metric": 0.25,
+      "name": "initial_bubble_radius_matches_canonical_fraction",
+      "status": "PASS",
+      "target": 0.25
+    },
+    {
+      "metric": [
+        0.5,
+        0.25
+      ],
+      "name": "initial_bubble_center_matches_canonical_fraction",
+      "status": "PASS",
+      "target": [
+        0.5,
+        0.25
+      ]
+    },
+    {
+      "metric": 10.0,
+      "name": "density_ratio_matches_hysing_case_1",
+      "status": "PASS",
+      "target": 10.0
+    },
+    {
+      "metric": 0.98,
+      "name": "gravity_matches_hysing_case_1_scale",
+      "status": "PASS",
+      "target": 0.98
+    },
+    {
+      "metric": [
+        "prob.surface_tension_sigma",
+        "prob.surface_tension_grad_floor",
+        "prob.surface_tension_force_cap"
+      ],
+      "name": "surface_tension_contract_present",
+      "status": "PASS",
+      "target": "surface tension parameter equivalent to sigma=24.5"
+    },
+    {
+      "metric": [
+        "prob.phase_viscosity_mu_heavy",
+        "prob.phase_viscosity_mu_light",
+        "prob.phase_viscosity_force_cap"
+      ],
+      "name": "viscosity_contract_present",
+      "status": "PASS",
+      "target": "liquid/bubble viscosity equivalent to 10/1"
+    },
+    {
+      "metric": {
+        "clears_canonical_observable_timeseries_gap": true,
+        "has_center_of_mass": true,
+        "has_circularity": true,
+        "has_rise_velocity": true,
+        "observables_report_status": "PASS-ACADEMIC-TWOPHASE-BUBBLE-RISE-OBSERVABLE-DIAGNOSTICS",
+        "plot_count": 16
+      },
+      "name": "canonical_observable_timeseries_available",
+      "status": "PASS",
+      "target": {
+        "benchmark_quantities": [
+          "center_of_mass",
+          "mean_rise_velocity",
+          "circularity"
+        ],
+        "minimum_time_samples": 16
+      }
+    },
+    {
+      "metric": 0.001,
+      "name": "canonical_final_time_contract",
+      "status": "NOT_READY",
+      "target": 3.0
+    }
+  ],
+  "reference": {
+    "benchmark_quantities": [
+      "center_of_mass",
+      "mean_rise_velocity",
+      "circularity"
+    ],
+    "case_1_contract": {
+      "domain": [
+        1.0,
+        2.0
+      ],
+      "end_time": 3.0,
+      "gravity": 0.98,
+      "initial_bubble_center": [
+        0.5,
+        0.5
+      ],
+      "initial_bubble_radius": 0.25,
+      "mu_bubble": 1.0,
+      "mu_liquid": 10.0,
+      "representative_reference_values": {
+        "center_of_mass_y_at_t3": 1.0813,
+        "maximum_mean_rise_velocity": 0.2417,
+        "minimum_circularity": 0.9013,
+        "time_at_maximum_mean_rise_velocity": 0.92,
+        "time_at_minimum_circularity": 1.9
+      },
+      "rho_bubble": 100.0,
+      "rho_liquid": 1000.0,
+      "surface_tension": 24.5
+    },
+    "name": "Hysing-Turek-Kuzmin-Parolini-Burman-Ganesan-Tobiska 2D rising bubble benchmark",
+    "primary_doi": "10.1002/fld.1934",
+    "primary_url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/fld.1934"
+  },
+  "schema_version": 1,
+  "scope": "Machine-checkable comparison between the maintained PeleC bubble-rise evidence and the canonical Hysing et al. 2D rising-bubble benchmark contract.",
+  "source_reports": {
+    "bubble_rise_observables": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/academic_twophase_bubble_rise_observable_timeseries_report.json",
+    "bubble_rise_validation": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/academic_twophase_bubble_rise_validation_report.json",
+    "canonical_candidate": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_candidate_report.json"
+  },
+  "status": "NOT_READY-ACADEMIC-TWOPHASE-CANONICAL-BUBBLE-RISE-REFERENCE",
+  "summary": {
+    "blocking_gap_count": 1,
+    "blocking_gaps": [
+      "canonical_final_time_contract"
+    ],
+    "canonical_candidate_summary": {
+      "adv_mass_rel_drift": 4.99244987077e-16,
+      "blocking_reasons": [],
+      "centroid_rise": -5.80837742348e-08,
+      "clears_canonical_geometry_gravity_case_package": true,
+      "clears_qlt_03_canonical_long_time_bubble_rise_gap": false,
+      "derived_contract": {
+        "bubble_center_over_domain": [
+          0.5,
+          0.25
+        ],
+        "bubble_radius_over_domain_width": 0.25,
+        "density_ratio_heavy_over_light": 10.0,
+        "domain_aspect_height_over_width": 2.0,
+        "domain_height": 2.0,
+        "domain_width": 1.0,
+        "gravity": 0.98,
+        "phase_viscosity_force_cap": 1.0,
+        "phase_viscosity_mu_heavy": 10.0,
+        "phase_viscosity_mu_light": 1.0,
+        "plot_int": 1000.0,
+        "stop_time": 0.001,
+        "surface_tension_sigma": 24.5
+      },
+      "grid_nx": 32,
+      "grid_ny": 64,
+      "light_y0": 0.500000000895,
+      "light_y1": 0.499999942812,
+      "mass_rel_drift": 4.87738829356e-16,
+      "ready_for_surface_tension_viscosity_model_work": true,
+      "remaining_canonical_model_gaps": [
+        "canonical_final_time_contract"
+      ],
+      "time0": 0.0,
+      "time1": 3.04725008623e-05,
+      "ymom_absmax": 0.000327155853117,
+      "ymom_sum": 3.33841126454e-05
+    },
+    "clears_qlt_03_canonical_long_time_bubble_rise_gap": false,
+    "contract_source": "canonical_geometry_gravity_candidate",
+    "current_case_derived_contract": {
+      "bubble_center_over_domain": [
+        0.5,
+        0.25
+      ],
+      "bubble_radius_over_domain_width": 0.25,
+      "density_ratio_heavy_over_light": 10.0,
+      "domain_aspect_height_over_width": 2.0,
+      "domain_height": 2.0,
+      "domain_width": 1.0,
+      "gravity": 0.98,
+      "grid": [
+        32,
+        64
+      ],
+      "plot_int": 1000.0,
+      "stop_time": 0.001,
+      "surface_tension_keys": [
+        "prob.surface_tension_sigma",
+        "prob.surface_tension_grad_floor",
+        "prob.surface_tension_force_cap"
+      ],
+      "viscosity_keys": [
+        "prob.phase_viscosity_mu_heavy",
+        "prob.phase_viscosity_mu_light",
+        "prob.phase_viscosity_force_cap"
+      ]
+    },
+    "next_required_outputs": [
+      "center_of_mass",
+      "mean_rise_velocity",
+      "circularity"
+    ],
+    "ready_to_run_canonical_benchmark": false,
+    "recommended_next_case": {
+      "bubble_center": [
+        0.5,
+        0.5
+      ],
+      "bubble_radius": 0.25,
+      "density_ratio": 10.0,
+      "domain": [
+        1.0,
+        2.0
+      ],
+      "end_time": 3.0,
+      "gravity": 0.98,
+      "required_history": [
+        "center_of_mass_y(t)",
+        "mean_rise_velocity_y(t)",
+        "circularity(t)",
+        "final_interface_shape"
+      ],
+      "surface_tension": 24.5
+    }
+  },
+  "title": "Academic Two-Phase Canonical Bubble-Rise Reference Preflight"
+}

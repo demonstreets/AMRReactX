@@ -1,0 +1,206 @@
+{
+  "baseline": {
+    "arrival_pass_count": 5,
+    "clears_external_plume_reference_blocker": false,
+    "combined_pass_count": 32,
+    "common_sample_count_min": 69,
+    "failed_sensor_count": 28,
+    "nrmse_pass_count": 26,
+    "peak_pass_count": 1,
+    "production_agreement_completed": false,
+    "sensor_count": 29,
+    "simulation_mass_ratio_final": 1.0,
+    "simulation_time_end_s": 44.999999999999616,
+    "status": "QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING"
+  },
+  "cases": [
+    {
+      "delta_vs_baseline": {
+        "arrival_pass_count": -3,
+        "combined_pass_count": -5,
+        "nrmse_pass_count": -3,
+        "peak_pass_count": 1
+      },
+      "input": {
+        "amr.fixed_dt": 0.01,
+        "amr.max_step": 4500,
+        "prob.leak_radius": 0.04,
+        "prob.leak_rate": 0.0009152681907312,
+        "prob.leak_zc": 0.775
+      },
+      "label": "r004_z0775",
+      "metrics": {
+        "arrival_pass_count": 2,
+        "clears_external_plume_reference_blocker": false,
+        "combined_pass_count": 27,
+        "common_sample_count_min": 69,
+        "failed_sensor_count": 29,
+        "nrmse_pass_count": 23,
+        "peak_pass_count": 2,
+        "production_agreement_completed": false,
+        "sensor_count": 29,
+        "simulation_mass_ratio_final": 1.0,
+        "simulation_time_end_s": 44.999999999999616,
+        "status": "QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING"
+      },
+      "promote_to_120s_peak_window": false
+    },
+    {
+      "delta_vs_baseline": {
+        "arrival_pass_count": -3,
+        "combined_pass_count": -5,
+        "nrmse_pass_count": -3,
+        "peak_pass_count": 1
+      },
+      "input": {
+        "amr.fixed_dt": 0.01,
+        "amr.max_step": 4500,
+        "prob.leak_radius": 0.05,
+        "prob.leak_rate": 0.0009152681907312,
+        "prob.leak_zc": 0.8
+      },
+      "label": "r005_z08",
+      "metrics": {
+        "arrival_pass_count": 2,
+        "clears_external_plume_reference_blocker": false,
+        "combined_pass_count": 27,
+        "common_sample_count_min": 69,
+        "failed_sensor_count": 29,
+        "nrmse_pass_count": 23,
+        "peak_pass_count": 2,
+        "production_agreement_completed": false,
+        "sensor_count": 29,
+        "simulation_mass_ratio_final": 1.0,
+        "simulation_time_end_s": 44.999999999999616,
+        "status": "QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING"
+      },
+      "promote_to_120s_peak_window": false
+    },
+    {
+      "delta_vs_baseline": {
+        "arrival_pass_count": -3,
+        "combined_pass_count": -5,
+        "nrmse_pass_count": -3,
+        "peak_pass_count": 1
+      },
+      "input": {
+        "amr.fixed_dt": 0.01,
+        "amr.max_step": 4500,
+        "prob.leak_radius": 0.06,
+        "prob.leak_rate": 0.0009152681907312,
+        "prob.leak_zc": 0.8
+      },
+      "label": "r006_z08",
+      "metrics": {
+        "arrival_pass_count": 2,
+        "clears_external_plume_reference_blocker": false,
+        "combined_pass_count": 27,
+        "common_sample_count_min": 69,
+        "failed_sensor_count": 29,
+        "nrmse_pass_count": 23,
+        "peak_pass_count": 2,
+        "production_agreement_completed": false,
+        "sensor_count": 29,
+        "simulation_mass_ratio_final": 1.0,
+        "simulation_time_end_s": 44.999999999999616,
+        "status": "QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING"
+      },
+      "promote_to_120s_peak_window": false
+    }
+  ],
+  "decision": {
+    "next_screen_parameters": [
+      {
+        "amr.n_cell": "174 27 24",
+        "prob.leak_radius": 0.04,
+        "prob.leak_zc": 0.8
+      },
+      {
+        "boundary_condition_focus": "outlet/backflow and open-channel ventilation parity"
+      },
+      {
+        "geometry_focus": "encode DataverseNO internal component/obstacle bounds instead of all_regular"
+      }
+    ],
+    "promote_any_case_to_120s": false,
+    "reason": "All coarse-grid source-height/radius screens are numerically stable, but none improves the combined 45 s agreement score without regressing NRMSE or LFL arrival."
+  },
+  "evidence_files": [
+    {
+      "label": "baseline_45s_agreement_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_window_mpi_cuda_20260803/dataverse_open_channel_cfd_agreement_attempt_report.json",
+      "sha256": "afefcc245766b2545ac49d62ac50b29820e8db689d3f50c0c50f41a00f850189",
+      "size_bytes": 27896
+    },
+    {
+      "label": "r004_z0775_agreement_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r004_z0775_mpi_cuda_20260804/dataverse_open_channel_cfd_agreement_attempt_report.json",
+      "sha256": "da61e8154429be859d9ee1b79861b34c719926bec243376c1287ef0b5e146d44",
+      "size_bytes": 28141
+    },
+    {
+      "label": "r005_z08_agreement_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r005_z08_mpi_cuda_20260804/dataverse_open_channel_cfd_agreement_attempt_report.json",
+      "sha256": "97b632b8ddd9b221b62600cf793f13112c39a7b696ff15f24049e622876846f3",
+      "size_bytes": 28127
+    },
+    {
+      "label": "r006_z08_agreement_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r006_z08_mpi_cuda_20260804/dataverse_open_channel_cfd_agreement_attempt_report.json",
+      "sha256": "cfaed67482315c8ae3f5d275f601ada54ff58c4574cb294c44dfdb7fda79b593",
+      "size_bytes": 28127
+    },
+    {
+      "label": "r004_z0775_input_deck",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r004_z0775_mpi_cuda_20260804/input.dataverse_open_channel_h2_scout_3d",
+      "sha256": "e4525670acb17bcb5d86e79269baa6a3b6293b428b6f8ecabc0dad94ca08a376",
+      "size_bytes": 1525
+    },
+    {
+      "label": "r005_z08_input_deck",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r005_z08_mpi_cuda_20260804/input.dataverse_open_channel_h2_scout_3d",
+      "sha256": "9ed3dcf71adc8c8cb80f1e9e75037f7fc7961a9b067bb26dfb509952644f2956",
+      "size_bytes": 1525
+    },
+    {
+      "label": "r006_z08_input_deck",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r006_z08_mpi_cuda_20260804/input.dataverse_open_channel_h2_scout_3d",
+      "sha256": "92281041889204c305e3b79c620c3d81ed52a32f60502771ff05e877d320fb4e",
+      "size_bytes": 1525
+    },
+    {
+      "label": "r004_z0775_validation_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r004_z0775_mpi_cuda_20260804/validation.log",
+      "sha256": "e8d263e1c24894171f01d9ce02d60b4a90450b1dda65005b2a1e02926de80435",
+      "size_bytes": 483
+    },
+    {
+      "label": "r005_z08_validation_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r005_z08_mpi_cuda_20260804/validation.log",
+      "sha256": "8b75c9fa34e6a36f9d200bfc2dc8d272444623561fae241a20f34463912d3b15",
+      "size_bytes": 483
+    },
+    {
+      "label": "r006_z08_validation_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_45s_calibration_r006_z08_mpi_cuda_20260804/validation.log",
+      "sha256": "8b75c9fa34e6a36f9d200bfc2dc8d272444623561fae241a20f34463912d3b15",
+      "size_bytes": 483
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:01.930558+00:00",
+  "schema_version": 1,
+  "status": "SCREENED-DATAVERSE-OPEN-CHANNEL-H2-45S-CALIBRATION-SWEEP-NO-PROMOTION",
+  "summary": {
+    "baseline_combined_pass_count": 32,
+    "best_case_arrival_pass_count": 2,
+    "best_case_combined_pass_count": 27,
+    "best_case_label": "r004_z0775",
+    "best_case_nrmse_pass_count": 23,
+    "best_case_peak_pass_count": 2,
+    "case_count": 3,
+    "promoted_case_count": 0,
+    "ready_for_next_calibration_screen": true,
+    "stable_case_count": 3,
+    "strict_external_plume_blocker_cleared": false
+  }
+}

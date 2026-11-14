@@ -1,0 +1,66 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX2d.gnu.CUDA.ex(+0x602ff7) [0x5830c21f4ff7]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: ./PeleLMeX2d.gnu.CUDA.ex(+0x607d44) [0x5830c21f9d44]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleLMeX2d.gnu.CUDA.ex(+0x4d06ed) [0x5830c20c26ed]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const at /usr/include/c++/13/bits/basic_string.h:264
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() at /usr/include/c++/13/bits/basic_string.h:282
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) amrex::Arena::out_of_memory_abort(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Arena.cpp:750
+
+ 3: ./PeleLMeX2d.gnu.CUDA.ex(+0x4d1ae2) [0x5830c20c3ae2]
+    amrex::Arena::allocate_system(unsigned long) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Arena.cpp:350 (discriminator 2)
+
+ 4: ./PeleLMeX2d.gnu.CUDA.ex(+0x4d9da3) [0x5830c20cbda3]
+    amrex::CArena::alloc_protected(unsigned long) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_CArena.cpp:95
+
+ 5: ./PeleLMeX2d.gnu.CUDA.ex(+0x4da620) [0x5830c20cc620]
+    amrex::CArena::alloc(unsigned long) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_CArena.cpp:33
+
+ 6: ./PeleLMeX2d.gnu.CUDA.ex(+0x3e283c) [0x5830c1fd483c]
+    amrex::PODVector<double, amrex::ArenaAllocator<double> >::PODVector(unsigned long) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_PODVector.H:349
+ (inlined by) void amrex::particle_detail::packIODataGpu<amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor> >(amrex::Vector<int, std::allocator<int> >&, amrex::Vector<double, std::allocator<double> >&, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor> const&, int, int, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<std::map<std::pair<int, int>, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector, std::less<std::pair<int, int> >, std::allocator<std::pair<std::pair<int, int> const, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector> > >, std::allocator<std::map<std::pair<int, int>, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector, std::less<std::pair<int, int> >, std::allocator<std::pair<std::pair<int, int> const, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector> > > > > const&, amrex::Vector<int, std::allocator<int> > const&, int, bool) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_WriteBinaryParticleData.H:379
+
+ 7: ./PeleLMeX2d.gnu.CUDA.ex(+0x3e37f1) [0x5830c1fd57f1]
+    void amrex::particle_detail::packIOData<amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor> >(amrex::Vector<int, std::allocator<int> >&, amrex::Vector<double, std::allocator<double> >&, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor> const&, int, int, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<std::map<std::pair<int, int>, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector, std::less<std::pair<int, int> >, std::allocator<std::pair<std::pair<int, int> const, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector> > >, std::allocator<std::map<std::pair<int, int>, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector, std::less<std::pair<int, int> >, std::allocator<std::pair<std::pair<int, int> const, amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::FlagsVector> > > > > const&, amrex::Vector<int, std::allocator<int> > const&, int, bool) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_WriteBinaryParticleData.H:479
+ (inlined by) amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::WriteParticles(int, std::basic_ofstream<char, std::char_traits<char> >&, int, amrex::Vector<int, std::allocator<int> >&, amrex::Vector<int, std::allocator<int> >&, amrex::Vector<long, std::allocator<long> >&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<std::map<std::pair<int, int>, amrex::PODVector<int, amrex::ArenaAllocator<int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<std::pair<int, int> const, amrex::PODVector<int, amrex::ArenaAllocator<int> > > > >, std::allocator<std::map<std::pair<int, int>, amrex::PODVector<int, amrex::ArenaAllocator<int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<std::pair<int, int> const, amrex::PODVector<int, amrex::ArenaAllocator<int> > > > > > > const&, bool) const at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleIO.H:620
+
+ 8: ./PeleLMeX2d.gnu.CUDA.ex(+0x3d36ea) [0x5830c1fc56ea]
+    void amrex::WriteBinaryParticleDataSync<amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>, amrex::FilterPositiveID, 0>(amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor> const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, amrex::FilterPositiveID const&, bool) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_WriteBinaryParticleData.H:722 (discriminator 1)
+
+ 9: ./PeleLMeX2d.gnu.CUDA.ex(+0x3d5b63) [0x5830c1fc7b63]
+    void amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::WriteBinaryParticleData<amrex::FilterPositiveID>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, amrex::FilterPositiveID const&, bool) const at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleIO.H:438
+ (inlined by) amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, amrex::ArenaAllocator, amrex::DefaultAssignor>::Checkpoint(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool, amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&) const at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleIO.H:90
+ (inlined by) SprayParticleContainer::SprayParticleIO(int, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Spray/SprayIO.cpp:35
+
+10: ./PeleLMeX2d.gnu.CUDA.ex(+0x1c7392) [0x5830c1db9392]
+    PeleLM::WritePlotFile() at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Plot.cpp:518
+
+11: ./PeleLMeX2d.gnu.CUDA.ex(+0x1e4f90) [0x5830c1dd6f90]
+    PeleLM::Evolve() at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Evolve.cpp:81
+
+12: ./PeleLMeX2d.gnu.CUDA.ex(+0xc4c26) [0x5830c1cb6c26]
+    main at /home/cj/my-pele/external/PeleLMeX/Source/main.cpp:61
+
+13: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7bb119c2a1ca]
+
+14: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7bb119c2a28b]
+
+15: ./PeleLMeX2d.gnu.CUDA.ex(+0xd16c5) [0x5830c1cc36c5]
+    ?? ??:0
+

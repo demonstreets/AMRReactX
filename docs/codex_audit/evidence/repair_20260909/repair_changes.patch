@@ -1,0 +1,2754 @@
+--- a/external/PeleC/Source/Godunov.H
++++ b/external/PeleC/Source/Godunov.H
+@@ -7,6 +7,7 @@
+ #include "Constants.H"
+ #include "IndexDefines.H"
+ #include "Riemann.H"
++#include "SpeciesFluxLimiter.H"
+ #include "EB.H"
+ #if NUM_ADV > 0
+ #include "vof_modules.H"
+@@ -366,10 +367,19 @@
+     f_idx[2] = UMY;
+   }
+ 
++  const amrex::IntVect iv{AMREX_D_DECL(i, j, k)};
++  const amrex::IntVect ivm(iv - amrex::IntVect::TheDimensionVector(dir));
++  amrex::Real donorL[NUM_SPECIES], donorR[NUM_SPECIES];
+   for (int sp = 0; sp < NUM_SPECIES; ++sp) {
+     spl[sp] = ql(i, j, k, QFS + sp);
+     spr[sp] = qr(i, j, k, QFS + sp);
+-  }
++    donorL[sp] = q_cell(ivm, QFS + sp);
++    donorR[sp] = q_cell(iv, QFS + sp);
++  }
++  AMREX_ALWAYS_ASSERT_WITH_MESSAGE(
++    pc_bounded_face_composition<NUM_SPECIES>(spl, donorL) &&
++    pc_bounded_face_composition<NUM_SPECIES>(spr, donorR),
++    "invalid donor species in Godunov flux: check chemistry, CFL and restart state");
+ 
+   amrex::Real ul = ql(i, j, k, IU);
+   amrex::Real vl = ql(i, j, k, IV);
+@@ -383,53 +393,77 @@
+   amrex::Real pr = qr(i, j, k, QPRES);
+   amrex::Real rhor = qr(i, j, k, QRHO);
+ 
++  // Reconstructed pressure/density may overshoot at a discontinuity.
++  // Recover that face from its admissible donor instead of calling the EOS
++  // with a negative density or pressure.
++  if (!std::isfinite(rhol) || rhol <= 1.0e-8*q_cell(ivm, QRHO) ||
++      !std::isfinite(pl) || pl <= 1.0e-8*q_cell(ivm, QPRES) ||
++      !std::isfinite(ul) || !std::isfinite(vl) || !std::isfinite(v2l)) {
++    rhol = q_cell(ivm, QRHO); pl = q_cell(ivm, QPRES);
++    ul = q_cell(ivm, IU); vl = q_cell(ivm, IV); v2l = q_cell(ivm, IV2);
++    for (int n=0; n<NUM_SPECIES; ++n) { spl[n]=donorL[n]; }
++  }
++  if (!std::isfinite(rhor) || rhor <= 1.0e-8*q_cell(iv, QRHO) ||
++      !std::isfinite(pr) || pr <= 1.0e-8*q_cell(iv, QPRES) ||
++      !std::isfinite(ur) || !std::isfinite(vr) || !std::isfinite(v2r)) {
++    rhor = q_cell(iv, QRHO); pr = q_cell(iv, QPRES);
++    ur = q_cell(iv, IU); vr = q_cell(iv, IV); v2r = q_cell(iv, IV2);
++    for (int n=0; n<NUM_SPECIES; ++n) { spr[n]=donorR[n]; }
++  }
++
+   // Boundary condition corrections
+   if (dir == 2) {
+     idx = k;
+   } else {
+     idx = (dir == 0) ? i : j;
+   }
++  bool impermeable_wall = false;
+   if (idx == domlo) {
+     if (
+       bclo == PCPhysBCType::no_slip_wall || bclo == PCPhysBCType::slip_wall ||
+       bclo == PCPhysBCType::symmetry) {
++      impermeable_wall = true;
+       ul = -ur;
+       vl = vr;
+       v2l =
+         v2r; // NoSlip: this is fine because Godunov velocity normal will be 0
+       pl = pr;
+       rhol = rhor;
++      for (int n=0; n<NUM_SPECIES; ++n) { spl[n]=spr[n]; }
+     } else if (bclo == PCPhysBCType::outflow) {
+       ul = ur;
+       vl = vr;
+       v2l = v2r;
+       pl = pr;
+       rhol = rhor;
++      for (int n=0; n<NUM_SPECIES; ++n) { spl[n]=spr[n]; }
+     }
+   } else if (idx == domhi + 1) {
+     if (
+       bchi == PCPhysBCType::no_slip_wall || bchi == PCPhysBCType::slip_wall ||
+       bchi == PCPhysBCType::symmetry) {
++      impermeable_wall = true;
+       ur = -ul;
+       vr = vl;
+       v2r =
+         v2l; // NoSlip: this is fine because Godunov velocity normal will be 0
+       pr = pl;
+       rhor = rhol;
++      for (int n=0; n<NUM_SPECIES; ++n) { spr[n]=spl[n]; }
+     } else if (bchi == PCPhysBCType::outflow) {
+       ur = ul;
+       vr = vl;
+       v2r = v2l;
+       pr = pl;
+       rhor = rhol;
++      for (int n=0; n<NUM_SPECIES; ++n) { spr[n]=spl[n]; }
+     }
+   }
+ 
+-  const int bc_test_val = 1;
++  // Mirror composition as well as p/rho/u: unequal reconstructed species
++  // otherwise give unequal acoustic impedances and a spurious wall mass flux.
++  const int bc_test_val = impermeable_wall ? 0 : 1;
+   amrex::Real dummy_flx[NUM_SPECIES] = {0.0};
+-
+-  const amrex::IntVect iv{AMREX_D_DECL(i, j, k)};
+-  const amrex::IntVect ivm(iv - amrex::IntVect::TheDimensionVector(dir));
+ 
+ #if NUM_ADV > 0
+   const amrex::Real alphaL_vof = ql(iv, QFA);
+@@ -458,11 +492,17 @@
+         ((eosR_use.gamma - 1.0) * rhor);
+ 
+     amrex::Real Ystar[NUM_SPECIES];
++    // Array4 species components have a spatial stride; HLLC takes a
++    // contiguous species vector. Scatter explicitly after the Riemann solve.
++    amrex::Real species_flux[NUM_SPECIES];
+     twophase_hllc_flux<NUM_SPECIES>(
+         rhol, ul, pl, eL, spl, eosL_use,
+         rhor, ur, pr, eR, spr, eosR_use,
+-        flx(i, j, k, URHO), &flx(i, j, k, UFS), flx(i, j, k, f_idx[0]),
++        flx(i, j, k, URHO), species_flux, flx(i, j, k, f_idx[0]),
+         flx(i, j, k, UEDEN), flx(i, j, k, UEINT), ustar, Ystar);
++    for (int n = 0; n < NUM_SPECIES; ++n) {
++      flx(i, j, k, UFS + n) = species_flux[n];
++    }
+ 
+     // Tangential momenta via passive advection
+     pc_cmpflx_passive(
+@@ -498,7 +538,7 @@
+       pc_cmpflx_passive(ustar, flxrho, ql(iv, qc), qr(iv, qc), flx(iv, UFA + n));
+     }
+ #endif
+-    // Species already set by HLLC via &flx(UFS)
++    // Species already scattered from the contiguous HLLC result above
+ #if NUM_LIN > 0
+     for (int n = 0; n < NUM_LIN; n++) {
+       const int qc = QLIN + n;
+@@ -535,7 +575,7 @@
+ #endif
+     for (int n = 0; n < NUM_SPECIES; n++) {
+       const int qc = QFS + n;
+-      pc_cmpflx_passive(ustar, flxrho, ql(iv, qc), qr(iv, qc), flx(iv, UFS + n));
++      pc_cmpflx_passive(ustar, flxrho, spl[n], spr[n], flx(iv, UFS + n));
+     }
+ #if NUM_LIN > 0
+     for (int n = 0; n < NUM_LIN; n++) {
+@@ -545,6 +585,16 @@
+     }
+ #endif
+   }
++  // Correct face fluxes, never clip an evolved cell. Both neighboring cells
++  // use this same conservative flux, including across MPI box boundaries.
++  const amrex::Real mass_flux = flx(iv, URHO);
++  const bool from_left = mass_flux >= 0.0;
++  amrex::Real limited_species_flux[NUM_SPECIES];
++  pc_bounded_species_flux<NUM_SPECIES>(mass_flux,
++    q_cell(from_left ? ivm : iv, QRHO), from_left ? donorL : donorR,
++    from_left ? spl : spr, del[dir], dt, AMREX_SPACEDIM, limited_species_flux);
++  for (int n = 0; n < NUM_SPECIES; ++n)
++    flx(iv, UFS + n) = limited_species_flux[n];
+ }
+ 
+ // Transverse Correction for Predicted dir-states, using other_dir-Flux
+--- a/src/academic/vof/VOF_FCT.H
++++ b/src/academic/vof/VOF_FCT.H
+@@ -12,12 +12,13 @@
+ void vof_youngs_normal(
+   int i, int j, int k,
+   const amrex::Array4<const amrex::Real>& alpha,
+-  amrex::Real& nx, amrex::Real& ny, amrex::Real& nz)
++  amrex::Real& nx, amrex::Real& ny, amrex::Real& nz,
++  int alpha_comp)
+ {
+-  nx = 0.5 * (alpha(i+1,j,k,QFA) - alpha(i-1,j,k,QFA));
+-  ny = 0.5 * (alpha(i,j+1,k,QFA) - alpha(i,j-1,k,QFA));
++  nx = 0.5 * (alpha(i+1,j,k,alpha_comp) - alpha(i-1,j,k,alpha_comp));
++  ny = 0.5 * (alpha(i,j+1,k,alpha_comp) - alpha(i,j-1,k,alpha_comp));
+ #if AMREX_SPACEDIM >= 3
+-  nz = 0.5 * (alpha(i,j,k+1,QFA) - alpha(i,j,k-1,QFA));
++  nz = 0.5 * (alpha(i,j,k+1,alpha_comp) - alpha(i,j,k-1,alpha_comp));
+ #else
+   nz = 0.0;
+ #endif
+@@ -26,7 +27,8 @@
+   else { nx = 0.0; ny = 0.0; nz = 0.0; }
+ }
+ 
+-// MULES compression as cell-centered body force (Phase 3.10b fix)
++// Legacy experimental interface body force; this is NOT MULES.
++// Kept for isolated research tests, never enabled by pele.use_mules.
+ // Returns (fx, fy, fz) to be added to momentum source term.
+ // This eliminates boundary-access issues with face-based Youngs normal.
+ AMREX_GPU_DEVICE AMREX_FORCE_INLINE
+@@ -34,26 +36,27 @@
+   int i, int j, int k,
+   const amrex::Array4<const amrex::Real>& alpha,
+   const amrex::GpuArray<amrex::Real, AMREX_SPACEDIM>& dx,
+-  amrex::Real& fx, amrex::Real& fy, amrex::Real& fz)
++  amrex::Real& fx, amrex::Real& fy, amrex::Real& fz,
++  int alpha_comp)
+ {
+   fx = fy = fz = 0.0;
+ 
+   // Only act near interface
+-  const amrex::Real a_ij = alpha(i,j,k,QFA);
++  const amrex::Real a_ij = alpha(i,j,k,alpha_comp);
+   if (a_ij < VOF_TINY || a_ij > 1.0 - VOF_TINY) return;
+ 
+   // Interface normal from Youngs gradient
+   amrex::Real nx, ny, nz;
+-  vof_youngs_normal(i, j, k, alpha, nx, ny, nz);
++  vof_youngs_normal(i, j, k, alpha, nx, ny, nz, alpha_comp);
+ 
+   // Compression: F = C_alpha * |nabla alpha| * n
+   // Physically squeezes intermediate alpha values toward 0 or 1 along normal
+   constexpr amrex::Real C_alpha = 1.0;
+   const amrex::Real compression_factor = a_ij * (1.0 - a_ij);
+-  const amrex::Real dax = (alpha(i+1,j,k,QFA)-alpha(i-1,j,k,QFA))/(2.0*dx[0]);
+-  const amrex::Real day = (alpha(i,j+1,k,QFA)-alpha(i,j-1,k,QFA))/(2.0*dx[1]);
++  const amrex::Real dax = (alpha(i+1,j,k,alpha_comp)-alpha(i-1,j,k,alpha_comp))/(2.0*dx[0]);
++  const amrex::Real day = (alpha(i,j+1,k,alpha_comp)-alpha(i,j-1,k,alpha_comp))/(2.0*dx[1]);
+ #if AMREX_SPACEDIM >= 3
+-  const amrex::Real daz = (alpha(i,j,k+1,QFA)-alpha(i,j,k-1,QFA))/(2.0*dx[2]);
++  const amrex::Real daz = (alpha(i,j,k+1,alpha_comp)-alpha(i,j,k-1,alpha_comp))/(2.0*dx[2]);
+ #else
+   const amrex::Real daz = 0.0;
+ #endif
+--- a/external/PeleC/Source/Hydro.cpp
++++ b/external/PeleC/Source/Hydro.cpp
+@@ -50,16 +50,24 @@
+     {
+       static bool csf_enabled = false;
+       static bool csf_checked = false;
++      static amrex::Real csf_sigma = 72.0; // dyn/cm (0.072 N/m)
+       if (!csf_checked) {
+         amrex::ParmParse pp("pele");
+         pp.query("use_csf", csf_enabled);
++        pp.query("csf_sigma", csf_sigma);
++        if (!std::isfinite(csf_sigma) || csf_sigma < 0.0) {
++          amrex::Abort("pele.csf_sigma must be finite and nonnegative [dyn/cm]");
++        }
+         csf_checked = true;
+         if (csf_enabled && amrex::ParallelDescriptor::IOProcessor()) {
+-          amrex::Print() << "CSF surface tension enabled (sigma = 0.072 N/m)\n";
++          amrex::Print() << "CSF surface tension enabled: sigma = "
++                         << csf_sigma << " dyn/cm\n";
+         }
+       }
+       if (csf_enabled) {
+-        const amrex::Real sigma = 0.072; // water-air surface tension [N/m]
++        AMREX_ALWAYS_ASSERT_WITH_MESSAGE(S.nGrow() >= 2,
++          "CSF requires the FillPatch hydro state with two ghost cells");
++        const amrex::Real sigma = csf_sigma;
+         const amrex::GpuArray<amrex::Real, AMREX_SPACEDIM> dx_geom =
+           geom.CellSizeArray();
+ 
+@@ -67,7 +75,7 @@
+              mfi.isValid(); ++mfi) {
+           const amrex::Box& bx = mfi.tilebox();
+           auto const& src = sources_for_hydro.array(mfi);
+-          auto const& state = get_new_data(State_Type).const_array(mfi);
++          auto const& state = S.const_array(mfi);
+ 
+           // Build primitive alpha in a temporary FArrayBox (1 component)
+           const amrex::Box& gbx = amrex::grow(bx, 2);
+@@ -116,10 +124,10 @@
+              mfi.isValid(); ++mfi) {
+           const amrex::Box& bx = mfi.tilebox();
+           auto const& src = sources_for_hydro.array(mfi);
+-          auto const& state = get_new_data(State_Type).const_array(mfi);
++          auto const& state = S.const_array(mfi);
+ 
+           amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+-            // gravity = positive magnitude [m/s²], applied downward
++            // gravity = positive magnitude [cm/s^2] in PeleC CGS, applied downward
+             src(i, j, k, UMY) -= state(i, j, k, URHO) * gravity;
+             src(i, j, k, UEDEN) -= state(i, j, k, UMY) * gravity;
+           });
+@@ -127,59 +135,19 @@
+       }
+     }
+ 
+-    // MULES compression body force (Phase 3.10b)
+-    // Cell-centered compression: replaces face-based MULES in VOF_FCT.H
+-    // Applies compression force proportional to |grad alpha| * alpha*(1-alpha)
+-    // along the Youngs interface normal direction.
++    // The former use_mules path applied an uncalibrated momentum force.
++    // MULES requires a bounded conservative alpha flux correction; a body
++    // force is not that algorithm. Reject the unsupported option explicitly.
+ #if NUM_ADV > 0
+     {
+-      static bool mules_enabled = false;
+-      static bool mules_checked = false;
+-      if (!mules_checked) {
+-        amrex::ParmParse pp("pele");
+-        pp.query("use_mules", mules_enabled);
+-        mules_checked = true;
+-        if (mules_enabled && amrex::ParallelDescriptor::IOProcessor()) {
+-          amrex::Print() << "MULES compression body force enabled\n";
+-        }
++      bool use_mules = false;
++      amrex::ParmParse pp("pele");
++      pp.query("use_mules", use_mules);
++      if (use_mules) {
++        amrex::Abort("pele.use_mules is unsupported: the legacy momentum force "
++                     "was not MULES. Use the existing VOF transport with "
++                     "use_mules=0; bounded conservative MULES is not implemented.");
+       }
+-      if (mules_enabled) {
+-        const amrex::GpuArray<amrex::Real, AMREX_SPACEDIM> dx_mules =
+-          geom.CellSizeArray();
+-
+-        for (amrex::MFIter mfi(sources_for_hydro, amrex::TilingIfNotGPU());
+-             mfi.isValid(); ++mfi) {
+-          const amrex::Box& bx = mfi.tilebox();
+-          auto const& src = sources_for_hydro.array(mfi);
+-          auto const& state = get_new_data(State_Type).const_array(mfi);
+-
+-          // Build primitive alpha in a temporary FArrayBox (1 component)
+-          const amrex::Box& gbx = amrex::grow(bx, 1);
+-          amrex::FArrayBox alpha_fab(gbx, 1, amrex::The_Async_Arena());
+-          auto const& alpha_arr = alpha_fab.array();
+-
+-          amrex::ParallelFor(gbx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+-            const amrex::Real r = state(i, j, k, URHO);
+-            alpha_arr(i, j, k) = (r > 0.0) ? state(i, j, k, UFA) / r : 0.0;
+-          });
+-
+-          amrex::ParallelFor(bx, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+-            amrex::Real fx, fy, fz;
+-            vof_mules_body_force(i, j, k, alpha_arr, dx_mules, fx, fy, fz);
+-            src(i, j, k, UMX) += fx;
+-            src(i, j, k, UMY) += fy;
+-            // Energy source: F · u (compression work)
+-            const amrex::Real ux = state(i,j,k,UMX) / amrex::max(state(i,j,k,URHO), amrex::Real(1e-10));
+-            const amrex::Real uy = state(i,j,k,UMY) / amrex::max(state(i,j,k,URHO), amrex::Real(1e-10));
+-            src(i, j, k, UEDEN) += fx * ux + fy * uy;
+-#if AMREX_SPACEDIM == 3
+-            src(i, j, k, UMZ) += fz;
+-            const amrex::Real uz = state(i,j,k,UMZ) / amrex::max(state(i,j,k,URHO), amrex::Real(1e-10));
+-            src(i, j, k, UEDEN) += fz * uz;
+-#endif
+-          });
+-        }
+-      } // if (mules_enabled)
+     }
+ #endif
+ 
+--- a/test/unit/test_vof_fct.cpp
++++ b/test/unit/test_vof_fct.cpp
+@@ -131,7 +131,7 @@
+     Real nxn = -1.0;
+     Real nyn = -1.0;
+     Real nzn = -1.0;
+-    vof_youngs_normal(2, 2, 0, cq, nxn, nyn, nzn);
++    vof_youngs_normal(2, 2, 0, cq, nxn, nyn, nzn, QFA);
+     require_near(nxn, 0.0, 1.0e-14, "constant alpha has zero x-normal");
+     require_near(nyn, 0.0, 1.0e-14, "constant alpha has zero y-normal");
+     require_near(nzn, 0.0, 1.0e-14, "2D constant alpha has zero z-normal");
+@@ -140,7 +140,7 @@
+     Real fy = 1.0;
+     Real fz = 1.0;
+     amrex::GpuArray<Real, AMREX_SPACEDIM> dx{1.0, 1.0};
+-    vof_mules_body_force(2, 2, 0, cq, dx, fx, fy, fz);
++    vof_mules_body_force(2, 2, 0, cq, dx, fx, fy, fz, QFA);
+     require_near(fx, 0.0, 1.0e-14, "constant alpha has zero compression x-force");
+     require_near(fy, 0.0, 1.0e-14, "constant alpha has zero compression y-force");
+     require_near(fz, 0.0, 1.0e-14, "2D constant alpha has zero compression z-force");
+@@ -154,13 +154,13 @@
+     q(2, 2, 0, QFA) = 0.5;
+     q(3, 2, 0, QFA) = 1.0;
+ 
+-    vof_youngs_normal(2, 2, 0, cq, nxn, nyn, nzn);
++    vof_youngs_normal(2, 2, 0, cq, nxn, nyn, nzn, QFA);
+     require_near(nxn, 1.0, 1.0e-14, "linear alpha has unit x-normal");
+     require_near(nyn, 0.0, 1.0e-14, "linear alpha has zero y-normal");
+     require_near(nzn, 0.0, 1.0e-14, "2D linear alpha has zero z-normal");
+ 
+     fx = fy = fz = 0.0;
+-    vof_mules_body_force(2, 2, 0, cq, dx, fx, fy, fz);
++    vof_mules_body_force(2, 2, 0, cq, dx, fx, fy, fz, QFA);
+     require_near(fx, 0.125, 1.0e-14,
+                  "compression force magnitude is |grad alpha| alpha(1-alpha) along normal");
+     require_near(fy, 0.0, 1.0e-14, "compression y-force is zero for x-only interface");
+--- a/tools/write_academic_gas_detonation_single_cuda_report.py
++++ b/tools/write_academic_gas_detonation_single_cuda_report.py
+@@ -10,6 +10,8 @@
+ import re
+ from pathlib import Path
+ from typing import Any
++
++from cfd_evidence_checks import reacting_pair_metrics
+ 
+ 
+ STATUS = "PASS-ACADEMIC-GAS-DETONATION-SINGLE-CUDA"
+@@ -102,6 +104,8 @@
+     if "Hotspot Detonation IC" not in ic_path.read_text(errors="replace"):
+         raise RuntimeError("detonation hotspot IC marker missing")
+ 
++    physics_metrics = reacting_pair_metrics(run_dir / "plt00000", run_dir / "plt00040")
++
+     evidence = [
+         ("run_log", run_log),
+         ("launcher_log", launcher_log),
+@@ -115,6 +119,8 @@
+     ]
+     return {
+         "status": STATUS,
++        "physics_metrics": physics_metrics,
++        "detonation_propagation_verified": False,
+         "ready": True,
+         "case": "academic_bench2gpu_hotspot_lidryer_detonation_single_cuda",
+         "scope": "gas-phase H2/O2 detonation single-CUDA runtime gate",
+@@ -147,6 +153,7 @@
+             "final_time": time40,
+         },
+         "limitations": [
++            "Raw species conversion is required; this short runtime gate does not certify sustained detonation or cellular structure.",
+             "40-step academic gas detonation single-CUDA runtime gate; not a full grid-convergence study.",
+             "Hotspot detonation initialization is used as a robust GPU execution and reacting-flow stability gate.",
+         ],
+--- a/tools/write_academic_gas_detonation_mpi_cuda_report.py
++++ b/tools/write_academic_gas_detonation_mpi_cuda_report.py
+@@ -10,6 +10,8 @@
+ import re
+ from pathlib import Path
+ from typing import Any
++
++from cfd_evidence_checks import reacting_pair_metrics
+ 
+ 
+ STATUS = "PASS-ACADEMIC-GAS-DETONATION-MPI-CUDA"
+@@ -107,6 +109,8 @@
+     if "Hotspot Detonation IC" not in ic_path.read_text(errors="replace"):
+         raise RuntimeError("detonation hotspot IC marker missing")
+ 
++    physics_metrics = reacting_pair_metrics(run_dir / "plt00000", run_dir / "plt00040")
++
+     evidence = [
+         ("run_log", run_log),
+         ("launcher_log", launcher_log),
+@@ -119,6 +123,8 @@
+     ]
+     return {
+         "status": STATUS,
++        "physics_metrics": physics_metrics,
++        "detonation_propagation_verified": False,
+         "ready": True,
+         "case": "academic_bench2gpu_hotspot_lidryer_detonation_mpi_cuda",
+         "scope": "gas-phase H2/O2 detonation MPI+CUDA runtime gate",
+@@ -151,6 +157,7 @@
+             "final_time": time40,
+         },
+         "limitations": [
++            "Raw species conversion is required; this short runtime gate does not certify sustained detonation or cellular structure.",
+             "40-step academic gas detonation MPI+CUDA gate; not a full convergence study.",
+             "Hotspot detonation initialization is used as a robust parallel execution gate.",
+             "pressure was not emitted in this plotfile configuration; density, temperature, species, and velocity fields are verified.",
+--- a/tools/validate_academic_gas_3d_znd.py
++++ b/tools/validate_academic_gas_3d_znd.py
+@@ -12,6 +12,7 @@
+ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+ sys.path.insert(0, THIS_DIR)
+ import amrex_reader
++from cfd_evidence_checks import pressure_front_x, reacting_pair_metrics
+ 
+ SPECIES = ['H2', 'O2', 'H2O', 'H', 'O', 'OH', 'HO2', 'H2O2', 'N2']
+ 
+@@ -64,11 +65,13 @@
+     parser.add_argument('--min-temp-l1-change', type=float, default=1.0)
+     parser.add_argument('--min-h2o-l1-change', type=float, default=1.0e-8)
+     parser.add_argument('--min-front-speed', type=float, default=1.0e4)
+-    parser.add_argument('--max-front-speed', type=float, default=1.0e8)
++    parser.add_argument('--max-front-speed', type=float, default=1.0e6)
+     parser.add_argument('--max-mass-rel', type=float, default=5.0e-11)
+     parser.add_argument('--max-species-closure-rel', type=float, default=1.0e-10)
+-    parser.add_argument('--allow-small-negative-y', type=float, default=1.0e-3)
++    parser.add_argument('--allow-small-negative-y', type=float, default=1.0e-12)
+     args = parser.parse_args()
++    if not (0.0 <= args.allow_small_negative_y <= 1.0e-12):
++        fail('negative-Y tolerance must be between 0 and 1e-12; do not waive physical failures')
+ 
+     p0 = amrex_reader.read_plotfile(args.initial)
+     p1 = amrex_reader.read_plotfile(args.final)
+@@ -91,18 +94,18 @@
+         fail('final temperature is nonpositive')
+ 
+     x = np.asarray(p1['x'], dtype=float)
+-    temp_front0 = argmax_x(temp0, x)
+-    temp_front1 = argmax_x(temp1, x)
++    temp_front0 = pressure_front_x(require_field(f0, 'pressure'), x)
++    temp_front1 = pressure_front_x(require_field(f1, 'pressure'), x)
+     front_shift = temp_front1 - temp_front0
+     dx = float(p1['dx'][0])
+     front_shift_cells = front_shift / dx
+     if front_shift <= args.min_front_shift:
+-        fail(f'thermal front did not move right enough: {front_shift}')
++        fail(f'pressure front did not move right enough: {front_shift}')
+     if front_shift_cells < args.min_front_shift_cells:
+-        fail(f'thermal front shift too small in cells: {front_shift_cells}')
++        fail(f'pressure front shift too small in cells: {front_shift_cells}')
+     front_speed = front_shift / (float(p1['time']) - float(p0['time']))
+     if not (args.min_front_speed <= front_speed <= args.max_front_speed):
+-        fail(f'thermal front speed {front_speed} outside [{args.min_front_speed}, {args.max_front_speed}]')
++        fail(f'pressure front speed {front_speed} outside [{args.min_front_speed}, {args.max_front_speed}]')
+ 
+     temp_l1 = mean_abs_delta(temp0, temp1)
+     if temp_l1 <= args.min_temp_l1_change:
+@@ -133,11 +136,14 @@
+     h2o_mass0 = float(np.sum(species0['H2O']) * cell_volume)
+     h2o_mass1 = float(np.sum(species1['H2O']) * cell_volume)
+ 
++    reacting_pair_metrics(args.initial, args.final)
++
+     print(
+         'academic_gas_3d_znd_validation PASS '
++        'scope=reacting_wave_smoke self_sustained_detonation_verified=0 '
+         f'time0={p0["time"]:.8g} time1={p1["time"]:.8g} '
+         f'grid_nx={p1["grid"]["nx"]} grid_ny={p1["grid"]["ny"]} grid_nz={p1["grid"]["nz"]} '
+-        f'temp_front0={temp_front0:.8g} temp_front1={temp_front1:.8g} '
++        f'pressure_front0={temp_front0:.8g} pressure_front1={temp_front1:.8g} '
+         f'front_shift={front_shift:.8g} front_shift_cells={front_shift_cells:.8g} '
+         f'front_speed={front_speed:.8e} '
+         f'temp_max0={float(np.max(temp0)):.8g} temp_max1={float(np.max(temp1)):.8g} '
+--- a/tools/validate_detonation_wave.py
++++ b/tools/validate_detonation_wave.py
+@@ -8,6 +8,7 @@
+ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+ sys.path.insert(0, THIS_DIR)
+ import amrex_reader
++from cfd_evidence_checks import pressure_front_x, reacting_pair_metrics
+ 
+ 
+ REQUIRED_FIELDS = ['density', 'Temp', 'pressure', 'rho_H2', 'rho_O2', 'rho_H2O', 'rho_N2']
+@@ -40,8 +41,8 @@
+     ap.add_argument('--min-temp-l1-change', type=float, default=0.5)
+     ap.add_argument('--min-pressure-l1-change', type=float, default=10.0)
+     ap.add_argument('--min-front-speed', type=float, default=1.0e5)
+-    ap.add_argument('--max-front-speed', type=float, default=1.0e8)
+-    ap.add_argument('--max-species-closure-rel', type=float, default=1.0e-3)
++    ap.add_argument('--max-front-speed', type=float, default=1.0e6)
++    ap.add_argument('--max-species-closure-rel', type=float, default=1.0e-10)
+     ap.add_argument('--min-h2o-l1-change', type=float, default=1.0e-8)
+     args = ap.parse_args()
+ 
+@@ -71,15 +72,15 @@
+         raise SystemExit('FAIL: final pressure is nonpositive')
+ 
+     x = np.asarray(p1['x'], dtype=float)
+-    temp_front0 = argmax_x(temp0, x)
+-    temp_front1 = argmax_x(temp1, x)
++    temp_front0 = pressure_front_x(require_field(f0, 'pressure'), x)
++    temp_front1 = pressure_front_x(require_field(f1, 'pressure'), x)
+     front_shift = temp_front1 - temp_front0
+     if front_shift <= args.min_front_shift:
+-        raise SystemExit(f'FAIL: thermal front did not move right enough: {front_shift}')
++        raise SystemExit(f'FAIL: pressure front did not move right enough: {front_shift}')
+     front_speed = front_shift / (p1['time'] - p0['time'])
+     if front_speed < args.min_front_speed or front_speed > args.max_front_speed:
+         raise SystemExit(
+-            f'FAIL: thermal front speed {front_speed} outside '
++            f'FAIL: pressure front speed {front_speed} outside '
+             f'[{args.min_front_speed}, {args.max_front_speed}]')
+ 
+     temp_rise = float(np.max(temp1) - np.max(temp0))
+@@ -93,11 +94,14 @@
+     if pressure_l1 <= args.min_pressure_l1_change:
+         raise SystemExit(f'FAIL: pressure field changed too little: {pressure_l1}')
+ 
+-    species_names = ['rho_H2', 'rho_O2', 'rho_H2O', 'rho_N2']
++    species_names = [name for name in f1 if name.startswith('rho_') and name not in ('rho_E', 'rho_e')]
++    if not all(name in species_names for name in REQUIRED_FIELDS if name.startswith('rho_')):
++        raise SystemExit('FAIL: incomplete species data')
+     final_species = [require_field(f1, name) for name in species_names]
+     min_species = min(float(np.min(arr)) for arr in final_species)
+-    if min_species < -1.0e-14:
+-        raise SystemExit(f'FAIL: final species density is negative: {min_species}')
++    min_y = min(float(np.min(arr/rho1)) for arr in final_species)
++    if min_y < -1.0e-12:
++        raise SystemExit(f'FAIL: final species mass fraction is negative: {min_y}')
+ 
+     species_sum = np.sum(final_species, axis=0)
+     species_closure_rel = float(
+@@ -122,9 +126,12 @@
+     if mass_rel > 1.0e-12:
+         raise SystemExit(f'FAIL: total mass changed unexpectedly: {mass_rel}')
+ 
++    reacting_pair_metrics(args.initial, args.final)
++
+     print('detonation_wave_validation PASS ' +
++          'scope=reacting_wave_smoke self_sustained_detonation_verified=0 ' +
+           f'time0={p0["time"]:.8g} time1={p1["time"]:.8g} ' +
+-          f'temp_front0={temp_front0:.8g} temp_front1={temp_front1:.8g} ' +
++          f'pressure_front0={temp_front0:.8g} pressure_front1={temp_front1:.8g} ' +
+           f'front_shift={front_shift:.8g} front_speed={front_speed:.8e} ' +
+           f'temp_max0={float(np.max(temp0)):.8g} ' +
+           f'temp_max1={float(np.max(temp1)):.8g} temp_l1={temp_l1:.8e} ' +
+--- a/tools/codex_smoke_academic_detonation_wave.sh
++++ b/tools/codex_smoke_academic_detonation_wave.sh
+@@ -9,8 +9,12 @@
+ run_log="$log_dir/run.log"
+ validation_log="$log_dir/validation.log"
+ 
+-mkdir -p "$run_dir"
+-rm -rf "$run_dir"/plt* "$run_log" "$validation_log"
++# An explicitly reused path is an error: never destroy previous evidence.
++if ! mkdir "$log_dir"; then
++  echo "[codex-smoke] log directory already exists or cannot be created: $log_dir" >&2
++  exit 2
++fi
++mkdir "$run_dir"
+ 
+ printf '[codex-smoke] building PeleC detonation_2D wave validation\n'
+ make -C "$case_dir" -j "${JOBS:-4}" EBASE=codex_deton2d_cpu
+--- a/tools/write_academic_gas_liquid_detonation_certification_report.py
++++ b/tools/write_academic_gas_liquid_detonation_certification_report.py
+@@ -16,6 +16,8 @@
+ from pathlib import Path
+ from typing import Any
+ 
++from cfd_evidence_checks import archived_chemistry
++
+ 
+ STATUS = "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CERTIFICATION"
+ DEFAULT_ROOT = Path("docs/codex_audit/evidence/academic_gas_liquid_detonation_certification_20260731")
+@@ -90,6 +92,15 @@
+ 
+     response = reports["spray_detonation_response"]
+     response_summary = summaries["spray_detonation_response"]
++    chemistry_checks = []
++    for case in response.get("cases", []):
++        chemistry_checks.append(archived_chemistry(case["plotfile_final"]))
++    reactive_mechanism = bool(chemistry_checks) and all(
++        item["gas_reactions"] > 0 for item in chemistry_checks)
++    # The existing reports contain neither time-resolved cellular metrics nor
++    # an external reference comparison. Budget PASS cannot close those gaps.
++    cellular_reference_verified = False
++    external_reference_verified = False
+     source = reports["spray_detonation_source_budget"]
+     source_summary = summaries["spray_detonation_source_budget"]
+     reacting_cv = reports["reacting_closed_control_volume_budget"]
+@@ -129,14 +140,20 @@
+         and finite(coupled_summary.get("reacting_closed_control_volume_total_xmom_relative_error"), "coupled total xmom") <= 1.0e-3
+     )
+     certification_ready = all([
++        reactive_mechanism,
++        cellular_reference_verified,
++        external_reference_verified,
+         response_ready,
+         source_budget_ready,
+         reacting_cv_ready,
+         coupled_budget_ready,
+     ])
+-    require(certification_ready, "ACD-07 gas-liquid detonation certification gates did not all pass")
++    # Write an honest NOT_READY report; verification and CLI exit remain failing.
+ 
+     gates = [
++        gate("nonzero_gas_chemistry", reactive_mechanism, chemistry_checks, "archived run mechanism must contain reactions", []),
++        gate("cellular_structure_reference", cellular_reference_verified, None, "time-resolved cellular validation required", []),
++        gate("external_reference", external_reference_verified, None, "independent reference comparison required", []),
+         gate("reacting_spray_detonation_front_response", response_ready, response_summary, "front shift, heat release, particle breakup/growth, evaporation, species closure", [str(REPORTS["spray_detonation_response"])]),
+         gate("reacting_spray_source_budget", source_budget_ready, source_summary, "spray detonation source-history budget PASS with finite front motion and heat release", [str(REPORTS["spray_detonation_source_budget"])]),
+         gate("reacting_closed_control_volume_budget", reacting_cv_ready, reacting_cv_summary, "reacting periodic gas-particle closed control-volume budget PASS", [str(REPORTS["reacting_closed_control_volume_budget"])]),
+@@ -144,11 +161,12 @@
+     ]
+ 
+     summary = {
+-        "acd_07_full_gas_liquid_detonation_ready": True,
+-        "clears_acd_07_spray_detonation_gap": True,
+-        "clears_acd_07_full_cellular_gas_liquid_detonation_gap": True,
+-        "clears_acd_07_external_reference_gap": True,
+-        "certification_basis": "self-contained in-repository end-to-end droplet-cloud reacting spray detonation certification",
++        "acd_07_full_gas_liquid_detonation_ready": certification_ready,
++        "clears_acd_07_spray_detonation_gap": certification_ready,
++        "clears_acd_07_full_cellular_gas_liquid_detonation_gap": certification_ready,
++        "clears_acd_07_external_reference_gap": certification_ready,
++        "certification_basis": "raw chemistry and physical evidence required; existing budget rollups are insufficient",
++        "chemistry_checks": chemistry_checks,
+         "spray_response_pressure_front_shift_cells": response_summary.get("pressure_front_shift_cells"),
+         "spray_response_heat_release_absmax": response_summary.get("heat_release_absmax"),
+         "spray_response_particle_growth_factor": response_summary.get("particle_growth_factor"),
+@@ -158,16 +176,15 @@
+         "reacting_cv_total_xmom_relative_error": reacting_cv_summary.get("relative_errors", {}).get("total_xmom"),
+         "coupled_budget_ready": coupled_budget_ready,
+         "interpretation": (
+-            "ACD-07 is certified by a self-contained 2D heptane-air droplet-cloud reacting spray "
+-            "detonation gate plus source-history and closed gas-particle control-volume budget evidence. "
+-            "No external experiment is attached; the accepted certification basis is the verified in-repository "
+-            "end-to-end case requested for this program."
++            "NOT_READY: existing shock/particle transport budgets do not certify gas-liquid "
++            "detonation. The archived heptane_3sp run is nonreacting; cellular and independent "
++            "reference validation are absent. Historical metrics are retained as diagnostics."
+         ),
+     }
+ 
+     return {
+-        "schema_version": 1,
+-        "status": STATUS,
++        "schema_version": 2,
++        "status": STATUS if certification_ready else "NOT_READY-ACADEMIC-GAS-LIQUID-DETONATION",
+         "created_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+         "scope": "ACD-07 gas-liquid/droplet-cloud reacting spray detonation certification rollup.",
+         "summary": summary,
+@@ -196,6 +213,11 @@
+ 
+ 
+ def verify_report(report: dict[str, Any]) -> None:
++    current = build_report(argparse.Namespace())
++    require(current.get("status") == STATUS,
++            "raw physical evidence does not certify gas-liquid detonation: "
++            + json.dumps(current["summary"]["chemistry_checks"]))
++    require(report.get("schema_version") == 2, "obsolete certification schema; re-evaluate raw evidence")
+     require(report.get("status") == STATUS, "unexpected certification status")
+     summary = report.get("summary", {})
+     require(summary.get("acd_07_full_gas_liquid_detonation_ready") is True, "ACD-07 certification flag missing")
+@@ -236,6 +258,9 @@
+     args.output.parent.mkdir(parents=True, exist_ok=True)
+     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+     write_markdown(report, args.markdown)
++    if report["status"] != STATUS:
++        print(f"academic_gas_liquid_detonation_certification NOT_READY json={args.output}")
++        return 2
+     verify_report(report)
+     print(f"academic_gas_liquid_detonation_certification PASS json={args.output} status={report['status']}")
+     return 0
+--- a/examples/academic/shock_droplet/prob.cpp
++++ b/examples/academic/shock_droplet/prob.cpp
+@@ -9,6 +9,16 @@
+   const amrex_real* /*problo*/,
+   const amrex_real* /*probhi*/)
+ {
++#if NUM_GAS_REACTIONS == 0
++  bool reacting = true;
++  amrex::ParmParse pele_pp("pelec");
++  pele_pp.query("do_react", reacting);
++  if (reacting) {
++    amrex::Abort("shock_droplet: zero-reaction chemistry cannot run with pelec.do_react=1. "
++                 "Use heptane_lu_88sk for reacting studies or explicitly set do_react=0 "
++                 "for nonreacting droplet transport.");
++  }
++#endif
+   amrex::ParmParse pp("prob");
+ 
+   pp.query("p_left", PeleC::h_prob_parm_device->p_left);
+--- /dev/null
++++ b/tools/cfd_evidence_checks.py
+@@ -0,0 +1,122 @@
++"""Physical checks shared by CFD evidence writers. No solver execution."""
++from __future__ import annotations
++
++import hashlib
++import re
++from pathlib import Path
++
++import numpy as np
++
++
++def pressure_front_x(pressure, x):
++    """Locate a right-moving compressive pressure front, never a T maximum.
++
++    This diagnostic alone does not establish a self-sustained detonation.
++    Multi-front/cellular runs require time-resolved tracking and references.
++    """
++    p = np.asarray(pressure, dtype=float)
++    x = np.asarray(x, dtype=float)
++    if p.shape[0] != x.size or x.size < 4 or not np.all(np.isfinite(p)):
++        raise ValueError('invalid pressure profile or grid for shock tracking')
++    if not np.all(np.diff(x) > 0):
++        raise ValueError('shock tracking requires increasing x coordinates')
++    profile = p.mean(axis=tuple(range(1, p.ndim))) if p.ndim > 1 else p
++    contrast = float(np.max(profile) - np.min(profile))
++    scale = max(float(np.max(np.abs(profile))), 1.0e-300)
++    if contrast <= 1.0e-3 * scale:
++        raise ValueError('no resolved pressure front: pressure is essentially uniform')
++    compression = -np.diff(profile) / np.diff(x)
++    index = int(np.argmax(compression))
++    if compression[index] <= 0:
++        raise ValueError('no right-moving compressive pressure front')
++    # The discontinuity lies between adjacent cell centers. This diagnostic
++    # deliberately keeps its half-cell resolution instead of claiming a
++    # subcell location from a temperature plateau.
++    return float(0.5 * (x[index] + x[index + 1]))
++
++
++def archived_chemistry(plotfile):
++    """Read run chemistry from job_info, not today's case Makefile.
++
++    Current mechanism source is an additional cross-check. A positive count
++    alone is not binary provenance, kinetics validation, or reaction proof.
++    A zero count positively disqualifies reacting-flow certification.
++    """
++    plotfile = Path(plotfile)
++    job = plotfile / 'job_info'
++    text = job.read_text(encoding='utf-8', errors='replace')
++    match = re.search(r'^\s*CHEMISTRY:\s*(\S+)\s*$', text, re.M)
++    if not match:
++        raise ValueError(f'job_info does not identify chemistry: {job}')
++    name = match.group(1)
++    if not re.fullmatch(r'[A-Za-z0-9_.-]+', name):
++        raise ValueError(f'invalid chemistry name in {job}')
++    root = Path(__file__).resolve().parents[1]
++    source = root / 'external/PeleC/Submodules/PelePhysics/Mechanisms' / name / 'mechanism.H'
++    raw = source.read_bytes()
++    count = re.search(rb'^\s*#define\s+NUM_GAS_REACTIONS\s+(\d+)', raw, re.M)
++    if not count:
++        raise ValueError(f'mechanism reaction count unavailable: {source}')
++    return {'name': name, 'gas_reactions': int(count.group(1)),
++            'job_info': str(job), 'mechanism_source': str(source),
++            'source_sha256': hashlib.sha256(raw).hexdigest(),
++            'binary_provenance_verified': False}
++
++
++def reacting_pair_metrics(initial, final):
++    """Require complete raw fields and chemical conversion in a closed window.
++
++    Intended for the short, initially hot H2/O2 benchmark runtime checks.
++    Advective redistribution of H2O or an initialized hot spot is insufficient.
++    For open windows a measured boundary/source budget is required instead.
++    """
++    import amrex_reader
++    p0, p1 = (amrex_reader.read_plotfile(str(path)) for path in (initial, final))
++    if not p1['time'] > p0['time']:
++        raise ValueError('plotfile time did not advance')
++    f0, f1 = p0['fields'], p1['fields']
++    for fields in (f0, f1):
++        for name, values in fields.items():
++            if not np.all(np.isfinite(values)):
++                raise ValueError(f'non-finite raw field: {name}')
++        for name in ('density', 'Temp'):
++            if name not in fields or np.min(fields[name]) <= 0:
++                raise ValueError(f'missing or nonpositive raw field: {name}')
++        if 'volFrac' in fields and np.any(np.asarray(fields['volFrac']) < 1.0):
++            raise ValueError('this closed regular-grid benchmark check does not support EB cells')
++    rho0, rho1 = np.asarray(f0['density']), np.asarray(f1['density'])
++    if rho0.shape != rho1.shape or not np.allclose(p0['dx'], p1['dx'], rtol=0, atol=0):
++        raise ValueError('initial/final benchmark grids differ')
++    temp0 = np.asarray(f0['Temp'])
++    if float(np.max(temp0)) <= float(np.min(temp0)) + 50.0:
++        raise ValueError('hotspot absent in raw initial temperature field (cold-flow false pass)')
++    species = ('H2', 'O2', 'H2O', 'H', 'O', 'OH', 'HO2', 'H2O2', 'N2')
++    sums = []
++    for fields, rho in ((f0, rho0), (f1, rho1)):
++        values = []
++        for name in species:
++            if 'rho_' + name in fields:
++                y = np.asarray(fields['rho_' + name]) / rho
++            elif f'Y({name})' in fields:
++                y = np.asarray(fields[f'Y({name})'])
++            else:
++                raise ValueError(f'raw species field missing: {name}')
++            if np.min(y) < -1.0e-12 or np.max(y) > 1 + 1.0e-12:
++                raise ValueError(f'unphysical mass fraction {name}: [{np.min(y)}, {np.max(y)}]')
++            values.append(y)
++        closure = float(np.max(np.abs(sum(values) - 1)))
++        if closure > 1.0e-10:
++            raise ValueError(f'species closure error: {closure}')
++        sums.append({name: float(np.sum(rho * y)) for name, y in zip(species, values)})
++    mass0, mass1 = float(np.sum(rho0)), float(np.sum(rho1))
++    mass_rel = abs(mass1 - mass0) / mass0
++    if mass_rel > 1.0e-10:
++        raise ValueError('nonclosed mass budget: provide measured boundary/source fluxes')
++    fuel_loss = (sums[0]['H2'] - sums[1]['H2']) / max(sums[0]['H2'], 1.0e-300)
++    water_gain = (sums[1]['H2O'] - sums[0]['H2O']) / mass0
++    if fuel_loss <= 1.0e-8 or water_gain <= 1.0e-8:
++        raise ValueError(f'no resolved chemical conversion: H2 loss={fuel_loss}, H2O gain={water_gain}')
++    return {'initial_temp_max': float(np.max(temp0)), 'fuel_consumed_fraction': fuel_loss,
++            'water_mass_gain_fraction': water_gain, 'mass_relative_change': mass_rel,
++            'detonation_propagation_verified': False,
++            'scope': 'hot initialized H2/O2 chemical-conversion runtime check only'}
+--- a/examples/academic/bench_1gpu/prob_parm.H
++++ b/examples/academic/bench_1gpu/prob_parm.H
+@@ -6,14 +6,14 @@
+ struct ProbParmDevice
+ {
+   // === Background (unburned stoichiometric H2/O2) ===
+-  amrex::Real p_0 = 2.0e5;   // Pa
++  amrex::Real p_0 = 2.0e5;   // dyn/cm^2 (PeleC CGS)
+   amrex::Real T_0 = 300.0;   // K
+   amrex::Real rho_0;          // computed: PYT2R(p_0, Y_0, T_0)
+   amrex::Real rhoe_0;         // computed: rho_0 * e_0 via RYP2E
+ 
+   // === Hotspot (CJ products) ===
+   amrex::Real T_hot = 3000.0; // K
+-  amrex::Real p_hot = 2.0e6;  // Pa
++  amrex::Real p_hot = 2.0e6;  // dyn/cm^2 (PeleC CGS)
+   amrex::Real r_hot = 0.3;    // cm
+   amrex::Real u_hot = 2.84e5; // cm/s (CJ speed)
+   amrex::Real rho_hot;         // computed: PYT2R(p_hot, Y_hot, T_hot)
+@@ -21,7 +21,7 @@
+ 
+   // === Hotspot positions ===
+   int n_hot = 4;
+-  amrex::Real y_hot[4] = {1.5, 4.0, 6.5, 8.5}; // cm from prob_lo (staggered)
++  amrex::Real y_hot[4] = {}; // absolute cm; initialized from domain or prob.y_hot
+ 
+   // === Mass fractions (LiDryer order: H2 O2 H2O H O OH HO2 H2O2 N2) ===
+   amrex::Real massfrac_0[NUM_SPECIES];   // Background
+--- a/examples/academic/bench_1gpu/prob.cpp
++++ b/examples/academic/bench_1gpu/prob.cpp
+@@ -9,12 +9,37 @@
+   const amrex::Real* problo, const amrex::Real* probhi)
+ {
+   amrex::ParmParse pp("prob");
++  auto& prm = *PeleC::h_prob_parm_device;
++  const amrex::Real height = probhi[1] - problo[1];
++  const amrex::Real fractions[4] = {0.15, 0.40, 0.65, 0.85};
++  amrex::Vector<amrex::Real> positions(4);
++  for (int n = 0; n < 4; ++n) positions[n] = problo[1] + fractions[n] * height;
++  pp.queryarr("y_hot", positions);
++  if (positions.size() != 4 || !std::isfinite(height) || height <= 0.0) {
++    amrex::Abort("prob.y_hot must contain four absolute y coordinates in a positive-height domain");
++  }
++  for (int n = 0; n < 4; ++n) {
++    if (!std::isfinite(positions[n]) || positions[n] < problo[1] || positions[n] > probhi[1]) {
++      amrex::Abort("prob.y_hot lies outside the domain; refusing an empty hotspot initialization");
++    }
++    prm.y_hot[n] = positions[n];
++  }
++  prm.r_hot = 0.03 * height; // cm; follows the original 0.3 cm in a 10 cm domain
++
+   pp.query("p_0", PeleC::h_prob_parm_device->p_0);
+   pp.query("T_0", PeleC::h_prob_parm_device->T_0);
+   pp.query("T_hot", PeleC::h_prob_parm_device->T_hot);
+   pp.query("p_hot", PeleC::h_prob_parm_device->p_hot);
+   pp.query("r_hot", PeleC::h_prob_parm_device->r_hot);
+   pp.query("u_hot", PeleC::h_prob_parm_device->u_hot);
++  if (!std::isfinite(prm.r_hot) || prm.r_hot <= 0.0 ||
++      !std::isfinite(prm.p_0) || prm.p_0 <= 0.0 ||
++      !std::isfinite(prm.p_hot) || prm.p_hot <= 0.0 ||
++      !std::isfinite(prm.T_0) || prm.T_0 <= 0.0 ||
++      !std::isfinite(prm.T_hot) || prm.T_hot <= prm.T_0 ||
++      !std::isfinite(prm.u_hot)) {
++    amrex::Abort("invalid hotspot state: require finite positive p, T, radius and T_hot > T_0 (CGS units)");
++  }
+ 
+   auto eos = pele::physics::PhysicsType::eos();
+ 
+@@ -76,7 +101,14 @@
+ void PeleC::problem_post_timestep() {}
+ void PeleC::problem_post_init()
+ {
+-  // GPU NaN check disabled — __device__ lambda + Atomic::Add incompatible
+-  // with PeleC member function access. Initial state verified in amrex_probinit.
++  // MultiFab reduction performs the GPU and MPI reduction. Checking the
++  // initialized cells catches a radius smaller than the first cell center.
++  const auto& state = get_new_data(State_Type);
++  const amrex::Real tmax = state.max(UTEMP);
++  const amrex::Real background = h_prob_parm_device->T_0;
++  if (!std::isfinite(tmax) || tmax <= background + 1.0e-6) {
++    amrex::Abort("hotspot initialized zero resolved hot cells; check radius and grid spacing");
++  }
++  amrex::Print() << "Resolved hotspot initial temperature max = " << tmax << " K\n";
+ }
+ void PeleC::problem_post_restart() {}
+--- a/examples/academic/bench_1gpu/prob.H
++++ b/examples/academic/bench_1gpu/prob.H
+@@ -30,11 +30,11 @@
+   const amrex::Real x = prob_lo[0] + (i + 0.5) * dx[0];
+   const amrex::Real y = prob_lo[1] + (j + 0.5) * dx[1];
+ 
+-  // Check distance to each hotspot (hotspots at x=0, various y)
++  // Check distance to each hotspot on the left domain boundary.
+   bool in_hotspot = false;
+   for (int n = 0; n < prob_parm.n_hot; n++) {
+     amrex::Real dy = y - prob_parm.y_hot[n];
+-    amrex::Real dist = std::sqrt((x-0.0)*(x-0.0) + dy*dy);
++    amrex::Real dist = std::sqrt((x-prob_lo[0])*(x-prob_lo[0]) + dy*dy);
+     if (dist <= prob_parm.r_hot) {
+       in_hotspot = true;
+       break;
+--- a/examples/academic/bench_2gpu/prob_parm.H
++++ b/examples/academic/bench_2gpu/prob_parm.H
+@@ -6,14 +6,14 @@
+ struct ProbParmDevice
+ {
+   // === Background (unburned stoichiometric H2/O2) ===
+-  amrex::Real p_0 = 2.0e5;   // Pa
++  amrex::Real p_0 = 2.0e5;   // dyn/cm^2 (PeleC CGS)
+   amrex::Real T_0 = 300.0;   // K
+   amrex::Real rho_0;          // computed: PYT2R(p_0, Y_0, T_0)
+   amrex::Real rhoe_0;         // computed: rho_0 * e_0 via RYP2E
+ 
+   // === Hotspot (CJ products) ===
+   amrex::Real T_hot = 3000.0; // K
+-  amrex::Real p_hot = 2.0e6;  // Pa
++  amrex::Real p_hot = 2.0e6;  // dyn/cm^2 (PeleC CGS)
+   amrex::Real r_hot = 0.3;    // cm
+   amrex::Real u_hot = 2.84e5; // cm/s (CJ speed)
+   amrex::Real rho_hot;         // computed: PYT2R(p_hot, Y_hot, T_hot)
+@@ -21,7 +21,7 @@
+ 
+   // === Hotspot positions ===
+   int n_hot = 4;
+-  amrex::Real y_hot[4] = {1.5, 3.5, 5.5, 8.0}; // cm from prob_lo
++  amrex::Real y_hot[4] = {}; // absolute cm; initialized from domain or prob.y_hot
+ 
+   // === Mass fractions (LiDryer order: H2 O2 H2O H O OH HO2 H2O2 N2) ===
+   amrex::Real massfrac_0[NUM_SPECIES];   // Background
+--- a/examples/academic/bench_2gpu/prob.cpp
++++ b/examples/academic/bench_2gpu/prob.cpp
+@@ -9,12 +9,37 @@
+   const amrex::Real* problo, const amrex::Real* probhi)
+ {
+   amrex::ParmParse pp("prob");
++  auto& prm = *PeleC::h_prob_parm_device;
++  const amrex::Real height = probhi[1] - problo[1];
++  const amrex::Real fractions[4] = {0.15, 0.35, 0.55, 0.80};
++  amrex::Vector<amrex::Real> positions(4);
++  for (int n = 0; n < 4; ++n) positions[n] = problo[1] + fractions[n] * height;
++  pp.queryarr("y_hot", positions);
++  if (positions.size() != 4 || !std::isfinite(height) || height <= 0.0) {
++    amrex::Abort("prob.y_hot must contain four absolute y coordinates in a positive-height domain");
++  }
++  for (int n = 0; n < 4; ++n) {
++    if (!std::isfinite(positions[n]) || positions[n] < problo[1] || positions[n] > probhi[1]) {
++      amrex::Abort("prob.y_hot lies outside the domain; refusing an empty hotspot initialization");
++    }
++    prm.y_hot[n] = positions[n];
++  }
++  prm.r_hot = 0.03 * height; // cm; follows the original 0.3 cm in a 10 cm domain
++
+   pp.query("p_0", PeleC::h_prob_parm_device->p_0);
+   pp.query("T_0", PeleC::h_prob_parm_device->T_0);
+   pp.query("T_hot", PeleC::h_prob_parm_device->T_hot);
+   pp.query("p_hot", PeleC::h_prob_parm_device->p_hot);
+   pp.query("r_hot", PeleC::h_prob_parm_device->r_hot);
+   pp.query("u_hot", PeleC::h_prob_parm_device->u_hot);
++  if (!std::isfinite(prm.r_hot) || prm.r_hot <= 0.0 ||
++      !std::isfinite(prm.p_0) || prm.p_0 <= 0.0 ||
++      !std::isfinite(prm.p_hot) || prm.p_hot <= 0.0 ||
++      !std::isfinite(prm.T_0) || prm.T_0 <= 0.0 ||
++      !std::isfinite(prm.T_hot) || prm.T_hot <= prm.T_0 ||
++      !std::isfinite(prm.u_hot)) {
++    amrex::Abort("invalid hotspot state: require finite positive p, T, radius and T_hot > T_0 (CGS units)");
++  }
+ 
+   auto eos = pele::physics::PhysicsType::eos();
+ 
+@@ -76,7 +101,14 @@
+ void PeleC::problem_post_timestep() {}
+ void PeleC::problem_post_init()
+ {
+-  // GPU NaN check disabled — __device__ lambda + Atomic::Add incompatible
+-  // with PeleC member function access. Initial state verified in amrex_probinit.
++  // MultiFab reduction performs the GPU and MPI reduction. Checking the
++  // initialized cells catches a radius smaller than the first cell center.
++  const auto& state = get_new_data(State_Type);
++  const amrex::Real tmax = state.max(UTEMP);
++  const amrex::Real background = h_prob_parm_device->T_0;
++  if (!std::isfinite(tmax) || tmax <= background + 1.0e-6) {
++    amrex::Abort("hotspot initialized zero resolved hot cells; check radius and grid spacing");
++  }
++  amrex::Print() << "Resolved hotspot initial temperature max = " << tmax << " K\n";
+ }
+ void PeleC::problem_post_restart() {}
+--- a/examples/academic/bench_2gpu/prob.H
++++ b/examples/academic/bench_2gpu/prob.H
+@@ -30,11 +30,11 @@
+   const amrex::Real x = prob_lo[0] + (i + 0.5) * dx[0];
+   const amrex::Real y = prob_lo[1] + (j + 0.5) * dx[1];
+ 
+-  // Check distance to each hotspot (hotspots at x=0, various y)
++  // Check distance to each hotspot on the left domain boundary.
+   bool in_hotspot = false;
+   for (int n = 0; n < prob_parm.n_hot; n++) {
+     amrex::Real dy = y - prob_parm.y_hot[n];
+-    amrex::Real dist = std::sqrt((x-0.0)*(x-0.0) + dy*dy);
++    amrex::Real dist = std::sqrt((x-prob_lo[0])*(x-prob_lo[0]) + dy*dy);
+     if (dist <= prob_parm.r_hot) {
+       in_hotspot = true;
+       break;
+--- a/external/PeleLMeX/Source/PeleLMeX_ProblemSpecificFunctions.H
++++ b/external/PeleLMeX/Source/PeleLMeX_ProblemSpecificFunctions.H
+@@ -7,6 +7,20 @@
+ #include <AMReX_REAL.H>
+ #include <PMFData.H>
+ #include <memory>
++#include <AMReX_MultiFab.H>
++#include <AMReX_iMultiFab.H>
++
++namespace pelelmex {
++// All levels of the composite source mesh, with coarse cells covered by a
++// finer level marked zero. Factories retain EB fluid-volume information.
++struct SourceLevelView {
++  const amrex::MultiFab* cells;
++  const amrex::iMultiFab* owner_mask;
++  amrex::GeometryData geometry;
++};
++using SourceGeometry = amrex::Vector<SourceLevelView>;
++}
++
+ 
+ struct ProbParmDefault
+ {
+@@ -347,6 +361,35 @@
+     time, dt, state_old, state_new, ext_src, geomdata, prob_parm_d);
+ }
+ 
++// Prefer the geometry-aware source hook when a problem supplies one.
++template <typename PSF, typename PP>
++auto call_modify_ext_sources_geometry_impl(
++  int, amrex::Real time, amrex::Real dt,
++  const amrex::MultiFab& state_old, const amrex::MultiFab& state_new,
++  const amrex::MultiFab* /*aux_old*/, const amrex::MultiFab* /*aux_new*/,
++  std::unique_ptr<amrex::MultiFab>& ext_src,
++  const amrex::GeometryData& geomdata, const PP* prob_parm_d,
++  const SourceGeometry& source_geometry)
++  -> decltype(PSF::modify_ext_sources(time, dt, state_old, state_new,
++        ext_src, geomdata, prob_parm_d, source_geometry), void())
++{
++  PSF::modify_ext_sources(time, dt, state_old, state_new,
++    ext_src, geomdata, prob_parm_d, source_geometry);
++}
++
++template <typename PSF, typename PP>
++void call_modify_ext_sources_geometry_impl(
++  long, amrex::Real time, amrex::Real dt,
++  const amrex::MultiFab& state_old, const amrex::MultiFab& state_new,
++  const amrex::MultiFab* aux_old, const amrex::MultiFab* aux_new,
++  std::unique_ptr<amrex::MultiFab>& ext_src,
++  const amrex::GeometryData& geomdata, const PP* prob_parm_d,
++  const SourceGeometry& /*source_geometry*/)
++{
++  call_modify_ext_sources_impl<PSF, PP>(0, time, dt, state_old, state_new,
++    aux_old, aux_new, ext_src, geomdata, prob_parm_d);
++}
++
+ } // namespace pelelmex::detail
+ 
+ namespace pelelmex {
+@@ -361,11 +404,12 @@
+   const amrex::MultiFab* aux_new,
+   std::unique_ptr<amrex::MultiFab>& ext_src,
+   const amrex::GeometryData& geomdata,
+-  const PP* prob_parm_d)
+-{
+-  detail::call_modify_ext_sources_impl<PSF, PP>(
++  const PP* prob_parm_d,
++  const SourceGeometry& source_geometry)
++{
++  detail::call_modify_ext_sources_geometry_impl<PSF, PP>(
+     0, time, dt, state_old, state_new, aux_old, aux_new, ext_src, geomdata,
+-    prob_parm_d);
++    prob_parm_d, source_geometry);
+ }
+ 
+ } // namespace pelelmex
+--- a/external/PeleLMeX/Source/PeleLMeX_Forces.cpp
++++ b/external/PeleLMeX/Source/PeleLMeX_Forces.cpp
+@@ -437,6 +437,17 @@
+ 
+   // User defined external sources
+   if (m_user_defined_ext_sources) {
++    amrex::Vector<std::unique_ptr<amrex::iMultiFab>> source_owner_masks(finest_level + 1);
++    pelelmex::SourceGeometry source_geometry;
++    for (int lev = 0; lev <= finest_level; ++lev) {
++      if (lev < finest_level) {
++        source_owner_masks[lev] = std::make_unique<amrex::iMultiFab>(amrex::makeFineMask(
++          m_extSource[lev]->boxArray(), m_extSource[lev]->DistributionMap(),
++          grids[lev + 1], refRatio(lev), 1, 0, amrex::MFInfo()));
++      }
++      source_geometry.push_back({m_extSource[lev].get(), source_owner_masks[lev].get(),
++                                 geom[lev].data()});
++    }
+     for (int lev = 0; lev <= finest_level; ++lev) {
+       auto* ldata_p_old = getLevelDataPtr(lev, a_timestamp_old);
+       auto* ldata_p_new = getLevelDataPtr(lev, a_timestamp_new);
+@@ -456,11 +467,9 @@
+       pelelmex::call_modify_ext_sources<ProblemSpecificFunctions, ProbParm>(
+         getTime(lev, a_timestamp_old), m_dt, ldata_p_old->state,
+         ldata_p_new->state, aux_old, aux_new, ext_src, geom[lev].data(),
+-        prob_parm_d);
++        prob_parm_d, source_geometry);
+       if (lev < finest_level) {
+-        amrex::iMultiFab user_source_owner_mask = amrex::makeFineMask(
+-          ext_src->boxArray(), ext_src->DistributionMap(), grids[lev + 1],
+-          refRatio(lev), 1, 0, amrex::MFInfo());
++        const auto& user_source_owner_mask = *source_owner_masks[lev];
+         auto const& ext_arrs = ext_src->arrays();
+         auto const& before_arrs = ext_src_before->const_arrays();
+         auto const& mask_arrs = user_source_owner_mask.const_arrays();
+--- a/examples/engineering/h2_leak_3d/pelelmex_prob.H
++++ b/examples/engineering/h2_leak_3d/pelelmex_prob.H
+@@ -9,6 +9,11 @@
+ #include <PelePhysics.H>
+ #include <leak_source.H>
+ #include <cmath>
++#include <AMReX_Reduce.H>
++#ifdef AMREX_USE_EB
++#include <AMReX_EBFabFactory.H>
++#endif
++
+ 
+ struct MyProbParm : public ProbParmDefault {
+   amrex::Real P_mean=101325.0, T_mean=300.0;
+@@ -141,10 +146,53 @@
+     }
+   }
+ 
++  // The normalization integral uses actual fluid cells on the composite
++  // AMR mesh, not a sphere discretized over a fictitious full level domain.
++  static amrex::Real source_fluid_volume(
++    const MyPele::Engineering::LeakSource::SphericalLeakSource& region,
++    const pelelmex::SourceGeometry& source_geometry)
++  {
++    namespace Leak = MyPele::Engineering::LeakSource;
++    amrex::ReduceOps<amrex::ReduceOpSum> reduce_op;
++    amrex::ReduceData<amrex::Real> reduce_data(reduce_op);
++    using Tuple = typename decltype(reduce_data)::Type;
++    for (const auto& view : source_geometry) {
++      const auto gd = view.geometry;
++      const auto cell = gd.CellSize();
++      const amrex::Real dv = cell[0] * cell[1] * cell[2];
++#ifdef AMREX_USE_EB
++      const auto* eb = dynamic_cast<const amrex::EBFArrayBoxFactory*>(&view.cells->Factory());
++#endif
++      for (amrex::MFIter mfi(*view.cells, amrex::TilingIfNotGPU()); mfi.isValid(); ++mfi) {
++        amrex::Array4<const amrex::Real> vf;
++        bool has_vf = false;
++#ifdef AMREX_USE_EB
++        if (eb) { vf = eb->getVolFrac().const_array(mfi); has_vf = true; }
++#endif
++        amrex::Array4<const int> owner;
++        const bool has_owner = view.owner_mask != nullptr;
++        if (has_owner) owner = view.owner_mask->const_array(mfi);
++        reduce_op.eval(mfi.tilebox(), reduce_data,
++          [=] AMREX_GPU_DEVICE(int i, int j, int k) -> Tuple {
++            if (has_owner && owner(i,j,k) == 0) return {0.0};
++            const amrex::Real fluid = has_vf ? vf(i,j,k) : 1.0;
++            const amrex::Real x = gd.ProbLo(0) + (i-gd.Domain().smallEnd(0)+0.5)*gd.CellSize(0);
++            const amrex::Real y = gd.ProbLo(1) + (j-gd.Domain().smallEnd(1)+0.5)*gd.CellSize(1);
++            const amrex::Real z = gd.ProbLo(2) + (k-gd.Domain().smallEnd(2)+0.5)*gd.CellSize(2);
++            return {fluid > 0.0 && Leak::contains(region,x,y,z) ? fluid*dv : 0.0};
++          });
++      }
++    }
++    amrex::Real volume = amrex::get<0>(reduce_data.value());
++    amrex::ParallelDescriptor::ReduceRealSum(volume);
++    return volume;
++  }
++
+   static void modify_ext_sources(amrex::Real time,amrex::Real dt,
+     const amrex::MultiFab&,const amrex::MultiFab&,
+     std::unique_ptr<amrex::MultiFab>& ext_src,
+-    const amrex::GeometryData& geomdata,const MyProbParm* pp)
++    const amrex::GeometryData& geomdata,const MyProbParm* pp,
++    const pelelmex::SourceGeometry& source_geometry)
+   {
+     auto eos=pele::physics::PhysicsType::eos();
+     namespace Leak = MyPele::Engineering::LeakSource;
+@@ -586,13 +634,6 @@
+       geomdata.ProbLo(0), geomdata.ProbLo(1), geomdata.ProbLo(2)};
+     const amrex::GpuArray<amrex::Real, 3> dx = {
+       geomdata.CellSize(0), geomdata.CellSize(1), geomdata.CellSize(2)};
+-    double leak_prob_lo[3] = {plo[0], plo[1], plo[2]};
+-    double leak_dx[3] = {dx[0], dx[1], dx[2]};
+-    int leak_lo[3] = {geomdata.Domain().smallEnd(0), geomdata.Domain().smallEnd(1),
+-                      geomdata.Domain().smallEnd(2)};
+-    int leak_hi[3] = {geomdata.Domain().bigEnd(0), geomdata.Domain().bigEnd(1),
+-                      geomdata.Domain().bigEnd(2)};
+-
+     amrex::GpuArray<Leak::SphericalLeakSource, MyProbParm::max_leak_sources>
+       leak_sources;
+     amrex::Real total_active_volume = 0.0;
+@@ -615,10 +656,9 @@
+       source.specific_enthalpy = h_inj + source_ke;
+       source.species_index = pp->fuel_species_index;
+       const amrex::Real active_volume =
+-        Leak::cell_centered_active_volume(source, leak_prob_lo, leak_dx, leak_lo,
+-                                          leak_hi);
++        source_fluid_volume(source, source_geometry);
+       if (active_volume <= 0.0) {
+-        amrex::Abort("configured fuel leak source has no active cells on this grid");
++        amrex::Abort("configured fuel leak source has no active fluid cells on the composite AMR mesh");
+       }
+       source.normalization_volume = active_volume;
+       total_active_volume += active_volume;
+@@ -665,10 +705,9 @@
+       ignition_region.specific_enthalpy = 0.0;
+       ignition_region.species_index = pp->fuel_species_index;
+       ignition_active_volume =
+-        Leak::cell_centered_active_volume(ignition_region, leak_prob_lo, leak_dx,
+-                                          leak_lo, leak_hi);
++        source_fluid_volume(ignition_region, source_geometry);
+       if (ignition_active_volume <= 0.0) {
+-        amrex::Abort("configured fuel ignition source has no active cells on this grid");
++        amrex::Abort("configured fuel ignition source has no active fluid cells on the composite AMR mesh");
+       }
+       const amrex::Real ignition_end_time =
+         pp->ignition_start_time + pp->ignition_duration;
+@@ -697,8 +736,22 @@
+     const amrex::Real ignition_radius = pp->ignition_radius;
+     const amrex::Real ignition_radius2 = ignition_radius * ignition_radius;
+     auto const& src_arrs=ext_src->arrays();
++    amrex::MultiArray4<const amrex::Real> vf_arrs;
++    bool has_vf = false;
++#ifdef AMREX_USE_EB
++    if (const auto* eb = dynamic_cast<const amrex::EBFArrayBoxFactory*>(&ext_src->Factory())) {
++      vf_arrs = eb->getVolFrac().const_arrays();
++      has_vf = true;
++    }
++#endif
++    const amrex::GpuArray<int, 3> domain_lo = {
++      geomdata.Domain().smallEnd(0), geomdata.Domain().smallEnd(1), geomdata.Domain().smallEnd(2)};
+     amrex::ParallelFor(*ext_src,[=]AMREX_GPU_DEVICE(int nbx,int i,int j,int k)noexcept{
+-      amrex::Real x=plo[0]+(i+0.5)*dx[0], y=plo[1]+(j+0.5)*dx[1], z=plo[2]+(k+0.5)*dx[2];
++      if (has_vf && vf_arrs[nbx](i,j,k) <= 0.0) return;
++      // Source is per fluid volume: do not multiply by volFrac a second time.
++      amrex::Real x=plo[0]+(i-domain_lo[0]+0.5)*dx[0];
++      amrex::Real y=plo[1]+(j-domain_lo[1]+0.5)*dx[1];
++      amrex::Real z=plo[2]+(k-domain_lo[2]+0.5)*dx[2];
+       for (int n = 0; n < leak_count; ++n) {
+         Leak::apply_single_species_source(
+           src_arrs[nbx], i, j, k, x, y, z, leak_sources[n], DENSITY, VELX, VELY,
+@@ -709,7 +762,7 @@
+           (x - ignition_xc) * (x - ignition_xc) +
+           (y - ignition_yc) * (y - ignition_yc) +
+           (z - ignition_zc) * (z - ignition_zc);
+-        if (dr2 <= ignition_radius2) {
++        if (dr2 < ignition_radius2) {
+           src_arrs[nbx](i, j, k, RHOH) += ignition_qdot;
+         }
+       }
+--- /dev/null
++++ b/external/PeleC/Source/SpeciesFluxLimiter.H
+@@ -0,0 +1,61 @@
++#ifndef PELEC_SPECIES_FLUX_LIMITER_H
++#define PELEC_SPECIES_FLUX_LIMITER_H
++
++#include <AMReX_Gpu.H>
++#include <AMReX_REAL.H>
++#include <cmath>
++
++// Limit reconstructed compositions before EOS/Riemann evaluation. Donor
++// states are checked, not repaired: an invalid evolved cell must fail visibly.
++template <int N>
++AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
++bool pc_bounded_face_composition(amrex::Real* face, amrex::Real* donor)
++{
++  amrex::Real donor_sum = 0.0;
++  amrex::Real face_sum = 0.0;
++  for (int n = 0; n < N; ++n) {
++    if (!std::isfinite(donor[n]) || donor[n] < -1.e-12 || donor[n] > 1.0 + 1.e-12)
++      return false;
++    donor[n] = amrex::max(amrex::Real(0.0), donor[n]);
++    donor_sum += donor[n];
++    if (!std::isfinite(face[n])) face[n] = donor[n];
++    face[n] = amrex::max(amrex::Real(0.0), amrex::min(amrex::Real(1.0), face[n]));
++    face_sum += face[n];
++  }
++  if (!(donor_sum > 0.0) || std::abs(donor_sum - 1.0) > 1.e-8) return false;
++  for (int n = 0; n < N; ++n) {
++    donor[n] /= donor_sum;
++    face[n] = face_sum > 0.0 ? face[n] / face_sum : donor[n];
++  }
++  return true;
++}
++
++// A common convex weight preserves sum(F_species)=F_mass. Limit outgoing
++// high-order species fluxes against a conservative donor-cell budget shared
++// among the 2*ndim faces. A zero donor species cannot be removed. If the
++// low-order mass flux exhausts that per-face budget, revert to donor upwind
++// composition; density/CFL admissibility remains the hydro solver's contract.
++template <int N>
++AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE
++void pc_bounded_species_flux(
++  amrex::Real mass_flux, amrex::Real donor_rho, const amrex::Real* donor,
++  const amrex::Real* face, amrex::Real dx, amrex::Real dt, int ndim,
++  amrex::Real* species_flux)
++{
++  amrex::Real theta = 1.0;
++  const amrex::Real courant = dt > 0.0 ?
++    std::abs(mass_flux) * dt / (donor_rho * dx) : 0.0;
++  if (courant > 0.0) {
++    const amrex::Real ratio = 1.0 / (2.0 * ndim * courant);
++    for (int n = 0; n < N; ++n) {
++      const amrex::Real cap = donor[n] * amrex::max(amrex::Real(1.0), ratio);
++      if (face[n] > cap && face[n] > donor[n]) {
++        theta = amrex::min(theta, (cap - donor[n]) / (face[n] - donor[n]));
++      }
++    }
++  }
++  theta = amrex::max(amrex::Real(0.0), amrex::min(amrex::Real(1.0), theta));
++  for (int n = 0; n < N; ++n)
++    species_flux[n] = mass_flux * (donor[n] + theta * (face[n] - donor[n]));
++}
++#endif
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -40,6 +40,8 @@
+   enable_testing()
+   find_package(Python3 COMPONENTS Interpreter QUIET)
+   if(Python3_FOUND)
++    add_test(NAME cfd_evidence_checks
++      COMMAND ${Python3_EXECUTABLE} ${MYPELE_ROOT}/tools/test_cfd_evidence_checks.py)
+     add_test(
+       NAME amrex_reader_multibox_smoke
+       COMMAND ${Python3_EXECUTABLE} ${MYPELE_ROOT}/tools/test_amrex_reader_multibox.py
+@@ -51,6 +53,14 @@
+   add_executable(test_weno5_smoke test/unit/test_weno5.cpp)
+   target_link_libraries(test_weno5_smoke PRIVATE my_pele_headers)
+   add_test(NAME weno5_smoke COMMAND test_weno5_smoke)
++
++  add_executable(test_species_flux_limiter_smoke test/unit/test_species_flux_limiter.cpp)
++  target_compile_definitions(test_species_flux_limiter_smoke PRIVATE AMREX_GPU_MAX_THREADS=0)
++  target_include_directories(test_species_flux_limiter_smoke PRIVATE
++    "${MYPELE_ROOT}/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base"
++    "${CMAKE_CURRENT_BINARY_DIR}"
++    "${MYPELE_ROOT}/external/PeleC/Source")
++  add_test(NAME species_flux_limiter_smoke COMMAND test_species_flux_limiter_smoke)
+ 
+   add_executable(test_pelec_weno_smoke test/unit/test_pelec_weno.cpp)
+   target_include_directories(test_pelec_weno_smoke PRIVATE
+--- /dev/null
++++ b/test/unit/test_species_flux_limiter.cpp
+@@ -0,0 +1,55 @@
++#include "SpeciesFluxLimiter.H"
++#include <array>
++#include <vector>
++#include <cmath>
++#include <iostream>
++#include <cstdlib>
++
++void require(bool condition, const char* message) {
++  if (!condition) { std::cerr << message << '\n'; std::exit(1); }
++}
++
++int main() {
++  using Cell = std::array<double,3>;
++  {
++    double donor[3] = {.2,.3,.5}, face[3] = {-.1,.5,.6};
++    require(pc_bounded_face_composition<3>(face,donor), "valid donor rejected");
++    require(face[0] == 0. && std::abs(face[1]+face[2]-1.) < 1.e-14,
++            "face composition is not in the species simplex");
++    donor[0] = -7.e-5;
++    require(!pc_bounded_face_composition<3>(face,donor), "negative evolved donor was hidden");
++  }
++  for (double velocity : {1.0,-1.0}) {
++    constexpr int nx=64;
++    constexpr double dt=.4, dx=1.;
++    std::vector<Cell> state(nx), next(nx), flux(nx);
++    Cell initial_mass{};
++    for(int i=0;i<nx;++i) {
++      state[i] = (i>=12 && i<30) ? Cell{.8,.0,.2} : Cell{.0,.8,.2};
++      for(int n=0;n<3;++n) initial_mass[n]+=state[i][n];
++    }
++    for(int step=0;step<120;++step) {
++      for(int face_index=0;face_index<nx;++face_index) {
++        const int donor_index = velocity>0 ? (face_index+nx-1)%nx : face_index;
++        const int back = (donor_index + (velocity>0 ? nx-1 : 1))%nx;
++        Cell donor=state[donor_index], face{};
++        for(int n=0;n<3;++n) face[n]=1.5*donor[n]-.5*state[back][n];
++        require(pc_bounded_face_composition<3>(face.data(),donor.data()), "invalid transported donor");
++        pc_bounded_species_flux<3>(velocity,1.,donor.data(),face.data(),dx,dt,1,flux[face_index].data());
++        require(std::abs(flux[face_index][0]+flux[face_index][1]+flux[face_index][2]-velocity)<2.e-14,
++                "species flux sum differs from density flux");
++      }
++      for(int i=0;i<nx;++i) for(int n=0;n<3;++n) {
++        next[i][n]=state[i][n]-dt/dx*(flux[(i+1)%nx][n]-flux[i][n]);
++        require(next[i][n]>=-1.e-13 && next[i][n]<=1.+1.e-13,
++                "bounded flux generated negative or excessive species");
++      }
++      state.swap(next);
++    }
++    Cell final_mass{};
++    for(const auto& cell : state)for(int n=0;n<3;++n)final_mass[n]+=cell[n];
++    for(int n=0;n<3;++n)require(std::abs(final_mass[n]-initial_mass[n])<1.e-11,
++                                "periodic species mass not conserved");
++  }
++  std::cout << "PASS: species simplex, invalid donor rejection, bidirectional periodic conservation and bounds\n";
++}
+--- /dev/null
++++ b/test/integration/test_source_volume_amr.cpp
+@@ -0,0 +1,52 @@
++// Manufactured geometry/integration test: no leak or fire time advance.
++#include "pelelmex_prob.H"
++#include <AMReX.H>
++#include <AMReX_EB2.H>
++#include <AMReX_EB2_IF_Plane.H>
++#include <AMReX_EB2_GeometryShop.H>
++#include <AMReX_MultiFabUtil.H>
++#include <iostream>
++
++int main(int argc,char** argv) {
++  amrex::Initialize(argc,argv);
++  {
++    const amrex::Box domain({0,0,0},{7,7,7});
++    const amrex::Box fine_domain=amrex::refine(domain,2);
++    const amrex::RealBox physical({0.,0.,0.},{1.,1.,1.});
++    const int periodic[3]={0,0,0};
++    amrex::Geometry coarse_geom(domain,&physical,0,periodic);
++    amrex::Geometry fine_geom(fine_domain,&physical,0,periodic);
++    // Fluid above y=0.3; exact fluid volume is 0.7 in a unit cube.
++    amrex::EB2::PlaneIF plane({0.,0.3,0.},{0.,-1.,0.},true);
++    amrex::EB2::Build(amrex::EB2::makeShop(plane),fine_geom,1,1);
++    amrex::BoxArray coarse_ba(domain);coarse_ba.maxSize(4);
++    amrex::BoxArray fine_ba(amrex::Box({8,0,0},{15,15,15}));fine_ba.maxSize(8);
++    amrex::DistributionMapping coarse_dm(coarse_ba),fine_dm(fine_ba);
++    auto coarse_factory=amrex::makeEBFabFactory(coarse_geom,coarse_ba,coarse_dm,{2,2,2},amrex::EBSupport::full);
++    auto fine_factory=amrex::makeEBFabFactory(fine_geom,fine_ba,fine_dm,{2,2,2},amrex::EBSupport::full);
++    amrex::MultiFab coarse(coarse_ba,coarse_dm,1,0,amrex::MFInfo(),*coarse_factory);
++    amrex::MultiFab fine(fine_ba,fine_dm,1,0,amrex::MFInfo(),*fine_factory);
++    auto owner=amrex::makeFineMask(coarse_ba,coarse_dm,fine_ba,amrex::IntVect(2),1,0,amrex::MFInfo());
++    pelelmex::SourceGeometry geometry{{&coarse,&owner,coarse_geom.data()},
++                                     {&fine,nullptr,fine_geom.data()}};
++    namespace Leak=MyPele::Engineering::LeakSource;
++    Leak::SphericalLeakSource region;
++    region.center[0]=region.center[1]=region.center[2]=0.5;
++    region.radius=2.;region.mass_flow_rate=1.;
++    const double volume=MyProblemSpecificFunctions::source_fluid_volume(region,geometry);
++    AMREX_ALWAYS_ASSERT_WITH_MESSAGE(std::abs(volume-.7)<1.e-12,
++      "EB/composite-AMR source volume differs from exact 0.7");
++    region.normalization_volume=volume;
++    AMREX_ALWAYS_ASSERT_WITH_MESSAGE(std::abs(Leak::volumetric_mass_source(region)*.7-1.)<1.e-12,
++      "fluid-integrated mass injection does not equal requested 1 kg/s");
++    // Entire sphere in solid must have no active source volume.
++    region.center[0]=region.center[1]=region.center[2]=0.1;
++    region.radius=.05;
++    const double solid_volume=MyProblemSpecificFunctions::source_fluid_volume(region,geometry);
++    AMREX_ALWAYS_ASSERT_WITH_MESSAGE(solid_volume==0.,"solid source has nonzero fluid volume");
++    amrex::Print()<<"PASS source-volume manufactured AMR+EB integration: fluid_volume="
++      <<volume<<", mass_rate=1, solid_volume="<<solid_volume
++      <<", ranks="<<amrex::ParallelDescriptor::NProcs()<<"\n";
++  }
++  amrex::Finalize();
++}
+--- /dev/null
++++ b/tools/cfd_run_archive.py
+@@ -0,0 +1,215 @@
++#!/usr/bin/env python3
++"""Archive complete CFD evidence and fingerprint actual source trees.
++
++No cleanup or overwrite mode is provided. Hash verification and physical
++validation are separate: an intact archive is not a physically valid run.
++"""
++from __future__ import annotations
++import argparse
++import hashlib
++import json
++import math
++import platform
++import re
++import shutil
++import subprocess
++from datetime import datetime, timezone
++from pathlib import Path
++
++
++def sha256(path):
++    h = hashlib.sha256()
++    with Path(path).open('rb') as stream:
++        for block in iter(lambda: stream.read(1024 * 1024), b''):
++            h.update(block)
++    return h.hexdigest()
++
++
++def safe_child(root, relative):
++    root = Path(root).resolve()
++    path = (root / relative).resolve()
++    if not path.is_relative_to(root):
++        raise ValueError(f'path escapes artifact root: {relative}')
++    return path
++
++
++def binary_references(header):
++    header = Path(header)
++    refs = re.findall(r'FabOnDisk:\s+(\S+)\s+(\d+)', header.read_text(errors='strict'))
++    if not refs:
++        raise ValueError(f'no binary FAB references in {header}')
++    files = []
++    for name, offset in refs:
++        path = safe_child(header.parent, name)
++        if not path.is_file() or path.stat().st_size <= int(offset):
++            raise ValueError(f'missing/truncated FAB payload: {path} offset={offset}')
++        files.append(path)
++    return files
++
++
++def check_plotfile(plot):
++    import amrex_reader
++    import numpy as np
++    plot = Path(plot)
++    header = plot / 'Header'
++    lines = [line.strip() for line in header.read_text().splitlines() if line.strip()]
++    ncomp = int(lines[1])
++    ndim, time, finest = int(lines[ncomp + 2]), float(lines[ncomp + 3]), int(lines[ncomp + 4])
++    if ncomp <= 0 or ndim not in (1, 2, 3) or finest < 0 or not math.isfinite(time):
++        raise ValueError(f'invalid plot header: {header}')
++    required = {f'Level_{lev}/Cell' for lev in range(finest + 1)}
++    if not required.issubset(set(lines)):
++        raise ValueError(f'missing level references in {header}')
++    payloads = []
++    for prefix in sorted(required):
++        payloads.extend(binary_references(safe_child(plot, prefix + '_H')))
++    meta = amrex_reader._parse_header_structured(str(header))
++    nonfinite = 0
++    for level in range(finest + 1):
++        # Decode payload sizes without imposing a physical PASS on the fields.
++        data, grid = amrex_reader._read_level(str(plot), level, ncomp, meta['dx'][level])
++        coverage = grid.get('coverage')
++        stored = data[coverage] if coverage is not None else data
++        nonfinite += int(np.count_nonzero(~np.isfinite(stored)))
++    return {'time': time, 'ndim': ndim, 'levels': finest + 1,
++            'payload_count': len(set(payloads)), 'nonfinite_stored_values': nonfinite,
++            'physical_validation': 'not_performed'}
++
++
++def git_metadata(path, repo):
++    def query(*args):
++        try:
++            p = subprocess.run(['git', '-C', str(path), *args], capture_output=True, text=True)
++        except OSError:
++            return None
++        return p.stdout.strip() if p.returncode == 0 else None
++    top = query('rev-parse', '--show-toplevel')
++    return {'repository_root': top, 'parent_commit': query('rev-parse', 'HEAD'),
++            'source_kind': 'vendored_in_parent_repository' if top and Path(top).resolve() == repo
++                           else 'independent_repository' if top else 'unversioned_source',
++            'upstream_commit_verified': False}
++
++
++def source_fingerprint(repo, roots):
++    repo = Path(repo).resolve()
++    result = {'schema_version': 1, 'created_utc': datetime.now(timezone.utc).isoformat(),
++              'repository': str(repo), 'source_trees': []}
++    for relative in roots:
++        root = safe_child(repo, relative)
++        if not root.exists():
++            raise ValueError(f'missing source root: {root}')
++        paths = [root] if root.is_file() else sorted(root.rglob('*'))
++        entries = []
++        for p in paths:
++            if any(part in ('.git', '__pycache__', 'tmp_build_dir') or part.startswith('build-')
++                   for part in p.relative_to(root.parent).parts):
++                continue
++            if p.is_symlink():
++                raise ValueError(f'source snapshot requires explicit resolved roots, not symlinks: {p}')
++            if p.is_file() and p.suffix not in ('.o', '.a', '.so', '.ex', '.pyc', '.log'):
++                entries.append({'path': p.relative_to(repo).as_posix(),
++                                'size_bytes': p.stat().st_size, 'sha256': sha256(p)})
++        digest = hashlib.sha256(''.join(item['path'] + '\0' + item['sha256'] + '\n'
++                                        for item in entries).encode()).hexdigest()
++        result['source_trees'].append({'path': str(relative), 'tree_sha256': digest,
++                                      'files': entries, 'version': git_metadata(root if root.is_dir() else root.parent, repo)})
++    return result
++
++
++def verify_archive(directory):
++    directory = Path(directory).resolve()
++    report = json.loads((directory / 'archive_manifest.json').read_text())
++    for item in report['files']:
++        p = safe_child(directory, item['path'])
++        if not p.is_file() or p.stat().st_size != item['size_bytes'] or sha256(p) != item['sha256']:
++            raise ValueError(f'archive integrity mismatch: {p}')
++    for relative in report['plotfiles']:
++        check_plotfile(safe_child(directory, relative))
++    return report
++
++
++def archive_run(run, output, repo, executable, source_manifest=None):
++    run, output, repo, executable = (Path(p).resolve() for p in (run, output, repo, executable))
++    if output.exists() or output.is_relative_to(run):
++        raise ValueError('archive output must be new and outside the run directory')
++    plots = sorted(p for p in run.iterdir() if p.is_dir() and re.fullmatch(r'plt\d+', p.name))
++    if not plots:
++        raise ValueError('run has no plotfiles to archive')
++    checked = {p.name: check_plotfile(p) for p in plots}
++    # Check every checkpoint FAB header too; do not archive Header-only checkpoints.
++    for checkpoint in run.glob('chk[0-9]*'):
++        headers = list(checkpoint.glob('Level_*/*_H'))
++        if checkpoint.is_dir() and not headers:
++            raise ValueError(f'checkpoint has no binary FAB headers: {checkpoint}')
++        for header in headers:
++            binary_references(header)
++    if not executable.is_file():
++        raise ValueError(f'executable missing: {executable}')
++    before = {p.relative_to(run).as_posix(): sha256(p) for p in run.rglob('*') if p.is_file()}
++    if any(p.is_symlink() for p in run.rglob('*')):
++        raise ValueError('portable run archive cannot contain symlinks')
++    expected_sources = None
++    if source_manifest:
++        expected_sources = json.loads(Path(source_manifest).read_text())
++        for tree in expected_sources['source_trees']:
++            for item in tree['files']:
++                p = safe_child(repo, item['path'])
++                if not p.is_file() or sha256(p) != item['sha256']:
++                    raise ValueError(f'source changed since pre-build manifest: {p}')
++    output.mkdir(parents=True, exist_ok=False)
++    shutil.copytree(run, output / 'run')
++    (output / 'binary').mkdir()
++    shutil.copy2(executable, output / 'binary' / executable.name)
++    for name, digest in before.items():
++        if sha256(safe_child(output / 'run', name)) != digest or sha256(safe_child(run, name)) != digest:
++            raise ValueError(f'run changed during archive: {name}; incomplete archive retained at {output}')
++    if expected_sources:
++        for tree in expected_sources['source_trees']:
++            for item in tree['files']:
++                destination = safe_child(output / 'source_snapshot', item['path'])
++                destination.parent.mkdir(parents=True, exist_ok=True)
++                shutil.copy2(safe_child(repo, item['path']), destination)
++                if sha256(destination) != item['sha256']:
++                    raise ValueError(f'source changed during archive: {item["path"]}')
++        (output / 'source_manifest.json').write_text(json.dumps(expected_sources, indent=2))
++    files = [{'path': p.relative_to(output).as_posix(), 'size_bytes': p.stat().st_size,
++              'sha256': sha256(p)} for p in sorted(output.rglob('*')) if p.is_file()]
++    report = {'schema_version': 1, 'created_utc': datetime.now(timezone.utc).isoformat(),
++              'platform': platform.platform(), 'source_run': str(run),
++              'executable_sha256': sha256(executable), 'files': files,
++              'plotfiles': {'run/' + name: info for name, info in checked.items()},
++              'source_snapshot_present': expected_sources is not None,
++              'physical_acceptance': 'not_granted_by_archive_integrity'}
++    (output / 'archive_manifest.json').write_text(json.dumps(report, indent=2))
++    verify_archive(output)
++    return report
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    sub = parser.add_subparsers(dest='action', required=True)
++    source = sub.add_parser('sources')
++    source.add_argument('--repo', type=Path, required=True)
++    source.add_argument('--source-root', action='append', required=True)
++    source.add_argument('--output', type=Path, required=True)
++    archive = sub.add_parser('archive')
++    for name in ('run', 'output', 'repo', 'executable'):
++        archive.add_argument('--' + name, type=Path, required=True)
++    archive.add_argument('--source-manifest', type=Path)
++    verify = sub.add_parser('verify')
++    verify.add_argument('directory', type=Path)
++    args = parser.parse_args()
++    if args.action == 'sources':
++        report = source_fingerprint(args.repo, args.source_root)
++        args.output.parent.mkdir(parents=True, exist_ok=True)
++        with args.output.open('x') as stream:
++            json.dump(report, stream, indent=2)
++    elif args.action == 'archive':
++        archive_run(args.run, args.output, args.repo, args.executable, args.source_manifest)
++    else:
++        verify_archive(args.directory)
++    print('PASS archive/source integrity only; physical acceptance requires separate validation')
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/tools/test_cfd_evidence_checks.py
+@@ -0,0 +1,117 @@
++#!/usr/bin/env python3
++import copy
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import numpy as np
++import cfd_evidence_checks as checks
++import cfd_run_archive as archive
++from test_amrex_reader_multibox import write_plotfile
++
++
++class EvidenceChecks(unittest.TestCase):
++    def test_run_scoped_log_checks(self):
++        from check_cfd_run_log import check_log
++        with tempfile.TemporaryDirectory() as td:
++            p=Path(td)/'run.log'
++            p.write_text('CVODE reactor initialized; information follows\nAMReX (test) finalized\n')
++            self.assertIn('PASS',check_log(p,0))
++            with self.assertRaises(ValueError):check_log(p,6)
++            p.write_text('CVODE solve failed, flag=-4\nAMReX (test) finalized\n')
++            with self.assertRaises(ValueError):check_log(p,0)
++            p.write_text('amrex::Abort::Simulation stopped early\n')
++            with self.assertRaises(ValueError):check_log(p,0)
++
++
++    def pair(self, reacts=True, cold=False):
++        shape=(8,2,2)
++        fields={'density':np.ones(shape), 'Temp':np.full(shape,300.)}
++        if not cold: fields['Temp'][0]=1000.
++        species=('H2','O2','H2O','H','O','OH','HO2','H2O2','N2')
++        for name in species: fields['rho_'+name]=np.zeros(shape)
++        fields['rho_H2'][:]=.1;fields['rho_O2'][:]=.8;fields['rho_H2O'][:]=.1
++        initial={'fields':fields,'time':0.,'dx':[1.,1.,1.]}
++        final=copy.deepcopy(initial);final['time']=1.
++        if reacts:
++            final['fields']['rho_H2']-=.01
++            final['fields']['rho_O2']-=.08
++            final['fields']['rho_H2O']+=.09
++        return initial,final
++
++    def test_pressure_front_and_cold_rejection(self):
++        x=np.arange(10)+.5
++        p=np.where(x<5,10.,1.)[:,None,None]
++        self.assertEqual(checks.pressure_front_x(p,x),5.)
++        with self.assertRaises(ValueError): checks.pressure_front_x(np.ones_like(p),x)
++
++    def test_real_conversion_passes(self):
++        with patch('amrex_reader.read_plotfile',side_effect=self.pair()):
++            result=checks.reacting_pair_metrics('initial','final')
++        self.assertAlmostEqual(result['fuel_consumed_fraction'],.1)
++        self.assertFalse(result['detonation_propagation_verified'])
++
++    def test_cold_runtime_rejected(self):
++        with patch('amrex_reader.read_plotfile',side_effect=self.pair(cold=True)):
++            with self.assertRaisesRegex(ValueError,'hotspot absent'):
++                checks.reacting_pair_metrics('initial','final')
++
++    def test_hot_but_nonreacting_rejected(self):
++        with patch('amrex_reader.read_plotfile',side_effect=self.pair(reacts=False)):
++            with self.assertRaisesRegex(ValueError,'no resolved chemical conversion'):
++                checks.reacting_pair_metrics('initial','final')
++
++    def test_negative_species_rejected(self):
++        pair=self.pair();pair[1]['fields']['rho_O2'][3,0,0]=-7.e-5
++        with patch('amrex_reader.read_plotfile',side_effect=pair):
++            with self.assertRaisesRegex(ValueError,'unphysical mass fraction'):
++                checks.reacting_pair_metrics('initial','final')
++
++    def test_finite_and_closure_checks(self):
++        for bad in (float('nan'),.9):
++            pair=self.pair();pair[1]['fields']['rho_O2'][3,0,0]=bad
++            with patch('amrex_reader.read_plotfile',side_effect=pair):
++                with self.assertRaises(ValueError): checks.reacting_pair_metrics('initial','final')
++
++    def test_archived_zero_chemistry_identified(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=Path(td);plot=root/'run/plt00000';plot.mkdir(parents=True)
++            (plot/'job_info').write_text('CHEMISTRY: inert_test\n')
++            mechanism=root/'external/PeleC/Submodules/PelePhysics/Mechanisms/inert_test/mechanism.H'
++            mechanism.parent.mkdir(parents=True);mechanism.write_text('#define NUM_GAS_REACTIONS 0\n')
++            with patch.object(checks,'__file__',str(root/'tools/cfd_evidence_checks.py')):
++                result=checks.archived_chemistry(plot)
++            self.assertEqual(result['gas_reactions'],0)
++            self.assertFalse(result['binary_provenance_verified'])
++
++    def test_archive_missing_payload_and_no_overwrite(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=Path(td);run=root/'run';plot=run/'plt00000'
++            write_plotfile(plot,2,[(0,1,0,1,0,0)])
++            executable=root/'solver.ex';executable.write_bytes(b'test executable identity')
++            destination=root/'archive'
++            archive.archive_run(run,destination,root,executable)
++            archive.verify_archive(destination)
++            with self.assertRaises(ValueError): archive.archive_run(run,destination,root,executable)
++            # A manifest checksum detects mutation even if the file still exists.
++            (destination/'run/plt00000/Level_0/Cell_D_00000').write_bytes(b'broken')
++            with self.assertRaises(ValueError): archive.verify_archive(destination)
++            (plot/'Level_0/Cell_D_00000').unlink()
++            with self.assertRaises(ValueError): archive.check_plotfile(plot)
++
++    def test_source_drift_rejected(self):
++        with tempfile.TemporaryDirectory() as td:
++            root=Path(td);(root/'src').mkdir();source=root/'src/model.cpp';source.write_text('version one')
++            manifest=archive.source_fingerprint(root,['src'])
++            import json
++            m=root/'sources.json';m.write_text(json.dumps(manifest))
++            run=root/'run';write_plotfile(run/'plt00000',2,[(0,1,0,1,0,0)])
++            executable=root/'solver.ex';executable.write_bytes(b'binary')
++            source.write_text('version two')
++            with self.assertRaisesRegex(ValueError,'source changed'):
++                archive.archive_run(run,root/'archive',root,executable,m)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- a/external/PeleC/Source/Riemann.H
++++ b/external/PeleC/Source/Riemann.H
+@@ -63,6 +63,45 @@
+     ((wr * pl + wl * pr) + wl * wr * (ul - ur)) / (wl + wr));
+   ustar = ((wl * ul + wr * ur) + (pl - pr)) / (wl + wr);
+ 
++  // The acoustic star estimate can approach numerical vacuum in a strong
++  // expansion. Evaluating NASA thermochemistry at DBL_MIN pressure produces
++  // 0*Inf in the polynomial energy. Use a conservative local Lax-Friedrichs
++  // flux from the admissible input states before evaluating such a star EOS.
++  // This fallback is deliberately dissipative and does not impose a pressure
++  // floor on the evolved conservative state.
++  if (pstar < 1.0e-8 * amrex::min(pl, pr)) {
++    amrex::Real el, er;
++    eos.RYP2E(rl, spl, pl, el);
++    eos.RYP2E(rr, spr, pr, er);
++    const amrex::Real speed = amrex::max(std::abs(ul) + cl, std::abs(ur) + cr);
++    const amrex::Real EL = rl * (el + 0.5 *
++      (ul*ul + vl*vl + v2l*v2l - omegal*omegal*radl*radl));
++    const amrex::Real ER = rr * (er + 0.5 *
++      (ur*ur + vr*vr + v2r*v2r - omegar*omegar*radr*radr));
++    uflx_rho = 0.5 * (rl*ul + rr*ur - speed*(rr-rl));
++    for (int n = 0; n < NUM_SPECIES; ++n) {
++      uflx_rhoY[n] = 0.5 * (rl*spl[n]*ul + rr*spr[n]*ur
++                           - speed*(rr*spr[n]-rl*spl[n]));
++    }
++    uflx_u = 0.5 * (rl*ul*ul + pl + rr*ur*ur + pr
++                    - speed*(rr*ur-rl*ul));
++    uflx_v = 0.5 * (rl*ul*vl + rr*ur*vr - speed*(rr*vr-rl*vl));
++    uflx_w = 0.5 * (rl*ul*v2l + rr*ur*v2r - speed*(rr*v2r-rl*v2l));
++    uflx_eden = 0.5 * ((EL+pl)*ul + (ER+pr)*ur - speed*(ER-EL));
++    uflx_eint = 0.5 * (rl*el*ul + rr*er*ur - speed*(rr*er-rl*el));
++    qint_iu = ustar = (rl*ul + rr*ur)/(rl+rr);
++    qint_iv1 = (rl*vl + rr*vr)/(rl+rr);
++    qint_iv2 = (rl*v2l + rr*v2r)/(rl+rr);
++    qint_gdpres = 0.5*(pl+pr);
++    qint_gdgame = 1.0 + (pl+pr)/(rl*el+rr*er);
++    if (bc_test_val == 0) {
++      qint_iu = ustar = 0.0;
++      uflx_rho = uflx_v = uflx_w = uflx_eden = uflx_eint = 0.0;
++      for (int n = 0; n < NUM_SPECIES; ++n) { uflx_rhoY[n] = 0.0; }
++    }
++    return;
++  }
++
+   bool mask = ustar > 0.0;
+   amrex::Real ro = 0.0;
+   amrex::Real rspo[NUM_SPECIES];
+--- a/external/PeleC/Source/PeleC.cpp
++++ b/external/PeleC/Source/PeleC.cpp
+@@ -302,6 +302,19 @@
+   read_params_done = true;
+ 
+   amrex::ParmParse pp("pelec");
++#if NUM_ADV > 0
++  // ADV[0] is interpreted as VOF throughout this fork. Its mixed-cell EOS
++  // and algebraic transport are experimental, not a validated PLIC model.
++  bool allow_experimental_vof = false;
++  pp.query("allow_experimental_vof", allow_experimental_vof);
++  if (!allow_experimental_vof) {
++    amrex::Abort("VOF mixed-cell thermodynamics/PLIC are not validated. "
++      "For development only set pelec.allow_experimental_vof=1; "
++      "this does not grant physical acceptance.");
++  }
++  amrex::Print() << "EXPERIMENTAL VOF: mixed-cell EOS and PLIC incomplete; "
++                 << "results must not be certified as physical validation.\n";
++#endif
+ 
+ #include "pelec_queries.H"
+ 
+--- a/src/academic/twophase/StiffenedGas.H
++++ b/src/academic/twophase/StiffenedGas.H
+@@ -5,7 +5,7 @@
+ 
+ struct StiffenedGasParams {
+     amrex::Real gamma;   // gamma_l, typically 1.1-7.0
+-    amrex::Real p_inf;   // p_infinity [Pa], typically 6e8 for water-like
++    amrex::Real p_inf;   // p_infinity [pressure units]; PeleC CGS default 6e9 dyn/cm^2
+ };
+ 
+ // p = (gamma-1)*rho*e - gamma*p_inf
+@@ -20,11 +20,11 @@
+     return (p + sg.gamma * sg.p_inf) / ((sg.gamma - 1.0) * rho);
+ }
+ 
+-// Temperature: T = e / cv (simplified incompressible liquid)
++// Caloric stiffened gas with zero reference-energy offset: e = cv*T + p_inf/rho.
++// Parameters must be calibrated together; this is not a water property table.
+ AMREX_GPU_DEVICE AMREX_FORCE_INLINE
+ amrex::Real sg_T(const StiffenedGasParams& sg, amrex::Real rho, amrex::Real e, amrex::Real cv) {
+-    amrex::ignore_unused(sg, rho);
+-    return e / cv;
++    return (e - sg.p_inf / rho) / cv;
+ }
+ 
+ // Sound speed: c = sqrt(gamma*(p + p_inf)/rho)
+--- a/src/academic/twophase/TwoPhaseParams.H
++++ b/src/academic/twophase/TwoPhaseParams.H
+@@ -2,7 +2,7 @@
+ 
+ #include "StiffenedGas.H"
+ 
+-// Defaults preserve the existing water-like two-phase model. Individual
++// Dimensional defaults use CGS (p_inf dyn/cm^2, cv erg/g/K). Individual
+ // benchmark executables may override these at compile time for dimensionless
+ // reference problems without changing the physical default.
+ #ifndef MYPELE_TWOPHASE_GAS_GAMMA
+@@ -15,7 +15,7 @@
+ #define MYPELE_TWOPHASE_LIQUID_GAMMA 4.4
+ #endif
+ #ifndef MYPELE_TWOPHASE_LIQUID_PINF
+-#define MYPELE_TWOPHASE_LIQUID_PINF 6.0e8
++#define MYPELE_TWOPHASE_LIQUID_PINF 6.0e9
+ #endif
+ #ifndef MYPELE_TWOPHASE_LIQUID_CV
+ #define MYPELE_TWOPHASE_LIQUID_CV 4.18e7
+--- a/examples/academic/spray_test/prob.H
++++ b/examples/academic/spray_test/prob.H
+@@ -18,6 +18,7 @@
+ 
+ #include "ProblemSpecificFunctions.H"
+ #include "prob_parm.H"
++#include "TwoPhaseParams.H"
+ 
+ AMREX_GPU_DEVICE
+ AMREX_FORCE_INLINE
+@@ -62,10 +63,11 @@
+   amrex::Real e_int;
+   if (is_liquid) {
+     // StiffenedGas: e = (p + γ*p∞) / ((γ-1)*ρ)
+-    constexpr amrex::Real gamma_l = 4.4;
+-    constexpr amrex::Real p_inf = 6.0e8;
++    constexpr amrex::Real gamma_l = MYPELE_TWOPHASE_LIQUID_GAMMA;
++    constexpr amrex::Real p_inf = MYPELE_TWOPHASE_LIQUID_PINF;
+     e_int = (prob_parm.p0 + gamma_l * p_inf) / ((gamma_l - 1.0) * prob_parm.rho0);
+-    state(i, j, k, UTEMP) = e_int / 4180.0; // SG: T = e/cv
++    state(i, j, k, UTEMP) = sg_T(twophase_liquid_params(), prob_parm.rho0, e_int,
++        MYPELE_TWOPHASE_LIQUID_CV); // CGS caloric SG model
+   } else {
+     auto eos = pele::physics::PhysicsType::eos();
+     eos.RYP2E(prob_parm.rho0, massfrac, prob_parm.p0, e_int);
+--- a/examples/academic/vof_advection_1D/prob.H
++++ b/examples/academic/vof_advection_1D/prob.H
+@@ -18,6 +18,7 @@
+ 
+ #include "ProblemSpecificFunctions.H"
+ #include "prob_parm.H"
++#include "TwoPhaseParams.H"
+ #include "vof_modules.H"
+ 
+ AMREX_GPU_DEVICE
+@@ -63,10 +64,11 @@
+   amrex::Real e_int;
+   if (is_liquid) {
+     // StiffenedGas: e = (p + γ*p∞) / ((γ-1)*ρ)
+-    constexpr amrex::Real gamma_l = 4.4;
+-    constexpr amrex::Real p_inf = 6.0e8;
++    constexpr amrex::Real gamma_l = MYPELE_TWOPHASE_LIQUID_GAMMA;
++    constexpr amrex::Real p_inf = MYPELE_TWOPHASE_LIQUID_PINF;
+     e_int = (prob_parm.p0 + gamma_l * p_inf) / ((gamma_l - 1.0) * prob_parm.rho0);
+-    state(i, j, k, UTEMP) = e_int / 4180.0; // SG: T = e/cv
++    state(i, j, k, UTEMP) = sg_T(twophase_liquid_params(), prob_parm.rho0, e_int,
++        MYPELE_TWOPHASE_LIQUID_CV); // CGS caloric SG model
+   } else {
+     auto eos = pele::physics::PhysicsType::eos();
+     eos.RYP2E(prob_parm.rho0, massfrac, prob_parm.p0, e_int);
+--- a/examples/academic/bubble_rise/prob.H
++++ b/examples/academic/bubble_rise/prob.H
+@@ -13,6 +13,7 @@
+ #include "PeleC.H"
+ #include "ProblemSpecificFunctions.H"
+ #include "StiffenedGas.H"
++#include "TwoPhaseParams.H"
+ #include "Tagging.H"
+ 
+ AMREX_GPU_DEVICE AMREX_FORCE_INLINE
+@@ -42,8 +43,8 @@
+   const amrex::Real light_fraction = 1.0 - alpha;
+   const amrex::Real rho =
+     prob_parm.rho_heavy * alpha + prob_parm.rho_light * light_fraction;
+-  const amrex::Real gamma_gas = 1.4;
+-  constexpr StiffenedGasParams sg = {4.4, 6.0e8};
++  const amrex::Real gamma_gas = MYPELE_TWOPHASE_GAS_GAMMA;
++  constexpr StiffenedGasParams sg = twophase_liquid_params();
+   const amrex::Real e =
+     (alpha > 0.5) ? sg_e(sg, rho, prob_parm.p0)
+                   : prob_parm.p0 / ((gamma_gas - 1.0) * rho);
+@@ -55,7 +56,7 @@
+   state(i, j, k, UEINT) = rho * e;
+   state(i, j, k, UEDEN) = rho * e;
+ 
+-  constexpr amrex::Real cv_liquid = 4.18e7;
++  constexpr amrex::Real cv_liquid = MYPELE_TWOPHASE_LIQUID_CV;
+   state(i, j, k, UTEMP) =
+     (alpha > 0.5) ? sg_T(sg, rho, e, cv_liquid) : prob_parm.p0 / rho;
+ 
+--- a/test/unit/test_twophase_eos.cpp
++++ b/test/unit/test_twophase_eos.cpp
+@@ -95,7 +95,7 @@
+         rho_liq, e_liq, 1.0, y, gas, water_like, cv_liq);
+     require_near(liquid_res.p, p_liq, 1.0e-7,
+                  "pure liquid branch uses stiffened-gas pressure");
+-    require_near(liquid_res.T, e_liq / cv_liq, 1.0e-12,
++    require_near(liquid_res.T, (e_liq - water_like.p_inf / rho_liq) / cv_liq, 1.0e-12,
+                  "pure liquid branch uses liquid cv temperature");
+     require_near(liquid_res.cs, sg_cs(water_like, rho_liq, p_liq), 1.0e-8,
+                  "pure liquid branch uses stiffened-gas sound speed");
+--- a/src/academic/twophase/TwoPhaseHLLC.H
++++ b/src/academic/twophase/TwoPhaseHLLC.H
+@@ -58,8 +58,8 @@
+ //      p_L              p*              p*                p_R
+ //      e_L              e*_L            e*_R              e_R
+ //
+-// Star-state internal energy uses stiffened-gas EOS at p*:
+-//   e*_K = (p* + γ_K·p_∞,K) / ((γ_K-1)·ρ*_K)      K = L, R
++// Star total energy satisfies the Rankine-Hugoniot energy jump.
++// The PVRS estimate is used only for outer-wave speeds, not as star pressure.
+ //
+ // Species are passively advected: Y_face follows the upwind side.
+ // ============================================================================
+@@ -89,12 +89,12 @@
+ 
+     // ---- 3. Wave speed q_k factor (stiffened-gas compatible) ----
+     // q = 1 for rarefaction (p* ≤ p); q > 1 for shock
+-    auto wave_q = [](amrex::Real ps, amrex::Real pk, amrex::Real gk) {
++    auto wave_q = [](amrex::Real ps, amrex::Real pk, amrex::Real gk, amrex::Real pinf) {
+         if (ps <= pk) { return 1.0; }
+-        return std::sqrt(1.0 + (gk + 1.0) / (2.0 * gk) * (ps / pk - 1.0));
++        return std::sqrt(1.0 + (gk + 1.0) / (2.0 * gk) * ((ps - pk) / (pk + pinf)));
+     };
+-    const amrex::Real qL = wave_q(pstar, pL, eosL.gamma);
+-    const amrex::Real qR = wave_q(pstar, pR, eosR.gamma);
++    const amrex::Real qL = wave_q(pstar, pL, eosL.gamma, eosL.p_inf);
++    const amrex::Real qR = wave_q(pstar, pR, eosR.gamma, eosR.p_inf);
+ 
+     // ---- 4. Nonlinear wave speeds ----
+     const amrex::Real SL = uL - cL * qL;
+@@ -110,15 +110,15 @@
+     const amrex::Real rhoL_star = rhoL * (SL - uL) / (SL - Sstar);
+     const amrex::Real rhoR_star = rhoR * (SR - uR) / (SR - Sstar);
+ 
+-    // ---- 7. Star region internal energies (stiffened-gas EOS at p*) ----
+-    const amrex::Real eL_star = twophase_internal_energy(rhoL_star, pstar, eosL);
+-    const amrex::Real eR_star = twophase_internal_energy(rhoR_star, pstar, eosR);
+-
+-    // Total energy per unit mass: E = e + 0.5*u^2
++    // ---- 7. Conservative star energy from the energy jump condition ----
+     const amrex::Real EL = 0.5 * uL * uL + eL;
+     const amrex::Real ER = 0.5 * uR * uR + eR;
+-    const amrex::Real EL_star = 0.5 * Sstar * Sstar + eL_star;
+-    const amrex::Real ER_star = 0.5 * Sstar * Sstar + eR_star;
++    const amrex::Real EL_star = EL + (Sstar-uL) *
++        (Sstar + pL/(rhoL*(SL-uL)));
++    const amrex::Real ER_star = ER + (Sstar-uR) *
++        (Sstar + pR/(rhoR*(SR-uR)));
++    const amrex::Real eL_star = EL_star - 0.5*Sstar*Sstar;
++    const amrex::Real eR_star = ER_star - 0.5*Sstar*Sstar;
+ 
+     // ---- 8. Upwind based on wave speeds ----
+     amrex::Real flux_rho_tmp, flux_u_tmp, flux_E_tmp, flux_eint_tmp;
+--- /dev/null
++++ b/tools/test_cfd_core_regressions.py
+@@ -0,0 +1,47 @@
++import pathlib,subprocess,tempfile,json
++root=pathlib.Path(__file__).resolve().parents[1]
++out={}
++def run(cmd,**kw):
++ p=subprocess.run(cmd,capture_output=True,text=True,timeout=90,**kw)
++ return {'command':cmd,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr}
++with tempfile.TemporaryDirectory(prefix='cfd_repair_regression_') as td:
++ pathlib.Path(td,'AMReX_Config.H').write_text((root/'test/unit/AMReX_Config.H.in').read_text())
++ base=root/'external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base'
++ cmd=['g++','-std=c++20','-O1','-g','-fsanitize=address,undefined','-fno-omit-frame-pointer','-DAMREX_SPACEDIM=2','-DBL_SPACEDIM=2','-DAMREX_GPU_MAX_THREADS=0','-DNUM_ADV=1','-DNUM_SPECIES=3']
++ for d in [base,pathlib.Path(td),root/'test/unit',root/'external/PeleC/Source',root/'src/academic/vof',root/'src/academic/twophase']: cmd+=['-I'+str(d)]
++ text=(root/'external/PeleC/Source/Godunov.H').read_text()
++ segment=text[text.index('    amrex::Real Ystar[NUM_SPECIES];'):text.index('    // Tangential momenta via passive advection')]
++ cpp='''#include "TwoPhaseHLLC.H"
++#include "VOF_FCT.H"
++#include <vector>
++#include <iostream>
++#include <cmath>
++int main(){
++ std::vector<double> a(8*NVAR,-999.);amrex::Array4<double> flx(a.data(),{0,0,0},{8,1,1},NVAR);
++ int i=0,j=0,k=0;int f_idx[3]={UMX,UMY,UMZ};
++ double rhol=1.,rhor=1.,ul=1.,ur=1.,pl=1e5,pr=1e5,eL=2.5e5,eR=2.5e5,ustar;
++ double spl[3]={.2,.3,.5},spr[3]={.2,.3,.5};PhaseEOSParams eosL_use={1.4,0},eosR_use={1.4,0};
++'''+segment+'''
++ for(int n=0;n<3;++n){
++  if(std::abs(flx(0,0,0,UFS+n)-spl[n])>1e-12) return 1;
++  for(int x=1;x<8;++x) if(flx(x,0,0,UFS+n)!=-999.) return 2;
++ }
++ std::vector<double> b(25,.5);amrex::Array4<double> alpha(b.data(),{0,0,0},{5,5,1},1);
++ for(int y=0;y<5;++y)for(int x=0;x<5;++x)alpha(x,y,0)=.1+.1*x;
++ double fx,fy,fz;amrex::GpuArray<double,2> dx={1.,1.};
++ vof_mules_body_force(2,2,0,alpha,dx,fx,fy,fz,0);
++ if(std::abs(fx-.021)>1e-12 || fy!=0. || fz!=0.)return 3;
++ std::cout<<"PASS actual Godunov HLLC scatter: three species, eight cells, untouched neighbors; scalar-alpha helper under ASan/UBSan\\n";
++}
++'''
++ exe=td+'/core'
++ out['build']=run(cmd+['-x','c++','-','-o',exe],input=cpp)
++ if out['build']['exit']==0: out['run']=run([exe])
++ hydro=(root/'external/PeleC/Source/Hydro.cpp').read_text()
++ out['hydro_contract']={'uses_fillpatched_S': 'get_new_data(State_Type).const_array(mfi)' not in hydro,
++ 'ghost_assert': 'S.nGrow() >= 2' in hydro, 'mules_rejected':'pele.use_mules is unsupported' in hydro,
++ 'no_artificial_mules_force':'vof_mules_body_force(' not in hydro}
++print(json.dumps(out))
++
++assert out["build"]["exit"] == 0 and out.get("run", {}).get("exit") == 0, out
++assert all(out["hydro_contract"].values()), out
+--- a/external/PeleC/Source/PPM.cpp
++++ b/external/PeleC/Source/PPM.cpp
+@@ -194,6 +194,44 @@
+       }
+     }
+ 
++    // WENO is not bound-preserving. Limit each characteristic integral
++    // toward the admissible cell primitive state BEFORE an EOS evaluation.
++    // One factor is shared by all primitive components of that integral.
++    // A negative species at a zero-species donor reduces locally to first
++    // order; no evolved cell species or conservative energy is clipped.
++    for (int side = 0; side < 2; ++side) {
++      for (int wave = 0; wave < 3; ++wave) {
++        amrex::Real theta = 1.0;
++        for (int n = 0; n < QVAR; ++n) {
++          const amrex::Real candidate = side == 0 ? Im[n][wave] : Ip[n][wave];
++          const amrex::Real donor = q_arr(iv, n);
++          if (!std::isfinite(candidate)) { theta = 0.0; }
++          const bool positive = n == QRHO || n == QPRES;
++          const bool species = n >= QFS && n < QFS + NUM_SPECIES;
++          if (positive || species) {
++            const amrex::Real lower = positive ? 1.0e-8*donor : 0.0;
++            if (candidate < lower) {
++              theta = amrex::min(theta, (donor-lower)/(donor-candidate));
++            }
++          }
++        }
++        theta = amrex::max(0.0, amrex::min(1.0, theta));
++        if (theta < 1.0) { theta *= 1.0 - 1.0e-12; }
++        amrex::Real sumY = 0.0;
++        for (int n = 0; n < QVAR; ++n) {
++          amrex::Real& value = side == 0 ? Im[n][wave] : Ip[n][wave];
++          // Avoid 0*NaN when a nonfinite reconstruction selects the donor.
++          value = theta == 0.0 ? q_arr(iv,n) :
++                    q_arr(iv,n) + theta*(value-q_arr(iv,n));
++          if (n >= QFS && n < QFS+NUM_SPECIES) { sumY += value; }
++        }
++        for (int n = QFS; n < QFS+NUM_SPECIES; ++n) {
++          amrex::Real& value = side == 0 ? Im[n][wave] : Ip[n][wave];
++          value /= sumY;
++        }
++      }
++    }
++
+     // PeleC does source term tracing in pc_transx, pc_transy, and
+     // pc_transz. So to be consistent we remove the source term
+     // tracing here. However, Nyx and Castro do the source term
+@@ -322,6 +360,18 @@
+ 
+       // This allows the (rho e) to take advantage of (pressure > small_pres)
+       amrex::Real eint = 0;
++      // Characteristic projection can overshoot again after integration.
++      // Recover the complete face primitive state if thermodynamics or any
++      // velocity is inadmissible, rather than using a DBL_MIN EOS state.
++      if (!std::isfinite(qp(iv, QRHO)) ||
++          !std::isfinite(qp(iv, QPRES)) ||
++          qp(iv, QRHO) <= 1.0e-8*q_arr(iv, QRHO) ||
++          qp(iv, QPRES) <= 1.0e-8*q_arr(iv, QPRES) ||
++          !std::isfinite(qp(iv, QU)) ||
++          !std::isfinite(qp(iv, QV)) ||
++          !std::isfinite(qp(iv, QW))) {
++        for (int n=0; n<QVAR; ++n) { qp(iv, n)=q_arr(iv,n); }
++      }
+       amrex::Real massfrac_p[NUM_SPECIES];
+       for (int species = 0; species < NUM_SPECIES; ++species) {
+         massfrac_p[species] = qp(iv, species + QFS);
+@@ -413,6 +463,18 @@
+       // This allows the (rho e) to take advantage of (pressure >
+       // small_pres)
+       amrex::Real eint = 0;
++      // Characteristic projection can overshoot again after integration.
++      // Recover the complete face primitive state if thermodynamics or any
++      // velocity is inadmissible, rather than using a DBL_MIN EOS state.
++      if (!std::isfinite(qm(ivp1, QRHO)) ||
++          !std::isfinite(qm(ivp1, QPRES)) ||
++          qm(ivp1, QRHO) <= 1.0e-8*q_arr(iv, QRHO) ||
++          qm(ivp1, QPRES) <= 1.0e-8*q_arr(iv, QPRES) ||
++          !std::isfinite(qm(ivp1, QU)) ||
++          !std::isfinite(qm(ivp1, QV)) ||
++          !std::isfinite(qm(ivp1, QW))) {
++        for (int n=0; n<QVAR; ++n) { qm(ivp1, n)=q_arr(iv,n); }
++      }
+       amrex::Real massfrac_m[NUM_SPECIES];
+       for (int species = 0; species < NUM_SPECIES; ++species) {
+         massfrac_m[species] = qm(ivp1, species + QFS);
+--- a/examples/academic/shock_droplet/prob.H
++++ b/examples/academic/shock_droplet/prob.H
+@@ -7,6 +7,22 @@
+ #include <AMReX_FArrayBox.H>
+ 
+ #include "mechanism.H"
++
++// Explicit supported mechanism mappings. Lu's 88-species mechanism uses
++// lowercase generated identifiers; the transport-only 3-species model uses
++// uppercase. Never infer species indices from their order in a mechanism.
++#if defined(nc7h16_ID) && defined(o2_ID) && defined(n2_ID)
++constexpr int shock_heptane_id = nc7h16_ID;
++constexpr int shock_oxygen_id = o2_ID;
++constexpr int shock_nitrogen_id = n2_ID;
++#elif defined(NC7H16_ID) && defined(O2_ID) && defined(N2_ID)
++constexpr int shock_heptane_id = NC7H16_ID;
++constexpr int shock_oxygen_id = O2_ID;
++constexpr int shock_nitrogen_id = N2_ID;
++#else
++#error "shock_droplet requires an explicit n-heptane/O2/N2 mechanism mapping"
++#endif
++
+ 
+ #include "IndexDefines.H"
+ #include "Constants.H"
+@@ -37,9 +53,9 @@
+ 
+   // Mass fractions: air with optional heptane vapor for reacting spray gates.
+   amrex::Real massfrac[NUM_SPECIES] = {0.0};
+-  massfrac[NC7H16_ID] = prob_parm.Y_NC7H16;
+-  massfrac[O2_ID] = prob_parm.Y_O2;
+-  massfrac[N2_ID] = prob_parm.Y_N2;
++  massfrac[shock_heptane_id] = prob_parm.Y_NC7H16;
++  massfrac[shock_oxygen_id] = prob_parm.Y_O2;
++  massfrac[shock_nitrogen_id] = prob_parm.Y_N2;
+ 
+   auto eos = pele::physics::PhysicsType::eos();
+   amrex::Real rho, eint;
+--- a/examples/academic/shock_droplet/GNUmakefile
++++ b/examples/academic/shock_droplet/GNUmakefile
+@@ -28,6 +28,9 @@
+ PELE_USE_MAGMA = FALSE
+ PELE_COMPILE_AJACOBIAN = FALSE
+ Eos_Model := Fuego
++# Default is an explicitly NONREACTING transport/breakup benchmark.
++# For chemistry smoke testing build with Chemistry_Model=heptane_lu_88sk
++# and use inputs.reacting_smoke. The zero-reaction runtime guard remains.
+ Chemistry_Model := heptane_3sp
+ Transport_Model := Simple
+ 
+@@ -38,6 +41,11 @@
+ PELE_HOME := ../../../external/PeleC
+ MY_PELE_HOME := ../../..
+ 
++# A mechanism changes NUM_SPECIES and generated code but GNU Make does not
++# invalidate old objects merely because Chemistry_Model changed. Isolate its
++# complete object/dependency cache to prevent ABI-mismatched stale linking.
++TMP_BUILD_DIR ?= tmp_build_dir/$(Chemistry_Model)
++
+ # GNU Make
+ Bpack := ./Make.package
+ Blocs := .
+--- /dev/null
++++ b/examples/academic/shock_droplet/inputs.reacting_smoke
+@@ -0,0 +1,41 @@
++# Academic gas-phase chemistry smoke; not gas-liquid detonation validation.
++# Build: make Chemistry_Model=heptane_lu_88sk EBASE=reacting_smoke
++# CGS units. Spray is disabled to isolate the chemistry path.
++max_step = 4
++stop_time = -1
++geometry.is_periodic = 1 1
++geometry.coord_sys = 0
++geometry.prob_lo = 0 0
++geometry.prob_hi = 1 1
++amr.n_cell = 8 8
++amr.blocking_factor = 4
++amr.max_grid_size = 8
++amr.max_level = 0
++pelec.lo_bc = "Interior" "Interior"
++pelec.hi_bc = "Interior" "Interior"
++pelec.do_hydro = 0
++pelec.do_react = 1
++pelec.do_spray_particles = 0
++# Stiff 88-species chemistry: explicit RK64 fails this time-step test.
++# CPU CVODE + GMRES is the tested path; do not infer GPU support from this.
++pelec.chem_integrator = "ReactorCvode"
++cvode.solve_type = "GMRES"
++ode.rtol = 1.0e-8
++ode.atol = 1.0e-14
++pelec.allow_negative_energy = 1
++pelec.fixed_dt = 1.0e-8
++amr.checkpoint_files_output = 0
++amr.plot_int = 1
++amr.plot_vars = density Temp rho_nc7h16 rho_o2 rho_h2o rho_co2
++amr.derive_plot_vars = pressure
++pelec.plot_massfrac = 1
++prob.p_left = 1.0e6
++prob.p_right = 1.0e6
++prob.T_left = 1400
++prob.T_right = 1400
++prob.diaphragm = 0.5
++prob.Y_NC7H16 = 0.062
++prob.Y_O2 = 0.218
++prob.Y_N2 = 0.720
++amrex.the_arena_init_size = 0
++amrex.abort_on_unused_inputs = 1
+--- /dev/null
++++ b/tools/test_source_volume_integration.py
+@@ -0,0 +1,38 @@
++import pathlib,subprocess,shlex,json,os
++import argparse
++parser=argparse.ArgumentParser(description="Compile and run composite AMR/EB source-volume tests using a current CPU MPI LMeX build log")
++parser.add_argument('--compile-log',type=pathlib.Path,required=True)
++parser.add_argument('--output',type=pathlib.Path,required=True)
++args=parser.parse_args()
++root=pathlib.Path(__file__).resolve().parents[1]
++case=root/'examples/engineering/h2_leak_3d'
++outdir=args.output.resolve()
++outdir.mkdir(exist_ok=False)
++lines=args.compile_log.read_text().splitlines()
++compile_line=next(s for s in lines if s.startswith('mpicxx ') and ' -c pelelmex_prob.cpp ' in s)
++link_line=next(s for s in reversed(lines) if s.startswith('mpicxx ') and ' -o ' in s and ' -c ' not in s)
++args=shlex.split(compile_line)
++source=root/'test/integration/test_source_volume_amr.cpp'
++obj=outdir/'source_volume_test.o';exe=outdir/'source_volume_test.ex'
++args[args.index('pelelmex_prob.cpp')]=str(source)
++args[args.index('-o')+1]=str(obj)
++args=[arg for arg in args if arg not in ('-MMD','-MP')]
++def run(cmd,**kw):
++ p=subprocess.run(cmd,cwd=case,capture_output=True,text=True,timeout=100,**kw)
++ return {'command':cmd,'exit':p.returncode,'stdout':p.stdout,'stderr':p.stderr[-12000:]}
++out={'compile':run(args)}
++if out['compile']['exit']==0:
++ link=shlex.split(link_line)
++ link[link.index('-o')+1]=str(exe)
++ oldmain=[a for a in link if a.endswith('/main.o')]
++ assert len(oldmain)==1,oldmain
++ link[link.index(oldmain[0])]=str(obj)
++ out['link']=run(link)
++ if out['link']['exit']==0:
++  env=os.environ.copy();env.pop('DISPLAY',None);env['OMP_NUM_THREADS']='1'
++  for nrank in [1,2,8]:
++   out['mpi_'+str(nrank)]=run(['timeout','45','mpirun','--bind-to','none','-np',str(nrank),str(exe)],env=env)
++(outdir/'result.json').write_text(json.dumps(out,indent=2))
++print(json.dumps(out))
++
++assert all(out.get(key, {}).get("exit") == 0 for key in ("compile","link","mpi_1","mpi_2","mpi_8")), out
+--- /dev/null
++++ b/tools/test_riemann_thermochemistry.py
+@@ -0,0 +1,41 @@
++import pathlib,subprocess,shlex,json
++import argparse
++parser=argparse.ArgumentParser(description="Exercise production Riemann code with the actual Fuego thermochemistry")
++parser.add_argument('--compile-log',type=pathlib.Path,required=True)
++parser.add_argument('--output',type=pathlib.Path,required=True)
++args_cli=parser.parse_args()
++r=pathlib.Path(__file__).resolve().parents[1]
++d=args_cli.output.resolve();d.mkdir(parents=True,exist_ok=False)
++case=r/'examples/engineering/h2_leak_3d'
++line=next(x for x in args_cli.compile_log.read_text().splitlines() if x.startswith('mpicxx ') and ' -c pelelmex_prob.cpp ' in x)
++code=(r/'external/PeleC/Source/Riemann.H').read_text().replace('#include "PeleC.H"','#include <AMReX.H>\n#include <AMReX_Math.H>\n#include "Constants.H"\n#include <iostream>')
++code+=r''' 
++int main() {
++ double y[NUM_SPECIES]={};y[H2O_ID]=1.;auto eos=pele::physics::PhysicsType::eos();
++ for(double vel: {0.,100000.,284000.,500000.}) {
++  double rho=.00176155,p=1.8e7,c;eos.RPY2Cs(rho,p,y,c);
++  double us,fr,fy[NUM_SPECIES],fu,fv,fw,fe,fi,qu,qv,qw,qp,qg;
++  riemann(rho,-vel,0,0,p,y,rho,vel,0,0,p,y,1,c,us,fr,fy,fu,fv,fw,fe,fi,qu,qv,qw,qp,qg);
++  for(double value:{us,fr,fu,fv,fw,fe,fi,qu,qv,qw,qp,qg}) if(!std::isfinite(value)) return 1;
++  if(fr!=0. || fe!=0.)return 2;
++ }
++ // Unequal reconstructed compositions must never create wall mass/energy flow.
++ double yl[NUM_SPECIES]={};yl[H2_ID]=.1;yl[O2_ID]=.9;
++ double us,fr,fy[NUM_SPECIES],fu,fv,fw,fe,fi,qu,qv,qw,qp,qg;
++ riemann(.001,10000,0,0,1e6,yl,.001,-10000,0,0,1e6,y,0,1e5,us,fr,fy,fu,fv,fw,fe,fi,qu,qv,qw,qp,qg);
++ if(fr!=0. || fe!=0. || fi!=0. || qu!=0.)return 3;
++ for(double f:fy)if(f!=0.)return 4;
++ std::cout<<"PASS actual Fuego/Riemann: finite expansion fluxes and impermeable wall fluxes\n";
++}
++'''
++src=d/'probe.cpp';src.write_text(code)
++args=shlex.split(line);args[args.index('pelelmex_prob.cpp')]=str(src)
++args[args.index('-o')+1]=str(d/'probe');args=[x for x in args if x not in ('-c','-MMD','-MP')]
++args+=['-I'+str(r/'external/PeleC/Source')]
++p=subprocess.run(args,cwd=case,capture_output=True,text=True,timeout=60)
++out={'compile_exit':p.returncode,'stderr':p.stderr[-12000:]}
++if p.returncode==0:
++ p=subprocess.run([str(d/'probe')],capture_output=True,text=True,timeout=20);out.update(exit=p.returncode,stdout=p.stdout,stderr=p.stderr)
++print(json.dumps(out))
++
++assert out["compile_exit"] == 0 and out.get("exit") == 0, out
+--- /dev/null
++++ b/tools/check_cfd_run_log.py
+@@ -0,0 +1,33 @@
++#!/usr/bin/env python3
++"""Check one completed solver log and its recorded process exit code."""
++import argparse
++from pathlib import Path
++import re
++
++
++def check_log(log, exit_code):
++    if int(exit_code) != 0:
++        raise ValueError(f'process exited with code {exit_code}')
++    text=Path(log).read_text(errors='replace')
++    patterns=(r'amrex::(?:Abort|Error)', r'Assertion.*failed', r'SIG(?:ABRT|SEGV|FPE)',r'Segmentation fault',r'Floating point exception',
++              r'Simulation stopped early',r'NaNs detected in the Solution',
++              r'CVODE[^\n]*(?:failed|failure|flag\s*=\s*-\d+)',
++              r'CUDA[^\n]*(?:illegal memory access|out of memory|error\s*[:=])')
++    for pattern in patterns:
++        match=re.search(pattern,text,re.I)
++        if match: raise ValueError(f'current run has fatal marker: {match.group(0)}')
++    if not re.search(r'AMReX[^\n]*finalized',text):
++        raise ValueError('normal AMReX finalization marker absent')
++    return 'PASS process/log health only; raw-field physical checks still required'
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--log',type=Path,required=True)
++    p.add_argument('--exit-code',type=int,required=True)
++    a=p.parse_args()
++    try: print(check_log(a.log,a.exit_code))
++    except ValueError as e: raise SystemExit('FAIL: '+str(e))
++
++
++if __name__=='__main__':main()
+--- a/README.md
++++ b/README.md
+@@ -1,11 +1,13 @@
+-# my-pele Current Status
++> **2026-09-09 审查修正：旧 PASS 不代表当前物理验收。** 7–8 月的汇总、认证与并行能力报告保留为历史记录；其中冷流热点、零反应机理和缺失全场数据的结论已被独立审查否定或降级。当前依据为 [修复说明与复验方法](docs/codex_audit/repair_20260909.md)。本轮不开展真实 CAD 接入及实际三维泄漏/火灾算例验证。VOF 混合物闭合、PLIC 主推进和气液爆轰完整认证仍不完备。
++
++# my-pele 历史状态入口（以下为审查前记录）
+ 
+ This repository is the current `/home/cj/my-pele` working tree for the PeleC/PeleLMeX
+ CFD program. Older README content was replaced because it contained stale progress
+ claims, obsolete dependency notes, and encoding damage. Detailed history remains in
+ `PROGRESS.md` and the evidence reports under `docs/codex_audit/evidence/`.
+ 
+-## Current Authoritative Entry Points
++## 历史入口：不得替代 2026-09-09 的复验结论
+ 
+ Operator runbook:
+ 
+--- a/PROGRESS.md
++++ b/PROGRESS.md
+@@ -1,3 +1,5 @@
++> **2026-09-09 审查修正：旧 PASS 不代表当前物理验收。** 7–8 月的汇总、认证与并行能力报告保留为历史记录；其中冷流热点、零反应机理和缺失全场数据的结论已被独立审查否定或降级。当前依据为 [修复说明与复验方法](docs/codex_audit/repair_20260909.md)。本轮不开展真实 CAD 接入及实际三维泄漏/火灾算例验证。VOF 混合物闭合、PLIC 主推进和气液爆轰完整认证仍不完备。
++
+ # Codex Takeover Notice — 2026-07-15
+ 
+ Current audit verdict: this repository contains useful prototypes and successful case runs, but it is not yet a strictly completed Phase 0-5 implementation of `pele_cfd_master_plan.md`. Treat the older completion percentages below as historical working notes until each phase is revalidated with reproducible build/test evidence.
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -1,3 +1,15 @@
++# 2026-09-09 修复后的操作约束
++
++- 以下旧笔记中的运行结果、死锁原因和后端选项是历史记录，使用前查当前源码和完整运行证据。
++- 当前修复状态见 `docs/codex_audit/repair_20260909.md`。不得从冷流、零反应机理、缺失 FAB 文件或进程异常退出生成物理 PASS。
++- PeleC 反应开关是 `pelec.do_react`；本分支的 CSF/旧 MULES 参数位于 `pele` 前缀，不能混用。
++- `pele.use_mules=1` 明确拒绝：旧体力不是 MULES。`pelec.allow_experimental_vof=1` 只允许开发调试，不代表混合物闭合或 PLIC 已完备。
++- 本次范围排除真实 CAD 和实际三维泄漏/火灾验证；保留旧结果，运行目录不得复用或清理后伪装复验。
++- 仅检查本次 run 的退出码、具体 fatal 标记、原始场和守恒。CVODE/信息文字不是错误，任何 Segfault 都先记为运行失败。
++- 切换 `shock_droplet` 机理使用独立 `TMP_BUILD_DIR`（该例已按机理分开），防止旧对象混入新 `NUM_SPECIES` 构建。
++
++---
++
+ # AGENTS.md — PeleLMeX / AMReX 项目笔记
+ 
+ ## EB2 多圆柱 MPI 死锁修复（2026-06-28）
+@@ -43,7 +55,7 @@
+ 
+ ### 注意事项
+ - 初始投影(initialProjection)有独立概率性死锁，可加 peleLM.do_init_proj=0 绕过
+-- 退出时的 Segfault 是 MPI_Finalize 析构顺序问题，不影响结果
++- 退出时的 Segfault 必须记为进程失败；析构顺序只是历史猜测，需定位并正常退出复验后才能关闭问题
+ 
+ 
+ ---
+@@ -73,9 +85,9 @@
+ ## 常见 BUG 及修复
+ 
+ ### 1. do_react=0 静默关闭反应 🔴
+-inputs 中如果有两个 `pele.do_react` 行，ParmParse 取最后一个。
++inputs 中如果有两个 `pelec.do_react` 行，ParmParse 取最后一个。
+ 症状: CVODE t=0 flag=-4，即使热点初值正确也会崩。
+-修复: 确保只有一行 `pele.do_react = 1`
++修复: 确保只有一行 `pelec.do_react = 1`
+ 
+ ### 2. 背景 UMX 误设为热点值 🔴
+ prob.H pc_initdata 的 else(背景)分支，UMX 必须 = 0.0，不能复制热点分支的 rho_hot*u_hot。
+--- a/docs/codex_audit/current_scope_operator_runbook.md
++++ b/docs/codex_audit/current_scope_operator_runbook.md
+@@ -1,3 +1,5 @@
++> **2026-09-09 审查修正：旧 PASS 不代表当前物理验收。** 7–8 月的汇总、认证与并行能力报告保留为历史记录；其中冷流热点、零反应机理和缺失全场数据的结论已被独立审查否定或降级。当前依据为 [修复说明与复验方法](repair_20260909.md)。本轮不开展真实 CAD 接入及实际三维泄漏/火灾算例验证。VOF 混合物闭合、PLIC 主推进和气液爆轰完整认证仍不完备。
++
+ # Current-Scope Operator Runbook
+ 
+ This runbook records the current evidence-backed operating path for `/home/cj/my-pele`.
+--- a/docs/user_guides/Pele_CFD_中文使用手册.md
++++ b/docs/user_guides/Pele_CFD_中文使用手册.md
+@@ -1,3 +1,5 @@
++> **运行诊断修正（2026-09-09）：** 下文错误检查只针对 `RUN_DIR` 指定的本次运行，不扫描整个 `/tmp` 或历史证据库。运行器必须把本次进程退出码保存到 `RUN_DIR/exit_code`；不能把错误后的下一条命令退出码当成求解器退出码。日志健康检查与原始场的物理验证分别进行，正常的 CVODE 初始化不算错误。
++
+ # Pele CFD 中文使用手册
+ 
+ 适用仓库：`/home/cj/my-pele`
+@@ -275,7 +277,8 @@
+ 
+ ```bash
+ grep -i "AMReX .* finalized" run.log
+-grep -i "nan\\|inf\\|Backtrace\\|Segmentation\\|CUDA error\\|Abort" run.log
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ 如果第一条能找到、第二条没有危险命中，说明至少运行层面是稳定结束的。
+--- a/docs/user_guides/从零设置完整算例_工程H2泄漏火灾与学术爆轰.md
++++ b/docs/user_guides/从零设置完整算例_工程H2泄漏火灾与学术爆轰.md
+@@ -1,3 +1,5 @@
++> **运行诊断修正（2026-09-09）：** 下文错误检查只针对 `RUN_DIR` 指定的本次运行，不扫描整个 `/tmp` 或历史证据库。运行器必须把本次进程退出码保存到 `RUN_DIR/exit_code`；不能把错误后的下一条命令退出码当成求解器退出码。日志健康检查与原始场的物理验证分别进行，正常的 CVODE 初始化不算错误。
++
+ # 从零设置完整算例：工程 H2 泄漏/火灾与学术爆轰
+ 
+ 适用仓库：`/home/cj/my-pele`
+@@ -111,7 +113,8 @@
+ tail -n 80 /tmp/codex_*/*run.log
+ 
+ # 2. 是否出现 NaN、Inf、CVODE、CUDA、Abort 等错误
+-grep -RniE "nan|inf|abort|backtrace|cvode|cuda error|segmentation" /tmp/codex_* | tail -n 80
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ 
+ # 3. 是否生成 plotfile
+ find /tmp/codex_* -maxdepth 4 -type d -name "plt[0-9][0-9][0-9][0-9][0-9]" | sort | tail
+@@ -288,7 +291,8 @@
+ 查错误：
+ 
+ ```bash
+-grep -RniE "nan|inf|abort|error|fail|cuda|segmentation" /tmp/codex_h2_leak_open_domain_* | tail -n 80
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ 看云团验证：
+@@ -603,7 +607,8 @@
+ 查错误：
+ 
+ ```bash
+-grep -RniE "nan|inf|abort|error|fail|cvode|reactor|segmentation" /tmp/codex_detonation_wave_* | tail -n 80
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ 最低通过标准：
+--- a/docs/user_guides/学术场景_气相与两相爆轰_Tutorial.md
++++ b/docs/user_guides/学术场景_气相与两相爆轰_Tutorial.md
+@@ -1,3 +1,5 @@
++> **运行诊断修正（2026-09-09）：** 下文错误检查只针对 `RUN_DIR` 指定的本次运行，不扫描整个 `/tmp` 或历史证据库。运行器必须把本次进程退出码保存到 `RUN_DIR/exit_code`；不能把错误后的下一条命令退出码当成求解器退出码。日志健康检查与原始场的物理验证分别进行，正常的 CVODE 初始化不算错误。
++
+ # 学术场景 Tutorial：气相爆轰、GPU/MPI、两相与液滴验证
+ 
+ 适用目录：`/home/cj/my-pele`
+@@ -232,7 +234,8 @@
+ grep "STEP =" run.log | tail
+ grep -i "PLOTFILE" run.log
+ grep -i "AMReX .* finalized" run.log
+-grep -i "nan\\|inf\\|Backtrace\\|Segmentation\\|CUDA error\\|Abort" run.log
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ plotfile：
+--- a/docs/user_guides/从目录到排错_完整运行教程.md
++++ b/docs/user_guides/从目录到排错_完整运行教程.md
+@@ -1,3 +1,5 @@
++> **运行诊断修正（2026-09-09）：** 下文错误检查只针对 `RUN_DIR` 指定的本次运行，不扫描整个 `/tmp` 或历史证据库。运行器必须把本次进程退出码保存到 `RUN_DIR/exit_code`；不能把错误后的下一条命令退出码当成求解器退出码。日志健康检查与原始场的物理验证分别进行，正常的 CVODE 初始化不算错误。
++
+ # Pele CFD 从目录到排错完整运行教程
+ 
+ 适用仓库：`/home/cj/my-pele`
+@@ -527,7 +529,8 @@
+ 常查关键词：
+ 
+ ```bash
+-grep -Ei "nan|inf|abort|error|fail|segmentation|illegal|diverg|cvode|reactor" path/to/run.log
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ 正常日志通常会持续出现：
+@@ -719,7 +722,8 @@
+ 检查：
+ 
+ ```bash
+-grep -RniE "nan|inf|diverg|abort" docs/codex_audit/evidence examples | tail -n 80
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ 优先处理：
+--- a/docs/user_guides/工程场景_泄漏扩散火灾_Tutorial.md
++++ b/docs/user_guides/工程场景_泄漏扩散火灾_Tutorial.md
+@@ -1,3 +1,5 @@
++> **运行诊断修正（2026-09-09）：** 下文错误检查只针对 `RUN_DIR` 指定的本次运行，不扫描整个 `/tmp` 或历史证据库。运行器必须把本次进程退出码保存到 `RUN_DIR/exit_code`；不能把错误后的下一条命令退出码当成求解器退出码。日志健康检查与原始场的物理验证分别进行，正常的 CVODE 初始化不算错误。
++
+ # 工程场景 Tutorial：泄漏、扩散、障碍物、着火和火灾后果
+ 
+ 适用目录：`/home/cj/my-pele`
+@@ -48,7 +50,8 @@
+ ```bash
+ grep -i "MPI initialized" /tmp/codex_h2_leak_open_domain_mpi_*/run.log
+ grep -i "AMReX .* finalized" /tmp/codex_h2_leak_open_domain_mpi_*/run.log
+-grep -i "nan\\|inf\\|Backtrace\\|CUDA error\\|Abort" /tmp/codex_h2_leak_open_domain_mpi_*/run.log
++: "${RUN_DIR:?请先设置 RUN_DIR 为本次运行目录}"
++python3 tools/check_cfd_run_log.py --log "$RUN_DIR/run.log" --exit-code "$(cat "$RUN_DIR/exit_code")"
+ ```
+ 
+ 如果 `mpi_validation.log` 里有 PASS，并且 `pltxxxxx/Level_0/Cell_H` 中 Fab 数量不少于 MPI rank 数，说明 MPI 输出分布也通过了基本检查。
+--- /dev/null
++++ b/docs/codex_audit/repair_20260909.md
+@@ -0,0 +1,68 @@
++# 2026-09-09 独立审查后的修复与复验
++
++本轮针对已确认的越界、错误验收、热点、组分与通量、源项归一化、单位及证据归档问题修复。它不是主计划全部完成声明。历史结果和失败试验均保留；每批修改的原件及前后 SHA-256 在 `repair_backups/`。
++
++## 当前可用与不可用范围
++
++- 修复了 HLLC 的 Array4 组分步长接线、标量 alpha 辅助函数的分量索引、CSF 对未填充状态幽灵层的访问。
++- 原 MULES 路径只是人为动量体力，已从主推进删除并在请求时明确拒绝。没有将其他算法重命名为 MULES。
++- VOF 混合单元的液相近似闭合与 alpha=0.5 EOS 切换仍是实验模型；PLIC 仍未接入主推进。默认拒绝此路径，`pelec.allow_experimental_vof=1` 仅供开发调试。
++- HLLC 星区总能量改为满足能量跃迁关系；stiffened-gas 波速修正包含 p_inf，温度采用零参考能偏移的 `e=cv*T+p_inf/rho`。这不是经标定的真实水物性。
++- GPU 热点按域大小定位且初始化检查实际最高温度。WENO 特征积分在 EOS 前进行统一凸限制；异常最终面状态退回有效供体。极低星区压力使用保守稳健通量回退，壁面镜像也同步组分。
++- 气相组分面通量使用共同限制因子保持组分通量总和；局部周期输运测试检查非负与守恒。该测试和短时反应算例不构成任意 CFL/网格/反应机理的全局保正证明。
++- `shock_droplet` 默认 `heptane_3sp` 保留为非反应输运/破碎基准，反应数为 0 时禁止 `pelec.do_react=1`。显式反应构建选项为 `Chemistry_Model=heptane_lu_88sk`；88 个组分、729 个反应不等于气液爆轰认证。
++- AMR/EB 泄漏与点火源按当前层级的有效流体体积归一化，排除细网格覆盖和 EB 固体。制造解只检查积分：单元立方体内流体体积 0.7，1/2/8 MPI rank 一致；未推进实际三维泄漏或火灾。
++- 真实 CAD、水密性、现场坐标、储罐实际尺寸及实际三维泄漏/火灾验证按用户要求暂缓。不能用简化几何代替这些证据。
++
++## 单位
++
++PeleC 使用 CGS：压力 dyn/cm²、密度 g/cm³、速度 cm/s、比内能 erg/g、比热 erg/(g·K)、表面张力 dyn/cm、加速度 cm/s²。常用换算：1 Pa=10 dyn/cm²；0.072 N/m=72 dyn/cm；6e8 Pa=6e9 dyn/cm²；4180 J/(kg·K)=4.18e7 erg/(g·K)。无量纲基准必须成套覆盖 EOS、初场、表面张力和重力，不能只改一项。旧泡升案例不因数值存活而升级为真实水/标准基准验证。
++
++## 复验入口
++
++从项目根目录运行。构建和运行目录必须新建；下列命令中的 `recheck-*` 首次使用，已存在则另选名称，不能先删除旧结果。
++
++```bash
++cmake -S . -B recheck-unit-20260909
++cmake --build recheck-unit-20260909 -j4
++ctest --test-dir recheck-unit-20260909 --output-on-failure
++python3 -B tools/test_cfd_core_regressions.py
++```
++
++实际 Fuego 黎曼退化测试及 AMR/EB 积分测试需要当前 CPU MPI LMeX 的完整编译日志。使用本轮已保存日志可以复现本轮环境：
++
++```bash
++python3 -B tools/test_riemann_thermochemistry.py   --compile-log repair_validation/20260909T164249/lmex_build/build.log   --output repair_validation/recheck-riemann-20260909
++python3 -B tools/test_source_volume_integration.py   --compile-log repair_validation/20260909T164249/lmex_build/build.log   --output repair_validation/recheck-source-volume-20260909
++```
++
++正庚烷反应路径：
++
++```bash
++make -C examples/academic/shock_droplet -j4   Chemistry_Model=heptane_lu_88sk EBASE=reacting_smoke
++```
++
++该例按机理分开对象缓存；不要覆盖此设计来复用旧三组分对象。`inputs.reacting_smoke` 禁用喷雾，只检验真实气相化学路径。不同机理的燃料名称可能区分大小写，Lu 机理使用 `nc7h16`，不能把旧 `NC7H16` 喷雾配置原样用于新机理。
++
++## 验收语义
++
++1. 退出码为 0、正常结束、无具体 fatal 标记，只代表进程健康。
++2. plotfile 必须保留 Header、所有 Level_*/Cell_H 及实际 FAB 二进制；checkpoint 同样保留全部数据。
++3. 所有有效流体单元检查有限值、正密度/温度/压力、组分非负及组分和。当前组分容差为 1e-12，不能用 1e-3 掩盖负质量分数。
++4. 热点初场或 H2O 的空间重分布不等于反应：短时 H2/O2 验收额外检查闭合质量预算、净燃料消耗与净产物增加。
++5. 前缘使用压力压缩梯度，记录多时刻位置及网格分辨率。两个温度峰位置之差不能作波速；两帧压力位移也不能证明自持爆轰、ZND 精度或胞格统计。
++6. 本轮 GPU/MPI 和重启对比属于有限窗口回归；自持爆轰、外部基准、长期稳定和气液胞格认证均未授予。
++
++```bash
++python3 tools/check_cfd_run_log.py   --log repair_validation/20260909T164249/gpu_final_np1/run.log   --exit-code "$(cat repair_validation/20260909T164249/gpu_final_np1/exit_code)"
++```
++
++## 归档与版本
++
++`tools/cfd_run_archive.py` 提供 `sources`、`archive`、`verify`。归档拒绝既有输出目录，核对每个文件的大小与 SHA-256，并读取数据层；源树在构建前记录，归档时检查有无漂移。vendored 依赖记录实际树哈希及所属父仓库，不把父仓库 commit 伪装为上游版本。库、编译器与运行环境仍须匹配，本地归档完整性不自动授予物理通过。
++
++```bash
++python3 tools/cfd_run_archive.py verify   docs/codex_audit/evidence/repair_20260909/gpu_final_np1
++```
++
++历史工程 C3H8/CH4 的缺失 FAB，以及已删除的 H2 `/tmp` 运行数据无法由日志补造。本轮保留缺口并重建允许范围内的新证据；工程场景须待后续获准验证时重新产生完整档案。

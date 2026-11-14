@@ -1,0 +1,187 @@
+Initializing AMReX (26.05)...
+MPI initialized with 1 MPI processes
+MPI initialized with thread support level 0
+Initializing CUDA...
+Initializing AMReX (26.05)...
+MPI initialized with 1 MPI processes
+MPI initialized with thread support level 0
+Initializing CUDA...
+Multiple GPUs are visible to each MPI rank. This is usually not an issue. But this may lead to incorrect or suboptimal rank-to-GPU mapping.!
+Multiple GPUs are visible to each MPI rank. This is usually not an issue. But this may lead to incorrect or suboptimal rank-to-GPU mapping.!
+CUDA initialized with 1 device.
+CUDA initialized with 1 device.
+amrex::Abort::0::Arena out of memory!!!
+Bytes to allocate: 12794658816 (12201 MiB)
+Memory type: GPU device memory
+MPI rank: 0
+Error: cudaMalloc returned 2: out of memory
+
+AMReX Arena usage so far:
+
+Total GPU global memory (MB): 16269
+Free  GPU global memory (MB): 3548
+[The         Arena] space allocated (MB): 0
+[The         Arena] space used      (MB): 0
+[The         Arena]: 0 allocs, 0 busy blocks, 0 free blocks
+
+
+Out of memory, see message above !!!
+SIGABRT
+See Backtrace.0 file for details
+Abort(6) on node 0 (rank 0 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 6) - process 0
+AMReX (26.05) initialized
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: f030699
+ AMReX       git hash: f030699
+ PelePhysics git hash: f030699
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: unknown
+ ===============================================
+ Simulation performed with the closed chamber algorithm 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ => Total number of state variables: 3
+ ==============================================================================
+
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 15 4.618006386 4.951963201 
+ ==============================================================================
+ Est. time step - Conv: 1.458333333e-05, divu: 1e+200
+ Initial dt: 1.458333333e-05
+
+ Doing initial projection(s) 
+
+ Initial velocity projection:   U: 15  V: 4.618006386  W: 4.951963201
+ >> After initial velocity projection:   U: 18.00317122  V: 1.750857337  W: 1.107681912
+ Est. time step - Conv: 1.215063709e-05, divu: 1e+200
+ Initial dt: 1.215063709e-05
+ Initial velocity projection:   U: 18.00317122  V: 1.750857337  W: 1.107681912
+ >> After initial velocity projection:   U: 18.09718946  V: 1.655499851  W: 1.214249955
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 1.208751229e-05, divu: 1e+200
+ STEP [-1] - Time: 0, dt 1.208751229e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.087198733
+   - Advance()::VelocityAdvance  --> Time: 0.401841654
+ >> PeleLMeX::Advance() --> Time: 0.4901152
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 1.208751229e-05, divu: 1e+200
+ STEP [-1] - Time: 0, dt 1.208751229e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.066307108
+   - Advance()::VelocityAdvance  --> Time: 0.15885926
+ >> PeleLMeX::Advance() --> Time: 0.22622651
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 1.208751229e-05, divu: 1e+200
+ STEP [-1] - Time: 0, dt 1.208751229e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.067349733
+   - Advance()::VelocityAdvance  --> Time: 0.142899459
+ >> PeleLMeX::Advance() --> Time: 0.2112172
+
+ Writing plotfile: plt00000
+
+ Writing checkpoint file: chk00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.208751229e-05, divu: 1e+200
+ STEP [0] - Time: 0, dt 1.208751229e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.0650037
+   - Advance()::VelocityAdvance  --> Time: 0.39328472
+ >> PeleLMeX::Advance() --> Time: 0.459329824
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.213673328e-05, divu: 1e+200
+ STEP [1] - Time: 1.208751229e-05, dt 1.213673328e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.064309968
+   - Advance()::VelocityAdvance  --> Time: 0.394485445
+ >> PeleLMeX::Advance() --> Time: 0.459855386
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.211055574e-05, divu: 1e+200
+ STEP [2] - Time: 2.422424557e-05, dt 1.211055574e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.068100834
+   - Advance()::VelocityAdvance  --> Time: 0.398902868
+ >> PeleLMeX::Advance() --> Time: 0.468045507
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.20994776e-05, divu: 1e+200
+ STEP [3] - Time: 3.63348013e-05, dt 1.20994776e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.066944212
+   - Advance()::VelocityAdvance  --> Time: 0.393597005
+ >> PeleLMeX::Advance() --> Time: 0.46161291
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.209218601e-05, divu: 1e+200
+ STEP [4] - Time: 4.843427891e-05, dt 1.209218601e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.066399837
+   - Advance()::VelocityAdvance  --> Time: 0.403093637
+ >> PeleLMeX::Advance() --> Time: 0.470560626
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.206749265e-05, divu: 1e+200
+ STEP [5] - Time: 6.052646491e-05, dt 1.206749265e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.065257178
+   - Advance()::VelocityAdvance  --> Time: 0.390947643
+ >> PeleLMeX::Advance() --> Time: 0.457298894
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.206983554e-05, divu: 1e+200
+ STEP [6] - Time: 7.259395757e-05, dt 1.206983554e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.065935248
+   - Advance()::VelocityAdvance  --> Time: 0.391079212
+ >> PeleLMeX::Advance() --> Time: 0.458058535
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.204643263e-05, divu: 1e+200
+ STEP [7] - Time: 8.466379311e-05, dt 1.204643263e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.065193939
+   - Advance()::VelocityAdvance  --> Time: 0.395013257
+ >> PeleLMeX::Advance() --> Time: 0.461242348
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.203708304e-05, divu: 1e+200
+ STEP [8] - Time: 9.671022574e-05, dt 1.203708304e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.065424836
+   - Advance()::VelocityAdvance  --> Time: 0.391497802
+ >> PeleLMeX::Advance() --> Time: 0.45802923
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.203965267e-05, divu: 1e+200
+ STEP [9] - Time: 0.0001087473088, dt 1.203965267e-05, Ncells 131072
+   - Advance()::MACProjection()  --> Time: 0.06697936
+   - Advance()::VelocityAdvance  --> Time: 0.395488949
+ >> PeleLMeX::Advance() --> Time: 0.46356282
+
+ Writing plotfile: plt00010
+
+ >> Final simulation time: 0.0001207869614
+
+ Writing checkpoint file: chk00010
+
+Total Time: 5.881203225
+Total GPU global memory (MB) spread across MPI: [16269 ... 16269]
+Free  GPU global memory (MB) spread across MPI: [1122 ... 1122]
+[The         Arena] max space (MB) allocated spread across MPI: [12201 ... 12201]
+[The         Arena] max space (MB) used      spread across MPI: [505 ... 505]
+[The Managed Arena] max space (MB) allocated spread across MPI: [8 ... 8]
+[The Managed Arena] max space (MB) used      spread across MPI: [0 ... 0]
+[The  Pinned Arena] max space (MB) allocated spread across MPI: [8 ... 8]
+[The  Pinned Arena] max space (MB) used      spread across MPI: [4 ... 4]
+AMReX (26.05) finalized

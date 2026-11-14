@@ -1,0 +1,344 @@
+# name   type   default
+#
+# note, name can have two values, as (a, b).  a will be the name used
+# in the inputs file, b is the variable name in the C++ class.
+
+
+@namespace: pelec PeleC static
+
+#-----------------------------------------------------------------------------
+# category: AMR
+#-----------------------------------------------------------------------------
+
+# highest order used in interpolation
+state_interp_order           int           1
+
+# how to do limiting of the state data when interpolating
+# 0: only prevent new extrema
+# 1: preserve linear combinations of state variables
+lin_limit_state_interp       int           1
+
+# Number of ghost zones for state data to have. Note that
+# if you are using radiation, choosing this to be zero will
+# be overridden since radiation needs at least one ghost zone.
+state_nghost                 int           0
+
+# do we do the hyperbolic reflux at coarse-fine interfaces?
+do_reflux                   bool           true
+
+# do we average down the fine data onto the coarse?
+do_avg_down                 bool           true
+
+# Initialize from a plot file
+init_pltfile              string          ""
+
+# Acceptable tolerance for species mass fraction when initializing from a plot file
+init_pltfile_massfrac_tol   Real         1e-8
+
+# Number of coarser levels in the init pltfile vs present simulation
+init_pltfile_coarse_levels  int         0
+
+# Checkpoint old state
+dump_old                   bool          false
+
+#-----------------------------------------------------------------------------
+# category: Processor Type
+#-----------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------
+# category: hydrodynamics
+#-----------------------------------------------------------------------------
+
+# the coefficient of the artificial viscosity
+difmag                       Real          0.1
+
+# the small pressure cutoff.  Pressures below this value will be reset
+small_pres                   Real          1.e-200
+
+# permits hydro to be turned on and off for running pure rad problems
+do_hydro                     bool          true
+
+# uses MOL aapproach to timestep advection and diffusion
+do_mol                       bool          false
+
+# use hybrid WENO scheme in PPM method
+use_hybrid_weno              bool          false
+
+# WENO scheme type in PPM method
+weno_scheme                  int           1
+
+# permits Ghost-Cells Navier-Stokes Boundary Conditions to be turned on and off
+# for advective terms (adv) and for diffusion terms (diff)
+nscbc_adv                   bool          true
+nscbc_diff                  bool          false
+
+# if true, define an external source term
+add_ext_src                 bool           false
+
+# external source term value
+external_forcing       dim_array           0.0
+
+# if true, define an additional forcing term
+add_forcing_src             bool           false
+
+# Mean velocity to define fluctuations to force
+forcing_u0                  Real           0.0
+forcing_v0                  Real           0.0
+forcing_w0                  Real           0.0
+
+# Forcing
+forcing_force               Real           0.0
+
+# reconstruction type:
+# 0: piecewise linear;
+# 1: classic Colella \& Woodward ppm;
+# 2: extrema-preserving ppm (deprecated in C++)
+ppm_type                     int           0
+
+# do we reconstruct and trace under the parabolas of the source
+# terms to the velocity
+ppm_trace_sources           bool           false
+
+# for piecewise linear, reconstruction order to use
+plm_iorder                   int           4
+
+# for mol, reconstruction order to use
+mol_iorder                   int           2
+
+# Lax Friedrich's flux
+use_laxf_flux               bool           false
+
+# flatten the reconstructed profiles around shocks to prevent them
+# from becoming too thin
+use_flattening              bool           true
+
+# Allow internal energy resets and temperature flooring to change the
+# total energy variable UEDEN in addition to the internal energy variable
+# UEINT.
+dual_energy_update_E_from_e  bool           true
+
+# Threshold value of (E - K) / E such that above eta2, we update the
+# internal energy variable UEINT to match E - K. Below this, UEINT
+# remains unchanged.
+dual_energy_eta2             Real          1.0e-4
+
+# Whether or not to allow internal energy to be less than zero
+allow_negative_energy       bool           true
+
+# Whether or not to allow the internal energy to be less than the
+# internal energy corresponding to small\_temp
+allow_small_energy          bool           true
+
+# if we are doing an external -x boundary condition, who do we interpret it?
+xl_ext_bc_type               string        ""
+
+# if we are doing an external +x boundary condition, who do we interpret it?
+xr_ext_bc_type               string        ""
+
+# if we are doing an external -y boundary condition, who do we interpret it?
+yl_ext_bc_type               string        ""
+
+# if we are doing an external +y boundary condition, who do we interpret it?
+yr_ext_bc_type               string        ""
+
+# if we are doing an external -z boundary condition, who do we interpret it?
+zl_ext_bc_type               string        ""
+
+# if we are doing an external +z boundary condition, who do we interpret it?
+zr_ext_bc_type               string        ""
+
+#use rotational frame (rf)
+do_rf                      bool        false
+
+#rf rotational speed
+rf_omega                   Real        0.0
+
+#rf axis
+rf_axis                   int        0
+
+#rf locations
+rf_axis_x                 Real        0.0
+rf_axis_y                 Real        0.0
+rf_axis_z                 Real        0.0
+
+#rf radius beyond which 
+#impose rotational velocity bc
+rf_rad                    Real         0.0
+
+#-----------------------------------------------------------------------------
+# category: diffusion
+#-----------------------------------------------------------------------------
+
+# flag for diffusion for temperature
+diffuse_temp                  bool         false
+
+# flag for diffusion for enthalpy
+diffuse_enth                  bool         false
+
+# flag for diffusion for species
+diffuse_spec                  bool         false
+
+# flag for diffusion for velocity
+diffuse_vel                   bool         false
+
+# flag for harmonic averaging of transport coefficients to the face
+transport_harmonic_mean       bool         true
+
+# flag for isothermal walls
+do_isothermal_walls           bool         false
+
+# low domain boundary isothermal temperature [K] (negative = adiabatic)
+domlo_isothermal_temp         dim_array    -1.0
+
+# hi domain boundary isothermal temperature [K] (negative = adiabatic)
+domhi_isothermal_temp         dim_array    -1.0
+
+#-----------------------------------------------------------------------------
+# category: large eddy simulation
+#-----------------------------------------------------------------------------
+
+# permits LES to be turned on and off
+do_les                       bool          false
+
+# permits explicit LES to be turned on and off
+use_explicit_filter          bool          false
+
+# Constant Smagorinsky Cs coefficient
+Cs                           Real          0.0
+
+# Constant Wale Cw coefficient
+Cw                           Real          0.0   
+
+# Constant Smagorinsky CI coefficient
+CI                           Real          0.0
+
+# Constant Smagorinsky PrT coefficient
+PrT                          Real          1.0
+
+#-----------------------------------------------------------------------------
+# category: EB
+#-----------------------------------------------------------------------------
+
+# set the EB boundary temperature for isothermal walls
+eb_boundary_T                Real         1.0
+
+# flag for isothermal EB boundary
+eb_isothermal                bool         true
+
+# flag for no slip EB boundary
+eb_noslip                    bool         true
+
+# redistribution type in amrex-hydro
+redistribution_type          string       "StateRedist"
+
+# flag to clean massfractions on EB cut cells
+eb_clean_massfrac           bool          true
+
+# threshold to use for cleaning massfractions on EB cut cells
+eb_clean_massfrac_threshold  Real         0.0
+
+# Max order used for SRD slopes
+eb_srd_max_order             int          0
+
+# Weight types for ML redistribution (0 = 1.0, 1 = energy, 2 = density, 3 = vfrac)
+eb_weights_type              int          2
+
+# Set body state in covered cells to 0
+eb_zero_body_state           bool         false
+
+# Use the user-defined EB state
+eb_problem_state             bool         false
+
+#-----------------------------------------------------------------------------
+# category: method of manufactured solution
+#-----------------------------------------------------------------------------
+
+# permits MMS (using MASA library) to be turned on and off
+do_mms                       bool          false
+
+# name of the MMS MASA solution to load
+masa_solution_name           string        "ad_cns_3d_les"
+
+#-----------------------------------------------------------------------------
+# category: timestep control
+#-----------------------------------------------------------------------------
+
+# a fixed timestep to use for all steps (negative turns it off)
+fixed_dt                     Real         -1.0
+
+# the initial timestep (negative uses the step returned from the timestep
+# constraints)
+initial_dt                   Real         -1.0
+
+# the smallest valid timestep---if we go below this, we abort
+dt_cutoff                    Real          0.0
+
+# the largest valid timestep---limit all timesteps to be no larger than this
+max_dt                       Real          1.e200
+
+# the effective Courant number to use---we will not allow the hydrodynamic
+# waves to cross more than this fraction of a zone over a single timestep
+cfl                          Real          0.8
+
+# a factor by which to reduce the first timestep from that requested by
+# the timestep estimators
+init_shrink                  Real          1.0
+
+# the maximum factor by which the timestep can increase from one step to
+# the next.
+change_max                   Real          1.1
+
+# Number of iterations for the SDC advance.
+sdc_iters                    int           1
+
+# Number of iterations for the MOL advance.
+mol_iters                    int           1
+
+#-----------------------------------------------------------------------------
+# category: reactions
+#-----------------------------------------------------------------------------
+
+# permits reactions to be turned on and off
+do_react                    bool           false
+
+# chemistry integrator
+chem_integrator              string        "ReactorNull"
+
+#-----------------------------------------------------------------------------
+# category: parallelization
+#-----------------------------------------------------------------------------
+
+bndry_func_thread_safe      bool           true
+
+#-----------------------------------------------------------------------------
+# category: diagnostics
+#-----------------------------------------------------------------------------
+
+# display breakdown of energy sources
+print_energy_diagnostics     bool           (false, true)
+
+# how often (number of coarse timesteps) to compute integral sums (for runtime diagnostics)
+sum_interval                 int           -1
+
+# record extrema of certain variables along with the integral sums
+track_extrema               bool           true
+
+# track the extrema of this species in addition to other quantities
+extrema_spec_name            string	   ""
+
+# how often (simulation time) to compute integral sums (for runtime diagnostics)
+sum_per                      Real          -1.0e0
+
+# abort if we exceed CFL = 1 over the course of a timestep
+hard_cfl_limit               bool           true
+
+# a string describing the simulation that will be copied into the
+# plotfile's {\tt job\_info} file
+job_name                     string        ""
+
+#-----------------------------------------------------------------------------
+# category: misc combustion
+#-----------------------------------------------------------------------------
+
+flame_trac_name              string        ""
+fuel_name                    string        ""

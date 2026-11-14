@@ -1,0 +1,119 @@
+{
+  "fail_count": 0,
+  "gate_count": 9,
+  "gates": [
+    {
+      "claim": "gas-phase 0D/2D/3D detonation, AMR-front tracking, WENO5, strong-shock, chemistry/rate-kernel and 2GPU MPI+CUDA readiness",
+      "failures": [],
+      "name": "gas_detonation_priority",
+      "priority": 1,
+      "source_report": "docs/codex_audit/evidence/academic_gas_detonation_priority_matrix_20260731/academic_gas_detonation_priority_matrix_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-DETONATION-PRIORITY-MATRIX",
+      "status": "PASS"
+    },
+    {
+      "claim": "reacting gas-liquid/spray detonation response and closed coupled-budget readiness",
+      "failures": [],
+      "name": "gas_liquid_detonation_certification",
+      "priority": 2,
+      "source_report": "docs/codex_audit/evidence/academic_gas_liquid_detonation_certification_20260731/academic_gas_liquid_detonation_certification_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CERTIFICATION",
+      "status": "PASS"
+    },
+    {
+      "claim": "reacting heptane-air droplet/spray detonation scout on single GPU and 2-rank/2-device MPI+CUDA",
+      "failures": [],
+      "name": "gas_liquid_detonation_cuda_scout",
+      "priority": 3,
+      "source_report": "docs/codex_audit/evidence/academic_gas_liquid_detonation_cuda_scout_20260731/academic_gas_liquid_detonation_cuda_scout_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CUDA-SCOUT",
+      "status": "PASS"
+    },
+    {
+      "claim": "300-step reacting heptane-air droplet/spray detonation stability gate on 2-rank/2-device MPI+CUDA",
+      "failures": [],
+      "name": "gas_liquid_detonation_mpi_cuda_long",
+      "priority": 4,
+      "source_report": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/academic_gas_liquid_detonation_mpi_cuda_long_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-LONG",
+      "status": "PASS"
+    },
+    {
+      "claim": "1000-step reacting heptane-air droplet/spray detonation extended stability gate on 2-rank/2-device MPI+CUDA",
+      "failures": [],
+      "name": "gas_liquid_detonation_mpi_cuda_extended",
+      "priority": 5,
+      "source_report": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_extended_20260803/academic_gas_liquid_detonation_mpi_cuda_extended_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-EXTENDED",
+      "status": "PASS"
+    },
+    {
+      "claim": "broader gas-liquid/two-phase matrix, including VOF, CSF, interface AMR, shock-bubble and gas-particle budgets",
+      "failures": [],
+      "name": "twophase_broader_matrix",
+      "priority": 6,
+      "source_report": "docs/codex_audit/evidence/academic_twophase_broader_matrix_20260730/academic_twophase_broader_matrix_report.json",
+      "source_status": "PASS-ACADEMIC-TWOPHASE-BROADER-MATRIX-AUDIT",
+      "status": "PASS"
+    },
+    {
+      "claim": "QLT-03/Hysing low-Mach CSF-stress closure supersedes older low-Mach two-phase blocker",
+      "failures": [],
+      "name": "readiness_qlt03_delta",
+      "priority": 7,
+      "source_report": "docs/codex_audit/evidence/academic_readiness_qlt03_closure_delta_20260730/academic_readiness_qlt03_closure_delta_report.json",
+      "source_status": "PASS-ACADEMIC-READINESS-QLT03-CSF-STRESS-DELTA",
+      "status": "PASS"
+    },
+    {
+      "claim": "historical baseline retained for traceability; later reports supersede current-priority blocking gaps",
+      "failures": [],
+      "name": "historical_readiness_summary",
+      "priority": 8,
+      "source_report": "docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json",
+      "source_status": "PASS-ACADEMIC-INITIAL-CPU-READINESS",
+      "status": "PASS"
+    },
+    {
+      "claim": "academic CUDA/GPU runtime and detonation smoke preflight readiness",
+      "failures": [],
+      "name": "academic_gpu_environment",
+      "priority": 9,
+      "source_report": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/academic_gpu_environment_preflight_report.json",
+      "source_status": "PASS-ACADEMIC-GPU-ENVIRONMENT-PREFLIGHT",
+      "status": "PASS"
+    }
+  ],
+  "interpretation": "This report is the authoritative current academic-priority rollup. Older academic readiness summaries remain as historical baselines and must not be used alone to downgrade the current gas/gas-liquid academic priority status.",
+  "pass_count": 9,
+  "priority_order": [
+    "gas_phase_detonation",
+    "gas_liquid_reacting_spray_detonation",
+    "gas_liquid_reacting_spray_mpi_cuda_scout",
+    "gas_liquid_reacting_spray_mpi_cuda_300step",
+    "gas_liquid_reacting_spray_mpi_cuda_1000step",
+    "broader_two_phase_matrix",
+    "academic_gpu_environment"
+  ],
+  "ready": true,
+  "scope": "academic current priority after engineering-scene closure: gas first, gas-liquid/two-phase second",
+  "status": "PASS-ACADEMIC-CURRENT-PRIORITY-SCOPE",
+  "summary": {
+    "academic_current_priority_ready": true,
+    "academic_gpu_runtime_ready": true,
+    "gas_liquid_mpi_cuda_extended_ready": true,
+    "gas_liquid_mpi_cuda_long_ready": true,
+    "gas_liquid_mpi_cuda_scout_ready": true,
+    "gas_liquid_priority_ready": true,
+    "gas_phase_mpi_cuda_runtime_inherited_from_priority_matrix": true,
+    "gas_phase_priority_ready": true,
+    "historical_readiness_blocking_gap_count": 2,
+    "historical_readiness_gaps_superseded": true,
+    "strict_external_literature_benchmarks_not_claimed_here": true
+  },
+  "superseded_historical_gaps": {
+    "academic_twophase_broader_non_qlt_matrix": "superseded by academic_twophase_broader_matrix",
+    "acd_07_full_gas_liquid_detonation": "superseded by academic_gas_liquid_detonation_certification",
+    "qlt_03_canonical_bubble_rise_reference": "superseded by academic_readiness_qlt03_closure_delta and twophase broader matrix"
+  }
+}

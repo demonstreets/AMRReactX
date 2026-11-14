@@ -1,0 +1,22 @@
+## Phase 0 任务 0.2-0.3：验证编译结果
+
+PeleC 已成功编译，31个可执行文件在 ~/my-pele/external/PeleC/build/Exec/RegTests/ 下。
+
+### 任务 0.2：跑 Sod 激波管验证
+1. cd ~/my-pele/external/PeleC/build/Exec/RegTests/Sod/
+2. 查看该目录下的 inputs 文件，了解参数
+3. 用 mpirun -n 4 ./PeleC-Sod inputs 运行（2D Sod）
+4. 检查是否生成了 plt 文件，报告结果
+
+### 任务 0.3：编译 PeleLMeX
+1. cd ~/my-pele/external/PeleLMeX
+2. 检查 CMakeLists.txt 和 Submodules 链接
+3. 配置 cmake 并编译（参考 PeleC 的编译经验：SUNDIALS_ROOT=~/my-pele/external/PelePhysics/Submodules CXXFLAGS需要-L和-I路径）
+4. 报告编译成功或失败原因
+
+环境：
+- gcc 13.3, mpich 4.2, cmake 3.28
+- AMReX: ~/my-pele/external/amrex
+- SUNDIALS: ~/.local (libsundials_cvode.a 等)
+- PelePhysics: ~/my-pele/external/PelePhysics
+- SUBMODULES都通过软链连接

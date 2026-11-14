@@ -1,0 +1,184 @@
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- SUNDIALS_GIT_VERSION: 
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of int32_t
+-- Check size of int32_t - done
+-- Using int32_t for indices
+-- C standard set to 99
+-- C extensions set to ON
+-- Performing Test SUNDIALS_C_COMPILER_HAS_SNPRINTF_AND_VA_COPY
+-- Performing Test SUNDIALS_C_COMPILER_HAS_SNPRINTF_AND_VA_COPY - Success
+-- Performing Test SUNDIALS_C_COMPILER_HAS_MATH_PRECISIONS
+-- Performing Test SUNDIALS_C_COMPILER_HAS_MATH_PRECISIONS - Success
+-- Performing Test SUNDIALS_C_COMPILER_HAS_ISINF_ISNAN
+-- Performing Test SUNDIALS_C_COMPILER_HAS_ISINF_ISNAN - Success
+-- Performing Test SUNDIALS_C_COMPILER_HAS_INLINE
+-- Performing Test SUNDIALS_C_COMPILER_HAS_INLINE - Success
+-- Looking for POSIX timers... found
+-- Performing Test COMPILER_HAS_DEPRECATED_MSG
+-- Performing Test COMPILER_HAS_DEPRECATED_MSG - Success
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CXX standard set to 14
+-- C++ extensions set to ON
+-- CUDA standard set to 14
+CMake Error at /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:780 (message):
+  Compiling the CUDA compiler identification source file
+  "CMakeCUDACompilerId.cu" failed.
+
+  Compiler: /usr/bin/nvcc
+
+  Build flags: --expt-extended-lambda;--expt-relaxed-constexpr
+
+  Id flags: --keep;--keep-dir;tmp;-ccbin=/usr/bin/c++ -v
+
+
+
+  The output was:
+
+  1
+
+  #$ _NVVM_BRANCH_=nvvm
+
+  #$ _SPACE_=
+
+  #$ _CUDART_=cudart
+
+  #$ _HERE_=/usr/lib/nvidia-cuda-toolkit/bin
+
+  #$ _THERE_=/usr/lib/nvidia-cuda-toolkit/bin
+
+  #$ _TARGET_SIZE_=
+
+  #$ _TARGET_DIR_=
+
+  #$ _TARGET_SIZE_=64
+
+  #$ NVVMIR_LIBRARY_DIR=/usr/lib/nvidia-cuda-toolkit/libdevice
+
+  #$
+  PATH=/usr/lib/nvidia-cuda-toolkit/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+
+  #$ LIBRARIES= -L/usr/lib/x86_64-linux-gnu/stubs -L/usr/lib/x86_64-linux-gnu
+
+  #$ rm tmp/a_dlink.reg.c
+
+  #$ "/usr/bin"/c++ -D__CUDA_ARCH_LIST__=520 -E -x c++ -D__CUDACC__
+  -D__NVCC__ -D__CUDACC_EXTENDED_LAMBDA__ -D__CUDACC_RELAXED_CONSTEXPR__
+  -D__CUDACC_VER_MAJOR__=12 -D__CUDACC_VER_MINOR__=0
+  -D__CUDACC_VER_BUILD__=140 -D__CUDA_API_VER_MAJOR__=12
+  -D__CUDA_API_VER_MINOR__=0 -D__NVCC_DIAG_PRAGMA_SUPPORT__=1 -include
+  "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" -o
+  "tmp/CMakeCUDACompilerId.cpp4.ii"
+
+  In file included from /usr/include/cuda_runtime.h:83,
+
+                   from <command-line>:
+
+  /usr/include/crt/host_config.h:132:2: error: #error -- unsupported GNU
+  version! gcc versions later than 12 are not supported! The nvcc flag
+  '-allow-unsupported-compiler' can be used to override this version check;
+  however, using an unsupported host compiler may cause compilation failure
+  or incorrect run time execution.  Use at your own risk.
+
+    132 | #error -- unsupported GNU version! gcc versions later than 12 are not supported! The nvcc flag '-allow-unsupported-compiler' can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run time execution. Use at your own risk.
+        |  ^~~~~
+
+  # --error 0x1 --
+
+
+
+
+
+  Compiling the CUDA compiler identification source file
+  "CMakeCUDACompilerId.cu" failed.
+
+  Compiler: /usr/bin/nvcc
+
+  Build flags:
+
+  Id flags: --keep;--keep-dir;tmp;-ccbin=/usr/bin/c++ -v
+
+
+
+  The output was:
+
+  1
+
+  #$ _NVVM_BRANCH_=nvvm
+
+  #$ _SPACE_=
+
+  #$ _CUDART_=cudart
+
+  #$ _HERE_=/usr/lib/nvidia-cuda-toolkit/bin
+
+  #$ _THERE_=/usr/lib/nvidia-cuda-toolkit/bin
+
+  #$ _TARGET_SIZE_=
+
+  #$ _TARGET_DIR_=
+
+  #$ _TARGET_SIZE_=64
+
+  #$ NVVMIR_LIBRARY_DIR=/usr/lib/nvidia-cuda-toolkit/libdevice
+
+  #$
+  PATH=/usr/lib/nvidia-cuda-toolkit/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+
+  #$ LIBRARIES= -L/usr/lib/x86_64-linux-gnu/stubs -L/usr/lib/x86_64-linux-gnu
+
+  #$ rm tmp/a_dlink.reg.c
+
+  #$ "/usr/bin"/c++ -D__CUDA_ARCH_LIST__=520 -E -x c++ -D__CUDACC__
+  -D__NVCC__ -D__CUDACC_VER_MAJOR__=12 -D__CUDACC_VER_MINOR__=0
+  -D__CUDACC_VER_BUILD__=140 -D__CUDA_API_VER_MAJOR__=12
+  -D__CUDA_API_VER_MINOR__=0 -D__NVCC_DIAG_PRAGMA_SUPPORT__=1 -include
+  "cuda_runtime.h" -m64 "CMakeCUDACompilerId.cu" -o
+  "tmp/CMakeCUDACompilerId.cpp4.ii"
+
+  In file included from /usr/include/cuda_runtime.h:83,
+
+                   from <command-line>:
+
+  /usr/include/crt/host_config.h:132:2: error: #error -- unsupported GNU
+  version! gcc versions later than 12 are not supported! The nvcc flag
+  '-allow-unsupported-compiler' can be used to override this version check;
+  however, using an unsupported host compiler may cause compilation failure
+  or incorrect run time execution.  Use at your own risk.
+
+    132 | #error -- unsupported GNU version! gcc versions later than 12 are not supported! The nvcc flag '-allow-unsupported-compiler' can be used to override this version check; however, using an unsupported host compiler may cause compilation failure or incorrect run time execution. Use at your own risk.
+        |  ^~~~~
+
+  # --error 0x1 --
+
+
+
+
+
+Call Stack (most recent call first):
+  /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)
+  /usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:53 (__determine_compiler_id_test)
+  /usr/share/cmake-3.28/Modules/CMakeDetermineCUDACompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID)
+  cmake/SundialsSetupCuda.cmake:74 (enable_language)
+  cmake/SundialsSetupCompilers.cmake:362 (include)
+  CMakeLists.txt:165 (include)
+
+
+-- Configuring incomplete, errors occurred!

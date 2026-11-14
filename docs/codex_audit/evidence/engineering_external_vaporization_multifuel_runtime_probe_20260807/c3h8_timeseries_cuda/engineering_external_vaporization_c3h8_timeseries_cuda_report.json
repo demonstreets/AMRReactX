@@ -1,0 +1,111 @@
+{
+  "evidence_files": [
+    {
+      "label": "source_matrix_report",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_source_matrix_20260807/engineering_external_vaporization_multifuel_source_matrix_report.json",
+      "sha256": "40b986c2e8ba3f709b74901a740c14088492220219a61345e0cb588ec74cb2eb",
+      "size_bytes": 14760
+    },
+    {
+      "label": "generated_c3h8_input",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/run/input.codex_c3h8_external_vaporization_timeseries",
+      "sha256": "4167e038ac0cde3dc5acd5116472626bb082548d203cc63de9348d5d5735ead7",
+      "size_bytes": 2857
+    },
+    {
+      "label": "stl_obstacles",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/run/codex_merged_pipe_rack_obstacles.stl",
+      "sha256": "7862d8d94760cffec12db46628b483f9a4cd57a0b34f9a2c9628200885c50f05",
+      "size_bytes": 56684
+    },
+    {
+      "label": "cuda_executable",
+      "path": "examples/engineering/h2_leak_3d/codex_c3h8_timeseries_probe3d.gnu.CUDA.ex",
+      "sha256": "32233cfcb4f057decfe7b2a65bd55cbd393f08372571ab3dee58025cbc16b661",
+      "size_bytes": 361375880
+    },
+    {
+      "label": "environment_log",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/environment.log",
+      "sha256": "e724240a5fd9679e0c4f807ceaf32a8c088ae21ea405558c6c7a96e640bfb813",
+      "size_bytes": 1340
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/build.log",
+      "sha256": "d38905a2ad656c70d65cb157ab19547406a1546aa3615e1cd6dfa39f5c664644",
+      "size_bytes": 3909245
+    },
+    {
+      "label": "run_status",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/run.status",
+      "sha256": "548b9825af0ee92dc8deabb50763e48402f01285da0aca55e1912f9c9d724546",
+      "size_bytes": 9
+    },
+    {
+      "label": "cuda_run_log",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/run.log",
+      "sha256": "bdadb81b376ede2e6b1c3bc04eb978cc28f55fdef8f80f46bec2e1252ca1af68",
+      "size_bytes": 14328
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:43+00:00",
+  "log_samples": {
+    "first_schedule_line": "C3H8 leak fixed-mass-flow schedule: time=0, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4e-12, scheduled_leak_T=285.0000003, scheduled_velocity=(0.200000008,1e-09,0), scheduled_radius=0.0800000003, scheduled_center=(0.4200000008,0.2500000004,0.2000000002), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4e-12",
+    "last_schedule_line": "C3H8 leak fixed-mass-flow schedule: time=5e-08, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4.4e-11, scheduled_leak_T=285.0000033, scheduled_velocity=(0.200000088,1.1e-08,0), scheduled_radius=0.0800000033, scheduled_center=(0.4200000088,0.2500000044,0.2000000022), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4.4e-11",
+    "unused_parmparse_block": "[TOP]::amr.checkpoint_files_output(nvals = 1)  :: [0]\n  [TOP]::amr.plot_files_output(nvals = 1)  :: [0]"
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-EXTERNAL-VAPORIZATION-C3H8-TIMESERIES-CUDA",
+  "summary": {
+    "build_bad_markers": [],
+    "build_passed": true,
+    "build_uses_cuda_12_6": true,
+    "build_uses_cuda_sundials_home": true,
+    "effective_mdot_count": 7,
+    "environment_uses_cuda_12_6": true,
+    "environment_uses_tesla_p100": true,
+    "external_vaporization_c3h8_timeseries_cuda_ready": true,
+    "fuel_species_c3h8_selected": true,
+    "gpu_memory_reported": true,
+    "leak_schedule_unused": false,
+    "only_allowed_unused_output_overrides": true,
+    "reached_expected_steps": true,
+    "run_bad_markers": [],
+    "run_finalized": true,
+    "run_log_has_no_abort_nan_or_cuda_error": true,
+    "run_returncode_zero": true,
+    "schedule_count_ok": true,
+    "schedule_log_line_count": 7,
+    "scheduled_center_x_max": 0.4200000088,
+    "scheduled_center_x_min": 0.4200000008,
+    "scheduled_center_xy_varies": true,
+    "scheduled_center_y_max": 0.2500000044,
+    "scheduled_center_y_min": 0.2500000004,
+    "scheduled_leak_T_max": 285.0000033,
+    "scheduled_leak_T_min": 285.0000003,
+    "scheduled_leak_T_varies": true,
+    "scheduled_radius_max": 0.0800000033,
+    "scheduled_radius_min": 0.0800000003,
+    "scheduled_radius_varies": true,
+    "scheduled_reference_mdot_max": 4.4e-11,
+    "scheduled_reference_mdot_min": 4e-12,
+    "scheduled_reference_mdot_varies": true,
+    "scheduled_velocity_x_max": 0.200000088,
+    "scheduled_velocity_x_min": 0.200000008,
+    "scheduled_velocity_xy_varies": true,
+    "scheduled_velocity_y_max": 1.1e-08,
+    "scheduled_velocity_y_min": 1e-09,
+    "source_matrix_report_passed": true,
+    "step_count": 6,
+    "steps": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "stl_obstacles_built": true
+  }
+}

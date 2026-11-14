@@ -1,0 +1,153 @@
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 7
+ Temperature: 8
+ thermo. pressure: 9
+ => Total number of state variables: 10
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 8.485 8.485 0 
+	Density:  1.171983992
+	Temp:     300
+	H:        1900.593693
+	Y_N2:     0.767
+	Y_O2:     0.233
+	Y_C3H8:   0
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 0.02946375958, divu: 1e+20
+ Initial dt: 0.02946375958
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 8.485  V: 8.485  W: 0
+ >> After initial velocity projection:   U: 12.60030266  V: 15.65661313  W: 14.7677061
+ Est. time step - Conv: 0.01596769351, divu: 5.156246682e+15
+ Initial dt: 0.01596769351
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 12.60030266  V: 15.65661313  W: 14.7677061
+ >> After initial velocity projection:   U: 12.86073802  V: 17.27758951  W: 15.967444
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 0.01446961105, divu: 5.156246682e+15
+ STEP [-1] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 73.45714722
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 0.01446961105, divu: 5.156246682e+15
+ STEP [-1] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 72.39303587
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 0.01446961105, divu: 5.156246682e+15
+ STEP [-1] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 75.13863383
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01446961105, divu: 5.156246682e+15
+ STEP [0] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 80.5643847
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01694357703, divu: 32.7928003
+ STEP [1] - Time: 0.01446961105, dt 0.01591657215, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.01446961105
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 73.05530741
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01698649789, divu: 32.78862707
+ STEP [2] - Time: 0.0303861832, dt 0.01698649789, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.0303861832
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 74.29164092
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0167203929, divu: 32.78728805
+ STEP [3] - Time: 0.04737268109, dt 0.0167203929, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.04737268109
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 74.63358002
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01665866096, divu: 32.78608745
+ STEP [4] - Time: 0.06409307399, dt 0.01665866096, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.06409307399
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 73.83367622
+
+ Writing plotfile: plt00005
+
+ >> Final simulation time: 0.08075173496
+
+Total Time: 640.9649923
+Unused ParmParse Variables:
+  [TOP]::amr.ref_ratio(nvals = 2)  :: [2, 2]
+  [TOP]::amr.regrid_int(nvals = 1)  :: [10]
+  [TOP]::peleLM.do_les(nvals = 1)  :: [1]
+  [TOP]::peleLM.have_divu(nvals = 1)  :: [1]
+  [TOP]::peleLM.sdc_iterations(nvals = 1)  :: [2]
+  [TOP]::peleLM.use_typ_vals(nvals = 1)  :: [1]
+  [TOP]::transport.const_bulk_viscosity(nvals = 1)  :: [0.0]
+  [TOP]::transport.const_conductivity(nvals = 1)  :: [0.0]
+  [TOP]::transport.const_diffusivity(nvals = 1)  :: [0.001]
+  [TOP]::transport.const_viscosity(nvals = 1)  :: [1.85e-5]
+
+AMReX (26.05) finalized

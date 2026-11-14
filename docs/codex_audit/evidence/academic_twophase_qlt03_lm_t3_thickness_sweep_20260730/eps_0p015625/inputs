@@ -1,0 +1,70 @@
+# QLT-03 low-Mach auxiliary-alpha bridge smoke.
+#
+# This is not yet a canonical Hysing bubble-rise solve. Its purpose is to
+# prove that PeleLMeX's incompressible state path can initialize, advect,
+# plot, and validate an alpha-like auxiliary scalar without touching gas
+# thermochemistry state components.
+
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0
+geometry.prob_hi     = 1.0 2.0
+
+# Hysing-style bubble-rise box: slip side walls, no-slip top/bottom walls.
+peleLM.lo_bc = SlipWallAdiab NoSlipWallAdiab
+peleLM.hi_bc = SlipWallAdiab NoSlipWallAdiab
+
+#-------------------------AMR CONTROL----------------------------
+amr.n_cell          = 32 64
+amr.v               = 0
+amr.max_level       = 0
+amr.blocking_factor = 16
+amr.max_grid_size   = 32
+
+#--------------------------- Problem -------------------------------
+prob.P_mean = 101325.0
+prob.bubble_center = 0.5 0.5
+prob.bubble_radius = 0.25
+prob.interface_thickness = 0.015625
+prob.u0 = 0.0
+prob.v0 = 0.0
+prob.surface_tension_sigma = 24.5
+prob.surface_tension_grad_floor = 1.0e-12
+prob.surface_tension_force_cap = 0.0
+prob.surface_tension_curvature_scheme = 1
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v = 0
+peleLM.incompressible = 1
+peleLM.rho = 1000.0
+peleLM.mu = 10.0
+peleLM.incompressible_aux_density = true
+peleLM.incompressible_aux_density_comp = 0
+peleLM.incompressible_aux_rho_heavy = 1000.0
+peleLM.incompressible_aux_rho_light = 100.0
+peleLM.incompressible_aux_alpha_is_light = true
+peleLM.incompressible_aux_advect_scheme = 2
+peleLM.incompressible_aux_viscosity = true
+peleLM.incompressible_aux_viscosity_comp = 0
+peleLM.incompressible_aux_mu_heavy = 10.0
+peleLM.incompressible_aux_mu_light = 1.0
+peleLM.gravity = 0.0 -0.98
+peleLM.num_init_iter = 1
+peleLM.user_defined_ext_sources = true
+
+peleLM.aux_vars = alpha
+peleLM.alpha.advect = 1
+peleLM.alpha.conservative = 1
+peleLM.alpha.diffuse = 0
+
+amr.max_step = 4000
+amr.dt_shrink = 0.5
+amr.stop_time = 3.0
+amr.cfl = 0.2
+amr.plot_int = 250
+amr.check_int = -1
+amr.derive_plot_vars = avg_pressure mag_vort
+
+nodal_proj.verbose = 0
+mac_proj.verbose = 0

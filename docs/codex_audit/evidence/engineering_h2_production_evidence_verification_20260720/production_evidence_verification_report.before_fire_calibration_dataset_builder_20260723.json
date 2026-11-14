@@ -1,0 +1,207 @@
+{
+  "command": "tools/verify_engineering_h2_production_evidence.sh",
+  "criteria": {
+    "expected_ctest_tests": 22,
+    "expected_scheduler_statuses": [
+      "PASS",
+      "NOT_READY"
+    ],
+    "expected_scorecard_status": "NOT_PRODUCTION_READY",
+    "require_ctest": true,
+    "require_mpi_link_shim_pass": true,
+    "require_path_audit_pass": true,
+    "require_verifier_pass_line": true
+  },
+  "evidence_files": [
+    {
+      "label": "verification_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_fire_calibration_ingestion_gate_20260723.log",
+      "sha256": "033b67a5fad9af9d47090dbb5bcd3f4574c6fc85418b8598ea925d3f3709bac2",
+      "size_bytes": 18742
+    },
+    {
+      "label": "engineering_production_scorecard",
+      "path": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "sha256": "e449f69d62c1a1ade7d2dc1704d44dd90834c22c2e56623c3787c5938bd9c7a1",
+      "size_bytes": 20728
+    },
+    {
+      "label": "engineering_h2_hybrid_cfd_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_cfd_scout_20260720/hybrid_cfd_scout_report.json",
+      "sha256": "faef5650a6bbc49ba63a330ec324f2afb2fc239a2af027719588c45d433ce9dc",
+      "size_bytes": 13729
+    },
+    {
+      "label": "engineering_h2_hybrid_production_mesh_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_scout_20260720/hybrid_production_mesh_scout_report.json",
+      "sha256": "a1904e6a386548aaaf4652e6e7ba33e65c93ebbf1405984dd2ad09bd7066f15c",
+      "size_bytes": 14320
+    },
+    {
+      "label": "engineering_h2_hybrid_production_mesh_8rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/hybrid_production_mesh_8rank_scout_report.json",
+      "sha256": "6f782b257dade0949c979d511ea8a98d5b53c9a835a781d4ad3cf01f3e50e1ff",
+      "size_bytes": 14608
+    },
+    {
+      "label": "engineering_h2_hybrid_production_mesh_8rank_600step_stability_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_600step_stability_scout_20260721/hybrid_production_mesh_8rank_600step_stability_scout_report.json",
+      "sha256": "19864310cdeceff1f2d5b3242e8cc15b520e10c2f09a8452597d2813cef49693",
+      "size_bytes": 15428
+    },
+    {
+      "label": "engineering_h2_hybrid_production_mesh_600step_stability_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/hybrid_production_mesh_600step_stability_scout_report.json",
+      "sha256": "47a64264ae2a42200f71ff33ac4aa56a64d925c7a45b9d7c4c1d56b2505aa6a5",
+      "size_bytes": 15140
+    },
+    {
+      "label": "engineering_h2_hybrid_largegrid_8rank_120step_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json",
+      "sha256": "c542c808e81dc86f53d389036941d9bbdd56dd2db2a41e9ad05e45f2e807b3de",
+      "size_bytes": 14733
+    },
+    {
+      "label": "engineering_h2_reference_agreement_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json",
+      "sha256": "a306974d431e414dc67b57cc61f0b1d54f0ddb6c88d4c0842034894fdb7b77e0",
+      "size_bytes": 7775
+    },
+    {
+      "label": "engineering_bfs_kepsilon_reference_report",
+      "path": "docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_reference_report.json",
+      "sha256": "d6ed7e0a4a5793d7a35230199eb782312c1bea6d1f6a75ebfc0730369587eb4c",
+      "size_bytes": 12150
+    },
+    {
+      "label": "mpi_link_shim_script",
+      "path": "tools/prepare_mpi_link_shims.sh",
+      "sha256": "35bb1975445567d43c4bde5a41b63a12a14d74a07ef789cd23819a4fd6b5b5ba",
+      "size_bytes": 2000
+    },
+    {
+      "label": "engineering_h2_mpi_scaling_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_mpi_scaling_20260720/mpi_scaling_report.json",
+      "sha256": "e175591c7b4ee68aada94cfec12ae7b970f70f6af6b10c354099d1b50a14fd73",
+      "size_bytes": 7754
+    },
+    {
+      "label": "hybrid_runtime_affinity_manifest",
+      "path": "docs/codex_audit/evidence/engineering_runtime_affinity_hybrid_20260720/runtime_affinity_manifest.json",
+      "sha256": "c3707d1611d611a56c242f5b273b1721bb0641dc51907e12676368a55d209be4",
+      "size_bytes": 10679
+    },
+    {
+      "label": "scheduler_run_report",
+      "path": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_run_report.json",
+      "sha256": "262da4919c55fc24a12f4d211aaed5b991173112905e89323d9f1c69cb4ce66a",
+      "size_bytes": 8054
+    },
+    {
+      "label": "production_mesh_16rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json",
+      "sha256": "976464cb31a86f6cc4570ba55e913a8cbfbe4b8701bbf1f315e6c13d58ffeb85",
+      "size_bytes": 9489
+    }
+  ],
+  "generated_at_utc": "2026-07-23T07:37:54+00:00",
+  "limitations": [
+    "This report packages verification evidence for the maintained engineering H2 evidence ledger.",
+    "It does not launch new CFD cases and does not clear production-size, reference-data, real-CAD, or calibrated fire metric blockers.",
+    "BFS/k-epsilon reference validation is tracked as a separate production blocker until reattachment, recirculation, and log-law checks pass."
+  ],
+  "log": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_fire_calibration_ingestion_gate_20260723.log",
+  "log_sha256": "033b67a5fad9af9d47090dbb5bcd3f4574c6fc85418b8598ea925d3f3709bac2",
+  "returncode": 0,
+  "schema_version": 7,
+  "status": "PASS",
+  "summary": {
+    "bfs_kepsilon_reference_bfs_returncode": 0,
+    "bfs_kepsilon_reference_bfs_verdict": "PASS",
+    "bfs_kepsilon_reference_blocks_production_readiness": false,
+    "bfs_kepsilon_reference_loglaw_linf": 15.4519819,
+    "bfs_kepsilon_reference_loglaw_returncode": 1,
+    "bfs_kepsilon_reference_status": "PASS-BFS-KEPSILON-REFERENCE",
+    "ctest_passed": true,
+    "ctest_tests": 22,
+    "hybrid_cfd_cloud_rel_diff": 0.0446428599,
+    "hybrid_cfd_peak_rel_diff": 0.0455934286,
+    "hybrid_cfd_scout_ranks": 4,
+    "hybrid_cfd_scout_status": "PASS-HYBRID-CFD-SCOUT",
+    "hybrid_cfd_scout_threads_per_rank": 2,
+    "hybrid_largegrid_8rank_120step_advance_seconds_ratio": 1.72411476,
+    "hybrid_largegrid_8rank_120step_amr_equivalent_fine_cell_count": 1769472,
+    "hybrid_largegrid_8rank_120step_amr_finest_level": 1,
+    "hybrid_largegrid_8rank_120step_amr_plotfiles": 5,
+    "hybrid_largegrid_8rank_120step_base_cell_count": 221184,
+    "hybrid_largegrid_8rank_120step_baseline_plotfiles": 5,
+    "hybrid_largegrid_8rank_120step_cloud_rel_diff": 0.0159761211,
+    "hybrid_largegrid_8rank_120step_max_step": 120,
+    "hybrid_largegrid_8rank_120step_peak_rel_diff": 0.00155533247,
+    "hybrid_largegrid_8rank_120step_ranks": 8,
+    "hybrid_largegrid_8rank_120step_regrid_count": 59,
+    "hybrid_largegrid_8rank_120step_status": "PASS-HYBRID-CFD-SCOUT",
+    "hybrid_largegrid_8rank_120step_threads_per_rank": 2,
+    "hybrid_production_mesh_600step_advance_seconds_ratio": 2.00754474,
+    "hybrid_production_mesh_600step_amr_equivalent_fine_cell_count": 524288,
+    "hybrid_production_mesh_600step_base_cell_count": 65536,
+    "hybrid_production_mesh_600step_cloud_rel_diff": 0.0315976518,
+    "hybrid_production_mesh_600step_max_step": 600,
+    "hybrid_production_mesh_600step_peak_rel_diff": 0.0340034177,
+    "hybrid_production_mesh_600step_ranks": 4,
+    "hybrid_production_mesh_600step_regrid_count": 299,
+    "hybrid_production_mesh_600step_status": "PASS-HYBRID-CFD-SCOUT",
+    "hybrid_production_mesh_600step_threads_per_rank": 2,
+    "hybrid_production_mesh_8rank_600step_advance_seconds_ratio": 2.20802169,
+    "hybrid_production_mesh_8rank_600step_amr_equivalent_fine_cell_count": 524288,
+    "hybrid_production_mesh_8rank_600step_base_cell_count": 65536,
+    "hybrid_production_mesh_8rank_600step_cloud_rel_diff": 0.0315976518,
+    "hybrid_production_mesh_8rank_600step_max_step": 600,
+    "hybrid_production_mesh_8rank_600step_peak_rel_diff": 0.0340034177,
+    "hybrid_production_mesh_8rank_600step_ranks": 8,
+    "hybrid_production_mesh_8rank_600step_regrid_count": 299,
+    "hybrid_production_mesh_8rank_600step_status": "PASS-HYBRID-CFD-SCOUT",
+    "hybrid_production_mesh_8rank_600step_threads_per_rank": 2,
+    "hybrid_production_mesh_8rank_advance_seconds_ratio": 2.00980894,
+    "hybrid_production_mesh_8rank_amr_equivalent_fine_cell_count": 524288,
+    "hybrid_production_mesh_8rank_base_cell_count": 65536,
+    "hybrid_production_mesh_8rank_cloud_rel_diff": 0.0380952381,
+    "hybrid_production_mesh_8rank_max_step": 120,
+    "hybrid_production_mesh_8rank_peak_rel_diff": 0.0431073584,
+    "hybrid_production_mesh_8rank_ranks": 8,
+    "hybrid_production_mesh_8rank_regrid_count": 59,
+    "hybrid_production_mesh_8rank_status": "PASS-HYBRID-CFD-SCOUT",
+    "hybrid_production_mesh_8rank_threads_per_rank": 2,
+    "hybrid_production_mesh_advance_seconds_ratio": 1.61148722,
+    "hybrid_production_mesh_amr_equivalent_fine_cell_count": 524288,
+    "hybrid_production_mesh_base_cell_count": 65536,
+    "hybrid_production_mesh_cloud_rel_diff": 0.0380952381,
+    "hybrid_production_mesh_max_step": 120,
+    "hybrid_production_mesh_peak_rel_diff": 0.0431073584,
+    "hybrid_production_mesh_scout_ranks": 4,
+    "hybrid_production_mesh_scout_status": "PASS-HYBRID-CFD-SCOUT",
+    "hybrid_production_mesh_scout_threads_per_rank": 2,
+    "hybrid_runtime_affinity_ranks": 4,
+    "hybrid_runtime_affinity_status": "PASS",
+    "hybrid_runtime_affinity_threads_per_rank": 2,
+    "hybrid_runtime_affinity_warnings": [],
+    "mpi_link_shim_pass": true,
+    "mpi_scaling": "PASS-SCALING-SCOUT",
+    "path_audit_pass": true,
+    "production_mesh_16rank_scout": "PASS-SCOUT",
+    "reference_agreement_all_threshold_checks_passed": true,
+    "reference_agreement_amr_lel_cloud_volume": 0.0253408927,
+    "reference_agreement_amr_peak_x": 0.186431079,
+    "reference_agreement_cloud_rel_diff": 0.0159761211,
+    "reference_agreement_peak_rel_diff": 0.00155533247,
+    "reference_agreement_status": "PASS-REFERENCE-THRESHOLD-AGREEMENT",
+    "scheduler_status": "PASS",
+    "scorecard_blocking_gaps": [
+      "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure"
+    ],
+    "scorecard_functional_percent": 94.1,
+    "scorecard_production_credibility_percent": 76.0
+  }
+}

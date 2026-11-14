@@ -1,0 +1,127 @@
+{
+  "cantera_version": "3.2.0",
+  "cases": [
+    {
+      "composition": "H2:2,O2:1,N2:3.76",
+      "end_time_s": 0.021624677039069593,
+      "ignition_delay_s": 0.0003212730681333078,
+      "max_oh_mole_fraction": 0.031485652294411526,
+      "max_temp_rise_k": 1908.623542842142,
+      "max_temperature_k": 2908.623542842142,
+      "pressure_pa": 101325.0,
+      "steps": 1520,
+      "temperature_k": 1000.0
+    },
+    {
+      "composition": "H2:2,O2:1,N2:3.76",
+      "end_time_s": 0.031305008792548175,
+      "ignition_delay_s": 0.00010540866688079981,
+      "max_oh_mole_fraction": 0.0330153584475731,
+      "max_temp_rise_k": 1828.3702328035306,
+      "max_temperature_k": 2928.3702328035306,
+      "pressure_pa": 101325.0,
+      "steps": 1372,
+      "temperature_k": 1100.0
+    },
+    {
+      "composition": "H2:2,O2:1,N2:3.76",
+      "end_time_s": 0.029854362580277478,
+      "ignition_delay_s": 6.721699675695292e-05,
+      "max_oh_mole_fraction": 0.03457025935936626,
+      "max_temp_rise_k": 1747.6520507641394,
+      "max_temperature_k": 2947.6520507641394,
+      "pressure_pa": 101325.0,
+      "steps": 1348,
+      "temperature_k": 1200.0
+    },
+    {
+      "composition": "H2:2,O2:1,N2:3.76",
+      "end_time_s": 0.16069079338024322,
+      "ignition_delay_s": 5.4113919943847135e-05,
+      "max_oh_mole_fraction": 0.03614743921764648,
+      "max_temp_rise_k": 1666.4554993175534,
+      "max_temperature_k": 2966.4554993175534,
+      "pressure_pa": 101325.0,
+      "steps": 1362,
+      "temperature_k": 1300.0
+    }
+  ],
+  "composition": "H2:2,O2:1,N2:3.76",
+  "curve_csv": "docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_curve.csv",
+  "curve_csv_sha256": "6b4bbb6ec8fe098f30dd59036a52212b5d7a91e796bfed8ff8640fc40bb9cfe1",
+  "evidence_files": [
+    {
+      "label": "cantera_ignition_reference_curve_csv",
+      "path": "docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_curve.csv",
+      "sha256": "6b4bbb6ec8fe098f30dd59036a52212b5d7a91e796bfed8ff8640fc40bb9cfe1",
+      "size_bytes": 699
+    }
+  ],
+  "generated_at_utc": "2026-07-24T01:33:53+00:00",
+  "limitations": [
+    "This report provides a Cantera reference curve only; it does not prove Pele/PelePhysics mechanism equivalence.",
+    "The curve is constant-volume 0D kinetics evidence and does not prove multidimensional detonation accuracy."
+  ],
+  "mechanism": "h2o2.yaml",
+  "pressure_pa": 101325.0,
+  "quality_gate_matrix": [
+    {
+      "evidence": [
+        "cantera_version"
+      ],
+      "gap": "",
+      "name": "cantera_importable",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "h2o2.yaml"
+      ],
+      "gap": "",
+      "name": "mechanism_loadable",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_curve.csv"
+      ],
+      "gap": "",
+      "name": "multi_temperature_curve",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_curve.csv"
+      ],
+      "gap": "",
+      "name": "monotonic_temperature_response",
+      "status": "PASS"
+    },
+    {
+      "evidence": [],
+      "gap": "This report generates a Cantera reference curve but does not compare PelePhysics generated rates/species against Cantera.",
+      "name": "pele_mechanism_equivalence",
+      "status": "MISSING"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS-ACADEMIC-GAS-CANTERA-IGNITION-REFERENCE",
+  "summary": {
+    "case_count": 4,
+    "clears_cantera_mechanism_comparison_gap": false,
+    "clears_zero_d_ignition_delay_reference_curve_gap": true,
+    "delay_monotonic_decreases_with_temperature": true,
+    "max_ignition_delay_s": 0.0003212730681333078,
+    "max_temperature_k": 1300.0,
+    "min_ignition_delay_s": 5.4113919943847135e-05,
+    "min_temperature_k": 1000.0,
+    "reference_curve_available": true
+  },
+  "temperatures_k": [
+    1000.0,
+    1100.0,
+    1200.0,
+    1300.0
+  ],
+  "title": "Academic Gas Cantera H2/O2 Ignition Reference Curve"
+}

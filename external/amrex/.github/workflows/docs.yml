@@ -1,0 +1,81 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+  pull_request:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.head_ref }}-docs
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: ${{ github.event_name != 'push' && 1 || 0 }}
+
+      - name: Dependencies
+        run: |
+          .github/workflows/dependencies/documentation.sh
+          python3 -m pip install --upgrade pip
+          python3 -m pip install sphinx==5.0.0 sphinx_rtd_theme
+
+      - name: Install and Build
+        run: |
+          cd Docs && ./build_docs.sh
+
+      - name: Prepare deployment
+        run: |
+          mkdir -p build/docs_html/doxygen
+          mkdir -p build/docs_xml/doxygen
+
+          # Doxygen HTML
+          cp -rp Docs/Doxygen/html/* build/docs_html/doxygen/
+
+          # Remove LaTeX temp files left by doxygen formula rendering
+          rm -f build/docs_html/doxygen/*.repository build/docs_html/doxygen/*.aux \
+                build/docs_html/doxygen/*.dvi build/docs_html/doxygen/*.log \
+                build/docs_html/doxygen/*.tex build/docs_html/doxygen/*.ps \
+                build/docs_html/doxygen/*.epsi
+
+          # Doxygen tag file for interlinking
+          cp Docs/Doxygen/amrex-doxygen-web.tag.xml build/docs_xml/doxygen/
+
+          # Sphinx HTML (includes amrex.pdf in _downloads/)
+          cp -rp Docs/sphinx_documentation/build/html/* build/docs_html/
+
+          # On push, only deploy a new PDF if sphinx sources changed
+          # since the last successful deployment.
+          # On PR builds deploy doesn't run, so we skip the check.
+          if [ "${{ github.event_name }}" = "push" ]; then
+            LAST_DEPLOYED=$(curl -sSf "https://raw.githubusercontent.com/AMReX-Codes/AMReX-Codes.github.io/main/amrex/.deploy-sha" 2>/dev/null || echo "")
+            if [ -n "$LAST_DEPLOYED" ] && git cat-file -e "${LAST_DEPLOYED}^{commit}" 2>/dev/null; then
+              if ! git diff --name-only ${LAST_DEPLOYED}..HEAD \
+                     | grep -q "^Docs/sphinx_documentation/"; then
+                echo "No sphinx doc changes since ${LAST_DEPLOYED} — removing PDF to keep published version"
+                rm -f build/docs_html/_downloads/*/amrex.pdf
+              fi
+            else
+              echo "No previous deploy SHA reachable — keeping PDF"
+            fi
+          fi
+
+          # Record the deployed SHA so the next build can diff correctly
+          echo "$(git rev-parse --short HEAD)" > build/.deploy-sha
+
+      - name: Deploy
+        if: github.event_name == 'push' && github.repository == 'AMReX-Codes/amrex' && github.ref == 'refs/heads/development'
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
+        with:
+          ssh-key: ${{ secrets.AMREX_BUILD_DOCS }}
+          repository-name: AMReX-Codes/AMReX-Codes.github.io
+          branch: main # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
+          target-folder: amrex # The folder the action should deploy to.
+          clean: false # Do not remove existing files from the deploy target.

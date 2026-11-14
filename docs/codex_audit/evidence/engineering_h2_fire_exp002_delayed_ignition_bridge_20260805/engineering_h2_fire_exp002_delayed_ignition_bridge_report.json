@@ -1,0 +1,150 @@
+{
+  "checks": {
+    "cpu_gpu_delayed_ignition_parity_pass": true,
+    "cpu_mpi_energy_conservation_pass": true,
+    "cuda_energy_conservation_pass": true,
+    "exp002_ready_for_reduced_validation_case": true,
+    "pressure_targets_available": true,
+    "source_reports_pass": true,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "current_model_bridge": {
+    "cpu_gpu_final_h2o_relative_difference": 0.016438256595282762,
+    "cpu_gpu_final_h2o_relative_difference_limit": 0.05,
+    "model_final_time_s": 1.1999999999999985e-06,
+    "model_h2_mdot_kg_s": 0.0005,
+    "model_has_timed_energy_source": true,
+    "model_ignition_duration_s": 1.5e-07,
+    "model_ignition_power_w": 10000000000.0,
+    "model_ignition_start_time_s": 2e-07,
+    "model_injected_energy_j": 1500.0,
+    "model_uses_initial_hotspot": false,
+    "sustained_reaction_output_count": 7
+  },
+  "decision": "delayed_ignition_energy_conserved_and_exp002_mapping_ready",
+  "energy_conservation": {
+    "cpu_mpi": {
+      "active_time_first_s": 2e-07,
+      "active_time_last_s": 3.4e-07,
+      "active_unique_ignition_rows": 15,
+      "active_volume_m3": 0.001953125,
+      "duration_s": 1.5e-07,
+      "energy_conservation_pass": true,
+      "expected_energy_j": 1500.0,
+      "integrated_energy_j": 1500.0,
+      "log_path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/runtime_evidence/run.log",
+      "max_relative_energy_error_allowed": 1e-10,
+      "parsed_unique_ignition_rows": 120,
+      "power_w": 10000000000.0,
+      "qdot_w_per_m3": 5120000000000.0,
+      "relative_energy_error": 0.0,
+      "start_time_s": 2e-07
+    },
+    "single_cuda": {
+      "active_time_first_s": 2e-07,
+      "active_time_last_s": 3.4e-07,
+      "active_unique_ignition_rows": 15,
+      "active_volume_m3": 0.001953125,
+      "duration_s": 1.5e-07,
+      "energy_conservation_pass": true,
+      "expected_energy_j": 1500.0,
+      "integrated_energy_j": 1500.0,
+      "log_path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/runtime_evidence/run.log",
+      "max_relative_energy_error_allowed": 1e-10,
+      "parsed_unique_ignition_rows": 120,
+      "power_w": 10000000000.0,
+      "qdot_w_per_m3": 5120000000000.0,
+      "relative_energy_error": 0.0,
+      "start_time_s": 2e-07
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "single_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/engineering_h2_pipe_rack_delayed_ignition_cuda_report.json",
+      "sha256": "6703e1feb990d9973cd279a68f304cb6b8c80f56612c37249a41f5ecabe79094",
+      "size_bytes": 5205
+    },
+    {
+      "label": "cpu_mpi_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/engineering_h2_pipe_rack_delayed_ignition_mpi_report.json",
+      "sha256": "643818c985df181d4e07106b1a344f8b48a1bf0bf3ae85a175ee20264cdd2670",
+      "size_bytes": 4882
+    },
+    {
+      "label": "cross_platform_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cross_platform_20260805/engineering_h2_pipe_rack_delayed_ignition_cross_platform_report.json",
+      "sha256": "5ee49fbe885215279be9b869b12a99a5fd6aefce642a570ab775eb7bc9862198",
+      "size_bytes": 4195
+    },
+    {
+      "label": "exp002_reduced_overpressure_report",
+      "path": "docs/codex_audit/evidence/h2_fire_overpressure_reduced_exp002_20260805/h2_fire_overpressure_reduced_exp002_report.json",
+      "sha256": "9cb5633eddf3ba90d4df77ea3ea220b42abe0dd4307f2345e2b5f286a8228482",
+      "size_bytes": 6956
+    },
+    {
+      "label": "exp002_metadata_report",
+      "path": "docs/codex_audit/evidence/h2_fire_overpressure_dataverse_metadata_20260805/h2_fire_overpressure_dataverse_metadata_report.json",
+      "sha256": "46f761f0efeb68b1da072f36f9583db2c6e2952a15251fe15def34a7220645c2",
+      "size_bytes": 16886
+    },
+    {
+      "label": "single_cuda_staged_run_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/runtime_evidence/run.log",
+      "sha256": "58cb5fb8e9a7e652695d6c1d8304d5fd99b21265c9f78e32a9a75d31e09dbadb",
+      "size_bytes": 114498
+    },
+    {
+      "label": "cpu_mpi_staged_run_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/runtime_evidence/run.log",
+      "sha256": "ed5be8ce9136840854ae5e31a2cf910df8b395c876a4068cd9b34569bd208107",
+      "size_bytes": 113460
+    }
+  ],
+  "exp002_targets": {
+    "avg_mfr_kg_s": 0.006350705865770578,
+    "calibration_curve": "1 V = -1 bar",
+    "dataset_doi": "doi:10.18710/X044QK",
+    "experiment_id": 2,
+    "ignition_delay_time_s": 2.5,
+    "ignition_place": 2,
+    "max_mfr_kg_s": 0.009750540368258953,
+    "obstacle_distance_from_nozzle_m": 0.29,
+    "peak_corrected_overpressure_bar": 0.027474030077501568,
+    "peak_corrected_overpressure_time_range_ms": [
+      2540.88896576,
+      2748.83696524
+    ],
+    "pressure_channel_count": 4,
+    "release_time_s": 3.0,
+    "source_csv_filename": "Ign_pipe_geom_EXP_002.csv",
+    "source_csv_md5_matches_dataverse": true
+  },
+  "generated_at_utc": "2026-08-20T10:02:01.142610+00:00",
+  "limitations": [
+    "This bridge proves energy-source accounting and EXP002 target availability; it is not calibrated CFD overpressure agreement.",
+    "The current delayed-ignition run is a stiff reduced window, not the full 3 s EXP002 release and 2.5 s ignition delay.",
+    "The current geometry remains synthetic cube/cylinder/pipe-rack STL, not the EXP002 pipe geometry or a cleaned plant CAD import."
+  ],
+  "recommended_next_steps": [
+    "Build an EXP002-scaled delayed-ignition validation case with the 0.006350705865770578 kg/s average mass flow and 0.29 m obstacle distance.",
+    "Compare simulated pressure sensors against the four baseline-corrected EXP002 peaks and arrival times.",
+    "Promote the strict fire blocker only after calibrated overpressure or radiation agreement passes the acceptance contract."
+  ],
+  "scale_gap_to_exp002": {
+    "avg_mfr_ratio_exp002_to_current_model": 12.701411731541157,
+    "ignition_delay_ratio_exp002_to_current_model_start": 12500000.0,
+    "max_mfr_ratio_exp002_to_current_model": 19.501080736517906,
+    "release_time_ratio_exp002_to_current_model": 2500000.0000000033
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-EXP002-DELAYED-IGNITION-BRIDGE",
+  "title": "Engineering H2 Fire EXP002 Delayed-Ignition Bridge",
+  "validated_capabilities": {
+    "cpu_mpi_and_single_gpu_same_delayed_ignition_case": true,
+    "exp002_overpressure_targets_ingested": true,
+    "exp002_parameters_mapped_for_future_calibration": true,
+    "timed_energy_ignition_source_integrates_to_requested_energy": true
+  }
+}

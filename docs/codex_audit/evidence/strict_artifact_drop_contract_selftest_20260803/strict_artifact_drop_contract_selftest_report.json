@@ -1,0 +1,267 @@
+{
+  "evidence_files": [
+    {
+      "label": "drop_contract_validator_script",
+      "path": "tools/write_strict_artifact_drop_contract_preflight_report.py",
+      "sha256": "c8efc91dcaf50e930100533e9e6a7d33e8119365215a00c486815e5f938712b0",
+      "size_bytes": 16840
+    },
+    {
+      "label": "drop_contract_preflight_report",
+      "path": "docs/codex_audit/evidence/strict_artifact_drop_contract_preflight_20260803/strict_artifact_drop_contract_preflight_report.json",
+      "sha256": "06b5a5c2d236be39d7a5e776f997872a8fde2f801b334164aa7668cd540b2ad3",
+      "size_bytes": 11067
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:46.949063+00:00",
+  "schema_version": 1,
+  "status": "PASS-STRICT-ARTIFACT-DROP-CONTRACT-SELFTEST",
+  "summary": {
+    "failed_selftest_count": 0,
+    "passed_selftest_count": 8,
+    "selftest_count": 8,
+    "strict_artifact_drop_contract_selftest_ready": true,
+    "validator_report_status": "PASS-STRICT-ARTIFACT-DROP-CONTRACT-PREFLIGHT"
+  },
+  "tests": [
+    {
+      "expected_ready": true,
+      "name": "valid_json_accepts_required_keys",
+      "observed_ready": true,
+      "passed": true,
+      "result": {
+        "actual_keys": [
+          "benchmark_id",
+          "case_alignment",
+          "digitization",
+          "digitized_dataset_sha256",
+          "original_dataset_sha256",
+          "schema_version",
+          "source"
+        ],
+        "domain": "external_plume",
+        "errors": [],
+        "kind": "json",
+        "label": "selftest.valid_json",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/valid.json",
+        "present": true,
+        "ready": true,
+        "required_keys": [
+          "benchmark_id",
+          "case_alignment",
+          "digitization",
+          "digitized_dataset_sha256",
+          "original_dataset_sha256",
+          "schema_version",
+          "source"
+        ],
+        "sha256": "dbb309176950d6b011b6312cecc0561b94e264abb356335f578af523aaea2361"
+      }
+    },
+    {
+      "expected_ready": false,
+      "name": "missing_json_keys_rejected",
+      "observed_ready": false,
+      "passed": true,
+      "result": {
+        "actual_keys": [
+          "benchmark_id",
+          "schema_version"
+        ],
+        "domain": "external_plume",
+        "errors": [
+          "missing required keys: case_alignment, digitization, digitized_dataset_sha256, original_dataset_sha256, source"
+        ],
+        "kind": "json",
+        "label": "selftest.missing_key_json",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/missing_key.json",
+        "present": true,
+        "ready": false,
+        "required_keys": [
+          "benchmark_id",
+          "case_alignment",
+          "digitization",
+          "digitized_dataset_sha256",
+          "original_dataset_sha256",
+          "schema_version",
+          "source"
+        ],
+        "sha256": "5295e93819a7dd6217e20275eabb4363ac94b29995b4d5e13963384229ecf2bf"
+      }
+    },
+    {
+      "expected_ready": false,
+      "name": "malformed_json_rejected",
+      "observed_ready": false,
+      "passed": true,
+      "result": {
+        "domain": "external_plume",
+        "errors": [
+          "invalid JSON evidence /tmp/strict_drop_contract_selftest_ey6lj2pk/malformed.json: Expecting property name enclosed in double quotes: line 1 column 23 (char 22)"
+        ],
+        "kind": "json",
+        "label": "selftest.malformed_json",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/malformed.json",
+        "present": true,
+        "ready": false
+      }
+    },
+    {
+      "expected_ready": true,
+      "name": "valid_required_csv_accepts_header_and_data",
+      "observed_ready": true,
+      "passed": true,
+      "result": {
+        "actual_header": [
+          "metric_id",
+          "distance_m",
+          "reference_flux_w_m2",
+          "tolerance_abs_w_m2",
+          "tolerance_rel",
+          "source_basis"
+        ],
+        "data_row_count": 1,
+        "domain": "fire_calibration",
+        "errors": [],
+        "expected_header": [
+          "metric_id",
+          "distance_m",
+          "reference_flux_w_m2",
+          "tolerance_abs_w_m2",
+          "tolerance_rel",
+          "source_basis"
+        ],
+        "kind": "csv",
+        "label": "selftest.valid_csv",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/valid.csv",
+        "present": true,
+        "ready": true,
+        "required": true,
+        "row_count": 2,
+        "sha256": "dc4f1ba90a84cf62bca3192e4dd02f66e448ea584123d1fb1f452393025373d2"
+      }
+    },
+    {
+      "expected_ready": false,
+      "name": "wrong_csv_header_rejected",
+      "observed_ready": false,
+      "passed": true,
+      "result": {
+        "actual_header": [
+          "metric_id",
+          "distance_m",
+          "bad_column"
+        ],
+        "data_row_count": 1,
+        "domain": "fire_calibration",
+        "errors": [
+          "header does not match expected template contract"
+        ],
+        "expected_header": [
+          "metric_id",
+          "distance_m",
+          "reference_flux_w_m2",
+          "tolerance_abs_w_m2",
+          "tolerance_rel",
+          "source_basis"
+        ],
+        "kind": "csv",
+        "label": "selftest.wrong_header_csv",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/wrong_header.csv",
+        "present": true,
+        "ready": false,
+        "required": true,
+        "row_count": 2,
+        "sha256": "ca3a342861be2f8a149c876cd8c1463a0ee6abb9d1f59e7e710e2bb7cbba74a0"
+      }
+    },
+    {
+      "expected_ready": false,
+      "name": "required_csv_without_data_rows_rejected",
+      "observed_ready": false,
+      "passed": true,
+      "result": {
+        "actual_header": [
+          "metric_id",
+          "distance_m",
+          "reference_flux_w_m2",
+          "tolerance_abs_w_m2",
+          "tolerance_rel",
+          "source_basis"
+        ],
+        "data_row_count": 0,
+        "domain": "fire_calibration",
+        "errors": [
+          "required CSV has no data rows"
+        ],
+        "expected_header": [
+          "metric_id",
+          "distance_m",
+          "reference_flux_w_m2",
+          "tolerance_abs_w_m2",
+          "tolerance_rel",
+          "source_basis"
+        ],
+        "kind": "csv",
+        "label": "selftest.header_only_required_csv",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/header_only.csv",
+        "present": true,
+        "ready": false,
+        "required": true,
+        "row_count": 1,
+        "sha256": "84e94b67e60f13b2c0aa6a65ddfdc0864dbf4fe6cffa4f39ba2bc68da345cd30"
+      }
+    },
+    {
+      "expected_ready": false,
+      "name": "duplicate_csv_columns_rejected",
+      "observed_ready": false,
+      "passed": true,
+      "result": {
+        "actual_header": [
+          "metric_id",
+          "metric_id",
+          "source_basis"
+        ],
+        "data_row_count": 1,
+        "domain": "fire_calibration",
+        "errors": [
+          "header does not match expected template contract",
+          "duplicate columns: metric_id"
+        ],
+        "expected_header": [
+          "metric_id",
+          "distance_m",
+          "reference_flux_w_m2",
+          "tolerance_abs_w_m2",
+          "tolerance_rel",
+          "source_basis"
+        ],
+        "kind": "csv",
+        "label": "selftest.duplicate_column_csv",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/duplicate_columns.csv",
+        "present": true,
+        "ready": false,
+        "required": true,
+        "row_count": 2,
+        "sha256": "7cff9a2d637fc02ff3699657e7195ffd2a147cfbe587a0cfea289b82ac5ff382"
+      }
+    },
+    {
+      "expected_ready": true,
+      "name": "absent_optional_csv_is_awaiting_not_invalid",
+      "observed_ready": true,
+      "passed": true,
+      "result": {
+        "domain": "external_plume",
+        "kind": "csv",
+        "label": "selftest.optional_absent_csv",
+        "path": "/tmp/strict_drop_contract_selftest_ey6lj2pk/optional_absent.csv",
+        "present": false,
+        "ready": true,
+        "reason": "optional_artifact_absent",
+        "required": false
+      }
+    }
+  ]
+}

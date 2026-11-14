@@ -1,0 +1,115 @@
+{
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "clears_reference_data_blocker": false,
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/run_log.log",
+      "sha256": "dd4c7fecc168e6de9010f1a96c8544e876fbc006cf6c0a64786e417b45eab717",
+      "size_bytes": 154695
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/validation_log.log",
+      "sha256": "84194516d2eb27d2bf890ef4bbd6e8bd2c2d9dc9a865bbb79f5e172f2321229c",
+      "size_bytes": 483
+    },
+    {
+      "label": "input",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/input.sbepv5_d27_scout_h2_leak_3d",
+      "sha256": "7555d1d414fdad889fac4e25590ba384e99960c4234d9e7418b9c5c4bb8f1114",
+      "size_bytes": 2095
+    },
+    {
+      "label": "sensors_json",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/sensors_json.json",
+      "sha256": "f98bea5ab67a3005e5320ecd4e86c62c35f3f7477270594ca817286344358be4",
+      "size_bytes": 2837
+    },
+    {
+      "label": "plume_observation_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/plume_observation_report.json",
+      "sha256": "515a0819a050ce88d3c8269e2d0f31c69e4cd79debe56ed8a96f98689fd54462",
+      "size_bytes": 3551
+    },
+    {
+      "label": "plume_extents_csv",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/plume_extents_csv.csv",
+      "sha256": "5f6ca2cbfd5c8ecbe06bab4ea1b0698b3cf1266c428787c2bb21d2a73aec606b",
+      "size_bytes": 1354
+    },
+    {
+      "label": "sensor_timeseries_csv",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_program_scout_run_20260727/files/sensor_timeseries_csv.csv",
+      "sha256": "99b01a23809b1cb8c991d7dc2d08aacbdee437791e4fc13ffec833df1b95c558",
+      "size_bytes": 16985
+    }
+  ],
+  "generated_at_utc": "2026-07-27T09:06:50+00:00",
+  "input_summary": {
+    "baffle_stl_count": 4,
+    "domain_m": "1.20 0.20 0.90",
+    "fixed_dt": 1e-05,
+    "max_step": 200,
+    "n_cell": "48 8 36",
+    "numeric_source_shifted_inside_domain": true,
+    "plot_int": 50,
+    "public_d27_exit_velocity_m_s": 10.17,
+    "public_d27_jet_exit_location_m": [
+      0.03,
+      0.1,
+      0.145
+    ],
+    "release_location_m": [
+      0.075,
+      0.1,
+      0.145
+    ],
+    "release_mdot_kg_s": 0.0001034,
+    "release_velocity_m_s": 1.0
+  },
+  "limitations": [
+    "This is a program-side SBEPV5 D27 scout using public geometry/release facts and approximate baffle/sensor placement.",
+    "The plume observation threshold is configured for low-concentration plume detection, not for claiming a flammable cloud.",
+    "It is not an external experimental agreement claim because exact baffle bounds, exact sensor coordinates, and original/digitized Gas01..Gas12 histories are not ingested."
+  ],
+  "plume_detection": {
+    "lower_threshold": 1e-08,
+    "species": "H2",
+    "threshold_semantics": "low-concentration plume detection for D27 scout, not H2 flammability evidence",
+    "upper_threshold": 1.0
+  },
+  "plume_summary": {
+    "all_sensors_inside_domain": true,
+    "case_matched_external_benchmark": false,
+    "extent_rows": 5,
+    "max_cloud_volume": 0.0015312500000000005,
+    "max_flammable_x": 0.13749999999999998,
+    "max_flammable_z": 0.21250000000000002,
+    "max_nearest_cell_distance": 0.01920286436967152,
+    "max_peak_X": 0.0049255823912365505,
+    "max_sensor_sample_distance": 0.01920286436967152,
+    "plume_extents_available": true,
+    "sensor_rows": 60,
+    "sensor_timeseries_available": true,
+    "time_end": 0.0020000000000000044,
+    "time_start": 0.0
+  },
+  "run_dir": "/tmp/codex_h2_sbepv5_d27_scout_cuda_20260727_200step_baffle_clearance_plume_threshold/run",
+  "run_root": "/tmp/codex_h2_sbepv5_d27_scout_cuda_20260727_200step_baffle_clearance_plume_threshold",
+  "schema_version": 1,
+  "status": "PASS-SBEPV5-D27-PROGRAM-SCOUT-RUN",
+  "title": "HySafe SBEPV5 D27 Program-Side Scout Run",
+  "validated_outputs": {
+    "case_matched_external_dataset_ingested": false,
+    "cuda_run": true,
+    "mpi_ranks": 1,
+    "plotfile_count": 5,
+    "plume_extent_rows": 5,
+    "program_downwind_extent_available": true,
+    "program_sensor_sampling_available": true,
+    "program_vertical_extent_available": true,
+    "sensor_count": 12,
+    "sensor_timeseries_rows": 60
+  }
+}

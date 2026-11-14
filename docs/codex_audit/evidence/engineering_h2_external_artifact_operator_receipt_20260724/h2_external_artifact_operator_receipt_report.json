@@ -1,0 +1,88 @@
+{
+  "does_not_clear_production_blockers": true,
+  "drop_root": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop",
+  "evidence_files": [
+    {
+      "label": "production_blocker_data_room_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+      "sha256": "67c532294b2b054e347bf649097533b9fa3752608c9eff89cf459cef20f280df",
+      "size_bytes": 8998
+    },
+    {
+      "label": "production_blocker_closure_manifest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    },
+    {
+      "label": "external_evidence_intake_kit_manifest",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_intake_kit_20260724/h2_external_evidence_intake_kit_manifest.json",
+      "sha256": "3f73281de7529843281c2a204d3f39ff56ecb496839018a972eb6f73b92af014",
+      "size_bytes": 11798
+    }
+  ],
+  "expected_domains": [
+    "external_plume_shape_reference",
+    "fire_consequence_calibration",
+    "real_cad_cleanup"
+  ],
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This receipt gate validates operator/source/legal attestations for a staged external artifact drop; it does not supply external evidence.",
+    "A PASS receipt is required before real external artifacts should be accepted for controlled ingestion, but it does not by itself clear production blockers."
+  ],
+  "operator_receipt_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/operator_receipt.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+      "gap": "",
+      "name": "data_room_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "gap": "",
+      "name": "closure_manifest_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_evidence_intake_kit_20260724/h2_external_evidence_intake_kit_manifest.json",
+      "gap": "",
+      "name": "intake_kit_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "gate=strict-v1-operator-source-legal-attestation receipt_present=False gaps=1",
+      "gap": "",
+      "name": "operator_receipt_gate_enforced",
+      "status": "PASS"
+    },
+    {
+      "evidence": "ready=False remaining_blockers=3",
+      "gap": "",
+      "name": "not_ready_receipt_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "ready_for_external_artifact_acceptance": false,
+  "receipt_gate_level": "strict-v1-operator-source-legal-attestation",
+  "receipt_present": false,
+  "receipt_valid": false,
+  "receipt_validation": {
+    "gaps": [
+      "missing_operator_receipt:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/operator_receipt.json"
+    ],
+    "present": false,
+    "summary": {},
+    "valid": false
+  },
+  "receipt_validation_gap_count": 1,
+  "receipt_validation_gaps": [
+    "missing_operator_receipt:docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/operator_receipt.json"
+  ],
+  "remaining_blocker_count": 3,
+  "schema_version": 1,
+  "status": "NOT_READY-H2-EXTERNAL-ARTIFACT-OPERATOR-RECEIPT",
+  "title": "Engineering H2 External Artifact Operator Receipt",
+  "total_missing_artifact_count": 14
+}

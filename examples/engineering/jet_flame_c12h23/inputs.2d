@@ -1,0 +1,109 @@
+#-------------------------DOMAIN------------------------
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0
+geometry.prob_hi     = 0.50 0.25
+
+# BC: left=inflow(分段), right/up/down=outflow
+peleLM.lo_bc = Inflow Outflow
+peleLM.hi_bc = Outflow Outflow
+
+#-------------------------AMR------------------------
+amr.n_cell          = 256 128
+amr.v               = 1
+amr.max_level       = 0
+amr.blocking_factor = 16
+amr.max_grid_size   = 64
+
+#-------------------------PROBLEM------------------------
+prob.P_mean = 101325.0
+
+# 喷口1: C12H23 + N2
+prob.jet1_ylo = 0.125
+prob.jet1_yhi = 0.150
+prob.jet1_T   = 298.0
+prob.jet1_U   = 40.0
+prob.jet1_Y_C12H23 = 1.0
+prob.jet1_Y_N2     = 0.0
+
+# 喷口2: 高温空气
+prob.jet2_ylo = 0.100
+prob.jet2_yhi = 0.125
+prob.jet2_T   = 800.0
+prob.ke_inlet_TI = 0.02
+prob.ke_inlet_L = 0.01
+prob.jet2_U   = 40.0
+prob.jet2_Y_O2 = 1.0
+prob.jet2_Y_N2 = 0.0
+prob.do_ignit = 0
+prob.ignitSphX  = 0.005
+prob.ignitSphY  = 0.0275
+prob.ignitSphRad = 0.003
+prob.ignitT     = 1500.0
+
+#-------------------------PeleLM------------------------
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.use_wbar = 1
+peleLM.sdc_iterMax = 2
+peleLM.floor_species = 1
+peleLM.num_init_iter = 1
+peleLM.allow_negative_energy = 1
+
+peleLM.do_diffuse_spec = 1
+peleLM.do_diffuse_temp = 1
+peleLM.do_mass_balance = 1
+
+amr.plot_int = 200
+amr.max_step = 2000
+amr.dt_shrink = 0.01
+amr.init_dt = 1.e-9
+amr.cfl = 0.02
+amr.plot_speciesState = 1
+amr.derive_plot_vars = avg_pressure mass_fractions
+
+# RK64 显式化学
+peleLM.chem_integrator = "ReactorNull"
+peleLM.les_model = kepsilon
+peleLM.ke_k_amb = 0.05
+peleLM.ke_eps_amb = 0.01
+peleLM.ke_prod_lim = 10.0
+
+#-------------------------SPRAY------------------------
+peleLM.do_spray_particles = 1
+particles.v = 0
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.fuel_ref_temp = 298.15
+particles.fuel_species = C12H23
+
+# C12H23 物性（近似正十二烷，MKS）
+particles.C12H23_crit_temp = 658.
+particles.C12H23_boil_temp = 489.
+particles.C12H23_latent = 3.59E5
+particles.C12H23_cp = 2.217E3
+particles.C12H23_rho = 750.
+particles.C12H23_psat = 4.2654 1741.1453 -80.9035 1.E5
+particles.use_splash_model = false
+
+particles.cfl = 2.
+particles.parcel_size = 10.
+particles.write_ascii_files = 0
+
+# 喷雾喷射
+spray.jet1.do_inject = 1
+spray.jet1.T = 350.
+spray.jet1.jet_cent = 0.0 0.1375
+spray.jet1.jet_norm = 1.0 0.0
+spray.jet1.jet_dia = 0.005
+spray.jet1.dist_type = Uniform
+spray.jet1.diameter = 5.E-5
+spray.jet1.jet_vel = 40.
+spray.jet1.mass_flow_rate = 2.0E-4
+spray.jet1.spread_angle = 0.
+
+#-------------------------LINEAR SOLVER------------------------
+nodal_proj.verbose = 1
+nodal_proj.rtol = 1.0e-7
+mac_proj.verbose = 1
+mac_proj.rtol = 1.0e-7

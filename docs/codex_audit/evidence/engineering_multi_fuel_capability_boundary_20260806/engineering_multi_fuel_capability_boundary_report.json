@@ -1,0 +1,355 @@
+{
+  "capability_matrix": {
+    "gasified_lng_or_simplified_natural_gas_cloud": {
+      "available_mechanisms": [
+        "CH4_lean",
+        "grimech30",
+        "grimech30-noArN",
+        "drm19",
+        "chem-CH4-2step"
+      ],
+      "evidence_path": "docs/codex_audit/evidence/engineering_gasified_lng_lpg_surrogate_20260806/engineering_gasified_lng_lpg_surrogate_report.json",
+      "external_vaporization_timeseries_cuda_passed": true,
+      "gasified_lng_ch4_cold_source_sustained_fire_claim_allowed": false,
+      "gasified_lng_ch4_mpi_cuda_runtime_passed": true,
+      "gasified_lng_ch4_warmed_vapor_mpi_cuda_fire_probe_passed": true,
+      "gasified_lng_ch4_warmed_vapor_sustained_fire_claim_allowed": true,
+      "given_gas_source_surrogate_passed": true,
+      "liquefied_release_generated_input_cuda_smoke_passed": true,
+      "production_claim_allowed": false,
+      "required_work": [
+        "define LNG vapor composition surrogate, normally methane-rich with selected heavier components",
+        "add low-temperature inlet/source thermodynamics and density/buoyancy checks",
+        "verify ground-hugging cold-cloud dispersion before ignition/fire claims"
+      ],
+      "status": "GASIFIED_CH4_SURROGATE_TEMPLATE_AND_MPI_CUDA_COLD_SOURCE_RUNTIME_PASS_NOT_CRYOGENIC_FIRE_PRODUCTION_VERIFIED"
+    },
+    "h2_gas_leak_dispersion_ignition_fire": {
+      "cpu_mpi_ready": true,
+      "evidence_path": {
+        "cpu_mpi": "docs/codex_audit/evidence/engineering_h2_production_mesh_campaign_20260722/production_mesh_campaign_report.json",
+        "multi_gpu_mpi_cuda": "docs/codex_audit/evidence/engineering_h2_pipe_rack_mpi_cuda_long_revalidation_20260731/pipe_rack_direct_reacting_mpi_cuda_report.json",
+        "single_gpu": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_cuda_2000step_20260727/pipe_rack_direct_reacting_cuda_report.json"
+      },
+      "multi_gpu_mpi_cuda_ready": true,
+      "production_claim_allowed": true,
+      "single_gpu_ready": true,
+      "status": "CURRENT_SCOPE_READY"
+    },
+    "liquefied_gas_tank_rupture_flash_vaporization_pool_evaporation": {
+      "available_related_mechanisms": [
+        "liquid_fuels_nonreacting",
+        "fuellib_posf_nonreacting"
+      ],
+      "cfd_internal_phase_change_ready": false,
+      "external_gas_source_balance_species": [
+        "C3H8",
+        "CH4"
+      ],
+      "external_gas_source_mass_balance_negative_selftest_passed": true,
+      "external_gas_source_mass_balance_passed": true,
+      "external_gas_source_max_inventory_mass_relative_error": 0.06546339683315126,
+      "external_gas_source_total_mass_integral_kg": 6.262612621214,
+      "generated_gas_source_inputs_cuda_smoke_passed": true,
+      "lng_ch4_generated_input_cuda_smoke_passed": true,
+      "lpg_c3h8_generated_input_cuda_smoke_passed": true,
+      "production_claim_allowed": false,
+      "required_work": [
+        "two-phase or flashing discharge model at the rupture",
+        "liquid pool spread or droplet/aerosol transport representation",
+        "latent heat, wall/ground heat transfer, cryogenic property closure, and vaporization source coupling",
+        "validation against LNG/LPG spill, vaporization, dense-cloud dispersion, and fire consequence datasets"
+      ],
+      "screening_release_to_gas_source_generator_passed": true,
+      "screening_release_to_gas_source_negative_selftest_passed": true,
+      "status": "INTERNAL_PHASE_CHANGE_NOT_IMPLEMENTED_SCREENING_RELEASE_TO_GAS_SOURCE_GENERATOR_AND_CUDA_SMOKE_PASS"
+    },
+    "methane_or_natural_gas_gas_phase": {
+      "available_mechanisms": [
+        "CH4_lean",
+        "grimech30",
+        "grimech30-noArN",
+        "drm19",
+        "chem-CH4-2step"
+      ],
+      "cpu_mpi_cuda_cold_plume_probe_passed": true,
+      "delayed_ignition_cpu_mpi_fire_probe_passed": true,
+      "delayed_ignition_mpi_cuda_500step_fire_probe_passed": true,
+      "delayed_ignition_mpi_cuda_fire_probe_passed": true,
+      "delayed_ignition_single_cuda_fire_probe_passed": true,
+      "external_vaporization_timeseries_cuda_passed": true,
+      "production_claim_allowed": false,
+      "required_work": [
+        "extend CH4/natural-gas from reduced CPU/MPI, single-CUDA, rank-mapped MPI+CUDA, and 500-step MPI+CUDA fire probes to scenario-scale production-duration campaigns",
+        "add LFL/UFL and heat-release metrics appropriate to the selected gas composition",
+        "add production-duration CH4/natural-gas dispersion-to-fire acceptance thresholds"
+      ],
+      "source_entry_probe_passed": true,
+      "status": "CH4_CPU_MPI_CUDA_COLD_PLUME_AND_CPU_MPI_SINGLE_CUDA_MPI_CUDA_FIRE_PASS_BUT_NOT_PRODUCTION_VERIFIED"
+    },
+    "propane_gas_phase": {
+      "available_mechanisms": [
+        "c3h8_mini",
+        "C3MechLite",
+        "propane_fc",
+        "POLIMI2020"
+      ],
+      "c3h8_cold_plume_cpu_passed": true,
+      "c3h8_propane_fc_fire_cpu_mpi_passed": true,
+      "c3h8_propane_fc_fire_cpu_passed": true,
+      "c3h8_propane_fc_fire_cuda_passed": true,
+      "c3h8_propane_fc_fire_mpi_cuda_passed": true,
+      "c3h8_rank_mapped_two_gpu_mpi_cuda_passed": true,
+      "evidence_path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/engineering_c3h8_gas_phase_cpu_cuda_report.json",
+      "external_vaporization_timeseries_cuda_passed": true,
+      "gasified_lpg_c3h8_mpi_cuda_fire_probe_passed": true,
+      "liquefied_release_generated_input_cuda_smoke_passed": true,
+      "production_claim_allowed": false,
+      "required_work": [
+        "extend C3H8 from 120-step reduced probes to longer production-duration campaigns",
+        "verify dense-gas/slumping behavior and ignition/fire gates",
+        "add propane-specific acceptance thresholds and external comparison cases"
+      ],
+      "status": "INITIAL_C3H8_GAS_PHASE_CPU_CPU_MPI_SINGLE_CUDA_AND_MPI_CUDA_FIRE_PROBES_PASS_BUT_NOT_PRODUCTION_VERIFIED"
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "engineering_h2_leak_prob_h",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "engineering_h2_leak_prob_cpp",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.cpp",
+      "sha256": "e75c504b2ca2973e37e6977677b90cbfc9e9cf6b4b37f99f96da64b66f71fc78",
+      "size_bytes": 24604
+    },
+    {
+      "label": "engineering_h2_leak_gnumakefile",
+      "path": "examples/engineering/h2_leak_3d/GNUmakefile",
+      "sha256": "1a7e9374f56c60a3717c7d1cc0e62f4b9a43368cc502199fa9af9ad92cd65571",
+      "size_bytes": 795
+    },
+    {
+      "label": "current_scenario_readiness_matrix",
+      "path": "docs/codex_audit/evidence/current_scenario_readiness_matrix_20260805/current_scenario_readiness_matrix_report.json",
+      "sha256": "a47a2fad9472d709a58e2b368c52517c68e112cfe397dcc8258a242752e1aef6",
+      "size_bytes": 6131
+    },
+    {
+      "label": "h2_default_fuel_species_run_log",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_source_probe_20260806/h2_default_fuel_species_run.log",
+      "sha256": "302b4c05d4447a41d6022767d29a102c93455155f6cc9eabef8a375d5cefa731",
+      "size_bytes": 6889
+    },
+    {
+      "label": "h2_default_fuel_species_validation_log",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_source_probe_20260806/h2_default_fuel_species_validation.log",
+      "sha256": "a8cc6b207a165612c0309997203ec3069bd8a271b26377672a967d00edf611a3",
+      "size_bytes": 482
+    },
+    {
+      "label": "ch4_fuel_species_build_log",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_source_probe_20260806/ch4_fuel_species_build.log",
+      "sha256": "80d0f31d0a6526d0fe04aafb6323c490f42dc2843d8238f6bd5994f37f1af293",
+      "size_bytes": 1108929
+    },
+    {
+      "label": "ch4_fuel_species_run_log",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_source_probe_20260806/ch4_fuel_species_run.log",
+      "sha256": "870410a3750c1e539dd7f2d40754523333730f8a228767d1300cf2094a1dfb84",
+      "size_bytes": 4667
+    },
+    {
+      "label": "ch4_cold_plume_cpu_mpi_cuda_probe_report",
+      "path": "docs/codex_audit/evidence/engineering_ch4_cold_plume_cpu_probe_20260806/engineering_ch4_cold_plume_cpu_probe_report.json",
+      "sha256": "46e7b4a74bf28e35802d0809bab4b66b69dad8242a6cc5353b16adc8f7f252ce",
+      "size_bytes": 13180
+    },
+    {
+      "label": "ch4_pipe_rack_delayed_ignition_single_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_cuda_20260806/engineering_ch4_pipe_rack_delayed_ignition_cuda_report.json",
+      "sha256": "936b1ec117f7ca4e68200277501e307d9362932ebe7dd5485f5378dd0eb92b4e",
+      "size_bytes": 7043
+    },
+    {
+      "label": "ch4_pipe_rack_delayed_ignition_cpu_mpi_report",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_mpi_20260806/engineering_ch4_pipe_rack_delayed_ignition_mpi_report.json",
+      "sha256": "151b9fd7f5769b1467d57ba4ae3d6b77b6b79448531e130dc5c97f7ccefc5071",
+      "size_bytes": 6799
+    },
+    {
+      "label": "ch4_pipe_rack_delayed_ignition_mpi_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_20260806/engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_report.json",
+      "sha256": "26572ec077e4427ab1db92a8c631213db08e7ab830d96687333518d4a978350f",
+      "size_bytes": 7725
+    },
+    {
+      "label": "ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_report",
+      "path": "docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_20260806/engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_report.json",
+      "sha256": "edca40330c33fa164038c51ff34406ba3364783e7e74c695bcc10e946e39328f",
+      "size_bytes": 8373
+    },
+    {
+      "label": "c3h8_gas_phase_cpu_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/engineering_c3h8_gas_phase_cpu_cuda_report.json",
+      "sha256": "08cb7cc0ced2f24993b530a253969e3d544754b1fdf3f3d1c90bae1e9996e74c",
+      "size_bytes": 8643
+    },
+    {
+      "label": "gasified_lng_lpg_surrogate_report",
+      "path": "docs/codex_audit/evidence/engineering_gasified_lng_lpg_surrogate_20260806/engineering_gasified_lng_lpg_surrogate_report.json",
+      "sha256": "f11e1b65a32fcf713235a377ca68a222d5a059aa165b8be4e30a3c5cdbffc5c5",
+      "size_bytes": 12121
+    },
+    {
+      "label": "ch4_external_vaporization_timeseries_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/ch4_timeseries_cuda/engineering_external_vaporization_ch4_timeseries_cuda_report.json",
+      "sha256": "4823a6cfabfc167d6757547c452e875345f292d28c7d144a5e81d9665b87fad1",
+      "size_bytes": 5394
+    },
+    {
+      "label": "c3h8_external_vaporization_timeseries_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/engineering_external_vaporization_c3h8_timeseries_cuda_report.json",
+      "sha256": "402780c556a775b12d046f9d285bc4cbd55780cfddaf36ec26a2298118ce07e1",
+      "size_bytes": 5431
+    },
+    {
+      "label": "liquefied_release_vaporization_source_model_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/engineering_liquefied_release_vaporization_source_model_report.json",
+      "sha256": "4be22be889e5df0db88134ec244bc833f1279591025098fabbab677ab263b9fb",
+      "size_bytes": 15190
+    },
+    {
+      "label": "liquefied_release_vaporization_source_model_negative_selftest_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_negative_selftest_20260807/engineering_liquefied_release_vaporization_source_model_negative_selftest_report.json",
+      "sha256": "0fa2ca3302cc5fd7354a54a7413c6c184c089e7544d13f30a8e13ce8eddb3dd9",
+      "size_bytes": 6030
+    },
+    {
+      "label": "liquefied_release_vaporization_source_model_cuda_smoke_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_cuda_smoke_20260807/engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.json",
+      "sha256": "a071327cea9eca43e6b74f9016fcbc4c2e51a041961378f40a466c8629f905aa",
+      "size_bytes": 6930
+    },
+    {
+      "label": "liquefied_release_source_balance_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_source_balance_20260807/engineering_liquefied_release_source_balance_report.json",
+      "sha256": "cb9ab9ff5433d1503ffaf191256345685a229c9f6437fe061d29c814646d9481",
+      "size_bytes": 6865
+    },
+    {
+      "label": "liquefied_release_source_balance_negative_selftest_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_source_balance_negative_selftest_20260807/engineering_liquefied_release_source_balance_negative_selftest_report.json",
+      "sha256": "632204ee04ff4d5ca5163dcb1ca617202fe61361dce96e8b2126288bbf18e0a0",
+      "size_bytes": 15565
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:45+00:00",
+  "h2_specific_markers": {
+    "H2_ID": 0,
+    "cloud_YH2": 1,
+    "h2_named_abort_or_log": 0,
+    "lidryer_makefile": 1,
+    "species_equals_H2_log": 0
+  },
+  "limitations": [
+    "This is a capability-boundary audit, not a multi-fuel production validation.",
+    "H2 remains the only engineering gas leak/fire scenario with current long CPU/GPU evidence.",
+    "CH4 has short CPU, CPU/MPI, and single-CUDA cold-plume evidence plus reduced CPU/MPI, single-CUDA, rank-mapped MPI+CUDA, and 500-step MPI+CUDA delayed-ignition fire probes, not scenario-scale natural-gas production validation.",
+    "CH4 and C3H8 now also have CUDA runtime evidence for time-varying external-vaporization engineering sources with STL pipe-rack obstacles.",
+    "C3H8 has gas-phase cold source plus reduced CPU, CPU/MPI, single-CUDA, rank-mapped MPI+CUDA propane_fc delayed-ignition fire probes, and external-vaporization-source CUDA evidence, not dense-gas, external-threshold, or production-duration validation.",
+    "Gasified LNG/LPG given-source surrogates now have templates, 2-rank/2-GPU runtime evidence, CH4/C3H8 time-varying external-source CUDA evidence, generated-input CUDA smoke evidence, source-schedule mass-balance evidence, and negative selftests for the screening liquefied-release source generator; the LNG cold-source run is stable but does not claim sustained cryogenic fire validation, and internal liquefied-gas rupture, flashing, pool evaporation, and cryogenic dense-cloud production validation remain outside the current scope."
+  ],
+  "promotion_gates": [
+    {
+      "acceptance": "prob.fuel_species or equivalent must select source/cloud fuel species without H2_ID-only source injection",
+      "current_status": "passed_for_H2_CH4_C3H8_source_selection",
+      "gate": "configurable_fuel_species_source",
+      "required_for": [
+        "methane_or_natural_gas_gas_phase",
+        "propane_gas_phase",
+        "gasified_lng_or_simplified_natural_gas_cloud"
+      ]
+    },
+    {
+      "acceptance": "CH4 and C3H8 executables compile and pass CPU/MPI, single-CUDA, and rank-mapped MPI+CUDA smoke tests",
+      "current_status": "passed_for_CH4_and_C3H8_CPU_CPU_MPI_SINGLE_CUDA_MPI_CUDA_initial_probes",
+      "gate": "mechanism_specific_builds",
+      "required_for": [
+        "methane_or_natural_gas_gas_phase",
+        "propane_gas_phase"
+      ]
+    },
+    {
+      "acceptance": "fuel-specific LFL/UFL, ignition, heat-release, and stable flame propagation reports pass",
+      "current_status": "initial_CH4_and_C3H8_reduced_fire_probes_pass_external_thresholds_and_production_duration_missing",
+      "gate": "fuel_specific_fire_validation",
+      "required_for": [
+        "methane_or_natural_gas_gas_phase",
+        "propane_gas_phase",
+        "gasified_lng_or_simplified_natural_gas_cloud"
+      ]
+    },
+    {
+      "acceptance": "flashing/liquid-pool or droplet evaporation source terms are implemented and validated",
+      "current_status": "missing",
+      "gate": "liquefied_gas_phase_change_model",
+      "required_for": [
+        "liquefied_gas_tank_rupture_flash_vaporization_pool_evaporation"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY",
+  "summary": {
+    "c3h8_gas_phase_cpu_cpu_mpi_single_cuda_mpi_cuda_probe_passed": true,
+    "c3h8_gas_phase_cpu_cuda_probe_passed": true,
+    "c3h8_gas_phase_cpu_mpi_cuda_probe_passed": true,
+    "c3h8_propane_gas_phase_initial_ready": true,
+    "ch4_cpu_mpi_cuda_cold_plume_probe_passed": true,
+    "ch4_delayed_ignition_cpu_mpi_fire_probe_passed": true,
+    "ch4_delayed_ignition_mpi_cuda_500step_fire_probe_passed": true,
+    "ch4_delayed_ignition_mpi_cuda_fire_probe_passed": true,
+    "ch4_delayed_ignition_single_cuda_fire_probe_passed": true,
+    "ch4_fuel_species_probe_passed": true,
+    "current_engineering_chemistry_model": "LiDryer",
+    "engineering_source_is_h2_specific": false,
+    "external_vaporization_c3h8_timeseries_cuda_passed": true,
+    "external_vaporization_ch4_timeseries_cuda_passed": true,
+    "external_vaporization_multifuel_timeseries_cuda_passed": true,
+    "gasified_lng_ch4_cold_source_sustained_fire_claim_allowed": false,
+    "gasified_lng_ch4_mpi_cuda_runtime_passed": true,
+    "gasified_lng_ch4_warmed_vapor_mpi_cuda_fire_probe_passed": true,
+    "gasified_lng_ch4_warmed_vapor_sustained_fire_claim_allowed": true,
+    "gasified_lng_given_source_surrogate_ready": true,
+    "gasified_lng_lpg_surrogate_boundary_passed": true,
+    "gasified_lng_production_ready": false,
+    "gasified_lpg_c3h8_mpi_cuda_fire_probe_passed": true,
+    "gasified_lpg_given_source_surrogate_ready": true,
+    "h2_default_fuel_species_probe_passed": true,
+    "h2_engineering_current_scope_ready": true,
+    "liquefied_gas_phase_change_ready": false,
+    "liquefied_release_lng_ch4_generated_input_cuda_smoke_passed": true,
+    "liquefied_release_lpg_c3h8_generated_input_cuda_smoke_passed": true,
+    "liquefied_release_source_balance_expected_fragment_seen_count": 5,
+    "liquefied_release_source_balance_max_inventory_mass_relative_error": 0.06546339683315126,
+    "liquefied_release_source_balance_negative_rejected_count": 5,
+    "liquefied_release_source_balance_negative_selftest_passed": true,
+    "liquefied_release_source_balance_passed": true,
+    "liquefied_release_source_balance_total_gas_mass_integral_kg": 6.262612621214,
+    "liquefied_release_vaporization_source_model_cuda_smoke_passed": true,
+    "liquefied_release_vaporization_source_model_negative_selftest_passed": true,
+    "liquefied_release_vaporization_source_model_passed": true,
+    "liquid_fuel_related_mechanism_count": 2,
+    "methane_mechanism_count": 5,
+    "multi_fuel_production_ready": false,
+    "prevents_overclaim": true,
+    "promotion_gate_count": 4,
+    "propane_mechanism_count": 4,
+    "source_fuel_species_configurable": true
+  },
+  "title": "Engineering Multi-Fuel And Liquefied-Gas Capability Boundary"
+}

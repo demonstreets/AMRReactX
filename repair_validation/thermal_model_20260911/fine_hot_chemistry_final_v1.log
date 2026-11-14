@@ -1,0 +1,1097 @@
+{
+  "reference_method": "Independent SciPy Radau integration of two stoichiometric extents; NASA7 caloric inversion implemented separately from native C++.",
+  "mechanism_sha256": "0c57c352eec78d0865cd5fe625400ffa78fbfa793ee3f06bd22b9cab8682b253",
+  "sources": [
+    {
+      "case": "/home/cj/my-pele/repair_validation/thermal_model_20260911/fine_main_depth_v2",
+      "csv_sha256": "373835f5da9a27999e64b20728a4411aaf5430550e0a4cc26a8d9c99ab84e8ea"
+    }
+  ],
+  "probe_source_sha256": "2a94b41da3771ec8bb748a094c62da92c804580b2a3aa701fd5c57e190db681b",
+  "probe_binary_sha256": "d65108efc0e836bc03760d0c79a22eb509820326287ed5fb48df8da0b3abc135",
+  "script_sha256": "46027a92bf4911fe4423bd311dfcf75d19c7c44cb574334dfd750fdb528a2707",
+  "species": [
+    "nc7h16",
+    "o2",
+    "co",
+    "h2o",
+    "co2",
+    "n2"
+  ],
+  "concentration_regularization_mol_m3": 1e-10,
+  "results": {
+    "fine_main_depth_v2__16306_chemistry_1": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 5857.026676282754,
+          "T_flow_inverse_K": 5853.766216040091,
+          "Y": [
+            0.0,
+            0.08766689857101956,
+            0.0002586007480938107,
+            0.05589309732120061,
+            0.11886659987936904,
+            0.7373148034802914
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -2.55351295663786e-14,
+          "nfev": 836,
+          "elapsed_s": 0.1799645433202386
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 5857.026676282754,
+          "T_flow_inverse_K": 5853.766216040091,
+          "Y": [
+            0.0,
+            0.08766689857101956,
+            0.0002586007480938107,
+            0.05589309732120061,
+            0.11886659987936904,
+            0.7373148034802914
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -2.55351295663786e-14,
+          "nfev": 2603,
+          "elapsed_s": 0.5376754151657224
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 0.0
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 5857.026724922681,
+          "T_flow_inverse_K": 5853.766263848093,
+          "Y": [
+            6.607926996629403e-176,
+            0.08766689472368337,
+            0.0002585940124299349,
+            0.05589309732120061,
+            0.11886661046236909,
+            0.7373148034802914
+          ],
+          "energy_residual_J_m3": 0.0,
+          "accepted_steps": 1,
+          "rejected_steps": 0,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 4.780800190928858e-05,
+          "max_Y_difference_from_reference": 1.0583000045749635e-08,
+          "T_difference_from_recorded_flow_stage_K": 0.0
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 5857.026691298565,
+          "T_flow_inverse_K": 5853.7662307990795,
+          "Y": [
+            1.4123127270733534e-207,
+            0.08766689738329426,
+            0.00025859866870226323,
+            0.05589309732120061,
+            0.1188666031464859,
+            0.7373148034802914
+          ],
+          "energy_residual_J_m3": 7.450580596923828e-09,
+          "accepted_steps": 4,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 1.475898807257181e-05,
+          "max_Y_difference_from_reference": 3.267116854832608e-09,
+          "T_difference_from_recorded_flow_stage_K": -3.304901383671677e-05
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 5857.026680949898,
+          "T_flow_inverse_K": 5853.766220627415,
+          "Y": [
+            3.622088286911903e-294,
+            0.08766689820185633,
+            0.00025860010178703583,
+            0.05589309732120061,
+            0.11886660089483903,
+            0.7373148034802914
+          ],
+          "energy_residual_J_m3": 7.450580596923828e-09,
+          "accepted_steps": 13,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 4.587323928717524e-06,
+          "max_Y_difference_from_reference": 1.0154699858766492e-09,
+          "T_difference_from_recorded_flow_stage_K": -4.3220677980571054e-05
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 5857.026676317581,
+          "T_flow_inverse_K": 5853.7662160743275,
+          "Y": [
+            0.0,
+            0.08766689856826487,
+            0.0002586007432711766,
+            0.05589309732120061,
+            0.1188665998869465,
+            0.7373148034802914
+          ],
+          "energy_residual_J_m3": 1.4901161193847656e-08,
+          "accepted_steps": 125,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 3.423610905883834e-08,
+          "max_Y_difference_from_reference": 7.577466432096003e-12,
+          "T_difference_from_recorded_flow_stage_K": -4.777376580022974e-05
+        }
+      ]
+    },
+    "fine_main_depth_v2__16306_chemistry_2": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 5857.310286024412,
+          "T_flow_inverse_K": 5854.04554848752,
+          "Y": [
+            0.0,
+            0.08766760742164717,
+            0.0002598079956610701,
+            0.055892699361658825,
+            0.11886824755470632,
+            0.7373116376663009
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -2.5757174171303632e-14,
+          "nfev": 1290,
+          "elapsed_s": 0.268243545666337
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 5857.310286024412,
+          "T_flow_inverse_K": 5854.04554848752,
+          "Y": [
+            0.0,
+            0.08766760742164717,
+            0.0002598079956610701,
+            0.055892699361658825,
+            0.11886824755470632,
+            0.7373116376663009
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -2.5757174171303632e-14,
+          "nfev": 3972,
+          "elapsed_s": 0.8294359380379319
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 0.0
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 5857.310398907579,
+          "T_flow_inverse_K": 5854.045659438223,
+          "Y": [
+            8.931361215702419e-173,
+            0.08766759849282833,
+            0.00025979236367059376,
+            0.055892699361658825,
+            0.11886827211551566,
+            0.7373116376663009
+          ],
+          "energy_residual_J_m3": -2.9802322387695312e-08,
+          "accepted_steps": 4,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 0.00011095070294686593,
+          "max_Y_difference_from_reference": 2.4560809344653656e-08,
+          "T_difference_from_recorded_flow_stage_K": 0.0
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 5857.310333732543,
+          "T_flow_inverse_K": 5854.04559537893,
+          "Y": [
+            2.8685219053243475e-264,
+            0.08766760364803546,
+            0.000259801389069185,
+            0.055892699361658825,
+            0.11886825793490988,
+            0.7373116376663009
+          ],
+          "energy_residual_J_m3": 0.0,
+          "accepted_steps": 13,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 4.6891409510863014e-05,
+          "max_Y_difference_from_reference": 1.0380203557813772e-08,
+          "T_difference_from_recorded_flow_stage_K": -6.405929343600292e-05
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 5857.310290807151,
+          "T_flow_inverse_K": 5854.045553188386,
+          "Y": [
+            0.0,
+            0.08766760704334288,
+            0.0002598073333506565,
+            0.055892699361658825,
+            0.11886824859532105,
+            0.7373116376663009
+          ],
+          "energy_residual_J_m3": 1.4901161193847656e-08,
+          "accepted_steps": 41,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 4.700866156781558e-06,
+          "max_Y_difference_from_reference": 1.040614733271994e-09,
+          "T_difference_from_recorded_flow_stage_K": -0.00010624983679008437
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 5857.310286067458,
+          "T_flow_inverse_K": 5854.045548529695,
+          "Y": [
+            0.0,
+            0.0876676074182537,
+            0.00025980798971996373,
+            0.055892699361658825,
+            0.1188682475640412,
+            0.7373116376663009
+          ],
+          "energy_residual_J_m3": 1.4379620552062988e-06,
+          "accepted_steps": 406,
+          "rejected_steps": 4,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 4.217508831061423e-08,
+          "max_Y_difference_from_reference": 9.334880091138587e-12,
+          "T_difference_from_recorded_flow_stage_K": -0.00011090852785855532
+        }
+      ]
+    },
+    "fine_main_depth_v2__16731_chemistry_1": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 5376.47323880604,
+          "T_flow_inverse_K": 5376.43941587356,
+          "Y": [
+            0.0,
+            0.08748143718408655,
+            0.000513986362417492,
+            0.05579905586744715,
+            0.11953246125924985,
+            0.7366730593267612
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -3.774758283725532e-14,
+          "nfev": 356,
+          "elapsed_s": 0.07363664917647839
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 5376.47323880604,
+          "T_flow_inverse_K": 5376.43941587356,
+          "Y": [
+            0.0,
+            0.08748143718408655,
+            0.000513986362417492,
+            0.05579905586744715,
+            0.11953246125924985,
+            0.7366730593267612
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -3.774758283725532e-14,
+          "nfev": 1066,
+          "elapsed_s": 0.21673214808106422
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 0.0
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 5376.473446100571,
+          "T_flow_inverse_K": 5376.439622850294,
+          "Y": [
+            1.009460946442226e-214,
+            0.08748142081855087,
+            0.0005139577107108415,
+            0.05579905586744715,
+            0.1195325062764922,
+            0.7366730593267612
+          ],
+          "energy_residual_J_m3": -2.0489096641540527e-08,
+          "accepted_steps": 1,
+          "rejected_steps": 0,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 0.00020697673335234867,
+          "max_Y_difference_from_reference": 4.501724235050908e-08,
+          "T_difference_from_recorded_flow_stage_K": 9.094947017729282e-13
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 5376.473306820471,
+          "T_flow_inverse_K": 5376.4394837837235,
+          "Y": [
+            1.5290356378026248e-240,
+            0.08748143181446795,
+            0.000513976961641349,
+            0.05579905586744715,
+            0.11953247602964465,
+            0.7366730593267612
+          ],
+          "energy_residual_J_m3": 1.862645149230957e-09,
+          "accepted_steps": 4,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 6.791016312490683e-05,
+          "max_Y_difference_from_reference": 1.477039479613751e-08,
+          "T_difference_from_recorded_flow_stage_K": -0.00013906656931794714
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 5376.473260279843,
+          "T_flow_inverse_K": 5376.439437314448,
+          "Y": [
+            1.9274694625140801e-296,
+            0.08748143548876791,
+            0.0005139833943648261,
+            0.05579905586744715,
+            0.11953246592262112,
+            0.7366730593267612
+          ],
+          "energy_residual_J_m3": 3.725290298461914e-09,
+          "accepted_steps": 11,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 2.1440887394419406e-05,
+          "max_Y_difference_from_reference": 4.663371272473071e-09,
+          "T_difference_from_recorded_flow_stage_K": -0.00018553584504843457
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 5376.473239127289,
+          "T_flow_inverse_K": 5376.4394161923565,
+          "Y": [
+            0.0,
+            0.08748143715888007,
+            0.000513986318287514,
+            0.05579905586744715,
+            0.11953246132858625,
+            0.7366730593267612
+          ],
+          "energy_residual_J_m3": 8.288770914077759e-06,
+          "accepted_steps": 108,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 3.187960828654468e-07,
+          "max_Y_difference_from_reference": 6.93363977344319e-11,
+          "T_difference_from_recorded_flow_stage_K": -0.00020665793635998853
+        }
+      ]
+    },
+    "fine_main_depth_v2__16731_chemistry_2": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 5375.319607605812,
+          "T_flow_inverse_K": 5375.287207905512,
+          "Y": [
+            0.0,
+            0.08748111821721095,
+            0.0005125304168621971,
+            0.055799175654282065,
+            0.11953290787505573,
+            0.7366742678365515
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -3.752553823233029e-14,
+          "nfev": 398,
+          "elapsed_s": 0.08314213808625937
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 5375.319607605812,
+          "T_flow_inverse_K": 5375.287207905512,
+          "Y": [
+            0.0,
+            0.08748111821721095,
+            0.0005125304168621971,
+            0.055799175654282065,
+            0.11953290787505573,
+            0.7366742678365515
+          ],
+          "minimum_Y": 0.0,
+          "mass_fraction_sum_error": -3.752553823233029e-14,
+          "nfev": 1192,
+          "elapsed_s": 0.24576521711423993
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 0.0
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 5375.319687061947,
+          "T_flow_inverse_K": 5375.287287241134,
+          "Y": [
+            7.814163432325963e-182,
+            0.08748111194444998,
+            0.0005125194349236605,
+            0.055799175654282065,
+            0.11953292512975526,
+            0.7366742678365515
+          ],
+          "energy_residual_J_m3": -3.725290298461914e-09,
+          "accepted_steps": 1,
+          "rejected_steps": 0,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 7.933562210382661e-05,
+          "max_Y_difference_from_reference": 1.725469953028913e-08,
+          "T_difference_from_recorded_flow_stage_K": 1.8189894035458565e-12
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 5375.319696614515,
+          "T_flow_inverse_K": 5375.287296779213,
+          "Y": [
+            3.108415068787358e-220,
+            0.08748111119031088,
+            0.0005125181146263882,
+            0.055799175654282065,
+            0.11953292720419158,
+            0.7366742678365515
+          ],
+          "energy_residual_J_m3": 0.0,
+          "accepted_steps": 5,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 8.887370040611131e-05,
+          "max_Y_difference_from_reference": 1.932913584745677e-08,
+          "T_difference_from_recorded_flow_stage_K": 9.538080121274106e-06
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 5375.31963676079,
+          "T_flow_inverse_K": 5375.287237016273,
+          "Y": [
+            1.0245038257446349e-296,
+            0.08748111591553584,
+            0.0005125263872403367,
+            0.055799175654282065,
+            0.11953291420635272,
+            0.7366742678365515
+          ],
+          "energy_residual_J_m3": -3.725290298461914e-09,
+          "accepted_steps": 15,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 2.9110760806361213e-05,
+          "max_Y_difference_from_reference": 6.3312969866835545e-09,
+          "T_difference_from_recorded_flow_stage_K": -5.022485947847599e-05
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 5375.3196080218595,
+          "T_flow_inverse_K": 5375.287208320892,
+          "Y": [
+            0.0,
+            0.08748111818436889,
+            0.0005125303593644224,
+            0.055799175654282065,
+            0.11953290796539584,
+            0.7366742678365515
+          ],
+          "energy_residual_J_m3": 1.7136335372924805e-07,
+          "accepted_steps": 146,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": 4.153798727202229e-07,
+          "max_Y_difference_from_reference": 9.03401103924395e-11,
+          "T_difference_from_recorded_flow_stage_K": -7.892024041211698e-05
+        }
+      ]
+    },
+    "fine_main_depth_v2__15854_chemistry_1": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 5007.378389556667,
+          "T_flow_inverse_K": 5007.378520678118,
+          "Y": [
+            0.004503573359588727,
+            0.10431962797845534,
+            0.0013703390007602171,
+            0.04938064939037258,
+            0.10327477759042922,
+            0.7371510326803832
+          ],
+          "minimum_Y": 0.0013703390007602171,
+          "mass_fraction_sum_error": -1.0769163338864018e-14,
+          "nfev": 324,
+          "elapsed_s": 0.06644724309444427
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 5007.378389556667,
+          "T_flow_inverse_K": 5007.378520678119,
+          "Y": [
+            0.004503573359588727,
+            0.10431962797845531,
+            0.0013703390007601705,
+            0.04938064939037258,
+            0.10327477759042927,
+            0.7371510326803832
+          ],
+          "minimum_Y": 0.0013703390007601705,
+          "mass_fraction_sum_error": -1.0769163338864018e-14,
+          "nfev": 944,
+          "elapsed_s": 0.19637578539550304
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 9.094947017729282e-13,
+        "max_Y_difference": 5.551115123125783e-17
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 5007.37708531544,
+          "T_flow_inverse_K": 5007.377216390642,
+          "Y": [
+            0.004503598408433626,
+            0.10431973730946542,
+            0.0013703763701133258,
+            0.04938061336383174,
+            0.10327464186776192,
+            0.7371510326803832
+          ],
+          "energy_residual_J_m3": 3.4049153327941895e-06,
+          "accepted_steps": 6,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -0.0013042874761595158,
+          "max_Y_difference_from_reference": 1.3572266735484284e-07,
+          "T_difference_from_recorded_flow_stage_K": 9.094947017729282e-13
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 5007.378264381579,
+          "T_flow_inverse_K": 5007.378395498646,
+          "Y": [
+            0.004503575684601617,
+            0.1043196384486764,
+            0.0013703430334528772,
+            0.04938064604641915,
+            0.10327476410645607,
+            0.7371510326803832
+          ],
+          "energy_residual_J_m3": 3.725290298461914e-08,
+          "accepted_steps": 20,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -0.00012517947288870346,
+          "max_Y_difference_from_reference": 1.3483973201888766e-08,
+          "T_difference_from_recorded_flow_stage_K": 0.001179108004180307
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 5007.378377064539,
+          "T_flow_inverse_K": 5007.378508185572,
+          "Y": [
+            0.004503573588747649,
+            0.10431962902252301,
+            0.0013703394194113456,
+            0.04938064906078445,
+            0.10327477622813956,
+            0.7371510326803832
+          ],
+          "energy_residual_J_m3": 3.725290298461914e-09,
+          "accepted_steps": 64,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -1.249254637514241e-05,
+          "max_Y_difference_from_reference": 1.3622897115928012e-09,
+          "T_difference_from_recorded_flow_stage_K": 0.001291794930693868
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 5007.3783894320995,
+          "T_flow_inverse_K": 5007.378520553567,
+          "Y": [
+            0.004503573361860925,
+            0.10431962798886132,
+            0.0013703390050061209,
+            0.049380649387105076,
+            0.10327477757677274,
+            0.7371510326803832
+          ],
+          "energy_residual_J_m3": 1.4901161193847656e-08,
+          "accepted_steps": 644,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -1.2455166142899543e-07,
+          "max_Y_difference_from_reference": 1.3656534236794471e-11,
+          "T_difference_from_recorded_flow_stage_K": 0.0013041629254075815
+        }
+      ]
+    },
+    "fine_main_depth_v2__15854_chemistry_2": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 5034.103300943361,
+          "T_flow_inverse_K": 5034.105897676855,
+          "Y": [
+            0.003963139038418898,
+            0.10237799360073795,
+            0.0013020618982746068,
+            0.05015829265451221,
+            0.10504337740478656,
+            0.7371551354032592
+          ],
+          "minimum_Y": 0.0013020618982746068,
+          "mass_fraction_sum_error": -1.0658141036401503e-14,
+          "nfev": 415,
+          "elapsed_s": 0.08653298206627369
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 5034.103300943362,
+          "T_flow_inverse_K": 5034.105897676855,
+          "Y": [
+            0.003963139038418898,
+            0.10237799360073792,
+            0.0013020618982745689,
+            0.05015829265451221,
+            0.10504337740478663,
+            0.7371551354032592
+          ],
+          "minimum_Y": 0.0013020618982745689,
+          "mass_fraction_sum_error": -1.0658141036401503e-14,
+          "nfev": 1245,
+          "elapsed_s": 0.254947149194777
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 6.938893903907228e-17
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 5034.10250432028,
+          "T_flow_inverse_K": 5034.105100938919,
+          "Y": [
+            0.0039631519387870046,
+            0.10237805966575869,
+            0.0013020982285627581,
+            0.05015827410053734,
+            0.1050432806630843,
+            0.7371551354032592
+          ],
+          "energy_residual_J_m3": 3.203749656677246e-07,
+          "accepted_steps": 9,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -0.0007967379360707127,
+          "max_Y_difference_from_reference": 9.674170232953916e-08,
+          "T_difference_from_recorded_flow_stage_K": -9.094947017729282e-13
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 5034.1032180892025,
+          "T_flow_inverse_K": 5034.105814810765,
+          "Y": [
+            0.003963140325686177,
+            0.10237800045645404,
+            0.0013020659846424097,
+            0.050158290803097964,
+            0.10504336702684962,
+            0.7371551354032592
+          ],
+          "energy_residual_J_m3": 7.450580596923828e-09,
+          "accepted_steps": 29,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -8.286609045171645e-05,
+          "max_Y_difference_from_reference": 1.0377937009753424e-08,
+          "T_difference_from_recorded_flow_stage_K": 0.0007138718447095016
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 5034.10329251747,
+          "T_flow_inverse_K": 5034.105889249761,
+          "Y": [
+            0.003963139167371268,
+            0.10237799429737596,
+            0.0013020623248982666,
+            0.050158292469046205,
+            0.10504337633803837,
+            0.7371551354032592
+          ],
+          "energy_residual_J_m3": -3.725290298461914e-09,
+          "accepted_steps": 92,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -8.427094144281e-06,
+          "max_Y_difference_from_reference": 1.0667482591708577e-09,
+          "T_difference_from_recorded_flow_stage_K": 0.000788310841016937
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 5034.103300858696,
+          "T_flow_inverse_K": 5034.105897592189,
+          "Y": [
+            0.003963139039705953,
+            0.10237799360773538,
+            0.0013020619026095131,
+            0.050158292652661314,
+            0.10504337739401853,
+            0.7371551354032592
+          ],
+          "energy_residual_J_m3": -3.725290298461914e-09,
+          "accepted_steps": 923,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 1,
+          "T_difference_from_reference_K": -8.466668077744544e-08,
+          "max_Y_difference_from_reference": 1.0768094749202817e-11,
+          "T_difference_from_recorded_flow_stage_K": 0.0007966532684804406
+        }
+      ]
+    },
+    "fine_main_depth_v2__15852_chemistry_1": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 4875.404263866529,
+          "T_flow_inverse_K": 4875.404263866529,
+          "Y": [
+            0.007338302047386495,
+            0.11451474761348421,
+            0.0017731146331260853,
+            0.04530280412079858,
+            0.09392968449348818,
+            0.7371413470917055
+          ],
+          "minimum_Y": 0.0017731146331260853,
+          "mass_fraction_sum_error": -1.0880185641326534e-14,
+          "nfev": 310,
+          "elapsed_s": 0.06452757585793734
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 4875.404263866529,
+          "T_flow_inverse_K": 4875.404263866529,
+          "Y": [
+            0.007338302047386495,
+            0.1145147476134842,
+            0.0017731146331260374,
+            0.04530280412079858,
+            0.09392968449348825,
+            0.7371413470917055
+          ],
+          "minimum_Y": 0.0017731146331260374,
+          "mass_fraction_sum_error": -1.0880185641326534e-14,
+          "nfev": 923,
+          "elapsed_s": 0.1920179440639913
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 6.938893903907228e-17
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 4875.4032034788215,
+          "T_flow_inverse_K": 4875.4032034788215,
+          "Y": [
+            0.007338316934496277,
+            0.1145148349714407,
+            0.0017731760240363987,
+            0.04530278270938936,
+            0.09392954226892082,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": 3.91155481338501e-07,
+          "accepted_steps": 7,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -0.001060387707184418,
+          "max_Y_difference_from_reference": 1.4222456742873923e-07,
+          "T_difference_from_recorded_flow_stage_K": 0.0
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 4875.404158488816,
+          "T_flow_inverse_K": 4875.404158488816,
+          "Y": [
+            0.007338303438701074,
+            0.11451475626726537,
+            0.0017731212275799288,
+            0.045302802119738174,
+            0.09392966985499887,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": -3.725290298461914e-09,
+          "accepted_steps": 23,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -0.00010537771231611259,
+          "max_Y_difference_from_reference": 1.4638489378993036e-08,
+          "T_difference_from_recorded_flow_stage_K": 0.0009550099948683055
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 4875.404253379474,
+          "T_flow_inverse_K": 4875.404253379474,
+          "Y": [
+            0.007338302183155925,
+            0.11451474847384403,
+            0.0017731153044608663,
+            0.04530280392552807,
+            0.09392968302129483,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": 0.0,
+          "accepted_steps": 72,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -1.0487055078556295e-05,
+          "max_Y_difference_from_reference": 1.4721934227246436e-09,
+          "T_difference_from_recorded_flow_stage_K": 0.0010499006521058618
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 4875.404263761829,
+          "T_flow_inverse_K": 4875.404263761829,
+          "Y": [
+            0.007338302048727746,
+            0.11451474762205642,
+            0.0017731146398850064,
+            0.04530280411886919,
+            0.09392968447874515,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": -7.450580596923828e-09,
+          "accepted_steps": 725,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -1.0470012057339773e-07,
+          "max_Y_difference_from_reference": 1.4743095633207304e-11,
+          "T_difference_from_recorded_flow_stage_K": 0.0010602830070638447
+        }
+      ]
+    },
+    "fine_main_depth_v2__15851_chemistry_2": {
+      "reference_runs": [
+        {
+          "rtol": 1e-10,
+          "atol_extent_mol_m3": 1e-14,
+          "T_polynomial_K": 4839.541195074664,
+          "T_flow_inverse_K": 4839.541195074664,
+          "Y": [
+            0.00818718761224623,
+            0.11757848704664546,
+            0.0019166077047273941,
+            0.044081893112290126,
+            0.09109447743237432,
+            0.7371413470917055
+          ],
+          "minimum_Y": 0.0019166077047273941,
+          "mass_fraction_sum_error": -1.0880185641326534e-14,
+          "nfev": 380,
+          "elapsed_s": 0.08048697095364332
+        },
+        {
+          "rtol": 1e-12,
+          "atol_extent_mol_m3": 1e-16,
+          "T_polynomial_K": 4839.541195074664,
+          "T_flow_inverse_K": 4839.541195074664,
+          "Y": [
+            0.00818718761224623,
+            0.11757848704664545,
+            0.0019166077047273568,
+            0.04408189311229013,
+            0.0910944774323744,
+            0.7371413470917055
+          ],
+          "minimum_Y": 0.0019166077047273568,
+          "mass_fraction_sum_error": -1.0880185641326534e-14,
+          "nfev": 1133,
+          "elapsed_s": 0.2348895650357008
+        }
+      ],
+      "reference_convergence": {
+        "temperature_difference_K": 0.0,
+        "max_Y_difference": 6.938893903907228e-17
+      },
+      "native_runs": [
+        {
+          "rtol": 0.0001,
+          "atol_y": 1e-13,
+          "success": true,
+          "T_polynomial_K": 4839.54037702863,
+          "T_flow_inverse_K": 4839.54037702863,
+          "Y": [
+            0.008187195444125203,
+            0.11757855328260525,
+            0.0019166755034313626,
+            0.04408188184807779,
+            0.09109434683004387,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": -3.725290298461914e-09,
+          "accepted_steps": 10,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -0.0008180460336006945,
+          "max_Y_difference_from_reference": 1.306023305197579e-07,
+          "T_difference_from_recorded_flow_stage_K": -9.094947017729282e-13
+        },
+        {
+          "rtol": 1e-05,
+          "atol_y": 1e-14,
+          "success": true,
+          "T_polynomial_K": 4839.541113455404,
+          "T_flow_inverse_K": 4839.541113455404,
+          "Y": [
+            0.00818718834739184,
+            0.1175784936404607,
+            0.0019166147279000123,
+            0.04408189205496574,
+            0.09109446413756518,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": 3.725290298461914e-09,
+          "accepted_steps": 31,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -8.161925961758243e-05,
+          "max_Y_difference_from_reference": 1.3294809211861214e-08,
+          "T_difference_from_recorded_flow_stage_K": 0.0007364267730736174
+        },
+        {
+          "rtol": 1e-06,
+          "atol_y": 1e-15,
+          "success": true,
+          "T_polynomial_K": 4839.541186763017,
+          "T_flow_inverse_K": 4839.541186763017,
+          "Y": [
+            0.00818718768556838,
+            0.11757848771761176,
+            0.0019166084285096774,
+            0.04408189300683452,
+            0.09109447606975937,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": 7.450580596923828e-09,
+          "accepted_steps": 98,
+          "rejected_steps": 2,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -8.311646524816751e-06,
+          "max_Y_difference_from_reference": 1.3626150208168042e-09,
+          "T_difference_from_recorded_flow_stage_K": 0.000809734386166383
+        },
+        {
+          "rtol": 1e-08,
+          "atol_y": 1e-17,
+          "success": true,
+          "T_polynomial_K": 4839.5411949866,
+          "T_flow_inverse_K": 4839.5411949866,
+          "Y": [
+            0.008187187612970562,
+            0.1175784870533328,
+            0.0019166077119806121,
+            0.04408189311124862,
+            0.09109447741875175,
+            0.7371413470917055
+          ],
+          "energy_residual_J_m3": -4.081800580024719e-05,
+          "accepted_steps": 987,
+          "rejected_steps": 3,
+          "flow_inverse_range_flag": 0,
+          "T_difference_from_reference_K": -8.806364348856732e-08,
+          "max_Y_difference_from_reference": 1.3622644678967788e-11,
+          "T_difference_from_recorded_flow_stage_K": 0.0008179579690477112
+        }
+      ]
+    }
+  },
+  "interpretation": "Numerical chemistry verification at recorded high-temperature states of the active WD6 model. Does not validate extrapolated thermodynamics, high-temperature kinetic completeness, wall physics, or the full coupled trajectory."
+}

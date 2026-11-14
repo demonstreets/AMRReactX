@@ -1,0 +1,255 @@
+{
+  "generated_at_utc": "2026-07-20T07:32:51+00:00",
+  "host": "xiaochun-4028",
+  "launcher": {
+    "path": "/usr/bin/mpirun",
+    "version": {
+      "argv": [
+        "/usr/bin/mpirun",
+        "--version"
+      ],
+      "duration_s": 0.005628482962492853,
+      "returncode": 0,
+      "stderr": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "mpirun (Open MPI) 4.1.6\n\nReport bugs to http://www.open-mpi.org/community/help/\n",
+      "stdout_sha256": "c2ec9fd7b47e6992ca3248b8d42a2a83bd89b1e8ad8ae679f0e8a1a1425180dd",
+      "timed_out": false
+    }
+  },
+  "limitations": [
+    "This is a runtime/affinity preflight and does not prove CFD numerical accuracy.",
+    "The MPI probe is a lightweight Python launch; it does not replace production-size CFD scaling, scheduler allocation testing, or overnight stability.",
+    "Absence of scheduler environment variables means this evidence was collected from an interactive shell rather than a managed batch allocation."
+  ],
+  "mpi_probe": {
+    "argv": [
+      "/usr/bin/mpirun",
+      "-np",
+      "4",
+      "/usr/bin/python3",
+      "<python-affinity-probe>"
+    ],
+    "duration_s": 0.21883817901834846,
+    "returncode": 0,
+    "rows": [
+      {
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41
+        ],
+        "affinity_count": 28,
+        "hostname": "xiaochun-4028",
+        "local_rank": "0",
+        "omp_num_threads": "2",
+        "pid": 652766,
+        "rank": 0,
+        "size": "4"
+      },
+      {
+        "affinity": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55
+        ],
+        "affinity_count": 28,
+        "hostname": "xiaochun-4028",
+        "local_rank": "1",
+        "omp_num_threads": "2",
+        "pid": 652767,
+        "rank": 1,
+        "size": "4"
+      },
+      {
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41
+        ],
+        "affinity_count": 28,
+        "hostname": "xiaochun-4028",
+        "local_rank": "2",
+        "omp_num_threads": "2",
+        "pid": 652768,
+        "rank": 2,
+        "size": "4"
+      },
+      {
+        "affinity": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55
+        ],
+        "affinity_count": 28,
+        "hostname": "xiaochun-4028",
+        "local_rank": "3",
+        "omp_num_threads": "2",
+        "pid": 652769,
+        "rank": 3,
+        "size": "4"
+      }
+    ],
+    "stderr": "",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "{\"affinity\": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41], \"affinity_count\": 28, \"hostname\": \"xiaochun-4028\", \"local_rank\": \"0\", \"omp_num_threads\": \"2\", \"pid\": 652766, \"rank\": 0, \"size\": \"4\"}\n{\"affinity\": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55], \"affinity_count\": 28, \"hostname\": \"xiaochun-4028\", \"local_rank\": \"1\", \"omp_num_threads\": \"2\", \"pid\": 652767, \"rank\": 1, \"size\": \"4\"}\n{\"affinity\": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41], \"affinity_count\": 28, \"hostname\": \"xiaochun-4028\", \"local_rank\": \"2\", \"omp_num_threads\": \"2\", \"pid\": 652768, \"rank\": 2, \"size\": \"4\"}\n{\"affinity\": [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55], \"affinity_count\": 28, \"hostname\": \"xiaochun-4028\", \"local_rank\": \"3\", \"omp_num_threads\": \"2\", \"pid\": 652769, \"rank\": 3, \"size\": \"4\"}\n",
+    "stdout_sha256": "1316c12958139bb5cac98ff7dc3ef16ff5737b740af2c5d4f9265b1cae250b6b"
+  },
+  "recommended_policy": {
+    "evidence": "Preserve this manifest next to campaign summaries for production handoff.",
+    "mpi": "Use scheduler-native launch when available; otherwise record mpirun/mpiexec command and rank count.",
+    "openmp": "Set OMP_NUM_THREADS explicitly. For hybrid runs, set OMP_PROC_BIND=spread and OMP_PLACES=cores unless the site scheduler provides a stronger binding policy."
+  },
+  "requested": {
+    "ranks": 4,
+    "threads_per_rank": 2
+  },
+  "scheduler_environment": {
+    "OMP_NUM_THREADS": "2",
+    "OMP_PLACES": "cores",
+    "OMP_PROC_BIND": "spread"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "topology": {
+    "logical_cpus": 56,
+    "lscpu": {
+      "argv": [
+        "/usr/bin/lscpu"
+      ],
+      "duration_s": 0.07025726704159752,
+      "returncode": 0,
+      "stderr": "",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  56\nOn-line CPU(s) list:                     0-55\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz\nCPU family:                              6\nModel:                                   79\nThread(s) per core:                      2\nCore(s) per socket:                      14\nSocket(s):                               2\nStepping:                                1\nCPU(s) scaling MHz:                      39%\nCPU max MHz:                             3300.0000\nCPU min MHz:                             1200.0000\nBogoMIPS:                                4800.42\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 cdp_l3 pti intel_ppin ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm rdt_a rdseed adx smap intel_pt xsaveopt cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts vnmi md_clear flush_l1d\nVirtualization:                          VT-x\nL1d cache:                               896 KiB (28 instances)\nL1i cache:                               896 KiB (28 instances)\nL2 cache:                                7 MiB (28 instances)\nL3 cache:                                70 MiB (2 instances)\nNUMA node(s):                            2\nNUMA node0 CPU(s):                       0-13,28-41\nNUMA node1 CPU(s):                       14-27,42-55\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             KVM: Mitigation: Split huge pages\nVulnerability L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable\nVulnerability Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Meltdown:                  Mitigation; PTI\nVulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; IBRS_FW; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n",
+      "stdout_sha256": "7a176cce5770f84c290ef3e04c4bbe690860b44f84b51e545a2e39feb0c39198",
+      "timed_out": false
+    },
+    "python_os_cpu_count": 56,
+    "summary": {
+      "Architecture": "x86_64",
+      "CPU max MHz": "3300.0000",
+      "CPU min MHz": "1200.0000",
+      "CPU(s)": "56",
+      "Core(s) per socket": "14",
+      "Model name": "Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz",
+      "NUMA node(s)": "2",
+      "Socket(s)": "2",
+      "Thread(s) per core": "2"
+    }
+  },
+  "uname": {
+    "argv": [
+      "uname",
+      "-a"
+    ],
+    "duration_s": 0.002255133993458003,
+    "returncode": 0,
+    "stderr": "",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout": "Linux xiaochun-4028 6.17.0-40-generic #40~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Jun 23 16:48:12 UTC 2 x86_64 x86_64 x86_64 GNU/Linux\n",
+    "stdout_sha256": "649f960d1ec9c1407769c1e7acde0b23db971587523f749e720c71471ab3118c",
+    "timed_out": false
+  },
+  "warnings": []
+}

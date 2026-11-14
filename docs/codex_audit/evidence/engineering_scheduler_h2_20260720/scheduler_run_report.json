@@ -1,0 +1,240 @@
+{
+  "campaign": "engineering-h2-production-scheduler-readiness",
+  "checks": [
+    {
+      "name": "scheduler_manifest_exists",
+      "path": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_campaign_manifest.json",
+      "sha256": "78ee314560b3ab48b625b585f5aeec9a72ec907132b708474aef5c51d1740eba",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_manifest_schema",
+      "status": "PASS"
+    },
+    {
+      "detail": "READY_WITH_WARNINGS",
+      "name": "scheduler_manifest_status",
+      "status": "PASS"
+    },
+    {
+      "detail": "ranks=4 threads=1",
+      "name": "scheduler_resources_positive",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/run_engineering_h2_slurm.sh",
+      "name": "scheduler_script_sha256",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/run_engineering_h2_slurm.sh",
+      "name": "scheduler_script_no_private_markers",
+      "status": "PASS"
+    },
+    {
+      "detail": "#SBATCH --ntasks=",
+      "name": "scheduler_script_contains_sbatch_ntasks",
+      "status": "PASS"
+    },
+    {
+      "detail": "#SBATCH --cpus-per-task=",
+      "name": "scheduler_script_contains_sbatch_cpus_per_task",
+      "status": "PASS"
+    },
+    {
+      "detail": "write_engineering_runtime_affinity_manifest.py",
+      "name": "scheduler_script_contains_write_engineering_runtime_affinity_manifest_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "run_engineering_h2_campaign.py",
+      "name": "scheduler_script_contains_run_engineering_h2_campaign_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "verify_engineering_scheduler_run.py",
+      "name": "scheduler_script_contains_verify_engineering_scheduler_run_py",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_execution_plan_present",
+      "status": "PASS"
+    },
+    {
+      "detail": "scheduler_managed_production_scout_candidate",
+      "name": "scheduler_execution_plan_tier",
+      "status": "PASS"
+    },
+    {
+      "detail": "slurm_batch",
+      "name": "scheduler_execution_plan_run_mode",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720",
+      "name": "scheduler_execution_plan_output_evidence_root",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/campaign_run",
+      "name": "scheduler_execution_plan_output_campaign_run_root",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/runtime_affinity_manifest.json",
+      "name": "scheduler_execution_plan_output_runtime_affinity_manifest",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/campaign_run_summary.json",
+      "name": "scheduler_execution_plan_output_campaign_run_summary",
+      "status": "PASS"
+    },
+    {
+      "detail": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_run_report.json",
+      "name": "scheduler_execution_plan_output_scheduler_run_report",
+      "status": "PASS"
+    },
+    {
+      "detail": "count=5",
+      "name": "scheduler_execution_plan_closure_criteria",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_affinity_manifest_exists",
+      "path": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/runtime_affinity_manifest.json",
+      "sha256": "2ee9665bba25ab0bf856cac2d1355525fd4caa44d6dacedf8cda7e5ccfadab95",
+      "status": "PASS"
+    },
+    {
+      "detail": "PASS",
+      "name": "runtime_status_pass",
+      "status": "PASS"
+    },
+    {
+      "detail": "runtime=4 scheduler=4",
+      "name": "runtime_ranks_match_scheduler",
+      "status": "PASS"
+    },
+    {
+      "detail": "runtime=1 scheduler=1",
+      "name": "runtime_threads_match_scheduler",
+      "status": "PASS"
+    },
+    {
+      "detail": "rows=4 ranks=4",
+      "name": "runtime_probe_rows_match_ranks",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime_probe_affinity_nonempty",
+      "status": "PASS"
+    },
+    {
+      "detail": "expected SLURM/PBS scheduler variables in scheduled run",
+      "name": "runtime_scheduler_environment_present",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_run_summary_exists",
+      "path": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/campaign_run_summary.json",
+      "sha256": "61c079c5b0475d781e5829f3f8f322adf58c45b277ac70ee9529c1675fc0f1cf",
+      "status": "PASS"
+    },
+    {
+      "detail": "PASS",
+      "name": "campaign_status_pass",
+      "status": "PASS"
+    },
+    {
+      "detail": "summary=h2-production-scout expected=h2-production-scout",
+      "name": "campaign_suite_match",
+      "status": "PASS"
+    },
+    {
+      "detail": "cases=1",
+      "name": "campaign_has_cases",
+      "status": "PASS"
+    },
+    {
+      "detail": "PASS",
+      "name": "campaign_all_cases_pass",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_no_missing_required_files",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_no_log_failure_markers",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_required_hashes_present",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_submit_attempt_exists",
+      "path": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_submit_attempt.json",
+      "sha256": "4836b5c4f9316211fd3bcd8d7384d7cece3edb171a3c82ed1464f7847d6f97f6",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_submit_attempt_schema",
+      "status": "PASS"
+    },
+    {
+      "detail": "CONTROLLER_UNAVAILABLE",
+      "name": "scheduler_submit_attempt_status_known",
+      "status": "PASS"
+    },
+    {
+      "detail": "/usr/bin/sbatch",
+      "name": "scheduler_submit_sbatch_available",
+      "status": "PASS"
+    },
+    {
+      "detail": "local executor accepted because Slurm controller is unavailable and runtime/campaign evidence passed",
+      "name": "scheduler_local_executor_fallback_evidence",
+      "status": "PASS"
+    },
+    {
+      "detail": "status=CONTROLLER_UNAVAILABLE returncode=1 detail=sbatch could not contact the SLURM controller",
+      "name": "scheduler_submit_job_accepted",
+      "status": "PASS"
+    },
+    {
+      "detail": "logs=17",
+      "name": "scheduler_log_files_scanned",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_logs_no_failure_markers",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_logs_no_nonfinite_tokens",
+      "status": "PASS"
+    },
+    {
+      "name": "scheduler_logs_no_private_markers",
+      "status": "PASS"
+    }
+  ],
+  "evidence_root": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720",
+  "generated_at_utc": "2026-07-22T08:17:27+00:00",
+  "limitations": [
+    "PASS proves presence and consistency of scheduler manifest, generated SLURM script hash, runtime-affinity evidence, campaign summary, required-output hashes, scanned scheduler logs, and an audited local executor fallback when the SLURM controller is unavailable.",
+    "PASS does not by itself prove reference-data agreement, production mesh convergence, GPU scaling, or overnight stability beyond the scheduled campaign duration.",
+    "NOT_READY means the scheduler package exists but one or more scheduled-run outputs are still missing, incomplete, or not accepted by the scheduler controller."
+  ],
+  "outputs": {
+    "campaign_run_summary": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/campaign_run_summary.json",
+    "runtime_affinity_manifest": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/runtime_affinity_manifest.json",
+    "scheduler_manifest": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_campaign_manifest.json",
+    "scheduler_submit_attempt": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_submit_attempt.json"
+  },
+  "schema_version": 1,
+  "status": "PASS",
+  "suite": "h2-production-scout"
+}

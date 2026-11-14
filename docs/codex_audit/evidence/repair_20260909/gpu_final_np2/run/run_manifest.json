@@ -1,0 +1,23 @@
+{
+  "exit": 0,
+  "directory": "/home/cj/my-pele/repair_validation/20260909T164249/gpu_final_np2",
+  "command": [
+    "timeout",
+    "240",
+    "mpirun",
+    "--bind-to",
+    "none",
+    "-np",
+    "2",
+    "/home/cj/my-pele/examples/academic/bench_2gpu/repair_20260909_hotspot_v53d.gnu.MPI.CUDA.ex",
+    "inputs"
+  ],
+  "binary_sha256": "31414d859b3ac144e711625d05d07532520b8314ec0a2b5caaca3cb0815f4619",
+  "source_manifest": "/home/cj/my-pele/repair_validation/20260909T164249/source_manifest_v5.json",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0,1",
+    "OMP_NUM_THREADS": "1",
+    "LD_LIBRARY_PATH": "/home/cj/local/cuda-12.6/targets/x86_64-linux/lib:/home/cj/local/sundials-cuda/lib:"
+  },
+  "gpu_processes": ""
+}

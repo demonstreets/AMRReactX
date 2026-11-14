@@ -1,0 +1,79 @@
+{
+  "answers": {
+    "can_compute_liquefied_tank_breach_vaporization": "Screening external gas-source schedules can be generated from editable LNG/LPG breach presets; CFD-internal flashing discharge, liquid-pool spread, boiling, and evaporation are not yet solved.",
+    "can_compute_lng_lpg": "Yes as gasified LNG/CH4 and LPG/C3H8 external-source or screening vaporization workflows.",
+    "can_compute_other_gases": "Yes for current gas-phase source workflows with H2, CH4, and C3H8 evidence; additional species require a compatible mechanism and source template.",
+    "can_compute_propane": "Yes for gas-phase C3H8/propane source, dispersion, ignition, and fire screening in the current scope."
+  },
+  "evidence_files": [
+    {
+      "label": "engineering_multi_fuel_capability_boundary",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "719661db78e161ed2dff8bca2f1f23a9754ec4fa10c8cc588877254a8318e075",
+      "size_bytes": 19158
+    },
+    {
+      "label": "engineering_multi_fuel_template_catalog",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_template_catalog_20260811/engineering_multi_fuel_template_catalog_report.json",
+      "sha256": "39acb717e4fd6c346ebfcf86d38492350a0dfa025a18eb54d3ef47234c540716",
+      "size_bytes": 5470
+    },
+    {
+      "label": "engineering_liquefied_breach_preset_templates",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_breach_preset_templates_20260811/engineering_liquefied_breach_preset_templates_report.json",
+      "sha256": "64e765d5299a39fff1fa5fdba7de93ee9dd4fedbc7a10862e68291518526a9ac",
+      "size_bytes": 5482
+    },
+    {
+      "label": "engineering_liquefied_breach_source_contract",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_breach_source_contract_20260811/engineering_liquefied_breach_source_contract_report.json",
+      "sha256": "10f4014684bac3ed471b97337a62503f1f1b81666b793bb5535f97d9b709cc9b",
+      "size_bytes": 6605
+    },
+    {
+      "label": "current_parallel_capability_matrix",
+      "path": "docs/codex_audit/evidence/current_parallel_capability_matrix_20260803/current_parallel_capability_matrix_report.json",
+      "sha256": "27235bb2873ef3782c0c56fdd9356bbe6f5288b4f3d8212739f1bad4f5b9ff3b",
+      "size_bytes": 18858
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:37.129853+00:00",
+  "limitations": [
+    "The current positive claim is for gas-phase source workflows and audited external vaporization schedules.",
+    "A process-safety source schedule or measured release rate should replace the screening schedule when available.",
+    "Complete LNG/LPG tank rupture, flashing multiphase discharge, pool spread, boiling, ground heat transfer, and EOS-coupled phase change remain outside the current production claim."
+  ],
+  "schema_version": 1,
+  "scope": "evidence-backed answer for non-H2 gases and LNG/LPG liquefied breach engineering use",
+  "status": "PASS-ENGINEERING-MULTIFUEL-LIQUEFIED-USER-ANSWER",
+  "summary": {
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "cpu_mpi_ready_for_current_scenarios": true,
+    "gas_phase_non_h2_ready": true,
+    "gas_species_supported_in_current_templates": [
+      "C3H8",
+      "CH4",
+      "H2"
+    ],
+    "gaseous_c3h8_propane_ready": true,
+    "gaseous_ch4_ready": true,
+    "gaseous_h2_ready": true,
+    "gasified_lng_ch4_ready": true,
+    "gasified_lpg_c3h8_ready": true,
+    "internal_liquid_phase_change_cfd_ready": false,
+    "liquefied_breach_external_source_ready": true,
+    "liquefied_breach_generates_cfd_csv": true,
+    "liquefied_breach_max_gas_mass_relative_error": 0.006735779203685908,
+    "liquefied_breach_max_peak_jet_speed_m_s": 83.9938794667,
+    "liquefied_breach_preset_count": 2,
+    "liquefied_fluids_with_screening_presets": [
+      "LNG_CH4",
+      "LPG_C3H8"
+    ],
+    "multi_gpu_mpi_cuda_ready_for_current_scenarios": true,
+    "operator_answer_ready": true,
+    "production_phase_change_claim_allowed": false,
+    "single_gpu_ready_for_current_scenarios": true
+  }
+}

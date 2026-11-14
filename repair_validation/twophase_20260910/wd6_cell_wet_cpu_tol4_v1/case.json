@@ -1,0 +1,37 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "1",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_cell_v12d.gnu.MPI.ex",
+    "inputs"
+  ],
+  "mechanism": "heptane_wd6",
+  "species_names": [
+    "nc7h16",
+    "o2",
+    "co",
+    "h2o",
+    "co2",
+    "n2"
+  ],
+  "binary_sha256": "bf945729e55a3901c6c2ba96b8ffce458b4bcd07d8f35ce97aebc875e91281c0",
+  "input_sha256": "4c9fa2876361e3b8637203194eee3b7d12683e2afeb85fe30dbb1d4158f5a4b4",
+  "dt_s": 1e-07,
+  "end_time_s": 0.0002,
+  "gas_phi": 0.6000000000000001,
+  "liquid_phi": 0.4,
+  "gas_temperature_K": 1400.0,
+  "pressure_Pa": 100000.0,
+  "effective_depth_cm": 0.025,
+  "droplet_u_ms": 0.0,
+  "real_droplets_per_parcel": 0.2847465435390437,
+  "representation": "uniform periodic native gas plus Lagrangian droplets; hydro disabled",
+  "chemistry_transport_split": "strang",
+  "linear_solver": "custom_direct",
+  "wd6_concentration_epsilon_mol_m3": 1e-10,
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_cell_v12d.gnu.MPI.ex",
+  "cell_chemistry_integrator": "wd6_extrapolated",
+  "cell_chemistry_rtol": 0.0001,
+  "cell_chemistry_atol_y": 1e-13
+}

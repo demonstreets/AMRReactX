@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/cj/my-pele
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_RANKS=8
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_MAX_STEP=7200
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_PLOT_INT=240
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_MIN_PLOTFILES=31
+export RUN_TIMEOUT=43200
+export JOBS=8
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_LOG_DIR=docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run
+bash tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_reduced_long.sh

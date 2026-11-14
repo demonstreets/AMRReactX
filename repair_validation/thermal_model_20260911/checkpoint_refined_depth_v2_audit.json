@@ -1,0 +1,30 @@
+{
+  "source": "/dev/shm/my_pele_thermal_model_20260911/checkpoint_refined_v1",
+  "destination": "/dev/shm/my_pele_thermal_model_20260911/checkpoint_refined_depth_v2",
+  "coarse_depth_cm": 0.005,
+  "fine_depth_cm": 0.0025,
+  "weight_factor": 0.5,
+  "count": 991652,
+  "scaled_components": [
+    "number_density",
+    "num_dens0"
+  ],
+  "expected_state_max_errors": {
+    "coordinate_0": 0.0,
+    "coordinate_1": 0.0,
+    "xvel": 0.0,
+    "yvel": 0.0,
+    "temperature": 0.0,
+    "diam": 0.0,
+    "spray_mf_NC7H16": 0.0,
+    "number_density": 0.0,
+    "num_dens0": 0.0,
+    "unused1": 0.0,
+    "unused2": 0.0,
+    "wall_film_height": 0.0
+  },
+  "unit_depth_weight_error": 0.0,
+  "identity_words_unchanged": true,
+  "physical_interpretation": "The library enforces Lz=dx. Halving parcel represented droplet counts preserves liquid number, mass, momentum and energy per unit out-of-plane depth. Physical droplet diameter, velocity, temperature and position are unchanged.",
+  "supersedes": "The unchanged-depth statement in checkpoint_refined_v1_audit.json was incorrect. fine_main_v1 is invalidated and terminated; do not use as a grid-only comparison."
+}

@@ -1,0 +1,4 @@
+#!/bin/bash
+export CUDA_VISIBLE_DEVICES=${OMPI_COMM_WORLD_LOCAL_RANK:?}
+echo rank=$OMPI_COMM_WORLD_RANK gpu=$CUDA_VISIBLE_DEVICES pid=$$
+exec "$@"

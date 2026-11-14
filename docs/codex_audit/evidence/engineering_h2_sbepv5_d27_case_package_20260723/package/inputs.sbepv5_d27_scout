@@ -1,0 +1,55 @@
+
+# HySafe SBEPV5 / GexCon D27 PeleLMeX scout case scaffold.
+# Generated from the audited benchmark specification. This input is not
+# production-runnable until exact baffle/sensor coordinates and the dataset
+# package have passed their ingestion gates.
+
+peleLM.lo_bc = NoSlipWallAdiab NoSlipWallAdiab NoSlipWallAdiab
+peleLM.hi_bc = NoSlipWallAdiab NoSlipWallAdiab NoSlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.have_divu = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 0
+peleLM.chem_integrator = ReactorNull
+peleLM.do_les = 1
+peleLM.les_model = kepsilon
+peleLM.aux_vars = k epsilon
+peleLM.ke_k_amb = 0.05
+peleLM.ke_eps_amb = 0.01
+peleLM.ke_prod_lim = 1.6
+peleLM.ke_wall_functions = 1
+
+amr.n_cell = 60 10 45
+amr.max_level = 1
+amr.ref_ratio = 2
+amr.max_grid_size = 10
+amr.blocking_factor = 5
+amr.plot_int = 50
+amr.check_int = -1
+amr.regrid_int = 2
+amr.stop_time = 120.0
+amr.max_step = 12000
+
+geometry.prob_lo = 0.0 0.0 0.0
+geometry.prob_hi = 1.20 0.20 0.90
+geometry.coord_sys = 0
+geometry.is_periodic = 0 0 0
+
+codex.case_id = hysafe_sbepv5_d27
+codex.case_mode = scout
+codex.release_gas = pure_H2
+codex.release_period_s = 60.0
+codex.nozzle_diameter_m = 0.012
+codex.exit_velocity_m_s = 10.17
+codex.flow_rate_normal_l_s = 1.15
+codex.jet_exit_location_m = 0.03 0.1 0.145
+codex.sensor_file = sensors_template.csv
+codex.baffle_file = baffle_geometry_template.csv
+codex.dataset_metadata_file = dataset_metadata_template.json
+codex.experimental_timeseries_file = experimental_timeseries_template.csv
+codex.time_step_s = 2.0e-2

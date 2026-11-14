@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/validate_academic_twophase_bubble_rise.py", line 142, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/cj/my-pele/tools/validate_academic_twophase_bubble_rise.py", line 108, in main
+    final = metrics(Path(args.final_plotfile))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/validate_academic_twophase_bubble_rise.py", line 45, in metrics
+    data = amrex_reader.read_plotfile(str(plotfile))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 517, in read_plotfile
+    raise PlotfileError(
+amrex_reader.PlotfileError: Single-level plotfile contains uncovered or non-finite cells

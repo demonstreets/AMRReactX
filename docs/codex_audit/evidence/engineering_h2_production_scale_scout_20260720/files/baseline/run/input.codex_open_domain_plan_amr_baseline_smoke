@@ -1,0 +1,49 @@
+# Codex 3D PeleLMeX H2 leak open-domain flammable-cloud smoke.
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 2.0 1.0 1.0
+
+peleLM.lo_bc = Inflow SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc = Outflow SlipWallAdiab SlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.n_cell = 48 24 24
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 16
+amr.max_step = 120
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-3
+amr.cfl = 0.5
+amr.plot_int = 20
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 2.0
+prob.wind_v = 0.0
+prob.leak_xc = 0.5
+prob.leak_yc = 0.5
+prob.leak_zc = 0.5
+prob.leak_rate = 2.0e-3
+prob.leak_radius = 0.15
+prob.leak_vel_x = 2.0
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 300.0
+
+eb2.geom_type = all_regular
+
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

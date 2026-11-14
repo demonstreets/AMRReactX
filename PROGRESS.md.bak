@@ -1,0 +1,89 @@
+# PROGRESS.md
+> 更新: 2026-06-11 | Phase 2.1–2.9 ✅ | Phase 2 ✅ ALL DONE
+
+## Phase 1 — 几何处理管线 ✅ ALL DONE
+
+| 任务 | 状态 |
+|------|:--:|
+| 1.1 STL 解析器 | ✅ |
+| 1.2 SDF 生成 | ✅ |
+| 1.3 EB2 GeometryShop | ✅ |
+| 1.4 BC 标签 | ✅ |
+| 1.5 球验证 | ✅ |
+| 1.6 储罐群验证 | ✅ |
+
+## Phase 2 — 工程场景核心功能
+
+| 任务 | 内容 | 状态 | 验证 |
+|------|------|:--:|------|
+| 2.1 | YAML 输入解析器 | ✅ | 140/140 PASS |
+| 2.2 | k-ε 湍流模型核心 | ✅ | 16/16 PASS |
+| 2.3 | Launder-Spalding 壁面函数 | ✅ | 14/14 PASS |
+| 2.4 | 湍流-扩散耦合 | ✅ | 7/7 PASS |
+| 2.5 | 液体池蒸发源项 | ✅ | 15/15 PASS |
+| 2.6 | 风场边界条件 | ✅ | 12/12 PASS |
+| 2.7 | k-ε 验证 | ✅ | 周期衰减 dt 修复，误差 1.6% |
+| 2.8 | 着火/燃烧验证 | ✅ | H₂/空气预混热点，H₂O 生成+温升 642K |
+| 2.9 | 端到端集成验证 | ✅ | multi_module_test 86 步零 crash |
+| 2.10 | CPU 性能 profiling | ✅ | gprof：扩散29%/对流32%/MLMG4%，分布健康 |
+
+### k-ε 集成关键修复 (2026-06-10)
+
+- **问题**：均匀流 k 衰减比解析解快 10 倍
+- **根因**：源项在 SDC 子迭代中被重复调用（oneSDC 内 + Post SDC），且未乘 dt
+- **修复**：
+  - ：删除 oneSDC 内调用，只保留 Post SDC 一次，传入 
+  - ：函数签名加  参数，源项 
+- **结果**：误差 10× → 1.6%
+
+### 2.8 燃烧验证关键参数 (2026-06-11)
+
+- 算例：（基于 HotBubble 改造）
+- 机理：LiDryer（H₂ 燃烧，9 组分）
+- 初始化：全域化学当量 H₂/空气（Y_H₂=0.0283）+ 中心 2000K 热点
+- 开启化学三开关： +  + 
+- CVODE：, rtol=1e-8, atol=1e-12
+- 结果：200 步 T_max 2000→2642K，H₂O 0→0.17
+
+## Phase 2 Deliverables
+
+| Item | Location |
+|------|----------|
+| 聚合头文件 |  |
+| k-ε 核心 |  |
+| 壁面函数 |  |
+| 湍流输运 |  |
+| 蒸发源项 |  |
+| 风场 BC |  |
+| 验证算例 |  (bfs_sink, h2_ignition, multi_module_test) |
+
+### 2.10 性能 Profiling (2026-06-11)
+
+- 工具：gprof（GNUmake USE_GPROF=TRUE）
+- 算例：bfs_sink，100 步，2D 64×64，air 机理
+- 热点分布（平顶曲线占比）：
+
+| 模块 | 占比 | 主要函数 |
+|------|:---:|------|
+| 扩散/输运 | ~29% | getDiffusivity(12%), calcDiffusivity(7%), addWbarTerm(5%) |
+| 对流/Godunov | ~32% | ComputeEdgeState(9%), PLM(3%) |
+| MLMG 线性求解 | ~4% | MLABecLaplacian::Fapply(2%) |
+| 其他 | ~35% | fillPatch, BC, regrid, k-ε 等 |
+
+- 结论：分布均匀，无明显热点，当前无需优化。
+## Phase 3 — 学术场景核心功能
+
+| 任务 | 内容 | 状态 | 审查 |
+|------|------|:--:|:--:|
+| 3.1 | WENO5/WENO5-Z 独立库 | ✅ | PASS |
+| 3.2 | WENO5 PeleC 验证（等熵涡+双马赫） | ✅ | PASS |
+| 3.3 | 爆轰 AMR tagging (Shu-Osher验证) | ✅ | — |
+| 3.4 | H2/O2 ZND 爆轰 (Fuego+LiDryer) | ✅ | PASS |
+| 3.5 | VOF 体积分数输运 | 📝 spec已起草 | — |
+
+### 关键发现
+- PeleC 已内置 WENO5-JS/Z (WENO.H, PPM.cpp调用)，3.2转为验证任务
+- PeleC tagging框架已有 dengrad/pressgrad/tempgrad，3.3为纯配置
+- AMReX plotfile FAB数据布局为 order='C' (ncomp连续)，非'F'
+- 多FAB block需迭代解析 (read_plotfile_raw.py已修复)
+- ZND输出需 plot_rhoy=0 + derive_plot_vars (和TGReact一致)

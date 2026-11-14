@@ -1,0 +1,120 @@
+{
+  "agreement_attempt": {
+    "agreement_json": "/home/cj/my-pele/docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/dataverse_open_channel_agreement_contract_report.json",
+    "agreement_status": "failed_expected_for_short_scout",
+    "clears_external_plume_reference_blocker": false,
+    "message": "dataverse_open_channel_agreement_contract FAIL sensor 1 has fewer than two common comparison samples",
+    "production_agreement_completed": false,
+    "schema_version": 1,
+    "simulation_long_csv": "/home/cj/my-pele/docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/sensor_timeseries.csv"
+  },
+  "coordinate_transform": {
+    "solver_x": "article_y_m",
+    "solver_y": "article_x_m",
+    "solver_z": "article_z_m"
+  },
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/run.log",
+      "sha256": "28d6e1e7288a046567102aa056670be4356e521e3086675698e981971090a1ec",
+      "size_bytes": 805686
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/validation.log",
+      "sha256": "e5a6962510b04a41e5c7a6ed43d6dac3f5a676187b9a6e251c60a2c5f6970f54",
+      "size_bytes": 484
+    },
+    {
+      "label": "plume_observation_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/h2_plume_observation_report.json",
+      "sha256": "46103a0a8c60e4badc37d27e6d0b4217d2f88131a8513467fab7680fda56a624",
+      "size_bytes": 5073
+    },
+    {
+      "label": "agreement_attempt_status",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/agreement_attempt_status.json",
+      "sha256": "80ff016ddfa71735380209ef86a0929fee418f7c4bcc9cc37780b4664fc8759d",
+      "size_bytes": 678
+    },
+    {
+      "label": "input_deck",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/input.dataverse_open_channel_h2_scout_3d",
+      "sha256": "927bd603610ae3537809897fec7ba59e7ac37b1c34d462ba2323d9b51e54a5a9",
+      "size_bytes": 1517
+    },
+    {
+      "label": "dataverse_sensor_solver_coords",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/sensors.dataverse_open_channel_solver_coords.json",
+      "sha256": "2cb1632f79e3e3a156d49a46e747c303060674c480e08f3c39000c70c1cf19c2",
+      "size_bytes": 8777
+    },
+    {
+      "label": "dataverse_scout_script",
+      "path": "tools/codex_smoke_engineering_h2_dataverse_open_channel_scout_cuda.sh",
+      "sha256": "4a97fb9f02a95c1b66b837301b1c163338cd87c798ad27ae5e5c6bfb4e060a79",
+      "size_bytes": 8701
+    },
+    {
+      "label": "plume_history_wrapper",
+      "path": "tools/codex_smoke_engineering_h2_leak_plume_history.sh",
+      "sha256": "2bb610a3a857c7dc9892e1184644149b766f2f7f486ce06aa52af728a0e80f09",
+      "size_bytes": 10712
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:02+00:00",
+  "limitations": [
+    "This is a short MPI+CUDA CFD scout with Dataverse channel dimensions and transformed sensor coordinates.",
+    "It proves run stability and sensor sampling, not long-duration agreement with the 378.5 s experimental record.",
+    "Exact internal obstacle/component bounds are still not encoded, so full geometry parity is not claimed."
+  ],
+  "plume_observation_report": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805/h2_plume_observation_report.json",
+  "run_root": "docs/codex_audit/evidence/dataverse_open_channel_open_boundary_orifice_velocity_extended_01s_mpi_cuda_20260805",
+  "schema_version": 1,
+  "status": "PASS-DATAVERSE-OPEN-CHANNEL-H2-CFD-SCOUT-MPI-CUDA",
+  "summary": {
+    "agreement_attempt_message": "dataverse_open_channel_agreement_contract FAIL sensor 1 has fewer than two common comparison samples",
+    "agreement_attempt_status": "failed_expected_for_short_scout",
+    "case_matched_external_benchmark": true,
+    "clears_external_plume_reference_blocker": false,
+    "cuda_initialized": true,
+    "downstream_fraction": 0.981998935,
+    "grid_equal_spacing": true,
+    "grid_shape": "[(116,",
+    "mass_growth_ratio": 10.0,
+    "mass_ratio_final": 1.0,
+    "max_step": 20,
+    "max_yh2": 0.0215982076,
+    "mpi_rank_count": 2,
+    "plotfile_count": 11,
+    "plume_observation_status": "PASS-H2-PLUME-OBSERVATION",
+    "production_agreement_completed": false,
+    "ready_for_longer_dataverse_cfd_campaign": true,
+    "sensor_count": 29,
+    "sensor_timeseries_rows": 319,
+    "time_end_s": 0.1,
+    "upstream_fraction": 0.018001065
+  },
+  "title": "DataverseNO Open-Channel H2 CFD Scout",
+  "validation": {
+    "centroid": "(7.98602826e-01,4.50000000e-01,7.51290180e-01)",
+    "downstream_fraction": 0.981998935,
+    "grid_shapes": "[(116,",
+    "injectedN": 9.15268191e-05,
+    "lateral_offset": 0.0237098201,
+    "mass0": 0.0,
+    "mass1": 9.15268191e-06,
+    "massN": 9.15268191e-05,
+    "mass_growth_ratio": 10.0,
+    "mass_ratioN": 1.0,
+    "max_YH2": 0.0215982076,
+    "max_mass_drop": -9.15268191e-06,
+    "max_mass_drop_ratio": -0.1,
+    "nplot": 11.0,
+    "pass_line": "h2_leak_plume_history_validation PASS nplot=11 time0=0 timeN=0.1 mass0=0.00000000e+00 mass1=9.15268191e-06 massN=9.15268191e-05 injectedN=9.15268191e-05 mass_ratioN=1.00000000e+00 mass_growth_ratio=1.00000000e+01 max_mass_drop=-9.15268191e-06 max_mass_drop_ratio=-1.00000000e-01 max_YH2=2.15982076e-02 grid_shapes=[(116, 18, 16)] centroid=(7.98602826e-01,4.50000000e-01,7.51290180e-01) lateral_offset=2.37098201e-02 downstream_fraction=9.81998935e-01 upstream_fraction=1.80010650e-02",
+    "time0": 0.0,
+    "timeN": 0.1,
+    "upstream_fraction": 0.018001065
+  }
+}

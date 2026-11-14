@@ -1,0 +1,782 @@
+{
+  "case": {
+    "diffusion": false,
+    "init_file": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/initspraydata_2d_single.dat",
+    "input_file": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/inputs",
+    "mass_transfer": true,
+    "momentum_transfer": true,
+    "periodic": true,
+    "reaction": false,
+    "run_dir": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step",
+    "run_log": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/run.log"
+  },
+  "evidence_files": [
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_spray_closed_control_volume_budget_report.py",
+      "sha256": "abab2eb00eec8a88834160125adac02f2f30ab4627e3420e23a1a89d8e375c9c",
+      "size_bytes": 16607
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_spray_closed_control_volume_budget.sh",
+      "sha256": "69ebced6170c344581c9e58557973dc129aff625c31af3066438a93f8465f2a7",
+      "size_bytes": 2781
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/inputs",
+      "sha256": "54e3298a9aff6f87680a588f524a3152baf1da58c8244fb079e9b1f36c38751a",
+      "size_bytes": 2669
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/run.log",
+      "sha256": "23579699cda9acf3cfbd32e94969a0613bfe163a6f7453bf4ac6dad84b21aef3",
+      "size_bytes": 8213
+    },
+    {
+      "label": "init_file",
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/initspraydata_2d_single.dat",
+      "sha256": "c3e138d45aabfe78ca16cd291b89614a85dcda3c2080a8ded938d1be78b08b44",
+      "size_bytes": 57
+    },
+    {
+      "label": "initial_header",
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00000/Header",
+      "sha256": "d1014b9ae4c65699c18e8ac404ed6733acfc48f996ec0dce8a2711abd1235c5c",
+      "size_bytes": 456
+    },
+    {
+      "label": "final_header",
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00020/Header",
+      "sha256": "da7b1e7d07f920f4c30e681c7244a324638ff146689aae9fa70d7ffef4622940",
+      "size_bytes": 500
+    }
+  ],
+  "generated_at_utc": "2026-07-29T07:55:51+00:00",
+  "limitations": [
+    "This clears the ACD-05 closed periodic spray control-volume budget for a non-reacting evaporation/momentum-transfer case.",
+    "It does not clear ACD-07 reacting spray/gas-liquid detonation control-volume or cellular detonation morphology credit.",
+    "The 2D spray particle budget uses PeleC's effective-thickness convention; gas integrals are scaled by this factor before comparing with native particle DATA budgets."
+  ],
+  "quality_gates": [
+    {
+      "metric": {
+        "has_failure_token": false
+      },
+      "name": "run_finalized_without_failure_tokens",
+      "status": "PASS"
+    },
+    {
+      "metric": [
+        "spray_rho_src",
+        "spray_xmom_src",
+        "spray_ymom_src",
+        "spray_eng_src",
+        "spray_rhoY_NC7H16_src"
+      ],
+      "name": "source_fields_present",
+      "status": "PASS"
+    },
+    {
+      "metric": 0.0016702677276412919,
+      "name": "strong_x_momentum_source",
+      "status": "PASS"
+    },
+    {
+      "metric": 8.742698324610663e-05,
+      "name": "gas_mass_matches_source_history",
+      "status": "PASS"
+    },
+    {
+      "metric": 3.7249984221956517e-07,
+      "name": "gas_xmomentum_matches_source_history",
+      "status": "PASS"
+    },
+    {
+      "metric": 4.3024095796365315e-06,
+      "name": "gas_total_energy_matches_source_history",
+      "status": "PASS"
+    },
+    {
+      "metric": 3.14596715074278e-07,
+      "name": "gas_fuel_species_matches_source_history",
+      "status": "PASS"
+    },
+    {
+      "metric": 3.183934190883665e-07,
+      "name": "particle_mass_matches_thickness_scaled_source",
+      "status": "PASS"
+    },
+    {
+      "metric": 4.620742218595308e-07,
+      "name": "particle_xmomentum_matches_thickness_scaled_source",
+      "status": "PASS"
+    },
+    {
+      "metric": 8.774537666522658e-05,
+      "name": "total_mass_control_volume_closure",
+      "status": "PASS"
+    },
+    {
+      "metric": 8.957437966238878e-08,
+      "name": "total_xmomentum_control_volume_closure",
+      "status": "PASS"
+    },
+    {
+      "metric": 1.7378781749867613e-24,
+      "name": "y_momentum_transverse_absolute_residual_small",
+      "status": "PASS"
+    }
+  ],
+  "records": [
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503777,
+        "rho_E": 1158067395.6930864,
+        "rho_NC7H16": 0.0,
+        "xmom": 0.0,
+        "ymom": 0.0
+      },
+      "particle": {
+        "mass": 4.459752571158511e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379257713475533e-05,
+        "xmom": 4.459752571158511e-06,
+        "ymom": 0.0
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00000",
+      "source_rate_integrals": {
+        "rho": 0.0,
+        "rho_E": 0.0,
+        "rho_NC7H16": 0.0,
+        "xmom": 0.0,
+        "ymom": 0.0
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 0.0
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375037938,
+        "rho_E": 1158067395.693055,
+        "rho_NC7H16": 1.674946997166026e-15,
+        "xmom": 2.4153262652052516e-12,
+        "ymom": -4.008291006279798e-24
+      },
+      "particle": {
+        "mass": 4.459752440303276e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379257109637102e-05,
+        "xmom": 4.4597506841848585e-06,
+        "ymom": 3.1314784050174344e-24
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00001",
+      "source_rate_integrals": {
+        "rho": 1.1582741654395599e-06,
+        "rho_E": -21754.064768138433,
+        "rho_NC7H16": 1.1582741654395599e-06,
+        "xmom": 0.0016702677276412919,
+        "ymom": -5.54370006129022e-15
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 1.4460711489104051e-09
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038124,
+        "rho_E": 1158067395.6930203,
+        "rho_NC7H16": 3.5173880426803183e-15,
+        "xmom": 5.0721838059134775e-12,
+        "ymom": -1.777281925788046e-23
+      },
+      "particle": {
+        "mass": 4.459752296362567e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379256445415096e-05,
+        "xmom": 4.459748608514909e-06,
+        "ymom": 1.38849447053544e-23
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00002",
+      "source_rate_integrals": {
+        "rho": 1.1582737490261468e-06,
+        "rho_E": -21754.05768693743,
+        "rho_NC7H16": 1.1582737490261468e-06,
+        "xmom": 0.0016702668451779,
+        "ymom": -1.1762676532765056e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 3.0367494127118508e-09
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038326,
+        "rho_E": 1158067395.6929824,
+        "rho_NC7H16": 5.54407240839353e-15,
+        "xmom": 7.99472487723104e-12,
+        "ymom": -4.445996395998466e-23
+      },
+      "particle": {
+        "mass": 4.45975213802785e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379255714771227e-05,
+        "xmom": 4.459746325279263e-06,
+        "ymom": 3.474002471433995e-23
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00003",
+      "source_rate_integrals": {
+        "rho": 1.158273291077892e-06,
+        "rho_E": -21754.04989961593,
+        "rho_NC7H16": 1.158273291077892e-06,
+        "xmom": 0.0016702658744794682,
+        "ymom": -1.8749757479851364e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 4.786495502893441e-09
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038548,
+        "rho_E": 1158067395.6929405,
+        "rho_NC7H16": 7.77342426369523e-15,
+        "xmom": 1.1209518827482584e-11,
+        "ymom": -8.813063314125043e-23
+      },
+      "particle": {
+        "mass": 4.459751963859735e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.337925491106337e-05,
+        "xmom": 4.459743813721618e-06,
+        "ymom": 6.88451335073042e-23
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00004",
+      "source_rate_integrals": {
+        "rho": 1.1582727832244557e-06,
+        "rho_E": -21754.04125636257,
+        "rho_NC7H16": 1.1582727832244557e-06,
+        "xmom": 0.0016702648063009451,
+        "ymom": -2.6612196482897062e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 6.711216202093191e-09
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038795,
+        "rho_E": 1158067395.6928945,
+        "rho_NC7H16": 1.0225710159338555e-14,
+        "xmom": 1.4745789563897806e-11,
+        "ymom": -1.53857143257681e-22
+      },
+      "particle": {
+        "mass": 4.4597517722748996e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379254026985213e-05,
+        "xmom": 4.4597410510101074e-06,
+        "ymom": 1.2019247687077158e-22
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00005",
+      "source_rate_integrals": {
+        "rho": 1.1582722303227313e-06,
+        "rho_E": -21754.031856533962,
+        "rho_NC7H16": 1.1582722303227313e-06,
+        "xmom": 0.0016702636318792203,
+        "ymom": -3.547436594984139e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 8.828408971212916e-09
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375039064,
+        "rho_E": 1158067395.6928437,
+        "rho_NC7H16": 1.2923223257106244e-14,
+        "xmom": 1.8635684019704078e-11,
+        "ymom": -2.4812578477332035e-22
+      },
+      "particle": {
+        "mass": 4.459751561531689e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379253054499828e-05,
+        "xmom": 4.45973801202974e-06,
+        "ymom": 1.9383964607222403e-22
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00006",
+      "source_rate_integrals": {
+        "rho": 1.1582716185738163e-06,
+        "rho_E": -21754.021449915013,
+        "rho_NC7H16": 1.1582716185738163e-06,
+        "xmom": 0.001670262339660776,
+        "ymom": -4.548051095954493e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 1.1157321017244613e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503936,
+        "rho_E": 1158067395.6927881,
+        "rho_NC7H16": 1.5890485999383925e-14,
+        "xmom": 2.291456548163609e-11,
+        "ymom": -3.791356229496283e-22
+      },
+      "particle": {
+        "mass": 4.459751329714283e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379251984766596e-05,
+        "xmom": 4.4597346691541085e-06,
+        "ymom": 2.9619100620900314e-22
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00007",
+      "source_rate_integrals": {
+        "rho": 1.158270953327455e-06,
+        "rho_E": -21754.01014682743,
+        "rho_NC7H16": 1.158270953327455e-06,
+        "xmom": 0.0016702609189896181,
+        "ymom": -5.6798825006542716e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 1.371912426787948e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503969,
+        "rho_E": 1158067395.6927266,
+        "rho_NC7H16": 1.9154472980469207e-14,
+        "xmom": 2.76213290250054e-11,
+        "ymom": -5.5735168655526685e-22
+      },
+      "particle": {
+        "mass": 4.459751074715297e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379250808060906e-05,
+        "xmom": 4.459730991994275e-06,
+        "ymom": 4.353553749526245e-22
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00008",
+      "source_rate_integrals": {
+        "rho": 1.1582702138976485e-06,
+        "rho_E": -21753.99756958496,
+        "rho_NC7H16": 1.1582702138976485e-06,
+        "xmom": 0.0016702593554871479,
+        "ymom": -6.962521345461953e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 1.6537107843577836e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375040044,
+        "rho_E": 1158067395.6926591,
+        "rho_NC7H16": 2.2744856204961527e-14,
+        "xmom": 3.27987650602414e-11,
+        "ymom": -7.9574592542959975e-22
+      },
+      "particle": {
+        "mass": 4.459750794216607e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.337924951368569e-05,
+        "xmom": 4.459726947122529e-06,
+        "ymom": 6.216009995141661e-22
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00009",
+      "source_rate_integrals": {
+        "rho": 1.1582694039678826e-06,
+        "rho_E": -21753.983799281723,
+        "rho_NC7H16": 1.1582694039678826e-06,
+        "xmom": 0.0016702576359807696,
+        "ymom": -8.418848279274374e-14
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 1.9636889776846024e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837504044,
+        "rho_E": 1158067395.692585,
+        "rho_NC7H16": 2.6694274783052606e-14,
+        "xmom": 3.849393948127805e-11,
+        "ymom": -1.1109261493241545e-21
+      },
+      "particle": {
+        "mass": 4.4597504856682784e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379248089874206e-05,
+        "xmom": 4.459722497768524e-06,
+        "ymom": 8.679361003734899e-22
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00010",
+      "source_rate_integrals": {
+        "rho": 1.1582685101734712e-06,
+        "rho_E": -21753.968598011394,
+        "rho_NC7H16": 1.1582685101734712e-06,
+        "xmom": 0.0016702557442390517,
+        "ymom": -1.007565005307668e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 2.3046649903441032e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375040874,
+        "rho_E": 1158067395.6925035,
+        "rho_NC7H16": 3.103863162922717e-14,
+        "xmom": 4.4758622941851525e-11,
+        "ymom": -1.5242589714012042e-21
+      },
+      "particle": {
+        "mass": 4.4597501462654e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379246523683095e-05,
+        "xmom": 4.459717603485073e-06,
+        "ymom": 1.190850526473222e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00011",
+      "source_rate_integrals": {
+        "rho": 1.1582675314213924e-06,
+        "rho_E": -21753.951959659134,
+        "rho_NC7H16": 1.1582675314213924e-06,
+        "xmom": 0.0016702536637683157,
+        "ymom": -1.1964321504351414e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 2.6797386042695542e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375041354,
+        "rho_E": 1158067395.6924136,
+        "rho_NC7H16": 3.5817419815587194e-14,
+        "xmom": 5.1649761128192556e-11,
+        "ymom": -2.0622319742753548e-21
+      },
+      "particle": {
+        "mass": 4.4597497729225734e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.337924480087471e-05,
+        "xmom": 4.45971221978048e-06,
+        "ymom": 1.611264577376004e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00012",
+      "source_rate_integrals": {
+        "rho": 1.1582664523592354e-06,
+        "rho_E": -21753.933611737597,
+        "rho_NC7H16": 1.1582664523592354e-06,
+        "xmom": 0.0016702513750106297,
+        "ymom": -1.412171709644269e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 3.0923195795875503e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837504188,
+        "rho_E": 1158067395.6923149,
+        "rho_NC7H16": 4.1074081561355653e-14,
+        "xmom": 5.923000805097001e-11,
+        "ymom": -2.758870622054961e-21
+      },
+      "particle": {
+        "mass": 4.4597493622458765e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379242905787712e-05,
+        "xmom": 4.459706297714143e-06,
+        "ymom": 2.15574556871172e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00013",
+      "source_rate_integrals": {
+        "rho": 1.1582652631064226e-06,
+        "rho_E": -21753.91338611443,
+        "rho_NC7H16": 1.1582652631064226e-06,
+        "xmom": 0.001670248857153093,
+        "ymom": -1.659119252930826e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 3.5461586524373465e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375042456,
+        "rho_E": 1158067395.6922066,
+        "rho_NC7H16": 4.6856403119636486e-14,
+        "xmom": 6.756826543587169e-11,
+        "ymom": -3.6575154061894085e-21
+      },
+      "particle": {
+        "mass": 4.459748910502004e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379240821194693e-05,
+        "xmom": 4.459699783451714e-06,
+        "ymom": 2.858069804559641e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00014",
+      "source_rate_integrals": {
+        "rho": 1.158263957663413e-06,
+        "rho_E": -21753.891189293237,
+        "rho_NC7H16": 1.158263957663413e-06,
+        "xmom": 0.0016702460877885846,
+        "ymom": -1.942379139558477e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 4.045381632572122e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375043092,
+        "rho_E": 1158067395.692087,
+        "rho_NC7H16": 5.321694912743967e-14,
+        "xmom": 7.674032985677606e-11,
+        "ymom": -4.813538682426695e-21
+      },
+      "particle": {
+        "mass": 4.4597484135843446e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379238528145618e-05,
+        "xmom": 4.4596926177758e-06,
+        "ymom": 3.76123173347891e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00015",
+      "source_rate_integrals": {
+        "rho": 1.1582625207105242e-06,
+        "rho_E": -21753.866754648883,
+        "rho_NC7H16": 1.1582625207105242e-06,
+        "xmom": 0.0016702430413974502,
+        "ymom": -2.2679740106151644e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 4.594526910720375e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837504379,
+        "rho_E": 1158067395.6919556,
+        "rho_NC7H16": 6.021354041696667e-14,
+        "xmom": 8.682958323701084e-11,
+        "ymom": -6.296798817089571e-21
+      },
+      "particle": {
+        "mass": 4.459747866975645e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379236005795568e-05,
+        "xmom": 4.4596847355477305e-06,
+        "ymom": 4.920029568054879e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00016",
+      "source_rate_integrals": {
+        "rho": 1.1582609406737207e-06,
+        "rho_E": -21753.839888015445,
+        "rho_NC7H16": 1.1582609406737207e-06,
+        "xmom": 0.001670239690436059,
+        "ymom": -2.643003110791997e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 5.198586716683453e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375044563,
+        "rho_E": 1158067395.6918108,
+        "rho_NC7H16": 6.790977956567299e-14,
+        "xmom": 9.79277395935993e-11,
+        "ymom": -8.197220273574716e-21
+      },
+      "particle": {
+        "mass": 4.459747265706961e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379233231215293e-05,
+        "xmom": 4.45967606511554e-06,
+        "ymom": 6.404401117041212e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00017",
+      "source_rate_integrals": {
+        "rho": 1.158259203178833e-06,
+        "rho_E": -21753.81034495711,
+        "rho_NC7H16": 1.158259203178833e-06,
+        "xmom": 0.001670236004442416,
+        "ymom": -3.0758664797651194e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 5.863052503242839e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375045407,
+        "rho_E": 1158067395.691652,
+        "rho_NC7H16": 7.637562898778437e-14,
+        "xmom": 1.1013566089939503e-10,
+        "ymom": -1.0627775191030107e-20
+      },
+      "particle": {
+        "mass": 4.4597466043124726e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379230179182741e-05,
+        "xmom": 4.4596665276627305e-06,
+        "ymom": 8.30373257362048e-21
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00018",
+      "source_rate_integrals": {
+        "rho": 1.1582572901150295e-06,
+        "rho_E": -21753.77781341067,
+        "rho_NC7H16": 1.1582572901150295e-06,
+        "xmom": 0.001670231949678746,
+        "ymom": -3.5764924022845925e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 6.593964868458164e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837504634,
+        "rho_E": 1158067395.691477,
+        "rho_NC7H16": 8.568804684428175e-14,
+        "xmom": 1.2356435048332254e-10,
+        "ymom": -1.3736469021404584e-20
+      },
+      "particle": {
+        "mass": 4.4597458767798255e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379226821953913e-05,
+        "xmom": 4.459656036491991e-06,
+        "ymom": 1.0732426527693561e-20
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00019",
+      "source_rate_integrals": {
+        "rho": 1.1582551877128188e-06,
+        "rho_E": -21753.742065658458,
+        "rho_NC7H16": 1.1582551877128188e-06,
+        "xmom": 0.0016702274896491195,
+        "ymom": -4.1566327936645587e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 7.397968470195022e-08
+    },
+    {
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375047363,
+        "rho_E": 1158067395.6912847,
+        "rho_NC7H16": 9.593168652270935e-14,
+        "xmom": 1.3833588679949826e-10,
+        "ymom": -1.770927982518071e-20
+      },
+      "particle": {
+        "mass": 4.459745076495473e-08,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1,
+        "thermal_mass_temperature_sum": 1.3379223129010635e-05,
+        "xmom": 4.459644496237268e-06,
+        "ymom": 1.3837112741597416e-20
+      },
+      "path": "docs/codex_audit/evidence/academic_spray_closed_control_volume_budget_20260729/closed_control_volume_momentum_20step/plt00020",
+      "source_rate_integrals": {
+        "rho": 1.1582528751431757e-06,
+        "rho_E": -21753.70274448267,
+        "rho_NC7H16": 1.1582528751431757e-06,
+        "xmom": 0.001670222583640253,
+        "ymom": -4.830213326019124e-13
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "time": 8.282372432105566e-08
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Closed periodic non-reacting PeleC spray case with strong particle x-momentum validating gas and particle mass, x-momentum, and gas total-energy source-history closure.",
+  "status": "PASS-ACADEMIC-SPRAY-CLOSED-CONTROL-VOLUME-BUDGET",
+  "summary": {
+    "case_name": "closed_control_volume_momentum_20step",
+    "clears_acd_05_closed_control_volume_mass_momentum_energy_budget": true,
+    "clears_acd_07_reacting_control_volume_budget": false,
+    "final_time": 8.282372432105566e-08,
+    "gas_delta": {
+      "mass": 9.592326932761353e-14,
+      "rho_E": -0.0018017292022705078,
+      "rho_NC7H16": 9.593168652270935e-14,
+      "xmom": 1.3833588679949826e-10,
+      "ymom": -1.770927982518071e-20
+    },
+    "gas_residual": {
+      "mass": -8.387015311864197e-18,
+      "rho_E": 7.751810331222547e-09,
+      "rho_NC7H16": 3.017978395711885e-20,
+      "xmom": 5.153007681117125e-17,
+      "ymom": 1.3964695164391124e-21
+    },
+    "max_abs_xmom_source_rate_integral": 0.0016702677276412919,
+    "particle_delta": {
+      "mass": -7.494663038041676e-14,
+      "xmom": -1.0807492124284757e-10,
+      "ymom": 1.3837112741597416e-20
+    },
+    "particle_residual": {
+      "mass": -2.3862506298307968e-20,
+      "xmom": -4.9938612060473557e-17,
+      "ymom": -1.0892539315430708e-21
+    },
+    "plot_count": 21,
+    "relative_errors": {
+      "gas_fuel": 3.14596715074278e-07,
+      "gas_mass": 8.742698324610663e-05,
+      "gas_rho_E": 4.3024095796365315e-06,
+      "gas_xmom": 3.7249984221956517e-07,
+      "particle_mass": 3.183934190883665e-07,
+      "particle_xmom": 4.620742218595308e-07,
+      "total_mass": 8.774537666522658e-05,
+      "total_xmom": 8.957437966238878e-08
+    },
+    "source_integrals": {
+      "rho": 9.593165634292539e-14,
+      "rho_E": -0.001801736954080839,
+      "rho_NC7H16": 9.593165634292539e-14,
+      "xmom": 1.3833583526942145e-10,
+      "ymom": -1.9105749341619822e-20
+    },
+    "spray_particle_mass_measure_factor": 0.78125,
+    "thickness_scaled_total_residual": {
+      "mass": -6.5762182186945785e-18,
+      "xmom": -9.680739554169399e-18,
+      "ymom": 1.7378781749867613e-24
+    }
+  },
+  "title": "Academic Spray Closed Control-Volume Budget"
+}

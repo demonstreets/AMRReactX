@@ -1,0 +1,188 @@
+{
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "clears_reference_data_blocker": false,
+  "experiment": {
+    "case_id": "D27",
+    "description": "Low-momentum horizontal pure-H2 jet release into a baffled, partially confined multi-compartment vessel.",
+    "experiment_organizations": [
+      "GexCon",
+      "Norsk Hydro",
+      "Statoil"
+    ],
+    "test_year": 2003
+  },
+  "generated_at_utc": "2026-07-23T07:06:31+00:00",
+  "geometry": {
+    "baffle_count": 4,
+    "baffle_plate_dimensions_m": {
+      "y_depth": 0.2,
+      "z_height": 0.3
+    },
+    "baffle_position_status": "requires_source_figure_digitization",
+    "compartment_count": 12,
+    "coordinate_system": "paper_table_x_width_y_depth_z_vertical",
+    "vent_opening": {
+      "description": "central vent opening about 0.01 m above floor",
+      "dimensions_m": {
+        "y_width": 0.1,
+        "z_height": 0.2
+      },
+      "exact_position_status": "requires_source_figure_digitization",
+      "wall": "opposite_release_location"
+    },
+    "vessel_dimensions_m": {
+      "x_width": 1.2,
+      "y_depth": 0.2,
+      "z_height": 0.9
+    }
+  },
+  "limitations": [
+    "This report fixes the public benchmark specification used for future case setup.",
+    "It does not contain digitized experimental traces and does not clear production reference-data validation.",
+    "Exact baffle and sensor coordinates still require source-figure digitization or original tabular data."
+  ],
+  "measurements": {
+    "available_dataset_description": "Transient volumetric H2 concentration recordings for 12 monitor locations reported as MS Excel data in the benchmark paper.",
+    "dataset_ingested": false,
+    "reliable_sensor_ids": [
+      1,
+      2,
+      5,
+      7,
+      8,
+      9,
+      10,
+      12
+    ],
+    "sensor_accuracy_volume_percent_h2": 1.0,
+    "sensor_coordinate_status": "requires_source_figure_or_tabular_data",
+    "sensor_count": 12,
+    "sensor_location_description": "one H2 concentration sensor per compartment on the rear wall",
+    "timeseries_duration_s": 120.0,
+    "unreliable_sensor_ids": [
+      3,
+      4,
+      6,
+      11
+    ]
+  },
+  "pre_ingestion_gaps": [
+    "exact_baffle_positions_require_source_figure_digitization",
+    "exact_sensor_coordinates_require_source_figure_or_tabular_data",
+    "experimental_120s_sensor_timeseries_excel_not_ingested",
+    "case_matched_pelelmex_input_not_generated_from_this_spec"
+  ],
+  "recommended_acceptance_metrics": [
+    {
+      "metric_type": "arrival_time",
+      "sensor_ids": [
+        1,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "threshold_volume_fraction_h2": 0.04
+    },
+    {
+      "metric_type": "sensor_concentration_peak",
+      "sensor_ids": [
+        1,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "metric_type": "sensor_concentration_release_end",
+      "sensor_ids": [
+        1,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "time_s": 60.0
+    },
+    {
+      "metric_type": "sensor_concentration_late",
+      "sensor_ids": [
+        1,
+        2,
+        5,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "time_s": 120.0
+    }
+  ],
+  "release": {
+    "direction_status": "requires_case_input_confirmation_against_source_figure",
+    "exit_velocity_m_s": 10.17,
+    "flow_rate_normal_l_s": 1.15,
+    "gas": "pure_H2",
+    "jet_exit_location_m": {
+      "x": 0.03,
+      "y": 0.1,
+      "z": 0.145
+    },
+    "nozzle_diameter_m": 0.012,
+    "release_direction": "horizontal_toward_vent_wall_from_paper_geometry",
+    "release_period_s": 60.0
+  },
+  "required_program_outputs": [
+    "case-matched baffled-box geometry including vent and release nozzle",
+    "transient H2 concentration sampling at the 12 monitor locations",
+    "arrival-time metrics for reliable sensors",
+    "peak and late-release concentration metrics for reliable sensors",
+    "source metadata and digitization uncertainty for each literature-derived trace"
+  ],
+  "schema_version": 1,
+  "source": {
+    "authors": [
+      "T. Jordan",
+      "J. Garcia",
+      "O. Hansen",
+      "A. Huser",
+      "S. Ledin",
+      "P. Middha",
+      "V. Molkov",
+      "J. Travis",
+      "A. G. Venetsanos",
+      "F. Verbecke",
+      "J. Xiao"
+    ],
+    "publication_year": 2007,
+    "source_type": "literature_digitized",
+    "title": "Results of the HySafe CFD Validation Benchmark SBEPV5",
+    "urls": [
+      "https://publikationen.bibliothek.kit.edu/230068969",
+      "https://www.h2knowledgecentre.com/content/conference289",
+      "https://www.researchgate.net/publication/311396790_Results_of_the_HySafe_CFD_Validation_Benchmark_SBEPV5"
+    ],
+    "venue": "2nd International Conference on Hydrogen Safety, San Sebastian"
+  },
+  "status": "PASS-EXTERNAL-PLUME-BENCHMARK-SPEC",
+  "summary": {
+    "case_spec_available": true,
+    "exact_sensor_coordinates_available": false,
+    "experimental_timeseries_dataset_ingested": false,
+    "preparation_gap_count": 4,
+    "release_geometry_metadata_available": true,
+    "reliable_sensor_subset_declared": true
+  },
+  "title": "HySafe SBEPV5 / GexCon D27 External H2 Plume Benchmark Specification"
+}

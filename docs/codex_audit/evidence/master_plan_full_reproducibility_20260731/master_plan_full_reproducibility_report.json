@@ -1,0 +1,78 @@
+{
+  "evidence_files": [
+    {
+      "label": "full_cpu_reproducible_gate_log",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gate_logs/reproducible_gate_full_cpu.log",
+      "sha256": "c2a1b038f9923eb0141ce17c6ad2a42ffda57df4a3185d870fe87a2382287ffa",
+      "size_bytes": 395
+    },
+    {
+      "label": "full_cpu_reproducible_gate_exitcode",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gate_logs/reproducible_gate_full_cpu.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    {
+      "label": "cuda_preflight_diagnostic_log",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/cuda_preflight_diagnostic.log",
+      "sha256": "64fe7339dc8afcbb893a8603c0e342a1944f92d796784653dff1d0c989ed05c7",
+      "size_bytes": 2083
+    },
+    {
+      "label": "cuda_preflight_diagnostic_exitcode",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/cuda_preflight_diagnostic.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    {
+      "label": "engineering_pipe_rack_gpu_fire_obstacle_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_gpu_fire_obstacle_20260727/pipe_rack_gpu_fire_obstacle_report.json",
+      "sha256": "f8d2a16e319e9bb16b87619480e09ed0c77e8e52a796d79908fd1cf13b09ca13",
+      "size_bytes": 5497
+    },
+    {
+      "label": "engineering_pipe_rack_direct_reacting_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_cuda_2000step_20260727/pipe_rack_direct_reacting_cuda_report.json",
+      "sha256": "12b98e8c794016bee3ebf7f74a580104141634085350f8db98fadb87d14d45b4",
+      "size_bytes": 10075
+    },
+    {
+      "label": "engineering_pipe_rack_direct_reacting_mpi_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_mpi_cuda_2000step_20260727/pipe_rack_direct_reacting_mpi_cuda_report.json",
+      "sha256": "a0c6df5513382e75f333513061d8349f15238bb6a9f2b8b990c03281816d2bef",
+      "size_bytes": 9789
+    },
+    {
+      "label": "gpu_runtime_recovery_report",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/gpu_runtime_recovery_report.json",
+      "sha256": "b13acf7003c76b225fa956da39051f7c87d5697664aeb80bd43b785a2cca6acc",
+      "size_bytes": 2909
+    },
+    {
+      "label": "cuda_revalidation_report",
+      "path": "docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/master_plan_cuda_revalidation_report.json",
+      "sha256": "f196d89ee8ba2c11d94ab6509e50c8630d9cbc44c3d94ed9fe0aab9af6a47239",
+      "size_bytes": 2725
+    }
+  ],
+  "generated_at_utc": "2026-07-31T06:57:56.223655+00:00",
+  "schema_version": 1,
+  "status": "PASS-MASTER-PLAN-FULL-CPU-CUDA-REPRODUCIBILITY",
+  "summary": {
+    "cuda_require_preflight_exitcode": 0,
+    "cuda_revalidation_current_ready": true,
+    "cuda_revalidation_script_ready": true,
+    "cuda_revalidation_status": "PASS-MASTER-PLAN-CUDA-REVALIDATION",
+    "current_cuda_runtime_blocker": "",
+    "current_cuda_runtime_ready": true,
+    "full_cpu_repro_exitcode": 0,
+    "full_cpu_reproducibility_ready": true,
+    "gpu_runtime_kernel_module_version": "580.173.02",
+    "gpu_runtime_nvml_user_space_version": "580.173.02",
+    "gpu_runtime_ready": true,
+    "gpu_runtime_recommended_action": "no_reload_required_runtime_versions_match",
+    "gpu_runtime_recovery_status": "PASS-MASTER-PLAN-GPU-RUNTIME-READY",
+    "historical_engineering_gpu_case_evidence_ready": true,
+    "interpretation": "Current source state passes the full CPU reproducibility gate including smoke_all, the current CUDA runtime is healthy, and the current CUDA revalidation gate passes."
+  }
+}

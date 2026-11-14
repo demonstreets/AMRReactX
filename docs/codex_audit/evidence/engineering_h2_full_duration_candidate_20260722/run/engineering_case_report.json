@@ -1,0 +1,205 @@
+{
+  "amr_overhead": {
+    "amr": {
+      "advance_seconds": 2442.15706,
+      "final_plotfile_bytes": 5917146,
+      "mean_ncells": 32022.9867
+    },
+    "amr_ratios": {
+      "advance_seconds_ratio": 4.74059718,
+      "all_plotfiles_bytes_ratio": 3.88331079,
+      "final_plotfile_bytes_ratio": 4.047852,
+      "max_ncells_ratio": 4.015625,
+      "mean_advance_seconds_ratio": 4.74059718,
+      "mean_ncells_ratio": 3.90905599
+    },
+    "baseline": {
+      "advance_seconds": 515.158105,
+      "final_plotfile_bytes": 1461799,
+      "mean_ncells": 8192.0
+    }
+  },
+  "case_name": "h2-open-domain-plan-amr-mpi-reduced-long",
+  "evidence_files": {
+    "amr_overhead_summary.csv": {
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr_overhead_summary.csv",
+      "sha256": "2c0182da8d2dcc3a0ba0acf3a78d76ca3bca3176242801bb9e6f12585147aee4"
+    },
+    "plan_amr_compare_summary.csv": {
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/plan_amr_compare_summary.csv",
+      "sha256": "0aee9c7da4fab55917e6ab1d55845ee688f8dd8c38085f5ea2567a9e5bcab485"
+    },
+    "reduced_long_summary.csv": {
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/reduced_long_summary.csv",
+      "sha256": "96d54a0c0f796f2434b76763b0fbfba1c4110e333676af55c1c058dae3a52d73"
+    }
+  },
+  "evidence_root": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run",
+  "generated_at_utc": "2026-07-22T07:33:13+00:00",
+  "inputs": [
+    {
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/inputs/input.codex_open_domain_plan_amr_baseline_smoke",
+      "sha256": "391dfb8dea834090d29481ecee78736f8e069d6b37d6f77bd09ab57e9adfa94a"
+    },
+    {
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/inputs/input.codex_open_domain_plan_amr_level1_smoke",
+      "sha256": "7edf822d9062eb2348544bce58116ac070e1cfebe768bf9e6a6d84b180d17499"
+    }
+  ],
+  "limitations": [
+    "Reduced-long smoke evidence, not production completion.",
+    "Does not prove overnight stability, production-size MPI scaling, scheduler/affinity behavior, real CAD/large-layout tank-farm AMR load balance, fire heat-release validation, or experimental/reference-data accuracy."
+  ],
+  "logs": {
+    "amr": {
+      "hazard_planes.log": {
+        "pass_line": "h2_leak_hazard_planes PASS plot=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/run/plt07200 output=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/hazard_planes.csv time=7.2 species=H2 lfl=4.00000000e-02 ufl=7.50000000e-01 min_x=0.7 planes=64 active_planes=42 flammable_planes=42 total_cloud_volume=1.15722656e-01 total_cloud_species_mass=1.42315650e-03 total_species_mass=1.47377128e-03 peak_X=2.28180342e-01",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/hazard_planes.log",
+        "sha256": "c06c1ba622b619ba1e0a16d756e486bf66a9fd19e9b1e891e15a7fe48807d806"
+      },
+      "hazard_summary.log": {
+        "pass_line": "h2_leak_hazard_summary PASS plot=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/run/plt07200 time=7.2 species=H2 lfl=4.00000000e-02 ufl=7.50000000e-01 status=flammable_cloud_detected cloud_cells=3792 cloud_volume=1.15722656e-01 cloud_species_mass=1.42315650e-03 total_species_mass=1.47377128e-03 max_X=2.28180342e-01 max_Y=2.02391252e-02 mean_X_active=1.44164576e-02",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/hazard_summary.log",
+        "sha256": "19047ba47cbbc80941fbf175ab05b01ac179d3c4159d1b8a0553c637c4ed1418"
+      },
+      "hazard_timeseries.log": {
+        "pass_line": "h2_leak_hazard_timeseries PASS run_dir=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/run output=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/hazard_timeseries.csv species=H2 plotfiles=31 time0=0 timeN=7.2 mass0=0.00000000e+00 massN=1.47377128e-03 initial_cloud_volume=0.00000000e+00 final_cloud_volume=1.15722656e-01 max_cloud_volume=1.15722656e-01 final_active_planes=42 final_flammable_planes=42 max_flammable_planes=42 final_peak_X=2.28180342e-01 max_peak_X=2.28370398e-01",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/hazard_timeseries.log",
+        "sha256": "df52428909e9cc524a520716d4497d513aaff288952c44d42295622157665114"
+      },
+      "mpi_validation.log": {
+        "pass_line": "parallel_smoke_log_validation PASS solver=pelelmex mode=mpi ranks=8 threads=na final_time=7.2 finalized=1 warning=mpi_thread_support_level_0",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/mpi_validation.log",
+        "sha256": "b7cbc599ceabef178b0b92378f996d7bb34cd0ec0f56f8d7baf8e8e0cffd5147"
+      },
+      "profile_validation.log": {
+        "pass_line": "h2_leak_plume_profile_validation PASS plot=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/run/plt07200 time=7.2 h2_mass=1.47377128e-03 injected=1.44000000e-02 mass_ratio=1.02345228e-01 centroid=(1.24939305e+00,5.00000325e-01,5.00000044e-01) centroid_shift=7.49393050e-01 downstream_fraction=9.80446493e-01 plane_x=1.23437500e+00 plane_fraction=2.08789845e-02 sigma_y=7.50000000e-02 sigma_z=7.50000000e-02 y_l1=1.16895574e-01 z_l1=1.16933150e-01",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/profile_validation.log",
+        "sha256": "6d76cb04f7bd7c9dc93b9e0bf63eabedd0f3307de2846cd3af7a870378b3ab8f"
+      },
+      "run.log": {
+        "line_count": 111774,
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/run.log",
+        "sha256": "330bcba02bd0b405dcf2a0269a6f630f6b00743a5f5464378c079b8b272d97d4"
+      },
+      "validation.log": {
+        "pass_line": "h2_leak_plume_history_validation PASS nplot=31 time0=0 timeN=7.2 mass0=0.00000000e+00 mass1=4.80000244e-04 massN=1.47377128e-03 injectedN=1.44000000e-02 mass_ratioN=1.02345228e-01 mass_growth_ratio=3.07035528e+00 max_mass_drop=9.15483397e-07 max_mass_drop_ratio=6.21184174e-04 max_YH2=2.02605283e-02 grid_shapes=[(32, 16, 16), (64, 32, 32)] centroid=(1.24939305e+00,5.00000325e-01,5.00000044e-01) lateral_offset=3.28389634e-07 downstream_fraction=9.80446493e-01 upstream_fraction=1.95535070e-02",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/amr/validation.log",
+        "sha256": "c4f3ac6e4d520a4f37cf6c891ada883544c8417fca91cb29ef02457b185fd30a"
+      }
+    },
+    "baseline": {
+      "hazard_planes.log": {
+        "pass_line": "h2_leak_hazard_planes PASS plot=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/run/plt07200 output=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/hazard_planes.csv time=7.2 species=H2 lfl=4.00000000e-02 ufl=7.50000000e-01 min_x=0.7 planes=32 active_planes=21 flammable_planes=21 total_cloud_volume=9.66796875e-02 total_cloud_species_mass=1.36374599e-03 total_species_mass=1.47491064e-03 peak_X=2.00222909e-01",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/hazard_planes.log",
+        "sha256": "f08fd2f21413eefa415296c13c280b495be8141cb467649d9ea7582aaea34bb9"
+      },
+      "hazard_summary.log": {
+        "pass_line": "h2_leak_hazard_summary PASS plot=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/run/plt07200 time=7.2 species=H2 lfl=4.00000000e-02 ufl=7.50000000e-01 status=flammable_cloud_detected cloud_cells=396 cloud_volume=9.66796875e-02 cloud_species_mass=1.36374599e-03 total_species_mass=1.47491064e-03 max_X=2.00222909e-01 max_Y=1.71918569e-02 mean_X_active=9.37858057e-03",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/hazard_summary.log",
+        "sha256": "d692427b505dc9ad32387190aa2a886ada152db540af0996ecb0b3c6c7505b99"
+      },
+      "hazard_timeseries.log": {
+        "pass_line": "h2_leak_hazard_timeseries PASS run_dir=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/run output=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/hazard_timeseries.csv species=H2 plotfiles=31 time0=0 timeN=7.2 mass0=0.00000000e+00 massN=1.47491064e-03 initial_cloud_volume=0.00000000e+00 final_cloud_volume=9.66796875e-02 max_cloud_volume=9.66796875e-02 final_active_planes=21 final_flammable_planes=21 max_flammable_planes=21 final_peak_X=2.00222909e-01 max_peak_X=2.00400834e-01",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/hazard_timeseries.log",
+        "sha256": "87111d537be8fdf9f32eb79c5305198d06dd5e542e0fd30b61e46614886ffec0"
+      },
+      "mpi_validation.log": {
+        "pass_line": "parallel_smoke_log_validation PASS solver=pelelmex mode=mpi ranks=8 threads=na final_time=7.2 finalized=1 warning=mpi_thread_support_level_0",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/mpi_validation.log",
+        "sha256": "b7cbc599ceabef178b0b92378f996d7bb34cd0ec0f56f8d7baf8e8e0cffd5147"
+      },
+      "profile_validation.log": {
+        "pass_line": "h2_leak_plume_profile_validation PASS plot=/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/run/plt07200 time=7.2 h2_mass=1.47491064e-03 injected=1.44000000e-02 mass_ratio=1.02424350e-01 centroid=(1.24742227e+00,5.00000000e-01,5.00000000e-01) centroid_shift=7.47422275e-01 downstream_fraction=9.79091706e-01 plane_x=1.21875000e+00 plane_fraction=4.19951549e-02 sigma_y=7.50000000e-02 sigma_z=7.50000000e-02 y_l1=2.33662604e-01 z_l1=2.33662604e-01",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/profile_validation.log",
+        "sha256": "ab818287c3405586964f36b093922ea2c21131c81db90e8f643157f11d42c51e"
+      },
+      "run.log": {
+        "line_count": 72143,
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/run.log",
+        "sha256": "b289c9d6e8027d32ddc7f49b10ef8cdb6ce4d733735e7c4136fc3f87050659c3"
+      },
+      "validation.log": {
+        "pass_line": "h2_leak_plume_history_validation PASS nplot=31 time0=0 timeN=7.2 mass0=0.00000000e+00 mass1=4.80000000e-04 massN=1.47491064e-03 injectedN=1.44000000e-02 mass_ratioN=1.02424350e-01 mass_growth_ratio=3.07273049e+00 max_mass_drop=2.77119206e-06 max_mass_drop_ratio=1.87888811e-03 max_YH2=1.72106343e-02 grid_shapes=[(32, 16, 16)] centroid=(1.24742227e+00,5.00000000e-01,5.00000000e-01) lateral_offset=4.71027738e-16 downstream_fraction=9.79091706e-01 upstream_fraction=2.09082943e-02",
+        "path": "/home/cj/my-pele/docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/run/baseline/validation.log",
+        "sha256": "86e7ac53c45459f1b8511c7077b1c6cebf531c8752e98f0c31c3724d4bf545fd"
+      }
+    }
+  },
+  "plan_amr_compare": {
+    "amr": {
+      "active_planes": 42,
+      "cloud_volume": 0.115722656,
+      "finest_fab_count": 86,
+      "finest_level": 1,
+      "flammable_planes": 42,
+      "mass_ratio": 0.102345228,
+      "mass_ratioN": 0.102345228,
+      "max_X": 0.228180342,
+      "regrid_count": 3599
+    },
+    "amr_deltas": {
+      "centroid_abs_diff": 0.001970775,
+      "cloud_rel_diff": 0.16455696,
+      "downstream_abs_diff": 0.001354787,
+      "peak_rel_diff": 0.122523407
+    },
+    "baseline": {
+      "active_planes": 21,
+      "cloud_volume": 0.0966796875,
+      "finest_fab_count": 16,
+      "finest_level": 0,
+      "flammable_planes": 21,
+      "mass_ratio": 0.10242435,
+      "mass_ratioN": 0.10242435,
+      "max_X": 0.200222909,
+      "regrid_count": 0
+    }
+  },
+  "reduced_long": {
+    "amr": {
+      "fabs": "[(0, 16), (1, 86)]",
+      "final_cloud_volume": 0.11572265625,
+      "final_flammable_planes": 42,
+      "final_mass": 0.001473771281506,
+      "final_peak_X": 0.2281803422182,
+      "final_step": 7200,
+      "final_time": 7.2,
+      "finest_level": 1,
+      "log_files": 14,
+      "max_cloud_volume": 0.11572265625,
+      "max_flammable_planes": 42,
+      "max_peak_X": 0.2283703984868,
+      "max_step": 7200,
+      "plot_int": 240,
+      "plotfiles": 31,
+      "ranks": 8
+    },
+    "amr_deltas": {
+      "centroid_abs_diff": 0.001970775,
+      "cloud_rel_diff": 0.16455696,
+      "downstream_abs_diff": 0.001354787,
+      "peak_rel_diff": 0.122523407
+    },
+    "baseline": {
+      "fabs": "[(0, 16)]",
+      "final_cloud_volume": 0.0966796875,
+      "final_flammable_planes": 21,
+      "final_mass": 0.001474910636096,
+      "final_peak_X": 0.2002229087907,
+      "final_step": 7200,
+      "final_time": 7.2,
+      "finest_level": 0,
+      "log_files": 14,
+      "max_cloud_volume": 0.0966796875,
+      "max_flammable_planes": 21,
+      "max_peak_X": 0.200400833714,
+      "max_step": 7200,
+      "plot_int": 240,
+      "plotfiles": 31,
+      "ranks": 8
+    }
+  },
+  "schema_version": 1,
+  "status": "PASS"
+}

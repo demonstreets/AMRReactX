@@ -1,0 +1,184 @@
+{
+  "acceptance_contract": {
+    "minimum_real_geometry_count": 3,
+    "required_boundary_roles": [
+      "outflow_or_vent",
+      "release_or_inlet",
+      "wall_or_obstacle"
+    ],
+    "required_boundary_tag_columns": [
+      "area_m2",
+      "bc_type",
+      "engineering_role",
+      "face_selector",
+      "label",
+      "normal_hint",
+      "patch_id",
+      "reviewer",
+      "source_basis"
+    ],
+    "required_cleanup_quality_columns": [
+      "bbox_max_m",
+      "bbox_min_m",
+      "label",
+      "nondegenerate_elements",
+      "positive_volume_or_area",
+      "reviewer",
+      "tool_or_method",
+      "units_declared",
+      "watertight_or_closed_surface"
+    ],
+    "required_data_room_columns": [
+      "file_role",
+      "label",
+      "owner_or_supplier",
+      "relative_path",
+      "revision",
+      "sha256",
+      "source_type"
+    ],
+    "required_manifest_keys": [
+      "cad_source_is_real",
+      "campaign",
+      "dataset_type",
+      "geometries",
+      "large_layout_campaign",
+      "provenance",
+      "schema_version",
+      "source_type",
+      "status",
+      "synthetic"
+    ],
+    "required_provenance_keys": [
+      "confidentiality",
+      "drawing_or_package_id",
+      "owner_or_supplier",
+      "received_at_utc",
+      "revision",
+      "title"
+    ],
+    "strict_credit_policy": "blocker remains open until controlled source CAD, cleaned geometry, quality records, and boundary tags validate together"
+  },
+  "evidence_files": [
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "c627b4e4eb0a9018976c609c2e801c21a5abcc6e8c90e1c3bd295fc80ca27ac6",
+      "size_bytes": 5093
+    },
+    {
+      "label": "real_cad_intake_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "sha256": "da94058dd5d7517d0fc2f961cfa6e618141e90f7afe560d71cf0dc4d7b637ca9",
+      "size_bytes": 6969
+    },
+    {
+      "label": "real_cad_boundary_tag_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_boundary_tag_contract_20260724/real_cad_boundary_tag_contract_report.json",
+      "sha256": "813cae304daa336538e7960fc3e3e333e0bc82245e11fde885fe7f9139e959ad",
+      "size_bytes": 5060
+    },
+    {
+      "label": "real_cad_cleanup_manifest_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest_template.json",
+      "sha256": "2829bb399a8b89dc5bb5caa46b559b58ff77c06300087decf42dec63cad11f58",
+      "size_bytes": 3389
+    },
+    {
+      "label": "real_cad_data_room_index_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index_template.csv",
+      "sha256": "b6ddc6e5c3f9f0f43dfb6cad7640ee396aab62fb31b2c6684e4f9719d3fdfe03",
+      "size_bytes": 317
+    },
+    {
+      "label": "real_cad_cleanup_quality_record_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record_template.csv",
+      "sha256": "8b9710b6c936c2e46ec630b87c9210802ebcfdae0c5625f7fc3bdd5cd9a5b2de",
+      "size_bytes": 227
+    },
+    {
+      "label": "real_cad_boundary_tags_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv",
+      "sha256": "fd9f75d380dc22a8bfcdb1a5438ec3c4966a2a09df498e8064c7b48f5595ba15",
+      "size_bytes": 505
+    },
+    {
+      "label": "real_cad_intake_checklist",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_intake_checklist.csv",
+      "sha256": "250b076944eeec4acabf18f1fdd8e4c8c3735c0383ac064e0b96f95fbc45e5d9",
+      "size_bytes": 1328
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:25.997005+00:00",
+  "schema_version": 1,
+  "status": "PASS-H2-REAL-CAD-HANDOFF-CONTRACT",
+  "summary": {
+    "boundary_tag_template_ready": true,
+    "cleanup_quality_template_ready": true,
+    "data_room_index_template_ready": true,
+    "handoff_contract_ready": true,
+    "intake_checklist_ready": true,
+    "manifest_template_ready": true,
+    "source_cad_artifacts_present": false,
+    "strict_real_cad_blocker_cleared": false
+  },
+  "template_checks": {
+    "boundary_tag_template": {
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv",
+      "roles": [
+        "outflow_or_vent",
+        "release_or_inlet",
+        "wall_or_obstacle"
+      ],
+      "row_count": 3
+    },
+    "cleanup_package_template": {
+      "geometry_label_count": 3,
+      "geometry_labels": [
+        "tank_001",
+        "pipe_rack_001",
+        "bund_wall_001"
+      ],
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest_template.json"
+    },
+    "cleanup_quality_template": {
+      "column_count": 9,
+      "columns": [
+        "bbox_max_m",
+        "bbox_min_m",
+        "label",
+        "nondegenerate_elements",
+        "positive_volume_or_area",
+        "reviewer",
+        "tool_or_method",
+        "units_declared",
+        "watertight_or_closed_surface"
+      ],
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record_template.csv"
+    },
+    "data_room_index_template": {
+      "column_count": 8,
+      "columns": [
+        "file_role",
+        "label",
+        "notes",
+        "owner_or_supplier",
+        "relative_path",
+        "revision",
+        "sha256",
+        "source_type"
+      ],
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index_template.csv"
+    },
+    "intake_checklist": {
+      "column_count": 3,
+      "columns": [
+        "item",
+        "production_rule",
+        "required_evidence"
+      ],
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_intake_checklist.csv"
+    }
+  },
+  "title": "Engineering H2 Real-CAD Handoff Contract"
+}

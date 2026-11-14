@@ -1,0 +1,45 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x165887) [0x62347b4cc887]
+    ?? ??:0
+
+ 1: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x1693c1) [0x62347b4d03c1]
+    ?? ??:0
+
+ 2: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x1519fd) [0x62347b4b89fd]
+    ?? ??:0
+
+ 3: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x15341f) [0x62347b4ba41f]
+    ?? ??:0
+
+ 4: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x15aa56) [0x62347b4c1a56]
+    ?? ??:0
+
+ 5: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x15ae00) [0x62347b4c1e00]
+    ?? ??:0
+
+ 6: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x1554e2) [0x62347b4bc4e2]
+    ?? ??:0
+
+ 7: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x8ecbf) [0x62347b3f5cbf]
+    ?? ??:0
+
+ 8: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x544a0) [0x62347b3bb4a0]
+    ?? ??:0
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x71d60ec2a1ca]
+
+10: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x71d60ec2a28b]
+
+11: /home/cj/my-pele/repair_validation/twophase_20260910/build_cuda/resolved_twophase(+0x56d55) [0x62347b3bdd55]
+    ?? ??:0
+

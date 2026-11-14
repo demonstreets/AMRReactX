@@ -1,0 +1,50 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x2f5526) [0x654a0b493526]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x2fa2d4) [0x654a0b4982d4]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x4095f9) [0x654a0b5a75f9]
+    amrex::Error(char const*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:157
+ (inlined by) amrex::AmrMesh::checkInput() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrMesh.cpp:1219
+
+ 3: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x40c039) [0x654a0b5aa039]
+    std::_Vector_base<amrex::IntVectND<2>, std::allocator<amrex::IntVectND<2> > >::~_Vector_base() at /usr/include/c++/13/bits/stl_vector.h:370
+ (inlined by) std::vector<amrex::IntVectND<2>, std::allocator<amrex::IntVectND<2> > >::~vector() at /usr/include/c++/13/bits/stl_vector.h:738
+ (inlined by) amrex::Vector<amrex::IntVectND<2>, std::allocator<amrex::IntVectND<2> > >::~Vector() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Vector.H:25
+ (inlined by) amrex::AmrInfo::~AmrInfo() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrMesh.H:25
+ (inlined by) amrex::AmrMesh::InitAmrMesh(int, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<amrex::IntVectND<2>, std::allocator<amrex::IntVectND<2> > >, amrex::RealBox const*, int, int const*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrMesh.cpp:389
+
+ 4: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x40dd07) [0x654a0b5abd07]
+    amrex::AmrMesh::AmrMesh() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrMesh.cpp:23 (discriminator 1)
+
+ 5: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x39f48d) [0x654a0b53d48d]
+    amrex::AmrCore::AmrCore() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrCore.cpp:18 (discriminator 1)
+
+ 6: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x348eae) [0x654a0b4e6eae]
+    amrex::Amr::Amr(amrex::LevelBld*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:260 (discriminator 1)
+
+ 7: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x426e6) [0x654a0b1e06e6]
+    PeleCAmr::Amr(amrex::LevelBld*) at /home/cj/my-pele/examples/academic/detonation_2D/../../../external/PeleC/Source/PeleCAmr.H:20 (discriminator 1)
+ (inlined by) std::__detail::_MakeUniq<PeleCAmr>::__single_object std::make_unique<PeleCAmr, amrex::LevelBld*>(amrex::LevelBld*&&) at /usr/include/c++/13/bits/unique_ptr.h:1070 (discriminator 1)
+ (inlined by) main at /home/cj/my-pele/examples/academic/detonation_2D/../../../external/PeleC/Source/main.cpp:175 (discriminator 1)
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x70630bc2a1ca]
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x70630bc2a28b]
+
+10: /home/cj/my-pele/examples/academic/detonation_2D/codex_deton2d_cpu2d.gnu.ex(+0x43aa5) [0x654a0b1e1aa5]
+    ?? ??:0
+

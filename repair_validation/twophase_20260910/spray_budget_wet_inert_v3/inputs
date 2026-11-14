@@ -1,0 +1,69 @@
+# Academic gas-phase chemistry smoke; not gas-liquid detonation validation.
+# Build: make Chemistry_Model=heptane_lu_88sk EBASE=reacting_smoke
+# CGS units. Spray is disabled to isolate the chemistry path.
+max_step = 20000
+stop_time = -1
+geometry.is_periodic = 1 1
+geometry.coord_sys = 0
+geometry.prob_lo = 0 0
+geometry.prob_hi = 0.1 0.1
+amr.n_cell = 4 4
+amr.blocking_factor = 4
+amr.max_grid_size = 4
+amr.max_level = 0
+pelec.lo_bc = "Interior" "Interior"
+pelec.hi_bc = "Interior" "Interior"
+pelec.do_hydro = 0
+pelec.do_react = 0
+pelec.do_spray_particles = 1
+# Stiff 88-species chemistry: explicit RK64 fails this time-step test.
+# CPU CVODE + GMRES is the tested path; do not infer GPU support from this.
+pelec.chem_integrator = "ReactorCvode"
+pelec.allow_negative_energy = 1
+pelec.fixed_dt = 1.0e-8
+amr.checkpoint_files_output = 0
+amr.plot_int = 1000
+amr.plot_vars = density Temp rho_E rho_nc7h16 rho_o2 rho_h2o rho_co2
+amr.derive_plot_vars = pressure
+pelec.plot_massfrac = 1
+prob.p_left = 1.0e6
+prob.p_right = 1.0e6
+prob.T_left = 1400
+prob.T_right = 1400
+prob.diaphragm = 0.5
+prob.Y_NC7H16 = 0.038276374792422144
+prob.Y_O2 = 0.22408133071681655
+prob.Y_N2 = 0.7376422944907611
+amrex.the_arena_init_size = 0
+amrex.abort_on_unused_inputs = 1
+
+pelec.do_spray_particles = 1
+particles.v = 0
+particles.derive_plot_vars = 1
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.fixed_parts = 0
+
+particles.fuel_ref_temp = 300.0
+
+particles.fuel_species = NC7H16
+particles.NC7H16_crit_temp = 540.0
+particles.NC7H16_boil_temp = 371.6
+particles.NC7H16_latent = 3.63E9
+particles.NC7H16_cp = 2.2483E7
+particles.NC7H16_rho = 0.6814
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+
+# Heptane liquid transport properties (for None breakup)
+# μ(T) polynomial coefficients (CGS: Poise)
+particles.NC7H16_mu = 0.004 0.0 0.0 0.0
+# λ(T) polynomial coefficients (CGS: erg/(cm·s·K))
+particles.NC7H16_lambda = 120.0 0.0 0.0 0.0
+
+# None breakup model
+particles.use_splash_model = false
+particles.use_breakup_model = None
+
+particles.dep_fuel_species = nc7h16
+particles.init_file = droplets.dat
+particles.plot_src = 1

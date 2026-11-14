@@ -1,0 +1,121 @@
+Initializing AMReX (d0a6a9a8c33a)...
+Initializing CUDA...
+CUDA initialized with 1 device.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (d0a6a9a8c33a) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 7
+ Temperature: 8
+ thermo. pressure: 9
+ => Total number of state variables: 10
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 8 0 0 
+	Density:  1.171983992
+	Temp:     300
+	H:        1900.593693
+	Y_N2:     0.767
+	Y_O2:     0.233
+	Y_C3H8:   0
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 0.3125, divu: 1e+20
+ Initial dt: 0.3125
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 8  V: 0  W: 0
+ >> After initial velocity projection:   U: 8.375990817  V: 0.2683546617  W: 0.2779897636
+ Est. time step - Conv: 0.2984721515, divu: 1e+20
+ Initial dt: 0.2984721515
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 8.375990817  V: 0.2683546617  W: 0.2779897636
+ >> After initial velocity projection:   U: 8.434275573  V: 0.3657745096  W: 0.3846338143
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 0.2964095705, divu: 1e+20
+ STEP [-1] - Time: 0, dt 0.2964095705, Ncells 1280
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.139128288
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 0.2964095705, divu: 1e+20
+ STEP [-1] - Time: 0, dt 0.2964095705, Ncells 1280
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.135522424
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 0.2964095705, divu: 1e+20
+ STEP [-1] - Time: 0, dt 0.2964095705, Ncells 1280
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.127835455
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.2964095705, divu: 1e+20
+ STEP [0] - Time: 0, dt 0.2964095705, Ncells 1280
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.130242823
+
+ Writing plotfile: plt00001
+
+ >> Final simulation time: 0.2964095705
+
+Total Time: 0.65350698
+Total GPU global memory (MB): 16269
+Free  GPU global memory (MB): 1122
+[The         Arena] max space allocated (MB): 12201
+[The         Arena] max space used      (MB): 44
+[The Managed Arena] max space allocated (MB): 8
+[The Managed Arena] max space used      (MB): 0
+[The  Pinned Arena] max space allocated (MB): 8
+[The  Pinned Arena] max space used      (MB): 0
+AMReX (d0a6a9a8c33a) finalized

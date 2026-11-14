@@ -1,0 +1,125 @@
+{
+  "compared_reports": {
+    "cpu_mpi": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/engineering_h2_pipe_rack_delayed_ignition_mpi_report.json",
+    "single_cuda": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/engineering_h2_pipe_rack_delayed_ignition_cuda_report.json"
+  },
+  "comparison": {
+    "comparable_parameters": {
+      "chem_integrator": [
+        "ReactorCvode",
+        "ReactorCvode"
+      ],
+      "cvode_solve_type": [
+        "GMRES",
+        "GMRES"
+      ],
+      "ignition_duration": [
+        1.5e-07,
+        1.5e-07
+      ],
+      "ignition_hotspot": [
+        false,
+        false
+      ],
+      "ignition_power": [
+        10000000000.0,
+        10000000000.0
+      ],
+      "ignition_source": [
+        true,
+        true
+      ],
+      "ignition_start_time": [
+        2e-07,
+        2e-07
+      ],
+      "initial_flammable_cloud": [
+        true,
+        true
+      ],
+      "max_step": [
+        120,
+        120
+      ],
+      "n_cell": [
+        "32 16 16",
+        "32 16 16"
+      ],
+      "obstacle_geometry": [
+        "stl",
+        "stl"
+      ],
+      "plot_int": [
+        10,
+        10
+      ]
+    },
+    "final_time_abs_diff": 0.0,
+    "final_time_cpu_mpi": 1.1999999999999985e-06,
+    "final_time_cuda": 1.1999999999999985e-06,
+    "final_y_h2o_max_cpu_mpi": 1.408529569452905e-06,
+    "final_y_h2o_max_cuda": 1.385375798968195e-06,
+    "final_y_h2o_rel_diff": 0.016438256595282762,
+    "max_final_h2o_rel_diff_allowed": 0.05,
+    "max_final_time_abs_diff_allowed": 1e-18,
+    "max_step": 120,
+    "sustained_output_count_cpu_mpi": 7,
+    "sustained_output_count_cuda": 7
+  },
+  "decision": "same_delayed_ignition_case_cpu_mpi_and_single_gpu_consistent",
+  "evidence_files": [
+    {
+      "label": "single_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/engineering_h2_pipe_rack_delayed_ignition_cuda_report.json",
+      "sha256": "6703e1feb990d9973cd279a68f304cb6b8c80f56612c37249a41f5ecabe79094",
+      "size_bytes": 5205
+    },
+    {
+      "label": "cpu_mpi_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/engineering_h2_pipe_rack_delayed_ignition_mpi_report.json",
+      "sha256": "643818c985df181d4e07106b1a344f8b48a1bf0bf3ae85a175ee20264cdd2670",
+      "size_bytes": 4882
+    },
+    {
+      "label": "cuda_problem_header",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "cuda_problem_parameter_reader",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.cpp",
+      "sha256": "e75c504b2ca2973e37e6977677b90cbfc9e9cf6b4b37f99f96da64b66f71fc78",
+      "size_bytes": 24604
+    },
+    {
+      "label": "single_cuda_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "sha256": "9178b3f2f9af6dfb39ffd37c80077cf9aece679b5d3c79e36b2c57ee797a4cf3",
+      "size_bytes": 15875
+    },
+    {
+      "label": "cpu_mpi_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh",
+      "sha256": "fc9af0ec7a178228a8bb795616d8a565a198a6b4e42188d98af2446745f5573e",
+      "size_bytes": 13674
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:57+00:00",
+  "limitations": [
+    "This compares reduced engineering stability outputs, not full-scale experimental overpressure/radiation calibration.",
+    "CPU/MPI uses a premerged STL to avoid parallel STL merge races; single-CUDA uses the multi-file STL merge path."
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-PIPE-RACK-DELAYED-IGNITION-CPU-GPU-PARITY",
+  "title": "H2 Pipe-Rack Delayed-Ignition CPU/GPU Parity Evidence",
+  "validated_capabilities": {
+    "cpu_gpu_delayed_ignition_parity": true,
+    "cpu_mpi_delayed_ignition_ready": true,
+    "final_h2o_within_tolerance": true,
+    "same_input_physics_parameters": true,
+    "same_step_and_time_window": true,
+    "single_gpu_delayed_ignition_ready": true,
+    "sustained_reaction_count_consistent": true
+  }
+}

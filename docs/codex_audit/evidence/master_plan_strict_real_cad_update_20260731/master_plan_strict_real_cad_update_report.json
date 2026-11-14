@@ -1,0 +1,87 @@
+{
+  "evidence_files": [
+    {
+      "label": "master_plan_traceability_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_master_plan_traceability_20260724/h2_master_plan_traceability_report.json",
+      "sha256": "98e414b147a6537ce2a7c567093b295fd8ac57d7a4827613cc73f481cc8eeaa0",
+      "size_bytes": 32680
+    },
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "e227facfc24e049ebe4d2672e9060475e751bb7d629453ebb5a4b1635b73db82",
+      "size_bytes": 5093
+    },
+    {
+      "label": "real_cad_intake_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "sha256": "33e882ad5cc94663d01c9e93f18faa8a1bb385c5dd1a838e5df80423b0b3a5fc",
+      "size_bytes": 6969
+    },
+    {
+      "label": "real_cad_boundary_tag_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_boundary_tag_contract_20260724/real_cad_boundary_tag_contract_report.json",
+      "sha256": "d88856f1bce57f1b09f565e1fe5f8970a7fbeb7292e8de3c95fdf4a5f46db739",
+      "size_bytes": 5060
+    },
+    {
+      "label": "real_cad_handoff_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_handoff_contract_20260805/real_cad_handoff_contract_report.json",
+      "sha256": "e8eec8e5210f30dadb69c73327b120f82b6d37ef608da591885472762e67264f",
+      "size_bytes": 6301
+    },
+    {
+      "label": "real_cad_guard_negative_selftest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_guard_negative_selftest_20260807/real_cad_guard_negative_selftest_report.json",
+      "sha256": "f9f7e9a3eabec9ffac0d2ef40a7e2bb29790248dd46d80a82201a74df47b5ce7",
+      "size_bytes": 9514
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:27.659899+00:00",
+  "missing_for_strict_credit": [
+    "source CAD files",
+    "cleaned geometry files",
+    "cleanup manifest with source and cleaned geometry hashes",
+    "data-room index/provenance records",
+    "cleanup quality record",
+    "boundary tag CSV/JSON entries for real geometry surfaces and leak/monitor regions",
+    "large-layout coverage with at least three real geometries when claiming large-layout campaign credit"
+  ],
+  "schema_version": 1,
+  "status": "TRIAGED-MASTER-PLAN-STRICT-REAL-CAD-ARTIFACTS-MISSING",
+  "summary": {
+    "boundary_contract_ready_for_credit": false,
+    "boundary_contract_status": "NOT_READY-H2-REAL-CAD-BOUNDARY-TAG-CONTRACT",
+    "boundary_tag_count": null,
+    "cleaned_geometry_file_count": 0,
+    "cleanup_package_clears_blocker": false,
+    "cleanup_package_status": "NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE",
+    "guards_boundary_missing_required_role": true,
+    "guards_boundary_placeholder": true,
+    "guards_cleanup_quality_false_check": true,
+    "guards_data_room_bad_hash": true,
+    "guards_large_layout_too_few_geometries": true,
+    "guards_missing_provenance": true,
+    "guards_source_hash_mismatch": true,
+    "guards_synthetic_manifest": true,
+    "handoff_contract_ready": true,
+    "handoff_contract_status": "PASS-H2-REAL-CAD-HANDOFF-CONTRACT",
+    "intake_preflight_status": "PASS-H2-REAL-CAD-INTAKE-PREFLIGHT",
+    "negative_selftest_case_count": 8,
+    "negative_selftest_expected_fragment_seen_count": 8,
+    "negative_selftest_ready": true,
+    "negative_selftest_rejected_count": 8,
+    "negative_selftest_status": "PASS-H2-REAL-CAD-GUARD-NEGATIVE-SELFTEST",
+    "real_cad_blocker_present": true,
+    "source_cad_file_count": 0,
+    "strict_real_cad_blocker_cleared": false,
+    "strict_real_cad_next_actions": [
+      "Provide controlled source CAD files with provenance and hashes.",
+      "Validate the delivery against the real-CAD handoff contract before claiming strict credit.",
+      "Run the existing real-CAD cleanup package workflow to produce cleaned geometry files.",
+      "Populate repository-ingestable cleanup manifest, data-room index, and cleanup quality record.",
+      "Provide boundary tag contract entries for inlet, outlet, walls, leak sources, obstacles, and monitoring regions.",
+      "Regenerate cleanup package, intake preflight, boundary tag contract, production scorecard, and master-plan traceability reports."
+    ]
+  }
+}

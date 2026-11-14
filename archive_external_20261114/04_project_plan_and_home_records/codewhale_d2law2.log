@@ -1,0 +1,1019 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_d2law_fix.md)
+tool read_file completed: # TASK: d²-law 修复 — 加热空气驱动蒸发
+
+## 问题
+
+当前 D=0.057 不变——液滴和空气同为 300K，无蒸发驱动力。
+
+## 修复
+
+在 `/home/cj/my-pele/examples/academic/d2_law/`:
+
+1. **改 prob_parm.H**: T0=800K (空气加热到 800K)
+2. **改 input**: `prob.T0 = 800.0`
+3. **改粒子文件**: 液滴 T=371K (庚烷沸点附近)
+
+## 重新编译运行
+
+```bash
+make -j8
+./PeleC2d.gnu.ex inputs
+```
+...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: list_dir (path: /home/cj/my-pele/examples/academic/d2_law)
+tool: read_file (path: /home/cj/my-pele/examples/academic/d2_law/prob_parm.H)
+tool read_file completed: #ifndef PROB_PARM_H
+#define PROB_PARM_H
+
+#include <AMReX_REAL.H>
+#include <AMReX_GpuQualifiers.H>
+
+struct ProbParmDevice
+{
+  amrex::Real p0 = 1.01325e6; // [erg cm^-3]
+  amrex::Real T0 = 300.0;
+  amrex::Real rho0 = 0.0;
+  amrex::Real v0 = 0.0;
+  amrex::Real Y_O2 = 0.233;
+  amrex::Real Y_N2 = 0.76...
+tool list_dir completed: <50 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool: read_file (path: /home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat)
+tool: read_file (path: /home/cj/my-pele/examples/academic/d2_law/SprayParticlesInitInsert.cpp)
+tool read_file completed: # ------------------  INPUTS TO MAIN PROGRAM  -------------------
+max_step = 200000
+stop_time = 0.3
+
+# PROBLEM SIZE & GEOMETRY
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0  # 0 => cart, 1 => RZ  2=>spherical
+geometry.prob_lo     =  0. 0.
+geometry.prob_hi     =  1. 1.
+amr.n_cell           =...
+tool read_file completed: 1
+0.5 0.5 0. 0. 300. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
+
+tool read_file completed: #include <SprayParticles.H>
+#include <AMReX_Particles.H>
+#include <PeleC.H>
+#include "prob.H"
+
+bool
+SprayParticleContainer::injectParticles(
+  amrex::Real /*time*/,
+  amrex::Real /*dt*/,
+  int /*nstep*/,
+  int /*lev*/,
+  int /*finest_level*/)
+{
+  return false;
+}
+
+void
+SprayParticleContainer::Init...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/academic/d2_law/prob.cpp)
+tool read_file completed: #include "prob.H"
+
+extern "C" {
+void
+amrex_probinit(
+  const int* /*init*/,
+  const int* /*name*/,
+  const int* /*namelen*/,
+  const amrex_real* /*problo*/,
+  const amrex_real* /*probhi*/)
+{
+  // Parse params
+  amrex::ParmParse pp("prob");
+  pp.query("init_v", PeleC::h_prob_parm_device->v0);
+  pp...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow I have the picture. Three changes needed:
+
+1. **prob_parm.H**: T0 300 → 800]0;🐋 CodeWhale
+2. **example.inp**: prob.init_T 300 → 800
+3. **initsprayfile.dat**: droplet T 300 → 371]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/prob_parm.H)
+tool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/prob_parm.H
++++ b//home/cj/my-pele/examples/academic/d2_law/prob_parm.H
+@@ -7,7 +7,7 @@
+ struct ProbParmDevice
+ {
+   amrex::Real p0 = 1.01325e6; // [erg cm^-3]
+-  amrex::Real T0 = 300.0;
++  amrex::Real T0 = 800.0;
+   amrex::Real rho0 = 0.0;
+   amrex...
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/example.inp
++++ b//home/cj/my-pele/examples/academic/d2_law/example.inp
+@@ -83,6 +83,6 @@
+ amr.derive_plot_vars = x_velocity y_velocity pressure
+ 
+ # Problem specific inputs
+-prob.init_T = 300.
++prob.init_T = 800.
+ prob.init_p = 1.01325E6
+ prob.init...
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
++++ b//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
+@@ -1,2 +1,2 @@
+ 1
+-0.5 0.5 0. 0. 300. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
++0.5 0.5 0. 0. 371. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
+
+Replaced 1 occurrence in /home/cj/my-pe...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleAll three files patched. Now recompile.]0;🐋 CodeWhaletool: exec_shell (command: cd /home/cj/my-pele/examples/academic/d2_law && make -j8 2>&1)
+
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+fatal: not a git repository (or any of the parent directories): .git
+Loading /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/comps/gnu.mak...
+Loading /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/sites/Make.unknown...
+Loading /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/packages/Make.sundials...
+${Blocs} is [. /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash  /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base  /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr  /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary  /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore  /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB  /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle  ../../../external/PeleC/Source  ../../../external/PeleC/Source/Params/param_includes]
+Compiling prob.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include  -c prob.cpp -o tmp_build_dir/o/2d.gnu.EXE/prob.o
+Compiling SprayParticlesInitInsert.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include  -c SprayParticlesInitInsert.cpp -o tmp_build_dir/o/2d.gnu.EXE/SprayParticlesInitInsert.o
+Compiling PeleC.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include  -c ../../../external/PeleC/Source/PeleC.cpp -o tmp_build_dir/o/2d.gnu.EXE/PeleC.o
+Compiling PeleCAmr.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include  -c ../../../external/PeleC/Source/PeleCAmr.cpp -o tmp_build_dir/o/2d.gnu.EXE/PeleCAmr.o
+Compiling Advance.cpp ...
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source...
+
+[Output truncated: showing first 22000 bytes and last 8000 bytes. 122404 bytes omitted.]
+
+[Preserved summary lines from omitted middle]
+Compiling Derive.cpp ...
+Compiling Bld.cpp ...
+Compiling BCfill.cpp ...
+Compiling Hydro.cpp ...
+Compiling Godunov.cpp ...
+Compiling PPM.cpp ...
+Compiling IO.cpp ...
+Compiling Sources.cpp ...
+Compiling Setup.cpp ...
+Compiling main.cpp ...
+Compiling SumIQ.cpp ...
+Compiling SumUtils.cpp ...
+Compiling Tagging.cpp ...
+Compiling Diffusion.cpp ...
+Compiling MOL.cpp ...
+Compiling React.cpp ...
+Compiling External.cpp ...
+Compiling Forcing.cpp ...
+Compiling LES.cpp ...
+Compiling EB.cpp ...
+Compiling Geometry.cpp ...
+Compiling InitEB.cpp ...
+Compiling RotSource.cpp ...
+Compiling Particle.cpp ...
+Compiling AMReX_buildInfo.cpp ...
+
+[Output tail]
+.gnu.EXE/SprayIO.o tmp_build_dir/o/2d.gnu.EXE/Distributions.o tmp_build_dir/o/2d.gnu.EXE/AMReX.o tmp_build_dir/o/2d.gnu.EXE/AMReX_error_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Version.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PODVector.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BlockMutex.o tmp_build_dir/o/2d.gnu.EXE/AMReX_String.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParmParse.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parmparse_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Utility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FileSystem.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Random.o tmp_build_dir/o/2d.gnu.EXE/AMReX_DistributionMapping.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_OpenMP.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ForkJoin.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelContext.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VisMF.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Arena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AsyncOut.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BackgroundThread.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NFiles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parstream.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuControl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuDevice.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuUtility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuAsyncArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuElixir.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FPC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IntConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VectorIO.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Box.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IndexType.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Orientation.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Periodicity.o tmp_build_dir/o/2d.gnu.EXE/AMReX_RealBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxDomain.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BaseFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFCopyDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_iMultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabArrayBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFIter.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CoordSys.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Geometry.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCRec.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PhysBCFunct.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilCC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilFC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NonLocalBC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileDataImpl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLProfiler.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLBackTrace.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MemPool.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Machine.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Amr.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrLevel.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Derive.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AuxBoundaryData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Extrapolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Mask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiMask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_LO_BCTYPES.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EdgeFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrCore.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Cluster.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ErrorList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FillPatchUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Interpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TagBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrMesh.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpFaceRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFabFactory.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBCellFlag.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBDataCollection.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiCutFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBAmrUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_algoim.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_Redistribution.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_RedistributionApply.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_FluxRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistUtils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistItracker.o tmp_build_dir/o/2d.gnu.EXE/AMReX_distFcnElement.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_MultiGFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_2D_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_ND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_STL_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleContainerBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TracerParticles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleMPIUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleBufferMap.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleCommunication.o tmp_build_dir/o/2d.gnu.EXE/PeleC.o tmp_build_dir/o/2d.gnu.EXE/PeleCAmr.o tmp_build_dir/o/2d.gnu.EXE/Advance.o tmp_build_dir/o/2d.gnu.EXE/Derive.o tmp_build_dir/o/2d.gnu.EXE/Bld.o tmp_build_dir/o/2d.gnu.EXE/BCfill.o tmp_build_dir/o/2d.gnu.EXE/Hydro.o tmp_build_dir/o/2d.gnu.EXE/Godunov.o tmp_build_dir/o/2d.gnu.EXE/PPM.o tmp_build_dir/o/2d.gnu.EXE/IO.o tmp_build_dir/o/2d.gnu.EXE/Sources.o tmp_build_dir/o/2d.gnu.EXE/Setup.o tmp_build_dir/o/2d.gnu.EXE/main.o tmp_build_dir/o/2d.gnu.EXE/SumIQ.o tmp_build_dir/o/2d.gnu.EXE/SumUtils.o tmp_build_dir/o/2d.gnu.EXE/Tagging.o tmp_build_dir/o/2d.gnu.EXE/Diffusion.o tmp_build_dir/o/2d.gnu.EXE/Utilities.o tmp_build_dir/o/2d.gnu.EXE/MOL.o tmp_build_dir/o/2d.gnu.EXE/React.o tmp_build_dir/o/2d.gnu.EXE/External.o tmp_build_dir/o/2d.gnu.EXE/Forcing.o tmp_build_dir/o/2d.gnu.EXE/LES.o tmp_build_dir/o/2d.gnu.EXE/EB.o tmp_build_dir/o/2d.gnu.EXE/Geometry.o tmp_build_dir/o/2d.gnu.EXE/InitEB.o tmp_build_dir/o/2d.gnu.EXE/RotSource.o tmp_build_dir/o/2d.gnu.EXE/Particle.o tmp_build_dir/o/2d.gnu.EXE/AMReX_buildInfo.o  -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -lsundials_arkode -lsundials_cvode -lsundials_nvecmanyvector -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_cvode -lsundials_arkode -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_core -lsundials_nvecserial -Wl,-rpath=/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib 
+rm -f AMReX_buildInfo.cpp
+SUCCESS
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleCompilation succeeded. Cleaning old run artifacts before the fresh run.]0;🐳 CodeWhaletool: exec_shell (command: <92 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+(no output)
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: task_shell_start (command: <91 chars>)
+tool task_shell_start completed: Background task started: shell_051adef4
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: task_shell_wait (task_id: shell_051adef4)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool task_shell_wait completed: Background task running (no new output).
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: tail -20 /home/cj/my-pele/examples/academic/d2_law/run.log)
+tool exec_shell completed
+--- stdout/stderr ---
+
+STEP = 92086 TIME = 0.05152412295 DT = 5.593208716e-07
+
+[Level 0 step 92087] ADVANCE at time 0.05152412295 with dt = 5.593209234e-07
+[Level 0 step 92087] Advanced 256 cells
+
+[STEP 92087] Coarse TimeStep time: 0.001404976
+[STEP 92087] FAB kilobyte spread across MPI nodes: [879 ... 879]
+
+STEP = 92087 TIME = 0.05152468227 DT = 5.593209234e-07
+
+[Level 0 step 92088] ADVANCE at time 0.05152468227 with dt = 5.593209752e-07
+[Level 0 step 92088] Advanced 256 cells
+
+[STEP 92088] Coarse TimeStep time: 0.001474736
+[STEP 92088] FAB kilobyte spread across MPI nodes: [879 ... 879]
+
+STEP = 92088 TIME = 0.05152524159 DT = 5.593209752e-07
+
+[Level 0 step 92089] ADVANCE at time 0.05152524159 with dt = 5.593210271e-07
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <311 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+-rw-rw-r-- 1 cj cj 79 Jun 26 20:56 /home/cj/my-pele/examples/academic/d2_law/spray17876.p3d
+-rw-rw-r-- 1 cj cj 79 Jun 26 20:57 /home/cj/my-pele/examples/academic/d2_law/spray35746.p3d
+-rw-rw-r-- 1 cj cj 78 Jun 26 20:57 /home/cj/my-pele/examples/academic/d2_law/spray53616.p3d
+-rw-rw-r-- 1 cj cj 79 Jun 26 20:57 /home/cj/my-pele/examples/academic/d2_law/spray71486.p3d
+-rw-rw-r-- 1 cj cj 79 Jun 26 20:58 /home/cj/my-pele/examples/academic/d2_law/spray89361.p3d
+---
+20:56:15 /home/cj/my-pele/examples/academic/d2_law/spray00000.p3d D=
+20:56:39 /home/cj/my-pele/examples/academic/d2_law/spray17876.p3d D=
+20:57:03 /home/cj/my-pele/examples/academic/d2_law/spray35746.p3d D=
+20:57:27 /home/cj/my-pele/examples/academic/d2_law/spray53616.p3d D=
+20:57:51 /home/cj/my-pele/examples/academic/d2_law/spray71486.p3d D=
+20:58:15 /home/cj/my-pele/examples/academic/d2_law/spray89361.p3d D=
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <142 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+1
+10
+0
+0
+0
+---
+1
+10
+0
+0
+0
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <134 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+1
+10
+0
+0
+0
+0.5 0.5 0 0 371 0.057 1 0 0 0 1 1 1 0 
+===
+1
+10
+0
+0
+0
+0.5 0.5 0 0 371.000334601083 0.057 1 0 0 0 1 0.999962676689863 1 0 
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <182 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+step=00000 D=
+step=17876 D=
+step=35746 D=
+step=53616 D=
+step=71486 D=
+step=89361 D=
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <206 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+step=00000 D=
+step=17876 D=
+step=35746 D=
+step=53616 D=
+step=71486 D=
+step=89361 D=
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <158 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+---
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <165 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+6 /home/cj/my-pele/examples/academic/d2_law/spray89361.p3d
+---
+0000000   0   .   5       0   .   5       0       0       3   7   1   .
+0000020   0   0   0   3   3   4   6   0   1   0   8   3       0   .   0
+0000040   5   7       1       0       0       0       1       0   .   9
+0000060   9   9   9   6   2   6   7   6   6   8   9   8   6   3       1
+0000100       0      \n
+0000104
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <182 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+step=00000 D=0.057
+step=107234 D=0.057
+step=17876 D=0.057
+step=35746 D=0.057
+step=53616 D=0.057
+step=71486 D=0.057
+step=89361 D=0.057
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleD]0;🐳 CodeWhale still at 0.057 after 107k steps — droplet still heating toward boiling point (371.6 K). Let the run continue.]0;🐋 CodeWhaletool: task_shell_wait (task_id: shell_051adef4)
+
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool task_shell_wait completed: (no new output)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <350 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+  [TOP]::amr.ref_ratio(nvals = 1)  :: [2]
+  [TOP]::amr.regrid_int(nvals = 1)  :: [2]
+  [TOP]::particles.NC7H16_ref_temp(nvals = 1)  :: [300.]
+
+AMReX (26.05) finalized
+---
+13
+spray files
+---
+step=00000 D=0.057
+step=107234 D=0.057
+step=125102 D=0.057
+step=142968 D=0.057
+step=160826 D=0.057
+step=178666 D=0.057
+step=17876 D=0.057
+step=196500 D=0.057
+step=200000 D=0.057
+step=35746 D=0.057
+step=53616 D=0.057
+step=71486 D=0.057
+step=89361 D=0.057
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <167 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+step=00000 0.5 0.5 0 0 371 0.057 1 0 0 0 1 1 1 0 
+step=107234 0.5 0.5 0 0 371.000430516902 0.057 1 0 0 0 1 0.999955143472094 1 0 
+step=125102 0.5 0.5 0 0 371.000492072602 0.057 1 0 0 0 1 0.999947653238124 1 0 
+step=142968 0.5 0.5 0 0 371.000547630871 0.057 1 0 0 0 1 0.999940168338108 1 0 
+step=160826 0.5 0.5 0 0 371.000611889319 0.057 1 0 0 0 1 0.99993266589014 1 0 
+step=178666 0.5 0.5 0 0 371.000697940283 0.057 1 0 0 0 1 0.999925118326875 1 0 
+step=17876 0.5 0.5 0 0 371.000084857681 0.057 1 0 0 0 1 0.999992541336433 1 0 
+step=196500 0.5 0.5 0 0 371.000786337934 0.057 1 0 0 0 1 0.999917586380406 1 0 
+step=200000 0.5 0.5 0 0 371.00080746716 0.057 1 0 0 0 1 0.999916131981028 1 0 
+step=35746 0.5 0.5 0 0 371.000144794892 0.057 1 0 0 0 1 0.999985097070798 1 0 
+step=53616 0.5 0.5 0 0 371.000196249478 0.057 1 0 0 0 1 0.99997764987379 1 0 
+step=71486 0.5 0.5 0 0 371.000250137342 0.057 1 0 0 0 1 0.999970188280156 1 0 
+step=89361 0.5 0.5 0 0 371.000334601083 0.057 1 0 0 0 1 0.999962676689863 1 0 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleThe droplet is barely heating (371 → 371.0008 K) and D remains unchanged. Let me inspect the spray evaporation model to understand what's needed.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray, pattern: boil_temp|mass_transfer|evaporation|Spalding)
+
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: mass_transfer|evap_rate|m_dot|dmdt|dMdt)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="380-609" truncated="true" next_start_line="610">
+   380│     amrex::Real T_skin = gpv.T_fluid;
+   381│     if (fdat.mass_trans) {
+   382│       T_skin = T_part + rule * delT;
+   383│     }
+   384...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: calcVaporState)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="48-267" truncated="true" next_start_line="268">
+    48│ //
+    49│ template <typename EOSType>
+    50│ struct calcVaporState
+    51│ {
+    52│   AMREX_GPU_HOST_DEVICE
+    53│   AMREX_FORCE_INLINE...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: rhod_conv)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="590-669" truncated="true" next_start_line="670">
+   590│     }
+   591│     if (fdat.mass_trans) {
+   592│       amrex::Real newT = T_part + part_dt * part_temp_src;
+   593│       amrex::Real new_...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: ls -d /home/cj/my-pele/examples/academic/d2_law/plt* | sort -V | tail -3)
+tool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/examples/academic/d2_law/plt178666
+/home/cj/my-pele/examples/academic/d2_law/plt196500
+/home/cj/my-pele/examples/academic/d2_law/plt200000
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <131 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 323, in <module>
+    data = read_plotfile(sys.argv[1])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 289, in read_plotfile
+    data, grid_meta = _read_level(plotfile_dir, level, meta['ncomp'], dx)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 225, in _read_level
+    data = _read_fab_data(fab_path, ncomp, nx, ny, nz)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 152, in _read_fab_data
+    raise PlotfileError(
+PlotfileError: Data size mismatch in plt200000/Level_0/Cell_D_00000: expected 6400 doubles, got 6399
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <200 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+HyperCLaw-V1.1
+25
+density
+xmom
+ymom
+rho_E
+Temp
+rho_NC7H16
+rho_O2
+rho_N2
+pressure
+x_velocity
+y_velocity
+spray_mass
+spray_density
+spray_num
+spray_vol
+spray_surf_area
+spray_vol_frac
+d10
+d32
+wall_film_hght
+wall_film_mass
+spray_temp
+num_parcels
+spray_x_vel
+spray_y_vel
+2
+0.11196284526149336
+0
+0 0 
+1 1 
+
+((0,0) (15,15) (0,0)) 
+200000 
+0.0625 0.0625 
+0
+0
+0 1 0.11196284526149336
+200000
+0 1
+0 1
+Level_0/Cell
+1.0e-6
+
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <472 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Variables: ['density', 'xmom', 'ymom', 'rho_E', 'Temp', 'rho_NC7H16', 'rho_O2', 'rho_N2', 'pressure', 'x_velocity', 'y_velocity', 'spray_mass', 'spray_density', 'spray_num', 'spray_vol', 'spray_surf_area', 'spray_vol_frac', 'd10', 'd32', 'wall_film_hght', 'wall_film_mass', 'spray_temp', 'num_parcels', 'spray_x_vel', 'spray_y_vel']
+
+  [5] rho_NC7H16
+  [11] spray_mass
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1943 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Traceback (most recent call last):
+  File "<string>", line 16, in <module>
+ValueError: invalid literal for int() with base 10: '0,0'
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1319 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Traceback (most recent call last):
+  File "<string>", line 15, in <module>
+ValueError: buffer size must be a multiple of element size
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <166 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+51283
+---
+00000000  46 41 42 20 28 28 38 2c  20 28 36 34 20 31 31 20  |FAB ((8, (64 11 |
+00000010  35 32 20 30 20 31 20 31  32 20 30 20 31 30 32 33  |52 0 1 12 0 1023|
+00000020  29 29 2c 28 38 2c 20 28  38 20 37 20 36 20 35 20  |)),(8, (8 7 6 5 |
+00000030  34 20 33 20 32 20 31 29  29 29 28 28 30 2c 30 29  |4 3 2 1)))((0,0)|
+00000040  20 28 31 35 2c 31 35 29  20 28 30 2c 30 29 29 20  | (15,15) (0,0)) |
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <2996 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Header ends at byte 58
+Data starts at byte 58
+Data size: 51225 bytes, 6403 doubles
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<stdin>", line 35, in <module>
+ValueError: buffer size must be a multiple of element size
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <810 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<stdin>", line 19, in <module>
+NameError: name 'data_bytes' is not defined
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1459 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,0) (15,15) (0,0)) 25\n&tP\n=?Le\x15\n=?\x0c\x15zW\x06=?^4\x00=?KR{<?=O<?`]<?(@<?W<?)Wj<?\x07\x06!X<?\x1cNR<?IQ<?KdQ<?NQ<?\x0f=Q<?\x11{\x14\n=?F?\x19z\x0b=?\tv\x0b=?_x\x0b\x07=?Br*\x00=?\x07V<?fN<?B'
+
+Header ends at char 58
+Header: 'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))'
+Data starts at byte offset 58
+Data bytes: 51225
+Not aligned to 8 bytes
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <1451 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+ASCII header ends at byte 82
+Header: 'FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,0) (15,15) (0,0)) 25'
+Data bytes: 51200
+Data bytes mod 8: 0
+First 20 bytes of data: 267450ea840a3d3f4c9465a8150a3d3f0cfc157a
+Array length: 6400
+Temp range: 785.8474 - 794.4865
+rho_NC7H16 range: -1.366168e-09 - 7.505379e-12
+spray_mass range: 0.000000e+00 - 0.000000e+00
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: pstateMass|pstateDia|pstateT)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: fixed_parts.*mass_trans|mass_trans.*fixed)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray, pattern: moveKickDrift|SprayParticleContainer::moveParticles)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.cpp, pattern: updateParticles|fixed_parts)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.cpp" total_lines="510" shown_lines="145-294" truncated="true" next_start_line="295">
+   145│ SprayParticleContainer::updateParticles(
+   146│   const int& level,
+   147│   MultiFab& state,
+   148│   MultiFab& source,
+  ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.cpp" total_lines="510" shown_lines="295-444" truncated="true" next_start_line="445">
+   295│ #endif
+   296│       bool do_splash_box = (do_splash && (eb_in_box || at_bounds));
+   297│       FArrayBox wf_fab;
+   298│    ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="310-359" truncated="true" next_start_line="360">
+   310│ calculateSpraySource(
+   311│   const amrex::Real flow_dt,
+   312│   GasPhaseVals& gpv,
+   313│   const SprayData& fdat,
+   314│   SprayPa...
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="359-398" truncated="true" next_start_line="399">
+   359│ 
+   360│   // Storing Y_{d,n}
+   361│   for (int spf = 0; spf < SPRAY_FUEL_NUM; ++spf) {
+   362│     Y_part[spf] = p.rdata(SprayComps::pst...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: calcBoilT)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayFuelData.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayFuelData.H" total_lines="192" shown_lines="135-164" truncated="true" next_start_line="165">
+   135│   void calcBoilT(const GasPhaseVals& gpv, amrex::Real* cBoilT) const
+   136│   {
+   137│     const amrex::Real RU = pele::physics...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1644 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+
+spray_mass stats: min=0.000000e+00, max=0.000000e+00, sum=0.000000e+00
+spray_num stats: min=0.000000e+00, max=0.000000e+00, sum=0.000000e+00
+spray_density: min=0.000000e+00, max=0.000000e+00
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: psat_i|Antoine|psat)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayPropertiesPeleMP.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayPropertiesPeleMP.H" total_lines="285" shown_lines="58-107" truncated="true" next_start_line="108">
+    58│ 
+    59│   AMREX_GPU_HOST_DEVICE
+    60│   AMREX_FORCE_INLINE
+    61│   amrex::Real
+    62│   psat_i(const amrex::Real T, ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayFuelData.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayFuelData.H" total_lines="192" shown_lines="28-57" truncated="true" next_start_line="58">
+    28│ // Spray flags and indices
+    29│ struct SprayComps
+    30│ {
+    31│   static const int pstateVel = 0; // Particle indices
+    32│...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1024 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+plt00000: max rho_NC7H16=0.000000e+00, max Temp=800.0000
+
+
+STDERR:
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'plt22268/Level_0/Cell_D_00000'
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe droplet D=0.057 hasn't changed after 200k steps — evaporation is effectively zero. Let me investigate whether the boiling-point clamping (T clamped to 0.99 × boilT = 367.9 K]0;🐳 CodeWhale) is the root cause. Let me test with droplet temperature above boiling point.]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
++++ b//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
+@@ -1,2 +1,2 @@
+ 1
+-0.5 0.5 0. 0. 371. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
++0.5 0.5 0. 0. 400. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
+
+Replaced 1 occurrence in /home/cj/my-pe...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool edit_file failed: Failed to execute tool: Search string not found in /home/cj/my-pele/examples/academic/d2_law/example.inp
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: head -3 /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool exec_shell completed
+--- stdout/stderr ---
+# ------------------  INPUTS TO MAIN PROGRAM  -------------------
+max_step = 500000
+stop_time = 0.3
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/example.inp
++++ b//home/cj/my-pele/examples/academic/d2_law/example.inp
+@@ -1,6 +1,6 @@
+ # ------------------  INPUTS TO MAIN PROGRAM  -------------------
+-max_step = 500000
+-stop_time = 0.3
++max_step = 30000
++stop_time = 0.05
+ 
+ # PROBLEM SIZE & GE...
+]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <119 chars>)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+g++ -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread   -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include -L. -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -o PeleC2d.gnu.ex tmp_build_dir/o/2d.gnu.EXE/AMReX_NVector_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Sundials_Core.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SUNMemory.o tmp_build_dir/o/2d.gnu.EXE/prob.o tmp_build_dir/o/2d.gnu.EXE/turbinflow.o tmp_build_dir/o/2d.gnu.EXE/PltFileManager.o tmp_build_dir/o/2d.gnu.EXE/DiagFilter.o tmp_build_dir/o/2d.gnu.EXE/DiagBase.o tmp_build_dir/o/2d.gnu.EXE/DiagFramePlane.o tmp_build_dir/o/2d.gnu.EXE/DiagPDF.o tmp_build_dir/o/2d.gnu.EXE/DiagConditional.o tmp_build_dir/o/2d.gnu.EXE/Filter.o tmp_build_dir/o/2d.gnu.EXE/BlackBoxFunction.o tmp_build_dir/o/2d.gnu.EXE/ReactorUtils.o tmp_build_dir/o/2d.gnu.EXE/ReactorBase.o tmp_build_dir/o/2d.gnu.EXE/ReactorBDF.o tmp_build_dir/o/2d.gnu.EXE/ReactorRK64.o tmp_build_dir/o/2d.gnu.EXE/ReactorNull.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvode.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeUtils.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodePreconditioner.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeJacobian.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeCustomLinSolver.o tmp_build_dir/o/2d.gnu.EXE/mechanism.o tmp_build_dir/o/2d.gnu.EXE/Transport.o tmp_build_dir/o/2d.gnu.EXE/SprayParticles.o tmp_build_dir/o/2d.gnu.EXE/SprayDerive.o tmp_build_dir/o/2d.gnu.EXE/SprayParticlesInitInsert.o tmp_build_dir/o/2d.gnu.EXE/SpraySetup.o tmp_build_dir/o/2d.gnu.EXE/SpraySB.o tmp_build_dir/o/2d.gnu.EXE/SprayJet.o tmp_build_dir/o/2d.gnu.EXE/SprayIO.o tmp_build_dir/o/2d.gnu.EXE/Distributions.o tmp_build_dir/o/2d.gnu.EXE/AMReX.o tmp_build_dir/o/2d.gnu.EXE/AMReX_error_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Version.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PODVector.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BlockMutex.o tmp_build_dir/o/2d.gnu.EXE/AMReX_String.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParmParse.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parmparse_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Utility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FileSystem.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Random.o tmp_build_dir/o/2d.gnu.EXE/AMReX_DistributionMapping.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_OpenMP.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ForkJoin.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelContext.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VisMF.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Arena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AsyncOut.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BackgroundThread.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NFiles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parstream.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuControl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuDevice.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuUtility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuAsyncArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuElixir.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FPC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IntConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VectorIO.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Box.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IndexType.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Orientation.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Periodicity.o tmp_build_dir/o/2d.gnu.EXE/AMReX_RealBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxDomain.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BaseFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFCopyDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_iMultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabArrayBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFIter.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CoordSys.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Geometry.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCRec.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PhysBCFunct.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilCC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilFC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NonLocalBC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileDataImpl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLProfiler.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLBackTrace.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MemPool.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Machine.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Amr.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrLevel.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Derive.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AuxBoundaryData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Extrapolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Mask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiMask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_LO_BCTYPES.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EdgeFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrCore.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Cluster.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ErrorList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FillPatchUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Interpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TagBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrMesh.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpFaceRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFabFactory.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBCellFlag.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBDataCollection.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiCutFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBAmrUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_algoim.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_Redistribution.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_RedistributionApply.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_FluxRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistUtils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistItracker.o tmp_build_dir/o/2d.gnu.EXE/AMReX_distFcnElement.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_MultiGFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_2D_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_ND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_STL_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleContainerBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TracerParticles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleMPIUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleBufferMap.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleCommunication.o tmp_build_dir/o/2d.gnu.EXE/PeleC.o tmp_build_dir/o/2d.gnu.EXE/PeleCAmr.o tmp_build_dir/o/2d.gnu.EXE/Advance.o tmp_build_dir/o/2d.gnu.EXE/Derive.o tmp_build_dir/o/2d.gnu.EXE/Bld.o tmp_build_dir/o/2d.gnu.EXE/BCfill.o tmp_build_dir/o/2d.gnu.EXE/Hydro.o tmp_build_dir/o/2d.gnu.EXE/Godunov.o tmp_build_dir/o/2d.gnu.EXE/PPM.o tmp_build_dir/o/2d.gnu.EXE/IO.o tmp_build_dir/o/2d.gnu.EXE/Sources.o tmp_build_dir/o/2d.gnu.EXE/Setup.o tmp_build_dir/o/2d.gnu.EXE/main.o tmp_build_dir/o/2d.gnu.EXE/SumIQ.o tmp_build_dir/o/2d.gnu.EXE/SumUtils.o tmp_build_dir/o/2d.gnu.EXE/Tagging.o tmp_build_dir/o/2d.gnu.EXE/Diffusion.o tmp_build_dir/o/2d.gnu.EXE/Utilities.o tmp_build_dir/o/2d.gnu.EXE/MOL.o tmp_build_dir/o/2d.gnu.EXE/React.o tmp_build_dir/o/2d.gnu.EXE/External.o tmp_build_dir/o/2d.gnu.EXE/Forcing.o tmp_build_dir/o/2d.gnu.EXE/LES.o tmp_build_dir/o/2d.gnu.EXE/EB.o tmp_build_dir/o/2d.gnu.EXE/Geometry.o tmp_build_dir/o/2d.gnu.EXE/InitEB.o tmp_build_dir/o/2d.gnu.EXE/RotSource.o tmp_build_dir/o/2d.gnu.EXE/Particle.o tmp_build_dir/o/2d.gnu.EXE/AMReX_buildInfo.o  -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -lsundials_arkode -lsundials_cvode -lsundials_nvecmanyvector -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_cvode -lsundials_arkode -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_core -lsundials_nvecserial -Wl,-rpath=/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib 
+rm -f AMReX_buildInfo.cpp
+SUCCESS
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: task_shell_start (command: <91 chars>)
+tool task_shell_start completed: Background task started: shell_8595484a
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: task_shell_wait (task_id: shell_8595484a)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool task_shell_wait completed: (no new output)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <146 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+  [TOP]::particles.NC7H16_ref_temp(nvals = 1)  :: [300.]
+
+AMReX (26.05) finalized
+---
+5
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <167 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+step=00000 0.5 0.5 0 0 400 0.057 1 0 0 0 1 1 1 0 
+step=17909 0.5 0.5 0 0 399.999833356912 0.057 1 0 0 0 1 0.999992380801597 1 0 
+step=214851 0.5 0.5 0 0 371.001429862869 0.057 1 0 0 0 1 0.999909748815055 1 0 
+step=232754 0.5 0.5 0 0 371.001634278381 0.057 1 0 0 0 1 0.999902734623084 1 0 
+step=30000 0.5 0.5 0 0 399.999719292102 0.057 1 0 0 0 1 0.99998722504608 1 0 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: NSR_SPR|NSR_SPR)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayParticles.H" total_lines="404" shown_lines="1-10" truncated="true" next_start_line="11">
+     1│ #ifndef SPRAYPARTICLES_H
+     2│ #define SPRAYPARTICLES_H
+     3│ 
+     4│ #include "SprayFuelData.H"
+     5│ #include <AMReX_AmrPar...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: NSR_SPR|NStructReal|NReal)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="610-639" truncated="true" next_start_line="640">
+   610│         for (int spf = 0; spf < SPRAY_FUEL_NUM; ++spf) {
+   611│           Y_part[spf] /= sumY;
+   612│         }
+   613│         rho_part...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="664-679" truncated="false">
+   664│ #else
+   665│     gpv.fluid_eng_src += num_ppp * midot * h_gas[pcspec] * SprayUnits::eng_conv;
+   666│ #endif
+   667│   }
+   668│   AMREX_D_TERM(p.rdata(SprayC...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC, pattern: d2_law|d2law|D2)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayIO.cpp, pattern: WriteAsciiFile|write_ascii)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <134 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+(no output)
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayPropertiesPeleMP.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayPropertiesPeleMP.H" total_lines="285" shown_lines="198-247" truncated="true" next_start_line="248">
+   198│     const amrex::Real /*T*/,
+   199│     const amrex::Real* /*cBoilT*/) const
+   200│   {
+   201│     return sigma;
+   20...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <131 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+ Reading spray model parameters ...
+ Warning: Spray model in 2D assumes narrow domain in z-direction (Lz = dz)!
+NC7H16  O2  N2  
+  [TOP]::particles.NC7H16_ref_temp(nvals = 1)  :: [300.]
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: grep -i psat /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool exec_shell completed
+--- stdout/stderr ---
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me try with droplet at 380K (above boiling point 371.6K) to check if mass transfer activates above boiling.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
++++ b//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
+@@ -1,2 +1,2 @@
+ 1
+-0.5 0.5 0. 0. 400. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
++0.5 0.5 0. 0. 380. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
+
+Replaced 1 occurrence in /home/cj/my-pe...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/example.inp
++++ b//home/cj/my-pele/examples/academic/d2_law/example.inp
+@@ -1,6 +1,6 @@
+ # ------------------  INPUTS TO MAIN PROGRAM  -------------------
+-max_step = 30000
+-stop_time = 0.05
++max_step = 200000
++stop_time = 0.3
+ 
+ # PROBLEM SIZE & GE...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool read_file completed: <file path="/home/cj/my-pele/examples/academic/d2_law/example.inp" total_lines="88" shown_lines="1-10" truncated="true" next_start_line="11">
+     1│ # ------------------  INPUTS TO MAIN PROGRAM  -------------------
+     2│ max_step = 200000
+     3│ stop_time = 0.3
+     4│ 
+     5│ # PROBLEM SIZE...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <128 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/examples/academic/d2_law/example.inp
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <107 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+(no output)
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <85 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+pelec.cfl            = 0.5     # cfl number for hyperbolic system
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayFuelData.H, pattern: dtmod)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <134 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/external/PeleC/Source/PeleCAmr.cpp
+/home/cj/my-pele/external/PeleC/Source/IO.cpp
+/home/cj/my-pele/external/PeleC/Source/Advance.cpp
+/home/cj/my-pele/external/PeleC/Source/Setup.cpp
+/home/cj/my-pele/external/PeleC/Source/Particle.cpp
+/home/cj/my-pele/external/PeleC/Source/PeleC.cpp
+/home/cj/my-pele/external/PeleC/Exec/RegTests/Spray-Multijet/SprayParticlesInitInsert.cpp
+/home/cj/my-pele/external/PeleC/Exec/RegTests/Spray-Jet/SprayParticlesInitInsert.cpp
+/home/cj/my-pele/external/PeleC/Exec/RegTests/Spray-A-Wbreakup/SprayParticlesInitInsert.cpp
+/home/cj/my-pele/external/PeleC/Exec/RegTests/Spray-Conv/SprayParticlesInitInsert.cpp
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <104 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/external/PeleC/Exec/RegTests/Spray-Conv/Spray-Conv.inp
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <122 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+prob.num_particles = (256, 256, 256)
+# PARTICLES / SPRAY
+pelec.do_spray_particles = 1
+particles.derive_plot_vars = 1
+particles.v = 0
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.cfl = 0.5
+particles.write_ascii_files = 0 # Do not write ascii output files
+particles.fuel_species = NC10H22
+particles.fuel_ref_temp = 298.15
+particles.NC10H22_crit_temp = 617.8 # K
+particles.NC10H22_boil_temp = 447.27 # K
+particles.NC10H22_latent = 3.5899E9
+particles.NC10H22_cp = 2.1921E7 # Cp at 298 K
+particles.NC10H22_rho = 0.640
+particles.NC10H22_psat = 4.07857 1501.268 -78.67 1.E6
+particles.use_splash_model = false
+# Only used if particles are initialized from a function
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me add a debug print to the spray model to see what's happening.]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="108-117" truncated="true" next_start_line="118">
+   108│       }
+   109│ 
+   110│       if (pres_sat > X_gn * gpv.p_fluid) {
+   111│         const amrex::Real mw_ln = fdat.liqprops.mw_i(spf);
+   ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <3154 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+T_clamp = 367.884 K
+P_sat = 9.0797e+05 dyn/cm^2 = 0.9080 bar
+P_amb = 1.0132e+06 dyn/cm^2
+P_sat/P_amb = 0.8961
+X_vn = 0.8961
+Y_vap (surface mass fraction) = 0.9675
+B_M = 20.0000
+T_skin = 514.0 K
+rho_g = 0.000688 g/cm^3
+rhoD = 2.062827e-04 g/(cm*s)
+Sc = 1.4543
+Sh_0 = 2.0000
+Sh = 2.0000
+mdotcoeff = 1.0904
+m_dot = -2.249244e-04 g/s
+pmass = 6.607320e-05 g
+Evaporation timescale = 0.2938 s
+At t=0.3s: mass fraction remaining = 0.0000
+
+d^2-law K = 0.0074 cm^2/s
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PelePhysics/Source/Spray, pattern: InterpolateGasPhase)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/SprayInterpolation.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/SprayInterpolation.H" total_lines="676" shown_lines="106-205" truncated="true" next_start_line="206">
+   106│ InterpolateGasPhase(
+   107│   GasPhaseVals& gpv,
+   108│   const amrex::Box& state_box,
+   109│   amrex::Array4<const amrex...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <162 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(128))
+
+STDOUT:
+---
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleLet]0;🐳 CodeWhale me try a radical test — droplet at 500K to force vigorous evaporation.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
++++ b//home/cj/my-pele/examples/academic/d2_law/initsprayfile.dat
+@@ -1,2 +1,2 @@
+ 1
+-0.5 0.5 0. 0. 380. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
++0.5 0.5 0. 0. 500. 0.057 1. 0. 0. 0. 1. 1. 0. 0. 0.
+
+Replaced 1 occurrence in /home/cj/my-pe...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/example.inp
++++ b//home/cj/my-pele/examples/academic/d2_law/example.inp
+@@ -1,6 +1,6 @@
+ # ------------------  INPUTS TO MAIN PROGRAM  -------------------
+-max_step = 200000
+-stop_time = 0.3
++max_step = 50000
++stop_time = 0.1
+ 
+ # PROBLEM SIZE & GEO...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <119 chars>)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+g++ -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread   -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include -L. -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -o PeleC2d.gnu.ex tmp_build_dir/o/2d.gnu.EXE/AMReX_NVector_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Sundials_Core.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SUNMemory.o tmp_build_dir/o/2d.gnu.EXE/prob.o tmp_build_dir/o/2d.gnu.EXE/turbinflow.o tmp_build_dir/o/2d.gnu.EXE/PltFileManager.o tmp_build_dir/o/2d.gnu.EXE/DiagFilter.o tmp_build_dir/o/2d.gnu.EXE/DiagBase.o tmp_build_dir/o/2d.gnu.EXE/DiagFramePlane.o tmp_build_dir/o/2d.gnu.EXE/DiagPDF.o tmp_build_dir/o/2d.gnu.EXE/DiagConditional.o tmp_build_dir/o/2d.gnu.EXE/Filter.o tmp_build_dir/o/2d.gnu.EXE/BlackBoxFunction.o tmp_build_dir/o/2d.gnu.EXE/ReactorUtils.o tmp_build_dir/o/2d.gnu.EXE/ReactorBase.o tmp_build_dir/o/2d.gnu.EXE/ReactorBDF.o tmp_build_dir/o/2d.gnu.EXE/ReactorRK64.o tmp_build_dir/o/2d.gnu.EXE/ReactorNull.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvode.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeUtils.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodePreconditioner.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeJacobian.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeCustomLinSolver.o tmp_build_dir/o/2d.gnu.EXE/mechanism.o tmp_build_dir/o/2d.gnu.EXE/Transport.o tmp_build_dir/o/2d.gnu.EXE/SprayParticles.o tmp_build_dir/o/2d.gnu.EXE/SprayDerive.o tmp_build_dir/o/2d.gnu.EXE/SprayParticlesInitInsert.o tmp_build_dir/o/2d.gnu.EXE/SpraySetup.o tmp_build_dir/o/2d.gnu.EXE/SpraySB.o tmp_build_dir/o/2d.gnu.EXE/SprayJet.o tmp_build_dir/o/2d.gnu.EXE/SprayIO.o tmp_build_dir/o/2d.gnu.EXE/Distributions.o tmp_build_dir/o/2d.gnu.EXE/AMReX.o tmp_build_dir/o/2d.gnu.EXE/AMReX_error_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Version.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PODVector.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BlockMutex.o tmp_build_dir/o/2d.gnu.EXE/AMReX_String.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParmParse.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parmparse_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Utility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FileSystem.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Random.o tmp_build_dir/o/2d.gnu.EXE/AMReX_DistributionMapping.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_OpenMP.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ForkJoin.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelContext.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VisMF.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Arena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AsyncOut.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BackgroundThread.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NFiles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parstream.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuControl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuDevice.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuUtility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuAsyncArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuElixir.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FPC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IntConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VectorIO.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Box.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IndexType.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Orientation.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Periodicity.o tmp_build_dir/o/2d.gnu.EXE/AMReX_RealBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxDomain.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BaseFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFCopyDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_iMultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabArrayBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFIter.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CoordSys.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Geometry.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCRec.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PhysBCFunct.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilCC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilFC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NonLocalBC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileDataImpl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLProfiler.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLBackTrace.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MemPool.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Machine.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Amr.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrLevel.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Derive.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AuxBoundaryData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Extrapolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Mask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiMask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_LO_BCTYPES.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EdgeFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrCore.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Cluster.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ErrorList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FillPatchUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Interpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TagBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrMesh.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpFaceRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFabFactory.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBCellFlag.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBDataCollection.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiCutFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBAmrUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_algoim.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_Redistribution.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_RedistributionApply.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_FluxRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistUtils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistItracker.o tmp_build_dir/o/2d.gnu.EXE/AMReX_distFcnElement.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_MultiGFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_2D_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_ND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_STL_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleContainerBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TracerParticles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleMPIUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleBufferMap.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleCommunication.o tmp_build_dir/o/2d.gnu.EXE/PeleC.o tmp_build_dir/o/2d.gnu.EXE/PeleCAmr.o tmp_build_dir/o/2d.gnu.EXE/Advance.o tmp_build_dir/o/2d.gnu.EXE/Derive.o tmp_build_dir/o/2d.gnu.EXE/Bld.o tmp_build_dir/o/2d.gnu.EXE/BCfill.o tmp_build_dir/o/2d.gnu.EXE/Hydro.o tmp_build_dir/o/2d.gnu.EXE/Godunov.o tmp_build_dir/o/2d.gnu.EXE/PPM.o tmp_build_dir/o/2d.gnu.EXE/IO.o tmp_build_dir/o/2d.gnu.EXE/Sources.o tmp_build_dir/o/2d.gnu.EXE/Setup.o tmp_build_dir/o/2d.gnu.EXE/main.o tmp_build_dir/o/2d.gnu.EXE/SumIQ.o tmp_build_dir/o/2d.gnu.EXE/SumUtils.o tmp_build_dir/o/2d.gnu.EXE/Tagging.o tmp_build_dir/o/2d.gnu.EXE/Diffusion.o tmp_build_dir/o/2d.gnu.EXE/Utilities.o tmp_build_dir/o/2d.gnu.EXE/MOL.o tmp_build_dir/o/2d.gnu.EXE/React.o tmp_build_dir/o/2d.gnu.EXE/External.o tmp_build_dir/o/2d.gnu.EXE/Forcing.o tmp_build_dir/o/2d.gnu.EXE/LES.o tmp_build_dir/o/2d.gnu.EXE/EB.o tmp_build_dir/o/2d.gnu.EXE/Geometry.o tmp_build_dir/o/2d.gnu.EXE/InitEB.o tmp_build_dir/o/2d.gnu.EXE/RotSource.o tmp_build_dir/o/2d.gnu.EXE/Particle.o tmp_build_dir/o/2d.gnu.EXE/AMReX_buildInfo.o  -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -lsundials_arkode -lsundials_cvode -lsundials_nvecmanyvector -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_cvode -lsundials_arkode -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_core -lsundials_nvecserial -Wl,-rpath=/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib 
+rm -f AMReX_buildInfo.cpp
+SUCCESS
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: task_shell_start (command: <91 chars>)
+tool task_shell_start completed: Background task started: shell_13a8e8d4
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: task_shell_wait (task_id: shell_13a8e8d4)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool task_shell_wait completed: Command failed (exit code: None)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <238 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+STEP = 42599 TIME = 0.02379082036 DT = 5.585482236e-07
+
+[Level 0 step 42600] ADVANCE at time 0.02379082036 with dt = 5.585482235e-07
+===
+step=00000 0.5 0.5 0 0 500 0.057 1 0 0 0 1 1 1 0 
+step=17909 0.5 0.5 0 0 499.998703454637 0.057 1 0 0 0 1 0.999991956598072 1 0 
+step=35813 0.5 0.5 0 0 499.997402530413 0.057 1 0 0 0 1 0.999983893128102 1 0 
+step=393886 0.5 0.5 0 0 371.00460880274 0.057 1 0 0 0 1 0.999847172142408 1 0 
+step=411789 0.5 0.5 0 0 371.005032044976 0.057 1 0 0 0 1 0.999841616692969 1 0 
+step=429692 0.5 0.5 0 0 371.005469461635 0.057 1 0 0 0 1 0.999836155598325 1 0 
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe diameter never changes regardless of temperature. Let me add debug output to the spray model]0;🐳 CodeWhale.tool: read_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H" total_lines="679" shown_lines="482-487" truncated="true" next_start_line="488">
+   482│     amrex::Real part_temp_src = 0.;
+   483│     amrex::Real m_dot = 0.;
+   484│     if (fdat.mass_trans) {
+   485│       amrex::Real Pr_sk...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool edit_file completed: --- a//home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H
++++ b//home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H
+@@ -482,6 +482,12 @@
+     amrex::Real part_temp_src = 0.;
+     amrex::Real m_dot = 0.;
+     if (fdat.mass_trans) {
++#if 1
++      if (T_part > 370.0 && pmass > 1e-10) {
++...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H)
+tool edit_file completed: --- a//home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H
++++ b//home/cj/my-pele/external/PelePhysics/Source/Spray/Drag.H
+@@ -595,6 +595,12 @@
+         , vel_part[2] += part_dt * part_vel_src[2];);
+     }
+     if (fdat.mass_trans) {
++#if 1
++      if (T_part > 370.0 && pmass > 1e-10) {
++    ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/d2_law/example.inp)
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/d2_law/example.inp
++++ b//home/cj/my-pele/examples/academic/d2_law/example.inp
+@@ -1,6 +1,6 @@
+ # ------------------  INPUTS TO MAIN PROGRAM  -------------------
+-max_step = 50000
+-stop_time = 0.1
++max_step = 10
++stop_time = 1.0
+ 
+ # PROBLEM SIZE & GEOMETR...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <186 chars>)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+g++ -MMD -MP -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread    -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include  -c AMReX_buildInfo.cpp -o tmp_build_dir/o/2d.gnu.EXE/AMReX_buildInfo.o
+Linking PeleC2d.gnu.ex ...
+g++ -Werror=return-type -g1 -O3 -finline-limit=43210 -std=c++20  -pthread   -DBL_NO_FORT -DAMREX_GPU_MAX_THREADS=0 -DBL_SPACEDIM=2 -DAMREX_SPACEDIM=2 -DBL_FORT_USE_UNDERSCORE -DAMREX_FORT_USE_UNDERSCORE -DBL_Linux -DAMREX_Linux -DAMREX_PARTICLES -DAMREX_USE_EB -DNDEBUG -DCRSEGRNDOMP -DUSE_FUEGO_EOS -DUSE_SIMPLE_TRANSPORT -DPELE_USE_SPRAY -DSPRAY_FUEL_NUM=1 -DAMREX_USE_SUNDIALS -Itmp_build_dir/s/2d.gnu.EXE -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Extern/SUNDIALS -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib/../include -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility/Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/Parser -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I. -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//TurbInflow -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//PltFileManager -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Diagnostics -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Filter -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//BlackBoxFunction -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Utility//Utilities -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Eos/ -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Transport -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/Distribution -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/BreakupSplash -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Boundary -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/EB -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle -I../../../external/PeleC/Source -I../../../external/PeleC/Source/Params/param_includes -I/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/C_scripts -isystem /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/include -L. -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -o PeleC2d.gnu.ex tmp_build_dir/o/2d.gnu.EXE/AMReX_NVector_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Sundials_Core.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SUNMemory.o tmp_build_dir/o/2d.gnu.EXE/prob.o tmp_build_dir/o/2d.gnu.EXE/turbinflow.o tmp_build_dir/o/2d.gnu.EXE/PltFileManager.o tmp_build_dir/o/2d.gnu.EXE/DiagFilter.o tmp_build_dir/o/2d.gnu.EXE/DiagBase.o tmp_build_dir/o/2d.gnu.EXE/DiagFramePlane.o tmp_build_dir/o/2d.gnu.EXE/DiagPDF.o tmp_build_dir/o/2d.gnu.EXE/DiagConditional.o tmp_build_dir/o/2d.gnu.EXE/Filter.o tmp_build_dir/o/2d.gnu.EXE/BlackBoxFunction.o tmp_build_dir/o/2d.gnu.EXE/ReactorUtils.o tmp_build_dir/o/2d.gnu.EXE/ReactorBase.o tmp_build_dir/o/2d.gnu.EXE/ReactorBDF.o tmp_build_dir/o/2d.gnu.EXE/ReactorRK64.o tmp_build_dir/o/2d.gnu.EXE/ReactorNull.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvode.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeUtils.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodePreconditioner.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeJacobian.o tmp_build_dir/o/2d.gnu.EXE/ReactorCvodeCustomLinSolver.o tmp_build_dir/o/2d.gnu.EXE/mechanism.o tmp_build_dir/o/2d.gnu.EXE/Transport.o tmp_build_dir/o/2d.gnu.EXE/SprayParticles.o tmp_build_dir/o/2d.gnu.EXE/SprayDerive.o tmp_build_dir/o/2d.gnu.EXE/SprayParticlesInitInsert.o tmp_build_dir/o/2d.gnu.EXE/SpraySetup.o tmp_build_dir/o/2d.gnu.EXE/SpraySB.o tmp_build_dir/o/2d.gnu.EXE/SprayJet.o tmp_build_dir/o/2d.gnu.EXE/SprayIO.o tmp_build_dir/o/2d.gnu.EXE/Distributions.o tmp_build_dir/o/2d.gnu.EXE/AMReX.o tmp_build_dir/o/2d.gnu.EXE/AMReX_error_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Version.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PODVector.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BlockMutex.o tmp_build_dir/o/2d.gnu.EXE/AMReX_String.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParmParse.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parmparse_fi.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Utility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FileSystem.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Random.o tmp_build_dir/o/2d.gnu.EXE/AMReX_DistributionMapping.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_OpenMP.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ForkJoin.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParallelContext.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VisMF.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Arena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_SArena.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AsyncOut.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BackgroundThread.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NFiles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_parstream.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuControl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuDevice.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuUtility.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuAsyncArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_GpuElixir.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FPC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IntConv.o tmp_build_dir/o/2d.gnu.EXE/AMReX_VectorIO.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Box.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IndexType.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Orientation.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Periodicity.o tmp_build_dir/o/2d.gnu.EXE/AMReX_RealBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxArray.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BoxDomain.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BaseFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFCopyDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_iMultiFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FabArrayBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFIter.o tmp_build_dir/o/2d.gnu.EXE/AMReX_CoordSys.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Geometry.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCRec.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PhysBCFunct.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BCUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilCC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FilFC_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_NonLocalBC.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_PlotFileDataImpl.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLProfiler.o tmp_build_dir/o/2d.gnu.EXE/AMReX_BLBackTrace.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MemPool.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Machine.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_parser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Parser.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.lex.o tmp_build_dir/o/2d.gnu.EXE/amrex_iparser.tab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Y.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser_Exe.o tmp_build_dir/o/2d.gnu.EXE/AMReX_IParser.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Amr.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrLevel.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Derive.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_StateDescriptor.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AuxBoundaryData.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Extrapolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Mask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiMask.o tmp_build_dir/o/2d.gnu.EXE/AMReX_LO_BCTYPES.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EdgeFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrCore.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Cluster.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ErrorList.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FillPatchUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_FluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_Interpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TagBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_AmrMesh.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_InterpFaceRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFArrayBox.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFabFactory.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMultiFabUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBCellFlag.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBDataCollection.o tmp_build_dir/o/2d.gnu.EXE/AMReX_MultiCutFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBMFInterpolater.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBFluxRegister.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EBAmrUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_algoim.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_Redistribution.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_RedistributionApply.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_FluxRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistribute.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistUtils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_StateRedistItracker.o tmp_build_dir/o/2d.gnu.EXE/AMReX_distFcnElement.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_MultiGFab.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_2D_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_ND_C.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_STL_utils.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_STL.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_Level_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_EB2_IndexSpace_chkpt_file.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleContainerBase.o tmp_build_dir/o/2d.gnu.EXE/AMReX_TracerParticles.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleMPIUtil.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleBufferMap.o tmp_build_dir/o/2d.gnu.EXE/AMReX_ParticleCommunication.o tmp_build_dir/o/2d.gnu.EXE/PeleC.o tmp_build_dir/o/2d.gnu.EXE/PeleCAmr.o tmp_build_dir/o/2d.gnu.EXE/Advance.o tmp_build_dir/o/2d.gnu.EXE/Derive.o tmp_build_dir/o/2d.gnu.EXE/Bld.o tmp_build_dir/o/2d.gnu.EXE/BCfill.o tmp_build_dir/o/2d.gnu.EXE/Hydro.o tmp_build_dir/o/2d.gnu.EXE/Godunov.o tmp_build_dir/o/2d.gnu.EXE/PPM.o tmp_build_dir/o/2d.gnu.EXE/IO.o tmp_build_dir/o/2d.gnu.EXE/Sources.o tmp_build_dir/o/2d.gnu.EXE/Setup.o tmp_build_dir/o/2d.gnu.EXE/main.o tmp_build_dir/o/2d.gnu.EXE/SumIQ.o tmp_build_dir/o/2d.gnu.EXE/SumUtils.o tmp_build_dir/o/2d.gnu.EXE/Tagging.o tmp_build_dir/o/2d.gnu.EXE/Diffusion.o tmp_build_dir/o/2d.gnu.EXE/Utilities.o tmp_build_dir/o/2d.gnu.EXE/MOL.o tmp_build_dir/o/2d.gnu.EXE/React.o tmp_build_dir/o/2d.gnu.EXE/External.o tmp_build_dir/o/2d.gnu.EXE/Forcing.o tmp_build_dir/o/2d.gnu.EXE/LES.o tmp_build_dir/o/2d.gnu.EXE/EB.o tmp_build_dir/o/2d.gnu.EXE/Geometry.o tmp_build_dir/o/2d.gnu.EXE/InitEB.o tmp_build_dir/o/2d.gnu.EXE/RotSource.o tmp_build_dir/o/2d.gnu.EXE/Particle.o tmp_build_dir/o/2d.gnu.EXE/AMReX_buildInfo.o  -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib -Wl,-rpath,/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/sundials/lib64 -lsundials_arkode -lsundials_cvode -lsundials_nvecmanyvector -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_cvode -lsundials_arkode -L/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib -lsundials_core -lsundials_nvecserial -Wl,-rpath=/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/ThirdParty/INSTALL/gnu/lib 
+rm -f AMReX_buildInfo.cpp
+SUCCESS
+
+---------------------

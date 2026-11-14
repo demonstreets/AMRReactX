@@ -1,0 +1,222 @@
+{
+  "evidence_files": [
+    {
+      "label": "path_decision_writer",
+      "path": "tools/write_academic_twophase_qlt03_path_decision_report.py",
+      "sha256": "5bb071e34218dad6c351c57686430a0cb846c0dacafbfb433999e66ad5270909",
+      "size_bytes": 17755
+    },
+    {
+      "label": "qlt03_t3_strict_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json",
+      "sha256": "e459e48d47473518860f6940f32e3d258fc5cb8a1942ac6553e78e9429ce9cce",
+      "size_bytes": 14351
+    },
+    {
+      "label": "qlt03_grid_confirmation_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_grid_confirmation_20260730/qlt03_lm_grid_confirmation_report.json",
+      "sha256": "1709c60efc1f3fdca9168ea6e53a11dc108a10f57944e584fa3de1da4fcc7a3a",
+      "size_bytes": 3054
+    },
+    {
+      "label": "qlt03_bridge_followup_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_bridge_followup_20260730/academic_twophase_qlt03_lm_bridge_followup_report.json",
+      "sha256": "6f8e1df32bfb493fef62fa9df8a7a103983d48b02329e03d38bbd44575c8fe1b",
+      "size_bytes": 2538
+    },
+    {
+      "label": "qlt03_bridge_prob",
+      "path": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+      "sha256": "801c8cf2a9e77b364225f9b32fdb648e9f217efe152e8217059f03e2f4d41d0e",
+      "size_bytes": 9057
+    },
+    {
+      "label": "pelelmex_advance",
+      "path": "external/PeleLMeX/Source/PeleLMeX_Advance.cpp",
+      "sha256": "bb1a0b5f7b493fc859e6374a8b95ea6c44590e4095a64b87907093858262d4bb",
+      "size_bytes": 27621
+    }
+  ],
+  "generated_at_utc": "2026-07-30T05:07:35+00:00",
+  "limitations": [
+    "This report can PASS as a decision record while qlt03_canonical_ready remains false.",
+    "The low-Mach bridge is not yet a final production VOF/CSF topology-preserving solver.",
+    "Strict Hysing readiness still requires time-series circularity/velocity and grid-convergence closure."
+  ],
+  "quality_gates": [
+    {
+      "metric": {
+        "adv_mass_rel_drift": 2.49622493539e-16,
+        "blocking_reasons": [],
+        "centroid_rise": -5.89081028401e-09,
+        "clears_qlt_03_canonical_final_time_contract": false,
+        "derived_contract": {
+          "average_physical_dt": 1.2261016571360001e-08,
+          "bubble_center_over_domain": [
+            0.5,
+            0.25
+          ],
+          "bubble_radius_over_domain_width": 0.25,
+          "density_ratio_heavy_over_light": 10.0,
+          "domain_aspect_height_over_width": 2.0,
+          "domain_height": 2.0,
+          "domain_width": 1.0,
+          "estimated_steps_to_t3_at_scout_dt": 244677918,
+          "estimated_wall_seconds_to_t3_at_scout_rate": 685098.1704,
+          "gravity": 0.98,
+          "max_step": 5000,
+          "phase_viscosity_mu_heavy": 10.0,
+          "phase_viscosity_mu_light": 1.0,
+          "plot_int": 5000,
+          "surface_tension_sigma": 24.5,
+          "target_stop_time": 3.0
+        },
+        "direct_t3_runtime_viable_on_current_compressible_explicit_path": false,
+        "grid_nx": 32,
+        "grid_ny": 64,
+        "light_y0": 0.500000000895,
+        "light_y1": 0.499999995005,
+        "mass_rel_drift": 1.21934707339e-16,
+        "remaining_canonical_model_gaps": [
+          "canonical_final_time_contract"
+        ],
+        "stable_long_window_scout": true,
+        "time0": 0.0,
+        "time1": 6.13050828568e-05,
+        "ymom_absmax": 7.66723440075e-05,
+        "ymom_sum": -1.12298968234e-07
+      },
+      "name": "compressible_explicit_direct_t3_path_ruled_out",
+      "status": "PASS",
+      "target": "stable scout plus direct t=3 not viable"
+    },
+    {
+      "metric": [
+        "canonical_final_time_contract"
+      ],
+      "name": "canonical_candidate_has_geometry_csf_viscosity_contracts",
+      "status": "PASS",
+      "target": [
+        "canonical_final_time_contract"
+      ]
+    },
+    {
+      "metric": {
+        "incompressible_aux_advance_uses_mac_face_flux": true,
+        "incompressible_aux_density_projection_uses_alpha_sigma": true,
+        "incompressible_aux_viscosity_sets_diffusion_coefficients": true,
+        "incompressible_setup_still_uses_constant_rho_mu": true,
+        "incompressible_velocity_force_scaling_reads_aux_density": true,
+        "problem_specific_ext_source_hook_accepts_aux_argument": true,
+        "qlt03_bridge_csf_source_reads_aux_alpha": true,
+        "qlt03_bridge_enables_aux_density_ratio": true,
+        "qlt03_bridge_records_canonical_observables": true,
+        "qlt03_bridge_rises_with_light_alpha_phase": true,
+        "qlt03_bridge_uses_canonical_boundary_conditions": true
+      },
+      "name": "pelelmex_low_mach_aux_csf_bridge_present",
+      "status": "PASS",
+      "target": "Aux transport/material/CSF source contracts present"
+    },
+    {
+      "metric": {
+        "alpha_center_of_mass_rises": true,
+        "alpha_mass_conserved": true,
+        "alpha_mean_rise_velocity_positive": true,
+        "canonical_boundary_conditions_configured": true,
+        "canonical_light_phase_convention_configured": true,
+        "canonical_observables_recorded": true,
+        "csf_force_cap_disabled": true,
+        "csf_source_is_uncapped_when_force_cap_nonpositive": true,
+        "short_window_stable_no_nan_abort_or_segfault": true,
+        "sigma_is_hysing_case1_value": true
+      },
+      "name": "pelelmex_low_mach_canonical_strength_csf_short_window_cleared",
+      "status": "PASS",
+      "target": "uncapped sigma=24.5 short-window stable rise"
+    },
+    {
+      "metric": {
+        "errors": {
+          "center_of_mass_y_at_t3_abs_error": 0.08397702843906696,
+          "maximum_mean_rise_velocity_abs_error": 0.003466450170439672,
+          "minimum_circularity_abs_error": 0.24352712056133463
+        },
+        "sample_count": 16,
+        "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT"
+      },
+      "name": "pelelmex_low_mach_t3_final_time_stable",
+      "status": "PASS",
+      "target": "t=3 stable with time-series extrema comparison"
+    },
+    {
+      "metric": {
+        "contracts": {
+          "center_height_grid_consistency_cleared": true,
+          "circularity_grid_consistency_cleared": false,
+          "coarse_mass_conserved": true,
+          "coarse_reaches_t3": true,
+          "coarse_time_series_sample_count_sufficient": true,
+          "fine_center_reference_error_cleared": true,
+          "fine_circularity_reference_error_cleared": false,
+          "fine_mass_conserved": true,
+          "fine_reaches_t3": true,
+          "fine_time_series_sample_count_sufficient": false,
+          "fine_velocity_reference_error_cleared": false,
+          "full_grid_confirmation_cleared": false,
+          "velocity_grid_consistency_cleared": false
+        },
+        "grid_differences": {
+          "center_y_final_abs_delta": 0.0034466845995402284,
+          "max_mean_rise_velocity_abs_delta": 0.3016587952263875,
+          "min_circularity_abs_delta": 0.1728123270849004
+        }
+      },
+      "name": "pelelmex_low_mach_grid_center_confirmation_cleared",
+      "status": "PASS",
+      "target": "32/64 center-height consistency but full shape gate remains open"
+    }
+  ],
+  "schema_version": 2,
+  "scope": "Machine-checkable decision record for strict Hysing QLT-03 readiness after low-Mach t=3 and 32/64 grid-confirmation evidence.",
+  "source_reports": {
+    "canonical_candidate": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_candidate_report.json",
+    "canonical_reference": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_reference_20260729/academic_twophase_canonical_bubble_rise_reference_report.json",
+    "compressible_final_time_scout": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_final_time_scout_report.json",
+    "lm_bridge_followup": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_bridge_followup_20260730/academic_twophase_qlt03_lm_bridge_followup_report.json",
+    "lm_canonical_csf_scout": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_canonical_csf_scout_20260730/academic_twophase_qlt03_lm_canonical_csf_scout_report.json",
+    "lm_grid_confirmation": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_grid_confirmation_20260730/qlt03_lm_grid_confirmation_report.json",
+    "lm_t3_scout": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json"
+  },
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-PATH-DECISION",
+  "summary": {
+    "compressible_explicit_direct_t3_ruled_out": true,
+    "path_decision_ready": true,
+    "pelelmex_low_mach_aux_csf_bridge_present": true,
+    "pelelmex_low_mach_canonical_strength_csf_short_window": true,
+    "pelelmex_low_mach_grid_center_confirmation": true,
+    "pelelmex_low_mach_t3_final_time_stable": true,
+    "pelelmex_low_mach_t3_reference_agreement": false,
+    "pelelmex_ready_vof_csf_path_present": false,
+    "qlt03_canonical_ready": false,
+    "recommended_paths": [
+      {
+        "minimum_next_gates": [
+          "reduce minimum-circularity error below tolerance using a better curvature/balanced-force treatment",
+          "clear refined-grid maximum rise-velocity agreement",
+          "rerun 32/64 or better grid-confirmation evidence"
+        ],
+        "name": "Improve low-Mach QLT-03 CSF curvature/balanced-force treatment before strict promotion",
+        "path": "preferred",
+        "why": "The repaired low-Mach path reaches t=3 and conserves alpha on 32x64 and 64x128 grids, with grid-consistent final center height; however time-series minimum circularity and refined-grid peak rise velocity are not yet within Hysing Case 1 tolerances."
+      }
+    ],
+    "remaining_canonical_model_gaps": [
+      "hysing_minimum_circularity_time_series_contract",
+      "hysing_maximum_rise_velocity_refined_grid_contract",
+      "qlt03_grid_convergence_contract",
+      "csf_curvature_balanced_force_contract"
+    ]
+  },
+  "title": "Academic Two-Phase QLT-03 Path Decision"
+}

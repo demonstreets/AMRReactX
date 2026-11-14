@@ -1,0 +1,17 @@
+{
+  "trial": "matched 10-step QR/LU comparison; intentionally short, not full detonation validation",
+  "source_case": "/home/cj/my-pele/repair_validation/twophase_20260910/detonation_wet_2d_300x100_strang_gpu_v1",
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v32d.gnu.MPI.CUDA.ex",
+  "binary_sha256": "1c557fc47913634b48d9a40aa7fa401aea158bd53a04ace66ce2ad90bd988f50",
+  "inputs_sha256": "7933af7ed9e46eb71110d9cc0acca7887fe3b57f4d093894f33d8a0b68f4885e",
+  "command": [
+    "mpirun",
+    "-np",
+    "1",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v32d.gnu.MPI.CUDA.ex",
+    "inputs"
+  ],
+  "CUDA_VISIBLE_DEVICES": "0",
+  "linear_solver": "custom_direct",
+  "mechanism": "heptane_lu_88sk"
+}

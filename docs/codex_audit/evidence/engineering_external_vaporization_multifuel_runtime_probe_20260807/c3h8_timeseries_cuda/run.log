@@ -1,0 +1,205 @@
+Initializing AMReX (0ec1056ff13b-dirty)...
+Initializing CUDA...
+CUDA initialized with 1 device.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+Engineering leak UserDefined EB STL: file=codex_merged_pipe_rack_obstacles.stl, scale=1, center=(0,0,0), reverse_normal=0, ngrow=4
+buildFromSTL QA: file=codex_merged_pipe_rack_obstacles.stl, format=binary, vertices=3396, triangles=1132, raw_bounds=([0.7699999809,0.25,0.1800000072],[1.720000029,0.7549999952,0.8199999928]), scaled_bounds=([0.7699999809,0.25,0.1800000072],[1.720000029,0.7549999952,0.8199999928])
+Reading binary STL file codex_merged_pipe_rack_obstacles.stl
+    Number of triangles: 1132
+    Min: (0.7699999809,0.25,0.1800000072) Max: (1.720000029,0.7549999952,0.8199999928)
+AMReX EB: Iter. 1 fixed 2 multicuts
+buildFromSTL: built AMReX EB2 IndexSpace from codex_merged_pipe_rack_obstacles.stl
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 38
+ Temperature: 39
+ thermo. pressure: 40
+ => Total number of state variables: 41
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using mixture-averaged transport 
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+ Initializing data for 1 levels 
+Engineering leak fuel species: name=C3H8, index=31, mechanism_species_count=34
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 0.5 0 0 
+	Density:  1.184395929
+	Temp:     300
+	H:        -69458.14457
+	Y_N2:     0.7437589703
+	Y_O:      0
+	Y_H:      0
+	Y_OH:     0
+	Y_H2:     0
+	Y_O2:     0.2259266431
+	Y_H2O:    0
+	Y_H2O2:   0
+	Y_HO2:    0
+	Y_CH2GSG: 0
+	Y_CH2O:   0
+	Y_CH3:    0
+	Y_CO:     0
+	Y_CH3O:   0
+	Y_C2H5:   0
+	Y_CH4:    0
+	Y_C2H4:   0
+	Y_C2H6:   0
+	Y_CO2:    0
+	Y_HCO:    0
+	Y_CH3O2:  0
+	Y_CH3O2H: 0
+	Y_C2H2:   0
+	Y_HCCO:   0
+	Y_C2H3:   0
+	Y_CH2CHO: 0
+	Y_C3H5XA: 0
+	Y_C3H6:   0
+	Y_C3H5O:  0
+	Y_IXC3H7: 0
+	Y_NXC3H7: 0
+	Y_C3H8:   0.03031438651
+	Y_IXC3H7O2:0
+	Y_NXC3H7O2:0
+ ==============================================================================
+ Initial dt: 1e-08
+
+ Doing initial projection(s) 
+
+ Initial velocity projection:   U: 0.5  V: 0  W: 0
+ >> After initial velocity projection:   U: 1.012410531  V: 0.384765213  W: 0.359544892
+ Initial dt: 1e-08
+ Initial velocity projection:   U: 1.012410531  V: 0.384765213  W: 0.359544892
+ >> After initial velocity projection:   U: 1.068650418  V: 0.4600864076  W: 0.4041931023
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ STEP [-1] - Time: 0, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=0, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4e-12, scheduled_leak_T=285.0000003, scheduled_velocity=(0.200000008,1e-09,0), scheduled_radius=0.0800000003, scheduled_center=(0.4200000008,0.2500000004,0.2000000002), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4e-12
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=4e-12, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000003, leak_count=1, pressure_driven_multihole=0, velocity=(0.200000008,1e-09,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=4e-12
+C3H8 leak source interval: time=0, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=4e-12, leak_T=285.0000003, injected_interval=4e-20, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.4200000008,0.2500000004,0.2000000002), radius=0.0800000003, fraction=1, pressure_fraction=1, mdot=4e-12, active_volume=0.001953125, mdot_vol=2.048e-09
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=0, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.245464969
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [0] - Time: 0, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=0, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4e-12, scheduled_leak_T=285.0000003, scheduled_velocity=(0.200000008,1e-09,0), scheduled_radius=0.0800000003, scheduled_center=(0.4200000008,0.2500000004,0.2000000002), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4e-12
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=4e-12, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000003, leak_count=1, pressure_driven_multihole=0, velocity=(0.200000008,1e-09,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=4e-12
+C3H8 leak source interval: time=0, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=4e-12, leak_T=285.0000003, injected_interval=4e-20, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.4200000008,0.2500000004,0.2000000002), radius=0.0800000003, fraction=1, pressure_fraction=1, mdot=4e-12, active_volume=0.001953125, mdot_vol=2.048e-09
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=0, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.216975026
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [1] - Time: 1e-08, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=1e-08, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=1.2e-11, scheduled_leak_T=285.0000009, scheduled_velocity=(0.200000024,3e-09,0), scheduled_radius=0.0800000009, scheduled_center=(0.4200000024,0.2500000012,0.2000000006), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=1.2e-11
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=1.2e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000009, leak_count=1, pressure_driven_multihole=0, velocity=(0.200000024,3e-09,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=1.2e-11
+C3H8 leak source interval: time=1e-08, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=1.2e-11, leak_T=285.0000009, injected_interval=1.2e-19, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.4200000024,0.2500000012,0.2000000006), radius=0.0800000009, fraction=1, pressure_fraction=1, mdot=1.2e-11, active_volume=0.001953125, mdot_vol=6.144e-09
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=1e-08, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.217027338
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [2] - Time: 2e-08, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=2e-08, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=2e-11, scheduled_leak_T=285.0000015, scheduled_velocity=(0.20000004,5e-09,0), scheduled_radius=0.0800000015, scheduled_center=(0.420000004,0.250000002,0.200000001), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=2e-11
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=2e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000015, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000004,5e-09,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=2e-11
+C3H8 leak source interval: time=2e-08, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=2e-11, leak_T=285.0000015, injected_interval=2e-19, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.420000004,0.250000002,0.200000001), radius=0.0800000015, fraction=1, pressure_fraction=1, mdot=2e-11, active_volume=0.001953125, mdot_vol=1.024e-08
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=2e-08, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.211918655
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [3] - Time: 3e-08, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=3e-08, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=2.8e-11, scheduled_leak_T=285.0000021, scheduled_velocity=(0.200000056,7e-09,0), scheduled_radius=0.0800000021, scheduled_center=(0.4200000056,0.2500000028,0.2000000014), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=2.8e-11
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=2.8e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000021, leak_count=1, pressure_driven_multihole=0, velocity=(0.200000056,7e-09,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=2.8e-11
+C3H8 leak source interval: time=3e-08, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=2.8e-11, leak_T=285.0000021, injected_interval=2.8e-19, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.4200000056,0.2500000028,0.2000000014), radius=0.0800000021, fraction=1, pressure_fraction=1, mdot=2.8e-11, active_volume=0.001953125, mdot_vol=1.4336e-08
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=3e-08, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.21684081
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [4] - Time: 4e-08, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=4e-08, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=3.6e-11, scheduled_leak_T=285.0000027, scheduled_velocity=(0.200000072,9e-09,0), scheduled_radius=0.0800000027, scheduled_center=(0.4200000072,0.2500000036,0.2000000018), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=3.6e-11
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=3.6e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000027, leak_count=1, pressure_driven_multihole=0, velocity=(0.200000072,9e-09,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=3.6e-11
+C3H8 leak source interval: time=4e-08, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=3.6e-11, leak_T=285.0000027, injected_interval=3.6e-19, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.4200000072,0.2500000036,0.2000000018), radius=0.0800000027, fraction=1, pressure_fraction=1, mdot=3.6e-11, active_volume=0.001953125, mdot_vol=1.8432e-08
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=4e-08, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.214765994
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [5] - Time: 5e-08, dt 1e-08, Ncells 8192
+C3H8 leak fixed-mass-flow schedule: time=5e-08, dt=1e-08, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4.4e-11, scheduled_leak_T=285.0000033, scheduled_velocity=(0.200000088,1.1e-08,0), scheduled_radius=0.0800000033, scheduled_center=(0.4200000088,0.2500000044,0.2000000022), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4.4e-11
+Applying C3H8 leak source: model=fixed_mass_flow_timeseries, mdot=4.4e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.0000033, leak_count=1, pressure_driven_multihole=0, velocity=(0.200000088,1.1e-08,0), fuel_species_index=31
+C3H8 leak effective mass flow rate=4.4e-11
+C3H8 leak source interval: time=5e-08, dt=1e-08, model=fixed_mass_flow_timeseries, mdot=4.4e-11, leak_T=285.0000033, injected_interval=4.4e-19, valve_fraction_mid=1
+C3H8 leak source[0]: center=(0.4200000088,0.2500000044,0.2000000022), radius=0.0800000033, fraction=1, pressure_fraction=1, mdot=4.4e-11, active_volume=0.001953125, mdot_vol=2.2528e-08
+C3H8 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+C3H8 delayed ignition source: enabled=1, time=5e-08, dt=1e-08, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.215861245
+
+ >> Final simulation time: 6e-08
+
+ Writing plotfile: plt00006
+
+Total Time: 1.767881737
+Unused ParmParse Variables:
+  [TOP]::amr.checkpoint_files_output(nvals = 1)  :: [0]
+  [TOP]::amr.plot_files_output(nvals = 1)  :: [0]
+
+Total GPU global memory (MB): 16269
+Free  GPU global memory (MB): 1120
+[The         Arena] max space allocated (MB): 12201
+[The         Arena] max space used      (MB): 295
+[The Managed Arena] max space allocated (MB): 8
+[The Managed Arena] max space used      (MB): 0
+[The  Pinned Arena] max space allocated (MB): 8
+[The  Pinned Arena] max space used      (MB): 2
+AMReX (0ec1056ff13b-dirty) finalized

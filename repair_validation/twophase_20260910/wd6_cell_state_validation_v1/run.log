@@ -1,0 +1,24 @@
+{'state': 0, 'T_K': 700, 'P_Pa': 100000.0, 'rtol': 1e-06, 'exit': 0, 'wall_s': 0.017066478729248047, 'max_T_error_K': 1.3301360013429075e-11, 'max_Y_error': 1.3600232051658168e-15, 'passed': True}
+{'state': 0, 'T_K': 700, 'P_Pa': 100000.0, 'rtol': 1e-07, 'exit': 0, 'wall_s': 0.0211794376373291, 'max_T_error_K': 1.3301360013429075e-11, 'max_Y_error': 1.3600232051658168e-15, 'passed': True}
+Traceback (most recent call last):
+  File "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_state_validation_v1/driver.py", line 18, in <module>
+    (d/'results.json').write_text(json.dumps(result,indent=2))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 430, in _iterencode
+    yield from _iterencode_list(o, _current_indent_level)
+  File "/usr/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool_ is not JSON serializable

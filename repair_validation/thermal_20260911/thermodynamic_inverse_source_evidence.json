@@ -1,0 +1,6 @@
+{
+  "path": "/home/cj/my-pele/external/PelePhysics/Mechanisms/heptane_wd6/mechanism.H",
+  "sha256": "035695ae56df2d5042d3ac64c1c5104263ac0c797a5e5464dd5a76cb837f5548",
+  "start_line": 1246,
+  "excerpt": "AMREX_GPU_HOST_DEVICE AMREX_FORCE_INLINE void GET_T_GIVEN_EY(const amrex::Real e, const amrex::Real y[], amrex::Real& t, int& ierr)\n{\n#ifdef CONVERGENCE\nconst int maxiter = 5000;\nconst amrex::Real tol = 1.e-12;\n#else\nconst int maxiter = 200;\nconst amrex::Real tol = 1.e-6;\n#endif\namrex::Real tmin = 300.0;// max lower bound for thermo def\namrex::Real tmax = 5000.0;// min upper bound for thermo def\namrex::Real e1,emin,emax,cv,t1,dt;\nCKUBMS(tmin, y, emin);\nCKUBMS(tmax, y, emax);\nif (e < emin) {\n// Linear Extrapolation below tmin\nCKCVBS(tmin, y, cv);\nt = tmin - (emin-e)/cv;\nierr = 1;\nreturn;\n}\nif (e > emax) {\n// Linear Extrapolation above tmax\nCKCVBS(tmax, y, cv);\nt = tmax - (emax-e)/cv;\nierr = 1;\nreturn;\n}\nt1 = t;\nif (t1 < tmin || t1 > tmax) {\nt1 = tmin + (tmax-tmin)/(emax-emin)*(e-emin);\n}\nfor (int i = 0; i < maxiter; ++i) {\nCKUBMS(t1,y,e1);\nCKCVBS(t1,y,cv);\ndt = (e - e1) / cv;\nif (dt > 100.) { dt = 100.; }\nelse if (dt < -100.) { dt = -100.; }\nelse if (fabs(dt) < tol) {break;}\nt1 += dt;\n}\nt = t1;\nierr = 0;\n}\n"
+}

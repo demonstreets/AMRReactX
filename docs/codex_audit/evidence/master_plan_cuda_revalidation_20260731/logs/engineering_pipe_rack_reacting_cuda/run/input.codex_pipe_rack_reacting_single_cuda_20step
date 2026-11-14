@@ -1,0 +1,82 @@
+# Codex direct 3D H2 pipe-rack reacting ignition smoke, single CUDA.
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 2.0 1.0 1.0
+
+peleLM.lo_bc = Inflow SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc = Outflow SlipWallAdiab SlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorCvode
+
+amr.n_cell = 32 16 16
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 32
+amr.max_step = 30
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-8
+amr.cfl = 0.25
+amr.plot_int = 5
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 0.50
+prob.wind_v = 0.0
+prob.leak_xc = 0.55
+prob.leak_yc = 0.50
+prob.leak_zc = 0.50
+prob.leak_rate = 5.0e-4
+prob.leak_radius = 0.10
+prob.leak_vel_x = 0.50
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 300.0
+
+prob.initial_flammable_cloud = 1
+prob.cloud_xc = 1.25
+prob.cloud_yc = 0.50
+prob.cloud_zc = 0.50
+prob.cloud_rx = 0.34
+prob.cloud_ry = 0.18
+prob.cloud_rz = 0.18
+prob.cloud_T = 300.0
+prob.cloud_YH2 = 0.0283
+prob.cloud_YO2 = 0.2264
+prob.cloud_YN2 = 0.7453
+prob.ignition_hotspot = 1
+prob.ignition_xc = 1.25
+prob.ignition_yc = 0.50
+prob.ignition_zc = 0.50
+prob.ignition_radius = 0.08
+prob.ignition_T = 2000.0
+
+eb2.geom_type = UserDefined
+eb2.cover_multiple_cuts = 1
+prob.obstacle_geometry = stl
+prob.obstacle_stl_files = codex_cube_block.stl codex_vertical_cylinder.stl codex_pipe_rack.stl
+prob.obstacle_stl_merged_file = codex_merged_pipe_rack_obstacles.stl
+prob.obstacle_stl_scale = 1.0
+prob.obstacle_stl_xc = 0.0
+prob.obstacle_stl_yc = 0.0
+prob.obstacle_stl_zc = 0.0
+prob.obstacle_stl_reverse_normal = 0
+prob.obstacle_stl_ngrow = 4
+prob.obstacle_xc = 0.0
+prob.obstacle_yc = 0.0
+prob.obstacle_zc = 0.0
+
+cvode.solve_type = GMRES
+cvode.max_order = 4
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

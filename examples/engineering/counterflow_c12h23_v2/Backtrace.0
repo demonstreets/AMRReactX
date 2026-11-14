@@ -1,0 +1,40 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX2d.gnu.CUDA.ex(+0x602f97) [0x613c98201f97]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: ./PeleLMeX2d.gnu.CUDA.ex(+0x607ce4) [0x613c98206ce4]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleLMeX2d.gnu.CUDA.ex(+0x2231d6) [0x613c97e221d6]
+    PeleLM::differentialDiffusionUpdate(std::unique_ptr<PeleLM::AdvanceAdvData, std::default_delete<PeleLM::AdvanceAdvData> > const&, std::unique_ptr<PeleLM::AdvanceDiffData, std::default_delete<PeleLM::AdvanceDiffData> > const&) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp:1558 (discriminator 1)
+
+ 3: ./PeleLMeX2d.gnu.CUDA.ex(+0x1d09ad) [0x613c97dcf9ad]
+    PeleLM::oneSDC(int, std::unique_ptr<PeleLM::AdvanceAdvData, std::default_delete<PeleLM::AdvanceAdvData> > const&, std::unique_ptr<PeleLM::AdvanceDiffData, std::default_delete<PeleLM::AdvanceDiffData> > const&) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp:498
+
+ 4: ./PeleLMeX2d.gnu.CUDA.ex(+0x1d2d12) [0x613c97dd1d12]
+    PeleLM::Advance(int) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp:205 (discriminator 2)
+
+ 5: ./PeleLMeX2d.gnu.CUDA.ex(+0x1e4c0a) [0x613c97de3c0a]
+    PeleLM::Evolve() at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Evolve.cpp:53
+
+ 6: ./PeleLMeX2d.gnu.CUDA.ex(+0xc4c26) [0x613c97cc3c26]
+    main at /home/cj/my-pele/external/PeleLMeX/Source/main.cpp:61
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x79ba5242a1ca]
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x79ba5242a28b]
+
+ 9: ./PeleLMeX2d.gnu.CUDA.ex(+0xd16c5) [0x613c97cd06c5]
+    ?? ??:0
+

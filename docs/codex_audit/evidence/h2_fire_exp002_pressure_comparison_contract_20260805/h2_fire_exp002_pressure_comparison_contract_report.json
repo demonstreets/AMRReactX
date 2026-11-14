@@ -1,0 +1,99 @@
+{
+  "acceptance_contract": {
+    "acceptance_criteria": {
+      "all_four_sensor_metrics_present": true,
+      "arrival_time_tolerance_ms": 25.0,
+      "cpu_or_gpu_parallel_run_required": true,
+      "no_nan_inf_solver_abort": true,
+      "peak_overpressure_tolerance_source": "per-row tolerance_abs_kpa and tolerance_rel in overpressure_metrics.csv",
+      "strict_credit_requires_radiation_table_too": true
+    },
+    "required_cfd_outputs": [
+      "time_series_pressure_kpa_at_each_exp002_sensor",
+      "peak_overpressure_kpa_at_each_exp002_sensor",
+      "peak_arrival_time_ms_at_each_exp002_sensor",
+      "baseline_or_ambient_pressure_definition",
+      "sensor_position_mapping_or_documented_surrogate_mapping"
+    ],
+    "required_reference_metric_count": 4,
+    "required_reference_metrics": [
+      "exp002_pressure_channel_2",
+      "exp002_pressure_channel_3",
+      "exp002_pressure_channel_4",
+      "exp002_pressure_channel_5"
+    ]
+  },
+  "current_gap": {
+    "comparison_executed": false,
+    "current_delayed_ignition_has_exp002_sensor_position_mapping": false,
+    "current_delayed_ignition_has_only_domain_avg_pressure": true,
+    "current_delayed_ignition_has_sensor_pressure_time_series": false,
+    "current_delayed_ignition_plot_has_pressure_like_variables": [
+      "avg_pressure"
+    ],
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "evidence_files": [
+    {
+      "label": "overpressure_table_report",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/h2_fire_exp002_overpressure_calibration_table_report.json",
+      "sha256": "169d4c3ccc1f0f5751094c7388d23b00dec572e4c19b1ecae3fe129030950bc7",
+      "size_bytes": 3677
+    },
+    {
+      "label": "delayed_ignition_bridge",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_exp002_delayed_ignition_bridge_20260805/engineering_h2_fire_exp002_delayed_ignition_bridge_report.json",
+      "sha256": "e03799444453f0f28ebc47dbc4d34b516e4290e415babcdb6c68f3e4476cda1e",
+      "size_bytes": 6791
+    },
+    {
+      "label": "cross_platform_delayed_ignition",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cross_platform_20260805/engineering_h2_pipe_rack_delayed_ignition_cross_platform_report.json",
+      "sha256": "7705587a266a76d002799d78bb0fcbba7a4eebd3f639c61b0d15106c20420841",
+      "size_bytes": 4195
+    },
+    {
+      "label": "strict_fire_update",
+      "path": "docs/codex_audit/evidence/master_plan_strict_fire_calibration_update_20260731/master_plan_strict_fire_calibration_update_report.json",
+      "sha256": "2c10760f348aad4d160c8c355dce42a6826a73b3ca131eed2b8250bdade5ad23",
+      "size_bytes": 13639
+    },
+    {
+      "label": "cuda_final_plot_header",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/runtime_evidence/plt00120/Header",
+      "sha256": "e83f44fed5aa487fda6a5eaf5f3173e62112e13d567ae65f1cecea18960ef904",
+      "size_bytes": 433
+    },
+    {
+      "label": "cpu_mpi_final_plot_header",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/runtime_evidence/plt00120/Header",
+      "sha256": "c982927a0bd853ed54478e588d7cf24a4081e8b56373967ab0261598a6f26104",
+      "size_bytes": 445
+    },
+    {
+      "label": "overpressure_metrics_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/overpressure_metrics.csv",
+      "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613",
+      "size_bytes": 1208
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:56.628501+00:00",
+  "limitations": [
+    "This is an acceptance contract and preflight, not an EXP002 CFD agreement result.",
+    "The current delayed-ignition plotfiles expose avg_pressure, not four EXP002 pressure-sensor time series.",
+    "Strict fire credit still requires an actual CFD pressure comparison and a radiation calibration table."
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-EXP002-PRESSURE-COMPARISON-CONTRACT",
+  "summary": {
+    "cpu_gpu_delayed_ignition_parity_ready": true,
+    "current_cfd_pressure_sensor_comparison_executed": false,
+    "current_outputs_sufficient_for_exp002_pressure_agreement": false,
+    "delayed_ignition_energy_bridge_ready": true,
+    "exp002_metric_count": 4,
+    "exp002_overpressure_table_ready": true,
+    "pressure_comparison_contract_ready": true,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire EXP002 Pressure Comparison Acceptance Contract"
+}

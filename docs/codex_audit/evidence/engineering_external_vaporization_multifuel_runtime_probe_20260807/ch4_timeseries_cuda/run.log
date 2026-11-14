@@ -1,0 +1,189 @@
+Initializing AMReX (0ec1056ff13b-dirty)...
+Initializing CUDA...
+Multiple GPUs are visible to each MPI rank. This is usually not an issue. But this may lead to incorrect or suboptimal rank-to-GPU mapping.!
+CUDA initialized with 1 device.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+Engineering leak UserDefined EB STL: file=codex_merged_pipe_rack_obstacles.stl, scale=1, center=(0,0,0), reverse_normal=0, ngrow=4
+buildFromSTL QA: file=codex_merged_pipe_rack_obstacles.stl, format=binary, vertices=3396, triangles=1132, raw_bounds=([0.7699999809,0.25,0.1800000072],[1.720000029,0.7549999952,0.8199999928]), scaled_bounds=([0.7699999809,0.25,0.1800000072],[1.720000029,0.7549999952,0.8199999928])
+Reading binary STL file codex_merged_pipe_rack_obstacles.stl
+    Number of triangles: 1132
+    Min: (0.7699999809,0.25,0.1800000072) Max: (1.720000029,0.7549999952,0.8199999928)
+AMReX EB: Iter. 1 fixed 2 multicuts
+buildFromSTL: built AMReX EB2 IndexSpace from codex_merged_pipe_rack_obstacles.stl
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 21
+ Temperature: 22
+ thermo. pressure: 23
+ => Total number of state variables: 24
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using mixture-averaged transport 
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+ Initializing data for 1 levels 
+Engineering leak fuel species: name=CH4, index=10, mechanism_species_count=17
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 0.5 0 0 
+	Density:  1.351443316
+	Temp:     260
+	H:        -191324.6297
+	Y_H2:     0
+	Y_H:      0
+	Y_O:      0
+	Y_O2:     0.2256368594
+	Y_OH:     0
+	Y_H2O:    0
+	Y_HO2:    0
+	Y_CH2:    0
+	Y_CH2(S): 0
+	Y_CH3:    0
+	Y_CH4:    0.03115174873
+	Y_CO:     0
+	Y_CO2:    0
+	Y_HCO:    0
+	Y_CH2O:   0
+	Y_CH2OH:  0
+	Y_N2:     0.7432113919
+ ==============================================================================
+ Initial dt: 1e-07
+
+ Doing initial projection(s) 
+
+ Initial velocity projection:   U: 0.5  V: 0  W: 0
+ >> After initial velocity projection:   U: 1.023473008  V: 0.4024386048  W: 0.3597563996
+ Initial dt: 1e-07
+ Initial velocity projection:   U: 1.023473008  V: 0.4024386048  W: 0.3597563996
+ >> After initial velocity projection:   U: 1.080069898  V: 0.4713310554  W: 0.404434155
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ STEP [-1] - Time: 0, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=0, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4e-11, scheduled_leak_T=285.000003, scheduled_velocity=(0.20000008,1e-08,0), scheduled_radius=0.080000003, scheduled_center=(0.420000008,0.250000004,0.200000002), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4e-11
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=4e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000003, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000008,1e-08,0), fuel_species_index=10
+CH4 leak effective mass flow rate=4e-11
+CH4 leak source interval: time=0, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=4e-11, leak_T=285.000003, injected_interval=4e-18, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.420000008,0.250000004,0.200000002), radius=0.080000003, fraction=1, pressure_fraction=1, mdot=4e-11, active_volume=0.001953125, mdot_vol=2.048e-08
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=0, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.221313991
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [0] - Time: 0, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=0, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4e-11, scheduled_leak_T=285.000003, scheduled_velocity=(0.20000008,1e-08,0), scheduled_radius=0.080000003, scheduled_center=(0.420000008,0.250000004,0.200000002), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4e-11
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=4e-11, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000003, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000008,1e-08,0), fuel_species_index=10
+CH4 leak effective mass flow rate=4e-11
+CH4 leak source interval: time=0, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=4e-11, leak_T=285.000003, injected_interval=4e-18, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.420000008,0.250000004,0.200000002), radius=0.080000003, fraction=1, pressure_fraction=1, mdot=4e-11, active_volume=0.001953125, mdot_vol=2.048e-08
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=0, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.190913176
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [1] - Time: 1e-07, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=1e-07, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=1.2e-10, scheduled_leak_T=285.000009, scheduled_velocity=(0.20000024,3e-08,0), scheduled_radius=0.080000009, scheduled_center=(0.420000024,0.250000012,0.200000006), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=1.2e-10
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=1.2e-10, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000009, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000024,3e-08,0), fuel_species_index=10
+CH4 leak effective mass flow rate=1.2e-10
+CH4 leak source interval: time=1e-07, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=1.2e-10, leak_T=285.000009, injected_interval=1.2e-17, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.420000024,0.250000012,0.200000006), radius=0.080000009, fraction=1, pressure_fraction=1, mdot=1.2e-10, active_volume=0.001953125, mdot_vol=6.144e-08
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=1e-07, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.203951907
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [2] - Time: 2e-07, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=2e-07, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=2e-10, scheduled_leak_T=285.000015, scheduled_velocity=(0.2000004,5e-08,0), scheduled_radius=0.080000015, scheduled_center=(0.42000004,0.25000002,0.20000001), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=2e-10
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=2e-10, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000015, leak_count=1, pressure_driven_multihole=0, velocity=(0.2000004,5e-08,0), fuel_species_index=10
+CH4 leak effective mass flow rate=2e-10
+CH4 leak source interval: time=2e-07, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=2e-10, leak_T=285.000015, injected_interval=2e-17, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.42000004,0.25000002,0.20000001), radius=0.080000015, fraction=1, pressure_fraction=1, mdot=2e-10, active_volume=0.001953125, mdot_vol=1.024e-07
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=2e-07, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=1, qdot=5.12e+12
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.214822581
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [3] - Time: 3e-07, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=3e-07, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=2.8e-10, scheduled_leak_T=285.000021, scheduled_velocity=(0.20000056,7e-08,0), scheduled_radius=0.080000021, scheduled_center=(0.420000056,0.250000028,0.200000014), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=2.8e-10
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=2.8e-10, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000021, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000056,7e-08,0), fuel_species_index=10
+CH4 leak effective mass flow rate=2.8e-10
+CH4 leak source interval: time=3e-07, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=2.8e-10, leak_T=285.000021, injected_interval=2.8e-17, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.420000056,0.250000028,0.200000014), radius=0.080000021, fraction=1, pressure_fraction=1, mdot=2.8e-10, active_volume=0.001953125, mdot_vol=1.4336e-07
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=3e-07, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=1, qdot=5.12e+12
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.234008135
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [4] - Time: 4e-07, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=4e-07, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=3.6e-10, scheduled_leak_T=285.000027, scheduled_velocity=(0.20000072,9e-08,0), scheduled_radius=0.080000027, scheduled_center=(0.420000072,0.250000036,0.200000018), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=3.6e-10
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=3.6e-10, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000027, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000072,9e-08,0), fuel_species_index=10
+CH4 leak effective mass flow rate=3.6e-10
+CH4 leak source interval: time=4e-07, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=3.6e-10, leak_T=285.000027, injected_interval=3.6e-17, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.420000072,0.250000036,0.200000018), radius=0.080000027, fraction=1, pressure_fraction=1, mdot=3.6e-10, active_volume=0.001953125, mdot_vol=1.8432e-07
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=4e-07, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.217975601
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [5] - Time: 5e-07, dt 1e-07, Ncells 8192
+CH4 leak fixed-mass-flow schedule: time=5e-07, dt=1e-07, reference_leak_rate=0.00045, schedule_count=4, scheduled_reference_mdot=4.4e-10, scheduled_leak_T=285.000033, scheduled_velocity=(0.20000088,1.1e-07,0), scheduled_radius=0.080000033, scheduled_center=(0.420000088,0.250000044,0.200000022), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=4.4e-10
+Applying CH4 leak source: model=fixed_mass_flow_timeseries, mdot=4.4e-10, reference_leak_rate=0.00045, radius=0.12, leak_T=285.000033, leak_count=1, pressure_driven_multihole=0, velocity=(0.20000088,1.1e-07,0), fuel_species_index=10
+CH4 leak effective mass flow rate=4.4e-10
+CH4 leak source interval: time=5e-07, dt=1e-07, model=fixed_mass_flow_timeseries, mdot=4.4e-10, leak_T=285.000033, injected_interval=4.4e-17, valve_fraction_mid=1
+CH4 leak source[0]: center=(0.420000088,0.250000044,0.200000022), radius=0.080000033, fraction=1, pressure_fraction=1, mdot=4.4e-10, active_volume=0.001953125, mdot_vol=2.2528e-07
+CH4 leak discrete active volume=0.001953125, leak_count=1, fraction_sum=1
+CH4 delayed ignition source: enabled=1, time=5e-07, dt=1e-07, start_time=2e-07, duration=2e-07, power=1e+10, active_volume=0.001953125, time_fraction=0, qdot=0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.208814527
+
+ Writing plotfile: plt00006
+
+ >> Final simulation time: 6e-07
+
+Total Time: 1.68111229
+Unused ParmParse Variables:
+  [TOP]::amr.checkpoint_files_output(nvals = 1)  :: [0]
+  [TOP]::amr.plot_files_output(nvals = 1)  :: [0]
+
+Total GPU global memory (MB): 16269
+Free  GPU global memory (MB): 1122
+[The         Arena] max space allocated (MB): 12201
+[The         Arena] max space used      (MB): 191
+[The Managed Arena] max space allocated (MB): 8
+[The Managed Arena] max space used      (MB): 0
+[The  Pinned Arena] max space allocated (MB): 8
+[The  Pinned Arena] max space used      (MB): 1
+AMReX (0ec1056ff13b-dirty) finalized

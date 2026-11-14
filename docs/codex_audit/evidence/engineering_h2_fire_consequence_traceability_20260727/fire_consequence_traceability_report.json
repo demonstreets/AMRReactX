@@ -1,0 +1,261 @@
+{
+  "decision": "screening_consequence_formulae_and_direct_reacting_fire_evidence_traceable",
+  "direct_reacting_fire_checks": {
+    "largegrid_mpi_cuda": {
+      "final_time": 2.9999999999999814e-06,
+      "final_y_h2o_max": 0.016843226873556934,
+      "passed": true,
+      "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-MPI-CUDA-SUSTAINED",
+      "sustained_output_count": 4
+    },
+    "restart_mpi_cuda": {
+      "checkpoint_y_h2o_max": 0.001993830787372594,
+      "final_step": 525,
+      "final_y_h2o_max": 0.13344498290244958,
+      "initial_step": 225,
+      "passed": true,
+      "post_restart_sustained_output_count": 4,
+      "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-MPI-CUDA-RESTART-SUSTAINED"
+    },
+    "single_cuda_1000step": {
+      "final_time": 9.999999999999914e-06,
+      "final_y_h2o_max": 0.1405349795432564,
+      "passed": true,
+      "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-SINGLE-CUDA-SUSTAINED",
+      "sustained_output_count": 8
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "fire_consequence_metrics_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_fire_consequence_metrics_20260727/fire_consequence_metrics_report.json",
+      "sha256": "d401253eb7998853920f91525992db00109fbf80ec06ca2f36fe5c92885994ec",
+      "size_bytes": 5882
+    },
+    {
+      "label": "direct_reacting_single_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_cuda_1000step_20260727/pipe_rack_direct_reacting_cuda_report.json",
+      "sha256": "1b56f87fc667c9240132207869cd4452ff2711afbb78ece274c9d53541716783",
+      "size_bytes": 9950
+    },
+    {
+      "label": "direct_reacting_largegrid_mpi_cuda_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_largegrid_mpi_cuda_20260727/pipe_rack_direct_reacting_mpi_cuda_report.json",
+      "sha256": "5721a79c006f1c0e09cc4ca0ed07a4b6f64e0baaaf82a22205d0b340da99463b",
+      "size_bytes": 8030
+    },
+    {
+      "label": "direct_reacting_mpi_cuda_restart_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_mpi_cuda_restart_20260727/pipe_rack_reacting_mpi_cuda_restart_report.json",
+      "sha256": "1d9172b102f948a02326ae25a3a5baf71c35f8d384b910774b42f52b69d669df",
+      "size_bytes": 6475
+    }
+  ],
+  "generated_at_utc": "2026-07-27T07:43:08+00:00",
+  "limitations": [
+    "This audit proves traceability and internal consistency of screening metrics, not external calibration.",
+    "Direct reacting plotfile heat-release extrema are linked as fire-existence evidence; they are not converted into calibrated radiative or overpressure loads.",
+    "The fire-consequence production blocker remains until accepted external radiation and overpressure data pass the calibrated report gate."
+  ],
+  "schema_version": 1,
+  "screening_traceability": {
+    "cloud_energy_formula": "flammable_cloud_h2_mass_kg * h2_lhv_j_per_kg",
+    "distance_checks": [
+      {
+        "distances_m": [
+          1.0,
+          3.0,
+          5.0,
+          10.0,
+          20.0
+        ],
+        "name": "radiation_source_limited_flux",
+        "passed": true,
+        "values": [
+          2864.7943710066866,
+          318.31048566740964,
+          114.59177484026746,
+          28.647943710066865,
+          7.161985927516716
+        ]
+      },
+      {
+        "distances_m": [
+          1.0,
+          3.0,
+          5.0,
+          10.0,
+          20.0
+        ],
+        "name": "overpressure_screening_peak",
+        "passed": true,
+        "values": [
+          0.22338670289012086,
+          0.010237851570927898,
+          0.002310710313129831,
+          0.0002985925925750162,
+          3.79519765473516e-05
+        ]
+      }
+    ],
+    "formula_checks": [
+      {
+        "abs_error": 0.0,
+        "actual": 240000.452,
+        "expected": 240000.452,
+        "name": "source_limited_heat_release_w",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 24299.52012,
+        "expected": 24299.52012,
+        "name": "flammable_cloud_energy_j",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 24299.52012,
+        "expected": 24299.52012,
+        "name": "cloud_average_heat_release_w",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 36000.0678,
+        "expected": 36000.0678,
+        "name": "source_limited_radiative_power_w",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 3644.928018,
+        "expected": 3644.928018,
+        "name": "cloud_average_radiative_power_w",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 0.00017423174082217973,
+        "expected": 0.00017423174082217973,
+        "name": "tnt_equivalent_mass_kg",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 2864.7943710066866,
+        "expected": 2864.7943710066866,
+        "name": "source_flux_at_1m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 290.05415563942245,
+        "expected": 290.05415563942245,
+        "name": "cloud_flux_at_1m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 318.31048566740964,
+        "expected": 318.31048566740964,
+        "name": "source_flux_at_3m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 32.22823951549138,
+        "expected": 32.22823951549138,
+        "name": "cloud_flux_at_3m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 114.59177484026746,
+        "expected": 114.59177484026746,
+        "name": "source_flux_at_5m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 11.602166225576898,
+        "expected": 11.602166225576898,
+        "name": "cloud_flux_at_5m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 28.647943710066865,
+        "expected": 28.647943710066865,
+        "name": "source_flux_at_10m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 2.9005415563942245,
+        "expected": 2.9005415563942245,
+        "name": "cloud_flux_at_10m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 7.161985927516716,
+        "expected": 7.161985927516716,
+        "name": "source_flux_at_20m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      },
+      {
+        "abs_error": 0.0,
+        "actual": 0.7251353890985561,
+        "expected": 0.7251353890985561,
+        "name": "cloud_flux_at_20m",
+        "passed": true,
+        "rel_error": 0.0,
+        "rel_tol": 1e-10
+      }
+    ],
+    "radiation_formula": "radiative_fraction * source_limited_heat_release_w / (4*pi*r^2)",
+    "source_hrr_formula": "total_h2_mass_kg / leak_final_time_s * h2_lhv_j_per_kg",
+    "tnt_equivalent_formula": "flammable_cloud_energy_j * blast_efficiency / tnt_j_per_kg"
+  },
+  "status": "PASS-H2-FIRE-CONSEQUENCE-TRACEABILITY",
+  "title": "H2 Fire Consequence Traceability Audit",
+  "validated_capabilities": {
+    "calibrated_fire_or_blast_model": false,
+    "direct_reacting_fire_evidence_linked": true,
+    "fire_screening_formula_traceable": true,
+    "overpressure_distance_sweep_traceable": true,
+    "radiation_distance_sweep_traceable": true,
+    "restart_reacting_fire_evidence_linked": true
+  }
+}

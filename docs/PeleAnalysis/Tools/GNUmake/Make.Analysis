@@ -1,0 +1,103 @@
+PELE_ANALYSIS_HOME ?= $(abspath ../..)
+PELE_PHYSICS_HOME ?= $(abspath $(lastword $(PELE_ANALYSIS_HOME)/Submodules/PelePhysics))
+AMREX_HOME        ?= $(abspath $(lastword $(PELE_PHYSICS_HOME)/Submodules/amrex))
+SUNDIALS_HOME     ?= $(abspath $(lastword $(PELE_PHYSICS_HOME)/Submodules/sundials))
+
+TOP := $(PELE_ANALYSIS_HOME)
+
+
+include $(AMREX_HOME)/Tools/GNUMake/Make.defs
+
+
+all: $(executable)
+	$(SILENT) $(RM) AMReX_buildInfo.cpp
+	@echo SUCCESS
+
+#--------------
+# AMReX sources
+#--------------
+Adirs := Base Boundary Extern/amrdata AmrCore LinearSolvers/MLMG
+
+ifeq ($(USE_PARTICLES),TRUE)
+  Adirs += Particle
+endif
+
+Bpack += $(foreach dir, $(Adirs), $(AMREX_HOME)/Src/$(dir)/Make.package)
+Blocs += $(foreach dir, $(Adirs), $(AMREX_HOME)/Src/$(dir))
+
+
+#--------------------
+#PeleAnalysis sources
+#--------------------
+
+ifeq ($(NEED_DISTANCE),TRUE)
+  SDF_LOC = $(PELE_ANALYSIS_HOME)/Tools/SDFGen
+  include $(SDF_LOC)/Make.package
+  INCLUDE_LOCATIONS += $(SDF_LOC)
+  VPATH_LOCATIONS += $(SDF_LOC)
+endif
+
+ifeq ($(NEED_QSLIM),TRUE)
+  QSLIM_TOOL = $(PELE_ANALYSIS_HOME)/Tools/qslim
+  QSLIM_LOC = $(PELE_ANALYSIS_HOME)/Submodules/qslim
+  include $(QSLIM_TOOL)/Make.package
+  MIX_ROOT       = $(QSLIM_LOC)/mixkit/src
+  GFX_ROOT       = $(QSLIM_LOC)/libgfx
+  INCLUDE_LOCATIONS += $(QSLIM_TOOL) ${MIX_ROOT} ${GFX_ROOT}/include
+  LIBRARY_LOCATIONS += ${MIX_ROOT} ${GFX_ROOT}/src
+  LIBRARIES += -lmix -lgfx
+  DEFINES += -DHAVE_CONFIG_H -DHAVE_BOOL
+  VPATH_LOCATIONS += $(QSLIM_TOOL)
+endif
+
+#-------------------
+# PelePhysics sources
+#-------------------
+PPdirs  := Utility/PltFileManager Utility/Filter
+Bpack   += $(foreach dir, $(PPdirs), $(PELE_PHYSICS_HOME)/Source/$(dir)/Make.package)
+Blocs += $(foreach dir, $(PPdirs), $(PELE_PHYSICS_HOME)/Source/$(dir))
+
+
+$(info $${Bpack} is [${Bpack}])
+
+include $(Bpack)
+
+INCLUDE_LOCATIONS += $(Blocs)
+VPATH_LOCATIONS   += $(Blocs)
+
+CEXE_sources += AMReX_buildInfo.cpp
+CEXE_headers += $(AMREX_HOME)/Tools/C_scripts/AMReX_buildInfo.H
+INCLUDE_LOCATIONS += $(AMREX_HOME)/Tools/C_scripts
+
+
+AMReX_buildInfo.cpp:
+	$(AMREX_HOME)/Tools/C_scripts/makebuildinfo_C.py \
+          --amrex_home "$(AMREX_HOME)" \
+          --COMP "$(COMP)" --COMP_VERSION "$(COMP_VERSION)" \
+          --FCOMP "$(FCOMP)" --FCOMP_VERSION "$(FCOMP_VERSION)" \
+          --MODULES "$(MNAMES)" \
+          --GIT "$(TOP) $(AMREX_HOME) $(PELE_PHYSICS_HOME)"
+
+include $(AMREX_HOME)/Tools/GNUMake/Make.rules
+
+
+clean::
+	$(SILENT) $(RM) AMReX_buildInfo.cpp
+
+qslim:
+	@echo "==> Building qslim library"
+	@cd $(QSLIM_LOC)/libgfx; ./configure
+	@cd $(QSLIM_LOC)/libgfx/src; $(MAKE)
+	@cd $(QSLIM_LOC)/mixkit; ./configure
+	@cd $(QSLIM_LOC)/mixkit/src; $(MAKE)
+
+qslimclean:
+	@echo "==> Removing qslim library"
+	@cd $(QSLIM_LOC)/libgfx/src; $(MAKE) clean
+	@cd $(QSLIM_LOC)/mixkit/src; $(MAKE) clean
+
+#-----------------------------------------------------------------------------
+# for debugging.  To see the value of a Makefile variable,
+# e.g. Fmlocs, simply do "make print-Fmlocs".  This will
+# print out the value.
+#print-%: ; @echo $* is $($*) ; $(SILENT) $(RM) AMReX_buildInfo.cpp

@@ -1,0 +1,156 @@
+{
+  "evidence_files": [
+    {
+      "label": "generator",
+      "path": "tools/codex_make_liquefied_release_vaporization_csv.py",
+      "sha256": "090d438dd914232f6829453fdc51972ce96fd770862d7e9fd60a132916bb8eec",
+      "size_bytes": 12589
+    },
+    {
+      "label": "positive_source_model_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/engineering_liquefied_release_vaporization_source_model_report.json",
+      "sha256": "2291615f4573b5c149d4a20eb0ed5150e01919feb76eada13e10eb7d7c0c3640",
+      "size_bytes": 15190
+    },
+    {
+      "label": "positive_generator_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_negative_selftest_20260807/positive/lng_ch4_positive.json",
+      "sha256": "6a230428a1d668d5bdab662e4414f77be7874c99c25dcc8305ad412c9f65a9e4",
+      "size_bytes": 1931
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:29+00:00",
+  "negative_cases": [
+    {
+      "expected_message": "inventory_kg must be positive and finite",
+      "name": "negative_inventory",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL inventory_kg must be positive and finite"
+    },
+    {
+      "expected_message": "initial pressure must be at least ambient pressure",
+      "name": "initial_pressure_below_ambient",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL initial pressure must be at least ambient pressure"
+    },
+    {
+      "expected_message": "hole_diameter_m must be positive and finite",
+      "name": "zero_hole_diameter",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL hole_diameter_m must be positive and finite"
+    },
+    {
+      "expected_message": "points must be in [2, 64]",
+      "name": "too_many_points",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL points must be in [2, 64]"
+    },
+    {
+      "expected_message": "discharge_coeff must be <= 1",
+      "name": "high_discharge_coeff",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL discharge_coeff must be <= 1"
+    },
+    {
+      "expected_message": "jet direction vector must be nonzero",
+      "name": "zero_jet_direction",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL jet direction vector must be nonzero"
+    },
+    {
+      "expected_message": "max_jet_speed_m_s must be positive and finite",
+      "name": "negative_max_jet_speed",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL max_jet_speed_m_s must be positive and finite"
+    },
+    {
+      "expected_message": "pool_vapor_fraction must be nonnegative and finite",
+      "name": "negative_pool_vapor_fraction",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL pool_vapor_fraction must be nonnegative and finite"
+    },
+    {
+      "expected_message": "pool_vapor_fraction must be <= 0.95",
+      "name": "high_pool_vapor_fraction",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL pool_vapor_fraction must be <= 0.95"
+    },
+    {
+      "expected_message": "vaporized_fraction must be nonnegative and finite",
+      "name": "negative_vaporized_fraction",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL vaporized_fraction must be nonnegative and finite"
+    },
+    {
+      "expected_message": "vaporized_fraction must be <= 0.95",
+      "name": "high_vaporized_fraction",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL vaporized_fraction must be <= 0.95"
+    },
+    {
+      "expected_message": "source_radius_m must be positive and finite",
+      "name": "negative_source_radius",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL source_radius_m must be positive and finite"
+    },
+    {
+      "expected_message": "liquid_T_K must be positive and finite",
+      "name": "negative_liquid_temperature",
+      "refused": true,
+      "returncode": 2,
+      "stderr": "",
+      "stdout": "liquefied_release_vaporization_csv FAIL liquid_T_K must be positive and finite"
+    }
+  ],
+  "positive_case": {
+    "report_json": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_negative_selftest_20260807/positive/lng_ch4_positive.json",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "liquefied_release_vaporization_csv PASS csv=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_negative_selftest_20260807/positive/lng_ch4_positive.csv json=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_negative_selftest_20260807/positive/lng_ch4_positive.json"
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL-NEGATIVE-SELFTEST",
+  "summary": {
+    "failed_negative_cases": [],
+    "failed_negative_count": 0,
+    "guards_discharge_coeff": true,
+    "guards_inventory": true,
+    "guards_jet_direction": true,
+    "guards_liquid_temperature": true,
+    "guards_max_jet_speed": true,
+    "guards_orifice": true,
+    "guards_pool_fraction": true,
+    "guards_pressure": true,
+    "guards_schedule_count": true,
+    "guards_source_radius": true,
+    "guards_vaporized_fraction": true,
+    "negative_case_count": 13,
+    "negative_refused_count": 13,
+    "negative_selftest_ready": true,
+    "positive_generator_case_passed": true
+  }
+}

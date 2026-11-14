@@ -1,0 +1,577 @@
+{
+  "campaign": "engineering-h2-production-full-20260720",
+  "campaign_scale": "engineering_regression_smoke",
+  "case_count": 16,
+  "cases": [
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain/campaign_case.log",
+      "case_log_sha256": "c0557d31cae99e1c09e99f93356b2536e0d643072f9c9863db3b4a6a7d18bd4d",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_open_domain.sh"
+      ],
+      "description": "Open-domain flammable H2 leak plume and hazard diagnostics.",
+      "duration_s": 26.29020752996439,
+      "finished_at_utc": "2026-07-20T02:19:09+00:00",
+      "name": "open-domain",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain/validation.log",
+          "sha256": "18d8c109035843c83a9065bbf3ad2abca038249503330ce8b54523145835abbf"
+        },
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain/profile_validation.log",
+          "sha256": "967a00cf3d2d645ac508ce25c3c78e6a48ab43976a3092f847aa7fc74c80ce08"
+        },
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain/hazard_summary.log",
+          "sha256": "a5f8e50037f049caeb74ed6aa8aab5ea08a60db2425cbce0ed22b7ea4d268927"
+        },
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain/hazard_planes.csv",
+          "sha256": "bd719f3055c884f0b90d5fd6d6f8d847a60a126bfee2dcf9dbd7bebe3c9fbd9d"
+        },
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain/hazard_timeseries.csv",
+          "sha256": "3ca5aee1813fe0854edee3f4ec1417ce1b5a7c6c272183a3dd593dce08d3bc2f"
+        }
+      ],
+      "required_files": [
+        "validation.log",
+        "profile_validation.log",
+        "hazard_summary.log",
+        "hazard_planes.csv",
+        "hazard_timeseries.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/open-domain",
+      "script": "tools/codex_smoke_engineering_h2_leak_open_domain.sh",
+      "started_at_utc": "2026-07-20T02:18:43+00:00",
+      "status": "PASS",
+      "suite": "h2-core",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/release-rate/campaign_case.log",
+      "case_log_sha256": "bd1ea42e4ba2eef6ff8b9baa018696f0240accb69a76dc74581e111c03e80bd0",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_open_domain_release_rate.sh"
+      ],
+      "description": "Low/high release-rate response and cloud-strength trend.",
+      "duration_s": 52.40902946301503,
+      "finished_at_utc": "2026-07-20T02:20:02+00:00",
+      "name": "release-rate",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/release-rate/release_rate_summary.csv",
+          "sha256": "aec5656d84f2cf1c7e72f72cd56547ac45849b31691cdd0b126ccb7a58202c53"
+        }
+      ],
+      "required_files": [
+        "release_rate_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/release-rate",
+      "script": "tools/codex_smoke_engineering_h2_leak_open_domain_release_rate.sh",
+      "started_at_utc": "2026-07-20T02:19:09+00:00",
+      "status": "PASS",
+      "suite": "h2-core",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/crosswind/campaign_case.log",
+      "case_log_sha256": "0a3b3ed356f25070e7692b0a197efec0fd2945110ba5d601a2f06aeaa85d8477",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh"
+      ],
+      "description": "Baseline/crosswind lateral plume response.",
+      "duration_s": 53.355063015013,
+      "finished_at_utc": "2026-07-20T02:20:55+00:00",
+      "name": "crosswind",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/crosswind/crosswind_summary.csv",
+          "sha256": "2a86d4dff9f2455a9f4ec2a2565c814d7000fe5578e4594dab198dcd168ef242"
+        }
+      ],
+      "required_files": [
+        "crosswind_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/crosswind",
+      "script": "tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh",
+      "started_at_utc": "2026-07-20T02:20:02+00:00",
+      "status": "PASS",
+      "suite": "h2-core",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/low-wind/campaign_case.log",
+      "case_log_sha256": "af3082e4061f4edea312c32699ce4701681d4e498a58e635a088c88ad638fd00",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh"
+      ],
+      "description": "Low ambient wind source-region retention response.",
+      "duration_s": 52.5054165640031,
+      "finished_at_utc": "2026-07-20T02:21:48+00:00",
+      "name": "low-wind",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/low-wind/low_wind_summary.csv",
+          "sha256": "d9fe423b3037f931cfc4fae1cd56e348c757c8dbc0350875a12595d770245ea1"
+        }
+      ],
+      "required_files": [
+        "low_wind_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/low-wind",
+      "script": "tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh",
+      "started_at_utc": "2026-07-20T02:20:55+00:00",
+      "status": "PASS",
+      "suite": "h2-core",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/pressure-orifice/campaign_case.log",
+      "case_log_sha256": "8db09fe2ac423535642992e5fc65923f5b8276df86b4bceda51d8f0d97221066",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_pressure_orifice.sh"
+      ],
+      "description": "Pressure-orifice mass-flow source model.",
+      "duration_s": 14.502157802984584,
+      "finished_at_utc": "2026-07-20T02:22:02+00:00",
+      "name": "pressure-orifice",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/pressure-orifice/validation.log",
+          "sha256": "6870743ae13b6841f271f7ca886f50ffcf8fb12b7787e5f6adfd64f987a0cc77"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/pressure-orifice",
+      "script": "tools/codex_smoke_engineering_h2_leak_pressure_orifice.sh",
+      "started_at_utc": "2026-07-20T02:21:48+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/real-gas-orifice/campaign_case.log",
+      "case_log_sha256": "93cdbad2e0b0fea027e87a326b59b1ee4a31bed29b879525badfac17859a8568",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_real_gas_orifice.sh"
+      ],
+      "description": "Compressibility-factor pressure-orifice scaling.",
+      "duration_s": 14.50457887497032,
+      "finished_at_utc": "2026-07-20T02:22:17+00:00",
+      "name": "real-gas-orifice",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/real-gas-orifice/validation.log",
+          "sha256": "ba9b0135e4930140a8ed26f91794bd6e775144685348e220a4adc14ce05dda00"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/real-gas-orifice",
+      "script": "tools/codex_smoke_engineering_h2_leak_real_gas_orifice.sh",
+      "started_at_utc": "2026-07-20T02:22:02+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/tank-blowdown/campaign_case.log",
+      "case_log_sha256": "1649102215ca031259b37571cd9e3ddaa7cf9ad682b1329deb4c5759860fd7ec",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_tank_blowdown.sh"
+      ],
+      "description": "Transient tank inventory and pressure-depletion source.",
+      "duration_s": 14.303455977991689,
+      "finished_at_utc": "2026-07-20T02:22:31+00:00",
+      "name": "tank-blowdown",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/tank-blowdown/validation.log",
+          "sha256": "49d4b7d71032b72667d9d7a1e8bf069057d8066317b3a112edb1758a0dd7d8d4"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/tank-blowdown",
+      "script": "tools/codex_smoke_engineering_h2_leak_tank_blowdown.sh",
+      "started_at_utc": "2026-07-20T02:22:17+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/real-gas-tank-blowdown/campaign_case.log",
+      "case_log_sha256": "b95445b485ce70edaf78286a2084f91fa868c03ccf3ab19954d3e9d6d3367533",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_real_gas_tank_blowdown.sh"
+      ],
+      "description": "Real-gas tank-blowdown source scaling.",
+      "duration_s": 14.153783734014723,
+      "finished_at_utc": "2026-07-20T02:22:45+00:00",
+      "name": "real-gas-tank-blowdown",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/real-gas-tank-blowdown/validation.log",
+          "sha256": "f3783cc5c09db9a67f69bb9c3647a77880b90489f229e7d740ab83ecae0bbc22"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/real-gas-tank-blowdown",
+      "script": "tools/codex_smoke_engineering_h2_leak_real_gas_tank_blowdown.sh",
+      "started_at_utc": "2026-07-20T02:22:31+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/pipe-loss/campaign_case.log",
+      "case_log_sha256": "26d7998f14210127c038eaccc4c48391788615fe4c6b9de7cce3fc26fdec1642",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_pipe_loss.sh"
+      ],
+      "description": "Equivalent pipe/valve loss pressure reduction.",
+      "duration_s": 14.3527968939743,
+      "finished_at_utc": "2026-07-20T02:23:00+00:00",
+      "name": "pipe-loss",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/pipe-loss/validation.log",
+          "sha256": "cf59117e435c14befaaa2500806ef49f65558d808f127776c81d488e25650de7"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/pipe-loss",
+      "script": "tools/codex_smoke_engineering_h2_leak_pipe_loss.sh",
+      "started_at_utc": "2026-07-20T02:22:45+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/linepack-blowdown/campaign_case.log",
+      "case_log_sha256": "3f56c3eab9804464fae13d1162b54245bff174c8d27b7b01a2d6c75d595ca401",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_linepack_blowdown.sh"
+      ],
+      "description": "Lumped linepack inventory depletion.",
+      "duration_s": 15.354396078037098,
+      "finished_at_utc": "2026-07-20T02:23:15+00:00",
+      "name": "linepack-blowdown",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/linepack-blowdown/validation.log",
+          "sha256": "5b2190d73cc083485b102e850430ef02d6522cf48ba92c2bae513e198d8d3bc2"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/linepack-blowdown",
+      "script": "tools/codex_smoke_engineering_h2_leak_linepack_blowdown.sh",
+      "started_at_utc": "2026-07-20T02:23:00+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/linepack-valve-schedule/campaign_case.log",
+      "case_log_sha256": "4d9273718ca16ae6fbdba181dfeb81792629132f7956375e82e6dd4ec95a3f97",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_linepack_valve_schedule.sh"
+      ],
+      "description": "Delayed/ramped linepack valve schedule.",
+      "duration_s": 14.854689129977487,
+      "finished_at_utc": "2026-07-20T02:23:30+00:00",
+      "name": "linepack-valve-schedule",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/linepack-valve-schedule/validation.log",
+          "sha256": "674bcffed1a16c6e3ae4bb8d6de25f6b75da7e44487c3e05d59630db2ffe240d"
+        }
+      ],
+      "required_files": [
+        "validation.log"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/linepack-valve-schedule",
+      "script": "tools/codex_smoke_engineering_h2_leak_linepack_valve_schedule.sh",
+      "started_at_utc": "2026-07-20T02:23:15+00:00",
+      "status": "PASS",
+      "suite": "h2-source-physics",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/tank-farm/campaign_case.log",
+      "case_log_sha256": "33505b7416dbe905694c42c3882ac44f0d5c96daba8e275b538ba536f8542fd0",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_tank_farm.sh"
+      ],
+      "description": "Compact three-cylinder tank-farm EB union smoke.",
+      "duration_s": 65.24015307601076,
+      "finished_at_utc": "2026-07-20T02:24:35+00:00",
+      "name": "tank-farm",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/tank-farm/tank_farm_summary.csv",
+          "sha256": "d1fde805798ba16d76a06d545d2a9f7ba816ccfa59e2f874474c4d3b7a22a271"
+        }
+      ],
+      "required_files": [
+        "tank_farm_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/tank-farm",
+      "script": "tools/codex_smoke_engineering_h2_leak_tank_farm.sh",
+      "started_at_utc": "2026-07-20T02:23:30+00:00",
+      "status": "PASS",
+      "suite": "h2-geometry",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/stl-multifile/campaign_case.log",
+      "case_log_sha256": "5284dd0030b3872350de04a6880f267c5c94dc23eec5efa35f126e3e28207ab1",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh"
+      ],
+      "description": "Merged multi-file STL obstacle dispersion smoke.",
+      "duration_s": 51.252942508028354,
+      "finished_at_utc": "2026-07-20T02:25:26+00:00",
+      "name": "stl-multifile",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/stl-multifile/stl_obstacle_summary.csv",
+          "sha256": "c86da1e5209ade2d0e1e8941d1147239964a8aadc35a472f6e7197911506ed38"
+        }
+      ],
+      "required_files": [
+        "stl_obstacle_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/stl-multifile",
+      "script": "tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh",
+      "started_at_utc": "2026-07-20T02:24:35+00:00",
+      "status": "PASS",
+      "suite": "h2-geometry",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/stl-perfile-transform/campaign_case.log",
+      "case_log_sha256": "a70a1c4b4c8ea7418a0662eccba0df35fa99b646f0427a1f3c61e15bcb6c7a8f",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_stl_perfile_transform.sh"
+      ],
+      "description": "Per-file STL transform and merged geometry smoke.",
+      "duration_s": 50.60171903599985,
+      "finished_at_utc": "2026-07-20T02:26:17+00:00",
+      "name": "stl-perfile-transform",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/stl-perfile-transform/stl_obstacle_summary.csv",
+          "sha256": "853c049d0e3353d2a3ed576520e6245ee5f988616de0436c30a2a2d78123815a"
+        }
+      ],
+      "required_files": [
+        "stl_obstacle_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/stl-perfile-transform",
+      "script": "tools/codex_smoke_engineering_h2_leak_stl_perfile_transform.sh",
+      "started_at_utc": "2026-07-20T02:25:26+00:00",
+      "status": "PASS",
+      "suite": "h2-geometry",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-rank-sweep/campaign_case.log",
+      "case_log_sha256": "31e084c66e98a566b804ad8c0b3ca970620d723351c2d5075041fb36c3654dec",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_rank_sweep.sh"
+      ],
+      "description": "2/4-rank dynamic plan-AMR MPI hazard consistency.",
+      "duration_s": 116.29641857801471,
+      "finished_at_utc": "2026-07-20T02:28:13+00:00",
+      "name": "plan-amr-mpi-rank-sweep",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-rank-sweep/rank_sweep_summary.csv",
+          "sha256": "82524eb74f6afcaa98d0543d54f4ed59c7a6ac89017d16deb55235178ac2c175"
+        }
+      ],
+      "required_files": [
+        "rank_sweep_summary.csv"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-rank-sweep",
+      "script": "tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_rank_sweep.sh",
+      "started_at_utc": "2026-07-20T02:26:17+00:00",
+      "status": "PASS",
+      "suite": "h2-amr-mpi",
+      "timeout_s": 7200
+    },
+    {
+      "case_log": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-reduced-long/campaign_case.log",
+      "case_log_sha256": "d27bcbe6c51b1dc9f24afef4e0ab6b621c3465c6d4f278dceb9336b1dafcd4ad",
+      "command": [
+        "bash",
+        "tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_reduced_long.sh"
+      ],
+      "description": "4-rank 200-step dynamic plan-AMR MPI reduced-long stability scout.",
+      "duration_s": 108.40498623903841,
+      "finished_at_utc": "2026-07-20T02:30:02+00:00",
+      "name": "plan-amr-mpi-reduced-long",
+      "required_file_hashes": [
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-reduced-long/reduced_long_summary.csv",
+          "sha256": "4166ac92139e9683120f60923b389823ec747eb74e625ebad87bcc7cf38c1cac"
+        },
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-reduced-long/engineering_case_report.json",
+          "sha256": "c90c9b7877eacf7fa0ff993d04ea58513e4afd7535662a0d4f144093fc857c26"
+        },
+        {
+          "path": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-reduced-long/engineering_case_report.md",
+          "sha256": "f0bc45cc80939b1759505800ae30b54dcdbd46561b9a6c40514703592eec7557"
+        }
+      ],
+      "required_files": [
+        "reduced_long_summary.csv",
+        "engineering_case_report.json",
+        "engineering_case_report.md"
+      ],
+      "root": "/tmp/codex_engineering_h2_campaign_full_20260720/cases/plan-amr-mpi-reduced-long",
+      "script": "tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_reduced_long.sh",
+      "started_at_utc": "2026-07-20T02:28:13+00:00",
+      "status": "PASS",
+      "suite": "h2-production-scout",
+      "timeout_s": 7200
+    }
+  ],
+  "clears_real_cad_cleanup_blocker": true,
+  "evidence_tier": "workflow_regression",
+  "full_duration_campaign": false,
+  "generated_at_utc": "2026-07-23T05:33:03+00:00",
+  "geometry_evidence_tier": "real_cad_cleanup",
+  "global_limitations": [
+    "Manifest proves runner orchestration, required-output presence, SHA-256 integrity, zero return codes, and absence of runner-detected failure markers for listed cases only.",
+    "Real CAD evidence proves source/cleaned geometry provenance, hashes, and declared cleanup checks; it does not by itself prove CFD accuracy for every possible plant layout."
+  ],
+  "host": "xiaochun-4028",
+  "output_root": "/tmp/codex_engineering_h2_campaign_full_20260720",
+  "production_campaign": false,
+  "production_readiness_scope": "engineering H2 leak full runner evidence packaging and verification",
+  "production_size_mesh_campaign": false,
+  "real_cad_cleanup_campaign": true,
+  "real_cad_cleanup_evidence": {
+    "bbox_union_m": {
+      "extent": [
+        6.0,
+        5.0,
+        1.0
+      ],
+      "max": [
+        6.0,
+        5.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "cleaned_geometry_files": [
+      {
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/files/selftest_cleaned_1.stl",
+        "sha256": "7cab3745b2afab1ea38c6c616357ab8c1d335f1d579a817f724cffb33f23a4b8",
+        "size_bytes": 143
+      },
+      {
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/files/selftest_cleaned_2.stl",
+        "sha256": "644ff0421fc6ed5f4c6f95a9bc6995788baab298b1484a7bf62503e1ea705674",
+        "size_bytes": 143
+      },
+      {
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/files/selftest_cleaned_3.stl",
+        "sha256": "65d3289b2193d5d01563a0c40e868ec0e95834637800aec34204353ed75ef120",
+        "size_bytes": 143
+      }
+    ],
+    "dataset_type": "engineering_real_cad_cleanup_evidence",
+    "geometry_count": 3,
+    "large_layout_campaign": true,
+    "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/selftest_real_cad_cleanup_manifest.json",
+    "provenance": {
+      "owner_or_supplier": "Codex selftest",
+      "site_or_asset": "schema selftest",
+      "title": "SCHEMA SELFTEST ONLY - synthetic CAD files for gate testing, not production evidence"
+    },
+    "sha256": "a6090662cb31130c3125542467bdc9a6f5f383ff64cc9d8a1b42b3c1124955a6",
+    "source_cad_files": [
+      {
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/files/selftest_source_1.stp",
+        "sha256": "dbf3b5a4a6b2af2e4cc064b1e2f9caf549ea5b919aefeea9625d66a12ebd19d9",
+        "size_bytes": 68
+      },
+      {
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/files/selftest_source_2.stp",
+        "sha256": "461b3ace14aec599064513bc659ec0216c27a7934f99f8f3f2863ff683c98b40",
+        "size_bytes": 68
+      },
+      {
+        "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_schema_20260723/files/selftest_source_3.stp",
+        "sha256": "1b158280480ab1c3358607dc007c44041db1d8c96c2b33dbb70511dca5df78fa",
+        "size_bytes": 68
+      }
+    ],
+    "source_type": "plant_cad",
+    "status": "PASS"
+  },
+  "real_cad_geometry_count": 3,
+  "real_cad_large_layout_campaign": true,
+  "repo": {
+    "branch": "codex/stabilize-my-pele",
+    "commit": "0ec1056ff13bba9ee4062713938d55a75efc93dd",
+    "dirty": true,
+    "dirty_short_line_count": 469,
+    "dirty_short_sha256": "7ba70535fda4cda71131bc1c5701922bae95a366aae097870aa2e42f5f487329"
+  },
+  "run_summary_markdown_path": "/tmp/codex_engineering_h2_campaign_full_20260720/campaign_run_summary.md",
+  "run_summary_markdown_sha256": "9e6fccc59cf91335e66c4441fdd6f1e96d4dafc52d704c68311f657c4d703d0b",
+  "run_summary_path": "/tmp/codex_engineering_h2_campaign_full_20260720/campaign_run_summary.json",
+  "run_summary_sha256": "7a4c5fea708e4f77f00457e05c4fac8943d9d6ba0b125f004db5650bf119ba6d",
+  "runner_campaign": "engineering-h2-production-full-20260720",
+  "schema_version": 1,
+  "source_type": "campaign_run_summary",
+  "status": "PASS",
+  "suite": "engineering-h2-production",
+  "suite_count": 5,
+  "suites": [
+    "h2-core",
+    "h2-source-physics",
+    "h2-geometry",
+    "h2-amr-mpi",
+    "h2-production-scout"
+  ],
+  "synthetic_stl_pipeline_evidence": true,
+  "synthetic_tank_farm_evidence": true
+}

@@ -1,0 +1,55 @@
+#ifndef PELELM_PROB_H
+#define PELELM_PROB_H
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <AMReX_SPACE.H>
+#include <PeleLMeX_ProblemSpecificFunctions.H>
+#include <PeleLMeX_Index.H>
+#include <PMFData.H>
+#include <PelePhysics.H>
+
+struct MyProbParm : public ProbParmDefault {
+  amrex::Real T_mean=300.0, meanFlowMag=2.0;
+  int meanFlowDir=1;
+};
+
+struct MyProblemSpecificFunctions : public DefaultProblemSpecificFunctions {
+  static void EBUserDefined(const amrex::Geometry&,const int,const int);
+
+  AMREX_GPU_DEVICE AMREX_FORCE_INLINE
+  static void initdata(int i,int j,int k,int is_incompressible,
+    amrex::Array4<amrex::Real> const& state,amrex::Array4<amrex::Real> const&,
+    amrex::GeometryData const& geomdata,MyProbParm const& pp,
+    pele::physics::PMF::PmfData::DataContainer const*)
+  {
+    auto eos=pele::physics::PhysicsType::eos();
+    amrex::Real mf[NUM_SPECIES]={0.0};mf[O2_ID]=0.233;mf[N2_ID]=0.767;
+    AMREX_D_TERM(state(i,j,k,VELX)=pp.meanFlowMag;,state(i,j,k,VELY)=0.0;,state(i,j,k,VELZ)=0.0);
+    if(!(is_incompressible==0))return;
+    state(i,j,k,TEMP)=pp.T_mean;
+    amrex::Real P=pp.P_mean*10.0,rho=0.0;eos.PYT2R(P,mf,state(i,j,k,TEMP),rho);state(i,j,k,DENSITY)=rho*1.0e3;
+    amrex::Real h=0.0;eos.TY2H(state(i,j,k,TEMP),mf,h);state(i,j,k,RHOH)=h*1.0e-4*state(i,j,k,DENSITY);
+    for(int n=0;n<NUM_SPECIES;n++)state(i,j,k,FIRSTSPEC+n)=mf[n]*state(i,j,k,DENSITY);
+  }
+
+  AMREX_GPU_DEVICE AMREX_FORCE_INLINE
+  static void bcnormal(const amrex::Real*,const amrex::CellData<amrex::Real>&,
+    amrex::Real s_ext[NVAR],const int,const int,const amrex::Real,
+    amrex::GeometryData const&,MyProbParm const& pp,
+    pele::physics::PMF::PmfData::DataContainer const*)
+  {
+    amrex::Real mf[NUM_SPECIES]={0.0};mf[O2_ID]=0.233;mf[N2_ID]=0.767;
+    auto eos=pele::physics::PhysicsType::eos();
+    AMREX_D_TERM(s_ext[VELX]=pp.meanFlowMag;,s_ext[VELY]=0.0;,s_ext[VELZ]=0.0);
+    s_ext[TEMP]=pp.T_mean;
+    amrex::Real P=pp.P_mean*10.0,rho,rhoh;eos.PYT2R(P,mf,s_ext[TEMP],rho);s_ext[DENSITY]=rho*1.0e3;
+    eos.TY2H(s_ext[TEMP],mf,rhoh);s_ext[RHOH]=rhoh*1.0e-4*s_ext[DENSITY];
+    for(int n=0;n<NUM_SPECIES;n++)s_ext[FIRSTSPEC+n]=mf[n]*s_ext[DENSITY];
+  }
+};
+
+using ProblemSpecificFunctions=MyProblemSpecificFunctions;
+using ProbParm=MyProbParm;
+
+// Continuous leak via post-timestep: add H2 mass after each step
+#endif

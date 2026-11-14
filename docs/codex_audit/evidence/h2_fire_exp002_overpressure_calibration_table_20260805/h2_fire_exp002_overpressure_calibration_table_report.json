@@ -1,0 +1,77 @@
+{
+  "evidence_files": [
+    {
+      "label": "exp002_reduced_report",
+      "path": "docs/codex_audit/evidence/h2_fire_overpressure_reduced_exp002_20260805/h2_fire_overpressure_reduced_exp002_report.json",
+      "sha256": "9cb5633eddf3ba90d4df77ea3ea220b42abe0dd4307f2345e2b5f286a8228482",
+      "size_bytes": 6956
+    },
+    {
+      "label": "exp002_delayed_ignition_bridge",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_exp002_delayed_ignition_bridge_20260805/engineering_h2_fire_exp002_delayed_ignition_bridge_report.json",
+      "sha256": "e03799444453f0f28ebc47dbc4d34b516e4290e415babcdb6c68f3e4476cda1e",
+      "size_bytes": 6791
+    },
+    {
+      "label": "metadata_report",
+      "path": "docs/codex_audit/evidence/h2_fire_overpressure_dataverse_metadata_20260805/h2_fire_overpressure_dataverse_metadata_report.json",
+      "sha256": "46f761f0efeb68b1da072f36f9583db2c6e2952a15251fe15def34a7220645c2",
+      "size_bytes": 16886
+    },
+    {
+      "label": "overpressure_metrics_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/overpressure_metrics.csv",
+      "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613",
+      "size_bytes": 1208
+    },
+    {
+      "label": "partial_metadata_json",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/calibration_metadata.exp002_overpressure_partial.json",
+      "sha256": "0252d795b266e682d1db430051267dfe9d92b7e36b350695e8e157693c18b8ad",
+      "size_bytes": 1075
+    },
+    {
+      "label": "channel_targets_json",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/exp002_pressure_channel_targets.json",
+      "sha256": "fac8e8ea1e273493ee8f9557dfefb7d213a79257c4b0389e384a00e0dc2f1c72",
+      "size_bytes": 1821
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:56.487884+00:00",
+  "limitations": [
+    "This table promotes EXP002 measured overpressure targets into the repository schema; it does not include CFD pressure-sensor agreement.",
+    "distance_m records the known nozzle-to-obstacle distance because sensor coordinates are not yet mapped.",
+    "Radiation calibration metrics are still absent, so strict fire-consequence credit remains blocked."
+  ],
+  "output_files": {
+    "channel_targets_json": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/exp002_pressure_channel_targets.json",
+    "overpressure_metrics_csv": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/overpressure_metrics.csv",
+    "partial_metadata_json": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/calibration_metadata.exp002_overpressure_partial.json"
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-EXP002-OVERPRESSURE-CALIBRATION-TABLE",
+  "summary": {
+    "csv_columns": [
+      "metric_id",
+      "distance_m",
+      "reference_overpressure_kpa",
+      "tolerance_abs_kpa",
+      "tolerance_rel",
+      "source_basis"
+    ],
+    "distance_m_field_is_obstacle_distance_not_sensor_distance": true,
+    "exp002_peak_corrected_overpressure_bar": 0.027474030077501568,
+    "max_tolerance_rel": 0.5,
+    "overpressure_metric_count": 4,
+    "overpressure_metrics_csv_ready": true,
+    "ready_for_cfd_pressure_sensor_comparison": true,
+    "ready_for_full_fire_calibration_ingestion": false,
+    "reference_overpressure_kpa_range": [
+      0.511295923456,
+      2.74740300775
+    ],
+    "source_csv_md5_matches_dataverse": true,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire EXP002 Overpressure Calibration Table"
+}

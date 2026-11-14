@@ -1,0 +1,65 @@
+# Codex-maintained short D2-law spray smoke. Keep this tiny; full validation is elsewhere.
+max_step = 2
+stop_time = 1.e-3
+
+geometry.is_periodic = 0 1
+geometry.coord_sys   = 0
+geometry.prob_lo     =  0. 0.
+geometry.prob_hi     =  50. 50.
+amr.n_cell           = 8 8
+
+pelec.lo_bc       =  "Hard" "Interior"
+pelec.hi_bc       =  "Hard" "Interior"
+
+pelec.do_hydro = 1
+pelec.diffuse_vel = 1
+pelec.diffuse_temp = 1
+pelec.diffuse_enth = 1
+pelec.diffuse_spec = 1
+pelec.do_react = 0
+pelec.chem_integrator = "ReactorNull"
+pelec.allow_negative_energy = 1
+
+pelec.cfl            = 0.5
+pelec.init_shrink    = 0.3
+pelec.change_max     = 1.1
+pelec.dt_cutoff      = 5.e-20
+
+pelec.sum_interval   = -1
+pelec.v              = 0
+amr.v                = 1
+
+amr.max_level       = 0
+amr.blocking_factor = 4
+amr.max_grid_size   = 8
+amr.n_error_buf     = 2
+
+pelec.do_spray_particles = 1
+particles.derive_plot_vars = 1
+particles.fixed_parts = 1
+particles.mom_transfer = 0
+particles.mass_transfer = 1
+particles.init_file = "initsprayfile.dat"
+particles.write_ascii_files = 1
+
+particles.fuel_ref_temp = 300.
+particles.fuel_species = NC7H16
+particles.NC7H16_crit_temp = 540.
+particles.NC7H16_boil_temp = 371.6
+particles.NC7H16_latent = 3.63E9
+particles.NC7H16_cp = 2.2483E7
+particles.NC7H16_rho = 0.6814
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+
+particles.use_splash_model = false
+particles.use_breakup_model = None
+
+amr.checkpoint_files_output = 0
+amr.plot_file       = plt
+amr.plot_int        = 1
+amr.plot_vars = density Temp rho_E xmom ymom eden rho_O2 rho_N2 rho_NC7H16
+amr.derive_plot_vars = x_velocity y_velocity pressure
+
+prob.init_T = 500.
+prob.init_p = 1.01325E6
+prob.init_v = -250.

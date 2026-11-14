@@ -1,0 +1,157 @@
+{
+  "case": {
+    "backend": "CPU-serial",
+    "build_log": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/build.log",
+    "case_name": "mms_nonconstant_density_stationary_8cell_1step",
+    "density_perturbation_amplitude": 0.05,
+    "dimension": 3,
+    "exact_pressure": 101325.0,
+    "input_file": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/run/input.codex_mms_nonconstant_density",
+    "manufactured_solution_kind": "nonconstant_density_stationary",
+    "masa_shim_home": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/masa_shim",
+    "max_step": 1,
+    "n_cell": [
+      8,
+      8,
+      8
+    ],
+    "role": "academic_mms_nonconstant_density_stationary_validation",
+    "run_log": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/run.log",
+    "run_returncode": 0,
+    "solver": "PeleC",
+    "stop_time": 1e-10,
+    "uses_external_masa": false,
+    "validation_log": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/validation.log",
+    "validation_returncode": 0
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/case_summary.json",
+      "sha256": "8fc37444daf73f33ffd71b4d7cfc3eb6b4b22d8958e8811b214371f29f1986a9",
+      "size_bytes": 1339
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/run/input.codex_mms_nonconstant_density",
+      "sha256": "7fb97adb52ce7572952bd939ce47814d6e173e9fc665711849f34cefcfb0b1ce",
+      "size_bytes": 2242
+    },
+    {
+      "label": "masa_shim_header",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/masa_shim/include/masa.h",
+      "sha256": "612f99073974a929b46b30804985303a7be511adad47c5f6c4d6a9be233d38ff",
+      "size_bytes": 1585
+    },
+    {
+      "label": "masa_shim_static_library",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/masa_shim/lib/libmasa.a",
+      "sha256": "2d8a2bc9f706ac535045fdd5d19c12698e900eda9fbf855588302cc5a8201246",
+      "size_bytes": 1544
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/build.log",
+      "sha256": "6f8cf8fd6c72b1ddadb2496aa54d2a9346be9285ba184c0a9a3e91802cfc0827",
+      "size_bytes": 732090
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/run.log",
+      "sha256": "67081c3affeb09d32166a3cba28b54c361bb49413ca9e10ef6addd5004b54aa9",
+      "size_bytes": 4212
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/validation.log",
+      "sha256": "acc1c19c4b568bf74490e9a363409f0845f67c8fa26bc77ccad4203013aa6026",
+      "size_bytes": 556
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_mms_nonconstant_density_shim_validation.sh",
+      "sha256": "00a7a88c38c83df51af29d69ec1495a94e8dff213d567891a49113929614bdc8",
+      "size_bytes": 10853
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_mms_nonconstant_density_shim_validation_report.py",
+      "sha256": "00ca6f58497f373e51176f23ca9828b0ae2a144a62c8fa1c33db886d38ce74f2",
+      "size_bytes": 14621
+    }
+  ],
+  "generated_at_utc": "2026-07-29T02:02:05+00:00",
+  "limitations": [
+    "This is a nonconstant in-repository MASA-compatible shim, not the external nonlinear MASA/MetaPhysicL benchmark.",
+    "The exact state is stationary with zero velocity and constant pressure; it strengthens MMS spatial-field coverage but does not exercise all nonlinear source terms.",
+    "The report intentionally sets clears_external_nonlinear_masa_benchmark=false to avoid overclaiming QLT-03 closure."
+  ],
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/masa_shim/include/masa.h",
+        "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/masa_shim/lib/libmasa.a"
+      ],
+      "gap": "",
+      "name": "nonconstant_density_shim_built",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/run.log"
+      ],
+      "gap": "",
+      "name": "mms_run_finalized_without_failure_tokens",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/validation.log"
+      ],
+      "gap": "",
+      "name": "nonconstant_density_primary_errors_near_roundoff",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/validation.log"
+      ],
+      "gap": "",
+      "name": "pressure_and_energy_relative_residuals_bounded",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_mms_nonconstant_density_shim_validation_20260729/mms_nonconstant_density_stationary_8cell_1step/case_summary.json"
+      ],
+      "gap": "",
+      "name": "scope_guard_does_not_claim_external_masa",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "PeleC MMS RegTest validation with a generated MASA-compatible nonconstant-density, zero-velocity, constant-pressure stationary manufactured state. This exercises spatially varying exact-field evaluation, MMS source wiring, error derives, clean finalization, and relative pressure/energy residual gates without claiming external MASA coverage.",
+  "status": "PASS-ACADEMIC-MMS-NONCONSTANT-DENSITY-SHIM-VALIDATION",
+  "summary": {
+    "blocking_reasons": [],
+    "clears_external_nonlinear_masa_benchmark": false,
+    "clears_qlt_03_nonconstant_mms_shim_gap": true,
+    "manufactured_solution_kind": "nonconstant_density_stationary",
+    "max_primary_error": 3.935420342e-13,
+    "max_primary_residual": 3.934805386e-13,
+    "pressure_error": 0.00196732577,
+    "pressure_error_relative": 1.94159957562e-08,
+    "rhoE_residual": 0.004918314429,
+    "rhoE_residual_relative": 1.9415995772e-08,
+    "rho_mms_error": 3.164622523e-15,
+    "rho_residual": 3.164622523e-15,
+    "rhou_residual": 3.934805386e-13,
+    "rhov_residual": 3.934805386e-13,
+    "rhow_residual": 3.934805386e-13,
+    "u_mms_error": 3.935420342e-13,
+    "uses_external_masa": false,
+    "v_mms_error": 3.935420342e-13,
+    "w_mms_error": 3.935420342e-13
+  },
+  "title": "Academic MMS Nonconstant-Density Shim Validation"
+}

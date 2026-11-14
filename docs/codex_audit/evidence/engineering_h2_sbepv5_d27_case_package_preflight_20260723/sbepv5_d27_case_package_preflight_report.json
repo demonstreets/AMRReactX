@@ -1,0 +1,183 @@
+{
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "case_package_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json",
+  "case_runnable": false,
+  "case_scaffold_preflight_passed": true,
+  "clears_reference_data_blocker": false,
+  "evidence_files": [
+    {
+      "label": "case_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json",
+      "sha256": "d8d79d2129aa82f3d88dcee01c28767ff6eef7a545d15bbcad3a8070ac141817",
+      "size_bytes": 6686
+    },
+    {
+      "label": "baffle_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/baffle_geometry_template.csv",
+      "sha256": "fee1e2511b7351e9f6e244ef6500e5b18111d74eb3b7168f1a088570ef25a732",
+      "size_bytes": 278
+    },
+    {
+      "label": "experimental_timeseries_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/experimental_timeseries_template.csv",
+      "sha256": "2cbc3b48c87399b180b8cbb09bbc8988ba8b79eb879289bfaca4de7e082a67a1",
+      "size_bytes": 223
+    },
+    {
+      "label": "metadata_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/dataset_metadata_template.json",
+      "sha256": "064c9d9af5e789b67e8b7662c1eed4f0f11d30e85b5f0326283158860df51167",
+      "size_bytes": 1198
+    },
+    {
+      "label": "readme",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/README.md",
+      "sha256": "92bc5db7fe79faa12db6cdd4def2464f1b83648b31d9797d8e5e48e97c6a6f62",
+      "size_bytes": 836
+    },
+    {
+      "label": "reference_input",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/inputs.sbepv5_d27_reference",
+      "sha256": "ca7684163d742034778e2854f755185d10a9d1b3dd5a3edcbde8b848c882137f",
+      "size_bytes": 1664
+    },
+    {
+      "label": "scout_input",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/inputs.sbepv5_d27_scout",
+      "sha256": "816f7843752624ff67c4e2c3b3a903b3a451e7d7502288f84085086349ec9ae3",
+      "size_bytes": 1653
+    },
+    {
+      "label": "sensor_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/sensors_template.csv",
+      "sha256": "e8e5eaf433fac33f5d3a3309a920cc42774f803c5e03f928baa2b9cd5fb96f13",
+      "size_bytes": 757
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "input_checks": {
+    "reference": {
+      "cell_size_m": [
+        0.005,
+        0.005,
+        0.005
+      ],
+      "max_cell_size_m": 0.005,
+      "n_cell": [
+        240,
+        40,
+        180
+      ],
+      "nozzle_cells_on_coarsest_spacing": 2.4,
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/inputs.sbepv5_d27_reference",
+      "release": {
+        "exit_velocity_m_s": 10.17,
+        "flow_rate_normal_l_s": 1.15,
+        "jet_exit_location_m": [
+          0.03,
+          0.1,
+          0.145
+        ],
+        "nozzle_diameter_m": 0.012,
+        "period_s": 60.0
+      },
+      "source_resolution_ready": true,
+      "stop_time_s": 120.0
+    },
+    "scout": {
+      "cell_size_m": [
+        0.02,
+        0.02,
+        0.02
+      ],
+      "max_cell_size_m": 0.02,
+      "n_cell": [
+        60,
+        10,
+        45
+      ],
+      "nozzle_cells_on_coarsest_spacing": 0.6,
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/package/inputs.sbepv5_d27_scout",
+      "release": {
+        "exit_velocity_m_s": 10.17,
+        "flow_rate_normal_l_s": 1.15,
+        "jet_exit_location_m": [
+          0.03,
+          0.1,
+          0.145
+        ],
+        "nozzle_diameter_m": 0.012,
+        "period_s": 60.0
+      },
+      "source_resolution_ready": true,
+      "stop_time_s": 120.0
+    }
+  },
+  "limitations": [
+    "This preflight checks package self-consistency and source-region resolution of the scaffold.",
+    "It does not run PeleLMeX and does not clear the external reference-data blocker.",
+    "production_validation_ready remains false until the exact dataset is ingested and a 120 s case-matched run is completed."
+  ],
+  "production_validation_ready": false,
+  "reference_input_source_resolution_ready": true,
+  "remaining_runtime_gaps": [
+    "dataset_metadata_json_missing_or_not_passed",
+    "exact_sensor_coordinates_missing_or_not_passed",
+    "exact_baffle_geometry_missing_or_not_passed",
+    "experimental_timeseries_missing_or_not_passed"
+  ],
+  "schema_version": 1,
+  "scout_input_source_resolution_ready": true,
+  "status": "PASS-SBEPV5-D27-CASE-PACKAGE-PREFLIGHT",
+  "template_checks": {
+    "baffles": {
+      "baffle_count": 4
+    },
+    "dataset_metadata": {
+      "case_alignment_keys": [
+        "boundary_conditions",
+        "geometry",
+        "release_direction",
+        "release_rate"
+      ]
+    },
+    "experimental_timeseries": {
+      "columns": [
+        "time_s",
+        "Gas01_vol_percent",
+        "Gas02_vol_percent",
+        "Gas03_vol_percent",
+        "Gas04_vol_percent",
+        "Gas05_vol_percent",
+        "Gas06_vol_percent",
+        "Gas07_vol_percent",
+        "Gas08_vol_percent",
+        "Gas09_vol_percent",
+        "Gas10_vol_percent",
+        "Gas11_vol_percent",
+        "Gas12_vol_percent"
+      ],
+      "sensor_columns": 12
+    },
+    "sensors": {
+      "reliable": [
+        "1",
+        "2",
+        "5",
+        "7",
+        "8",
+        "9",
+        "10",
+        "12"
+      ],
+      "sensor_count": 12,
+      "unreliable": [
+        "3",
+        "4",
+        "6",
+        "11"
+      ]
+    }
+  },
+  "title": "HySafe SBEPV5 D27 Case Package Preflight"
+}

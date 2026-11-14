@@ -1,0 +1,408 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_bfs_fix.md)
+tool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+tool: read_file (path: /home/cj/my-pele/tools/amrex_reader.py)
+tool read_file completed: # TASK: 修复 validate_bfs.py 两个 bug
+
+## Bug 1: FAB 数据读取 Fortran 顺序错误
+
+**文件**: `/home/cj/my-pele/tools/amrex_reader.py` (或 validate_bfs.py 内联)
+**行号**: ~156
+
+**问题**: `(ncomp, ny, nx, order='F')` 应该是 `(nx, ny, ncomp, order='F')`
+
+AMReX FAB 二进制格式是 Fortran 序：最内层循环是 x，所以 reshape 维度顺序是 (nx, ny, ncomp)。
+
+#...
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="1-200" truncated="true" next_start_line="201">
+     1│ #!/usr/bin/env python3
+     2│ """
+     3│ validate_bfs.py — Phase 2.7 Backward-Facing Step Validation.
+     4│ 
+     5│ Reads a PeleLMeX AMReX plotfile and va...
+tool read_file completed: <file path="/home/cj/my-pele/tools/amrex_reader.py" total_lines="326" shown_lines="1-200" truncated="true" next_start_line="201">
+     1│ #!/usr/bin/env python3
+     2│ """
+     3│ amrex_reader.py — Lightweight AMReX plotfile reader (HyperCLaw-V1.1 format).
+     4│ 
+     5│ Reads AMReX plotfile d...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me read the rest of both files to understand the full data flow.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/amrex_reader.py)
+tool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+
+tool read_file completed: <file path="/home/cj/my-pele/tools/amrex_reader.py" total_lines="326" shown_lines="201-326" truncated="false">
+   201│         box_3d = re.search(
+   202│             rb'\(\((\d+),(\d+),(\d+)\)\s*\((\d+),(\d+),(\d+)\)',
+   203│             header_bytes)
+   204│         box_2d = re.search(
+   205│...
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="201-400" truncated="true" next_start_line="401">
+   201│         u = fields['x_velocity'][:, ix]
+   202│     elif 'velocityx' in fields:
+   203│         u = fields['velocityx'][:, ix]
+   204│     else:
+   205│     ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow]0;🐋 CodeWhale I have the full picture. Let me trace the data flow carefully before making changes.
+
+**Bug 1**: In `amrex_reader.py` line 156, `(ncomp, ny, nx, order='F')` swaps the]0;🐳 CodeWhale x/y axes. The TASK says fix to `(nx, ny, ncomp, order='F')`. This means the data shape changes from `(ncomp, ny, nx)` to `(nx, ny, ncomp)`]0;🐋 CodeWhale — which requires downstream fixes in both files:
+
+- `read_plotfile`: `data[i]` → `data[:, :, i]` (component extraction)
+- Multi-box stitching]0;🐳 CodeWhale: array shape and slice alignment
+- `validate_bfs.py`: all `arr[0, :]` (first-row-above-wall) → `arr[:, 0]` and `arr]0;🐋 CodeWhale[:, ix]` (column slice) → `arr[ix, :]`
+
+**Bug 2**: `U_REF = 44.2` → `13.47` m/s on line 34.
+
+Let me also]0;🐳 CodeWhale check the remaining lines of validate_bfs.py for any other `[:, ix]` patterns.]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="401-440" truncated="false">
+   401│     print(f"Cf (tau=0.5, rho=1.225, U=44.2) = {cf:.6f}")
+   402│ 
+   403│     # Test Cp computation
+   404│     cp = compute_cp(101400, 101325, 1.225, 44.2)
+   405│     print(f"C...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleGood. Now I have the full picture. Let me create and apply both patches.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: apply_patch (path: /home/cj/my-pele/tools/amrex_reader.py)
+tool: apply_patch (path: /home/cj/my-pele/tools/validate_bfs.py)
+
+tool apply_patch completed: Applied 3/3 hunks across 1 file(s). Files: /home/cj/my-pele/tools/amrex_reader.py. Fuzz used on 1 hunk(s) (total fuzz: 1). Note: patch headers reference `amrex_reader.py` but `path` overrides to `/home/cj/my-pele/tools/amrex_reader.py`.
+tool apply_patch completed: Applied 4/4 hunks across 1 file(s). Files: /home/cj/my-pele/tools/validate_bfs.py. Fuzz used on 1 hunk(s) (total fuzz: 1). Note: patch headers reference `validate_bfs.py` but `path` overrides to `/home/cj/my-pele/tools/validate_bfs.py`.
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleBoth patches applied. Let me verify the key changes and find the latest plotfile.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/amrex_reader.py)
+tool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+tool: list_dir (path: /home/cj/my-pele/examples/engineering/backward_facing_step)
+
+tool read_file completed: <file path="/home/cj/my-pele/tools/amrex_reader.py" total_lines="326" shown_lines="153-162" truncated="true" next_start_line="163">
+   153│     data = np.frombuffer(raw, dtype=np.float64, count=expected, offset=data_start)
+   154│ 
+   155│     if nz == 1:
+   156│         data = data.reshape(nx, n...
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="31-38" truncated="true" next_start_line="39">
+    31│ H = 0.0381           # Step height [m]
+    32│ X_R_REF = 6.26       # Reference reattachment length X_R/H
+    33│ X_R_TOL = 0.15       # ±15% tolerance
+    34│ ...
+tool list_dir completed: <60 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhaleChanges verified. The latest plotfile is `plt02057`. Running validation.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <116 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Reading plotfile: my-pele/examples/engineering/backward_facing_step/plt02057
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/validate_bfs.py", line 438, in <module>
+    result = validate(sys.argv[1])
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/validate_bfs.py", line 316, in validate
+    pf = read_plotfile(plotfile_dir)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 286, in read_plotfile
+    data, grid_meta = _read_level(plotfile_dir, level, meta['ncomp'], dx)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 222, in _read_level
+    data = _read_fab_data(fab_path, ncomp, nx, ny, nz)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 149, in _read_fab_data
+    raise PlotfileError(
+amrex_reader.PlotfileError: Data size mismatch in my-pele/examples/engineering/backward_facing_step/plt02057/Level_0/Cell_D_00000: expected 18816 doubles, got 16128
+
+
+STDERR:
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleData size mismatch. Let me debug by inspecting the plotfile header to understand the expected dimensions.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <83 chars>)
+tool: exec_shell (command: <117 chars>)
+tool: exec_shell (command: <94 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+HyperCLaw-V1.1
+12
+x_velocity
+y_velocity
+density
+rhoh
+temp
+RhoRT
+divu
+gradpx
+gradpy
+volFrac
+avg_pressure
+mag_vort
+2
+0.5
+0
+-0.14999999999999999 0 
+1.1499999999999999 0.34999999999999998 
+
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+00000000: 4641 4220 2828 382c 2028 3634 2031 3120  FAB ((8, (64 11 
+00000010: 3532 2030 2031 2031 3220 3020 3130 3233  52 0 1 12 0 1023
+00000020: 2929 2c28 382c 2028 3820 3720 3620 3520  )),(8, (8 7 6 5 
+00000030: 3420 3320 3220 3129 2929 2828 302c 3029  4 3 2 1)))((0,0)
+00000040: 2028 3535 2c32 3729 2028 302c 3029 2920   (55,27) (0,0)) 
+00000050: 3132 0a00 0000 0000 0000 0000 0000 0000  12..............
+00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000080: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+000000a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+000000b0: 0000 0008 8097 6360 0dc6 bff8 a450 2477  ......c`.....P$w
+000000c0: 17e3 bf8c 282e e5f4 7bed bf0e b596 c370  ....(...{......p
+000000d0: 8cf4 bfe2 07cb 45b4 f900 c085 18d7 58b8  ......E.......X.
+000000e0: da0c c0f9 0ae0 447e d215 c0a2 80c3 0241  ......D~.......A
+000000f0: 9a1a c011 8e95 2765 ab19 c087 f7ba 278f  ......'e......'.
+00000100: a913 c00c b6b0 37fd 730a c04b 1411 6024  ......7.s..K..`$
+00000110: 3e04 c000 9dc5 3a5c af06 c09f 0a72 5b60  >.....:\.....r[`
+00000120: 6f0b c009 9361 a965 ec08 c06d 8232 0912  o....a.e...m.2..
+00000130: 00fa bff0 8644 824c 76d3 3fe0 c2da d020  .....D.Lv.?.... 
+00000140: 1201 4030 7a7f 4b9f 4a0e 4034 d3a2 074b  ..@0z.K.J.@4...K
+00000150: b314 40b2 069c 9700 f818 40e4 110d 986e  ..@.......@....n
+00000160: c81b 4033 268a 4454 fb1c 40b2 c65c be95  ..@3&.DT..@..\..
+00000170: a81c 4051 7e6b a049 471b 40a4 a954 f1cc  ..@Q~k.IG.@..T..
+00000180: 8f19 4024 94c3 81a7 a618 402f d391 0f7c  ..@$......@/...|
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+279720 /home/cj/my-pele/examples/engineering/backward_facing_step/plt02057/Level_0/Cell_D_00000
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe FAB header format in plt02057 might be unusual (EB-related). Let me try a different plotfile.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <119 chars>)
+tool: exec_shell (command: <181 chars>)
+
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+FAB ((8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((0,0) (55,27) (0,0)) 12
+^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@M-YM-3M-^\M-:M-\AM-tM-?:M-^I193M-^M^PM-@^FM-^^M-N^Le
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+279720 /home/cj/my-pele/examples/engineering/backward_facing_step/plt00100/Level_0/Cell_D_00000
+HyperCLaw-V1.1
+12
+x_velocity
+y_velocity
+density
+rhoh
+temp
+RhoRT
+divu
+gradpx
+gradpy
+volFrac
+avg_pressure
+mag_vort
+2
+0.019175404107450261
+0
+-0.14999999999999999 0 
+1.1499999999999999 0.34999999999999998 
+
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleSame format across plotfiles. Let me debug the data boundary detection]0;🐳 CodeWhale by looking for all regex matches in the raw file.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <895 chars>)
+
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+File size: 279720
+Found 2 matches for ")12\n"
+  Match -3: pos=78-83, ctx=b'4 3 2 1)))((0,0) (55,27) (0,0)) 12\n\x00\x00\x00\x00'
+  Match -2: pos=150691-150696, ctx=b'3 2 1)))((56,0) (103,27) (0,0)) 12\n\x9d \xe9\xa9'
+Newlines in first 200 bytes: [83]
+  After newline at 83: first 8 bytes = 0000000000000000
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleFound the root cause. The regex `matches[-1]` picks a false match inside the binary data (second FAB header at byte 150691]0;🐳 CodeWhale). Also need 8-byte alignment after the ASCII header. Let me fix both.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <367 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+  double[0] at offset 88: 0.0
+  double[1] at offset 96: 0.0
+  double[2] at offset 104: 0.0
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow I'll fix the three issues in `_read_f]0;🐳 CodeWhaleab_data`:
+1. Use first regex match, not last
+2. Align data_start to 8-byte boundary
+3. Relax count check (`<` instead of `!=`) since FAB files may contain concaten]0;🐋 CodeWhaleated blocks]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: apply_patch (path: /home/cj/my-pele/tools/amrex_reader.py)
+
+tool apply_patch completed: Applied 1/1 hunks across 1 file(s). Files: /home/cj/my-pele/tools/amrex_reader.py. Fuzz used on 1 hunk(s) (total fuzz: 2). Note: patch headers reference `amrex_reader.py` but `path` overrides to `/home/cj/my-pele/tools/amrex_reader.py`.
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me verify the fix and run the validation.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/amrex_reader.py)
+
+tool read_file completed: <file path="/home/cj/my-pele/tools/amrex_reader.py" total_lines="329" shown_lines="120-159" truncated="true" next_start_line="160">
+   120│         raw = f.read()
+   121│ 
+   122│     # Find the ASCII header boundary.
+   123│     # Pattern: the ASCII FAB header ends with ") <ncomp>\n"
+   124│    ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow running the validation with the fixed reader.]0;🐋 CodeWhaletool: exec_shell (command: <116 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/tools/validate_bfs.py:178: RuntimeWarning: overflow encountered in scalar multiply
+  tau_w = rhow * u_tau * u_tau
+Reading plotfile: my-pele/examples/engineering/backward_facing_step/plt02057
+  Time: 0.5000
+  Grid: 112 x 28
+
+Extracting Cf along bottom wall...
+  Reattachment: X_R = 0.05357 m  (X_R/H = 1.41)
+  Recirculation zone length: 28.94H
+
+Extracting velocity profiles...
+  x/H =  -4.0: U_max = 2035598725462588491176225489376134561305147713664855526713621674818245249228039471476683592951861780490385912300690987219260140716815700315276081757691535341093357529372404219872538081958474318100949474234394875376945570758963216514933374069067506851484236678738150432051945712603586080276480.00 m/s
+  x/H =   0.0: U_max = 147446035919115018587206719191081570789155102580130736125464095705074736132441521710849813503434987701437230001708844885786650430861029494248776379499403920127817899514940426797937665836693208539927214700770438664566500576169160982846688811847290366328957576087422684173689436464068927357283451430487099179008.00 m/s
+  x/H =   2.0: U_max = 5681585098914264241407916651027421985490749744140811905043051250671260676809135173191996442434473806946921577825279578587136968666877404659828863570130548219647777791490705427224870999236477984071523237888.00 m/s
+  x/H =   4.0: U_max = 4508548735382849902181390440538541660704865375900524198826935126362478992647390677379000238534208256282521777528229235222058574303424301186319473457901744400967366252365480736991786341262856210881371570593855752580412179212480014173279148939219143425700168718980081016149743866012133332257829807980544.00 m/s
+  x/H =   6.0: U_max = 9912676642562927512523650109290387189684409946194561642812769614894031984227765101831437902601020023300668046366513293869936964836418636694816926993410142153028169917317846101809941503922549498449211855100735571396727402277444060419364650812690080189823159352146214683897696243782089123510468726489088.00 m/s
+  x/H =   8.0: U_max = 1270000395701998714779534674013632484619986758263537589573249456405124219527554962008399331337348092762464362542896768122264918213219772152962088341646358073193041818678690297005310118060297059487816205775002240235279574264268994465695775502034645691437304203189346507842418822465820399773941760.00 m/s
+  x/H =  10.0: U_max = 1630117573308815391590727242065027760728897745297844005148872185117387012645522516740857747703204137986868923282015373127586634491302179899833549726361721302593332101167472246092975457762675785938418982732634553655130530791826429238825171311850100087795373646800971181699321616715156031545751271301145690112.00 m/s
+  x/H =  15.0: U_max = 1095253568828272975793132151734379198305565212929509083663310332913383116848591291121308742109268574157858579810001325731596153776638555531390313319431738977196809241827767074918849229718477382196884218539830915533607992621465399674362680690022956841183308418019508148698917652678091735040.00 m/s
+
+Extracting step-face Cp...
+  Cp on step face: 6738781059771325191443612728056377211399047801292616799210987580273341512889243142393621283369471994322368177892267554782598900279997962575892480228630921003275807476484740245357424726308872405337419861422605798883837408280837080644456770305405161944683076573357788237087358599561216.000 to 6738781059771325191443612728056377211399047801292616799210987580273341512889243142393621283369471994322368177892267554782598900279997962575892480228630921003275807476484740245357424726308872405337419861422605798883837408280837080644456770305405161944683076573357788237087358599561216.000
+
+============================================================
+  BACKWARD-FACING STEP VALIDATION REPORT
+============================================================
+
+  Parameters:
+    H = 0.0381 m
+    U_ref = 13.5 m/s
+    Re_H = 34214
+
+  Reattachment:
+    X_R/H = 1.41
+    Reference: 6.26 ± 0.94
+
+  Recirculation zone:
+    Length = 28.94H
+    Minimum required: 3.0H
+
+  Notes:
+    - X_R/H = 1.41 — FAIL
+    - Recirculation zone length = 28.94H — PASS
+
+  VERDICT: PASS WITH NOTES
+============================================================
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleThe plotfile read without errors now, but the velocity/pressure values are garbage — astronomically large numbers. The reshape axis interpretation is still]0;🐋 CodeWhale off. Let me check by reading raw data and testing both Fortran-order interpretations.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1412 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+data_start=88
+Interpretation A (ncomp,nx,ny,order=F): shape=(12, 56, 28)
+  x_velocity[0,0,0]=0.000000
+  x_velocity max=nan min=nan
+Interpretation B (nx,ny,ncomp,order=F): shape=(56, 28, 12)
+  x_velocity[0,0,0]=0.000000
+  x_velocity max=164950697773057216614565875523305470684051955684943475068947883718631183998327584388097956662083794629060006798782331662697910846645090654691897869188561177892927885745465375728101304974849061366469290733467665270528647627030457969585221436922368937542491960345879956129548939186391220747448651770002732482560.000000 min=-32450236541314244294123869968691128304247749795636959291621205518728629233683599395201613712502150863873011258953115667783488766938512872899571861125831997824329559126485473953027728077846065209160650146078228353545745903192763132281744342993288650069101775668470256745621805182438800268891260825580456640512.000000
+Interpretation C (ny,nx,ncomp,order=F): shape=(28, 56, 12)
+  x_velocity[0,0,0]=0.000000
+  x_velocity max=164950697773057216614565875523305470684051955684943475068947883718631183998327584388097956662083794629060006798782331662697910846645090654691897869188561177892927885745465375728101304974849061366469290733467665270528647627030457969585221436922368937542491960345879956129548939186391220747448651770002732482560.000000 min=-32450236541314244294123869968691128304247749795636959291621205518728629233683599395201613712502150863873011258953115667783488766938512872899571861125831997824329559126485473953027728077846065209160650146078228353545745903192763132281744342993288650069101775668470256745621805182438800268891260825580456640512.000000
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleAll interpretations give garbage except A which gives NaN. Let me check raw data alignment and test with different]0;🐳 CodeWhale offsets.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <694 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+offset=83: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=84: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=85: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=86: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=87: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=88: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=89: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=90: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+offset=91: finite=16/16, first 4 valid: [0. 0. 0. 0.]
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <592 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Bytes at first FAB data end (150616): b'\x12\\?\xb8ASG\xfd|Y?FAB ((8, (64 11 52 0 1 12 0 1'
+Hex: 125c3fb8415347fd7c593f464142202828382c202836342031312035322030203120313220302031
+Gap length: 80 bytes
+Gap content: b'(8, (64 11 52 0 1 12 0 1023)),(8, (8 7 6 5 4 3 2 1)))((56,0) (103,27) (0,0)) 12\n'
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me look at non-zero values deeper in the x_velocity field across all interpretations.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1692 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+Raw data (18816 doubles): finite=18809/18816
+  First few NaN indices: [12862 13135 13972 15840 16125 16712 17672]
+  Values at NaN indices: [nan nan nan nan nan]
+
+Interpretation A (ncomp,nx,ny):
+  x_vel finite: 1567/1568
+  x_vel [0,1,0]=6.124201e-62, [27,0,0]=-5.928775e+19, [55,0,0]=-1.127974e+107
+  y_vel finite: 1568/1568
+
+Interpretation B (nx,ny,ncomp):
+  x_vel[:,:,0] finite: 1568/1568
+  x_vel [0,0,0]=0.000000e+00, [27,0,0]=1.614010e+153, [55,0,0]=2.077321e-317
+  First non-zero x_vel at wall (b[:,0,0]): [ 0.00000000e+000 -4.95173602e+138  6.12420065e-062  5.83669458e+178
+ -6.93163914e+109  1.50596357e-294  7.76542337e+183 -1.22514746e-099
+  2.55350615e+127  2.70423006e+259]
+
+First 12 raw doubles (all components at x=0,y=0):
+  raw[0] = 0.000000e+00
+  raw[1] = 0.000000e+00
+  raw[2] = 0.000000e+00
+  raw[3] = 0.000000e+00
+  raw[4] = 0.000000e+00
+  raw[5] = 0.000000e+00
+  raw[6] = 0.000000e+00
+  raw[7] = 0.000000e+00
+  raw[8] = 0.000000e+00
+  raw[9] = 0.000000e+00
+  raw[10] = 0.000000e+00
+  raw[11] = -4.951736e+138
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleBoth interpretations give garbage. The raw data itself seems oddly structured. Let me check]0;🐳 CodeWhale what reasonable velocity values exist in the raw data.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <1170 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Values in [0.1, 100] range: 25 out of 18816
+First 10 indices: [ 145  323  842  846 1087 1199 1786 1809 2477 2629]
+Values: [ 0.28222892  0.14811685  0.74355829  3.34047558 34.32559875  1.76276409
+  0.45568692  0.81656989  0.85472183 23.74440037]
+Values in [0.1, 5] range: 17
+Values in (0, 20): 7805
+First 20 indices: [ 12  15  28  29  32  35  36  49  55  75  83  84  88  94  95 108 109 111
+ 124 126]
+Values: ['0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000']
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe file has]0;🐳 CodeWhale 2 concatenated FABs. Let me check the Cell_H structure and understand the full domain layout.]0;🐋 CodeWhaletool: exec_shell (command: <86 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+1
+1
+12
+0
+(2 0
+((0,0) (55,27) (0,0))
+((56,0) (103,27) (0,0))
+)
+2
+FabOnDisk: Cell_D_00000 0
+FabOnDisk: Cell_D_00000 150611
+
+2,12
+-8.40202896340611716e+00,-4.91864063773054561e+00,0.00000000000000000e+00,-6.20023580184379171e+03,0.00000000000000000e+00,0.00000000000000000e+00,-1.39944004316116558e-06,-2.31911105123332709e+03,-1.62689055043715257e+03,0.00000000000000000e+00,-9.28853960495831643e+01,0.00000000000000000e+00,
+1.20007995070061497e+01,-2.59634233291147383e-02,1.19997077090545079e+00,-6.19637241219657699e+03,2.93003134867077847e+02,1.01324999999999141e+05,-2.47892576834120952e-15,-2.22877054707183753e+00,-2.19486735362318530e+00,1.00000000000000000e+00,-2.48164844717206956e-01,7.22546307638705001e-07,
+
+2,12
+1.57511556718231365e+01,3.11925407657890119e+00,1.19998360687454841e+00,0.00000000000000000e+00,2.93003134867081940e+02,1.01325000121578603e+05,1.29867552104584437e-06,3.82768436226632730e+03,2.12631005824951035e+03,1.00000000000000000e+00,2.98477838777723079e+01,1.01164312748649490e+03,
+1.20523419361014721e+01,-1.00954478847818957e-05,1.19997077090547610e+00,-6.19637241219315183e+03,2.93003134867080576e+02,1.01325000000000291e+05,1.95701537581593465e-15,2.15238243293196074e+00,-3.08178123170220648e-05,1.00000000000000000e+00,2.39292904375311810e-01,5.87814232337191598e+01,
+
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale[<1u[?1004l[?2004l[?1006l[?1015l[?1003l[?1002l[?1000l[?1049l

@@ -1,0 +1,80 @@
+{
+  "status": "PASS-REAL-CASE-INTAKE-GUIDE",
+  "documents": {
+    "index": {
+      "path": "docs/user_guides/README.md",
+      "exists": true,
+      "sha256": "f7d017f00f28653dcf22134a749b86fce32a8444e3d13b657eed8626720e5f70",
+      "bytes": 2552
+    },
+    "real_case_intake_guide": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "exists": true,
+      "sha256": "fb3d9684a0dc87c3ae4c833a69c0a1709ec19165054faf577d41e2923c0d97e6",
+      "bytes": 13412
+    }
+  },
+  "checks": {
+    "index_links_real_case_guide": {
+      "path": "docs/user_guides/README.md",
+      "pattern": "真实工程资料交付与复验清单.md",
+      "pass": true
+    },
+    "real_cad_section": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "真实 CAD 与边界标签",
+      "pass": true
+    },
+    "external_plume_section": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "外部 plume/泄漏扩散标定数据",
+      "pass": true
+    },
+    "fire_calibration_section": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "火灾、热辐射、过压标定数据",
+      "pass": true
+    },
+    "master_scope_command": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "bash tools/verify_master_plan_current_scope.sh",
+      "pass": true
+    },
+    "release_refresh_command": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "bash tools/run_current_scope_release_refresh.sh",
+      "pass": true
+    },
+    "h2_rebuild_command": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "bash tools/rebuild_engineering_h2_evidence_chain.sh",
+      "pass": true
+    },
+    "real_cad_drop_root": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package",
+      "pass": true
+    },
+    "external_plume_drop_root": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset",
+      "pass": true
+    },
+    "fire_calibration_drop_root": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset",
+      "pass": true
+    },
+    "fire_calibration_residual_budget_command": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "bash tools/verify_h2_fire_calibration_residual_budget.sh",
+      "pass": true
+    },
+    "fire_calibration_residual_budget_report": {
+      "path": "docs/user_guides/真实工程资料交付与复验清单.md",
+      "pattern": "docs/codex_audit/evidence/h2_fire_calibration_residual_budget_20260811/h2_fire_calibration_residual_budget_report.md",
+      "pass": true
+    }
+  },
+  "failures": []
+}

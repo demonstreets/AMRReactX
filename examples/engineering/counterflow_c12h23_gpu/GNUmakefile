@@ -1,0 +1,20 @@
+REPO_ROOT ?= $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
+CUDA_HOME ?= /usr/local/cuda
+SUNDIALS_HOME ?= $(or $(SUNDIALS_CUDA_DIR),$(SUNDIALS_DIR))
+DIM = 2
+COMP = gnu
+PRECISION = DOUBLE
+USE_MPI = FALSE
+USE_CUDA = TRUE
+CUDA_ARCH = 60
+CUDA_HOME ?= /usr/local/cuda
+SUNDIALS_HOME ?= $(or $(SUNDIALS_CUDA_DIR),$(SUNDIALS_DIR))
+INCLUDE_LOCATIONS += $(SUNDIALS_HOME)/include
+LIBRARY_LOCATIONS += $(SUNDIALS_HOME)/lib
+USE_PARTICLES = TRUE
+SPRAY_FUEL_NUM = 1
+Chemistry_Model = heptane_fc
+Transport_Model = Simple
+Eos_Model = Fuego
+PELE_HOME := $(REPO_ROOT)/external/PeleLMeX
+include $(PELE_HOME)/Exec/Make.PeleLMeX

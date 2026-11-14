@@ -1,0 +1,145 @@
+{
+  "clears_fire_consequence_blocker": false,
+  "evidence_files": [
+    {
+      "label": "fire_calibration_public_source_triage_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json",
+      "sha256": "41249a0709ec15401ba7d74264c171b828242b1dcab58c6331e5b8516d796c0a",
+      "size_bytes": 7052
+    },
+    {
+      "label": "fire_calibration_digitization_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json",
+      "sha256": "de64e9cc2e3ffd0e66bd21bda3cccb87a870e1b709857a39aef89a5fb2827319",
+      "size_bytes": 6362
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "The metric anchors are public-literature intake checks, not calibrated consequence agreement.",
+    "The fire-consequence blocker remains until local radiation/overpressure data are ingested and the official calibrated consequence report passes."
+  ],
+  "metric_anchor_count": 4,
+  "metric_anchors": [
+    {
+      "family": "radiation",
+      "metric_id": "mdpi_jet_fire_radiometer_layout",
+      "quantity": "radiometer placement for hydrogen jet-fire heat flux",
+      "source_id": "mdpi_jet_fire_2024",
+      "use_in_future_agreement": "build radiation_metrics.csv rows with distance/height/source-basis columns",
+      "values": {
+        "flame_axis_heights_m": [
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "leak_diameters_mm": [
+          1.2,
+          1.5,
+          2.0
+        ],
+        "radial_distances_m": [
+          0.23,
+          0.5
+        ]
+      }
+    },
+    {
+      "family": "radiation",
+      "metric_id": "mdpi_jet_fire_reference_flux_bounds",
+      "quantity": "published heat-flux examples for jet-fire radiation scale",
+      "source_id": "mdpi_jet_fire_2024",
+      "use_in_future_agreement": "set heat-flux sanity bounds before full table digitization",
+      "values": {
+        "flux_w_m2_1p5mm_0p6mpa_0p23m": 1360.5,
+        "flux_w_m2_1p5mm_0p6mpa_0p50m": 412.1,
+        "max_flux_w_m2_at_0p23m_1p2mm": 952.8,
+        "max_flux_w_m2_at_0p23m_2p0mm": 3378.1
+      }
+    },
+    {
+      "family": "radiation",
+      "metric_id": "mdpi_jet_fire_model_error_anchor",
+      "quantity": "reported optimized multi-point source model error",
+      "source_id": "mdpi_jet_fire_2024",
+      "use_in_future_agreement": "initial radiation tolerance floor until experiment-specific uncertainty is ingested",
+      "values": {
+        "average_error_percent": 13.9,
+        "max_error_percent": 21.7
+      }
+    },
+    {
+      "family": "overpressure",
+      "metric_id": "hyindoor_overpressure_scale_anchor",
+      "quantity": "vented hydrogen deflagration enclosure and target pressure scale",
+      "source_id": "hyindoor_low_strength_enclosure_2017",
+      "use_in_future_agreement": "seed overpressure_metrics.csv scale checks for low-strength enclosure cases",
+      "values": {
+        "enclosure_volume_m3": 31.0,
+        "maximum_h2_concentration_vv_percent": 14.0,
+        "maximum_internal_overpressure_target_kpa": 10.0
+      }
+    }
+  ],
+  "missing_artifacts": [
+    {
+      "artifact": "radiation_metrics.csv",
+      "required_action": "digitize or obtain heat-flux rows with distance, tolerance, and source basis"
+    },
+    {
+      "artifact": "overpressure_metrics.csv",
+      "required_action": "digitize or obtain overpressure rows with gauge location, tolerance, and source basis"
+    },
+    {
+      "artifact": "fire_calibration_acceptance_overlay.json",
+      "required_action": "after calibrated consequence output exists, compare radiation/overpressure predictions to metric anchors"
+    }
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json",
+      "gap": "",
+      "name": "public_source_triage_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json",
+      "gap": "",
+      "name": "digitization_preflight_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "MDPI jet-fire radiometer layout and heat-flux examples recorded",
+      "gap": "",
+      "name": "radiation_metric_anchor_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "HyIndoor low-strength enclosure overpressure scale recorded",
+      "gap": "",
+      "name": "overpressure_metric_anchor_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Local radiation_metrics.csv and overpressure_metrics.csv are still required for calibration ingestion.",
+      "name": "local_metric_csvs_still_missing",
+      "status": "MISSING"
+    }
+  ],
+  "ready_for_dataset_ingestion": false,
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-CALIBRATION-LITERATURE-METRIC-PREFLIGHT",
+  "summary": {
+    "digitization_preflight_ready": true,
+    "missing_artifact_count": 3,
+    "overpressure_anchor_count": 1,
+    "overpressure_metric_anchor_available": true,
+    "public_source_triage_ready": true,
+    "radiation_anchor_count": 3,
+    "radiation_metric_anchor_available": true,
+    "ready_for_dataset_ingestion": false
+  },
+  "title": "Engineering H2 Fire Calibration Literature Metric Preflight"
+}

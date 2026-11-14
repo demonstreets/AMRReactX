@@ -1,0 +1,405 @@
+#include "ReactorNN.H"
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+
+namespace pele::physics::reactions {
+
+// ───────────────────────────────────────────────────────────────
+// Fixed architecture (hardcoded — matches rnn_weights.h)
+// 12 → 128 (ReLU) → 128 (ReLU) → 64 (ReLU) → 11
+// ───────────────────────────────────────────────────────────────
+static constexpr int RNN_D_IN  = 12;
+static constexpr int RNN_H1    = 128;
+static constexpr int RNN_H2    = 128;
+static constexpr int RNN_H3    = 64;
+static constexpr int RNN_D_OUT = 11;
+static constexpr int RNN_N_SPEC = 10;
+
+// ───────────────────────────────────────────────────────────────
+// Device weight arrays (global memory — 106KB total)
+// ───────────────────────────────────────────────────────────────
+__device__ float d_rnn_w0[RNN_D_IN * RNN_H1];    // 1536
+__device__ float d_rnn_b0[RNN_H1];               // 128
+__device__ float d_rnn_w1[RNN_H1 * RNN_H2];      // 16384
+__device__ float d_rnn_b1[RNN_H2];               // 128
+__device__ float d_rnn_w2[RNN_H2 * RNN_H3];      // 8192
+__device__ float d_rnn_b2[RNN_H3];               // 64
+__device__ float d_rnn_w3[RNN_H3 * RNN_D_OUT];   // 704
+__device__ float d_rnn_b3[RNN_D_OUT];            // 11
+
+// Binary blob layout (matches convert_weights.py)
+static constexpr size_t OFF_W0 = 0;
+static constexpr size_t OFF_B0 = 1536;
+static constexpr size_t OFF_W1 = 1664;
+static constexpr size_t OFF_B1 = 18048;
+static constexpr size_t OFF_W2 = 18176;
+static constexpr size_t OFF_B2 = 26368;
+static constexpr size_t OFF_W3 = 26432;
+static constexpr size_t OFF_B3 = 27136;
+
+// ───────────────────────────────────────────────────────────────
+// Device helper: single-cell NN forward pass (BN-folded weights)
+// Input:  x[12]  = [T, P, Y_0..Y_9]     — physical units
+// Output: out[11] = [dY_0..dY_9, dT]    — physical source terms
+// Called from both rnn_forward_kernel (1D path) and ParallelFor
+// ───────────────────────────────────────────────────────────────
+__device__ void rnn_forward_cell(const float* x, float* out)
+{
+    // Layer 0: 12 → 128, ReLU
+    float h1[128];
+    for (int j = 0; j < 128; j++) {
+        float sum = d_rnn_b0[j];
+#pragma unroll
+        for (int k = 0; k < 12; k++) sum += x[k] * d_rnn_w0[j * 12 + k];
+        h1[j] = fmaxf(0.0f, sum);
+    }
+
+    // Layer 1: 128 → 128, ReLU
+    float h2[128];
+    for (int j = 0; j < 128; j++) {
+        float sum = d_rnn_b1[j];
+        for (int k = 0; k < 128; k++) sum += h1[k] * d_rnn_w1[j * 128 + k];
+        h2[j] = fmaxf(0.0f, sum);
+    }
+
+    // Layer 2: 128 → 64, ReLU
+    float h3[64];
+    for (int j = 0; j < 64; j++) {
+        float sum = d_rnn_b2[j];
+        for (int k = 0; k < 128; k++) sum += h2[k] * d_rnn_w2[j * 128 + k];
+        h3[j] = fmaxf(0.0f, sum);
+    }
+
+    // Layer 3: 64 → 11 (no activation)
+    for (int j = 0; j < 11; j++) {
+        float sum = d_rnn_b3[j];
+#pragma unroll
+        for (int k = 0; k < 64; k++) sum += h3[k] * d_rnn_w3[j * 64 + k];
+        out[j] = sum;
+    }
+}
+
+// ───────────────────────────────────────────────────────────────
+// CUDA kernel: batched forward pass (1D flat-array path)
+// Input:  [ncells][T, P, Y_0..Y_9]    — physical units
+// Output: [ncells][dY_0..dY_9, dT] — physical source terms
+// ───────────────────────────────────────────────────────────────
+__global__ void rnn_forward_kernel(
+    const float* __restrict__ input,
+    float* __restrict__ output,
+    int ncells)
+{
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx >= ncells) return;
+
+    float x[12];
+#pragma unroll
+    for (int i = 0; i < 12; i++) x[i] = input[idx * 12 + i];
+
+    float out[11];
+    rnn_forward_cell(x, out);
+
+#pragma unroll
+    for (int i = 0; i < 11; i++) output[idx * 11 + i] = out[i];
+}
+
+// ───────────────────────────────────────────────────────────────
+// One-time weight load: read binary blob → cudaMemcpyToSymbol
+// ───────────────────────────────────────────────────────────────
+static bool load_weights_from_file()
+{
+    static bool done = false;
+    if (done) return true;
+    done = true;
+
+    const char* path = "/home/cj/NN_Project/ml_chem/h2o2/rnn_weights.bin";
+
+    FILE* fp = fopen(path, "rb");
+    if (!fp) {
+        amrex::Print() << "ReactorNN: ERROR cannot open " << path << std::endl;
+        return false;
+    }
+
+    // Read entire blob into host buffer
+    fseek(fp, 0, SEEK_END);
+    long fsize = ftell(fp);
+    rewind(fp);
+
+    // Expected size: 27147 floats * 4 = 108588 bytes
+    constexpr size_t expected_size = 27147 * sizeof(float);
+    if (static_cast<size_t>(fsize) != expected_size) {
+        amrex::Print() << "ReactorNN: ERROR weight file size mismatch (got "
+                       << fsize << ", expected " << expected_size << ")"
+                       << std::endl;
+        fclose(fp);
+        return false;
+    }
+
+    std::vector<char> buf(static_cast<size_t>(fsize));
+    size_t nread = fread(buf.data(), 1, static_cast<size_t>(fsize), fp);
+    fclose(fp);
+
+    if (nread != static_cast<size_t>(fsize)) {
+        amrex::Print() << "ReactorNN: ERROR short read on weight file"
+                       << std::endl;
+        return false;
+    }
+
+    const float* fbuf = reinterpret_cast<const float*>(buf.data());
+
+    // Copy each slice to device symbol
+    cudaMemcpyToSymbol(d_rnn_w0, fbuf + OFF_W0, (RNN_D_IN * RNN_H1) * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_b0, fbuf + OFF_B0, RNN_H1 * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_w1, fbuf + OFF_W1, (RNN_H1 * RNN_H2) * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_b1, fbuf + OFF_B1, RNN_H2 * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_w2, fbuf + OFF_W2, (RNN_H2 * RNN_H3) * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_b2, fbuf + OFF_B2, RNN_H3 * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_w3, fbuf + OFF_W3, (RNN_H3 * RNN_D_OUT) * sizeof(float));
+    cudaMemcpyToSymbol(d_rnn_b3, fbuf + OFF_B3, RNN_D_OUT * sizeof(float));
+
+    return true;
+}
+
+// ───────────────────────────────────────────────────────────────
+// init()
+// ───────────────────────────────────────────────────────────────
+int
+ReactorNN::init(int reactor_type, int /*ncells*/)
+{
+    BL_PROFILE("Pele::ReactorNN::init()");
+    m_reactor_type = reactor_type;
+    ReactorTypes::check_reactor_type(m_reactor_type);
+
+    amrex::ParmParse pp("ode");
+    pp.query("verbose", verbose);
+    pp.query("clean_init_massfrac", m_clean_init_massfrac);
+
+    if (!load_weights_from_file()) {
+        amrex::Abort("ReactorNN: failed to load weights");
+    }
+
+    if (verbose > 0) {
+        amrex::Print() << "ReactorNN: CUDA kernel inference initialized"
+                       << std::endl;
+    }
+
+    return 0;
+}
+
+// ───────────────────────────────────────────────────────────────
+// close()
+// ───────────────────────────────────────────────────────────────
+void
+ReactorNN::close()
+{
+    // No-op: device memory freed at process exit
+}
+
+// ───────────────────────────────────────────────────────────────
+// Array4 react() — GPU-native path via amrex::ParallelFor
+// No host↔device copy. Accesses Array4 directly inside the GPU
+// lambda and calls device-side EOS + rnn_forward_cell.
+// ───────────────────────────────────────────────────────────────
+int
+ReactorNN::react(
+    const amrex::Box& box,
+    amrex::Array4<amrex::Real> const& rY_in,
+    amrex::Array4<amrex::Real> const& rYsrc_in,
+    amrex::Array4<amrex::Real> const& T_in,
+    amrex::Array4<amrex::Real> const& rEner_in,
+    amrex::Array4<amrex::Real> const& rEner_src_in,
+    amrex::Array4<amrex::Real> const& FC_in,
+    amrex::Array4<int> const& /*mask*/,
+    amrex::Real& dt_react,
+    amrex::Real& time
+#ifdef AMREX_USE_GPU
+    ,
+    amrex::gpuStream_t /*stream*/
+#endif
+)
+{
+    BL_PROFILE("Pele::ReactorNN::react(Array4)");
+
+    const int ncells = static_cast<int>(box.numPts());
+    if (ncells == 0) {
+        return 0;
+    }
+
+    const auto* leosparm = m_d_eosparm;
+    constexpr int NN_IN = RNN_D_IN;
+    constexpr int NN_OUT = RNN_D_OUT;
+
+    amrex::ParallelFor(box, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+        // ── Step 1: convert rhoY to mass fractions ──
+        amrex::Real rhoY_local[NUM_SPECIES];
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            rhoY_local[sp] = rY_in(i, j, k, sp);
+        }
+
+        auto eos = pele::physics::PhysicsType::eos(leosparm);
+        amrex::Real mass_frac[NUM_SPECIES] = {0.0};
+        amrex::Real rho = 0.0, rho_inv = 0.0;
+        eos.RY2RRinvY(rhoY_local, rho, rho_inv, mass_frac);
+
+        amrex::Real temp = T_in(i, j, k, 0);
+        amrex::Real P = 0.0;
+        eos.RTY2P(rho, temp, mass_frac, P);
+        P /= 1.01325e6; // CGS → atm
+
+        // ── Step 2: build NN input vector ──
+        float x[12];
+        x[0] = static_cast<float>(temp);
+        x[1] = static_cast<float>(P);
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            x[2 + sp] = static_cast<float>(mass_frac[sp]);
+        }
+        for (int sp = NUM_SPECIES; sp < (NN_IN - 2); sp++) {
+            x[2 + sp] = 0.0f;
+        }
+
+        // ── Step 3: NN forward pass on GPU ──
+        float out_row[NN_OUT];
+        rnn_forward_cell(x, out_row);
+
+        // ── Step 4: write source terms back to Array4 ──
+        // Species sources: d(rhoY)/dt = rho * dY/dt
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            rYsrc_in(i, j, k, sp) =
+                rho * static_cast<amrex::Real>(out_row[sp]);
+        }
+
+        // Energy source: d(rhoE)/dt = rho * cv * dT/dt
+        amrex::Real cv = 0.0, cp = 0.0;
+        eos.RTY2Cv(rho, temp, mass_frac, cv);
+
+        amrex::Real dT_dt = static_cast<amrex::Real>(out_row[NN_OUT - 1]);
+        rEner_src_in(i, j, k, 0) = rho * cv * dT_dt;
+
+        FC_in(i, j, k, 0) = 1.0;
+    });
+
+    time = time + dt_react;
+    return 1;
+}
+
+// ───────────────────────────────────────────────────────────────
+// 1D flat-array react() — unchanged: host pointers, gather→kernel
+// ───────────────────────────────────────────────────────────────
+int
+ReactorNN::react(
+    amrex::Real* rY_in,
+    amrex::Real* rYsrc_in,
+    amrex::Real* rX_in,
+    amrex::Real* rX_src_in,
+    amrex::Real& dt_react,
+    amrex::Real& time,
+    int ncells
+#ifdef AMREX_USE_GPU
+    ,
+    amrex::gpuStream_t /*stream*/
+#endif
+)
+{
+    BL_PROFILE("Pele::ReactorNN::react(1D)");
+
+    if (ncells == 0) {
+        return 0;
+    }
+
+    auto eos = pele::physics::PhysicsType::eos(m_h_eosparm);
+
+    constexpr int NN_IN = RNN_D_IN;
+    constexpr int NN_OUT = RNN_D_OUT;
+    const int neq = NUM_SPECIES + 1;
+
+    // ── Step 1: gather ──
+    std::vector<float> h_input(static_cast<size_t>(ncells) * NN_IN);
+    std::vector<float> h_rho(static_cast<size_t>(ncells));
+    std::vector<float> h_temp(static_cast<size_t>(ncells));
+    std::vector<float> h_massfrac(static_cast<size_t>(ncells) * NUM_SPECIES);
+
+    for (int icell = 0; icell < ncells; icell++) {
+        amrex::Real rhoY_local[NUM_SPECIES];
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            rhoY_local[sp] = rY_in[icell * neq + sp];
+        }
+
+        amrex::Real mass_frac[NUM_SPECIES] = {0.0};
+        amrex::Real rho = 0.0, rho_inv = 0.0;
+        eos.RY2RRinvY(rhoY_local, rho, rho_inv, mass_frac);
+
+        amrex::Real temp = rY_in[icell * neq + NUM_SPECIES];
+        amrex::Real P = 0.0;
+        eos.RTY2P(rho, temp, mass_frac, P);
+        P /= 1.01325e6;
+
+        float* row = &h_input[static_cast<size_t>(icell) * NN_IN];
+        row[0] = static_cast<float>(temp);
+        row[1] = static_cast<float>(P);
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            row[2 + sp] = static_cast<float>(mass_frac[sp]);
+        }
+        for (int sp = NUM_SPECIES; sp < (NN_IN - 2); sp++) {
+            row[2 + sp] = 0.0f;
+        }
+
+        h_rho[icell] = static_cast<float>(rho);
+        h_temp[icell] = static_cast<float>(temp);
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            h_massfrac[icell * NUM_SPECIES + sp] =
+                static_cast<float>(mass_frac[sp]);
+        }
+    }
+
+    // ── Steps 2-3: GPU inference ──
+    float *d_input = nullptr, *d_output = nullptr;
+    cudaMalloc(&d_input, sizeof(float) * ncells * NN_IN);
+    cudaMalloc(&d_output, sizeof(float) * ncells * NN_OUT);
+    cudaMemcpy(
+        d_input, h_input.data(), sizeof(float) * ncells * NN_IN,
+        cudaMemcpyHostToDevice);
+
+    int threads = 256;
+    int blocks = (ncells + threads - 1) / threads;
+    rnn_forward_kernel<<<blocks, threads>>>(d_input, d_output, ncells);
+
+    std::vector<float> h_output(static_cast<size_t>(ncells) * NN_OUT);
+    cudaMemcpy(
+        h_output.data(), d_output, sizeof(float) * ncells * NN_OUT,
+        cudaMemcpyDeviceToHost);
+
+    cudaFree(d_input);
+    cudaFree(d_output);
+
+    // ── Step 4: write back ──
+    for (int icell = 0; icell < ncells; icell++) {
+        const float* out_row =
+            &h_output[static_cast<size_t>(icell) * NN_OUT];
+
+        amrex::Real rho = static_cast<amrex::Real>(h_rho[icell]);
+        amrex::Real temp = static_cast<amrex::Real>(h_temp[icell]);
+
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            rYsrc_in[icell * neq + sp] =
+                rho * static_cast<amrex::Real>(out_row[sp]);
+        }
+
+        amrex::Real mass_frac[NUM_SPECIES];
+        for (int sp = 0; sp < NUM_SPECIES; sp++) {
+            mass_frac[sp] =
+                static_cast<amrex::Real>(
+                    h_massfrac[icell * NUM_SPECIES + sp]);
+        }
+        amrex::Real cv = 0.0, cp = 0.0;
+        eos.RTY2Cv(rho, temp, mass_frac, cv);
+
+        amrex::Real dT_dt = static_cast<amrex::Real>(out_row[NN_OUT - 1]);
+        rX_src_in[icell] = rho * cv * dT_dt;
+    }
+
+    time = time + dt_react;
+    return 1;
+}
+
+} // namespace pele::physics::reactions

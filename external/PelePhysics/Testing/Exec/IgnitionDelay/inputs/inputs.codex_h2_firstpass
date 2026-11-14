@@ -1,0 +1,34 @@
+ncells = 1 1 1
+max_grid_size  = 1
+fuel_name = H2
+reactFormat = Array4
+chem_integrator = "ReactorCvode"
+
+ode.dt  = 0.01
+ode.ndt = 10000
+ode.ode_ncells = 1
+ode.reactor_type  = 2 # 1=full e, 2=full h
+ode.verbose = 0
+ode.use_typ_vals = 0
+ode.rtol = 1e-10
+ode.atol = 1e-12
+
+cvode.solve_type = dense_direct
+cvode.precond_type = dense_simplified_AJacobian
+cvode.max_order = 4
+
+ode.implicit_solve = 1
+ode.use_erkstep    = 0
+
+amrex.fpe_trap_invalid = 1
+amrex.fpe_trap_zero = 1
+amrex.fpe_trap_overflow = 1
+
+ode.bdf_nsubsteps=10000
+ode.bdf_scheme=3
+
+# 1 atm in CGS barye.
+hr.press = 1013250.0
+hr.t0 = 1200
+hr.equiv_ratio = 1.0
+hr.outputFolderHR = ./

@@ -1,0 +1,406 @@
+{
+  "case": {
+    "command": [
+      "mpirun",
+      "-np",
+      "24",
+      "/home/cj/my-pele/examples/academic/spray_detonation/spatial_final_cleanup_v12d.gnu.MPI.ex",
+      "inputs"
+    ],
+    "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_final_cleanup_v12d.gnu.MPI.ex",
+    "binary_sha256": "2508c56b7438e2c8a42dfe7a36aa9b891849ca6c658af4141ebc7db44f75b61f",
+    "reference": "/home/cj/my-pele/repair_validation/znd_20260912/reference_near_cj_v1",
+    "profile_sha256": "9e01c21e492dd4d5cbcfe9434cdf0f0fb24ecf029f27ee2cc3824900e4070e3f",
+    "input_sha256": "c86e68ede1454e21a510ec0125a85aa13615456fa372f6225d7e59e6898191d6",
+    "nx": 600,
+    "ny": 2,
+    "dx_m": 0.00019999999999999998,
+    "cfl": 0.2,
+    "rtol": 1e-07,
+    "atol_y": 1e-14,
+    "stop_time_s": 1.2e-05,
+    "plot_root": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1",
+    "physical_model": "Single-phase inviscid reactive Euler, heptane_lu_88sk, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+    "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+  },
+  "exit_code": null,
+  "partial": true,
+  "end_time_s": 5.0078687526934024e-06,
+  "CJ_m_s": 1594.688840749402,
+  "initial_ZND_speed_m_s": 1594.7047876378097,
+  "front_threshold_Pa": 685717.8046160069,
+  "comparison_window_m": [
+    0.001,
+    0.015
+  ],
+  "comparison_method": "Shock-aligned cell-center samples; errors normalized by fixed reference jumps, same physical window at every resolution.",
+  "wave_speed_fits": {
+    "0.0": {
+      "speed_m_s": 1605.4755909506378,
+      "relative_error_vs_CJ": 0.0067641723736941994,
+      "rms_position_residual_m": 1.9317085852207008e-05
+    }
+  },
+  "boundary_balance": {
+    "mass": {
+      "inventory_change": 0.004658135500170413,
+      "integrated_boundary_influx": 0.004658135923644822,
+      "residual": -4.2347440918494295e-10,
+      "relative_to_initial_inventory": 3.114531466494585e-09
+    },
+    "energy": {
+      "inventory_change": 5506.558930427331,
+      "integrated_boundary_influx": 5506.548514253005,
+      "residual": 0.010416174325655447,
+      "relative_to_initial_inventory": 9.835233845454063e-08
+    }
+  },
+  "history": [
+    {
+      "time_s": 0.0,
+      "plot": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1/plt00000",
+      "shock_m": 0.04000000112376115,
+      "shock_minus_expected_m": 1.1237611466374808e-09,
+      "Tmin_K": 300.0,
+      "Tmax_K": 2328.497597410378,
+      "pmax_Pa": 1321416.136861272,
+      "frozen_peak_pressure_Pa": 1321001.4336574057,
+      "fuel_half_distance_m": 0.004462068585247894,
+      "errors_1_to_15_mm": {
+        "rho": {
+          "mean_absolute": 2.3192573399555273e-07,
+          "max_absolute": 2.570360203790756e-06,
+          "normalized_L1": 7.937838882133373e-08
+        },
+        "p": {
+          "mean_absolute": 0.0036661760648712518,
+          "max_absolute": 0.014643189497292042,
+          "normalized_L1": 2.8865014103677515e-09
+        },
+        "T": {
+          "mean_absolute": 1.195273595645371e-05,
+          "max_absolute": 4.715665954790893e-05,
+          "normalized_L1": 5.884903198842681e-09
+        },
+        "u": {
+          "mean_absolute": 3.816277684823685e-06,
+          "max_absolute": 1.5242715562635567e-05,
+          "normalized_L1": 2.393093514490934e-09
+        },
+        "Y_fuel": {
+          "mean_absolute": 2.9447630724466475e-09,
+          "max_absolute": 6.558774783699262e-09
+        },
+        "Y_o2": {
+          "mean_absolute": 2.016513811883439e-09,
+          "max_absolute": 6.295157978231103e-09
+        },
+        "Y_co2": {
+          "mean_absolute": 9.34458755901773e-11,
+          "max_absolute": 7.130515134508991e-10
+        },
+        "Y_h2o": {
+          "mean_absolute": 1.0717009800396815e-09,
+          "max_absolute": 3.3879698334987607e-09
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 0.0,
+      "max_species_sum_error": 4.440892098500626e-16,
+      "mass_per_area_kg_m2": 0.1359672919476279,
+      "total_energy_per_area_J_m2": 105906.72768263564,
+      "net_mass_influx_kg_m2_s": 930.1552783812527,
+      "net_energy_influx_W_m2": 1098477179.8388102
+    },
+    {
+      "time_s": 1.001668250158862e-06,
+      "plot": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1/plt00060",
+      "shock_m": 0.041667562853364294,
+      "shock_minus_expected_m": 7.019769921116914e-05,
+      "Tmin_K": 299.99999999999983,
+      "Tmax_K": 2330.5103363609032,
+      "pmax_Pa": 1321418.6101969208,
+      "frozen_peak_pressure_Pa": 1272339.470914282,
+      "fuel_half_distance_m": 0.00453224032911642,
+      "errors_1_to_15_mm": {
+        "rho": {
+          "mean_absolute": 0.004267282742283093,
+          "max_absolute": 0.09122530090253678,
+          "normalized_L1": 0.001460510754421111
+        },
+        "p": {
+          "mean_absolute": 1000.0879605328697,
+          "max_absolute": 43873.203096090816,
+          "normalized_L1": 0.0007874022571448196
+        },
+        "T": {
+          "mean_absolute": 0.9049674316716196,
+          "max_absolute": 9.870789018140385,
+          "normalized_L1": 0.0004455587200198506
+        },
+        "u": {
+          "mean_absolute": 0.555863895933976,
+          "max_absolute": 17.973753477249375,
+          "normalized_L1": 0.00034856852518600715
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00018289200054165045,
+          "max_absolute": 0.00040525378731431916
+        },
+        "Y_o2": {
+          "mean_absolute": 0.00012731608463003585,
+          "max_absolute": 0.0004007263832592478
+        },
+        "Y_co2": {
+          "mean_absolute": 6.05775233897215e-06,
+          "max_absolute": 4.626832316856561e-05
+        },
+        "Y_h2o": {
+          "mean_absolute": 6.76747980049307e-05,
+          "max_absolute": 0.00021514231466304885
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": -1.2509546715660755e-32,
+      "max_species_sum_error": 4.440892098500626e-15,
+      "mass_per_area_kg_m2": 0.1368989999355237,
+      "total_energy_per_area_J_m2": 107007.27673597787,
+      "net_mass_influx_kg_m2_s": 930.1576009403877,
+      "net_energy_influx_W_m2": 1098950117.6049917
+    },
+    {
+      "time_s": 2.002028755146609e-06,
+      "plot": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1/plt00111",
+      "shock_m": 0.04326113918852415,
+      "shock_minus_expected_m": 6.849434770329205e-05,
+      "Tmin_K": 299.99999999999983,
+      "Tmax_K": 2332.3942782315576,
+      "pmax_Pa": 1326849.7866367965,
+      "frozen_peak_pressure_Pa": 1326849.7866367965,
+      "fuel_half_distance_m": 0.0045304159615731105,
+      "errors_1_to_15_mm": {
+        "rho": {
+          "mean_absolute": 0.011414293056685107,
+          "max_absolute": 0.1424192847743715,
+          "normalized_L1": 0.003906630699254677
+        },
+        "p": {
+          "mean_absolute": 4414.193316296614,
+          "max_absolute": 68501.5007851494,
+          "normalized_L1": 0.003475440079164211
+        },
+        "T": {
+          "mean_absolute": 1.7421961586103603,
+          "max_absolute": 15.653067220313005,
+          "normalized_L1": 0.0008577664380916708
+        },
+        "u": {
+          "mean_absolute": 1.9636599890628272,
+          "max_absolute": 28.755802258506492,
+          "normalized_L1": 0.0012313626975256908
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00018234428504971555,
+          "max_absolute": 0.0003903203441563488
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0001245997598022317,
+          "max_absolute": 0.0003927924907747571
+        },
+        "Y_co2": {
+          "mean_absolute": 5.971908818392684e-06,
+          "max_absolute": 4.575301104887963e-05
+        },
+        "Y_h2o": {
+          "mean_absolute": 6.630187862088473e-05,
+          "max_absolute": 0.00021084749835566935
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": -4.5216018916460946e-32,
+      "max_species_sum_error": 8.881784197001252e-15,
+      "mass_per_area_kg_m2": 0.13782949446704426,
+      "total_energy_per_area_J_m2": 108106.84741085634,
+      "net_mass_influx_kg_m2_s": 930.1609917095689,
+      "net_energy_influx_W_m2": 1099394271.236229
+    },
+    {
+      "time_s": 3.003593839040788e-06,
+      "plot": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1/plt00162",
+      "shock_m": 0.04486238750772092,
+      "shock_minus_expected_m": 7.2542032483143e-05,
+      "Tmin_K": 299.99999999999983,
+      "Tmax_K": 2334.167243660696,
+      "pmax_Pa": 1324859.8736604303,
+      "frozen_peak_pressure_Pa": 1318829.2781249518,
+      "fuel_half_distance_m": 0.0045343359162680185,
+      "errors_1_to_15_mm": {
+        "rho": {
+          "mean_absolute": 0.013263030286335622,
+          "max_absolute": 0.1352846662932614,
+          "normalized_L1": 0.004539375415054468
+        },
+        "p": {
+          "mean_absolute": 4566.948763425259,
+          "max_absolute": 64083.62167782965,
+          "normalized_L1": 0.003595709484063529
+        },
+        "T": {
+          "mean_absolute": 2.354870104090836,
+          "max_absolute": 26.968099403241467,
+          "normalized_L1": 0.0011594151045343413
+        },
+        "u": {
+          "mean_absolute": 2.062657745275367,
+          "max_absolute": 26.900594334081006,
+          "normalized_L1": 0.0012934417462499266
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00021238785395209176,
+          "max_absolute": 0.000941854527422778
+        },
+        "Y_o2": {
+          "mean_absolute": 0.00013293336846918706,
+          "max_absolute": 0.00041682286826391635
+        },
+        "Y_co2": {
+          "mean_absolute": 6.374161095997186e-06,
+          "max_absolute": 4.892125294696432e-05
+        },
+        "Y_h2o": {
+          "mean_absolute": 7.115409870368836e-05,
+          "max_absolute": 0.00022401725044838075
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": -3.412762558076986e-34,
+      "max_species_sum_error": 1.0436096431476471e-14,
+      "mass_per_area_kg_m2": 0.1387611131248108,
+      "total_energy_per_area_J_m2": 109208.17413240027,
+      "net_mass_influx_kg_m2_s": 930.1648955908194,
+      "net_energy_influx_W_m2": 1099813119.2312584
+    },
+    {
+      "time_s": 4.0055919689044075e-06,
+      "plot": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1/plt00213",
+      "shock_m": 0.04646112880296622,
+      "shock_minus_expected_m": 7.339211283079877e-05,
+      "Tmin_K": 299.99999999999983,
+      "Tmax_K": 2335.837682298867,
+      "pmax_Pa": 1324321.6049322616,
+      "frozen_peak_pressure_Pa": 1318433.368246262,
+      "fuel_half_distance_m": 0.004535239052409295,
+      "errors_1_to_15_mm": {
+        "rho": {
+          "mean_absolute": 0.016100225787085646,
+          "max_absolute": 0.1274683718193872,
+          "normalized_L1": 0.005510427672778454
+        },
+        "p": {
+          "mean_absolute": 4721.213585410111,
+          "max_absolute": 60980.67782556801,
+          "normalized_L1": 0.003717167269600908
+        },
+        "T": {
+          "mean_absolute": 2.9309605350772827,
+          "max_absolute": 36.25575130105835,
+          "normalized_L1": 0.001443051958262737
+        },
+        "u": {
+          "mean_absolute": 2.129264026646102,
+          "max_absolute": 25.67466256972284,
+          "normalized_L1": 0.0013352089008274186
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00028738696269451757,
+          "max_absolute": 0.0027278448947757397
+        },
+        "Y_o2": {
+          "mean_absolute": 0.00014033866638465636,
+          "max_absolute": 0.0004241784348575639
+        },
+        "Y_co2": {
+          "mean_absolute": 6.499722996592931e-06,
+          "max_absolute": 5.017278724702779e-05
+        },
+        "Y_h2o": {
+          "mean_absolute": 7.587181717872644e-05,
+          "max_absolute": 0.00022820800427269736
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": -2.5955006185928544e-32,
+      "max_species_sum_error": 1.2212453270876722e-14,
+      "mass_per_area_kg_m2": 0.13969313863109264,
+      "total_energy_per_area_J_m2": 110310.38468643602,
+      "net_mass_influx_kg_m2_s": 930.1690128310661,
+      "net_energy_influx_W_m2": 1100208254.4819024
+    },
+    {
+      "time_s": 5.0078687526934024e-06,
+      "plot": "/dev/shm/my_pele_znd_20260912/planar_600_cfl20_v1/plt00264",
+      "shock_m": 0.04805886446121092,
+      "shock_minus_expected_m": 7.279218542896593e-05,
+      "Tmin_K": 299.99999999999983,
+      "Tmax_K": 2337.4141429490064,
+      "pmax_Pa": 1323983.5144412473,
+      "frozen_peak_pressure_Pa": 1320773.818267703,
+      "fuel_half_distance_m": 0.004542324859750799,
+      "errors_1_to_15_mm": {
+        "rho": {
+          "mean_absolute": 0.017742818722395498,
+          "max_absolute": 0.12160309263017188,
+          "normalized_L1": 0.0060726178982784046
+        },
+        "p": {
+          "mean_absolute": 4890.24197794328,
+          "max_absolute": 58642.63363916357,
+          "normalized_L1": 0.0038502489014718318
+        },
+        "T": {
+          "mean_absolute": 3.617428724585586,
+          "max_absolute": 33.290938897401475,
+          "normalized_L1": 0.0017810330580761173
+        },
+        "u": {
+          "mean_absolute": 2.193022294104347,
+          "max_absolute": 24.606142998294672,
+          "normalized_L1": 0.0013751901361961846
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00042172455281547656,
+          "max_absolute": 0.0042192702927452
+        },
+        "Y_o2": {
+          "mean_absolute": 0.00015085402633782346,
+          "max_absolute": 0.00041630312743332065
+        },
+        "Y_co2": {
+          "mean_absolute": 6.483270969592961e-06,
+          "max_absolute": 4.966234217345256e-05
+        },
+        "Y_h2o": {
+          "mean_absolute": 8.324853988221876e-05,
+          "max_absolute": 0.00022398417951976536
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": -4.224791382533417e-32,
+      "max_species_sum_error": 1.4210854715202004e-14,
+      "mass_per_area_kg_m2": 0.14062542744779832,
+      "total_energy_per_area_J_m2": 111413.28661306297,
+      "net_mass_influx_kg_m2_s": 930.1730938035665,
+      "net_energy_influx_W_m2": 1100581356.4201393
+    }
+  ],
+  "max_nonfinite": 0,
+  "max_transverse_relative_spread": 0.0,
+  "minimum_Y_all_plots": -4.5216018916460946e-32,
+  "maximum_species_sum_error": 1.4210854715202004e-14
+}

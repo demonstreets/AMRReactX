@@ -1,0 +1,243 @@
+{
+  "created_utc": "2026-07-30T08:05:16.496023Z",
+  "evidence": [
+    {
+      "exists": true,
+      "name": "candidate",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_20260730/csf_stress_candidate_report.json",
+      "sha256": "f5f5c67515a965deded88ec8eb9a20bae387a822d622b44bb1ee0b1f65b2966d"
+    },
+    {
+      "exists": true,
+      "name": "grid",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_grid_confirmation_20260730/csf_stress_grid_confirmation_report.json",
+      "sha256": "813baac83ef9a81ebd09ef34d119aaa4d0889eb29388345bfe530c0aad87e93e"
+    },
+    {
+      "exists": true,
+      "name": "legacy_t3",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json",
+      "sha256": "730852ec05fdc5b7e618af33ee052666521e70577e4493cd2ef59f56c1b66576"
+    },
+    {
+      "exists": true,
+      "name": "legacy_grid",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_grid_confirmation_20260730/qlt03_lm_grid_confirmation_report.json",
+      "sha256": "1709c60efc1f3fdca9168ea6e53a11dc108a10f57944e584fa3de1da4fcc7a3a"
+    },
+    {
+      "exists": true,
+      "name": "legacy_path",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json",
+      "sha256": "18860f92b6433a9090bf941d4b0541750758089f7398f67e00672101a1164cfa"
+    },
+    {
+      "exists": true,
+      "name": "inputs",
+      "path": "examples/academic/qlt03_lm_aux_bridge/inputs",
+      "sha256": "11c1b5cc122a12f40507e668906910ad6a7bc34112b0c833bea80586327ce4cc"
+    },
+    {
+      "exists": true,
+      "name": "prob_h",
+      "path": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+      "sha256": "75313357e37c6dfb495b17852215722725425f51c3b303df3150b76ab916365d"
+    },
+    {
+      "exists": true,
+      "name": "prob_cpp",
+      "path": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.cpp",
+      "sha256": "895a93758ad481dc833606a3bc0751a5f9dc3db2f8461a87a3d035c033267c24"
+    },
+    {
+      "exists": true,
+      "name": "closure_writer",
+      "path": "tools/write_academic_twophase_qlt03_lm_csf_stress_closure_report.py",
+      "sha256": "de78726bdf774480c073eba7b360a40e2848d0b89281e9fde1c382e8fc6f0361"
+    }
+  ],
+  "gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_20260730/csf_stress_candidate_report.json"
+      ],
+      "metric": {
+        "decision": {
+          "promote_as_preferred_qlt03_low_mach_csf_form": true,
+          "promote_full_academic_twophase_readiness": false,
+          "remaining_work": [
+            "rerun 32/64 or better grid-confirmation evidence with force_form=3",
+            "decide whether QLT-03 example inputs should default to force_form=3 after grid confirmation",
+            "repeat academic evidence summary/path-decision records after grid confirmation clears"
+          ],
+          "retain_csf_stress_candidate": true,
+          "why": [
+            "canonical no-gravity short-window lateral drift falls below the target threshold",
+            "buoyant short-window run remains stable, mass-conserving, bounded, and rising",
+            "coarse 32x64 t=3 Hysing center-height, maximum-rise-velocity, and minimum-circularity errors all clear the current tolerances"
+          ]
+        },
+        "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-STRESS-CANDIDATE-PROMOTION",
+        "summary": {}
+      },
+      "name": "csf_stress_candidate_promoted",
+      "status": "PASS",
+      "target": "candidate t=3 reference agreement pass and force_form=3 promoted for QLT-03"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_grid_confirmation_20260730/csf_stress_grid_confirmation_report.json"
+      ],
+      "metric": {
+        "contracts": {
+          "center_height_grid_consistency_cleared": true,
+          "coarse_mass_conserved": true,
+          "coarse_reaches_t3": true,
+          "coarse_reference_agreement_cleared": true,
+          "coarse_sample_count_sufficient": true,
+          "fine_center_reference_error_cleared": true,
+          "fine_circularity_reference_error_cleared": true,
+          "fine_mass_conserved": true,
+          "fine_reaches_t3": true,
+          "fine_reference_agreement_cleared": true,
+          "fine_sample_count_sufficient": true,
+          "fine_velocity_reference_error_cleared": true,
+          "full_grid_confirmation_cleared": true,
+          "max_rise_velocity_grid_consistency_cleared": true,
+          "minimum_circularity_grid_consistency_cleared": true,
+          "qlt03_inputs_promote_force_form_3": true
+        },
+        "decision": {
+          "promote_force_form_3_for_qlt03_example": true,
+          "promote_full_academic_twophase_readiness": false,
+          "qlt03_low_mach_csf_stress_grid_confirmed": true,
+          "remaining_work": [
+            "refresh the older QLT-03 path-decision/readiness summary records so they no longer describe the pre-stress baseline as the preferred route",
+            "optionally run higher-resolution or AMR confirmation before claiming broad two-phase academic production readiness",
+            "keep non-QLT two-phase cases and spray/two-way-coupling readiness gates separate"
+          ]
+        },
+        "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-STRESS-GRID-CONFIRMATION"
+      },
+      "name": "csf_stress_grid_confirmation_cleared",
+      "status": "PASS",
+      "target": "coarse and 64x128 runs pass QLT-03 reference-agreement contracts"
+    },
+    {
+      "evidence": [
+        "examples/academic/qlt03_lm_aux_bridge/inputs"
+      ],
+      "metric": "prob.surface_tension_force_form = 3",
+      "name": "qlt03_inputs_promote_force_form_3",
+      "status": "PASS",
+      "target": "QLT-03 example input selects CSF stress-divergence form by default"
+    },
+    {
+      "evidence": [
+        "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+        "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.cpp"
+      ],
+      "metric": {
+        "csf_stress_helper": true,
+        "force_form_3": true,
+        "parameter": true
+      },
+      "name": "qlt03_source_contains_stress_divergence_form",
+      "status": "PASS",
+      "target": "source exposes force_form=3 continuum-surface-stress divergence implementation"
+    },
+    {
+      "evidence": [
+        "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+        "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.cpp"
+      ],
+      "metric": {
+        "code_default_surface_tension_force_form_1": true,
+        "legacy_cell_centered_force": true
+      },
+      "name": "legacy_cell_centered_csf_ab_path_retained",
+      "status": "PASS",
+      "target": "legacy force_form=1 remains available for A/B regression"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json",
+        "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_grid_confirmation_20260730/qlt03_lm_grid_confirmation_report.json",
+        "docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json"
+      ],
+      "metric": {
+        "legacy_grid_full_confirmation": false,
+        "legacy_grid_status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-GRID-CONFIRMATION",
+        "legacy_path_qlt03_canonical_ready": false,
+        "legacy_path_t3_reference_agreement": false,
+        "legacy_t3_clears_reference": false,
+        "legacy_t3_status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT"
+      },
+      "name": "legacy_pre_stress_reports_superseded",
+      "status": "PASS",
+      "target": "older pre-stress NOT_READY reports remain historical baselines and are superseded by this closure report"
+    }
+  ],
+  "input_reports": {
+    "candidate": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_20260730/csf_stress_candidate_report.json",
+    "grid": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_grid_confirmation_20260730/csf_stress_grid_confirmation_report.json",
+    "legacy_grid": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_grid_confirmation_20260730/qlt03_lm_grid_confirmation_report.json",
+    "legacy_path": "docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json",
+    "legacy_t3": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json"
+  },
+  "interpretation": [
+    "The legacy cell-centred CSF force is retained for A/B comparisons, but the QLT-03 bridge input now selects force_form=3.",
+    "The closure is intentionally scoped to QLT-03 low-Mach Hysing Case 1 at the current 32x64/64x128 confirmation level.",
+    "Full academic two-phase readiness is not promoted by this report alone."
+  ],
+  "schema_version": 1,
+  "scope": "Academic two-phase QLT-03 low-Mach Hysing Case 1 CSF-stress closure",
+  "source_files": {
+    "inputs": "examples/academic/qlt03_lm_aux_bridge/inputs",
+    "prob_cpp": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.cpp",
+    "prob_h": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H"
+  },
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-STRESS-CLOSURE",
+  "summary": {
+    "academic_twophase_qlt03_blocker_closed": true,
+    "coarse_32x64_reference_agreement": {
+      "center_y_final": 1.0503910888104113,
+      "mass_relative_drift": 0.0,
+      "max_mean_rise_velocity_y": 0.2310564282482914,
+      "min_circularity": 0.917080167499013,
+      "reference_errors": {
+        "center_of_mass_y_at_t3_abs_error": 0.030908911189588606,
+        "maximum_mean_rise_velocity_abs_error": 0.010643571751708603,
+        "minimum_circularity_abs_error": 0.01578016749901301
+      },
+      "sample_count": 12
+    },
+    "coarse_to_fine_deltas": {
+      "center_y_final_abs_delta": 0.013315045546150373,
+      "max_mean_rise_velocity_abs_delta": 0.005807069839865786,
+      "min_circularity_abs_delta": 0.038143285351377454
+    },
+    "code_default_retains_force_form_1_for_ab_regression": true,
+    "fine_64x128_reference_agreement": {
+      "center_y_final": 1.0637061343565617,
+      "mass_relative_drift": 0.0,
+      "max_mean_rise_velocity_y": 0.23686349808815718,
+      "min_circularity": 0.8789368821476355,
+      "reference_errors": {
+        "center_of_mass_y_at_t3_abs_error": 0.017593865643438233,
+        "maximum_mean_rise_velocity_abs_error": 0.0048365019118428165,
+        "minimum_circularity_abs_error": 0.022363117852364445
+      },
+      "sample_count": 14
+    },
+    "preferred_surface_tension_force_form_for_qlt03": 3,
+    "promote_full_academic_twophase_readiness": false,
+    "qlt03_low_mach_hysing_case1_current_grid_confirmed": true,
+    "remaining_academic_twophase_scope": [
+      "Refresh higher-level readiness/path-decision rollups to consume this closure record.",
+      "Broaden beyond QLT-03 low-Mach Hysing Case 1 to the remaining two-phase academic matrix.",
+      "Gas-liquid detonation/spray production-readiness remains a separate gate."
+    ],
+    "supersedes_legacy_pre_stress_reports": true
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-09",
+  "repository": "192.168.31.89:/home/cj/my-pele",
+  "scope": "confirmed defect and acceptance-chain repairs; excludes real CAD and actual 3D leakage/fire validation",
+  "status": "targeted_repairs_verified_with_explicit_model_gaps",
+  "all_master_plan_requirements_met": false,
+  "self_sustained_detonation_certified": false,
+  "gas_liquid_detonation_certified": false,
+  "full_mixture_eos_and_plic_complete": false,
+  "historical_missing_data_restored": false,
+  "source_test_doc_files_changed": 54,
+  "backup_batches": 23,
+  "findings": [
+    {
+      "id": "F01",
+      "status": "已修复",
+      "action": "HLLC 先写连续组分临时数组，再逐分量写回 Array4；修正相邻网格被误写。"
+    },
+    {
+      "id": "F02",
+      "status": "已修复并停用伪实现",
+      "action": "标量 alpha 辅助函数显式接收分量号；从主推进删除非 MULES 动量体力，use_mules=1 明确拒绝。"
+    },
+    {
+      "id": "F03",
+      "status": "验收错误已修复；反应路径补充",
+      "action": "旧零反应机理认证被拒绝；默认例保留非反应输运用途，增加 88 组分真实机理的显式构建、独立缓存与 CPU CVODE 输入。气液爆轰仍未认证。"
+    },
+    {
+      "id": "F04",
+      "status": "已修复",
+      "action": "CSF 从已 FillPatch 的入参状态读取，要求至少两层幽灵单元；实际 NUM_ADV=1 CPU 单步经过该分支。"
+    },
+    {
+      "id": "F05",
+      "status": "已修复",
+      "action": "热点按实际域定位并检查初始化真实最高温；新 GPU 初场 Tmax=2214 K。旧冷流报告不再通过。"
+    },
+    {
+      "id": "F06",
+      "status": "部分修正，模型缺口保留",
+      "action": "修正 HLLC 能量跃迁、p_inf 波速和 SG 温度；混合物闭合及 PLIC 主推进未补齐，VOF 默认拒绝、显式实验许可仅供开发。"
+    },
+    {
+      "id": "F07",
+      "status": "数值缺陷与验收逻辑已修复",
+      "action": "WENO 在 EOS 前限制特征积分，修复极低星区压力 NaN、组分面通量和壁面组分镜像；负 Y 严格验收，前缘改为压力梯度。没有授予自持爆轰认证。"
+    },
+    {
+      "id": "F08",
+      "status": "源项积分实现已修复",
+      "action": "归一化包含 AMR 覆盖掩码、EB 流体体积分数与 MPI 全局求和；制造解体积与源总量通过 1/2/8 rank 检查。"
+    },
+    {
+      "id": "F09",
+      "status": "按本次范围暂缓",
+      "action": "真实 CAD/STL 水密性和工程几何验收未开展。"
+    },
+    {
+      "id": "F10",
+      "status": "按本次范围暂缓",
+      "action": "现场 A/B 坐标及真实 CAD 对齐未开展。"
+    },
+    {
+      "id": "F11",
+      "status": "新归档已修复；历史缺口保留",
+      "action": "新结果完整保存 FAB、checkpoint、二进制与哈希；缺失的旧 C3H8/CH4/H2 场数据不能补造，未重跑本次排除的工程场景。"
+    },
+    {
+      "id": "F12",
+      "status": "实际场景验证暂缓",
+      "action": "短时封闭/简化算例不再被解释为工程火灾有效性；真实边界和长时工况留待实际三维验证。"
+    },
+    {
+      "id": "F13",
+      "status": "单位与公式已修复",
+      "action": "CGS 的 sigma=72 dyn/cm、p_inf=6e9 dyn/cm²、cv=4.18e7 erg/(g·K) 明确配置；初场共用参数，记录 SG 标定仍属模型缺口。"
+    },
+    {
+      "id": "F14",
+      "status": "已修复",
+      "action": "按实际源树哈希记录 vendored 依赖；GPU 构建前快照并核对漂移，归档二进制/库哈希/编译日志。正庚烷归档明确缺少构建前快照，不伪称完整溯源。"
+    },
+    {
+      "id": "F15",
+      "status": "按本次范围暂缓",
+      "action": "真实储罐/设备尺寸与 CAD 的核验未开展。"
+    },
+    {
+      "id": "F16",
+      "status": "已修复已定位脚本",
+      "action": "detonation_wave runner 拒绝复用日志目录，取消先 rm -rf 旧证据的行为；新归档同样拒绝覆盖。"
+    },
+    {
+      "id": "F17",
+      "status": "已修复",
+      "action": "教程改查单次 run 的实际退出码与具体 fatal 标记；不再把 CVODE/普通 inf 文字或其他历史任务混作错误。"
+    }
+  ],
+  "verification": {
+    "ctest_passed": 24,
+    "ctest_total": 24,
+    "evidence_unit_cases_passed": 10,
+    "asan_ubsan_core": "passed",
+    "real_fuego_riemann": "passed",
+    "source_volume_mpi_ranks": [
+      1,
+      2,
+      8
+    ],
+    "gpu_final": {
+      "time": 1.2861474213068803e-06,
+      "plot": "plt00200",
+      "Tmin": 299.9999999923163,
+      "Tmax": 3547.318989731806,
+      "rho_min": 2.0647758928905306e-05,
+      "Y_min": 0.0,
+      "closure": 4.440892098500626e-16,
+      "pressure_min": 162471.4051562849,
+      "front_x": 0.46875
+    },
+    "reaction": {
+      "initial_temp_max": 2214.0,
+      "fuel_consumed_fraction": 0.09092939898416602,
+      "water_mass_gain_fraction": 0.059988058159459415,
+      "mass_relative_change": 4.959397748092713e-16,
+      "detonation_propagation_verified": false,
+      "scope": "hot initialized H2/O2 chemical-conversion runtime check only"
+    },
+    "single_vs_two_gpu_max_difference": 0.0,
+    "restart_max_difference": 0.0,
+    "heptane": {
+      "time": 4e-08,
+      "Y_min": -5.151595278531252e-14,
+      "closure": 2.220446049250313e-16,
+      "fuel_consumed_fraction": 0.00016264804506594343,
+      "T_final": 1399.9564206858408,
+      "scope": "gas chemistry connectivity only, not ignition or spray detonation"
+    }
+  },
+  "artifacts": {
+    "gpu_final_np1": {
+      "directory": "/home/cj/my-pele/docs/codex_audit/evidence/repair_20260909/gpu_final_np1",
+      "file_count": 2234,
+      "size_bytes": 765067547,
+      "plots": 11,
+      "binary_sha256": "31414d859b3ac144e711625d05d07532520b8314ec0a2b5caaca3cb0815f4619",
+      "source_snapshot_present": true
+    },
+    "gpu_final_np2": {
+      "directory": "/home/cj/my-pele/docs/codex_audit/evidence/repair_20260909/gpu_final_np2",
+      "file_count": 2251,
+      "size_bytes": 765067282,
+      "plots": 11,
+      "binary_sha256": "31414d859b3ac144e711625d05d07532520b8314ec0a2b5caaca3cb0815f4619",
+      "source_snapshot_present": true
+    },
+    "gpu_final_restart_np2": {
+      "directory": "/home/cj/my-pele/docs/codex_audit/evidence/repair_20260909/gpu_final_restart_np2",
+      "file_count": 2199,
+      "size_bytes": 745532203,
+      "plots": 5,
+      "binary_sha256": "31414d859b3ac144e711625d05d07532520b8314ec0a2b5caaca3cb0815f4619",
+      "source_snapshot_present": true
+    }
+  },
+  "changes": [
+    {
+      "path": "external/PeleC/Source/Godunov.H",
+      "before_sha256": "011895a7011c6551957b98f74e58fc4fe23875db38f81598eda44038bfd71c62",
+      "after_sha256": "a94511a79615653810af0525e37aa28504b15ab06f8b361c97050e7c08bd95cb",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084026316117Z"
+    },
+    {
+      "path": "src/academic/vof/VOF_FCT.H",
+      "before_sha256": "2a5548bee041fce62b0a08237ddbf45ca4c1463ce99c3ec2bf854ce550637538",
+      "after_sha256": "95ffca86594badc9a411bca0c73443331f45a44d56af339a182b0834e119790d",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084026316117Z"
+    },
+    {
+      "path": "external/PeleC/Source/Hydro.cpp",
+      "before_sha256": "6cb833eeed263e3e938b033f95f8bf2cde3dd8524941d7cae14d11f7bac19a9a",
+      "after_sha256": "90b68b56445eaebf878123952335e489383d582ce0cacef30e0e3386ec51845b",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084026316117Z"
+    },
+    {
+      "path": "test/unit/test_vof_fct.cpp",
+      "before_sha256": "526ba3a2926c3b32b272c4dbb9b34332f8fc81aa44926ed19ee4f83b69e84850",
+      "after_sha256": "9b228a4855ef7f941a3978a50f6abc9801ba218f82ab3bfef5aa2474934dd86c",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/write_academic_gas_detonation_single_cuda_report.py",
+      "before_sha256": "10911d6cd4481cfb366633139a2995640c97f2bd8768fb3ad6aeed5c68ed2850",
+      "after_sha256": "9acdfdf13de3e7fc07e13e44d5aacd1492287c364fe0b7bcf3d48c432286df99",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/write_academic_gas_detonation_mpi_cuda_report.py",
+      "before_sha256": "29ea6e1bd6bfb989ea5b265a003e96b00c59c25b4d652bc889b4a639f5ac42b6",
+      "after_sha256": "6efe55bbd5aff61c61ff4add8279ddd2a026e96922659639a661419ddf7f2774",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/validate_academic_gas_3d_znd.py",
+      "before_sha256": "4cb2ff7a1a786d7bb955a61804310334725c9fdef41d52696ab91160a7c87f83",
+      "after_sha256": "f890c3b3b3a3ab9333eb298b6a158acc5fc88ded4fede7d55c65f4c43fabf5e5",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/validate_detonation_wave.py",
+      "before_sha256": "ca5b631a2f1ed30157e1e89727e7c1f34debd415f551621da9fa0df36ad80754",
+      "after_sha256": "47d21ea3220ae5614436e89fad19216ffd052f7416045b443934f02117390b13",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/codex_smoke_academic_detonation_wave.sh",
+      "before_sha256": "37cbb04928f71feccadde611b439547dad8c986b8f8e4dfacea7068f427bc8c1",
+      "after_sha256": "a6b7e949f442eadfad3076ab6f79701f1e5028c02d7a9120b46e5070e65addbd",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/write_academic_gas_liquid_detonation_certification_report.py",
+      "before_sha256": "5c0edc240615beb599ee78a13263cb067a4365fd320dfa88b72ef6cb2acad306",
+      "after_sha256": "3fa2920b804c0b9bc18d3a3d69f32770eb6bfacdbb33cbc26f651b90e10a8f10",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "examples/academic/shock_droplet/prob.cpp",
+      "before_sha256": "2569cc067426d899a554b0bd1f26b8e6452c7fbd5886597698465a75c4b6c7b3",
+      "after_sha256": "9c33d0708c465dd16b6141e3dc11c98e15981be984d47b23a2d44e7fdb78035b",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "tools/cfd_evidence_checks.py",
+      "before_sha256": null,
+      "after_sha256": "4e6db15d29c41131e138b491888f414acde953b15bdcdd5e99d14ec265b69488",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T084858048058Z"
+    },
+    {
+      "path": "examples/academic/bench_1gpu/prob_parm.H",
+      "before_sha256": "58b6746226c519963dbef982e46493651221c2030375af5171455cfe113230ea",
+      "after_sha256": "b7b5e1a33d64e7996863b9a9d4b261416d44730865e47ce454266a814c1e7501",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T085130106027Z"
+    },
+    {
+      "path": "examples/academic/bench_1gpu/prob.cpp",
+      "before_sha256": "aef19dec765ca36d872e3fe3bfe18e6d5410b5942bb25cfd8cbe220db8e4904a",
+      "after_sha256": "bdafb278bc9282d3733e351201d5fa28c517991a42c0336eeaf12d8eed9c6992",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T085130106027Z"
+    },
+    {
+      "path": "examples/academic/bench_1gpu/prob.H",
+      "before_sha256": "dcfb230dc1e9d9496c71e3665377074fbc304e79b9778e258025a3d27fa60fa1",
+      "after_sha256": "59793d256028ec2fbfa20b2a5f2c50e145ae9ddbcd16f29db575d948c676246c",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T085130106027Z"
+    },
+    {
+      "path": "examples/academic/bench_2gpu/prob_parm.H",
+      "before_sha256": "a7d6c5af5ec2b1911660aee2ed8205a3b41e92c4c01e172ce727d3c65c3196d3",
+      "after_sha256": "b7b5e1a33d64e7996863b9a9d4b261416d44730865e47ce454266a814c1e7501",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T085130106027Z"
+    },
+    {
+      "path": "examples/academic/bench_2gpu/prob.cpp",
+      "before_sha256": "aef19dec765ca36d872e3fe3bfe18e6d5410b5942bb25cfd8cbe220db8e4904a",
+      "after_sha256": "89d64fd5cc4d7a181e304e1644aed5d611995430d08615eae1fa37a0f05b8deb",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T085130106027Z"
+    },
+    {
+      "path": "examples/academic/bench_2gpu/prob.H",
+      "before_sha256": "dcfb230dc1e9d9496c71e3665377074fbc304e79b9778e258025a3d27fa60fa1",
+      "after_sha256": "59793d256028ec2fbfa20b2a5f2c50e145ae9ddbcd16f29db575d948c676246c",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T085130106027Z"
+    },
+    {
+      "path": "external/PeleLMeX/Source/PeleLMeX_ProblemSpecificFunctions.H",
+      "before_sha256": "bdbe5695e617a7814a246c11d9d6fc64c22adb25cb023d6be30a4057a11db000",
+      "after_sha256": "b6fd56ee5e5a34f706986046b6da7011a0a0804a1dac49478612faee70f478ca",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T091038969044Z"
+    },
+    {
+      "path": "external/PeleLMeX/Source/PeleLMeX_Forces.cpp",
+      "before_sha256": "3e18130e034d3287d81a2a6ad80da999265843aca8d4eac95fbc4fba226b3ef4",
+      "after_sha256": "c76f524a741c5fde748c3ba01a42d7800feb463932c23999422bd851706bdb45",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T091038969044Z"
+    },
+    {
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "before_sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "after_sha256": "542eadccc0f89d271988ad5bdffc5c9a3c36be7319fea860080daeb0c8e4267a",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T091038969044Z"
+    },
+    {
+      "path": "external/PeleC/Source/SpeciesFluxLimiter.H",
+      "before_sha256": null,
+      "after_sha256": "af2238130bf4c3697eaec72face5b7514e2798b40ad6fa7378745a84d73ccbff",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T092212789592Z"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "before_sha256": "54c6fb9243b0cb25f921c5dfa969ecd5293cb57ac3fdf57e5483882ff0033b80",
+      "after_sha256": "da6357de206bfbc7d5f6f02d786cab16464dd7acf7b810fe709acfc1e332c2b2",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T092334745279Z"
+    },
+    {
+      "path": "test/unit/test_species_flux_limiter.cpp",
+      "before_sha256": null,
+      "after_sha256": "963a3b29509bf3f4edc7e365e77b7b1737b68c4af82c4e5f2972e515678b2cef",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T092334745279Z"
+    },
+    {
+      "path": "test/integration/test_source_volume_amr.cpp",
+      "before_sha256": null,
+      "after_sha256": "1bf10cda518a12e417f8fb55432f7afdc38c28bca18b612092326eb943d4ba9b",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T092924124038Z"
+    },
+    {
+      "path": "tools/cfd_run_archive.py",
+      "before_sha256": null,
+      "after_sha256": "15b59e3741150d0bb8cb009e4b8d7f8bc964e623ba088926720daea65988754a",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T093840608999Z"
+    },
+    {
+      "path": "tools/test_cfd_evidence_checks.py",
+      "before_sha256": null,
+      "after_sha256": "4385811bb9e861fdb9fbfb76bd7efe97b1ddd802a8c283b298822f13d6b965d7",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T093840608999Z"
+    },
+    {
+      "path": "external/PeleC/Source/Riemann.H",
+      "before_sha256": "073ae14b2f7925de2858ef312d02fc50f033c2a344dccc5b24ecde1f77ed8253",
+      "after_sha256": "0de1df103ecf5b36a79116e62c668b4452df2fd2c8601577c9b6da8c45c8ce1a",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094522510735Z"
+    },
+    {
+      "path": "external/PeleC/Source/PeleC.cpp",
+      "before_sha256": "700756cc9696e8e22587e9c4e3bb28ff78fd6dbde4afce99f67e448061eebb10",
+      "after_sha256": "303478a6dc57667280471107417a3fbb3449dc6cd7b51fe22dca2e6c2be5a020",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "src/academic/twophase/StiffenedGas.H",
+      "before_sha256": "42c97a9048dda54ebe6888281b48f398a7e45eac288090654994415da80ede71",
+      "after_sha256": "57c97aebd5abf32ab5f89f30740ee9099ca75ca7c490b648a01677667dd6cee7",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "src/academic/twophase/TwoPhaseParams.H",
+      "before_sha256": "e638599dadef2a91ac5624760b4f758a45cde0966f045031c66d563179ae4d10",
+      "after_sha256": "eec4bd3754699985ef2440454f7fca6c8e6ad5ad3b01a0abd209313115b71fb7",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "examples/academic/spray_test/prob.H",
+      "before_sha256": "ff37d6b03a6e787ad507e396cf833341d13a39e299dee60563849092850b0642",
+      "after_sha256": "df22ceb1afa6111879a1b83659fb9b185ac5fb5809f13dc5abc75307d83cfdab",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "examples/academic/vof_advection_1D/prob.H",
+      "before_sha256": "f46697c3b5befbf5ad4519c1f1f8123dd8cc0e5de97b3ce2db45cd2ecc03f59d",
+      "after_sha256": "7710d3cf9eec5186e422c9f9019a2ae6832516ea5a9f4b4474a0f0538b5f85bb",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "examples/academic/bubble_rise/prob.H",
+      "before_sha256": "696e5bead6f342f0082cf0c425e7d4ddd0f1c500922e15830164155508f1aca0",
+      "after_sha256": "051dda19fa5345910a7dfc9a5bec67ace1dbcd9ff33634df42e408b6d3a7bdee",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "test/unit/test_twophase_eos.cpp",
+      "before_sha256": "d131a68a8aed0696eca2efe2a06f0b06dd34b4aec13c761b113337597aab5ef1",
+      "after_sha256": "b72a027cf2d22a104d6b4e45c955e57349afab37ca35334833d80da7c5128263",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "src/academic/twophase/TwoPhaseHLLC.H",
+      "before_sha256": "d4a9e1343e3681e05e203de61b02d49dc5f940d28f194bc6fa3d0da014f09eae",
+      "after_sha256": "6a027799df3cb13b5959380e6f64043f8bf52cdc9285d29e0fcfe7a1dcaf3e41",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "tools/test_cfd_core_regressions.py",
+      "before_sha256": null,
+      "after_sha256": "123c32a62bd42c9bbfdd81b1ec1d3bec3df6d7523ffd85ddb8bd024d8dc62329",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T094938100887Z"
+    },
+    {
+      "path": "external/PeleC/Source/PPM.cpp",
+      "before_sha256": "312dd0ae66bd56b62ec0c3de8d7690ce8181ac8098124188d6576e8a79eab703",
+      "after_sha256": "ac80398a6fbd50950ce213192cd5a72e96f51c22bc1c409f8bf78425766f637a",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T095854120515Z"
+    },
+    {
+      "path": "examples/academic/shock_droplet/prob.H",
+      "before_sha256": "137b6aa1fd7f64085d5eb6083abf33f4347182f33eaf5b7872397a184565140c",
+      "after_sha256": "65a8393ce547fe0098d07c6becda490ead71038999a9715b15123b73f078a1f7",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T100400223297Z"
+    },
+    {
+      "path": "examples/academic/shock_droplet/GNUmakefile",
+      "before_sha256": "bcaa089c927c7bac24d478e64d7956d0db594f0f091d610e46fde5734340c8ad",
+      "after_sha256": "9140f12a9e34e32cf799c4b0a0b6e5a3b649e641079154a9ccb403470a41b547",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T100400223297Z"
+    },
+    {
+      "path": "examples/academic/shock_droplet/inputs.reacting_smoke",
+      "before_sha256": null,
+      "after_sha256": "907e868295522102d314d034b124167fc617c1850617768a6f97b0ecc53bdc14",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T100400223297Z"
+    },
+    {
+      "path": "tools/test_source_volume_integration.py",
+      "before_sha256": null,
+      "after_sha256": "bd3a5bcc0492a2a30e0f253bd9669fa8edd2e33efcbbc00598ed875e904303e2",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T101642433174Z"
+    },
+    {
+      "path": "tools/test_riemann_thermochemistry.py",
+      "before_sha256": null,
+      "after_sha256": "d75d58eacd980b6ac82b3de889810dff197f558bf3d68a98ee9f42377f3a1d92",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T101642433174Z"
+    },
+    {
+      "path": "tools/check_cfd_run_log.py",
+      "before_sha256": null,
+      "after_sha256": "d312eb99964a446c1ba60567bb0e15b7ffed034a91f123c624508237abcea759",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T101642433174Z"
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "bdf20b1e30cf833d0e87e97783edba1be64144622c14e2807b6e256fbb762433",
+      "after_sha256": "795b11def41aa8ff2ff424dc3c78f2464e03d78a438b8e3fe94f474dd44fe172",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "PROGRESS.md",
+      "before_sha256": "78330187b3046feeddeb7c210958c0434e0a1b1492fe3f7d6148926efaca354a",
+      "after_sha256": "85621e548bfaaef42c928c86a712efbeb7a50c0694d92ec542d935a8bea6043a",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "AGENTS.md",
+      "before_sha256": "b8cab7dad92718cc41d0b23dfa27069ee65a48bbc90070b8a07df54ac8a6b119",
+      "after_sha256": "e1236c02ddb9478c96fe5050c6e0abb6d13269ec14c72271f5b1d00237dd4261",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/codex_audit/current_scope_operator_runbook.md",
+      "before_sha256": "76d22e47ffdcaaab7c7c1d35a5e279f3ae0d1974d35b69adc798cfa37b71c7d8",
+      "after_sha256": "9a4dc69f099aa14234fa268280641874088223d74aefdf1b3647e5a8a5e85713",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/user_guides/Pele_CFD_中文使用手册.md",
+      "before_sha256": "390e6d6bf051d06a8e8adbd0f112891d70aa21029e3c2d272fc4fdf1da15651c",
+      "after_sha256": "d5cd06dd292d1668848b1ff3bfaaf1a0a098f4d80b79501e57924e5f6b5ea602",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/user_guides/从零设置完整算例_工程H2泄漏火灾与学术爆轰.md",
+      "before_sha256": "e0cbc20fb9197767ca3134fc3eb81a81e4a8e24004e4cdf5970ef9d7313a907a",
+      "after_sha256": "b7c62d2dc053f72bba92f4e6188feeb364ff442571b7a4088284dea218d35b83",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/user_guides/学术场景_气相与两相爆轰_Tutorial.md",
+      "before_sha256": "5a24944699425238691620f4ad8b0fd85c375925a44eb41b36e9266fec444a13",
+      "after_sha256": "aaa8a936bcc026998185221dc3d112d2dbf56c7de1ef8491c3da4fc2d95d4254",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "before_sha256": "ea30ab0f4502af19739c5baf322bd20ff7f654cd1931b6fff33a4e50fa62da5d",
+      "after_sha256": "d12ac606d07b23f1b1a84bcf968fde93a3e1e19a820aad34330cdf3d975797ea",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/user_guides/工程场景_泄漏扩散火灾_Tutorial.md",
+      "before_sha256": "231c2fcf6eed284f6f406b0ddb972684622fa660dcfc6fa90b3ac5f9623cfad1",
+      "after_sha256": "c00c68cf6a815d73390429278c2260a78733e9cefa70462c0fa2a9d27a64e075",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    },
+    {
+      "path": "docs/codex_audit/repair_20260909.md",
+      "before_sha256": null,
+      "after_sha256": "fcbcc8840f3c52de215b8eef6cb0309d56bc72ea3e027b5fa1af78eaa65c75af",
+      "first_backup": "/home/cj/my-pele/repair_backups/20260909T102248203172Z"
+    }
+  ],
+  "backups": [
+    "/home/cj/my-pele/repair_backups/20260909T084026316117Z",
+    "/home/cj/my-pele/repair_backups/20260909T084858048058Z",
+    "/home/cj/my-pele/repair_backups/20260909T085130106027Z",
+    "/home/cj/my-pele/repair_backups/20260909T091038969044Z",
+    "/home/cj/my-pele/repair_backups/20260909T092212789592Z",
+    "/home/cj/my-pele/repair_backups/20260909T092334745279Z",
+    "/home/cj/my-pele/repair_backups/20260909T092434780302Z",
+    "/home/cj/my-pele/repair_backups/20260909T092559372301Z",
+    "/home/cj/my-pele/repair_backups/20260909T092924124038Z",
+    "/home/cj/my-pele/repair_backups/20260909T093840608999Z",
+    "/home/cj/my-pele/repair_backups/20260909T094522510735Z",
+    "/home/cj/my-pele/repair_backups/20260909T094938100887Z",
+    "/home/cj/my-pele/repair_backups/20260909T095854120515Z",
+    "/home/cj/my-pele/repair_backups/20260909T100135516187Z",
+    "/home/cj/my-pele/repair_backups/20260909T100400223297Z",
+    "/home/cj/my-pele/repair_backups/20260909T101017629954Z",
+    "/home/cj/my-pele/repair_backups/20260909T101343612809Z",
+    "/home/cj/my-pele/repair_backups/20260909T101642433174Z",
+    "/home/cj/my-pele/repair_backups/20260909T101741840809Z",
+    "/home/cj/my-pele/repair_backups/20260909T102248203172Z",
+    "/home/cj/my-pele/repair_backups/20260909T102752314567Z",
+    "/home/cj/my-pele/repair_backups/20260909T102912806098Z",
+    "/home/cj/my-pele/repair_backups/20260909T103003586864Z"
+  ]
+}

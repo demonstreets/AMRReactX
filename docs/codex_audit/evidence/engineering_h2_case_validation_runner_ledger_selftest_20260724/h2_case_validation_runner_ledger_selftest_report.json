@@ -1,0 +1,126 @@
+{
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_case_validation_runner",
+      "path": "tools/run_engineering_h2_external_evidence_case_validation_campaigns.py",
+      "sha256": "11fd580063d25318b836da68287404e855c10037f7eadc246c63b93ebb3b149b",
+      "size_bytes": 22245
+    },
+    {
+      "label": "engineering_h2_case_validation_runner_ledger",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json",
+      "sha256": "b9a7220b83bf3eab28b38938992e1c16b1b1aded22f2bf4b1e91c7a91db03b71",
+      "size_bytes": 9221
+    },
+    {
+      "label": "dryrun_with_command_results_fixture_ledger",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/dryrun_with_command_results_ledger.json",
+      "sha256": "a091b9806e28af0d5db39a4248e21bc0bbac58c73b065e66ae9ae1445c9cc00f",
+      "size_bytes": 9812
+    },
+    {
+      "label": "pass_with_blocked_campaigns_fixture_ledger",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/pass_with_blocked_campaigns_ledger.json",
+      "sha256": "eda7451582a436c58b7ad73bce2fefb2a054007fc9ab70e525855eb7a4964f02",
+      "size_bytes": 9808
+    },
+    {
+      "label": "pass_with_nonzero_returncode_fixture_ledger",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/pass_with_nonzero_returncode_ledger.json",
+      "sha256": "86a4ebc30e630ad22d344ccdf5f743f09829ca66d36c31dfe6bba4d7be049ef6",
+      "size_bytes": 9808
+    },
+    {
+      "label": "command_campaign_not_selected_fixture_ledger",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/command_campaign_not_selected_ledger.json",
+      "sha256": "98c0755142f4bf1d8cbf2c1fe83979eb8f790623d6f386b532aef450b58c41ee",
+      "size_bytes": 9248
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:10+00:00",
+  "limitations": [
+    "This selftest mutates isolated copies of the runner ledger and does not run CFD validation campaigns.",
+    "Negative fixture rejection proves ledger gate behavior only and does not clear production blockers."
+  ],
+  "negative_cases": [
+    {
+      "fixture_ledger": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/dryrun_with_command_results_ledger.json",
+      "name": "dryrun_with_command_results",
+      "refused": true,
+      "returncode": 2,
+      "stderr_tail": "engineering_h2_case_validation_runner REFUSED DRYRUN ledger recorded command results",
+      "stdout_tail": ""
+    },
+    {
+      "fixture_ledger": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/pass_with_blocked_campaigns_ledger.json",
+      "name": "pass_with_blocked_campaigns",
+      "refused": true,
+      "returncode": 2,
+      "stderr_tail": "engineering_h2_case_validation_runner REFUSED ledger unresolved command count mismatch",
+      "stdout_tail": ""
+    },
+    {
+      "fixture_ledger": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/pass_with_nonzero_returncode_ledger.json",
+      "name": "pass_with_nonzero_returncode",
+      "refused": true,
+      "returncode": 2,
+      "stderr_tail": "engineering_h2_case_validation_runner REFUSED ledger unresolved command count mismatch",
+      "stdout_tail": ""
+    },
+    {
+      "fixture_ledger": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/fixtures/command_campaign_not_selected_ledger.json",
+      "name": "command_campaign_not_selected",
+      "refused": true,
+      "returncode": 2,
+      "stderr_tail": "engineering_h2_case_validation_runner REFUSED ledger command row campaign not selected",
+      "stdout_tail": ""
+    }
+  ],
+  "positive_verify": {
+    "argv": [
+      "/usr/bin/python3",
+      "tools/run_engineering_h2_external_evidence_case_validation_campaigns.py",
+      "--verify-ledger",
+      "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json"
+    ],
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "engineering_h2_case_validation_runner_ledger VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json status=DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER campaigns=4 results=0"
+  },
+  "quality_gate_matrix": [
+    {
+      "evidence": "engineering_h2_case_validation_runner_ledger VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json status=DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER campaigns=4 results=0",
+      "gap": "",
+      "name": "positive_runner_ledger_verifies",
+      "status": "PASS"
+    },
+    {
+      "evidence": "refused=4/4",
+      "gap": "",
+      "name": "all_mutated_ledgers_are_refused",
+      "status": "PASS"
+    },
+    {
+      "evidence": "fixture-only runner-ledger selftest",
+      "gap": "",
+      "name": "selftest_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "runner": "tools/run_engineering_h2_external_evidence_case_validation_campaigns.py",
+  "runner_ledger": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json",
+  "schema_version": 1,
+  "selftest_only": true,
+  "status": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER-SELFTEST",
+  "summary": {
+    "command_campaign_not_selected_refused": true,
+    "dryrun_with_command_results_refused": true,
+    "negative_case_count": 4,
+    "negative_refused_count": 4,
+    "pass_with_blocked_campaigns_refused": true,
+    "pass_with_nonzero_returncode_refused": true,
+    "positive_verify_returncode": 0
+  },
+  "title": "Engineering H2 Case Validation Runner Ledger Selftest"
+}

@@ -1,0 +1,194 @@
+{
+  "blocking_gaps": [
+    "fire_calibration_dataset_ingestion_not_passed",
+    "fire_calibration_metadata_case_alignment_release_or_cloud_mass_not_true",
+    "fire_calibration_metadata_case_alignment_ignition_or_burn_basis_not_true",
+    "fire_calibration_metadata_case_alignment_boundary_conditions_not_true"
+  ],
+  "clears_fire_consequence_blocker": false,
+  "current_inputs": {
+    "ingestion_content_quality_gate_level": "strict-v1-placeholder-free-and-non-synthetic",
+    "ingestion_schema_version": 2,
+    "ingestion_selftest_duplicate_metric_negative_refused": true,
+    "ingestion_selftest_negative_refused_count": 1,
+    "ingestion_selftest_placeholder_negative_refused": true,
+    "ingestion_selftest_positive_passed_count": 2,
+    "ingestion_selftest_status": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION-SELFTEST",
+    "literature_metric_anchor_available": true,
+    "literature_metric_missing_artifact_count": 3,
+    "metadata_available": false,
+    "overpressure_metrics_available": true,
+    "public_source_missing_artifact_count": 4,
+    "public_source_triage_available": true,
+    "radiation_metrics_available": true
+  },
+  "dataset_root": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset",
+  "evidence_files": [
+    {
+      "label": "fire_calibration_dataset_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json",
+      "sha256": "ec57ea9833fa93b6f2c4fed712ba4f650252f4a7d2e4b82bdea42b11120f194a",
+      "size_bytes": 6383
+    },
+    {
+      "label": "fire_calibration_dataset_ingestion_selftest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fire_calibration_dataset_ingestion_selftest_report.json",
+      "sha256": "9d7a4e5f9ee9ac976c75f64d5edd07aa621b5f9dea2953fe19c06f938a676ce6",
+      "size_bytes": 3517
+    },
+    {
+      "label": "fire_calibration_public_source_triage_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json",
+      "sha256": "41249a0709ec15401ba7d74264c171b828242b1dcab58c6331e5b8516d796c0a",
+      "size_bytes": 7052
+    },
+    {
+      "label": "fire_calibration_literature_metric_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_literature_metric_preflight_20260724/fire_calibration_literature_metric_preflight_report.json",
+      "sha256": "5bef644b1ee189ee1e6f968f4d25340bd03f3af286460133a6c9167581a33723",
+      "size_bytes": 5512
+    },
+    {
+      "label": "README",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/README.md",
+      "sha256": "e8d9fea1ad6aa6f6709d0442655bd8842d34fe160daf0fd388fa78a601aa0f00",
+      "size_bytes": 654
+    },
+    {
+      "label": "calibration_metadata_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json",
+      "sha256": "757224382e1c667ff4d1ad3a0831f6960eaa21d50e7a64e240a070423c558fe7",
+      "size_bytes": 856
+    },
+    {
+      "label": "radiation_metrics_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv",
+      "sha256": "ceaf0cc1f31a6a4ce8e6dbce62a7e7745e74a1131ffca5be99df7e3702bfc630",
+      "size_bytes": 249
+    },
+    {
+      "label": "overpressure_metrics_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv",
+      "sha256": "6856b661c785344ab649992598668e18e375722985eae278d6dc4e8f427ddeb9",
+      "size_bytes": 261
+    },
+    {
+      "label": "fire_calibration_intake_checklist",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_intake_checklist.csv",
+      "sha256": "a869dea963fe0b4e03ffc59351a6ff47c62d112a96c00df5bb96b03404baf871",
+      "size_bytes": 1637
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "ingestion_content_quality_gate_level": "strict-v1-placeholder-free-and-non-synthetic",
+  "ingestion_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json",
+  "ingestion_schema_version": 2,
+  "ingestion_selftest_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fire_calibration_dataset_ingestion_selftest_report.json",
+  "ingestion_selftest_status": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION-SELFTEST",
+  "ingestion_status": "NOT_READY-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+  "limitations": [
+    "This package prepares external fire/blast calibration data for ingestion and does not clear the fire-consequence blocker by itself.",
+    "The default package is NOT_READY until real metadata, radiation, and overpressure calibration files pass ingestion.",
+    "Production credit requires the official fire consequence report to pass with the generated calibration dataset JSON."
+  ],
+  "literature_metric_preflight_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_literature_metric_preflight_20260724/fire_calibration_literature_metric_preflight_report.json",
+  "literature_metric_preflight_status": "PASS-H2-FIRE-CALIBRATION-LITERATURE-METRIC-PREFLIGHT",
+  "package_ready_for_dataset_builder": false,
+  "public_source_triage_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json",
+  "public_source_triage_status": "PASS-H2-FIRE-CALIBRATION-PUBLIC-SOURCE-TRIAGE",
+  "quality_gate_matrix": [
+    {
+      "evidence": "public fire calibration source triage passed",
+      "gap": "",
+      "name": "public_source_triage_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "radiation and overpressure public source candidates identified",
+      "gap": "",
+      "name": "radiation_and_overpressure_candidates_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "public radiation and overpressure metric anchors are machine-checkable",
+      "gap": "",
+      "name": "literature_metric_preflight_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Fire calibration dataset ingestion must pass before package is builder-ready.",
+      "name": "ingestion_report_passed",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "fire calibration ingestion strict-gate selftest passed",
+      "gap": "",
+      "name": "ingestion_strict_gate_selftest_passed",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide calibration_metadata.json with the required schema.",
+      "name": "metadata_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "literature_digitized with public identifier",
+      "gap": "",
+      "name": "experimental_source_identified",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Set all required fuel, release/cloud mass, burn/ignition, measurement, and boundary-condition alignment fields to true with evidence.",
+      "name": "case_alignment_complete",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "4 radiation metric row(s) accepted",
+      "gap": "",
+      "name": "radiation_metrics_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "4 overpressure metric row(s) accepted",
+      "gap": "",
+      "name": "overpressure_metrics_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "radiation=4, overpressure=4",
+      "gap": "",
+      "name": "radiation_and_overpressure_families_present",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "The package is not builder-ready until every ingestion and quality gate passes.",
+      "name": "package_ready_for_dataset_builder",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "package remains an intake gate; final blocker clearance requires calibrated consequence report",
+      "gap": "",
+      "name": "package_does_not_claim_final_calibration",
+      "status": "PASS"
+    }
+  ],
+  "required_dataset_files": {
+    "calibration_metadata_json": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+    "overpressure_metrics_csv": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv",
+    "radiation_metrics_csv": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv"
+  },
+  "schema_version": 5,
+  "status": "NOT_READY-H2-FIRE-CALIBRATION-PACKAGE",
+  "template_files": [
+    "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/README.md",
+    "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json",
+    "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv",
+    "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv",
+    "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_intake_checklist.csv"
+  ],
+  "title": "Engineering H2 Fire Calibration Package"
+}

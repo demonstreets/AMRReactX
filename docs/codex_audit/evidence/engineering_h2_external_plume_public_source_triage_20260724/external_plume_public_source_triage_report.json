@@ -1,0 +1,362 @@
+{
+  "artifact_resolution_matrix": [
+    {
+      "artifact": "dataset_metadata.json",
+      "can_clear_ingestion_gate": false,
+      "local_controlled_file_present": false,
+      "numeric_data_available_in_public_text": false,
+      "public_sources_identified": true,
+      "required_next_step": "download or receive the source document/data package, hash it locally, and record provenance plus case-alignment booleans",
+      "source_identity_sufficient": true,
+      "usable_source_ids": [
+        "kitopen_230068969",
+        "researchgate_311396790",
+        "h2knowledgecentre_conference289"
+      ]
+    },
+    {
+      "artifact": "sensor_coordinates.csv",
+      "can_clear_ingestion_gate": false,
+      "local_controlled_file_present": false,
+      "numeric_data_available_in_public_text": false,
+      "public_sources_identified": true,
+      "required_next_step": "digitize the sensor-position figure or obtain the original Gas01..Gas12 coordinate table with uncertainty records",
+      "source_identity_sufficient": true,
+      "usable_source_ids": [
+        "researchgate_311396790",
+        "slideserve_8677333"
+      ]
+    },
+    {
+      "artifact": "baffle_geometry.csv",
+      "can_clear_ingestion_gate": false,
+      "local_controlled_file_present": false,
+      "numeric_data_available_in_public_text": false,
+      "public_sources_identified": true,
+      "required_next_step": "digitize the geometry figure or obtain original baffle bounds for all four baffles",
+      "source_identity_sufficient": true,
+      "usable_source_ids": [
+        "researchgate_311396790"
+      ]
+    },
+    {
+      "artifact": "experimental_timeseries.csv",
+      "can_clear_ingestion_gate": false,
+      "local_controlled_file_present": false,
+      "numeric_data_available_in_public_text": false,
+      "public_sources_identified": true,
+      "required_next_step": "obtain the original Excel file or digitize all reliable-sensor curves through 120 s with uncertainty metadata",
+      "source_identity_sufficient": true,
+      "usable_source_ids": [
+        "researchgate_311396790"
+      ]
+    }
+  ],
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "clears_reference_data_blocker": false,
+  "extracted_facts": [
+    {
+      "fact_id": "vessel_dimensions",
+      "production_status": "usable_for_case_scaffold",
+      "source_ids": [
+        "researchgate_311396790",
+        "slideserve_8677333"
+      ],
+      "value": {
+        "x_width_m": 1.2,
+        "y_depth_m": 0.2,
+        "z_height_m": 0.9
+      }
+    },
+    {
+      "fact_id": "test_case",
+      "production_status": "usable_for_case_scaffold",
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "value": {
+        "case_id": "D27",
+        "selection_basis": "low-momentum SBEPV5 validation test"
+      }
+    },
+    {
+      "fact_id": "release_conditions",
+      "production_status": "usable_for_case_scaffold",
+      "source_ids": [
+        "researchgate_311396790",
+        "slideserve_8677333"
+      ],
+      "value": {
+        "exit_velocity_m_s": 10.17,
+        "flow_rate_normal_l_s": 1.15,
+        "gas": "pure_H2",
+        "jet_exit_location_m": {
+          "x": 0.03,
+          "y": 0.1,
+          "z": 0.145
+        },
+        "nozzle_diameter_m": 0.012,
+        "release_period_s": 60.0
+      }
+    },
+    {
+      "fact_id": "compartment_and_baffle_summary",
+      "production_status": "usable_for_case_scaffold_but_exact_positions_need_digitization",
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "value": {
+        "baffle_count": 4,
+        "baffle_plate_dimensions_m": {
+          "y_depth": 0.2,
+          "z_height": 0.3
+        },
+        "compartment_count": 12
+      }
+    },
+    {
+      "fact_id": "sensor_summary",
+      "production_status": "usable_for_reliable_sensor_filter_but_exact_coordinates_need_digitization",
+      "source_ids": [
+        "researchgate_311396790",
+        "slideserve_8677333"
+      ],
+      "value": {
+        "reliable_sensor_ids": [
+          1,
+          2,
+          5,
+          7,
+          8,
+          9,
+          10,
+          12
+        ],
+        "sensor_accuracy_volume_percent_h2": 1.0,
+        "sensor_count": 12,
+        "sensor_type": "Oldham OLCT20D thermal-conductivity H2 concentration sensors",
+        "unreliable_sensor_ids": [
+          3,
+          4,
+          6,
+          11
+        ]
+      }
+    },
+    {
+      "fact_id": "experimental_dataset_summary",
+      "production_status": "not_ingested_original_excel_or_digitized_csv_required",
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "value": {
+        "duration_s": 120.0,
+        "format_reported_by_paper": "MS Excel",
+        "quantity": "volumetric H2 concentration at 12 monitor locations"
+      }
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This triage report records public-source facts and data-acquisition gaps; it does not ingest experimental data.",
+    "Production reference agreement still requires local exact coordinates, baffle geometry, and concentration time series."
+  ],
+  "missing_artifacts": [
+    {
+      "artifact": "sensor_coordinates.csv",
+      "required_action": "digitize Figure 4/source figure or obtain original tabular sensor coordinates",
+      "why_missing": "public figure/transcript identifies layout and reliable sensors but no machine-readable exact coordinates are attached"
+    },
+    {
+      "artifact": "baffle_geometry.csv",
+      "required_action": "digitize Figure 2/source geometry or obtain original CAD/table",
+      "why_missing": "public text gives count and plate dimensions but exact baffle bounds still require figure digitization/original geometry"
+    },
+    {
+      "artifact": "experimental_timeseries.csv",
+      "required_action": "obtain original Excel data or digitize published curves with source and uncertainty metadata",
+      "why_missing": "paper reports MS Excel dataset and plots but no local accepted 12-sensor CSV/Excel file is ingested"
+    },
+    {
+      "artifact": "dataset_metadata.json",
+      "required_action": "record URL/DOI, source file hashes, digitization method, uncertainty, and case-alignment booleans",
+      "why_missing": "dataset source hashes and digitization provenance cannot be completed until source data files are local"
+    }
+  ],
+  "public_fact_to_case_input_map": [
+    {
+      "blocked_reason": "",
+      "input_field": "geometry.domain_dimensions_m",
+      "source_fact_ids": [
+        "vessel_dimensions"
+      ],
+      "status": "PUBLIC_FACT_AVAILABLE"
+    },
+    {
+      "blocked_reason": "",
+      "input_field": "release.nozzle_diameter_m",
+      "source_fact_ids": [
+        "release_conditions"
+      ],
+      "status": "PUBLIC_FACT_AVAILABLE"
+    },
+    {
+      "blocked_reason": "",
+      "input_field": "release.exit_velocity_m_s",
+      "source_fact_ids": [
+        "release_conditions"
+      ],
+      "status": "PUBLIC_FACT_AVAILABLE"
+    },
+    {
+      "blocked_reason": "",
+      "input_field": "release.duration_s",
+      "source_fact_ids": [
+        "release_conditions"
+      ],
+      "status": "PUBLIC_FACT_AVAILABLE"
+    },
+    {
+      "blocked_reason": "public material identifies sensors but not a controlled machine-readable coordinate table",
+      "input_field": "sensors.coordinates",
+      "source_fact_ids": [
+        "sensor_summary"
+      ],
+      "status": "NEEDS_DIGITIZATION_OR_ORIGINAL_TABLE"
+    },
+    {
+      "blocked_reason": "public material gives baffle count and dimensions but not exact bounds for every baffle",
+      "input_field": "baffles.bounds",
+      "source_fact_ids": [
+        "compartment_and_baffle_summary"
+      ],
+      "status": "NEEDS_DIGITIZATION_OR_ORIGINAL_TABLE"
+    },
+    {
+      "blocked_reason": "the paper states that an Excel dataset exists, but no accepted local file is present",
+      "input_field": "reference.experimental_timeseries",
+      "source_fact_ids": [
+        "experimental_dataset_summary"
+      ],
+      "status": "NEEDS_ORIGINAL_EXCEL_OR_DIGITIZED_CURVES"
+    }
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": [
+        "https://publikationen.bibliothek.kit.edu/230068969",
+        "https://www.researchgate.net/publication/311396790_Results_of_the_HySafe_CFD_Validation_Benchmark_SBEPV5",
+        "https://www.h2knowledgecentre.com/content/conference289",
+        "https://www.slideserve.com/nilson/results-of-the-hysafe-cfd-validation-benchmark-sbepv5-powerpoint-ppt-presentation"
+      ],
+      "gap": "",
+      "name": "public_source_registry_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "vessel_dimensions",
+        "release_conditions"
+      ],
+      "gap": "",
+      "name": "geometry_release_facts_extracted",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "sensor_summary"
+      ],
+      "gap": "",
+      "name": "sensor_reliability_facts_extracted",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "all required ingestion artifacts have explicit non-clearable resolution rows"
+      ],
+      "gap": "",
+      "name": "artifact_resolution_matrix_retains_blockers",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "public case-scaffold facts are separated from unavailable sensor/baffle/timeseries data"
+      ],
+      "gap": "",
+      "name": "case_input_map_separates_public_facts_from_digitization",
+      "status": "PASS"
+    },
+    {
+      "evidence": [],
+      "gap": "Exact Gas01..Gas12 coordinates are not present as local source-controlled data.",
+      "name": "exact_sensor_coordinates_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Exact baffle bounds are not present as local source-controlled data.",
+      "name": "exact_baffle_geometry_available",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Original Excel or accepted digitized 12-sensor concentration time series is not local.",
+      "name": "experimental_timeseries_available",
+      "status": "MISSING"
+    }
+  ],
+  "schema_version": 2,
+  "sources": [
+    {
+      "id": "kitopen_230068969",
+      "kind": "repository_metadata",
+      "production_use": "preferred bibliographic anchor for public source identity",
+      "publisher_or_host": "KITopen",
+      "title": "Results of the HySafe CFD validation benchmark SBEPV5",
+      "url": "https://publikationen.bibliothek.kit.edu/230068969"
+    },
+    {
+      "id": "researchgate_311396790",
+      "kind": "paper_full_text_page",
+      "production_use": "publicly readable paper text and figure captions for geometry/release/measurement facts",
+      "publisher_or_host": "ResearchGate mirror of ICHS 2007 paper",
+      "title": "Results of the HySafe CFD Validation Benchmark SBEPV5",
+      "url": "https://www.researchgate.net/publication/311396790_Results_of_the_HySafe_CFD_Validation_Benchmark_SBEPV5"
+    },
+    {
+      "id": "h2knowledgecentre_conference289",
+      "kind": "conference_record",
+      "production_use": "secondary bibliographic record and abstract",
+      "publisher_or_host": "Hydrogen Knowledge Centre",
+      "title": "Results of the HySafe CFD Validation Benchmark SBEPV5",
+      "url": "https://www.h2knowledgecentre.com/content/conference289"
+    },
+    {
+      "id": "slideserve_8677333",
+      "kind": "presentation_transcript_secondary",
+      "production_use": "secondary cross-check for sensor layout, release period, nozzle, exit velocity, and flow rate",
+      "publisher_or_host": "SlideServe transcript",
+      "title": "Results of the HySafe CFD Validation Benchmark SBEPV5",
+      "url": "https://www.slideserve.com/nilson/results-of-the-hysafe-cfd-validation-benchmark-sbepv5-powerpoint-ppt-presentation"
+    }
+  ],
+  "status": "PASS-H2-EXTERNAL-PLUME-PUBLIC-SOURCE-TRIAGE",
+  "summary": {
+    "artifact_resolution_clearable_count": 0,
+    "artifact_resolution_matrix_row_count": 4,
+    "case_input_needs_digitization_count": 3,
+    "case_input_public_fact_available_count": 4,
+    "clears_external_plume_reference_blocker": false,
+    "exact_baffle_geometry_table_available": false,
+    "exact_sensor_coordinate_table_available": false,
+    "missing_artifact_count": 4,
+    "original_excel_timeseries_available_locally": false,
+    "public_fact_to_case_input_map_row_count": 7,
+    "public_geometry_release_summary_available": true,
+    "public_sensor_reliability_summary_available": true,
+    "public_source_registry_available": true,
+    "public_timeseries_existence_documented": true,
+    "ready_for_dataset_ingestion": false
+  },
+  "title": "Engineering H2 External Plume Public Source Triage"
+}

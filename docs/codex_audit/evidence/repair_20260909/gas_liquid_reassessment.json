@@ -1,0 +1,304 @@
+{
+  "created_utc": "2026-09-09T10:32:39.078173Z",
+  "evidence": [
+    {
+      "label": "spray_detonation_response",
+      "path": "docs/codex_audit/evidence/academic_spray_detonation_validation_20260728/academic_spray_detonation_validation_report.json",
+      "sha256": "79f7546d6b8cce722899712e4f3c6a27b6fec439810ebf92fb07f2517746d677",
+      "size_bytes": 9955
+    },
+    {
+      "label": "spray_detonation_source_budget",
+      "path": "docs/codex_audit/evidence/academic_spray_detonation_source_budget_validation_20260729/academic_spray_detonation_source_budget_validation_report.json",
+      "sha256": "e797a6800b0daf26e6cffbf1792ee88293eb9b105a267475f389c60819d7792c",
+      "size_bytes": 802712
+    },
+    {
+      "label": "reacting_closed_control_volume_budget",
+      "path": "docs/codex_audit/evidence/academic_reacting_spray_closed_control_volume_budget_20260729/academic_reacting_spray_closed_control_volume_budget_report.json",
+      "sha256": "433714c8a03a6f960cda0dfa67bae8b3f484cbbc64f06a39fb0c953d21933869",
+      "size_bytes": 116955
+    },
+    {
+      "label": "coupled_budget_rollup",
+      "path": "docs/codex_audit/evidence/academic_spray_coupled_budget_residual_20260729/academic_spray_coupled_budget_residual_report.json",
+      "sha256": "2140f4fe9b7fbf7dc9accca18780ad9c242600226533791cb11477fcb70970f6",
+      "size_bytes": 10554
+    },
+    {
+      "label": "academic_readiness_summary",
+      "path": "docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json",
+      "sha256": "350350fa3d11bc3b2f65505c25235348945277aec2ae782297abe168c35ca2e5",
+      "size_bytes": 16688
+    },
+    {
+      "label": "certification_writer",
+      "path": "tools/write_academic_gas_liquid_detonation_certification_report.py",
+      "sha256": "3fa2920b804c0b9bc18d3a3d69f32770eb6bfacdbb33cbc26f651b90e10a8f10",
+      "size_bytes": 13849
+    }
+  ],
+  "gates": [
+    {
+      "evidence": [],
+      "metric": [
+        {
+          "binary_provenance_verified": false,
+          "gas_reactions": 0,
+          "job_info": "docs/codex_audit/evidence/academic_spray_detonation_validation_20260728/reacting_spray_detonation_1000/plt01000/job_info",
+          "mechanism_source": "/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp/mechanism.H",
+          "name": "heptane_3sp",
+          "source_sha256": "aefd60b24205bbfa89b51302ac6205770c4d7ee0613ca6bc15e5efa11fa4299a"
+        }
+      ],
+      "name": "nonzero_gas_chemistry",
+      "status": "NOT_READY",
+      "target": "archived run mechanism must contain reactions"
+    },
+    {
+      "evidence": [],
+      "metric": null,
+      "name": "cellular_structure_reference",
+      "status": "NOT_READY",
+      "target": "time-resolved cellular validation required"
+    },
+    {
+      "evidence": [],
+      "metric": null,
+      "name": "external_reference",
+      "status": "NOT_READY",
+      "target": "independent reference comparison required"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_spray_detonation_validation_20260728/academic_spray_detonation_validation_report.json"
+      ],
+      "metric": {
+        "case_count": 1,
+        "clears_acd_07_closed_gas_particle_budget_gap": false,
+        "clears_acd_07_external_reference_gap": false,
+        "clears_acd_07_full_cellular_gas_liquid_detonation_gap": false,
+        "clears_acd_07_reacting_spray_response_gate": true,
+        "clears_acd_07_spray_detonation_gap": false,
+        "d32_max": 0.00499987684,
+        "fuel_vapor_increase": 0.000788388867,
+        "heat_release_absmax": 1.56560169,
+        "main_case": "reacting_spray_detonation_1000",
+        "o2_consumption": 0.000183833557,
+        "particle_count0": 200.0,
+        "particle_count1": 2283.0,
+        "particle_growth_factor": 11.415,
+        "pressure_front_shift": 0.87890625,
+        "pressure_front_shift_cells": 9.0,
+        "species_closure_rel": 2.22044605e-16,
+        "spray_mass_loss_rel": 0.000595551434,
+        "spray_temp_increase": 118.466414,
+        "spray_x_vel_absmax": 48294.4386,
+        "surface_area_ratio": 1.19614644,
+        "temp_front_shift": 0.5859375
+      },
+      "name": "reacting_spray_detonation_front_response",
+      "status": "PASS",
+      "target": "front shift, heat release, particle breakup/growth, evaporation, species closure"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_spray_detonation_source_budget_validation_20260729/academic_spray_detonation_source_budget_validation_report.json"
+      ],
+      "metric": {
+        "clears_acd_07_broad_spray_detonation_gap": false,
+        "clears_acd_07_external_reference_gap": false,
+        "clears_acd_07_full_cellular_gas_liquid_detonation_gap": false,
+        "clears_acd_07_reacting_gas_mass_energy_source_budget": true,
+        "clears_acd_07_reacting_spray_detonation_budget": true,
+        "clears_acd_07_reacting_xmomentum_control_volume_budget": false,
+        "energy_source_integral_right_endpoint": -36.60015466255298,
+        "fuel_source_integral_right_endpoint": 1.948684751973486e-09,
+        "fuel_vapor_increase": 1.4646638382451171e-05,
+        "gas_energy_delta": -36.60015392303467,
+        "gas_energy_source_relative_error": 2.020533301214868e-08,
+        "gas_fuel_delta": 1.9486847916555528e-09,
+        "gas_fuel_source_relative_error": 2.036351269856256e-08,
+        "gas_mass_delta": 1.948684796859723e-09,
+        "gas_mass_source_relative_error": 2.3034119333453103e-08,
+        "gas_xmom_delta": 87.45844556269256,
+        "gas_xmom_source_relative_error": 7247698905385.671,
+        "gas_ymom_delta": 5.708745249813372e-13,
+        "gas_ymom_source_relative_error": 0.016921073744093795,
+        "heatRelease_absmax": 11.110226624283513,
+        "max_abs_momentum_source_rate_integral": 0.00013244295323736402,
+        "max_abs_rho_source_rate_integral": 0.0007570678866415355,
+        "o2_consumption": 3.4139090846485587e-06,
+        "particle_comparable_rho_source_integral": 1.9030124530991076e-10,
+        "particle_mass_delta": -1.9030125048276705e-10,
+        "particle_plus_rho_source_residual": -5.172856290920702e-18,
+        "particle_source_relative_mismatch": 2.7182461588711962e-08,
+        "plot_count": 301,
+        "pressure_front_shift": 0.29296875,
+        "pressure_front_shift_cells": 3.0,
+        "pure_fuel_rho_rhoY_source_absmax_mismatch": 0.0,
+        "rho_source_integral_right_endpoint": 1.948684751973486e-09,
+        "rhoe_dot_absmax": 3.941140141665528,
+        "species_closure_absmax": 2.220446049250313e-16,
+        "spray_particle_mass_measure_factor": 0.09765625,
+        "temp_front_shift": 0.1953125,
+        "time0": 0.0,
+        "time1": 2.5742757862690347e-06,
+        "xmom_source_integral_right_endpoint": -1.2067063864603342e-11,
+        "ymom_source_integral_right_endpoint": 5.807006027029129e-13
+      },
+      "name": "reacting_spray_source_budget",
+      "status": "PASS",
+      "target": "spray detonation source-history budget PASS with finite front motion and heat release"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_reacting_spray_closed_control_volume_budget_20260729/academic_reacting_spray_closed_control_volume_budget_report.json"
+      ],
+      "metric": {
+        "base_nonreacting_writer_status": "PASS-ACADEMIC-SPRAY-CLOSED-CONTROL-VOLUME-BUDGET",
+        "case_name": "reacting_closed_control_volume_evap_40step",
+        "clears_acd_05_closed_control_volume_mass_momentum_energy_budget": false,
+        "clears_acd_07_external_reference_gap": false,
+        "clears_acd_07_full_cellular_gas_liquid_detonation_gap": false,
+        "clears_acd_07_reacting_control_volume_budget": true,
+        "clears_acd_07_reacting_control_volume_total_budget": true,
+        "final_time": 3.601675230444286e-07,
+        "gas_delta": {
+          "mass": 4.842827527884452e-13,
+          "rho_E": -0.1884845495223999,
+          "rho_NC7H16": 4.842853548736592e-13,
+          "xmom": 9.402648672109893e-10,
+          "ymom": -7.43588514005398e-15
+        },
+        "gas_residual": {
+          "mass": -4.079998464730285e-17,
+          "rho_E": -3.389979284784683e-07,
+          "rho_NC7H16": -3.819789943333764e-17,
+          "xmom": -2.7291845100981862e-15,
+          "ymom": 4.117272285658712e-16
+        },
+        "max_abs_xmom_source_rate_integral": 0.002611075836569139,
+        "particle_delta": {
+          "mass": -3.78347881581191e-13,
+          "xmom": -7.345819276101609e-10,
+          "ymom": 5.809285286461325e-15
+        },
+        "particle_residual": {
+          "mass": 2.98940227875357e-17,
+          "xmom": 2.132073823042045e-15,
+          "ymom": -3.216618765229341e-16
+        },
+        "plot_count": 41,
+        "reaction_heatRelease_absmax": 0.2550094917530876,
+        "reaction_rhoe_dot_absmax": 0.14939798787236214,
+        "reaction_species_closure_absmax": 2.220446049250313e-16,
+        "relative_errors": {
+          "gas_fuel": 7.886855639092468e-05,
+          "gas_mass": 8.424117392948222e-05,
+          "gas_rho_E": 1.7985481517798292e-06,
+          "gas_xmom": 2.9025614841567134e-06,
+          "particle_mass": 7.900575751262853e-05,
+          "particle_xmom": 2.902423207984199e-06,
+          "total_mass": 5.235416416845343e-06,
+          "total_xmom": 1.3827621650070214e-10
+        },
+        "source_integrals": {
+          "rho": 4.843235527730925e-13,
+          "rho_E": -0.18848421052447142,
+          "rho_NC7H16": 4.843235527730925e-13,
+          "xmom": 9.402675963954994e-10,
+          "ymom": -7.847612368619852e-15
+        },
+        "spray_energy_source_integral_abs": 0.18848421052447142,
+        "spray_mass_source_integral_abs": 4.843235527730925e-13,
+        "spray_particle_mass_measure_factor": 0.78125,
+        "spray_xmomentum_source_integral_abs": 9.402675963954994e-10,
+        "thickness_scaled_total_residual": {
+          "mass": -1.9809652181664928e-18,
+          "xmom": -1.0157550447482728e-19,
+          "ymom": 2.079415258057241e-23
+        }
+      },
+      "name": "reacting_closed_control_volume_budget",
+      "status": "PASS",
+      "target": "reacting periodic gas-particle closed control-volume budget PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_spray_coupled_budget_residual_20260729/academic_spray_coupled_budget_residual_report.json"
+      ],
+      "metric": {
+        "case_count": 2,
+        "cases": [
+          "shock_droplet_khrt_1000",
+          "reacting_spray_detonation_1000"
+        ],
+        "clears_acd_05_coupled_budget_gap": true,
+        "clears_acd_07_coupled_budget_gap": true,
+        "clears_full_closed_gas_particle_budget_gap": true,
+        "closed_control_volume_available": true,
+        "closed_control_volume_budget_status": "PASS-ACADEMIC-SPRAY-CLOSED-CONTROL-VOLUME-BUDGET",
+        "closed_control_volume_total_mass_relative_error": 8.774537666522658e-05,
+        "closed_control_volume_total_xmom_relative_error": 8.957437966238878e-08,
+        "mass_transfer_signs_consistent": true,
+        "max_gas_plus_particle_mass_residual_over_particle_loss": 9.239999997789152,
+        "max_particle_plotfield_mass_relative_difference": 3.4196761926747894e-15,
+        "max_shed_mass_residual_over_particle_loss": 47.088828180614804,
+        "particle_plotfield_mass_consistency_ready": true,
+        "reacting_closed_control_volume_budget_status": "PASS-ACADEMIC-REACTING-SPRAY-CLOSED-CONTROL-VOLUME-BUDGET",
+        "reacting_closed_control_volume_total_mass_relative_error": 5.235416416845343e-06,
+        "reacting_closed_control_volume_total_xmom_relative_error": 1.3827621650070214e-10,
+        "source_history_accounting_available": true,
+        "spray_detonation_source_budget_heat_release_absmax": 11.110226624283513,
+        "spray_detonation_source_budget_particle_source_relative_mismatch": 2.7182461588711962e-08,
+        "spray_detonation_source_budget_pressure_front_shift_cells": 3.0,
+        "spray_detonation_source_budget_status": "PASS-ACADEMIC-SPRAY-DETONATION-SOURCE-BUDGET-VALIDATION",
+        "spray_source_budget_energy_source_relative_error": 6.173429543763765e-06,
+        "spray_source_budget_fuel_source_relative_error": 1.3841102017925978e-07,
+        "spray_source_budget_gas_mass_source_relative_error": 4.1546398406278134e-05,
+        "spray_source_budget_particle_source_relative_mismatch": 1.5138259899403366e-07,
+        "spray_source_budget_status": "PASS-ACADEMIC-SPRAY-SOURCE-BUDGET-VALIDATION"
+      },
+      "name": "closed_gas_particle_coupled_budget_rollup",
+      "status": "PASS",
+      "target": "full closed gas-particle coupled-budget rollup PASS"
+    }
+  ],
+  "input_reports": {
+    "academic_readiness_summary": "docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json",
+    "coupled_budget_rollup": "docs/codex_audit/evidence/academic_spray_coupled_budget_residual_20260729/academic_spray_coupled_budget_residual_report.json",
+    "reacting_closed_control_volume_budget": "docs/codex_audit/evidence/academic_reacting_spray_closed_control_volume_budget_20260729/academic_reacting_spray_closed_control_volume_budget_report.json",
+    "spray_detonation_response": "docs/codex_audit/evidence/academic_spray_detonation_validation_20260728/academic_spray_detonation_validation_report.json",
+    "spray_detonation_source_budget": "docs/codex_audit/evidence/academic_spray_detonation_source_budget_validation_20260729/academic_spray_detonation_source_budget_validation_report.json"
+  },
+  "schema_version": 2,
+  "scope": "ACD-07 gas-liquid/droplet-cloud reacting spray detonation certification rollup.",
+  "status": "NOT_READY-ACADEMIC-GAS-LIQUID-DETONATION",
+  "summary": {
+    "acd_07_full_gas_liquid_detonation_ready": false,
+    "certification_basis": "raw chemistry and physical evidence required; existing budget rollups are insufficient",
+    "chemistry_checks": [
+      {
+        "binary_provenance_verified": false,
+        "gas_reactions": 0,
+        "job_info": "docs/codex_audit/evidence/academic_spray_detonation_validation_20260728/reacting_spray_detonation_1000/plt01000/job_info",
+        "mechanism_source": "/home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Mechanisms/heptane_3sp/mechanism.H",
+        "name": "heptane_3sp",
+        "source_sha256": "aefd60b24205bbfa89b51302ac6205770c4d7ee0613ca6bc15e5efa11fa4299a"
+      }
+    ],
+    "clears_acd_07_external_reference_gap": false,
+    "clears_acd_07_full_cellular_gas_liquid_detonation_gap": false,
+    "clears_acd_07_spray_detonation_gap": false,
+    "coupled_budget_ready": true,
+    "interpretation": "NOT_READY: existing shock/particle transport budgets do not certify gas-liquid detonation. The archived heptane_3sp run is nonreacting; cellular and independent reference validation are absent. Historical metrics are retained as diagnostics.",
+    "reacting_cv_total_mass_relative_error": 5.235416416845343e-06,
+    "reacting_cv_total_xmom_relative_error": 1.3827621650070214e-10,
+    "spray_response_heat_release_absmax": 1.56560169,
+    "spray_response_particle_growth_factor": 11.415,
+    "spray_response_pressure_front_shift_cells": 9.0,
+    "spray_response_spray_temp_increase": 118.466414,
+    "spray_source_budget_particle_source_relative_mismatch": 2.7182461588711962e-08
+  }
+}

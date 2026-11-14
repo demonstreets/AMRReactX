@@ -1,0 +1,37 @@
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0
+geometry.prob_hi     = 0.1 0.1
+
+# BC
+peleLM.lo_bc = noslipwalladiab noslipwalladiab
+peleLM.hi_bc = noslipwalladiab noslipwalladiab
+
+#-------------------------AMR----------------------------
+amr.n_cell          = 64 64
+amr.max_level       = 0
+amr.plot_int        = 50
+amr.max_step        = 200
+amr.cfl             = 0.3
+amr.dt_shrink       = 0.1
+amr.initial_dt      = 1.0e-8
+amr.stop_time       = 0.001
+
+#--------------------------- Problem -------------------------------
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.T_hot = 2000.0
+prob.r_hot = 0.005
+prob.phi = 1.0
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v = 1
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNN
+peleLM.sdc_iterMax = 2
+peleLM.use_wbar = 0
+peleLM.floor_species = 1
+peleLM.do_init_proj = 1
+
+amr.derive_plot_vars = avg_pressure mag_vort mass_fractions temp

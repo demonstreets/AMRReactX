@@ -1,0 +1,31 @@
+# Current-Scope Release Refresh Entrypoint
+
+- Status: `PASS-CURRENT-SCOPE-RELEASE-REFRESH-ENTRYPOINT`
+- Entrypoint ready: `True`
+- Wrapper: `tools/run_current_scope_release_refresh.sh`
+- Operator command: `bash tools/run_current_scope_release_refresh.sh`
+- Latest passing full current-scope log: `docs/codex_audit/evidence/current_scope_last_run_20260807/current_scope_verify_after_release_refresh_20260820T100024Z.log`
+- Delivery package ready: `True`
+- Final handoff note ready: `True`
+- Operator quickstart smoke ready: `True`
+- Current phase closure certificate ready: `True`
+- Strict closeout action pack ready: `True`
+- Strict closeout action pack missing items: `9`
+- Current phase final delivery index ready: `True`
+- Current operator command inventory ready: `True`
+- Current operator command inventory commands: `341`
+- Current operator command inventory required snippets: `61`
+- Current operator command inventory missing required snippets: `0`
+- Current operator command inventory missing tools: `0`
+- Current operator command inventory syntax failures: `0`
+- Current worktree hygiene ready: `True`
+- Current worktree dirty entries: `1420`
+- SUNDIALS local link audit ready: `True`
+- SUNDIALS local link drift present: `True`
+- SUNDIALS safe to auto-restore: `False`
+- Current worktree review queue ready: `True`
+- Current worktree review queue high-attention entries: `255`
+- Current status CLI ready: `True`
+- State snapshot ready: `True`
+- Report hash-cycle guard ready: `True`
+- Report hash-cycle guard failures: `0`

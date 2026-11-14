@@ -1,0 +1,69 @@
+"""Bounded planar reactive-Euler verification using the existing native solver."""
+from pathlib import Path
+import argparse, hashlib, json, os, re, subprocess
+
+p=argparse.ArgumentParser(description=__doc__)
+p.add_argument('name');p.add_argument('--nx',type=int,required=True)
+p.add_argument('--ny',type=int,default=2)
+p.add_argument('--mapping',choices=['SFC','ROUNDROBIN'],default='ROUNDROBIN')
+p.add_argument('--cfl',type=float,default=.3);p.add_argument('--time',type=float,default=4.e-6)
+p.add_argument('--ranks',type=int,default=16);p.add_argument('--steps',type=int,default=100000)
+p.add_argument('--rtol',type=float,default=1.e-8);p.add_argument('--atol',type=float,default=1.e-18)
+p.add_argument('--reference',default='reference_v1')
+p.add_argument('--gpu',action='store_true')
+a=p.parse_args();assert re.fullmatch(r'[a-zA-Z0-9_]+',a.name)
+r=Path('/home/cj/my-pele');b=r/'repair_validation/hydrogen_znd_20260913'
+ref=b/a.reference;meta=json.loads((ref/'metadata.json').read_text())
+assert json.loads((ref/'reference_audit.json').read_text())['CJ_sonic_relative_error']<1.e-4
+exe=r/'repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1'
+if a.gpu:
+ exe=r/'examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.CUDA.ex'
+ assert a.ranks==1
+d=b/a.name;d.mkdir(exist_ok=False)
+scratch=Path('/dev/shm/my_pele_hydrogen_znd_20260913')/a.name;scratch.mkdir(parents=True,exist_ok=False)
+text=(r/'repair_validation/twophase_20260910/detonation_dry_1d_600_strang_cfl30_v1/inputs').read_text()
+replacements={'max_step':a.steps,'stop_time':format(a.time,'.17g'),
+ 'geometry.prob_hi':'2.4 0.02','amr.n_cell':f'{a.nx} {a.ny}','amr.max_grid_size':f'32 {a.ny}',
+ 'amr.blocking_factor':1,
+ 'pelec.cfl':a.cfl,'amr.checkpoint_files_output':0,'amr.plot_per':'2.5e-7',
+ 'ode.rtol':a.rtol,'ode.atol':a.atol,
+ 'prob.profile':str(ref/'profile_SI.txt'),'prob.front':.8,'prob.p0':meta['upstream']['p']*10.,'prob.T0':meta['upstream']['T'],'prob.perturbation':0,
+ 'amr.plot_vars':'density Temp rho_E heatRelease',
+ 'prob.upstream_Y':' '.join(format(v,'.17g') for v in meta['upstream']['Y'])}
+for key,value in replacements.items():
+ text,n=re.subn(r'^'+re.escape(key)+r'\s*=.*$',key+' = '+str(value),text,flags=re.M);assert n==1,(key,n)
+text=re.sub(r'^pelec.do_spray_particles.*\n','',text,flags=re.M)
+text+='\n'+f'''amr.plot_file = {scratch}/plt
+DistributionMapping.strategy = {a.mapping}
+pelec.sdc_iters = 1
+pelec.cell_chemistry_integrator = cvode
+'''
+if a.gpu:
+ text=re.sub(r'^pelec.cell_chemistry_.*\n','',text,flags=re.M)
+ text=text.replace('cvode.solve_type = denseAJ_direct','cvode.solve_type = custom_direct')
+ text+='amrex.the_arena_init_size = 268435456\n'
+(d/'inputs').write_text(text)
+cmd=['mpirun','-np',str(a.ranks),str(exe),'inputs'];env=os.environ.copy();env['OMP_NUM_THREADS']='1'
+if a.gpu:
+ env['CUDA_VISIBLE_DEVICES']='0'
+ env['LD_LIBRARY_PATH']='/home/cj/local/cuda-12.6/lib64:'+env.get('LD_LIBRARY_PATH','')
+case={'command':cmd,'binary':str(exe),'binary_sha256':hashlib.sha256(exe.read_bytes()).hexdigest(),
+ 'reference':str(ref),'profile_sha256':hashlib.sha256((ref/'profile_SI.txt').read_bytes()).hexdigest(),
+ 'input_sha256':hashlib.sha256(text.encode()).hexdigest(),'nx':a.nx,'ny':a.ny,'dx_m':.024/a.nx,'front_m':.008,'length_m':.024,
+ 'cfl':a.cfl,'ode_rtol':a.rtol,'ode_atol':a.atol,'stop_time_s':a.time,'plot_root':str(scratch),'mapping':a.mapping,
+ 'physical_model':'Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.',
+ 'initialization':'Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization.'}
+(d/'case.json').write_text(json.dumps(case,indent=2))
+runner='''import subprocess,json,time,os
+from pathlib import Path
+d=Path(__file__).resolve().parent
+case=json.loads((d/'case.json').read_text());start=time.time()
+with (d/'run.log').open('w') as log:
+ p=subprocess.Popen(case['command'],cwd=d,stdout=log,stderr=subprocess.STDOUT,env=dict(os.environ,OMP_NUM_THREADS='1'))
+ (d/'solver_pid').write_text(str(p.pid));code=p.wait()
+(d/'exit_code').write_text(str(code));(d/'timing.json').write_text(json.dumps({'wall_seconds':time.time()-start,'exit_code':code}))
+'''
+(d/'run_case.py').write_text(runner)
+q=subprocess.Popen(['python3',str(d/'run_case.py')],cwd=d,env=env,stdout=(d/'launcher.log').open('w'),stderr=subprocess.STDOUT,start_new_session=True)
+(d/'launcher.json').write_text(json.dumps({'pid':q.pid}));print(json.dumps({'case':str(d),'pid':q.pid,'nx':a.nx}))
+

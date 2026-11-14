@@ -1,0 +1,509 @@
+# Engineering H2 Production Evidence Verification
+
+Status: `PASS`
+Command: `tools/verify_engineering_h2_production_evidence.sh`
+Log: `docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_final_20260724.log` sha256 `93735a0c3e37fdeb`
+
+## Summary
+
+- `scorecard_functional_percent`: `96.9`
+- `scorecard_production_credibility_percent`: `82.2`
+- `scheduler_status`: `PASS`
+- `hybrid_runtime_affinity_status`: `PASS`
+- `hybrid_runtime_affinity_ranks`: `4`
+- `hybrid_runtime_affinity_threads_per_rank`: `2`
+- `hybrid_runtime_affinity_warnings`: `[]`
+- `hybrid_cfd_scout_status`: `PASS-HYBRID-CFD-SCOUT`
+- `hybrid_cfd_scout_ranks`: `4`
+- `hybrid_cfd_scout_threads_per_rank`: `2`
+- `hybrid_cfd_cloud_rel_diff`: `0.0446428599`
+- `hybrid_cfd_peak_rel_diff`: `0.0455934286`
+- `hybrid_production_mesh_scout_status`: `PASS-HYBRID-CFD-SCOUT`
+- `hybrid_production_mesh_scout_ranks`: `4`
+- `hybrid_production_mesh_scout_threads_per_rank`: `2`
+- `hybrid_production_mesh_max_step`: `120`
+- `hybrid_production_mesh_base_cell_count`: `65536`
+- `hybrid_production_mesh_amr_equivalent_fine_cell_count`: `524288`
+- `hybrid_production_mesh_cloud_rel_diff`: `0.0380952381`
+- `hybrid_production_mesh_peak_rel_diff`: `0.0431073584`
+- `hybrid_production_mesh_advance_seconds_ratio`: `1.61148722`
+- `hybrid_production_mesh_8rank_status`: `PASS-HYBRID-CFD-SCOUT`
+- `hybrid_production_mesh_8rank_ranks`: `8`
+- `hybrid_production_mesh_8rank_threads_per_rank`: `2`
+- `hybrid_production_mesh_8rank_max_step`: `120`
+- `hybrid_production_mesh_8rank_base_cell_count`: `65536`
+- `hybrid_production_mesh_8rank_amr_equivalent_fine_cell_count`: `524288`
+- `hybrid_production_mesh_8rank_cloud_rel_diff`: `0.0380952381`
+- `hybrid_production_mesh_8rank_peak_rel_diff`: `0.0431073584`
+- `hybrid_production_mesh_8rank_advance_seconds_ratio`: `2.00980894`
+- `hybrid_production_mesh_8rank_regrid_count`: `59`
+- `hybrid_production_mesh_8rank_600step_status`: `PASS-HYBRID-CFD-SCOUT`
+- `hybrid_production_mesh_8rank_600step_ranks`: `8`
+- `hybrid_production_mesh_8rank_600step_threads_per_rank`: `2`
+- `hybrid_production_mesh_8rank_600step_max_step`: `600`
+- `hybrid_production_mesh_8rank_600step_base_cell_count`: `65536`
+- `hybrid_production_mesh_8rank_600step_amr_equivalent_fine_cell_count`: `524288`
+- `hybrid_production_mesh_8rank_600step_cloud_rel_diff`: `0.0315976518`
+- `hybrid_production_mesh_8rank_600step_peak_rel_diff`: `0.0340034177`
+- `hybrid_production_mesh_8rank_600step_advance_seconds_ratio`: `2.20802169`
+- `hybrid_production_mesh_8rank_600step_regrid_count`: `299`
+- `hybrid_production_mesh_600step_status`: `PASS-HYBRID-CFD-SCOUT`
+- `hybrid_production_mesh_600step_ranks`: `4`
+- `hybrid_production_mesh_600step_threads_per_rank`: `2`
+- `hybrid_production_mesh_600step_max_step`: `600`
+- `hybrid_production_mesh_600step_base_cell_count`: `65536`
+- `hybrid_production_mesh_600step_amr_equivalent_fine_cell_count`: `524288`
+- `hybrid_production_mesh_600step_cloud_rel_diff`: `0.0315976518`
+- `hybrid_production_mesh_600step_peak_rel_diff`: `0.0340034177`
+- `hybrid_production_mesh_600step_advance_seconds_ratio`: `2.00754474`
+- `hybrid_production_mesh_600step_regrid_count`: `299`
+- `hybrid_largegrid_8rank_120step_status`: `PASS-HYBRID-CFD-SCOUT`
+- `hybrid_largegrid_8rank_120step_ranks`: `8`
+- `hybrid_largegrid_8rank_120step_threads_per_rank`: `2`
+- `hybrid_largegrid_8rank_120step_max_step`: `120`
+- `hybrid_largegrid_8rank_120step_base_cell_count`: `221184`
+- `hybrid_largegrid_8rank_120step_amr_equivalent_fine_cell_count`: `1769472`
+- `hybrid_largegrid_8rank_120step_baseline_plotfiles`: `5`
+- `hybrid_largegrid_8rank_120step_amr_plotfiles`: `5`
+- `hybrid_largegrid_8rank_120step_amr_finest_level`: `1`
+- `hybrid_largegrid_8rank_120step_cloud_rel_diff`: `0.0159761211`
+- `hybrid_largegrid_8rank_120step_peak_rel_diff`: `0.00155533247`
+- `hybrid_largegrid_8rank_120step_advance_seconds_ratio`: `1.72411476`
+- `hybrid_largegrid_8rank_120step_regrid_count`: `59`
+- `reference_agreement_status`: `PASS-REFERENCE-THRESHOLD-AGREEMENT`
+- `reference_agreement_all_threshold_checks_passed`: `True`
+- `reference_agreement_amr_peak_x`: `0.186431079`
+- `reference_agreement_amr_lel_cloud_volume`: `0.0253408927`
+- `reference_agreement_cloud_rel_diff`: `0.0159761211`
+- `reference_agreement_peak_rel_diff`: `0.00155533247`
+- `bfs_kepsilon_reference_status`: `PASS-BFS-KEPSILON-REFERENCE`
+- `bfs_kepsilon_reference_bfs_verdict`: `PASS`
+- `bfs_kepsilon_reference_bfs_returncode`: `0`
+- `bfs_kepsilon_reference_loglaw_returncode`: `1`
+- `bfs_kepsilon_reference_loglaw_linf`: `15.4519819`
+- `bfs_kepsilon_reference_blocks_production_readiness`: `False`
+- `real_cad_cleanup_package_status`: `NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE`
+- `real_cad_cleanup_package_clears_blocker`: `False`
+- `real_cad_cleanup_package_manifest_present`: `False`
+- `real_cad_cleanup_package_geometry_count`: `0`
+- `real_cad_cleanup_package_large_layout`: `False`
+- `real_cad_intake_preflight_status`: `PASS-H2-REAL-CAD-INTAKE-PREFLIGHT`
+- `real_cad_intake_package_scaffold_available`: `True`
+- `real_cad_intake_templates_available`: `True`
+- `real_cad_intake_data_room_index_present`: `False`
+- `real_cad_intake_data_room_index_validates`: `False`
+- `real_cad_intake_data_room_index_row_count`: `0`
+- `real_cad_intake_data_room_index_paired_label_count`: `0`
+- `real_cad_intake_cleanup_quality_record_present`: `False`
+- `real_cad_intake_cleanup_quality_record_validates`: `False`
+- `real_cad_intake_cleanup_quality_record_row_count`: `0`
+- `real_cad_intake_source_cad_file_count`: `0`
+- `real_cad_intake_cleaned_geometry_file_count`: `0`
+- `real_cad_intake_missing_artifact_count`: `6`
+- `real_cad_intake_manifest_validates`: `False`
+- `real_cad_intake_large_layout_valid`: `False`
+- `real_cad_boundary_tag_contract_status`: `NOT_READY-H2-REAL-CAD-BOUNDARY-TAG-CONTRACT`
+- `real_cad_boundary_tag_contract_does_not_clear_blockers`: `True`
+- `real_cad_boundary_tag_template_available`: `True`
+- `real_cad_boundary_tags_present`: `False`
+- `real_cad_boundary_tags_valid`: `False`
+- `real_cad_boundary_tag_row_count`: `0`
+- `real_cad_boundary_tag_label_count`: `0`
+- `real_cad_boundary_tag_patch_count`: `0`
+- `real_cad_boundary_tag_required_role_count`: `3`
+- `real_cad_boundary_tag_observed_required_role_count`: `0`
+- `real_cad_boundary_tag_cleanup_package_clears_blocker`: `False`
+- `real_cad_boundary_tag_intake_large_layout_valid`: `False`
+- `real_cad_boundary_tag_ready_for_credit`: `False`
+- `fire_calibration_package_status`: `NOT_READY-H2-FIRE-CALIBRATION-PACKAGE`
+- `fire_calibration_public_source_triage_status`: `PASS-H2-FIRE-CALIBRATION-PUBLIC-SOURCE-TRIAGE`
+- `fire_calibration_public_source_registry_available`: `True`
+- `fire_calibration_public_source_missing_artifact_count`: `4`
+- `fire_calibration_digitization_preflight_status`: `PASS-H2-FIRE-CALIBRATION-DIGITIZATION-PREFLIGHT`
+- `fire_calibration_digitization_templates_available`: `True`
+- `fire_calibration_digitization_missing_artifact_count`: `4`
+- `fire_calibration_literature_metric_preflight_status`: `PASS-H2-FIRE-CALIBRATION-LITERATURE-METRIC-PREFLIGHT`
+- `fire_calibration_literature_metric_anchor_count`: `4`
+- `fire_calibration_literature_radiation_anchor_available`: `True`
+- `fire_calibration_literature_overpressure_anchor_available`: `True`
+- `fire_calibration_literature_missing_artifact_count`: `3`
+- `fire_calibration_package_builder_ready`: `False`
+- `fire_calibration_ingestion_schema_version`: `2`
+- `fire_calibration_ingestion_content_quality_gate_level`: `strict-v1-placeholder-free-and-non-synthetic`
+- `fire_calibration_ingestion_selftest_status`: `PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION-SELFTEST`
+- `fire_calibration_ingestion_selftest_positive_passed_count`: `2`
+- `fire_calibration_ingestion_selftest_negative_refused_count`: `1`
+- `fire_calibration_ingestion_selftest_placeholder_negative_refused`: `True`
+- `fire_calibration_ingestion_selftest_duplicate_metric_negative_refused`: `True`
+- `fire_calibration_package_metadata_available`: `False`
+- `fire_calibration_package_radiation_metrics_available`: `True`
+- `fire_calibration_package_overpressure_metrics_available`: `True`
+- `external_plume_readiness_status`: `NOT_READY-EXTERNAL-PLUME-BENCHMARK`
+- `external_plume_readiness_blocking_gaps`: `['case_matched_external_plume_dataset_not_ingested', 'external_plume_quality_gates_not_all_passed']`
+- `external_plume_public_source_triage_status`: `PASS-H2-EXTERNAL-PLUME-PUBLIC-SOURCE-TRIAGE`
+- `external_plume_public_source_registry_available`: `True`
+- `external_plume_public_source_missing_artifact_count`: `4`
+- `external_plume_public_source_artifact_resolution_matrix_row_count`: `4`
+- `external_plume_public_source_artifact_resolution_clearable_count`: `0`
+- `external_plume_public_source_case_input_map_row_count`: `7`
+- `external_plume_public_source_case_input_public_fact_available_count`: `4`
+- `external_plume_public_source_case_input_needs_digitization_count`: `3`
+- `external_plume_dataset_json_written`: `False`
+- `external_plume_shape_dataset_agreement`: `False`
+- `blocker_clearance_preflight_status`: `NOT_READY-H2-BLOCKER-CLEARANCE-PREFLIGHT`
+- `blocker_clearance_preflight_ready`: `False`
+- `blocker_clearance_preflight_remaining_count`: `3`
+- `blocker_clearance_preflight_cleared_count`: `0`
+- `production_blocker_data_room_status`: `PASS-H2-PRODUCTION-BLOCKER-DATA-ROOM`
+- `production_blocker_data_room_ready`: `False`
+- `production_blocker_data_room_missing_artifact_count`: `14`
+- `production_blocker_data_room_remaining_blocker_count`: `3`
+- `production_blocker_closure_manifest_status`: `PASS-H2-PRODUCTION-BLOCKER-CLOSURE-MANIFEST`
+- `production_blocker_closure_manifest_missing_artifact_count`: `14`
+- `production_blocker_closure_manifest_remaining_blocker_count`: `3`
+- `production_blocker_closure_manifest_domain_count`: `3`
+- `external_evidence_intake_kit_status`: `PASS-H2-EXTERNAL-EVIDENCE-INTAKE-KIT-MANIFEST`
+- `external_evidence_intake_kit_total_template_count`: `23`
+- `external_evidence_intake_kit_all_templates_present`: `True`
+- `external_evidence_intake_kit_operator_receipt_template_present`: `True`
+- `external_evidence_intake_kit_missing_artifact_count`: `14`
+- `external_evidence_intake_kit_ready_for_external_data_handoff`: `True`
+- `external_artifact_operator_receipt_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-OPERATOR-RECEIPT`
+- `external_artifact_operator_receipt_gate_level`: `strict-v1-operator-source-legal-attestation`
+- `external_artifact_operator_receipt_present`: `False`
+- `external_artifact_operator_receipt_valid`: `False`
+- `external_artifact_operator_receipt_gap_count`: `1`
+- `external_artifact_operator_receipt_ready_for_acceptance`: `False`
+- `external_artifact_operator_receipt_does_not_clear_blockers`: `True`
+- `external_artifact_operator_receipt_gate_selftest_status`: `PASS-H2-EXTERNAL-ARTIFACT-OPERATOR-RECEIPT-GATE-SELFTEST`
+- `external_artifact_operator_receipt_gate_selftest_only`: `True`
+- `external_artifact_operator_receipt_gate_selftest_does_not_clear_blockers`: `True`
+- `external_artifact_operator_receipt_gate_selftest_positive_status`: `PASS-H2-EXTERNAL-ARTIFACT-OPERATOR-RECEIPT`
+- `external_artifact_operator_receipt_gate_selftest_positive_gap_count`: `0`
+- `external_artifact_operator_receipt_gate_selftest_negative_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-OPERATOR-RECEIPT`
+- `external_artifact_operator_receipt_gate_selftest_negative_gap_count`: `29`
+- `external_artifact_operator_receipt_gate_selftest_negative_placeholder_gap_detected`: `True`
+- `evidence_chain_rebuild_manifest_status`: `PASS-H2-EVIDENCE-CHAIN-REBUILD-MANIFEST`
+- `evidence_chain_rebuild_manifest_expected_command_count`: `60`
+- `evidence_chain_rebuild_manifest_commands_present`: `True`
+- `evidence_chain_rebuild_manifest_bootstrap_passed`: `True`
+- `evidence_chain_rebuild_manifest_bootstrap_ctest_tests`: `22`
+- `evidence_chain_rebuild_manifest_bootstrap_ctest_skipped`: `False`
+- `evidence_chain_rebuild_manifest_bootstrap_ctest_evidence_status`: `PASS`
+- `evidence_chain_rebuild_manifest_does_not_clear_blockers`: `True`
+- `external_artifact_drop_validator_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-DROP`
+- `external_artifact_drop_validator_content_quality_gate_level`: `strict-v5-placeholder-free`
+- `external_artifact_drop_validator_domain_quality_gap_count`: `0`
+- `external_artifact_drop_validator_test_fixture_data_allowed`: `False`
+- `external_artifact_drop_validator_total_expected_artifact_count`: `14`
+- `external_artifact_drop_validator_valid_artifact_count`: `0`
+- `external_artifact_drop_validator_missing_or_invalid_artifact_count`: `14`
+- `external_artifact_drop_validator_ready_for_controlled_ingestion`: `False`
+- `external_artifact_drop_validator_does_not_clear_blockers`: `True`
+- `external_artifact_ingestion_plan_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN`
+- `external_artifact_ingestion_plan_total_copy_action_count`: `14`
+- `external_artifact_ingestion_plan_ready_copy_action_count`: `0`
+- `external_artifact_ingestion_plan_missing_or_invalid_copy_action_count`: `14`
+- `external_artifact_ingestion_plan_ready_for_controlled_copy`: `False`
+- `external_artifact_ingestion_plan_does_not_apply_copy_actions`: `True`
+- `external_artifact_ingestion_plan_does_not_clear_blockers`: `True`
+- `external_artifact_controlled_copy_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY`
+- `external_artifact_controlled_copy_source_filesystem_gate_level`: `strict-v1-regular-nonempty-files`
+- `external_artifact_controlled_copy_source_integrity_gap_count`: `0`
+- `external_artifact_controlled_copy_total_copy_action_count`: `14`
+- `external_artifact_controlled_copy_ready_copy_action_count`: `0`
+- `external_artifact_controlled_copy_missing_or_invalid_copy_action_count`: `14`
+- `external_artifact_controlled_copy_apply_requested`: `False`
+- `external_artifact_controlled_copy_applied_copy_actions`: `False`
+- `external_artifact_controlled_copy_copied_file_count`: `0`
+- `external_artifact_controlled_copy_ready_for_controlled_copy`: `False`
+- `external_artifact_controlled_copy_does_not_clear_blockers`: `True`
+- `external_evidence_operations_dashboard_status`: `NOT_READY-H2-EXTERNAL-EVIDENCE-OPERATIONS-DASHBOARD`
+- `external_evidence_operations_dashboard_remaining_blocker_count`: `3`
+- `external_evidence_operations_dashboard_missing_artifact_count`: `14`
+- `external_evidence_operations_dashboard_drop_valid_artifact_count`: `0`
+- `external_evidence_operations_dashboard_total_expected_artifact_count`: `14`
+- `external_evidence_operations_dashboard_controlled_copy_copied_file_count`: `0`
+- `external_evidence_operations_dashboard_ready_for_production_blocker_clearance`: `False`
+- `external_evidence_operations_dashboard_domain_count`: `3`
+- `external_evidence_operations_dashboard_next_operator_command_count`: `6`
+- `external_evidence_operations_dashboard_does_not_clear_blockers`: `True`
+- `external_evidence_acceptance_worksheet_status`: `PASS-H2-EXTERNAL-EVIDENCE-ACCEPTANCE-WORKSHEET`
+- `external_evidence_acceptance_worksheet_domain_count`: `3`
+- `external_evidence_acceptance_worksheet_row_count`: `14`
+- `external_evidence_acceptance_worksheet_valid_artifact_row_count`: `0`
+- `external_evidence_acceptance_worksheet_missing_or_invalid_artifact_row_count`: `14`
+- `external_evidence_acceptance_worksheet_ready_for_external_evidence_acceptance`: `False`
+- `external_evidence_acceptance_worksheet_operator_receipt_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-OPERATOR-RECEIPT`
+- `external_evidence_acceptance_worksheet_does_not_clear_blockers`: `True`
+- `external_artifact_mapping_alias_status`: `PASS-H2-EXTERNAL-ARTIFACT-MAPPING-ALIAS`
+- `external_artifact_mapping_alias_does_not_clear_blockers`: `True`
+- `external_artifact_mapping_alias_domain_count`: `3`
+- `external_artifact_mapping_alias_artifact_row_count`: `14`
+- `external_artifact_mapping_alias_alias_group_count`: `1`
+- `external_artifact_mapping_alias_observed_allowed_alias_group_count`: `1`
+- `external_artifact_mapping_alias_duplicate_target_group_count`: `1`
+- `external_artifact_mapping_alias_duplicate_drop_group_count`: `1`
+- `external_artifact_mapping_alias_unexpected_duplicate_target_group_count`: `0`
+- `external_artifact_mapping_alias_unexpected_duplicate_drop_group_count`: `0`
+- `external_evidence_case_validation_plan_status`: `PASS-H2-EXTERNAL-EVIDENCE-CASE-VALIDATION-PLAN`
+- `external_evidence_case_validation_plan_domain_count`: `3`
+- `external_evidence_case_validation_plan_worksheet_row_count`: `14`
+- `external_evidence_case_validation_plan_campaign_count`: `4`
+- `external_evidence_case_validation_plan_ready_campaign_count`: `0`
+- `external_evidence_case_validation_plan_integrated_replay_ready`: `False`
+- `external_evidence_case_validation_plan_acceptance_contract_metric_count`: `44`
+- `external_evidence_case_validation_plan_does_not_clear_blockers`: `True`
+- `case_validation_acceptance_contract_status`: `PASS-H2-CASE-VALIDATION-ACCEPTANCE-CONTRACT`
+- `case_validation_acceptance_contract_does_not_clear_blockers`: `True`
+- `case_validation_acceptance_contract_campaign_count`: `4`
+- `case_validation_acceptance_contract_metric_count`: `44`
+- `case_validation_acceptance_contract_quantitative_metric_count`: `14`
+- `case_validation_acceptance_contract_failed_campaign_count`: `0`
+- `case_validation_acceptance_contract_negative_missing_threshold_refused`: `True`
+- `case_validation_acceptance_evaluation_status`: `NOT_READY-H2-CASE-VALIDATION-ACCEPTANCE-EVALUATION`
+- `case_validation_acceptance_evaluation_does_not_clear_blockers`: `True`
+- `case_validation_acceptance_evaluation_campaign_count`: `4`
+- `case_validation_acceptance_evaluation_ready_campaign_count`: `0`
+- `case_validation_acceptance_evaluation_metric_count`: `44`
+- `case_validation_acceptance_evaluation_passed_metric_count`: `0`
+- `case_validation_acceptance_evaluation_failed_metric_count`: `41`
+- `case_validation_acceptance_evaluation_deferred_metric_count`: `3`
+- `case_validation_acceptance_evaluation_ready_for_production_credit`: `False`
+- `case_validation_acceptance_evaluation_comparator_selftest_passed`: `True`
+- `case_validation_failure_attribution_status`: `PASS-H2-CASE-VALIDATION-FAILURE-ATTRIBUTION`
+- `case_validation_failure_attribution_does_not_clear_blockers`: `True`
+- `case_validation_failure_attribution_failed_metric_count`: `41`
+- `case_validation_failure_attribution_deferred_metric_count`: `3`
+- `case_validation_failure_attribution_attributed_problem_metric_count`: `44`
+- `case_validation_failure_attribution_unattributed_problem_metric_count`: `0`
+- `case_validation_failure_attribution_action_group_count`: `5`
+- `case_validation_failure_attribution_missing_or_invalid_artifact_row_count`: `14`
+- `case_validation_closure_matrix_status`: `PASS-H2-CASE-VALIDATION-CLOSURE-MATRIX`
+- `case_validation_closure_matrix_does_not_clear_blockers`: `True`
+- `case_validation_closure_matrix_artifact_row_count`: `14`
+- `case_validation_closure_matrix_missing_or_invalid_artifact_row_count`: `14`
+- `case_validation_closure_matrix_problem_metric_count`: `44`
+- `case_validation_closure_matrix_mapped_problem_metric_count`: `44`
+- `case_validation_closure_matrix_unmapped_problem_metric_count`: `0`
+- `case_validation_closure_matrix_artifact_rows_without_metric_context_count`: `0`
+- `external_artifact_unlock_forecast_status`: `PASS-H2-EXTERNAL-ARTIFACT-UNLOCK-FORECAST`
+- `external_artifact_unlock_forecast_does_not_clear_blockers`: `True`
+- `external_artifact_unlock_forecast_unresolved_blocker_count`: `3`
+- `external_artifact_unlock_forecast_unmapped_blocker_count`: `0`
+- `external_artifact_unlock_forecast_domain_unlock_count`: `3`
+- `external_artifact_unlock_forecast_artifact_unlock_requirement_count`: `14`
+- `external_artifact_unlock_forecast_missing_or_invalid_artifact_count`: `14`
+- `external_artifact_unlock_forecast_problem_metric_count`: `44`
+- `external_artifact_unlock_forecast_mapped_problem_metric_count`: `44`
+- `external_artifact_unlock_forecast_ready_for_production_blocker_clearance`: `False`
+- `external_evidence_case_validation_plan_selftest_status`: `PASS-H2-EXTERNAL-EVIDENCE-CASE-VALIDATION-PLAN-SELFTEST`
+- `external_evidence_case_validation_plan_selftest_only`: `True`
+- `external_evidence_case_validation_plan_selftest_does_not_clear_blockers`: `True`
+- `external_evidence_case_validation_plan_selftest_negative_ready_campaign_count`: `0`
+- `external_evidence_case_validation_plan_selftest_negative_integrated_replay_ready`: `False`
+- `external_evidence_case_validation_plan_selftest_positive_ready_campaign_count`: `4`
+- `external_evidence_case_validation_plan_selftest_positive_integrated_replay_ready`: `True`
+- `case_validation_runner_ledger_status`: `DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER`
+- `case_validation_runner_ledger_does_not_clear_blockers`: `True`
+- `case_validation_runner_ledger_execute_requested`: `False`
+- `case_validation_runner_ledger_selected_campaign_count`: `4`
+- `case_validation_runner_ledger_selected_blocked_campaign_count`: `4`
+- `case_validation_runner_ledger_unresolved_command_count`: `2`
+- `case_validation_runner_ledger_command_result_count`: `0`
+- `case_validation_runner_ledger_selftest_status`: `PASS-H2-CASE-VALIDATION-RUNNER-LEDGER-SELFTEST`
+- `case_validation_runner_ledger_selftest_only`: `True`
+- `case_validation_runner_ledger_selftest_does_not_clear_blockers`: `True`
+- `case_validation_runner_ledger_selftest_positive_verify_returncode`: `0`
+- `case_validation_runner_ledger_selftest_negative_case_count`: `4`
+- `case_validation_runner_ledger_selftest_negative_refused_count`: `4`
+- `case_validation_runner_preflight_status`: `PASS-H2-CASE-VALIDATION-RUNNER-PREFLIGHT`
+- `case_validation_runner_preflight_does_not_clear_blockers`: `True`
+- `case_validation_runner_preflight_dryrun_returncode`: `0`
+- `case_validation_runner_preflight_execute_refused`: `True`
+- `case_validation_runner_preflight_refusal_ledger_status`: `REFUSED-H2-CASE-VALIDATION-RUNNER-LEDGER`
+- `case_validation_runner_preflight_refusal_ledger_written`: `True`
+- `case_validation_runner_preflight_refusal_ledger_command_result_count`: `0`
+- `case_validation_runner_preflight_selected_campaign_count`: `4`
+- `case_validation_runner_preflight_selected_ready_campaign_count`: `0`
+- `case_validation_runner_preflight_selected_blocked_campaign_count`: `4`
+- `case_validation_runner_preflight_unresolved_command_count`: `2`
+- `case_validation_runner_preflight_positive_placeholder_all_resolved`: `True`
+- `case_validation_runner_preflight_positive_placeholder_resolved_count`: `2`
+- `case_validation_runner_preflight_positive_placeholder_unresolved_command_count`: `0`
+- `case_validation_command_contract_status`: `PASS-H2-CASE-VALIDATION-COMMAND-CONTRACT`
+- `case_validation_command_contract_does_not_clear_blockers`: `True`
+- `case_validation_command_contract_command_count`: `17`
+- `case_validation_command_contract_python_command_count`: `12`
+- `case_validation_command_contract_bash_command_count`: `5`
+- `case_validation_command_contract_option_check_count`: `4`
+- `case_validation_command_contract_placeholder_command_count`: `2`
+- `case_validation_command_contract_failed_command_count`: `0`
+- `case_validation_command_contract_missing_or_unsupported_contract_count`: `0`
+- `case_validation_command_contract_selftest_status`: `PASS-H2-CASE-VALIDATION-COMMAND-CONTRACT-SELFTEST`
+- `case_validation_command_contract_selftest_only`: `True`
+- `case_validation_command_contract_selftest_does_not_clear_blockers`: `True`
+- `case_validation_command_contract_selftest_positive_verify_returncode`: `0`
+- `case_validation_command_contract_selftest_negative_case_count`: `2`
+- `case_validation_command_contract_selftest_negative_refused_count`: `2`
+- `case_validation_command_contract_selftest_missing_script_refused`: `True`
+- `case_validation_command_contract_selftest_unsupported_option_refused`: `True`
+- `quality_review_coverage_status`: `PASS-H2-QUALITY-REVIEW-COVERAGE`
+- `quality_review_coverage_does_not_clear_blockers`: `True`
+- `quality_review_coverage_type_a_expected_module_count`: `8`
+- `quality_review_coverage_type_a_audit_record_covered_count`: `8`
+- `quality_review_coverage_type_b_expected_phase_count`: `4`
+- `quality_review_coverage_type_b_audit_record_covered_count`: `4`
+- `quality_review_coverage_formal_independent_review_missing_count`: `10`
+- `quality_review_coverage_missing_audit_record_count`: `0`
+- `quality_review_coverage_ready_for_qlt01_credit`: `False`
+- `quality_review_coverage_ready_for_qlt02_credit`: `False`
+- `external_artifact_gate_selftest_status`: `PASS-H2-EXTERNAL-ARTIFACT-GATE-SELFTEST`
+- `external_artifact_gate_selftest_synthetic_only`: `True`
+- `external_artifact_gate_selftest_does_not_clear_blockers`: `True`
+- `external_artifact_gate_selftest_drop_valid_artifact_count`: `14`
+- `external_artifact_gate_selftest_drop_total_expected_artifact_count`: `14`
+- `external_artifact_gate_selftest_ingestion_ready_copy_action_count`: `14`
+- `external_artifact_gate_selftest_dryrun_copied_file_count`: `0`
+- `external_artifact_gate_selftest_apply_copied_file_count`: `17`
+- `external_artifact_gate_selftest_targets_isolated`: `True`
+- `external_artifact_gate_negative_selftest_status`: `PASS-H2-EXTERNAL-ARTIFACT-GATE-NEGATIVE-SELFTEST`
+- `external_artifact_gate_negative_selftest_only`: `True`
+- `external_artifact_gate_negative_selftest_does_not_clear_blockers`: `True`
+- `external_artifact_gate_negative_selftest_drop_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-DROP`
+- `external_artifact_gate_negative_selftest_drop_valid_artifact_count`: `0`
+- `external_artifact_gate_negative_selftest_ingestion_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN`
+- `external_artifact_gate_negative_selftest_controlled_copy_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY`
+- `external_artifact_gate_negative_selftest_controlled_copy_copied_file_count`: `0`
+- `external_artifact_gate_negative_selftest_apply_refused_returncode`: `2`
+- `external_artifact_strict_qa_negative_selftest_status`: `PASS-H2-EXTERNAL-ARTIFACT-STRICT-QA-NEGATIVE-SELFTEST`
+- `external_artifact_strict_qa_negative_selftest_only`: `True`
+- `external_artifact_strict_qa_negative_selftest_all_present`: `True`
+- `external_artifact_strict_qa_negative_selftest_does_not_clear_blockers`: `True`
+- `external_artifact_strict_qa_negative_selftest_drop_status`: `NOT_READY-H2-EXTERNAL-ARTIFACT-DROP`
+- `external_artifact_strict_qa_negative_selftest_drop_content_quality_gate_level`: `strict-v5-placeholder-free`
+- `external_artifact_strict_qa_negative_selftest_drop_placeholder_gap_detected`: `True`
+- `external_artifact_strict_qa_negative_selftest_drop_domain_quality_gap_count`: `4`
+- `external_artifact_strict_qa_negative_selftest_drop_present_artifact_count`: `14`
+- `external_artifact_strict_qa_negative_selftest_drop_valid_artifact_count`: `0`
+- `external_artifact_strict_qa_negative_selftest_controlled_copy_copied_file_count`: `0`
+- `external_artifact_strict_qa_negative_selftest_apply_refused_returncode`: `2`
+- `synthetic_selftest_isolation_guard_status`: `PASS-H2-SYNTHETIC-SELFTEST-ISOLATION-GUARD`
+- `synthetic_selftest_isolation_guard_synthetic_only`: `True`
+- `synthetic_selftest_isolation_guard_does_not_clear_blockers`: `True`
+- `synthetic_selftest_isolation_guard_scanned_report_count`: `8`
+- `synthetic_selftest_isolation_guard_forbidden_hit_count`: `0`
+- `synthetic_selftest_isolation_guard_remaining_blocker_count`: `3`
+- `synthetic_selftest_isolation_guard_real_controlled_copy_copied_file_count`: `0`
+- `sbepv5_dataset_ingestion_status`: `NOT_READY-SBEPV5-D27-DATASET-INGESTION`
+- `sbepv5_dataset_ingestion_schema_version`: `2`
+- `sbepv5_dataset_ingestion_content_quality_gate_level`: `strict-v1-placeholder-free-and-non-synthetic`
+- `sbepv5_dataset_ingestion_selftest_status`: `PASS-SBEPV5-D27-DATASET-INGESTION-SELFTEST`
+- `sbepv5_dataset_ingestion_selftest_positive_case_count`: `2`
+- `sbepv5_dataset_ingestion_selftest_positive_passed_count`: `2`
+- `sbepv5_dataset_ingestion_selftest_negative_case_count`: `1`
+- `sbepv5_dataset_ingestion_selftest_negative_refused_count`: `1`
+- `sbepv5_dataset_ingestion_selftest_numeric_sensor_id_fixture_passed`: `True`
+- `sbepv5_dataset_ingestion_selftest_gas_sensor_id_fixture_passed`: `True`
+- `sbepv5_digitization_preflight_status`: `PASS-SBEPV5-D27-DIGITIZATION-PREFLIGHT`
+- `sbepv5_digitization_templates_available`: `True`
+- `sbepv5_digitization_missing_artifact_count`: `4`
+- `sbepv5_literature_metric_preflight_status`: `PASS-SBEPV5-D27-LITERATURE-METRIC-PREFLIGHT`
+- `sbepv5_literature_metric_anchor_available`: `True`
+- `sbepv5_literature_metric_anchor_count`: `4`
+- `sbepv5_literature_metric_missing_artifact_count`: `2`
+- `sbepv5_literature_gas09_arrival_interval_s`: `[16.0, 19.0]`
+- `sbepv5_literature_gas10_arrival_interval_s`: `[17.0, 20.0]`
+- `sbepv5_literature_ready_for_reference_agreement_consumption`: `False`
+- `sbepv5_dataset_metadata_available`: `False`
+- `sbepv5_exact_sensor_coordinates_available`: `False`
+- `sbepv5_exact_baffle_geometry_available`: `False`
+- `sbepv5_experimental_timeseries_available`: `False`
+- `sbepv5_external_dataset_status`: `NOT_READY-SBEPV5-D27-EXTERNAL-PLUME-DATASET`
+- `sbepv5_external_dataset_written`: `False`
+- `sbepv5_external_dataset_plume_observation_passed`: `True`
+- `sbepv5_case_package_status`: `PASS-SBEPV5-D27-CASE-PACKAGE-SCAFFOLD`
+- `sbepv5_case_package_runnable`: `False`
+- `sbepv5_case_package_preflight_status`: `PASS-SBEPV5-D27-CASE-PACKAGE-PREFLIGHT`
+- `academic_gas_detonation_readiness_status`: `PASS-ACADEMIC-GAS-DETONATION-READINESS`
+- `academic_gas_foundation_ready`: `True`
+- `academic_gas_short_2d_detonation_wave_validation_passed`: `True`
+- `academic_gas_clears_acd_02`: `True`
+- `academic_gas_clears_acd_03`: `True`
+- `academic_gas_missing_or_partial_quality_gate_count`: `0`
+- `mpi_scaling`: `PASS-SCALING-SCOUT`
+- `production_mesh_16rank_scout`: `PASS-SCOUT`
+- `mpi_link_shim_pass`: `True`
+- `path_audit_pass`: `True`
+- `ctest_passed`: `True`
+- `ctest_tests`: `22`
+
+## Evidence Files
+
+- `verification_log`: `docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_final_20260724.log` sha256 `93735a0c3e37fdeb`
+- `engineering_production_scorecard`: `docs/codex_audit/evidence/engineering_production_scorecard_20260728_integrated_initial_acceptance/engineering_production_scorecard.json` sha256 `5d04d11b450a9b83`
+- `engineering_h2_hybrid_cfd_scout_report`: `docs/codex_audit/evidence/engineering_h2_hybrid_cfd_scout_20260720/hybrid_cfd_scout_report.json` sha256 `faef5650a6bbc49b`
+- `engineering_h2_hybrid_production_mesh_scout_report`: `docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_scout_20260720/hybrid_production_mesh_scout_report.json` sha256 `a1904e6a386548aa`
+- `engineering_h2_hybrid_production_mesh_8rank_scout_report`: `docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/hybrid_production_mesh_8rank_scout_report.json` sha256 `6f782b257dade094`
+- `engineering_h2_hybrid_production_mesh_8rank_600step_stability_scout_report`: `docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_600step_stability_scout_20260721/hybrid_production_mesh_8rank_600step_stability_scout_report.json` sha256 `19864310cdeceff1`
+- `engineering_h2_hybrid_production_mesh_600step_stability_scout_report`: `docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/hybrid_production_mesh_600step_stability_scout_report.json` sha256 `47a64264ae2a4220`
+- `engineering_h2_hybrid_largegrid_8rank_120step_scout_report`: `docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json` sha256 `c542c808e81dc86f`
+- `engineering_h2_reference_agreement_report`: `docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json` sha256 `fab9d5b2ecb52b40`
+- `engineering_bfs_kepsilon_reference_report`: `docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_reference_report.json` sha256 `d6ed7e0a4a5793d7`
+- `mpi_link_shim_script`: `tools/prepare_mpi_link_shims.sh` sha256 `35bb1975445567d4`
+- `engineering_h2_mpi_scaling_report`: `docs/codex_audit/evidence/engineering_h2_mpi_scaling_20260720/mpi_scaling_report.json` sha256 `e175591c7b4ee68a`
+- `hybrid_runtime_affinity_manifest`: `docs/codex_audit/evidence/engineering_runtime_affinity_hybrid_20260720/runtime_affinity_manifest.json` sha256 `c3707d1611d611a5`
+- `scheduler_run_report`: `docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_run_report.json` sha256 `262da4919c55fc24`
+- `engineering_h2_real_cad_cleanup_package_report`: `docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json` sha256 `e227facfc24e049e`
+- `engineering_h2_real_cad_intake_preflight_report`: `docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json` sha256 `33e882ad5cc94663`
+- `engineering_h2_real_cad_boundary_tag_contract_report`: `docs/codex_audit/evidence/engineering_h2_real_cad_boundary_tag_contract_20260724/real_cad_boundary_tag_contract_report.json` sha256 `d88856f1bce57f1b`
+- `engineering_h2_fire_calibration_package_report`: `docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json` sha256 `006e030e8b78b8ad`
+- `engineering_h2_fire_calibration_public_source_triage_report`: `docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json` sha256 `41249a0709ec1540`
+- `engineering_h2_fire_calibration_digitization_preflight_report`: `docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json` sha256 `de64e9cc2e3ffd0e`
+- `engineering_h2_fire_calibration_literature_metric_preflight_report`: `docs/codex_audit/evidence/engineering_h2_fire_calibration_literature_metric_preflight_20260724/fire_calibration_literature_metric_preflight_report.json` sha256 `5bef644b1ee189ee`
+- `engineering_h2_external_plume_readiness_report`: `docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json` sha256 `2739954d4f8b48e5`
+- `engineering_h2_external_plume_public_source_triage_report`: `docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json` sha256 `a2489e6fd7cfc17b`
+- `engineering_h2_blocker_clearance_preflight_report`: `docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json` sha256 `320fe14cf656f817`
+- `engineering_h2_production_blocker_data_room_report`: `docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json` sha256 `67c532294b2b054e`
+- `engineering_h2_production_blocker_closure_manifest_report`: `docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json` sha256 `b47a3c8ab3eceea4`
+- `engineering_h2_external_evidence_intake_kit_manifest`: `docs/codex_audit/evidence/engineering_h2_external_evidence_intake_kit_20260724/h2_external_evidence_intake_kit_manifest.json` sha256 `3f73281de7529843`
+- `engineering_h2_external_artifact_operator_receipt_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_operator_receipt_20260724/h2_external_artifact_operator_receipt_report.json` sha256 `45ee4fec1495d120`
+- `engineering_h2_external_artifact_operator_receipt_gate_selftest_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_operator_receipt_gate_selftest_20260724/h2_external_artifact_operator_receipt_gate_selftest_report.json` sha256 `33151030b313a40a`
+- `engineering_h2_evidence_chain_rebuild_manifest`: `docs/codex_audit/evidence/engineering_h2_evidence_chain_rebuild_manifest_20260724/h2_evidence_chain_rebuild_manifest.json` sha256 `5c1a83f4af222433`
+- `engineering_h2_external_artifact_drop_validator_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json` sha256 `0108680ab41342c3`
+- `engineering_h2_external_artifact_ingestion_plan_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_ingestion_plan_20260724/h2_external_artifact_ingestion_plan.json` sha256 `47ad401fe999fd65`
+- `engineering_h2_external_artifact_controlled_copy_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_controlled_copy_20260724/h2_external_artifact_controlled_copy_report.json` sha256 `db32de0bbd795cbd`
+- `engineering_h2_external_evidence_operations_dashboard_report`: `docs/codex_audit/evidence/engineering_h2_external_evidence_operations_dashboard_20260724/h2_external_evidence_operations_dashboard.json` sha256 `1d744568de6afa2b`
+- `engineering_h2_external_evidence_acceptance_worksheet_report`: `docs/codex_audit/evidence/engineering_h2_external_evidence_acceptance_worksheet_20260724/h2_external_evidence_acceptance_worksheet.json` sha256 `1ffebc3a49890491`
+- `engineering_h2_external_artifact_mapping_alias_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_mapping_alias_20260724/h2_external_artifact_mapping_alias_report.json` sha256 `575d17d8d2cde050`
+- `engineering_h2_external_evidence_case_validation_plan_report`: `docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json` sha256 `c316765c026a3a8e`
+- `engineering_h2_case_validation_acceptance_contract_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_acceptance_contract_20260724/h2_case_validation_acceptance_contract_report.json` sha256 `76e52ef19d12a97a`
+- `engineering_h2_case_validation_acceptance_evaluation_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_acceptance_evaluation_20260724/h2_case_validation_acceptance_evaluation_report.json` sha256 `bbc10bd52b388f21`
+- `engineering_h2_case_validation_failure_attribution_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_failure_attribution_20260724/h2_case_validation_failure_attribution_report.json` sha256 `1aeae655c7c42af4`
+- `engineering_h2_case_validation_closure_matrix_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_closure_matrix_20260724/h2_case_validation_closure_matrix_report.json` sha256 `6a0114b1680a924b`
+- `engineering_h2_external_artifact_unlock_forecast_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_unlock_forecast_20260724/h2_external_artifact_unlock_forecast_report.json` sha256 `89eb9898a52fa86e`
+- `engineering_h2_external_evidence_case_validation_plan_selftest_report`: `docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/h2_external_evidence_case_validation_plan_selftest_report.json` sha256 `b7cc9a094ed1d7be`
+- `engineering_h2_case_validation_runner_ledger`: `docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json` sha256 `b9a7220b83bf3eab`
+- `engineering_h2_case_validation_runner_ledger_selftest_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_selftest_20260724/h2_case_validation_runner_ledger_selftest_report.json` sha256 `e650dba891a33660`
+- `engineering_h2_case_validation_runner_preflight_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_runner_preflight_20260724/h2_case_validation_runner_preflight_report.json` sha256 `f04dcc6cf9304855`
+- `engineering_h2_case_validation_command_contract_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_20260724/h2_case_validation_command_contract_report.json` sha256 `38a7e3f17cff3a7b`
+- `engineering_h2_case_validation_command_contract_selftest_report`: `docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_selftest_20260724/h2_case_validation_command_contract_selftest_report.json` sha256 `6658450528916063`
+- `engineering_h2_external_artifact_gate_selftest_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/h2_external_artifact_gate_selftest_report.json` sha256 `5d05db1ea9524f41`
+- `engineering_h2_external_artifact_gate_negative_selftest_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/h2_external_artifact_gate_negative_selftest_report.json` sha256 `8393b6914a38418c`
+- `engineering_h2_external_artifact_strict_qa_negative_selftest_report`: `docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/h2_external_artifact_strict_qa_negative_selftest_report.json` sha256 `3aba13a11c83ba82`
+- `engineering_h2_synthetic_selftest_isolation_guard_report`: `docs/codex_audit/evidence/engineering_h2_synthetic_selftest_isolation_guard_20260724/h2_synthetic_selftest_isolation_guard_report.json` sha256 `e858cfac4337ce39`
+- `engineering_h2_sbepv5_dataset_ingestion_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json` sha256 `51a726d2e60369c4`
+- `engineering_h2_sbepv5_dataset_ingestion_selftest_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/sbepv5_d27_dataset_ingestion_selftest_report.json` sha256 `2934950656f689a9`
+- `engineering_h2_sbepv5_digitization_preflight_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json` sha256 `dc9d74003eee5c1e`
+- `engineering_h2_sbepv5_literature_metric_preflight_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_literature_metric_preflight_20260724/sbepv5_d27_literature_metric_preflight_report.json` sha256 `76658b4be1388062`
+- `engineering_h2_sbepv5_external_dataset_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_external_dataset_20260723/sbepv5_d27_external_dataset_report.json` sha256 `daf0c3915e8b3bf0`
+- `engineering_h2_sbepv5_case_package_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json` sha256 `d8d79d2129aa82f3`
+- `engineering_h2_sbepv5_case_package_preflight_report`: `docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_preflight_20260723/sbepv5_d27_case_package_preflight_report.json` sha256 `95f3ecf3d97cb2ec`
+- `production_mesh_16rank_scout_report`: `docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json` sha256 `976464cb31a86f6c`
+- `academic_gas_detonation_readiness_report`: `docs/codex_audit/evidence/academic_gas_detonation_readiness_20260724/academic_gas_detonation_readiness_report.json` sha256 `e6c00594f975f42c`
+
+## Limitations
+
+- This report packages verification evidence for the maintained engineering H2 evidence ledger.
+- It does not launch new CFD cases and does not clear reference-data, real-CAD, or calibrated fire metric blockers.
+- BFS/k-epsilon reference validation is tracked as a separate production blocker until reattachment, recirculation, and log-law checks pass.

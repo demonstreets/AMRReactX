@@ -1,0 +1,35 @@
+preflight PASS command git=/usr/bin/git
+preflight PASS command cmake=/usr/bin/cmake
+preflight PASS command make=/usr/bin/make
+preflight PASS command python3=/usr/bin/python3
+preflight PASS command c++=/usr/bin/c++
+preflight PASS command cc=/usr/bin/cc
+preflight PASS release provenance strict log=/tmp/codex_preflight_release_provenance.log
+preflight PASS machine-local path audit strict log=/tmp/codex_preflight_machine_local_paths.log
+preflight PASS external/PeleLMeX/Submodules/AMReX-Hydro git worktree present
+preflight PASS external/PelePhysics/Submodules/amrex symlink=../../amrex
+preflight PASS external/PeleLMeX/Submodules/PelePhysics symlink=../../PelePhysics
+preflight PASS external/PeleC/Submodules/PelePhysics symlink=../../PelePhysics
+preflight PASS external/PelePhysics/Submodules/sundials local CMake shim present
+preflight INFO SUNDIALS_CUDA_DIR=/home/cj/.local/sundials-cuda-6.4.1
+preflight PASS SUNDIALS include directory exists
+preflight PASS SUNDIALS lib directory exists
+preflight INFO SUNDIALS_VERSION=6.4.1
+preflight INFO SUN_CUDA_VERSION=unknown
+preflight PASS SUNDIALS major version is 6 (validated server uses 6.7.0)
+preflight PASS SUNDIALS library libsundials_cvode present
+preflight PASS SUNDIALS library libsundials_core present
+preflight PASS SUNDIALS library libsundials_nvecserial present
+preflight PASS SUNDIALS CUDA library libsundials_nveccuda present
+preflight PASS SUNDIALS CUDA library libsundials_sunlinsolcusolversp present
+preflight PASS SUNDIALS CUDA library libsundials_sunmatrixcusparse present
+preflight PASS command nvcc=/usr/local/cuda-12.6/bin/nvcc
+preflight PASS command nvidia-smi=/usr/bin/nvidia-smi
+preflight INFO nvcc nvcc: NVIDIA (R) Cuda compiler driver
+preflight INFO nvcc Copyright (c) 2005-2024 NVIDIA Corporation
+preflight INFO nvcc Built on Tue_Oct_29_23:50:19_PDT_2024
+preflight INFO nvcc Cuda compilation tools, release 12.6, V12.6.85
+preflight INFO nvcc Build cuda_12.6.r12.6/compiler.35059454_0
+preflight INFO gpu Tesla P100-PCIE-16GB, 6.0
+preflight INFO gpu Tesla P100-PCIE-16GB, 6.0
+preflight SUMMARY PASS warnings=0

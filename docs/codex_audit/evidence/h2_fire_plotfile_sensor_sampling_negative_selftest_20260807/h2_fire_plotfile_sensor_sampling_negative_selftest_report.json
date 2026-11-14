@@ -1,0 +1,164 @@
+{
+  "claim_boundary": [
+    "This selftest verifies extractor input refusal behavior.",
+    "It does not create experimental sensor coordinates.",
+    "It does not clear calibrated overpressure or radiation agreement."
+  ],
+  "evidence_files": [
+    {
+      "label": "plotfile_sensor_extractor",
+      "path": "tools/codex_extract_plotfile_sensor_timeseries.py",
+      "sha256": "c68a6933c41fd278aa0eb31e070f74a0041802a2b950109ccb0fda412841b418",
+      "size_bytes": 11561
+    },
+    {
+      "label": "positive_linear_sensors",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/positive_linear_sensors.csv",
+      "sha256": "7295aa5c598260d74930e507732c5045fa5f1415f6149d40f7e62ef857620bfb",
+      "size_bytes": 66
+    },
+    {
+      "label": "positive_linear_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/positive_linear.log",
+      "sha256": "309c5f0cd1d4af9c969a19a79f322e62941f71e184e8d85d78bb7a720e07a077",
+      "size_bytes": 272
+    },
+    {
+      "label": "positive_linear_json",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/positive_linear.json",
+      "sha256": "1f0a779d690bfa34630f17f4e1cbf345af01a9e38b7d16cc8a50299cdcc452f0",
+      "size_bytes": 1446
+    },
+    {
+      "label": "duplicate_sensor_id_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/duplicate_sensor_id.log",
+      "sha256": "7886da94fa2016ffaa5bb61c25f4c6d1f500615fa919c448bebc3d5237c1ed51",
+      "size_bytes": 69
+    },
+    {
+      "label": "missing_x_column_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/missing_x_column.log",
+      "sha256": "8af8fda7d79b8e9c8f994bfcba3a9086478fba8596b2be068e99cd40a5bf7129",
+      "size_bytes": 96
+    },
+    {
+      "label": "nan_coordinate_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/nan_coordinate.log",
+      "sha256": "3de91f9d1139a2cf6714a32bf620bc3672a2926df6c508332b3ae6080519c7af",
+      "size_bytes": 67
+    },
+    {
+      "label": "outside_domain_x_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/outside_domain_x.log",
+      "sha256": "4f84e5f31a02452bc8f86bad100a139ed99152567033e65f51ac1bd04f601643",
+      "size_bytes": 65
+    },
+    {
+      "label": "empty_sensor_csv_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/empty_sensor_csv.log",
+      "sha256": "fab38823e52c5d3c1e5f523d70141d5b957d462bcd01efe0969bcb164f368d1d",
+      "size_bytes": 75
+    },
+    {
+      "label": "missing_variable_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/missing_variable.log",
+      "sha256": "95a95689bfd969b98194727aba867140dd1a33295681a7edfbb9035c3bd0e09d",
+      "size_bytes": 132
+    },
+    {
+      "label": "invalid_sampling_mode_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/invalid_sampling_mode.log",
+      "sha256": "ac86c8f3c131714908804426ba9597dd15a749ed756584a010aebe8afe3cf652",
+      "size_bytes": 719
+    },
+    {
+      "label": "no_plotfile_log",
+      "path": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/no_plotfile.log",
+      "sha256": "1a53add0ab174eca320895c97fd8ba1d462c4f173eb5dbdbed56057ef8010a8b",
+      "size_bytes": 80
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:02:00+00:00",
+  "negative_cases": [
+    {
+      "expected_failure": true,
+      "label": "duplicate_sensor_id",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/duplicate_sensor_id.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: duplicate sensor_id: P01\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "missing_x_column",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/missing_x_column.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: sensor CSV must include ['sensor_id', 'x_m', 'y_m']\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "nan_coordinate",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/nan_coordinate.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: P01.x_m must be finite\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "outside_domain_x",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/outside_domain_x.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: P01 x outside domain\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "empty_sensor_csv",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/empty_sensor_csv.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: sensor CSV contains no sensors\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "missing_variable",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/missing_variable.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: examples/engineering/h2_leak_3d/plt00001 missing variables: ['not_a_plotfile_variable']\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "invalid_sampling_mode",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/invalid_sampling_mode.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "usage: codex_extract_plotfile_sensor_timeseries.py [-h] --sensor-csv\n                                                   SENSOR_CSV\n                                                   [--plotfile PLOTFILE]\n                                                   --variables VARIABLES\n                                                   [VARIABLES ...]\n                                                   [--sampling-mode {nearest,linear}]\n                                                   --output-csv OUTPUT_CSV\n                                                   --output-json OUTPUT_JSON\ncodex_extract_plotfile_sensor_timeseries.py: error: argument --sampling-mode: invalid choice: 'spline' (choose from 'nearest', 'linear')\n"
+    },
+    {
+      "expected_failure": true,
+      "label": "no_plotfile",
+      "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/no_plotfile.log",
+      "passed": true,
+      "returncode": 2,
+      "stdout_tail": "plotfile_sensor_timeseries_extraction FAIL: at least one --plotfile is required\n"
+    }
+  ],
+  "positive_case": {
+    "label": "positive_linear",
+    "log": "docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/positive_linear.log",
+    "returncode": 0,
+    "stdout_tail": "plotfile_sensor_timeseries_extraction PASS csv=docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/positive_linear.csv json=docs/codex_audit/evidence/h2_fire_plotfile_sensor_sampling_negative_selftest_20260807/positive_linear.json rows=2\n"
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-PLOTFILE-SENSOR-SAMPLING-NEGATIVE-SELFTEST",
+  "summary": {
+    "failed_negative_count": 0,
+    "negative_case_count": 8,
+    "negative_refused_count": 8,
+    "negative_selftest_ready": true,
+    "positive_linear_extractor_case_passed": true,
+    "strict_fire_calibration_blocker_cleared": false
+  }
+}

@@ -1,0 +1,1508 @@
+{
+  "original_mechanism": "/home/cj/my-pele/external/PelePhysics/Mechanisms/heptane_wd6/mechanism.yaml",
+  "original_mechanism_sha256": "0c57c352eec78d0865cd5fe625400ffa78fbfa793ee3f06bd22b9cab8682b253",
+  "input_hot_cell_file": "/home/cj/my-pele/repair_validation/thermal_20260911/conservative_original_and_baseline_peak_states_v2.json",
+  "input_hot_cell_sha256": "4333a5fe8ea9a01c75f3f2b9d59a60c94176eeacb41405623433ad276e37c768",
+  "analysis_script_sha256": "12ff4adc5baeb9f9a6b70ccb29f46e65d7468275f43cd018d93f958691484432",
+  "reference_database": "/home/cj/.local/lib/python3.12/site-packages/cantera/data/nasa_gas.yaml",
+  "reference_database_sha256": "4de6199d65d2d3db782e30573720c723130953707336add59713b02d8667e4db",
+  "reference_source_url": "https://github.com/Cantera/cantera/blob/main/data/nasa_gas.yaml",
+  "nasa_report_url": "https://ntrs.nasa.gov/citations/19940013151",
+  "related_nasa_glenn_2002_report": "https://ntrs.nasa.gov/citations/20020085330",
+  "database_description_header": "description: |-\n  This file contains data for gas phase species from the NASA thermodynamic\n  database, which is available for download from\n  https://shepherd.caltech.edu/EDL/PublicResources/sdt/thermo.html.\n  The original source is:\n\n  B.J. McBride, S. Gordon, and M.A. Reno, \"Coefficients for Calculating\n  Thermodynamic and Transport Properties of Individual Species\", NASA\n  Report TM-4513, October 1993. https://ntrs.nasa.gov/citations/19940013151\n\n  The 'note' field for each species indicates the source and date for the data used\n  to generate the polynomial fits, as given by McBride et al. The abbreviations and\n  corresponding references are given in the report.\n\ngenerator: ck2yaml\ninput-files: [nasa_gas.dat]\ncantera-version: 2.6.0\ndate: Wed, 20 Apr 2022 22:21:10 -0400\n\nunits: {length: cm, time: s, quantity: mol, activation-energy: cal/mol}\n\n",
+  "cantera_version": "3.2.0",
+  "original_fit_range_K": [
+    300.0,
+    5000.0
+  ],
+  "reference_fit_range_K": [
+    200.0,
+    6000.0
+  ],
+  "expanded_reference_fit_range_K": [
+    200.0,
+    6000.0
+  ],
+  "reference_species_mapping": {
+    "nc7h16": "C7H16,n-heptane",
+    "o2": "O2",
+    "co": "CO",
+    "h2o": "H2O",
+    "co2": "CO2",
+    "n2": "N2"
+  },
+  "expanded_species": [
+    "nc7h16",
+    "o2",
+    "co",
+    "h2o",
+    "co2",
+    "n2",
+    "h2",
+    "h",
+    "o",
+    "oh",
+    "ho2",
+    "h2o2",
+    "n",
+    "no",
+    "no2",
+    "n2o"
+  ],
+  "hot_cells": [
+    {
+      "i": 2442,
+      "j": 1,
+      "original_T_K": 5048.096966307731,
+      "target_internal_energy_J_kg": 3210518.4122654283,
+      "source": {
+        "plot": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/plt15861",
+        "time_s": 5e-05,
+        "energy_extracted_from": "rho_E/rho - velocity_squared/2 from native CGS fields, converted to SI"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": 5.386531595606357,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5048.096966307703,
+      "original_polynomial_inverse_T_K": 5048.092405783012,
+      "independent_cp_relative_difference_at_original_T": 0.007742597469852841,
+      "independent_cv_relative_difference_at_original_T": 0.009643143462022996,
+      "independent_internal_energy_difference_at_original_T_J_kg": 13085.350699250586,
+      "independent_fixed_composition_UV": {
+        "T_K": 5037.122685160421,
+        "p_Pa": 4880705.16356303,
+        "energy_residual_J_kg": 2.1886080503463745e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4556.104173079553,
+        "p_Pa": 4561144.498963496,
+        "Y": {
+          "nc7h16": 8.285071461101116e-73,
+          "o2": 0.12480767507691004,
+          "co": 0.06536949700596131,
+          "h2o": 0.05585147386831989,
+          "co2": 0.017058535074581698,
+          "n2": 0.7369128189742272
+        },
+        "energy_residual_J_kg": -6.086193025112152e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 3776.211157133661,
+        "p_Pa": 3935192.2368054255,
+        "Y": {
+          "nc7h16": 6.877910491630774e-81,
+          "o2": 0.0668449266303441,
+          "co": 0.051672557485563375,
+          "h2o": 0.029763824111310528,
+          "co2": 0.038579013880400366,
+          "n2": 0.7115719260261321,
+          "h2": 0.000809843751199122,
+          "h": 0.0006625821019159768,
+          "o": 0.021382525129431094,
+          "oh": 0.02435828951092896,
+          "ho2": 9.919186434579807e-05,
+          "h2o2": 3.711411676698836e-06,
+          "n": 5.18946646679946e-05,
+          "no": 0.05407085842373281,
+          "no2": 0.00010135564581501374,
+          "n2o": 2.7499362536287522e-05
+        },
+        "energy_residual_J_kg": -1.5832483768463135e-07
+      }
+    },
+    {
+      "i": 2443,
+      "j": 1,
+      "original_T_K": 5132.485218648718,
+      "target_internal_energy_J_kg": 3310454.611194018,
+      "source": {
+        "plot": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/plt15861",
+        "time_s": 5e-05,
+        "energy_extracted_from": "rho_E/rho - velocity_squared/2 from native CGS fields, converted to SI"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": 30.1206554886885,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5132.485218648684,
+      "original_polynomial_inverse_T_K": 5132.459719468521,
+      "independent_cp_relative_difference_at_original_T": 0.009176382081242274,
+      "independent_cv_relative_difference_at_original_T": 0.011428695586284787,
+      "independent_internal_energy_difference_at_original_T_J_kg": 14159.213163288776,
+      "independent_fixed_composition_UV": {
+        "T_K": 5120.632385562072,
+        "p_Pa": 4911869.400125215,
+        "energy_residual_J_kg": 3.026798367500305e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4634.568036264002,
+        "p_Pa": 4595408.675044776,
+        "Y": {
+          "nc7h16": 3.357504815916036e-72,
+          "o2": 0.125355132384193,
+          "co": 0.06635857291850715,
+          "h2o": 0.055858492290936014,
+          "co2": 0.01546879942460777,
+          "n2": 0.7369590029817561
+        },
+        "energy_residual_J_kg": -3.864988684654236e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 3808.364632127553,
+        "p_Pa": 3942014.0845964868,
+        "Y": {
+          "nc7h16": 1.39461175051879e-80,
+          "o2": 0.0660594236218174,
+          "co": 0.05295331443695376,
+          "h2o": 0.02869406326300626,
+          "co2": 0.03653099223120815,
+          "n2": 0.7111527190067196,
+          "h2": 0.0008411488910929425,
+          "h": 0.0007191757109558167,
+          "o": 0.02279746916431199,
+          "oh": 0.02490788883928719,
+          "ho2": 0.00010011896314070385,
+          "h2o2": 3.6642715360430076e-06,
+          "n": 5.914767497118604e-05,
+          "no": 0.05505168195505104,
+          "no2": 0.00010114901526714763,
+          "n2o": 2.8042954680887455e-05
+        },
+        "energy_residual_J_kg": 2.421438694000244e-08
+      }
+    },
+    {
+      "i": 2444,
+      "j": 0,
+      "original_T_K": 5170.023273432504,
+      "target_internal_energy_J_kg": 3355242.9197908547,
+      "source": {
+        "plot": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/plt15861",
+        "time_s": 5e-05,
+        "energy_extracted_from": "rho_E/rho - velocity_squared/2 from native CGS fields, converted to SI"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": 41.399924310389906,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5170.023273432464,
+      "original_polynomial_inverse_T_K": 5169.98822380971,
+      "independent_cp_relative_difference_at_original_T": 0.009882843219625848,
+      "independent_cv_relative_difference_at_original_T": 0.01230873182683645,
+      "independent_internal_energy_difference_at_original_T_J_kg": 14697.768931098282,
+      "independent_fixed_composition_UV": {
+        "T_K": 5157.729635810036,
+        "p_Pa": 5158861.136731987,
+        "energy_residual_J_kg": 3.5390257835388184e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4671.134271619569,
+        "p_Pa": 4830085.992911288,
+        "Y": {
+          "nc7h16": 8.424321328302833e-72,
+          "o2": 0.12548586020591182,
+          "co": 0.066555805645177,
+          "h2o": 0.0558639442587435,
+          "co2": 0.015079502722804361,
+          "n2": 0.7370148871673633
+        },
+        "energy_residual_J_kg": -3.3853575587272644e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 3829.5029191391995,
+        "p_Pa": 4137428.0421828176,
+        "Y": {
+          "nc7h16": 3.1007561657004616e-80,
+          "o2": 0.06563002143188534,
+          "co": 0.05334284465000764,
+          "h2o": 0.028352624115617068,
+          "co2": 0.03583955986077964,
+          "n2": 0.7108874520723845,
+          "h2": 0.0008509404556522441,
+          "h": 0.0007354885905125853,
+          "o": 0.02320940612916484,
+          "oh": 0.02512101253930471,
+          "ho2": 0.00010264050699148481,
+          "h2o2": 3.7692681327029036e-06,
+          "n": 6.284424111028152e-05,
+          "no": 0.05572867126584375,
+          "no2": 0.000103610326116988,
+          "n2o": 2.9114546496088237e-05
+        },
+        "energy_residual_J_kg": 2.1420419216156006e-08
+      }
+    },
+    {
+      "i": 2444,
+      "j": 1,
+      "original_T_K": 5186.76782507377,
+      "target_internal_energy_J_kg": 3375030.0133947623,
+      "source": {
+        "plot": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/plt15861",
+        "time_s": 5e-05,
+        "energy_extracted_from": "rho_E/rho - velocity_squared/2 from native CGS fields, converted to SI"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": 45.44452612195164,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5186.7678250737345,
+      "original_polynomial_inverse_T_K": 5186.72934958643,
+      "independent_cp_relative_difference_at_original_T": 0.01021221314401699,
+      "independent_cv_relative_difference_at_original_T": 0.012719079138705958,
+      "independent_internal_energy_difference_at_original_T_J_kg": 14949.270959354937,
+      "independent_fixed_composition_UV": {
+        "T_K": 5174.268329364733,
+        "p_Pa": 4791933.995011598,
+        "energy_residual_J_kg": 3.818422555923462e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4684.796468896897,
+        "p_Pa": 4486271.446464899,
+        "Y": {
+          "nc7h16": 6.691391984976656e-72,
+          "o2": 0.12573373812163768,
+          "co": 0.06703315079348443,
+          "h2o": 0.05586507299171427,
+          "co2": 0.014361499622085756,
+          "n2": 0.7370065384710778
+        },
+        "energy_residual_J_kg": -2.845190465450287e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 3824.63009409296,
+        "p_Pa": 3831532.7871968755,
+        "Y": {
+          "nc7h16": 1.5796332118838494e-80,
+          "o2": 0.06557985106619091,
+          "co": 0.05381410883243763,
+          "h2o": 0.027926052605465088,
+          "co2": 0.03513111110590906,
+          "n2": 0.7109814986862727,
+          "h2": 0.0008631653010688654,
+          "h": 0.0007632180106846151,
+          "o": 0.0238793304381062,
+          "oh": 0.025256385372123765,
+          "ho2": 9.928795130995191e-05,
+          "h2o2": 3.55253070177901e-06,
+          "n": 6.410124039688838e-05,
+          "no": 0.05551105568338095,
+          "no2": 9.940293130104845e-05,
+          "n2o": 2.7878244650622125e-05
+        },
+        "energy_residual_J_kg": -1.210719347000122e-08
+      }
+    },
+    {
+      "i": 2445,
+      "j": 0,
+      "original_T_K": 5114.50327380783,
+      "target_internal_energy_J_kg": 3327785.913168754,
+      "source": {
+        "plot": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/plt15861",
+        "time_s": 5e-05,
+        "energy_extracted_from": "rho_E/rho - velocity_squared/2 from native CGS fields, converted to SI"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": 24.837689381092787,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5114.503273807793,
+      "original_polynomial_inverse_T_K": 5114.482255279304,
+      "independent_cp_relative_difference_at_original_T": 0.008810962958973656,
+      "independent_cv_relative_difference_at_original_T": 0.01097221843915408,
+      "independent_internal_energy_difference_at_original_T_J_kg": 13808.197591760661,
+      "independent_fixed_composition_UV": {
+        "T_K": 5102.943640613341,
+        "p_Pa": 4400145.755250664,
+        "energy_residual_J_kg": 2.8870999813079834e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4645.044621014815,
+        "p_Pa": 4142460.412790229,
+        "Y": {
+          "nc7h16": 2.0935706253044038e-72,
+          "o2": 0.12563911270624098,
+          "co": 0.06684597317320909,
+          "h2o": 0.055871238406619964,
+          "co2": 0.014581236422762319,
+          "n2": 0.7370624392911678
+        },
+        "energy_residual_J_kg": -3.2782554626464844e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 3798.223809894364,
+        "p_Pa": 3540912.5027091885,
+        "Y": {
+          "nc7h16": 5.038576640598974e-81,
+          "o2": 0.06607916096909983,
+          "co": 0.05340749097828837,
+          "h2o": 0.028224832381152382,
+          "co2": 0.03569562995773336,
+          "n2": 0.7114431974206338,
+          "h2": 0.0008552211588521365,
+          "h": 0.0007509901311440402,
+          "o": 0.02356115894533463,
+          "oh": 0.02504634834208556,
+          "ho2": 9.55385044169232e-05,
+          "h2o2": 3.3811683212486487e-06,
+          "n": 5.997165196875151e-05,
+          "no": 0.0546552249800784,
+          "no2": 9.55060578199886e-05,
+          "n2o": 2.6347353070778228e-05
+        },
+        "energy_residual_J_kg": 4.190951585769653e-09
+      }
+    },
+    {
+      "i": 2445,
+      "j": 1,
+      "original_T_K": 5060.717349732078,
+      "target_internal_energy_J_kg": 3291610.5005662413,
+      "source": {
+        "plot": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2/plt15861",
+        "time_s": 5e-05,
+        "energy_extracted_from": "rho_E/rho - velocity_squared/2 from native CGS fields, converted to SI"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": 8.523033732082695,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5060.71734973204,
+      "original_polynomial_inverse_T_K": 5060.710139664253,
+      "independent_cp_relative_difference_at_original_T": 0.007882040622234854,
+      "independent_cv_relative_difference_at_original_T": 0.009813984056256109,
+      "independent_internal_energy_difference_at_original_T_J_kg": 13041.569654369727,
+      "independent_fixed_composition_UV": {
+        "T_K": 5049.790722070398,
+        "p_Pa": 4029395.3131258986,
+        "energy_residual_J_kg": 2.1420419216156006e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4614.214367000273,
+        "p_Pa": 3809440.259503661,
+        "Y": {
+          "nc7h16": 7.402149347380007e-73,
+          "o2": 0.125603070998716,
+          "co": 0.0668369370032293,
+          "h2o": 0.05587189517047947,
+          "co2": 0.014634924900191542,
+          "n2": 0.7370531719273837
+        },
+        "energy_residual_J_kg": -3.739260137081146e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 3774.943254083734,
+        "p_Pa": 3256688.0043609706,
+        "Y": {
+          "nc7h16": 1.655251752568665e-81,
+          "o2": 0.06648340128718178,
+          "co": 0.05320245124995883,
+          "h2o": 0.028385978418317147,
+          "co2": 0.03605727704278537,
+          "n2": 0.7118004858327208,
+          "h2": 0.0008509898995533215,
+          "h": 0.0007464984796524928,
+          "o": 0.023430859315610838,
+          "oh": 0.024892622669685543,
+          "ho2": 9.177602154684849e-05,
+          "h2o2": 3.1999790827728663e-06,
+          "n": 5.689096680771715e-05,
+          "no": 0.05388122764588997,
+          "no2": 9.146874387566378e-05,
+          "n2o": 2.487244733072681e-05
+        },
+        "energy_residual_J_kg": 1.1175870895385742e-08
+      }
+    },
+    {
+      "i": 2389,
+      "j": 0,
+      "original_T_K": 5430.18262130754,
+      "target_internal_energy_J_kg": 3657457.3843211094,
+      "source": {
+        "case": "/home/cj/my-pele/repair_validation/thermal_20260911/replay_cfl20_v1",
+        "step": 15683,
+        "stage": "transport_and_spray",
+        "time_start_s": 4.95893374256285e-05,
+        "dt_s": 2.4794205238009395e-09,
+        "csv_sha256": "d2199df4808f9852c0df8aee1548f773fa026c4dc76122b78745069fcb9a7d20"
+      },
+      "original_EOS_minus_conserved_internal_energy_J_kg": -141.32032118318602,
+      "target_energy_source": "conservative_state",
+      "original_upper_edge_linear_inverse_T_K": 5430.182621307483,
+      "original_polynomial_inverse_T_K": 5430.302522295136,
+      "independent_cp_relative_difference_at_original_T": 0.016118466576165114,
+      "independent_cv_relative_difference_at_original_T": 0.020082371984895486,
+      "independent_internal_energy_difference_at_original_T_J_kg": 19399.881372886244,
+      "independent_fixed_composition_UV": {
+        "T_K": 5414.04458466297,
+        "p_Pa": 11184644.272980107,
+        "energy_residual_J_kg": 7.869675755500793e-08
+      },
+      "independent_six_species_equilibrium_UV": {
+        "T_K": 4933.320411469497,
+        "p_Pa": 10537261.449318817,
+        "Y": {
+          "nc7h16": 6.959797193879597e-68,
+          "o2": 0.12539216533709563,
+          "co": 0.066555433261722,
+          "h2o": 0.05582156556672988,
+          "co2": 0.015510541349811054,
+          "n2": 0.7367202944846415
+        },
+        "energy_residual_J_kg": -2.300366759300232e-07
+      },
+      "independent_expanded_equilibrium_UV": {
+        "T_K": 4047.2175491029407,
+        "p_Pa": 9049615.898113417,
+        "Y": {
+          "nc7h16": 8.100791122875284e-76,
+          "o2": 0.061982781676925204,
+          "co": 0.05497184948321038,
+          "h2o": 0.027375290276837536,
+          "co2": 0.03371053915442999,
+          "n2": 0.7072032715492979,
+          "h2": 0.0008761733931698587,
+          "h": 0.0007467486902043057,
+          "o": 0.023576634359176597,
+          "oh": 0.026244587342404705,
+          "ho2": 0.0001481160469441856,
+          "h2o2": 6.333400007452436e-06,
+          "n": 9.625635080041754e-05,
+          "no": 0.06285754486306708,
+          "no2": 0.00015455618469701674,
+          "n2o": 4.931722882744427e-05
+        },
+        "energy_residual_J_kg": 7.59027898311615e-08
+      }
+    }
+  ],
+  "fixed_peak_composition_temperature_sweep": [
+    {
+      "T_K": 300.0,
+      "original_cp_J_kg_K": 1050.226518874901,
+      "reference_cp_J_kg_K": 1051.923542696632,
+      "original_cv_J_kg_K": 760.3708356140928,
+      "reference_cv_J_kg_K": 762.0678594358237,
+      "original_u_J_kg": -1905100.672498737,
+      "reference_u_J_kg": -1904954.2033046212
+    },
+    {
+      "T_K": 350.0,
+      "original_cp_J_kg_K": 1061.8029470116255,
+      "reference_cp_J_kg_K": 1060.8954015130978,
+      "original_cv_J_kg_K": 771.9472637508171,
+      "reference_cv_J_kg_K": 771.0397182522894,
+      "original_u_J_kg": -1866789.728392054,
+      "reference_u_J_kg": -1866631.1018680558
+    },
+    {
+      "T_K": 400.0,
+      "original_cp_J_kg_K": 1072.917280929865,
+      "reference_cp_J_kg_K": 1070.9544795732304,
+      "original_cv_J_kg_K": 783.0615976690566,
+      "reference_cv_J_kg_K": 781.0987963124221,
+      "original_u_J_kg": -1827913.5920960363,
+      "reference_u_J_kg": -1827832.0951645754
+    },
+    {
+      "T_K": 450.0,
+      "original_cp_J_kg_K": 1084.0179293843469,
+      "reference_cp_J_kg_K": 1082.0547393968934,
+      "original_cv_J_kg_K": 794.1622461235385,
+      "reference_cv_J_kg_K": 792.199056136085,
+      "original_u_J_kg": -1788483.741118284,
+      "reference_u_J_kg": -1788503.853213332
+    },
+    {
+      "T_K": 500.0,
+      "original_cp_J_kg_K": 1095.4532248607104,
+      "reference_cp_J_kg_K": 1094.1213541435513,
+      "original_cv_J_kg_K": 805.597541599902,
+      "reference_cv_J_kg_K": 804.2656708827429,
+      "original_u_J_kg": -1748491.73443539,
+      "reference_u_J_kg": -1748596.0676414943
+    },
+    {
+      "T_K": 550.0,
+      "original_cp_J_kg_K": 1107.4714235755089,
+      "reference_cp_J_kg_K": 1107.0507076122703,
+      "original_cv_J_kg_K": 817.6157403147007,
+      "reference_cv_J_kg_K": 817.1950243514619,
+      "original_u_J_kg": -1707914.2163063926,
+      "reference_u_J_kg": -1708062.8911522678
+    },
+    {
+      "T_K": 600.0,
+      "original_cp_J_kg_K": 1120.2207054762093,
+      "reference_cp_J_kg_K": 1120.710394241718,
+      "original_cv_J_kg_K": 830.365022215401,
+      "reference_cv_J_kg_K": 830.8547109809097,
+      "original_u_J_kg": -1666717.920086228,
+      "reference_u_J_kg": -1666864.376992914
+    },
+    {
+      "T_K": 650.0,
+      "original_cp_J_kg_K": 1133.7491742411917,
+      "reference_cp_J_kg_K": 1134.939219110164,
+      "original_cv_J_kg_K": 843.8934909803833,
+      "reference_cv_J_kg_K": 845.0835358493556,
+      "original_u_J_kg": -1624864.6720391873,
+      "reference_u_J_kg": -1624967.918422771
+    },
+    {
+      "T_K": 700.0,
+      "original_cp_J_kg_K": 1148.0048572797498,
+      "reference_cp_J_kg_K": 1149.5471979354786,
+      "original_cv_J_kg_K": 858.1491740189415,
+      "reference_cv_J_kg_K": 859.6915146746702,
+      "original_u_J_kg": -1582316.3951523695,
+      "reference_u_J_kg": -1582349.6881812748
+    },
+    {
+      "T_K": 750.0,
+      "original_cp_J_kg_K": 1162.835705732091,
+      "reference_cp_J_kg_K": 1164.3155570751344,
+      "original_cv_J_kg_K": 872.9800224712825,
+      "reference_cv_J_kg_K": 874.4598738143261,
+      "original_u_J_kg": -1539040.1129491357,
+      "reference_u_J_kg": -1538996.077955976
+    },
+    {
+      "T_K": 800.0,
+      "original_cp_J_kg_K": 1177.989594469335,
+      "reference_cp_J_kg_K": 1178.9967335262058,
+      "original_cv_J_kg_K": 888.1339112085267,
+      "reference_cv_J_kg_K": 889.1410502653976,
+      "original_u_J_kg": -1495012.9533025657,
+      "reference_u_J_kg": -1494905.137850563
+    },
+    {
+      "T_K": 850.0,
+      "original_cp_J_kg_K": 1193.1143220935166,
+      "reference_cp_J_kg_K": 1193.3143749253672,
+      "original_cv_J_kg_K": 903.2586388327082,
+      "reference_cv_J_kg_K": 903.458691664559,
+      "original_u_J_kg": -1450227.152248907,
+      "reference_u_J_kg": -1450088.0158528783
+    },
+    {
+      "T_K": 900.0,
+      "original_cp_J_kg_K": 1207.7576109375832,
+      "reference_cp_J_kg_K": 1206.963339548896,
+      "original_cv_J_kg_K": 917.9019276767748,
+      "reference_cv_J_kg_K": 917.1076562880877,
+      "original_u_J_kg": -1404695.0578010362,
+      "reference_u_J_kg": -1404570.3973029447
+    },
+    {
+      "T_K": 950.0,
+      "original_cp_J_kg_K": 1221.3671070653945,
+      "reference_cp_J_kg_K": 1219.609696312671,
+      "original_cv_J_kg_K": 931.5114238045861,
+      "reference_cv_J_kg_K": 929.7540130518628,
+      "original_u_J_kg": -1358454.1337619065,
+      "reference_u_J_kg": -1358393.9443609768
+    },
+    {
+      "T_K": 1000.0,
+      "original_cp_J_kg_K": 1233.2903802717262,
+      "reference_cp_J_kg_K": 1230.8907247721718,
+      "original_cv_J_kg_K": 943.4346970109178,
+      "reference_cv_J_kg_K": 941.0350415113636,
+      "original_u_J_kg": -1311571.963538008,
+      "reference_u_J_kg": -1311617.7354754072
+    },
+    {
+      "T_K": 1050.0,
+      "original_cp_J_kg_K": 1243.886771736794,
+      "reference_cp_J_kg_K": 1241.5649577636034,
+      "original_cv_J_kg_K": 954.0310884759856,
+      "reference_cv_J_kg_K": 951.709274502795,
+      "original_u_J_kg": -1264133.4969497297,
+      "reference_u_J_kg": -1264297.274452414
+    },
+    {
+      "T_K": 1100.0,
+      "original_cp_J_kg_K": 1254.010100832175,
+      "reference_cp_J_kg_K": 1251.8009013295775,
+      "original_cv_J_kg_K": 964.1544175713668,
+      "reference_cv_J_kg_K": 961.9452180687691,
+      "original_u_J_kg": -1216176.9255931396,
+      "reference_u_J_kg": -1216454.1140477387
+    },
+    {
+      "T_K": 1150.0,
+      "original_cp_J_kg_K": 1263.6776098622115,
+      "reference_cp_J_kg_K": 1261.6119764104199,
+      "original_cv_J_kg_K": 973.8219266014032,
+      "reference_cv_J_kg_K": 971.7562931496115,
+      "original_u_J_kg": -1167725.6520232705,
+      "reference_u_J_kg": -1168109.8336740863
+    },
+    {
+      "T_K": 1200.0,
+      "original_cp_J_kg_K": 1272.9056430217615,
+      "reference_cp_J_kg_K": 1271.0114007498821,
+      "original_cv_J_kg_K": 983.0499597609531,
+      "reference_cv_J_kg_K": 981.1557174890737,
+      "original_u_J_kg": -1118802.0573604289,
+      "reference_u_J_kg": -1119285.3454655977
+    },
+    {
+      "T_K": 1250.0,
+      "original_cp_J_kg_K": 1281.7102377642536,
+      "reference_cp_J_kg_K": 1280.0121889263544,
+      "original_cv_J_kg_K": 991.8545545034452,
+      "reference_cv_J_kg_K": 990.156505665546,
+      "original_u_J_kg": -1069427.7131837136,
+      "reference_u_J_kg": -1070000.9057483594
+    },
+    {
+      "T_K": 1300.0,
+      "original_cp_J_kg_K": 1290.1071248016842,
+      "reference_cp_J_kg_K": 1288.6271523528656,
+      "original_cv_J_kg_K": 1000.2514415408759,
+      "reference_cv_J_kg_K": 998.7714690920573,
+      "original_u_J_kg": -1019623.3968680903,
+      "reference_u_J_kg": -1020276.1251986724
+    },
+    {
+      "T_K": 1350.0,
+      "original_cp_J_kg_K": 1298.111728104618,
+      "reference_cp_J_kg_K": 1296.8688992770815,
+      "original_cv_J_kg_K": 1008.2560448438095,
+      "reference_cv_J_kg_K": 1007.0132160162731,
+      "original_u_J_kg": -969409.1069214559,
+      "reference_u_J_kg": -970129.979001322
+    },
+    {
+      "T_K": 1400.0,
+      "original_cp_J_kg_K": 1305.7391649021897,
+      "reference_cp_J_kg_K": 1304.7498347813078,
+      "original_cv_J_kg_K": 1015.8834816413815,
+      "reference_cv_J_kg_K": 1014.8941515204993,
+      "original_u_J_kg": -918804.0783217199,
+      "reference_u_J_kg": -919580.8170078418
+    },
+    {
+      "T_K": 1450.0,
+      "original_cp_J_kg_K": 1313.0042456821022,
+      "reference_cp_J_kg_K": 1312.2821607824872,
+      "original_cv_J_kg_K": 1023.148562421294,
+      "reference_cv_J_kg_K": 1022.426477521679,
+      "original_u_J_kg": -867826.7978538669,
+      "reference_u_J_kg": -868646.3738947862
+    },
+    {
+      "T_K": 1500.0,
+      "original_cp_J_kg_K": 1319.9214741906271,
+      "reference_cp_J_kg_K": 1319.477876032201,
+      "original_cv_J_kg_K": 1030.0657909298188,
+      "reference_cv_J_kg_K": 1029.6221927713927,
+      "original_u_J_kg": -816495.0194470343,
+      "reference_u_J_kg": -817343.7793219954
+    },
+    {
+      "T_K": 1550.0,
+      "original_cp_J_kg_K": 1326.5050474326044,
+      "reference_cp_J_kg_K": 1326.3487761166687,
+      "original_cv_J_kg_K": 1036.6493641717962,
+      "reference_cv_J_kg_K": 1036.4930928558604,
+      "original_u_J_kg": -764825.7795115823,
+      "reference_u_J_kg": -765689.5680908652
+    },
+    {
+      "T_K": 1600.0,
+      "original_cp_J_kg_K": 1332.7688556714431,
+      "reference_cp_J_kg_K": 1332.9064534567472,
+      "original_cv_J_kg_K": 1042.9131724106348,
+      "reference_cv_J_kg_K": 1043.0507701959389,
+      "original_u_J_kg": -712835.4122761621,
+      "reference_u_J_kg": -713699.6903026131
+    },
+    {
+      "T_K": 1650.0,
+      "original_cp_J_kg_K": 1338.7264824291212,
+      "reference_cp_J_kg_K": 1339.1622973079338,
+      "original_cv_J_kg_K": 1048.870799168313,
+      "reference_cv_J_kg_K": 1049.3066140471255,
+      "original_u_J_kg": -660539.5651247927,
+      "reference_u_J_kg": -661389.5215165494
+    },
+    {
+      "T_K": 1700.0,
+      "original_cp_J_kg_K": 1344.391204486185,
+      "reference_cp_J_kg_K": 1345.1274937603616,
+      "original_cv_J_kg_K": 1054.5355212253767,
+      "reference_cv_J_kg_K": 1055.2718104995533,
+      "original_u_J_kg": -607953.2139339292,
+      "reference_u_J_kg": -608773.8729083433
+    },
+    {
+      "T_K": 1750.0,
+      "original_cp_J_kg_K": 1349.7759918817503,
+      "reference_cp_J_kg_K": 1350.813025738803,
+      "original_cv_J_kg_K": 1059.920308620942,
+      "reference_cv_J_kg_K": 1060.9573424779946,
+      "original_u_J_kg": -555090.6784095354,
+      "reference_u_J_kg": -555867.001428291
+    },
+    {
+      "T_K": 1800.0,
+      "original_cp_J_kg_K": 1354.8935079135008,
+      "reference_cp_J_kg_K": 1356.2296730026687,
+      "original_cv_J_kg_K": 1065.0378246526923,
+      "reference_cv_J_kg_K": 1066.3739897418604,
+      "original_u_J_kg": -501965.6374241535,
+      "reference_u_J_kg": -502682.61995958415
+    },
+    {
+      "T_K": 1850.0,
+      "original_cp_J_kg_K": 1359.7561091376886,
+      "reference_cp_J_kg_K": 1361.3880121460074,
+      "original_cv_J_kg_K": 1069.90042587688,
+      "reference_cv_J_kg_K": 1071.5323288851991,
+      "original_u_J_kg": -448591.14435398014,
+      "reference_u_J_kg": -449233.9074765775
+    },
+    {
+      "T_K": 1900.0,
+      "original_cp_J_kg_K": 1364.3758453691353,
+      "reference_cp_J_kg_K": 1366.2984165975063,
+      "original_cv_J_kg_K": 1074.520162108327,
+      "reference_cv_J_kg_K": 1076.442733336698,
+      "original_u_J_kg": -394979.6424159322,
+      "reference_u_J_kg": -395533.5192030587
+    },
+    {
+      "T_K": 1950.0,
+      "original_cp_J_kg_K": 1368.764459681232,
+      "reference_cp_J_kg_K": 1370.9710566204901,
+      "original_cv_J_kg_K": 1078.9087764204237,
+      "reference_cv_J_kg_K": 1081.1153733596818,
+      "original_u_J_kg": -341142.9800047243,
+      "reference_u_J_kg": -341593.5967705134
+    },
+    {
+      "T_K": 2000.0,
+      "original_cp_J_kg_K": 1372.9333884059372,
+      "reference_cp_J_kg_K": 1375.4158993129226,
+      "original_cv_J_kg_K": 1083.0777051451287,
+      "reference_cv_J_kg_K": 1085.5602160521144,
+      "original_u_J_kg": -287092.42602993484,
+      "reference_u_J_kg": -287425.77837639634
+    },
+    {
+      "T_K": 2050.0,
+      "original_cp_J_kg_K": 1376.8937611337778,
+      "reference_cp_J_kg_K": 1379.642708607405,
+      "original_cv_J_kg_K": 1087.0380778729696,
+      "reference_cv_J_kg_K": 1089.7870253465967,
+      "original_u_J_kg": -232838.68525308056,
+      "reference_u_J_kg": -233041.2089423979
+    },
+    {
+      "T_K": 2100.0,
+      "original_cp_J_kg_K": 1380.656400713851,
+      "reference_cp_J_kg_K": 1383.661045271177,
+      "original_cv_J_kg_K": 1090.8007174530428,
+      "reference_cv_J_kg_K": 1093.8053620103688,
+      "original_u_J_kg": -178391.91362468916,
+      "reference_u_J_kg": -178450.55027271205
+    },
+    {
+      "T_K": 2150.0,
+      "original_cp_J_kg_K": 1384.231823253822,
+      "reference_cp_J_kg_K": 1387.4802669061178,
+      "original_cv_J_kg_K": 1094.3761399930138,
+      "reference_cv_J_kg_K": 1097.6245836453095,
+      "original_u_J_kg": -123761.733621366,
+      "reference_u_J_kg": -123663.99121230523
+    },
+    {
+      "T_K": 2200.0,
+      "original_cp_J_kg_K": 1387.6302381199248,
+      "reference_cp_J_kg_K": 1391.1095279487427,
+      "original_cv_J_kg_K": 1097.7745548591165,
+      "reference_cv_J_kg_K": 1101.2538446879344,
+      "original_u_J_kg": -68957.24958287341,
+      "reference_u_J_kg": -68691.25780518337
+    },
+    {
+      "T_K": 2250.0,
+      "original_cp_J_kg_K": 1390.8615479369614,
+      "reference_cp_J_kg_K": 1394.5577796702057,
+      "original_cv_J_kg_K": 1101.0058646761531,
+      "reference_cv_J_kg_K": 1104.7020964093972,
+      "original_u_J_kg": -13987.063049193854,
+      "reference_u_J_kg": -13541.623452661466
+    },
+    {
+      "T_K": 2300.0,
+      "original_cp_J_kg_K": 1393.9353485883034,
+      "reference_cp_J_kg_K": 1397.8337701763,
+      "original_cv_J_kg_K": 1104.0796653274951,
+      "reference_cv_J_kg_K": 1107.9780869154915,
+      "original_u_J_kg": 41140.711902392446,
+      "reference_u_J_kg": 41776.080928370044
+    },
+    {
+      "T_K": 2350.0,
+      "original_cp_J_kg_K": 1396.8609292158912,
+      "reference_cp_J_kg_K": 1400.9460444074568,
+      "original_cv_J_kg_K": 1107.005245955083,
+      "reference_cv_J_kg_K": 1111.0903611466485,
+      "original_u_J_kg": 96418.43332023843,
+      "reference_u_J_kg": 97253.4567471748
+    },
+    {
+      "T_K": 2400.0,
+      "original_cp_J_kg_K": 1399.647272220233,
+      "reference_cp_J_kg_K": 1403.9029441387447,
+      "original_cv_J_kg_K": 1109.7915889594246,
+      "reference_cv_J_kg_K": 1114.0472608779362,
+      "original_u_J_kg": 151838.9160412583,
+      "reference_u_J_kg": 152882.5275809058
+    },
+    {
+      "T_K": 2450.0,
+      "original_cp_J_kg_K": 1402.3030532604066,
+      "reference_cp_J_kg_K": 1406.7126079798713,
+      "original_cv_J_kg_K": 1112.4473699995983,
+      "reference_cv_J_kg_K": 1116.8569247190628,
+      "original_u_J_kg": 207395.41635385685,
+      "reference_u_J_kg": 208655.72901633536
+    },
+    {
+      "T_K": 2500.0,
+      "original_cp_J_kg_K": 1404.8366412540588,
+      "reference_cp_J_kg_K": 1409.3829713751816,
+      "original_cv_J_kg_K": 1114.9809579932505,
+      "reference_cv_J_kg_K": 1119.527288114373,
+      "original_u_J_kg": 263081.6166608551,
+      "reference_u_J_kg": 264565.89849158534
+    },
+    {
+      "T_K": 2550.0,
+      "original_cp_J_kg_K": 1407.2560983774047,
+      "reference_cp_J_kg_K": 1411.92176660366,
+      "original_cv_J_kg_K": 1117.4004151165964,
+      "reference_cv_J_kg_K": 1122.0660833428517,
+      "original_u_J_kg": 318891.61014242214,
+      "reference_u_J_kg": 320606.26513786236
+    },
+    {
+      "T_K": 2600.0,
+      "original_cp_J_kg_K": 1409.5691800652273,
+      "reference_cp_J_kg_K": 1414.3365227789277,
+      "original_cv_J_kg_K": 1119.713496804419,
+      "reference_cv_J_kg_K": 1124.4808395181194,
+      "original_u_J_kg": 374819.88541900076,
+      "reference_u_J_kg": 376770.4396211865
+    },
+    {
+      "T_K": 2650.0,
+      "original_cp_J_kg_K": 1411.7833350108795,
+      "reference_cp_J_kg_K": 1416.6345658492455,
+      "original_cv_J_kg_K": 1121.9276517500712,
+      "reference_cv_J_kg_K": 1126.7788825884372,
+      "original_u_J_kg": 430861.31121423916,
+      "reference_u_J_kg": 433052.4039841278
+    },
+    {
+      "T_K": 2700.0,
+      "original_cp_J_kg_K": 1413.9057051662824,
+      "reference_cp_J_kg_K": 1418.823018597512,
+      "original_cv_J_kg_K": 1124.0500219054738,
+      "reference_cv_J_kg_K": 1128.9673353367036,
+      "original_u_J_kg": 487011.12101791584,
+      "reference_u_J_kg": 489446.50148753263
+    },
+    {
+      "T_K": 2750.0,
+      "original_cp_J_kg_K": 1415.9431257419265,
+      "reference_cp_J_kg_K": 1420.9088006412628,
+      "original_cv_J_kg_K": 1126.0874424811182,
+      "reference_cv_J_kg_K": 1131.0531173804545,
+      "original_u_J_kg": 543264.8977488695,
+      "reference_u_J_kg": 545947.4264522594
+    },
+    {
+      "T_K": 2800.0,
+      "original_cp_J_kg_K": 1417.90212520687,
+      "reference_cp_J_kg_K": 1422.8986284326731,
+      "original_cv_J_kg_K": 1128.0464419460618,
+      "reference_cv_J_kg_K": 1133.0429451718649,
+      "original_u_J_kg": 599618.5584179278,
+      "reference_u_J_kg": 602550.214100909
+    },
+    {
+      "T_K": 2850.0,
+      "original_cp_J_kg_K": 1419.7889252887405,
+      "reference_cp_J_kg_K": 1424.799015258557,
+      "original_cv_J_kg_K": 1129.9332420279322,
+      "reference_cv_J_kg_K": 1134.9433319977486,
+      "original_u_J_kg": 656068.338790836,
+      "reference_u_J_kg": 659250.2303995567
+    },
+    {
+      "T_K": 2900.0,
+      "original_cp_J_kg_K": 1421.609440973734,
+      "reference_cp_J_kg_K": 1426.6162712403636,
+      "original_cv_J_kg_K": 1131.7537577129258,
+      "reference_cv_J_kg_K": 1136.7605879795553,
+      "original_u_J_kg": 712610.7780511857,
+      "reference_u_J_kg": 716043.1618994846
+    },
+    {
+      "T_K": 2950.0,
+      "original_cp_J_kg_K": 1423.3692805066162,
+      "reference_cp_J_kg_K": 1428.3565033341838,
+      "original_cv_J_kg_K": 1133.513597245808,
+      "reference_cv_J_kg_K": 1138.5008200733755,
+      "original_u_J_kg": 769242.7034633391,
+      "reference_u_J_kg": 772925.0055789151
+    },
+    {
+      "T_K": 3000.0,
+      "original_cp_J_kg_K": 1425.0737453907207,
+      "reference_cp_J_kg_K": 1430.0256153307453,
+      "original_cv_J_kg_K": 1135.2180621299124,
+      "reference_cv_J_kg_K": 1140.169932069937,
+      "original_u_J_kg": 825961.2150353657,
+      "reference_u_J_kg": 829892.0586847386
+    },
+    {
+      "T_K": 3050.0,
+      "original_cp_J_kg_K": 1426.7278303879486,
+      "reference_cp_J_kg_K": 1431.6293078554131,
+      "original_cv_J_kg_K": 1136.8721471271404,
+      "reference_cv_J_kg_K": 1141.7736245946048,
+      "original_u_J_kg": 882763.6701819609,
+      "reference_u_J_kg": 886940.908574247
+    },
+    {
+      "T_K": 3100.0,
+      "original_cp_J_kg_K": 1428.3362235187724,
+      "reference_cp_J_kg_K": 1433.1730783681921,
+      "original_cv_J_kg_K": 1138.4805402579639,
+      "reference_cv_J_kg_K": 1143.3173951073836,
+      "original_u_J_kg": 939647.6683873846,
+      "reference_u_J_kg": 944068.4225568699
+    },
+    {
+      "T_K": 3150.0,
+      "original_cp_J_kg_K": 1429.9033060622312,
+      "reference_cp_J_kg_K": 1434.6622211637246,
+      "original_cv_J_kg_K": 1140.047622801423,
+      "reference_cv_J_kg_K": 1144.8065379029163,
+      "original_u_J_kg": 996611.0358683796,
+      "reference_u_J_kg": 1001271.7377359013
+    },
+    {
+      "T_K": 3200.0,
+      "original_cp_J_kg_K": 1431.4331525559346,
+      "reference_cp_J_kg_K": 1436.1018273712898,
+      "original_cv_J_kg_K": 1141.5774692951263,
+      "reference_cv_J_kg_K": 1146.2461441104815,
+      "original_u_J_kg": 1053651.8102371094,
+      "reference_u_J_kg": 1058548.2508502314
+    },
+    {
+      "T_K": 3250.0,
+      "original_cp_J_kg_K": 1432.929530796059,
+      "reference_cp_J_kg_K": 1437.496784954808,
+      "original_cv_J_kg_K": 1143.0738475352505,
+      "reference_cv_J_kg_K": 1147.6411016939999,
+      "original_u_J_kg": 1110768.2251640786,
+      "reference_u_J_kg": 1115895.608116085
+    },
+    {
+      "T_K": 3300.0,
+      "original_cp_J_kg_K": 1434.3959018373512,
+      "reference_cp_J_kg_K": 1438.8517787128353,
+      "original_cv_J_kg_K": 1144.5402185765429,
+      "reference_cv_J_kg_K": 1148.996095452027,
+      "original_u_J_kg": 1167958.6950410656,
+      "reference_u_J_kg": 1173311.6950687433
+    },
+    {
+      "T_K": 3350.0,
+      "original_cp_J_kg_K": 1435.8354199931255,
+      "reference_cp_J_kg_K": 1440.1712902785669,
+      "original_cv_J_kg_K": 1145.9797367323172,
+      "reference_cv_J_kg_K": 1150.3156070177583,
+      "original_u_J_kg": 1225221.7996440518,
+      "reference_u_J_kg": 1230794.626404285
+    },
+    {
+      "T_K": 3400.0,
+      "original_cp_J_kg_K": 1437.2509328352658,
+      "reference_cp_J_kg_K": 1441.4595981198368,
+      "original_cv_J_kg_K": 1147.3952495744572,
+      "reference_cv_J_kg_K": 1151.6039148590287,
+      "original_u_J_kg": 1282556.2687961487,
+      "reference_u_J_kg": 1288342.7358213149
+    },
+    {
+      "T_K": 3450.0,
+      "original_cp_J_kg_K": 1438.644981194224,
+      "reference_cp_J_kg_K": 1442.720777539115,
+      "original_cv_J_kg_K": 1148.7892979334158,
+      "reference_cv_J_kg_K": 1152.8650942783065,
+      "original_u_J_kg": 1339960.967030523,
+      "reference_u_J_kg": 1345954.5658626906
+    },
+    {
+      "T_K": 3500.0,
+      "original_cp_J_kg_K": 1440.0197991590219,
+      "reference_cp_J_kg_K": 1443.9587006735135,
+      "original_cv_J_kg_K": 1150.1641158982134,
+      "reference_cv_J_kg_K": 1154.1030174127052,
+      "original_u_J_kg": 1397434.8782533328,
+      "reference_u_J_kg": 1403628.8577572673
+    },
+    {
+      "T_K": 3550.0,
+      "original_cp_J_kg_K": 1441.3773140772485,
+      "reference_cp_J_kg_K": 1445.1770364947781,
+      "original_cv_J_kg_K": 1151.52163081644,
+      "reference_cv_J_kg_K": 1155.3213532339698,
+      "original_u_J_kg": 1454977.0904066467,
+      "reference_u_J_kg": 1461364.541261613
+    },
+    {
+      "T_K": 3600.0,
+      "original_cp_J_kg_K": 1442.7191465550627,
+      "reference_cp_J_kg_K": 1446.3792508092965,
+      "original_cv_J_kg_K": 1152.8634632942544,
+      "reference_cv_J_kg_K": 1156.5235675484885,
+      "original_u_J_kg": 1512586.7801313822,
+      "reference_u_J_kg": 1519160.7245017542
+    },
+    {
+      "T_K": 3650.0,
+      "original_cp_J_kg_K": 1444.0466104571917,
+      "reference_cp_J_kg_K": 1447.5686062580928,
+      "original_cv_J_kg_K": 1154.1909271963834,
+      "reference_cv_J_kg_K": 1157.7129229972843,
+      "original_u_J_kg": 1570263.1974302237,
+      "reference_u_J_kg": 1577016.683814903
+    },
+    {
+      "T_K": 3700.0,
+      "original_cp_J_kg_K": 1445.360712906932,
+      "reference_cp_J_kg_K": 1448.7481623168292,
+      "original_cv_J_kg_K": 1155.5050296461236,
+      "reference_cv_J_kg_K": 1158.8924790560209,
+      "original_u_J_kg": 1628005.6503305587,
+      "reference_u_J_kg": 1634931.8535911837
+    },
+    {
+      "T_K": 3750.0,
+      "original_cp_J_kg_K": 1446.6621542861476,
+      "reference_cp_J_kg_K": 1449.9207752958068,
+      "original_cv_J_kg_K": 1156.806471025339,
+      "reference_cv_J_kg_K": 1160.0650920349985,
+      "original_u_J_kg": 1685813.4895474056,
+      "reference_u_J_kg": 1692905.8161153784
+    },
+    {
+      "T_K": 3800.0,
+      "original_cp_J_kg_K": 1447.9513282352723,
+      "reference_cp_J_kg_K": 1451.089098339965,
+      "original_cv_J_kg_K": 1158.095644974464,
+      "reference_cv_J_kg_K": 1161.2334150791564,
+      "original_u_J_kg": 1743686.093146337,
+      "reference_u_J_kg": 1750938.2914086403
+    },
+    {
+      "T_K": 3850.0,
+      "original_cp_J_kg_K": 1449.2283216533087,
+      "reference_cp_J_kg_K": 1452.2555814288803,
+      "original_cv_J_kg_K": 1159.3726383925004,
+      "reference_cv_J_kg_K": 1162.399898168072,
+      "original_u_J_kg": 1801622.8512064125,
+      "reference_u_J_kg": 1809029.1270702423
+    },
+    {
+      "T_K": 3900.0,
+      "original_cp_J_kg_K": 1450.4929146978272,
+      "reference_cp_J_kg_K": 1453.422471376769,
+      "original_cv_J_kg_K": 1160.637231437019,
+      "reference_cv_J_kg_K": 1163.566788115961,
+      "original_u_J_kg": 1859623.150483107,
+      "reference_u_J_kg": 1867178.2881192996
+    },
+    {
+      "T_K": 3950.0,
+      "original_cp_J_kg_K": 1451.7445807849676,
+      "reference_cp_J_kg_K": 1454.5918118324844,
+      "original_cv_J_kg_K": 1161.8888975241593,
+      "reference_cv_J_kg_K": 1164.736128571676,
+      "original_u_J_kg": 1917686.3590712366,
+      "reference_u_J_kg": 1925385.8468365043
+    },
+    {
+      "T_K": 4000.0,
+      "original_cp_J_kg_K": 1452.9824865894377,
+      "reference_cp_J_kg_K": 1455.765443279518,
+      "original_cv_J_kg_K": 1163.1268033286292,
+      "reference_cv_J_kg_K": 1165.90976001871,
+      "original_u_J_kg": 1975811.81106789,
+      "reference_u_J_kg": 1983651.97260586
+    },
+    {
+      "T_K": 4050.0,
+      "original_cp_J_kg_K": 1454.2054920445164,
+      "reference_cp_J_kg_K": 1456.9450030360008,
+      "original_cv_J_kg_K": 1164.3498087837083,
+      "reference_cv_J_kg_K": 1167.0893197751927,
+      "original_u_J_kg": 2033998.7912353552,
+      "reference_u_J_kg": 2041976.9217564038
+    },
+    {
+      "T_K": 4100.0,
+      "original_cp_J_kg_K": 1455.4121503420479,
+      "reference_cp_J_kg_K": 1458.1319252547005,
+      "original_cv_J_kg_K": 1165.5564670812394,
+      "reference_cv_J_kg_K": 1168.2762419938924,
+      "original_u_J_kg": 2092246.5196640473,
+      "reference_u_J_kg": 2100361.027403952
+    },
+    {
+      "T_K": 4150.0,
+      "original_cp_J_kg_K": 1456.600707932448,
+      "reference_cp_J_kg_K": 1459.327440923024,
+      "original_cv_J_kg_K": 1166.7450246716398,
+      "reference_cv_J_kg_K": 1169.4717576622156,
+      "original_u_J_kg": 2150554.1364354384,
+      "reference_u_J_kg": 2158804.689292823
+    },
+    {
+      "T_K": 4200.0,
+      "original_cp_J_kg_K": 1457.7691045246993,
+      "reference_cp_J_kg_K": 1460.5325778630158,
+      "original_cv_J_kg_K": 1167.9134212638912,
+      "reference_cv_J_kg_K": 1170.6768946022075,
+      "original_u_J_kg": 2208920.6862849873,
+      "reference_u_J_kg": 2217308.3636375708
+    },
+    {
+      "T_K": 4250.0,
+      "original_cp_J_kg_K": 1458.9149730863542,
+      "reference_cp_J_kg_K": 1461.7481607313591,
+      "original_cv_J_kg_K": 1169.0592898255459,
+      "reference_cv_J_kg_K": 1171.8924774705508,
+      "original_u_J_kg": 2267345.103265063,
+      "reference_u_J_kg": 2275872.5529647195
+    },
+    {
+      "T_K": 4300.0,
+      "original_cp_J_kg_K": 1460.0356398435333,
+      "reference_cp_J_kg_K": 1462.9748110193755,
+      "original_cv_J_kg_K": 1170.1799565827253,
+      "reference_cv_J_kg_K": 1173.119127758567,
+      "original_u_J_kg": 2325826.1954078786,
+      "reference_u_J_kg": 2334497.79595449
+    },
+    {
+      "T_K": 4350.0,
+      "original_cp_J_kg_K": 1461.1281242809273,
+      "reference_cp_J_kg_K": 1464.212947053023,
+      "original_cv_J_kg_K": 1171.272441020119,
+      "reference_cv_J_kg_K": 1174.3572637922148,
+      "original_u_J_kg": 2384362.6293884185,
+      "reference_u_J_kg": 2393184.657282539
+    },
+    {
+      "T_K": 4400.0,
+      "original_cp_J_kg_K": 1462.189139141793,
+      "reference_cp_J_kg_K": 1465.4627839929003,
+      "original_cv_J_kg_K": 1172.3334558809847,
+      "reference_cv_J_kg_K": 1175.607100732092,
+      "original_u_J_kg": 2442952.9151873603,
+      "reference_u_J_kg": 2451933.7174616847
+    },
+    {
+      "T_K": 4450.0,
+      "original_cp_J_kg_K": 1463.2150904279579,
+      "reference_cp_J_kg_K": 1466.7243338342437,
+      "original_cv_J_kg_K": 1173.3594071671496,
+      "reference_cv_J_kg_K": 1176.8686505734354,
+      "original_u_J_kg": 2501595.390754018,
+      "reference_u_J_kg": 2510745.5626836424
+    },
+    {
+      "T_K": 4500.0,
+      "original_cp_J_kg_K": 1464.2020773998183,
+      "reference_cp_J_kg_K": 1467.9974054069253,
+      "original_cv_J_kg_K": 1174.34639413901,
+      "reference_cv_J_kg_K": 1178.141722146117,
+      "original_u_J_kg": 2560288.206669248,
+      "reference_u_J_kg": 2569620.774660755
+    },
+    {
+      "T_K": 4550.0,
+      "original_cp_J_kg_K": 1465.1458925763395,
+      "reference_cp_J_kg_K": 1469.28160437546,
+      "original_cv_J_kg_K": 1175.290209315531,
+      "reference_cv_J_kg_K": 1179.4259211146516,
+      "original_u_J_kg": 2619029.310808407,
+      "reference_u_J_kg": 2628559.920467721
+    },
+    {
+      "T_K": 4600.0,
+      "original_cp_J_kg_K": 1466.0420217350518,
+      "reference_cp_J_kg_K": 1470.5763332389963,
+      "original_cv_J_kg_K": 1176.1863384742433,
+      "reference_cv_J_kg_K": 1180.7206499781878,
+      "original_u_J_kg": 2677816.4330042484,
+      "reference_u_J_kg": 2687563.5423833397
+    },
+    {
+      "T_K": 4650.0,
+      "original_cp_J_kg_K": 1466.8856439120605,
+      "reference_cp_J_kg_K": 1471.8807913313235,
+      "original_cv_J_kg_K": 1177.029960651252,
+      "reference_cv_J_kg_K": 1182.025108070515,
+      "original_u_J_kg": 2736647.069709882,
+      "reference_u_J_kg": 2746632.1477322252
+    },
+    {
+      "T_K": 4700.0,
+      "original_cp_J_kg_K": 1467.671631402035,
+      "reference_cp_J_kg_K": 1473.193974820869,
+      "original_cv_J_kg_K": 1177.8159481412267,
+      "reference_cv_J_kg_K": 1183.3382915600605,
+      "original_u_J_kg": 2795518.468661671,
+      "reference_u_J_kg": 2805766.198726548
+    },
+    {
+      "T_K": 4750.0,
+      "original_cp_J_kg_K": 1468.3945497582147,
+      "reference_cp_J_kg_K": 1474.514676710696,
+      "original_cv_J_kg_K": 1178.5388664974064,
+      "reference_cv_J_kg_K": 1184.6589934498875,
+      "original_u_J_kg": 2854427.613542187,
+      "reference_u_J_kg": 2864966.102307769
+    },
+    {
+      "T_K": 4800.0,
+      "original_cp_J_kg_K": 1469.0486577924084,
+      "reference_cp_J_kg_K": 1475.8414868385107,
+      "original_cv_J_kg_K": 1179.1929745316,
+      "reference_cv_J_kg_K": 1185.9858035777022,
+      "original_u_J_kg": 2913371.208643123,
+      "reference_u_J_kg": 2924232.199988372
+    },
+    {
+      "T_K": 4850.0,
+      "original_cp_J_kg_K": 1469.6279075749917,
+      "reference_cp_J_kg_K": 1477.1727918766533,
+      "original_cv_J_kg_K": 1179.7722243141834,
+      "reference_cv_J_kg_K": 1187.3171086158447,
+      "original_u_J_kg": 2972345.6635282314,
+      "reference_u_J_kg": 2983564.7576935817
+    },
+    {
+      "T_K": 4900.0,
+      "original_cp_J_kg_K": 1470.1259444349123,
+      "reference_cp_J_kg_K": 1478.5067753321018,
+      "original_cv_J_kg_K": 1180.2702611741042,
+      "reference_cv_J_kg_K": 1188.6510920712935,
+      "original_u_J_kg": 3031347.0776962424,
+      "reference_u_J_kg": 3042963.955603115
+    },
+    {
+      "T_K": 4950.0,
+      "original_cp_J_kg_K": 1470.5361069596822,
+      "reference_cp_J_kg_K": 1479.841417546478,
+      "original_cv_J_kg_K": 1180.6804236988737,
+      "reference_cv_J_kg_K": 1189.9857342856697,
+      "original_u_J_kg": 3090371.2252438017,
+      "reference_u_J_kg": 3102429.877992897
+    },
+    {
+      "T_K": 5000.0,
+      "original_cp_J_kg_K": 1470.851426995387,
+      "reference_cp_J_kg_K": 1481.1744956960333,
+      "original_cv_J_kg_K": 1180.9957437345788,
+      "reference_cv_J_kg_K": 1191.318812435225,
+      "original_u_J_kg": 3149413.5395283885,
+      "reference_u_J_kg": 3161962.5030768034
+    },
+    {
+      "T_K": 5050.0,
+      "original_cp_J_kg_K": 1471.0646296466775,
+      "reference_cp_J_kg_K": 1482.5035837916676,
+      "original_cv_J_kg_K": 1181.2089463858692,
+      "reference_cv_J_kg_K": 1192.6479005308593,
+      "original_u_J_kg": 3208469.097831263,
+      "reference_u_J_kg": 3221561.6928483914
+    },
+    {
+      "T_K": 5100.0,
+      "original_cp_J_kg_K": 1471.168133276774,
+      "reference_cp_J_kg_K": 1483.8260526789084,
+      "original_cv_J_kg_K": 1181.3124500159654,
+      "reference_cv_J_kg_K": 1193.9703694181003,
+      "original_u_J_kg": 3267532.606020369,
+      "reference_u_J_kg": 3281227.182922619
+    },
+    {
+      "T_K": 5150.0,
+      "original_cp_J_kg_K": 1471.1540495074669,
+      "reference_cp_J_kg_K": 1485.1390700379293,
+      "original_cv_J_kg_K": 1181.2983662466584,
+      "reference_cv_J_kg_K": 1195.283386777121,
+      "original_u_J_kg": 3326598.383213282,
+      "reference_u_J_kg": 3340958.572377601
+    },
+    {
+      "T_K": 5200.0,
+      "original_cp_J_kg_K": 1471.0141832191127,
+      "reference_cp_J_kg_K": 1486.4396003835393,
+      "original_cv_J_kg_K": 1181.1584999583042,
+      "reference_cv_J_kg_K": 1196.583917122731,
+      "original_u_J_kg": 3385660.346440131,
+      "reference_u_J_kg": 3400755.3135963124
+    },
+    {
+      "T_K": 5250.0,
+      "original_cp_J_kg_K": 1470.74003255064,
+      "reference_cp_J_kg_K": 1487.7244050651836,
+      "original_cv_J_kg_K": 1180.8843492898316,
+      "reference_cv_J_kg_K": 1197.8687218043751,
+      "original_u_J_kg": 3444711.9953065203,
+      "reference_u_J_kg": 3460616.702108343
+    },
+    {
+      "T_K": 5300.0,
+      "original_cp_J_kg_K": 1470.3227888995439,
+      "reference_cp_J_kg_K": 1488.9900422669505,
+      "original_cv_J_kg_K": 1180.4671056387356,
+      "reference_cv_J_kg_K": 1199.134359006142,
+      "original_u_J_kg": 3503746.3966564806,
+      "reference_u_J_kg": 3520541.866431622
+    },
+    {
+      "T_K": 5350.0,
+      "original_cp_J_kg_K": 1469.7533369218881,
+      "reference_cp_J_kg_K": 1490.232867007562,
+      "original_cv_J_kg_K": 1179.89765366108,
+      "reference_cv_J_kg_K": 1200.3771837467536,
+      "original_u_J_kg": 3562756.1692353664,
+      "reference_u_J_kg": 3580529.7579141413
+    },
+    {
+      "T_K": 5400.0,
+      "original_cp_J_kg_K": 1469.0222545323068,
+      "reference_cp_J_kg_K": 1491.4490311403795,
+      "original_cv_J_kg_K": 1179.1665712714985,
+      "reference_cv_J_kg_K": 1201.593347879571,
+      "original_u_J_kg": 3621733.4683528035,
+      "reference_u_J_kg": 3640579.1405757037
+    },
+    {
+      "T_K": 5450.0,
+      "original_cp_J_kg_K": 1468.1198129040006,
+      "reference_cp_J_kg_K": 1492.634483353405,
+      "original_cv_J_kg_K": 1178.264129643192,
+      "reference_cv_J_kg_K": 1202.7788000925964,
+      "original_u_J_kg": 3680669.970545615,
+      "reference_u_J_kg": 3700688.580949639
+    },
+    {
+      "T_K": 5500.0,
+      "original_cp_J_kg_K": 1467.035976468741,
+      "reference_cp_J_kg_K": 1493.7849691692745,
+      "original_cv_J_kg_K": 1177.1802932079324,
+      "reference_cv_J_kg_K": 1203.9292859084665,
+      "original_u_J_kg": 3739556.858240752,
+      "reference_u_J_kg": 3760856.437924545
+    },
+    {
+      "T_K": 5550.0,
+      "original_cp_J_kg_K": 1465.7604029168663,
+      "reference_cp_J_kg_K": 1494.8960309452666,
+      "original_cv_J_kg_K": 1175.9047196560582,
+      "reference_cv_J_kg_K": 1205.040347684458,
+      "original_u_J_kg": 3798384.8044182104,
+      "reference_u_J_kg": 3821080.8525860235
+    },
+    {
+      "T_K": 5600.0,
+      "original_cp_J_kg_K": 1464.2824431972847,
+      "reference_cp_J_kg_K": 1495.9630078732948,
+      "original_cv_J_kg_K": 1174.4267599364766,
+      "reference_cv_J_kg_K": 1206.1073246124865,
+      "original_u_J_kg": 3857143.9572739736,
+      "reference_u_J_kg": 3881359.738058395
+    },
+    {
+      "T_K": 5650.0,
+      "original_cp_J_kg_K": 1462.5911415174753,
+      "reference_cp_J_kg_K": 1496.9810359799126,
+      "original_cv_J_kg_K": 1172.7354582566668,
+      "reference_cv_J_kg_K": 1207.1253527191043,
+      "original_u_J_kg": 3915823.924882934,
+      "reference_u_J_kg": 3941690.769346452
+    },
+    {
+      "T_K": 5700.0,
+      "original_cp_J_kg_K": 1460.6752353434797,
+      "reference_cp_J_kg_K": 1497.9450481263116,
+      "original_cv_J_kg_K": 1170.8195520826714,
+      "reference_cv_J_kg_K": 1208.089364865503,
+      "original_u_J_kg": 3974413.7598618143,
+      "reference_u_J_kg": 4002071.3731771717
+    },
+    {
+      "T_K": 5750.0,
+      "original_cp_J_kg_K": 1458.523155399915,
+      "reference_cp_J_kg_K": 1498.849774008319,
+      "original_cv_J_kg_K": 1168.6674721391066,
+      "reference_cv_J_kg_K": 1208.9940907475107,
+      "original_u_J_kg": 4032901.9440321177,
+      "reference_u_J_kg": 4062498.7178414646
+    },
+    {
+      "T_K": 5800.0,
+      "original_cp_J_kg_K": 1456.1230256699628,
+      "reference_cp_J_kg_K": 1499.6897401564052,
+      "original_cv_J_kg_K": 1166.2673424091545,
+      "reference_cv_J_kg_K": 1209.834056895597,
+      "original_u_J_kg": 4091276.3730830317,
+      "reference_u_J_kg": 4122969.7030358925
+    },
+    {
+      "T_K": 5850.0,
+      "original_cp_J_kg_K": 1453.4626633953753,
+      "reference_cp_J_kg_K": 1500.4592699356745,
+      "original_cv_J_kg_K": 1163.6069801345668,
+      "reference_cv_J_kg_K": 1210.6035866748664,
+      "original_u_J_kg": 4149524.3412343683,
+      "reference_u_J_kg": 4183480.949704415
+    },
+    {
+      "T_K": 5900.0,
+      "original_cp_J_kg_K": 1450.5295790764744,
+      "reference_cp_J_kg_K": 1501.1524835458702,
+      "original_cv_J_kg_K": 1160.673895815666,
+      "reference_cv_J_kg_K": 1211.296800285062,
+      "original_u_J_kg": 4207632.525899494,
+      "reference_u_J_kg": 4244028.789880098
+    },
+    {
+      "T_K": 5950.0,
+      "original_cp_J_kg_K": 1447.3109764721462,
+      "reference_cp_J_kg_K": 1501.7632980213762,
+      "original_cv_J_kg_K": 1157.455293211338,
+      "reference_cv_J_kg_K": 1211.9076147605679,
+      "original_u_J_kg": 4265586.972348255,
+      "reference_u_J_kg": 4304609.256526878
+    },
+    {
+      "T_K": 6000.0,
+      "original_cp_J_kg_K": 1443.793752599852,
+      "reference_cp_J_kg_K": 1502.2854272312125,
+      "original_cv_J_kg_K": 1153.9380693390435,
+      "reference_cv_J_kg_K": 1212.429743970404,
+      "original_u_J_kg": 4323373.078369909,
+      "reference_u_J_kg": 4365218.073381265
+    }
+  ],
+  "interpretation": "Fixed-composition UV compares caloric thermodynamics at the same conserved density, composition and energy. Equilibrium UV changes composition and is only a limiting sensitivity; it does not establish the local relaxation rate, shock cause, or actual flow temperature."
+}

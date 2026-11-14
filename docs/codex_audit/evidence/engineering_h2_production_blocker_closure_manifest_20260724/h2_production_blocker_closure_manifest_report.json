@@ -1,0 +1,187 @@
+{
+  "domain_closure_records": [
+    {
+      "artifact_records": [
+        {
+          "artifact": "real_cad_cleanup_manifest.json",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "fill the package manifest from the template with controlled provenance and exact file hashes",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json"
+        },
+        {
+          "artifact": "source_cad/*",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "stage at least three real source CAD files for a tank/pipe large-layout campaign",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/source_cad/"
+        },
+        {
+          "artifact": "cleaned_geometry/*",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "stage at least three cleaned simulation geometries derived from the source CAD files",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/cleaned_geometry/"
+        },
+        {
+          "artifact": "cleanup_quality_records",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "record units, watertightness, degeneracy, positive volume/area, and meter-space bounding boxes per geometry",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv"
+        },
+        {
+          "artifact": "real_cad_data_room_index.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "provide a controlled data-room index with source/cleaned file roles, labels, relative paths, hashes, source type, revision, and owner/supplier",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv"
+        },
+        {
+          "artifact": "real_cad_cleanup_quality_record.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "provide cleanup quality records for at least three geometries with true cleanup checks, bbox fields, tool/method, and reviewer",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv"
+        }
+      ],
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "domain": "real_cad_cleanup",
+      "domain_command_sequence": [
+        "python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py",
+        "python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py",
+        "python3 tools/write_engineering_production_scorecard.py",
+        "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py"
+      ],
+      "missing_artifact_count": 6,
+      "ready_for_execution": false
+    },
+    {
+      "artifact_records": [
+        {
+          "artifact": "dataset_metadata.json",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "replace the metadata template with URL/DOI, source file hash, digitization method, uncertainty basis, and case-alignment booleans",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json"
+        },
+        {
+          "artifact": "sensor_coordinates.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "digitize or obtain Gas01..Gas12 coordinates with reliability tags and <=0.02 m uncertainty",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv"
+        },
+        {
+          "artifact": "baffle_geometry.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "digitize or obtain baffles 1..4 bounds with source basis and <=0.02 m uncertainty",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv"
+        },
+        {
+          "artifact": "experimental_timeseries.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "obtain original Excel or digitize Gas01..Gas12 concentration histories through at least 120 s",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv"
+        }
+      ],
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "domain": "external_plume_shape_reference",
+      "domain_command_sequence": [
+        "python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py",
+        "python3 tools/write_engineering_h2_reference_agreement_report.py --external-plume-dataset-json <generated_external_plume_dataset_json>",
+        "python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py",
+        "python3 tools/write_engineering_production_scorecard.py",
+        "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py"
+      ],
+      "missing_artifact_count": 4,
+      "ready_for_execution": false
+    },
+    {
+      "artifact_records": [
+        {
+          "artifact": "calibration_metadata.json",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "select calibration sources and record source hash, uncertainty, and all case-alignment booleans",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json"
+        },
+        {
+          "artifact": "radiation_metrics.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "digitize or obtain heat-flux measurements with distances, tolerances, and source basis",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv"
+        },
+        {
+          "artifact": "overpressure_metrics.csv",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "digitize or obtain peak overpressure measurements with distances, tolerances, and source basis",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv"
+        },
+        {
+          "artifact": "calibrated_fire_consequence_report",
+          "closure_state": "WAITING_FOR_EXTERNAL_DATA",
+          "required_action": "rerun the official fire consequence report with the generated calibration dataset JSON",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json"
+        }
+      ],
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "domain": "fire_consequence_calibration",
+      "domain_command_sequence": [
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_package_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_report.py",
+        "python3 tools/write_engineering_h2_fire_consequence_metrics_report.py --calibration-dataset-json <generated_fire_calibration_dataset_json>",
+        "python3 tools/write_engineering_production_scorecard.py",
+        "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py"
+      ],
+      "missing_artifact_count": 4,
+      "ready_for_execution": false
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "production_blocker_data_room_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+      "sha256": "67c532294b2b054e347bf649097533b9fa3752608c9eff89cf459cef20f280df",
+      "size_bytes": 8998
+    }
+  ],
+  "final_rebuild_command_sequence": [
+    "python3 tools/write_engineering_h2_production_blocker_data_room_report.py",
+    "python3 tools/write_engineering_h2_production_blocker_closure_manifest_report.py",
+    "python3 tools/write_engineering_h2_production_handoff_report.py",
+    "python3 tools/write_engineering_h2_master_plan_traceability_report.py",
+    "bash tools/verify_engineering_h2_production_evidence.sh"
+  ],
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This manifest defines closure targets and command order; it does not provide missing external CAD, plume, or fire calibration data.",
+    "A blocker is still open until its domain report, production scorecard, blocker preflight, and final verifier all pass."
+  ],
+  "production_blocker_data_room_report": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+      "gap": "",
+      "name": "data_room_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "14 artifact target mapping(s)",
+      "gap": "",
+      "name": "all_missing_artifacts_have_target_paths",
+      "status": "PASS"
+    },
+    {
+      "evidence": "domain closure commands are defined",
+      "gap": "",
+      "name": "all_domains_have_command_sequences",
+      "status": "PASS"
+    },
+    {
+      "evidence": "bash tools/verify_engineering_h2_production_evidence.sh",
+      "gap": "",
+      "name": "final_verifier_command_defined",
+      "status": "PASS"
+    }
+  ],
+  "ready_for_production_scorecard_clearance": false,
+  "remaining_blocker_count": 3,
+  "schema_version": 1,
+  "status": "PASS-H2-PRODUCTION-BLOCKER-CLOSURE-MANIFEST",
+  "title": "Engineering H2 Production Blocker Closure Manifest",
+  "total_missing_artifact_count": 14
+}

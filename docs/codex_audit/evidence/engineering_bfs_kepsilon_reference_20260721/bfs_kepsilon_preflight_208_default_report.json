@@ -1,0 +1,78 @@
+{
+  "blocking_gaps": [],
+  "diagnostic_gaps": [],
+  "generated_at_utc": "2026-07-23T06:24:19+00:00",
+  "input_file": "examples/engineering/backward_facing_step/input.yaml",
+  "input_sha256": "062f19552748e2a1c163eaddd24c93d0f07da86c8f72a9b5f3218888e7a0e943",
+  "label": "refined_208x56_default_cfl",
+  "limitations": [
+    "This preflight checks input-deck readiness only; it does not replace CFD reference validation.",
+    "PASS means the case is suitable to attempt an engineering BFS k-epsilon reference run, not that the run will pass.",
+    "The CFL and dt_shrink thresholds are set from observed refined-grid NaN sensitivity and should be tightened when better evidence is available."
+  ],
+  "overrides": [
+    {
+      "key": "amr.n_cell",
+      "value": "208 56"
+    },
+    {
+      "key": "amr.max_grid_size",
+      "value": "208"
+    },
+    {
+      "key": "amr.blocking_factor",
+      "value": "8"
+    },
+    {
+      "key": "amr.cfl",
+      "value": "0.05"
+    },
+    {
+      "key": "amr.dt_shrink",
+      "value": "0.001"
+    },
+    {
+      "key": "amr.max_step",
+      "value": "5000"
+    },
+    {
+      "key": "amr.stop_time",
+      "value": "0.5"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS-BFS-KEPSILON-PREFLIGHT",
+  "summary": {
+    "blocking_factor": 8,
+    "blocks_production_readiness": false,
+    "cells_per_step_height": 6.096000000000001,
+    "cfl": 0.05,
+    "dt_shrink": 0.001,
+    "dx": 0.0062499999999999995,
+    "dy": 0.0062499999999999995,
+    "eb_box_step_configured": true,
+    "grid_aligned_to_step_x0": true,
+    "high_nan_risk_refined_grid": false,
+    "kepsilon_enabled": true,
+    "max_grid_size": 208,
+    "max_step": 5000,
+    "missing_required_keys": [],
+    "nx": 208,
+    "ny": 56,
+    "status": "PASS-BFS-KEPSILON-PREFLIGHT",
+    "step_height": 0.0381,
+    "step_x_index": 24.0,
+    "stop_time": 0.5,
+    "wall_functions_enabled": true
+  },
+  "thresholds": {
+    "max_cfl": 0.1,
+    "max_dt_shrink": 0.01,
+    "min_cells_per_h": 6.0,
+    "min_max_step": 5000,
+    "min_nx": 208,
+    "min_ny": 56,
+    "min_stop_time": 0.5
+  },
+  "title": "Engineering BFS k-epsilon Case Preflight"
+}

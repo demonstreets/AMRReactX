@@ -1,0 +1,50 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x669006) [0x593850cea006]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x66dc71) [0x593850ceec71]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x16d3b0) [0x5938507ee3b0]
+    amrex::Abort(char const*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:188
+ (inlined by) pele::physics::reactions::utils::check_flag(void*, char const*, int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions/ReactorUtils.cpp:40
+
+ 3: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x17e2e3) [0x5938507ff2e3]
+    pele::physics::reactions::ReactorCvode::initCvode(_generic_N_Vector*&, _generic_SUNMatrix*&, pele::physics::reactions::CVODEUserData*, _generic_SUNNonlinearSolver*&, _generic_SUNLinearSolver*&, void*, CUstream_st*, double const&, int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp:117 (discriminator 1)
+
+ 4: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x1821f8) [0x5938508031f8]
+    pele::physics::reactions::ReactorCvode::react(amrex::BoxND<2> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<int, 4, true> const&, double&, double&, CUstream_st*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp:1344 (discriminator 1)
+
+ 5: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0xaa7b19) [0x593851128b19]
+    PeleC::react_state(double, double, bool, amrex::MultiFab*) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/React.cpp:224 (discriminator 2)
+
+ 6: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x990ee2) [0x593851011ee2]
+    PeleC::post_init(double) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/PeleC.cpp:1326
+
+ 7: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x6bcef5) [0x593850d3def5]
+    amrex::Amr::FinalizeInit(double, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:1399 (discriminator 1)
+
+ 8: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0x6c79aa) [0x593850d489aa]
+    amrex::Amr::init(double, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:1182
+
+ 9: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0xcc743) [0x59385074d743]
+    main at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/main.cpp:194 (discriminator 1)
+
+10: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x71d45b42a1ca]
+
+11: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x71d45b42a28b]
+
+12: /home/cj/my-pele/examples/academic/spray_detonation/spatial_cublas_v22d.gnu.MPI.CUDA.ex(+0xcddc5) [0x59385074edc5]
+    ?? ??:0
+

@@ -1,0 +1,53 @@
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 6.0 2.5 2.5
+
+peleLM.lo_bc = Inflow Inflow SlipWallAdiab
+peleLM.hi_bc = Outflow Outflow SlipWallAdiab
+
+amr.n_cell = 192 80 80
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 64
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 2.0
+prob.wind_v = 0.0
+prob.leak_xc = 2.66
+prob.leak_yc = 1.25
+prob.leak_zc = 1.25
+prob.leak_rate = 0.104
+prob.leak_radius = 0.08
+prob.leak_vel_x = 50.0
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 300.0
+
+transport.const_viscosity = 1.85e-5
+transport.const_bulk_viscosity = 0.0
+transport.const_conductivity = 0.0
+transport.const_diffusivity = 2.0e-5
+
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterations = 2
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.have_divu = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.use_typ_vals = 1
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.plot_int = 100
+amr.max_step = 500
+amr.stop_time = -1.0
+amr.cfl = 0.5
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+eb2.geom_type = all_regular
+eb2.small_volfrac = 1.0e-4
+fabarray.mfiter_tile_size = 1024 1024 1024

@@ -1,0 +1,45 @@
+REPO_ROOT ?= $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
+CUDA_HOME ?= /usr/local/cuda
+SUNDIALS_HOME ?= $(or $(SUNDIALS_CUDA_DIR),$(SUNDIALS_DIR))
+# AMReX
+DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+
+# Profiling
+PROFILE = FALSE
+TINY_PROFILE = FALSE
+COMM_PROFILE = FALSE
+TRACE_PROFILE = FALSE
+MEM_PROFILE = FALSE
+USE_GPROF = FALSE
+
+# Performance
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = TRUE
+CUDA_ARCH = 60
+CUDA_HOME ?= /usr/local/cuda
+USE_HIP = FALSE
+USE_SYCL = FALSE
+
+# Debugging
+DEBUG = FALSE
+FSANITIZER = FALSE
+THREAD_SANITIZER = FALSE
+
+# PeleLMeX
+USE_PLASMA = FALSE
+USE_PARTICLES = TRUE
+SPRAY_FUEL_NUM = 1
+
+# PelePhysics
+Chemistry_Model = C12H23
+Eos_Model = Fuego
+Transport_Model = Simple
+
+PELE_HOME := $(REPO_ROOT)/external/PeleLMeX
+SUNDIALS_HOME ?= $(or $(SUNDIALS_CUDA_DIR),$(SUNDIALS_DIR))
+include $(PELE_HOME)/Exec/Make.PeleLMeX

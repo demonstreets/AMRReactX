@@ -1,0 +1,206 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_triangle_cyl.md)
+tool read_file completed: # 品字形圆柱 C3H8 泄漏算例
+
+## 几何参数
+- 计算域：80×50×40 m，网格 160×100×80
+- 三圆柱，半径各 5m，高 8m，z 中心 = 20m
+- 品字形排列：
+  - 前柱：(x=20, y=25, z=20) — 迎风
+  - 后柱左：(x=30, y=20, z=20)
+  - 后柱右：(x=30, y=30, z=20)
+- 前后间距 10m，后两柱间距 10m
+
+## 来流
+- 风向：左→右，风速 8 m/s（wind_u=8.0, wind_v=0.0）
+- 入口：lo-x 面（sgn=1），出口：hi-x 面
+- 入口湍流度 10%，k-eps...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me first explore the c3h8_flacs framework and understand its structure.]0;🐳 CodeWhaletool: list_dir (path: /home/cj/my-pele/examples/engineering/c3h8_flacs)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs)
+
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/examples/engineering/c3h8_flacs: Is a directory (os error 21)
+tool list_dir completed: <14 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/GNUmakefile)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.cpp)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/my_pele_modules.H)
+tool read_file completed: #----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# Inflow on lo-x and lo-y, Outflow on hi-x and hi-y
+peleLM....
+tool read_file completed: DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+PROFILE = FALSE
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = FALSE
+DEBUG = FALSE
+Chemistry_Model = c3h8_mini
+Eos_Model = Fuego
+Transport_Model = Simple
+PELE_HOME := /home/cj/my-pele/external/PeleLMeX
+INCLUDE_LOCATIONS += /home/cj...
+tool read_file completed: #include <PeleLMeX.H>
+#include <AMReX_ParmParse.H>
+#include <AMReX_EB2.H>
+#include <AMReX_EB2_IF.H>
+#include "pelelmex_prob.H"
+
+void
+PeleLM::readProbParm()
+{
+  amrex::ParmParse pp("prob");
+  pp.query("P_mean", prob_parm->P_mean);
+  pp.query("T_mean", prob_parm->T_mean);
+  pp.query("wind_u", prob_...
+tool read_file completed: #ifndef PELELM_PROB_H
+#define PELELM_PROB_H
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <PeleLMeX_ProblemSpecificFunctions.H>
+#include <PeleLMeX_Index.H>
+#include <PelePhysics.H>
+#include <cmath>
+
+struct MyProbParm : public ProbParmDefault {
+  amrex::Real P_mean=101325.0, T_...
+tool read_file completed: #pragma once
+#include "k_epsilon_constants.H"
+#include "k_epsilon_core.H"
+#include "wall_functions.H"
+#include "turbulent_transport.H"
+
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow I have a complete understanding of the framework. Let me create the directory and all files.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <7 items>)
+
+tool checklist_write completed: Todo list updated (7 items, 0% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Create triangle_cyl case directory",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "content": "Create GNUmakefile (same structure as c3h8_flacs)",
+      "status": "pending"
+    },
+    ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: mkdir -p /home/cj/my-pele/examples/engineering/triangle_cyl)
+tool exec_shell completed
+--- stdout/stderr ---
+(no output)
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow I'll create all case files. The key differences from c3h8_flacs:
+
+| Item | c3h8_flacs | triangle_cyl |
+|------|-----------|-------------|
+| Cyl]0;🐋 CodeWhaleinders | 3 in line (r=1m) | 3 品字形 (r=5m) |
+| Wind | (3.06, 7.39) | (8.0, 0.0) |
+| Inflow faces | lo-x, lo-y | lo-x only |
+| Leak pos | (33.5, 15, 15) | (25.5, 25, 20) |
+| Leak dir | -y]0;🐳 CodeWhale | +x (顺风) |]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: write_file (path: /home/cj/my-pele/examples/engineering/triangle_cyl/GNUmakefile, content: <489 chars>)
+tool: write_file (path: /home/cj/my-pele/examples/engineering/triangle_cyl/my_pele_modules.H, content: <134 chars>)
+tool: write_file (path: /home/cj/my-pele/examples/engineering/triangle_cyl/input.3d, content: <2220 chars>)
+tool: write_file (path: /home/cj/my-pele/examples/engineering/triangle_cyl/pelelmex_prob.cpp, content: <1806 chars>)
+tool: write_file (path: /home/cj/my-pele/examples/engineering/triangle_cyl/pelelmex_prob.H, content: <5927 chars>)
+
+tool write_file completed: --- a//home/cj/my-pele/examples/engineering/triangle_cyl/GNUmakefile
++++ b//home/cj/my-pele/examples/engineering/triangle_cyl/GNUmakefile
+@@ -0,0 +1,18 @@
++DIM = 3
++COMP = gnu
++PRECISION = DOUBLE
++USE_EB = TRUE
++USE_HYPRE = FALSE
++PROFILE = FALSE
++USE_MPI = FALSE
++USE_OMP = FALSE
++USE_CUDA = FALS...
+tool write_file completed: --- a//home/cj/my-pele/examples/engineering/triangle_cyl/my_pele_modules.H
++++ b//home/cj/my-pele/examples/engineering/triangle_cyl/my_pele_modules.H
+@@ -0,0 +1,5 @@
++#pragma once
++#include "k_epsilon_constants.H"
++#include "k_epsilon_core.H"
++#include "wall_functions.H"
++#include "turbulent_tran...
+tool write_file completed: --- a//home/cj/my-pele/examples/engineering/triangle_cyl/input.3d
++++ b//home/cj/my-pele/examples/engineering/triangle_cyl/input.3d
+@@ -0,0 +1,77 @@
++#----------------------DOMAIN DEFINITION------------------------
++geometry.is_periodic = 0 0 0
++geometry.coord_sys   = 0
++geometry.prob_lo     = 0....
+tool write_file completed: --- a//home/cj/my-pele/examples/engineering/triangle_cyl/pelelmex_prob.cpp
++++ b//home/cj/my-pele/examples/engineering/triangle_cyl/pelelmex_prob.cpp
+@@ -0,0 +1,78 @@
++#include <PeleLMeX.H>
++#include <AMReX_ParmParse.H>
++#include <AMReX_EB2.H>
++#include <AMReX_EB2_IF.H>
++#include "pelelmex_prob.H...
+tool write_file completed: --- a//home/cj/my-pele/examples/engineering/triangle_cyl/pelelmex_prob.H
++++ b//home/cj/my-pele/examples/engineering/triangle_cyl/pelelmex_prob.H
+@@ -0,0 +1,153 @@
++#ifndef PELELM_PROB_H
++#define PELELM_PROB_H
++#include <AMReX_Geometry.H>
++#include <AMReX_FArrayBox.H>
++#include <PeleLMeX_ProblemS...
+]0;🐳 CodeWhaleAll files written. Now let me verify]0;🐋 CodeWhale.tool: list_dir (path: /home/cj/my-pele/examples/engineering/triangle_cyl)
+
+tool list_dir completed: <5 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <7 items>)
+tool checklist_write completed: Todo list updated (7 items, 100% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Create triangle_cyl case directory",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Create GNUmakefile (same structure as c3h8_flacs)",
+      "status": "completed"
+    },
+  ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale品字形圆柱 C3H8 泄漏算例已创建，位于：
+
+```
+/home/cj/my-pele/examples/engineering/triangle_cyl/
+```
+
+### 5 个文件，对应修改如下：
+
+| 文件 | 用途 |
+|------|------|
+| `GNUmakefile` | 编译配置 —]0;🐳 CodeWhale c3h8_mini 机理，EB=TRUE，包含湍流模块路径 |
+| `input.3d` | 运行参数 — 80×50×40 域，160×100×80 网格，仅 lo-x 入流，k-epsilon LES |
+| `pelelmex_prob.H` | 物理核心 — 品字]0;🐋 CodeWhale三圆柱 EB (r=5m)，泄漏在前柱背风面 +x 方向，仅 lo-x 入流 BC |
+| `pelelmex_prob.cpp` | 参数读取分发 + EBUserDefined 实现 |
+| `my_pele_modules.H` | 湍流模块头文件 |
+
+### 与 c3h8_flacs 的关键差异：
+
+-]0;🐳 CodeWhale **几何**：三圆柱一线排列 → 品字形排列（前柱 x=20, 后左 x=30/y=20, 后右 x=30/y=30），半径 1m → 5m
+- **来流**：(3.06, 7.39) → (8.0, 0.0)，]0;🐋 CodeWhale入流面从 lo-x+lo-y → 仅 lo-x
+- **泄漏位置**：(33.5, 15, 15) → (25.5, 25, 20) 即前柱背风面，喷射方向从 -y → +x
+- **BC 条件**：`Inflow Inflow Slip]0;🐳 CodeWhaleWallAdiab` → `Inflow SlipWallAdiab SlipWallAdiab`
+
+### 运行方式：
+
+```bash
+cd /home/cj/my-pele/examples/engineering/triangle_cyl
+make -j
+./PeleLMeX3d.gnu.ex input.3d
+```

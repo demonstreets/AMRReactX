@@ -1,0 +1,88 @@
+# ------------------  INPUTS TO MAIN PROGRAM  -------------------
+max_step = 10000
+stop_time = 0.005
+
+# PROBLEM SIZE & GEOMETRY
+geometry.is_periodic = 0 0 1
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0. 0. 0.
+geometry.prob_hi     = 10. 10. 10.
+amr.n_cell           = 64 64 64
+
+# BC
+pelec.lo_bc = "NoSlipWall" "NoSlipWall" "Interior"
+pelec.hi_bc = "NoSlipWall" "NoSlipWall" "Interior"
+
+# FPE traps off for production
+amrex.fpe_trap_invalid = 0
+amrex.fpe_trap_zero = 0
+amrex.fpe_trap_overflow = 0
+
+# PHYSICS
+pelec.do_hydro = 1
+pelec.diffuse_vel = 1
+pelec.diffuse_temp = 1
+pelec.diffuse_enth = 1
+pelec.diffuse_spec = 1
+pelec.do_react = 1
+pelec.chem_integrator = "ReactorRK64"
+pelec.allow_negative_energy = 1
+pelec.do_mol = 1
+pelec.cfl = 0.1
+
+# TIME STEP CONTROL
+pelec.init_shrink    = 1.0
+pelec.change_max     = 1.1
+pelec.dt_cutoff      = 5.e-20
+
+# EB — inclined hot wall at 1500K
+eb2.geom_type = plane
+eb2.plane_point = 8.830222 1.786062 0.
+eb2.plane_normal = 0.7660444 -0.6427876 0.
+pelec.eb_boundary_T = 1500.
+pelec.eb_isothermal = 1
+ebd.boundary_grad_stencil_type = 0
+pelec.redistribution_type = "StateRedist"
+
+# VERBOSITY
+pelec.sum_interval = -1
+pelec.v = 1
+amr.v = 1
+
+# REFINEMENT
+amr.max_level       = 0
+amr.blocking_factor = 8
+amr.max_grid_size   = 32
+
+# SPRAY
+pelec.do_spray_particles = 1
+particles.v = 0
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.init_file = "initspraydata_3d.dat"
+particles.write_ascii_files = 1
+particles.fuel_ref_temp = 300.
+particles.fuel_species = NC7H16
+
+# Heptane properties (NIST Antoine)
+particles.NC7H16_crit_temp = 540.
+particles.NC7H16_boil_temp = 371.6
+particles.NC7H16_latent = 3.63E9
+particles.NC7H16_cp = 2.2483E7
+particles.NC7H16_rho = 0.693
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+particles.use_splash_model = false
+
+# PLOTFILES
+amr.plot_file = plt
+amr.plot_int = 500
+amr.plot_vars = density Temp rho_E xmom ymom zmom rho_O2 rho_N2 rho_NC7H16
+amr.derive_plot_vars = x_velocity y_velocity pressure vfrac Mach
+
+# INITIAL CONDITIONS
+prob.init_T = 1500.
+prob.init_p = 1.01325E7
+prob.init_v = 0.
+
+# Jet injection off (using particle file)
+spray.jet1.do_inject = 0

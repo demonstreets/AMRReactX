@@ -1,0 +1,172 @@
+#include "stl_parser.H"
+
+#include <AMReX.H>
+#include <AMReX_Print.H>
+
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <fstream>
+#include <limits>
+#include <sstream>
+
+namespace pele {
+
+namespace {
+
+std::uint32_t readLE32(std::ifstream& fs) {
+    std::uint32_t v;
+    fs.read(reinterpret_cast<char*>(&v), 4);
+    return v;
+}
+
+float readLEFloat(std::ifstream& fs) {
+    float v;
+    fs.read(reinterpret_cast<char*>(&v), 4);
+    return v;
+}
+
+amrex::XDim3 normalise(amrex::XDim3 n) {
+    amrex::Real len = std::sqrt(n.x*n.x + n.y*n.y + n.z*n.z);
+    if (len > std::numeric_limits<amrex::Real>::epsilon()) {
+        n.x /= len; n.y /= len; n.z /= len;
+    }
+    return n;
+}
+
+void trimStr(std::string& s) {
+    s.erase(0, s.find_first_not_of(" \t\r\n"));
+    s.erase(s.find_last_not_of(" \t\r\n") + 1);
+}
+
+}
+
+void STLReader::read(const std::string& fname,
+                     amrex::Real scale,
+                     const amrex::Array<amrex::Real,3>& center,
+                     int reverse_normal)
+{
+    std::ifstream fs(fname, std::ios::binary);
+    if (!fs.is_open()) {
+        amrex::Abort("STLReader::read: cannot open " + fname);
+    }
+    char magic[6] = {};
+    fs.read(magic, 5);
+    fs.close();
+    if (std::strncmp(magic, "solid", 5) == 0) {
+        readAscii(fname, scale, center, reverse_normal);
+    } else {
+        readBinary(fname, scale, center, reverse_normal);
+    }
+}
+
+void STLReader::readAscii(const std::string& fname,
+                          amrex::Real scale,
+                          const amrex::Array<amrex::Real,3>& center,
+                          int reverse_normal)
+{
+    std::ifstream fs(fname);
+    if (!fs.is_open()) {
+        amrex::Abort("STLReader::readAscii: cannot open " + fname);
+    }
+    std::string line;
+    std::getline(fs, line);
+    amrex::Real sgn = (reverse_normal != 0) ? -1.0 : 1.0;
+    while (std::getline(fs, line)) {
+        trimStr(line);
+        if (line.empty()) continue;
+        if (line.find("endsolid") != std::string::npos) break;
+        if (line.find("facet normal") != std::string::npos) {
+            STLFacet facet;
+            std::istringstream iss(line);
+            std::string token;
+            iss >> token >> token;
+            iss >> facet.normal.x >> facet.normal.y >> facet.normal.z;
+            facet.normal.x *= sgn;
+            facet.normal.y *= sgn;
+            facet.normal.z *= sgn;
+            std::getline(fs, line);
+            for (int iv = 0; iv < 3; ++iv) {
+                std::getline(fs, line);
+                trimStr(line);
+                std::istringstream vss(line);
+                std::string vtok;
+                vss >> vtok;
+                vss >> facet.vertices[iv].x >> facet.vertices[iv].y >> facet.vertices[iv].z;
+                facet.vertices[iv].x = facet.vertices[iv].x * scale + center[0];
+                facet.vertices[iv].y = facet.vertices[iv].y * scale + center[1];
+                facet.vertices[iv].z = facet.vertices[iv].z * scale + center[2];
+            }
+            std::getline(fs, line);
+            std::getline(fs, line);
+            facet.normal = normalise(facet.normal);
+            m_facets.push_back(facet);
+            m_vertices.push_back(facet.vertices[0]);
+            m_vertices.push_back(facet.vertices[1]);
+            m_vertices.push_back(facet.vertices[2]);
+        }
+    }
+    amrex::Print() << "STLReader (ASCII): done\n";
+}
+
+void STLReader::readBinary(const std::string& fname,
+                           amrex::Real scale,
+                           const amrex::Array<amrex::Real,3>& center,
+                           int reverse_normal)
+{
+    std::ifstream fs(fname, std::ios::binary);
+    if (!fs.is_open()) amrex::Abort("STLReader::readBinary: cannot open " + fname);
+    fs.seekg(80, std::ios::beg);
+    std::uint32_t num_tri = readLE32(fs);
+    if (num_tri == 0) amrex::Abort("STLReader::readBinary: zero triangles " + fname);
+    amrex::Real sgn = (reverse_normal != 0) ? -1.0 : 1.0;
+    m_facets.reserve(num_tri);
+    m_vertices.reserve(num_tri * 3);
+    for (std::uint32_t i = 0; i < num_tri; ++i) {
+        STLFacet facet;
+        float nx = readLEFloat(fs);
+        float ny = readLEFloat(fs);
+        float nz = readLEFloat(fs);
+        facet.normal.x = static_cast<amrex::Real>(nx) * sgn;
+        facet.normal.y = static_cast<amrex::Real>(ny) * sgn;
+        facet.normal.z = static_cast<amrex::Real>(nz) * sgn;
+        for (int iv = 0; iv < 3; ++iv) {
+            float vx = readLEFloat(fs);
+            float vy = readLEFloat(fs);
+            float vz = readLEFloat(fs);
+            facet.vertices[iv].x = static_cast<amrex::Real>(vx) * scale + center[0];
+            facet.vertices[iv].y = static_cast<amrex::Real>(vy) * scale + center[1];
+            facet.vertices[iv].z = static_cast<amrex::Real>(vz) * scale + center[2];
+        }
+        facet.normal = normalise(facet.normal);
+        std::uint16_t attr;
+        fs.read(reinterpret_cast<char*>(&attr), 2);
+        m_facets.push_back(facet);
+        m_vertices.push_back(facet.vertices[0]);
+        m_vertices.push_back(facet.vertices[1]);
+        m_vertices.push_back(facet.vertices[2]);
+    }
+    amrex::Print() << "STLReader (binary): done\n";
+}
+
+std::array<amrex::XDim3,2> STLReader::boundingBox() const noexcept
+{
+    amrex::XDim3 lo, hi;
+    lo.x = lo.y = lo.z = std::numeric_limits<amrex::Real>::max();
+    hi.x = hi.y = hi.z = -std::numeric_limits<amrex::Real>::max();
+    for (const auto& f : m_facets) {
+        for (const auto& v : f.vertices) {
+            lo.x = std::min(lo.x, v.x); lo.y = std::min(lo.y, v.y); lo.z = std::min(lo.z, v.z);
+            hi.x = std::max(hi.x, v.x); hi.y = std::max(hi.y, v.y); hi.z = std::max(hi.z, v.z);
+        }
+    }
+    return {lo, hi};
+}
+
+void STLReader::printSummary() const {
+    auto bb = boundingBox();
+    amrex::Print() << "STL: " << m_facets.size() << " facets, "
+                   << m_vertices.size() << " verts\n";
+}
+
+}

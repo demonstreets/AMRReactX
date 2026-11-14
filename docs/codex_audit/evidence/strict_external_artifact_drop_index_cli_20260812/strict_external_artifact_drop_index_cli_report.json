@@ -1,0 +1,67 @@
+{
+  "command_runs": {
+    "json": {
+      "argv": [
+        "python3",
+        "tools/codex_print_strict_external_artifact_drop_index.py",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_head": "{\n  \"domain_count\": 3,\n  \"domains\": [\n    {\n      \"currently_present_artifact_count\": 0,\n      \"domain\": \"external_plume\",\n      \"missing_artifact_count\": 5,\n      \"required_artifact_count\": 5,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates_template.csv\"\n      ]\n    },\n    {\n      \"currently_present_artifact_count\": 5,\n      \"domain\": \"fire_calibration\",\n      \"missing_artifact_count\": 0,\n      \"required_artifact_count\": 5,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv\"\n      ]\n    },\n    {\n      \"currently_present_artifact_count\": 0,\n      \"domain\": \"real_cad\",\n      \"missing_artifact_count\": 4,\n      \"required_artifact_count\": 4,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_te"
+    },
+    "text": {
+      "argv": [
+        "python3",
+        "tools/codex_print_strict_external_artifact_drop_index.py"
+      ],
+      "returncode": 0,
+      "stdout_head": "strict external artifact drop index\n===================================\nstatus: PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX\nstrict completion allowed: no\ndomains: 3\ntemplates: 16\nrequired files: 14\npresent files: 5\nmissing files: 9\n\nOperator next steps\n-------------------\n- Copy each *_template file to the matching non-template target path listed in domain_drop_index.\n- Fill JSON required keys and CSV headers without renaming columns.\n- Run bash tools/verify_strict_artifact_drop_contract_preflight.sh before asking for strict closeout.\n- Then run bash tools/run_current_scope_release_refresh.sh to rebuild all closure evidence.\n\nexternal_plume\n--------------\nrequired files: 5\npresent files: 0\nmissing files: 5\n- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv\n  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json\n  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata_template.json\n- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record.csv\n  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv\n  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv\n  template: docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates_template.csv\n\nfire_calibration\n----------------\nrequired files: 5\npresent files: 5\nmissing files: 0\n- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json\n  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json\n- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv\n  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv\n  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv\n  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv\n  template: docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv\n\nreal_cad\n--------\nrequired files: 4\npresent files: 0\nmissing files: 4\n- target: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv\n  template: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv\n- target: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json\n  template: docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_pack"
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "strict_external_artifact_drop_index_cli",
+      "path": "tools/codex_print_strict_external_artifact_drop_index.py",
+      "sha256": "efb6d3d432d1b37d44a3614a8884f780f48231601cd41f0e07701790f406e1ca",
+      "size_bytes": 3628
+    },
+    {
+      "label": "strict_external_artifact_drop_index_report",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_drop_index_20260812/strict_external_artifact_drop_index_report.json",
+      "sha256": "19237e2158bc59f9df0e466a4b76ecca166ea0c06541dfac6b953a11dceec858",
+      "size_bytes": 14242
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:07.424600+00:00",
+  "missing_text_snippets": [],
+  "schema_version": 1,
+  "status": "PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX-CLI",
+  "summary": {
+    "domain_count": 3,
+    "domain_missing_counts": {
+      "external_plume": 5,
+      "fire_calibration": 0,
+      "real_cad": 4
+    },
+    "domain_names": [
+      "external_plume",
+      "fire_calibration",
+      "real_cad"
+    ],
+    "domain_required_counts": {
+      "external_plume": 5,
+      "fire_calibration": 5,
+      "real_cad": 4
+    },
+    "index_status": "PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX",
+    "json_returncode": 0,
+    "missing_file_count": 9,
+    "missing_text_snippet_count": 0,
+    "present_file_count": 5,
+    "required_file_count": 14,
+    "strict_completion_allowed": false,
+    "strict_external_artifact_drop_index_cli_ready": true,
+    "template_count": 16,
+    "text_returncode": 0
+  }
+}

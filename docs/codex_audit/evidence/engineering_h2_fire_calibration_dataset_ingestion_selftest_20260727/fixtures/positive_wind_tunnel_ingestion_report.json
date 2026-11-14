@@ -1,0 +1,151 @@
+{
+  "blocking_gaps": [],
+  "clears_fire_consequence_blocker": false,
+  "current_inputs": {
+    "metadata_alignment_missing_or_false": [],
+    "metadata_available": true,
+    "metadata_file_present": true,
+    "metadata_strict_schema_and_alignment_ready": true,
+    "overpressure_metrics_available": true,
+    "overpressure_metrics_file_present": true,
+    "radiation_metrics_available": true,
+    "radiation_metrics_file_present": true
+  },
+  "dataset_root": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel",
+  "evidence_files": [
+    {
+      "label": "fire_consequence_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "fire_calibration_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/calibration_metadata.json",
+      "sha256": "b28623f9b57430f4d3f1a784c987dea1f672e0a485e2003f0b021ecfbc5683db",
+      "size_bytes": 767
+    },
+    {
+      "label": "radiation_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/radiation_metrics.csv",
+      "sha256": "d05610830e5f4564c5331524d1c4a81afc56160c37eb4d26cb94c765007e0bb4",
+      "size_bytes": 249
+    },
+    {
+      "label": "overpressure_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/overpressure_metrics.csv",
+      "sha256": "75f19f6ae48db19234b2ffea6933125c6f73d18e858494cc66c2cfe9a7e7f0d1",
+      "size_bytes": 249
+    }
+  ],
+  "fire_consequence_report": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This report validates availability and schema of external fire/blast calibration data.",
+    "It does not calibrate the model or clear the fire-consequence blocker.",
+    "The fire consequence metrics report must still pass with --calibration-dataset-json before production credit is claimed."
+  ],
+  "metadata_summary": {
+    "case": "fire_gate_validation_wind_tunnel",
+    "case_alignment": {
+      "boundary_conditions": true,
+      "fuel": true,
+      "ignition_or_burn_basis": true,
+      "overpressure_measurement_basis": true,
+      "radiation_measurement_basis": true,
+      "release_or_cloud_mass": true
+    },
+    "source": {
+      "title": "Controlled wind tunnel validation publication",
+      "url": "https://example.invalid/h2-fire-wind-tunnel-validation"
+    },
+    "source_type": "wind_tunnel"
+  },
+  "overpressure_summary": {
+    "distance_range_m": [
+      8.0,
+      16.0
+    ],
+    "metric_ids": [
+      "op_far",
+      "op_near"
+    ],
+    "reference_value_range": [
+      5.0,
+      17.0
+    ],
+    "row_count": 2,
+    "sha256": "75f19f6ae48db19234b2ffea6933125c6f73d18e858494cc66c2cfe9a7e7f0d1"
+  },
+  "radiation_summary": {
+    "distance_range_m": [
+      6.0,
+      12.0
+    ],
+    "metric_ids": [
+      "rad_far",
+      "rad_near"
+    ],
+    "reference_value_range": [
+      5200.0,
+      14500.0
+    ],
+    "row_count": 2,
+    "sha256": "d05610830e5f4564c5331524d1c4a81afc56160c37eb4d26cb94c765007e0bb4"
+  },
+  "received_dataset_files": [
+    {
+      "label": "fire_calibration_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/calibration_metadata.json",
+      "sha256": "b28623f9b57430f4d3f1a784c987dea1f672e0a485e2003f0b021ecfbc5683db",
+      "size_bytes": 767
+    },
+    {
+      "label": "radiation_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/radiation_metrics.csv",
+      "sha256": "d05610830e5f4564c5331524d1c4a81afc56160c37eb4d26cb94c765007e0bb4",
+      "size_bytes": 249
+    },
+    {
+      "label": "overpressure_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/overpressure_metrics.csv",
+      "sha256": "75f19f6ae48db19234b2ffea6933125c6f73d18e858494cc66c2cfe9a7e7f0d1",
+      "size_bytes": 249
+    }
+  ],
+  "required_dataset_files": {
+    "calibration_metadata_json": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/calibration_metadata.json",
+    "overpressure_metrics_csv": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/overpressure_metrics.csv",
+    "radiation_metrics_csv": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel/radiation_metrics.csv"
+  },
+  "schema_requirements": {
+    "calibration_metadata_required_alignment": [
+      "fuel",
+      "release_or_cloud_mass",
+      "ignition_or_burn_basis",
+      "radiation_measurement_basis",
+      "overpressure_measurement_basis",
+      "boundary_conditions"
+    ],
+    "content_quality_gate_level": "strict-v1-placeholder-free-and-non-synthetic",
+    "overpressure_metrics_csv_columns": [
+      "metric_id",
+      "distance_m",
+      "reference_overpressure_kpa",
+      "tolerance_abs_kpa",
+      "tolerance_rel",
+      "source_basis"
+    ],
+    "radiation_metrics_csv_columns": [
+      "metric_id",
+      "distance_m",
+      "reference_flux_w_m2",
+      "tolerance_abs_w_m2",
+      "tolerance_rel",
+      "source_basis"
+    ]
+  },
+  "schema_version": 2,
+  "status": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+  "title": "Engineering H2 Fire Calibration Dataset Ingestion"
+}

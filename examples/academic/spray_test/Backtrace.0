@@ -1,0 +1,50 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleC2d.gnu.ex(+0x2c9396) [0x5b7c6cd9c396]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleC2d.gnu.ex(+0x2ce144) [0x5b7c6cda1144]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleC2d.gnu.ex(+0xebfac) [0x5b7c6cbbefac]
+    amrex::Abort(char const*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:187
+ (inlined by) InterpolateGasPhase(GasPhaseVals&, amrex::BoxND<2> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::IntVectND<2> const*, double const*, pele::physics::eos::EosParm<pele::physics::eos::Fuego> const*, SprayData const*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/SprayInterpolation.H:135
+ (inlined by) operator() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/SprayParticles.cpp:383
+ (inlined by) call_f_scalar_handler<SprayParticleContainer::updateParticles(int const&, amrex::MultiFab&, amrex::MultiFab&, const amrex::Real&, const amrex::Real&, int, int, bool, bool, bool, const pele::physics::transport::TransParm<pele::physics::eos::Fuego, pele::physics::transport::SimpleTransport>*, amrex::Real)::<lambda(int)>, int> at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:17
+ (inlined by) ParallelFor<int, SprayParticleContainer::updateParticles(int const&, amrex::MultiFab&, amrex::MultiFab&, const amrex::Real&, const amrex::Real&, int, int, bool, bool, bool, const pele::physics::transport::TransParm<pele::physics::eos::Fuego, pele::physics::transport::SimpleTransport>*, amrex::Real)::<lambda(int)> > at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:169
+ (inlined by) SprayParticleContainer::updateParticles(int const&, amrex::MultiFab&, amrex::MultiFab&, double const&, double const&, int, int, bool, bool, bool, pele::physics::transport::TransParm<pele::physics::eos::Fuego, pele::physics::transport::SimpleTransport> const*, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/SprayParticles.cpp:328
+
+ 3: ./PeleC2d.gnu.ex(+0xf4290) [0x5b7c6cbc7290]
+    SprayParticleContainer::moveKickDrift(amrex::MultiFab&, amrex::MultiFab&, int, double const&, double, bool, bool, int, int, bool, pele::physics::transport::TransParm<pele::physics::eos::Fuego, pele::physics::transport::SimpleTransport> const*, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Spray/SprayParticles.cpp:86
+
+ 4: ./PeleC2d.gnu.ex(+0x65826c) [0x5b7c6d12b26c]
+    PeleC::particleMKD(double, double, int, int, int) at /home/cj/my-pele/examples/academic/spray_test/../../../external/PeleC/Source/Particle.cpp:256
+
+ 5: ./PeleC2d.gnu.ex(+0x550b52) [0x5b7c6d023b52]
+    PeleC::do_sdc_iteration(double, double, int, int, int, int) at /home/cj/my-pele/examples/academic/spray_test/../../../external/PeleC/Source/Advance.cpp:281 (discriminator 1)
+ (inlined by) PeleC::do_sdc_advance(double, double, int, int) at /home/cj/my-pele/examples/academic/spray_test/../../../external/PeleC/Source/Advance.cpp:223 (discriminator 1)
+
+ 6: ./PeleC2d.gnu.ex(+0x3153e4) [0x5b7c6cde83e4]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2077 (discriminator 1)
+ (inlined by) amrex::Amr::coarseTimeStep(double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2182 (discriminator 1)
+
+ 7: ./PeleC2d.gnu.ex(+0x48c82) [0x5b7c6cb1bc82]
+    main at /home/cj/my-pele/examples/academic/spray_test/../../../external/PeleC/Source/main.cpp:179
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7f44f6a2a1ca]
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7f44f6a2a28b]
+
+10: ./PeleC2d.gnu.ex(+0x49da5) [0x5b7c6cb1cda5]
+    ?? ??:0
+

@@ -1,0 +1,96 @@
+{
+  "evidence_files": [
+    {
+      "label": "external_plume_public_source_triage",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json",
+      "sha256": "a2489e6fd7cfc17b40047c514d62b1823c9cb1de29feda431d5f6a9e433a4cdf",
+      "size_bytes": 12608
+    },
+    {
+      "label": "sbepv5_d27_dataset_ingestion",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json",
+      "sha256": "51a726d2e60369c484ff63e0c6a96bd3ef8c2e91f10d7c23de0cd283d8d257b4",
+      "size_bytes": 3288
+    },
+    {
+      "label": "dataverse_open_channel_reference_package",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_open_channel_reference_package_report.json",
+      "sha256": "1a22b8c0dc839122e9b1b895f8059e698c5c25266af30dbd62a09b735d284476",
+      "size_bytes": 8831
+    },
+    {
+      "label": "dataverse_reference_case_metadata",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_case_metadata.json",
+      "sha256": "daf146d544d60044057cc2c7e9bec1ca7b9e2403d96737f11370a8d566283894",
+      "size_bytes": 2418
+    },
+    {
+      "label": "strict_cross_benchmark_alias_selftest",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_cross_benchmark_alias_selftest_20260817/strict_external_artifact_cross_benchmark_alias_selftest_report.json",
+      "sha256": "59148c87cdc7ff8a4b7da787a45aa2a6831866f3b015590890f25dd71a1d23c5",
+      "size_bytes": 6056
+    },
+    {
+      "label": "strict_external_artifact_drop_index",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_drop_index_20260812/strict_external_artifact_drop_index_report.json",
+      "sha256": "19237e2158bc59f9df0e466a4b76ecca166ea0c06541dfac6b953a11dceec858",
+      "size_bytes": 14242
+    },
+    {
+      "label": "strict_external_evidence_receiving_pack",
+      "path": "docs/codex_audit/evidence/strict_external_evidence_receiving_pack_20260812/strict_external_evidence_receiving_pack_report.json",
+      "sha256": "6c343fad91cf9e34f0fae670c368978a96f53c60e7206a783371a63944045600",
+      "size_bytes": 15842
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:28.617068+00:00",
+  "schema_version": 1,
+  "scope": "strict external plume source separation and public-search audit",
+  "searched_queries": [
+    "\"23_FFI_P101_T00031\" SBEPV5 D27",
+    "\"HySafe\" \"SBEPV5\" \"D27\" \"Excel\" hydrogen concentration",
+    "\"SBEPV5\" \"D27\" \"Gas01(%)\""
+  ],
+  "source_findings": [
+    {
+      "benchmark_id": "hysafe_sbepv5_d27",
+      "machine_readable_timeseries_available_locally": false,
+      "reason": "public sources identify the D27 case and figures, but no accepted local Excel/CSV source for Gas01..Gas12 time histories is present",
+      "representative_urls": [
+        "https://publikationen.bibliothek.kit.edu/230068969",
+        "https://www.researchgate.net/publication/311396790_Results_of_the_HySafe_CFD_Validation_Benchmark_SBEPV5",
+        "https://www.h2knowledgecentre.com/content/conference289",
+        "https://www.slideserve.com/nilson/results-of-the-hysafe-cfd-validation-benchmark-sbepv5-powerpoint-ppt-presentation"
+      ],
+      "source_family": "sbepv5_d27_public_literature",
+      "strict_artifact_credit_allowed": false
+    },
+    {
+      "benchmark_id": "dataverse_open_channel_h2",
+      "machine_readable_timeseries_available_locally": true,
+      "reason": "Dataverse provides a machine-readable open-channel dataset, but it has 29 sensor_* columns and is not the HySafe SBEPV5 D27 Gas01..Gas12 benchmark",
+      "representative_urls": [
+        "https://dataverse.no/dataset.xhtml?persistentId=doi:10.23642/USN.26117989",
+        "https://figshare.com/articles/dataset/Experimental_Data_of_Hydrogen_Dispersion_in_an_Open-ended_Rectangular_Channel/26117989"
+      ],
+      "source_family": "dataverse_open_channel_h2",
+      "strict_artifact_credit_allowed": false
+    }
+  ],
+  "status": "PASS-STRICT-EXTERNAL-PLUME-SOURCE-SEPARATION-AUDIT",
+  "summary": {
+    "cross_benchmark_alias_guard_ready": true,
+    "dataverse_machine_readable_timeseries_available_locally": true,
+    "dataverse_usable_as_sbepv5_strict_credit": false,
+    "external_plume_target_count": 5,
+    "external_plume_target_present_count": 0,
+    "sbepv5_machine_readable_timeseries_available_locally": false,
+    "sbepv5_public_sources_identified": true,
+    "strict_completion_allowed": false,
+    "strict_external_artifacts_missing": 9,
+    "strict_external_artifacts_present": 5,
+    "strict_external_artifacts_required": 14,
+    "strict_external_plume_source_separation_audit_ready": true,
+    "strict_master_plan_still_open": true
+  }
+}

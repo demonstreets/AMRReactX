@@ -1,0 +1,138 @@
+{
+  "case": {
+    "backend": "CPU-serial",
+    "build_log": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/build.log",
+    "case_name": "double_mach_reflection_8step",
+    "chemistry_model": "Null",
+    "dimension": 3,
+    "eos_model": "GammaLaw",
+    "final_plot": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/run/plt00008",
+    "input_file": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/run/input.codex_smoke",
+    "max_step": 8,
+    "role": "academic_gas_double_mach_reflection_strong_shock_validation",
+    "run_log": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/run.log",
+    "runner_log": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/runner.log",
+    "solver": "PeleC",
+    "validation_log": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/validation.log"
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/case_summary.json",
+      "sha256": "2956e9ea569e0c47c16da13478422d2fbd4aaadf26057c348b935dbc8d12dc52",
+      "size_bytes": 1055
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/run/input.codex_smoke",
+      "sha256": "b0ad78e61f1e9812151f81989d1b9ca891597d6fc9f3e9c8e02aaa31e6a86337",
+      "size_bytes": 1140
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/run.log",
+      "sha256": "6173097c61c1e6f9601d814633e0995e41af385ca69d032b1b9c49e8e031a6b1",
+      "size_bytes": 15244
+    },
+    {
+      "label": "runner_log",
+      "path": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/runner.log",
+      "sha256": "54501ebf5f791dca37780e46edcd5b575713fc0099e8ca0c4b258f41d9c2ee80",
+      "size_bytes": 636
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/validation.log",
+      "sha256": "6ed516ac9bcacbfa0af49b565edaace8ae968536bad97e752a65eacf17e7bfcf",
+      "size_bytes": 231
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_gas_double_mach_validation.sh",
+      "sha256": "3fdb1d8cecd14d8bade35b82daadf91110c1a0521c6bbc4429137840380d7c45",
+      "size_bytes": 3827
+    },
+    {
+      "label": "smoke_runner",
+      "path": "tools/codex_smoke_academic_double_mach.sh",
+      "sha256": "05720f1979a7a50ed8c520a6e18277bd253ee4dc28122eebaa6321252cfdb1db",
+      "size_bytes": 1456
+    },
+    {
+      "label": "validator",
+      "path": "tools/validate_double_mach_plotfile.py",
+      "sha256": "11e1e186357f17202e1f77b1ee1b925b9553f7916757399d8b77e312dd05f5eb",
+      "size_bytes": 5244
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_gas_double_mach_validation_report.py",
+      "sha256": "cf99b101f3c83c6cd162f23aa196a5757ed0900ee984c0f88fae72614f97b6ac",
+      "size_bytes": 12203
+    }
+  ],
+  "generated_at_utc": "2026-07-28T06:23:44+00:00",
+  "limitations": [
+    "This is an in-repository short Double-Mach reflection gate, not a full external literature benchmark.",
+    "The gate strengthens QLT-03 standard validation coverage but does not by itself clear MMS or bubble-rise gaps."
+  ],
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/run.log"
+      ],
+      "gap": "",
+      "name": "run_finalized_without_failure_tokens",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/validation.log"
+      ],
+      "gap": "",
+      "name": "positive_finite_density_pressure",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/validation.log"
+      ],
+      "gap": "",
+      "name": "rankine_hugoniot_plateau_states",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/double_mach_reflection_8step/validation.log"
+      ],
+      "gap": "",
+      "name": "shock_front_advancement",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "PeleC inviscid GammaLaw Double-Mach reflection strong-shock gate: front advancement, Rankine-Hugoniot plateau states, positive density/pressure, finite fields, and clean AMReX finalization",
+  "status": "PASS-ACADEMIC-GAS-DOUBLE-MACH-VALIDATION",
+  "summary": {
+    "clears_qlt_03_double_mach_gap": true,
+    "front_x": 0.729167,
+    "grid": "96x24",
+    "min_expected_front": 0.278926,
+    "post_state": {
+      "p": 116.5,
+      "rho": 8.0,
+      "u": 7.14471,
+      "v": -4.125
+    },
+    "pre_state": {
+      "p": 0.999697,
+      "rho": 1.39971
+    },
+    "pressure_max": 117.66,
+    "pressure_min": 0.976611,
+    "rho_max": 8.01314,
+    "rho_min": 1.37778,
+    "time": 0.000991338878532
+  },
+  "title": "Academic Gas Double-Mach Reflection Validation"
+}

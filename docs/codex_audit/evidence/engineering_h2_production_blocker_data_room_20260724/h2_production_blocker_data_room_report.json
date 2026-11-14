@@ -1,0 +1,202 @@
+{
+  "domain_count": 3,
+  "domain_records": [
+    {
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "domain": "real_cad_cleanup",
+      "missing_artifact_count": 6,
+      "missing_artifacts": [
+        {
+          "artifact": "real_cad_cleanup_manifest.json",
+          "required_action": "fill the package manifest from the template with controlled provenance and exact file hashes"
+        },
+        {
+          "artifact": "source_cad/*",
+          "required_action": "stage at least three real source CAD files for a tank/pipe large-layout campaign"
+        },
+        {
+          "artifact": "cleaned_geometry/*",
+          "required_action": "stage at least three cleaned simulation geometries derived from the source CAD files"
+        },
+        {
+          "artifact": "cleanup_quality_records",
+          "required_action": "record units, watertightness, degeneracy, positive volume/area, and meter-space bounding boxes per geometry"
+        },
+        {
+          "artifact": "real_cad_data_room_index.csv",
+          "required_action": "provide a controlled data-room index with source/cleaned file roles, labels, relative paths, hashes, source type, revision, and owner/supplier"
+        },
+        {
+          "artifact": "real_cad_cleanup_quality_record.csv",
+          "required_action": "provide cleanup quality records for at least three geometries with true cleanup checks, bbox fields, tool/method, and reviewer"
+        }
+      ],
+      "preflight_passed": true,
+      "preflight_report": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "preflight_status": "PASS-H2-REAL-CAD-INTAKE-PREFLIGHT",
+      "ready_for_blocker_clearance": false,
+      "summary": {
+        "cleaned_geometry_file_count": 0,
+        "cleanup_package_clears_blocker": false,
+        "cleanup_package_status": "NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE",
+        "cleanup_quality_record_present": false,
+        "cleanup_quality_record_row_count": 0,
+        "cleanup_quality_record_validates": false,
+        "data_room_index_paired_label_count": 0,
+        "data_room_index_present": false,
+        "data_room_index_row_count": 0,
+        "data_room_index_validates": false,
+        "data_room_templates_available": true,
+        "large_layout_valid": false,
+        "manifest_present": false,
+        "manifest_validates": false,
+        "missing_artifact_count": 6,
+        "package_scaffold_available": true,
+        "source_cad_file_count": 0
+      }
+    },
+    {
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "domain": "external_plume_shape_reference",
+      "missing_artifact_count": 4,
+      "missing_artifacts": [
+        {
+          "artifact": "dataset_metadata.json",
+          "required_action": "replace the metadata template with URL/DOI, source file hash, digitization method, uncertainty basis, and case-alignment booleans"
+        },
+        {
+          "artifact": "sensor_coordinates.csv",
+          "required_action": "digitize or obtain Gas01..Gas12 coordinates with reliability tags and <=0.02 m uncertainty"
+        },
+        {
+          "artifact": "baffle_geometry.csv",
+          "required_action": "digitize or obtain baffles 1..4 bounds with source basis and <=0.02 m uncertainty"
+        },
+        {
+          "artifact": "experimental_timeseries.csv",
+          "required_action": "obtain original Excel or digitize Gas01..Gas12 concentration histories through at least 120 s"
+        }
+      ],
+      "preflight_passed": true,
+      "preflight_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json",
+      "preflight_status": "PASS-SBEPV5-D27-DIGITIZATION-PREFLIGHT",
+      "ready_for_blocker_clearance": false,
+      "summary": {
+        "baffle_geometry_available": false,
+        "dataset_ingestion_status": "NOT_READY-SBEPV5-D27-DATASET-INGESTION",
+        "dataset_metadata_available": false,
+        "experimental_timeseries_available": false,
+        "missing_artifact_count": 4,
+        "public_source_registry_available": true,
+        "ready_for_dataset_ingestion": false,
+        "sensor_coordinates_available": false,
+        "template_count": 5,
+        "templates_available": true
+      }
+    },
+    {
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "domain": "fire_consequence_calibration",
+      "missing_artifact_count": 4,
+      "missing_artifacts": [
+        {
+          "artifact": "calibration_metadata.json",
+          "required_action": "select calibration sources and record source hash, uncertainty, and all case-alignment booleans"
+        },
+        {
+          "artifact": "radiation_metrics.csv",
+          "required_action": "digitize or obtain heat-flux measurements with distances, tolerances, and source basis"
+        },
+        {
+          "artifact": "overpressure_metrics.csv",
+          "required_action": "digitize or obtain peak overpressure measurements with distances, tolerances, and source basis"
+        },
+        {
+          "artifact": "calibrated_fire_consequence_report",
+          "required_action": "rerun the official fire consequence report with the generated calibration dataset JSON"
+        }
+      ],
+      "preflight_passed": true,
+      "preflight_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json",
+      "preflight_status": "PASS-H2-FIRE-CALIBRATION-DIGITIZATION-PREFLIGHT",
+      "ready_for_blocker_clearance": false,
+      "summary": {
+        "dataset_ingestion_status": "NOT_READY-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+        "metadata_available": false,
+        "missing_artifact_count": 4,
+        "overpressure_candidate_available": true,
+        "overpressure_metrics_available": true,
+        "public_source_registry_available": true,
+        "radiation_candidate_available": true,
+        "radiation_metrics_available": true,
+        "ready_for_dataset_ingestion": false,
+        "template_count": 5,
+        "templates_available": true
+      }
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "real_cad_intake_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "sha256": "33e882ad5cc94663d01c9e93f18faa8a1bb385c5dd1a838e5df80423b0b3a5fc",
+      "size_bytes": 6969
+    },
+    {
+      "label": "sbepv5_digitization_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json",
+      "sha256": "dc9d74003eee5c1e6ef267c6c30fe5b179494bbee7b36323b15d7413ef0a6c17",
+      "size_bytes": 7659
+    },
+    {
+      "label": "fire_calibration_digitization_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json",
+      "sha256": "de64e9cc2e3ffd0e66bd21bda3cccb87a870e1b709857a39aef89a5fb2827319",
+      "size_bytes": 6362
+    },
+    {
+      "label": "blocker_clearance_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "sha256": "320fe14cf656f8171fec3f7d8f3f66a8c4a8ecb044d1cbf94b0fb9b14396fa52",
+      "size_bytes": 6627
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This report is a consolidated production data-room intake ledger; it does not supply missing external evidence.",
+    "Production readiness still requires each domain report to pass its full ingestion/build/agreement path and the blocker preflight to clear."
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "real-CAD, external plume, and fire calibration preflight reports pass",
+      "gap": "",
+      "name": "all_domain_preflights_pass",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "gap": "",
+      "name": "blocker_preflight_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "total_missing_artifacts=14",
+      "gap": "",
+      "name": "missing_artifacts_retained_until_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "data-room readiness matches blocker preflight readiness",
+      "gap": "",
+      "name": "scorecard_clearance_consistency",
+      "status": "PASS"
+    }
+  ],
+  "ready_domain_count": 0,
+  "ready_for_production_scorecard_clearance": false,
+  "remaining_blocker_count": 3,
+  "schema_version": 1,
+  "status": "PASS-H2-PRODUCTION-BLOCKER-DATA-ROOM",
+  "title": "Engineering H2 Production Blocker Data Room",
+  "total_missing_artifact_count": 14
+}

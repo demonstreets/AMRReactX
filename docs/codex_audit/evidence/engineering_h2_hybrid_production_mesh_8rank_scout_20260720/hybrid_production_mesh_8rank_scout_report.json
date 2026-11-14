@@ -1,0 +1,304 @@
+{
+  "case": "engineering-h2-open-domain-plan-amr-hybrid-cfd-scout",
+  "cases": [
+    {
+      "active_planes": 9,
+      "advance_seconds": 470.781967,
+      "case": "baseline",
+      "cloud_species_mass": 0.000221582187,
+      "cloud_volume": 0.0256347656,
+      "finest_fab_count": 8,
+      "finest_level": 0,
+      "flammable_planes": 5,
+      "hybrid_validation": {
+        "final_time": 0.12,
+        "finalized": 1,
+        "mode": "hybrid",
+        "ranks": 8,
+        "raw": "parallel_smoke_log_validation PASS solver=pelelmex mode=hybrid ranks=8 threads=2 final_time=0.12 finalized=1 warning=mpi_thread_support_level_0",
+        "solver": "pelelmex",
+        "threads": 2,
+        "warning": "mpi_thread_support_level_0"
+      },
+      "made_level1": 0,
+      "mass_ratio": 1.00000001,
+      "mass_ratioN": 1.00000001,
+      "max_X": 0.181306773,
+      "mean_ncells": 65536.0,
+      "plot_metadata": {
+        "finest_level": 0,
+        "header_sha256": "68c5e78bf5d15e0296ca1ab2a02270f0e750d0ad924e8a7f21774d8f71be5068",
+        "levels": [
+          {
+            "fab_count": 8,
+            "level": 0
+          }
+        ],
+        "path": "/tmp/codex_h2_leak_open_domain_plan_amr_hybrid_prodmesh_8rank_20260720/baseline/run/plt00120",
+        "total_fab_count": 8
+      },
+      "plotfiles": 5,
+      "regrid_count": 0,
+      "total_fab_count": 8
+    },
+    {
+      "active_planes": 15,
+      "advance_seconds": 946.181807,
+      "case": "amr",
+      "cloud_species_mass": 0.000223883994,
+      "cloud_volume": 0.0246582031,
+      "finest_fab_count": 12,
+      "finest_level": 1,
+      "flammable_planes": 10,
+      "hybrid_validation": {
+        "final_time": 0.12,
+        "finalized": 1,
+        "mode": "hybrid",
+        "ranks": 8,
+        "raw": "parallel_smoke_log_validation PASS solver=pelelmex mode=hybrid ranks=8 threads=2 final_time=0.12 finalized=1 warning=mpi_thread_support_level_0",
+        "solver": "pelelmex",
+        "threads": 2,
+        "warning": "mpi_thread_support_level_0"
+      },
+      "made_level1": 1,
+      "mass_ratio": 1.00012525,
+      "mass_ratioN": 1.00012525,
+      "max_X": 0.189474519,
+      "mean_ncells": 92407.4667,
+      "plot_metadata": {
+        "finest_level": 1,
+        "header_sha256": "432771717f4d6a7b095f3e5fc07ee5b311f5c27a74c4c534f499d7ccb98c1fcc",
+        "levels": [
+          {
+            "fab_count": 16,
+            "level": 0
+          },
+          {
+            "fab_count": 12,
+            "level": 1
+          }
+        ],
+        "path": "/tmp/codex_h2_leak_open_domain_plan_amr_hybrid_prodmesh_8rank_20260720/amr/run/plt00120",
+        "total_fab_count": 28
+      },
+      "plotfiles": 5,
+      "regrid_count": 59,
+      "total_fab_count": 28
+    }
+  ],
+  "criteria": {
+    "expected_mode": "hybrid",
+    "expected_solver": "pelelmex",
+    "max_advance_seconds_ratio": 4.0,
+    "max_centroid_abs_diff": 0.08,
+    "max_cloud_rel_diff": 0.2,
+    "max_downstream_abs_diff": 0.15,
+    "max_peak_rel_diff": 0.2,
+    "min_max_step": 120,
+    "min_plotfiles": 5,
+    "min_ranks": 4,
+    "min_threads_per_rank": 2
+  },
+  "evidence_root": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720",
+  "files": [
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/plan_amr_compare_summary.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/plan_amr_compare_summary.csv",
+      "sanitized": true,
+      "sha256": "0b8b6e2a3e7b0987e36d6bf3e395677300cfc09405e8abfa797c81fc1ca95a55",
+      "size_bytes": 848
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr_overhead_summary.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr_overhead_summary.csv",
+      "sanitized": true,
+      "sha256": "b0a02abb4815c17194dbad3590efdc52f891597190f09f47c3ac377bd0860a66",
+      "size_bytes": 933
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_baseline_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_baseline_smoke",
+      "sanitized": false,
+      "sha256": "2421edb9d9a8a7269a6836334c51e647fdec67d389f55d4a50799fe7954a29e7",
+      "size_bytes": 1139
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_level1_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_level1_smoke",
+      "sanitized": false,
+      "sha256": "39dd112b920ee39386f73dda2e165382d256c1eceb86f591941143fac85fdbbe",
+      "size_bytes": 1492
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/validation.log",
+      "sanitized": false,
+      "sha256": "185b1c9af51b7c209a4733ac81ab444e61936914e32aa3cd45d29c0f47b2377c",
+      "size_bytes": 483
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/profile_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/profile_validation.log",
+      "sanitized": true,
+      "sha256": "d7c024969bd1c394a168fd5f8cdfcdbd699ecc17dcf4e1df607c489071ad89e7",
+      "size_bytes": 422
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_summary.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_summary.log",
+      "sanitized": true,
+      "sha256": "1f50cd57ada309553144c59d1a3596f55214f62a11a49c61b38ba76365e84073",
+      "size_bytes": 343
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_planes.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_planes.log",
+      "sanitized": true,
+      "sha256": "d81c70ce6380e4397d653c76dc0cac8341d27ef7bdb278e30510bc35b9b5e306",
+      "size_bytes": 360
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_planes.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_planes.csv",
+      "sanitized": false,
+      "sha256": "b72fd4b8c604105e040009a6af5292c07f56b837fc9bce5b89b2359681c8e685",
+      "size_bytes": 10864
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_timeseries.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_timeseries.log",
+      "sanitized": true,
+      "sha256": "2b4d12529fe64a83953be48a5c70a011f0f16d4acf014e93b1584e7c772df882",
+      "size_bytes": 428
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_timeseries.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hazard_timeseries.csv",
+      "sanitized": false,
+      "sha256": "f17666c241bd1be85a7612c10edc98f2e10769fe8573aa0bf08ad2a70b9c06d8",
+      "size_bytes": 953
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hybrid_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/hybrid_validation.log",
+      "sanitized": false,
+      "sha256": "1c4014f64dc5098e9fe8dcf8a2ac8fabe49da4e09679661fce3f15f3b1aeb554",
+      "size_bytes": 144
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/run/input.codex_open_domain_plan_amr_baseline_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/baseline/run/input.codex_open_domain_plan_amr_baseline_smoke",
+      "sanitized": false,
+      "sha256": "2421edb9d9a8a7269a6836334c51e647fdec67d389f55d4a50799fe7954a29e7",
+      "size_bytes": 1139
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/validation.log",
+      "sanitized": false,
+      "sha256": "34e8ebdbdafffb880a7d6bdfa6ac7451886792da6e8bac587b6db3125e5181bd",
+      "size_bytes": 498
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/profile_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/profile_validation.log",
+      "sanitized": true,
+      "sha256": "fc5c6d9cb6be078b5bf3a6f409249fab4baa3c40ea9be8c510740f43ae4b617b",
+      "size_bytes": 417
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_summary.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_summary.log",
+      "sanitized": true,
+      "sha256": "7115f180c02f83bd7446ab8c7ddf2f87c82e5f150852af8935e47881a29d73fd",
+      "size_bytes": 339
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_planes.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_planes.log",
+      "sanitized": true,
+      "sha256": "f0b32effe73265d00b947ee41c40eab588307302439f7e8e71934545d23b5cb0",
+      "size_bytes": 353
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_planes.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_planes.csv",
+      "sanitized": false,
+      "sha256": "79178ce94ad9d11eb86b4f40051847d13a3d1cd24a416990ea47a2469f083cbd",
+      "size_bytes": 21661
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_timeseries.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_timeseries.log",
+      "sanitized": true,
+      "sha256": "0ebfd31cc7c1f8ecd3bdd706e3ebfb2bec95d5cc6ee28a97c1fb4657579be1b5",
+      "size_bytes": 421
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_timeseries.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hazard_timeseries.csv",
+      "sanitized": false,
+      "sha256": "c57f99194f8b2b66dd146885a5a7542d7f35128e1ffc4589afa874fc05540fa3",
+      "size_bytes": 958
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hybrid_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/hybrid_validation.log",
+      "sanitized": false,
+      "sha256": "1c4014f64dc5098e9fe8dcf8a2ac8fabe49da4e09679661fce3f15f3b1aeb554",
+      "size_bytes": 144
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/run/input.codex_open_domain_plan_amr_level1_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/files/amr/run/input.codex_open_domain_plan_amr_level1_smoke",
+      "sanitized": false,
+      "sha256": "39dd112b920ee39386f73dda2e165382d256c1eceb86f591941143fac85fdbbe",
+      "size_bytes": 1492
+    }
+  ],
+  "generated_at_utc": "2026-07-21T00:24:39+00:00",
+  "limitations": [
+    "This is a production-mesh interactive hybrid MPI/OpenMP CFD scout, not a scheduler-managed full production campaign.",
+    "The scout verifies the real PeleLMeX hybrid executable, AMR Level_1 creation, H2 hazard post-processing, and bounded AMR-vs-baseline drift.",
+    "It does not prove long-duration hybrid scaling, production-size geometry, queue integration, calibrated fire consequences, or reference-data agreement.",
+    "The MPI implementation reports thread support level 0; this run does not request MPI calls from multiple OpenMP threads, so the warning is tracked but accepted for this scout."
+  ],
+  "plotfile_metadata_note": "Plotfiles are intentionally not copied; only Header hashes and FAB metadata are preserved.",
+  "schema_version": 1,
+  "source_log_root": "/tmp/codex_h2_leak_open_domain_plan_amr_hybrid_prodmesh_8rank_20260720",
+  "status": "PASS-HYBRID-CFD-SCOUT",
+  "summary": {
+    "advance_seconds_ratio": 2.00980894,
+    "amr_equivalent_fine_cell_count": 524288,
+    "amr_final_time": 0.12,
+    "amr_finest_fab_count": 12,
+    "amr_finest_level": 1,
+    "amr_n_cell": [
+      64,
+      32,
+      32
+    ],
+    "amr_plotfiles": 5,
+    "amr_total_fab_count": 28,
+    "base_cell_count": 65536,
+    "base_n_cell": [
+      64,
+      32,
+      32
+    ],
+    "baseline_final_time": 0.12,
+    "baseline_plotfiles": 5,
+    "centroid_abs_diff": 0.000315499,
+    "cloud_rel_diff": 0.0380952381,
+    "downstream_abs_diff": 0.002609223,
+    "final_plotfile_bytes_ratio": 1.57198198,
+    "max_step": 120,
+    "mean_ncells_ratio": 1.41002604,
+    "peak_rel_diff": 0.0431073584,
+    "plot_int": 30,
+    "ranks": 8,
+    "regrid_count": 59,
+    "threads_per_rank": 2
+  },
+  "title": "Engineering H2 Hybrid MPI/OpenMP CFD Scout"
+}

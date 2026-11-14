@@ -1,0 +1,52 @@
+# DataverseNO open-channel H2 CFD scout.
+# Physical dataset geometry: article x width=0.9 m, article y length=5.8 m,
+# article z height=0.8 m. Solver coordinates are transformed so solver x is
+# the channel length for existing h2_leak_3d plume-history validation.
+# Transform: solver_x=article_y, solver_y=article_x, solver_z=article_z.
+# Selected reference case: 23_FFI_P101_T00031.zip / test-08-1.
+
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 5.80 0.90 0.80
+
+peleLM.lo_bc = Outflow NoSlipWallAdiab NoSlipWallAdiab
+peleLM.hi_bc = Outflow NoSlipWallAdiab NoSlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.n_cell = 116 18 16
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 2
+amr.max_grid_size = 24
+amr.max_step = 20
+amr.stop_time = -1.0
+amr.fixed_dt = 1.000000000000e-04
+amr.cfl = 0.5
+amr.plot_int = 5
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 293.0
+prob.wind_u = 0.0
+prob.wind_v = 0.0
+prob.leak_xc = 0.50
+prob.leak_yc = 0.45
+prob.leak_zc = 7.750000000000e-01
+prob.leak_rate = 9.152681907312e-04
+prob.leak_radius = 4.000000000000e-02
+prob.leak_vel_x = 6.567687631723e+02
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 293.0
+
+eb2.geom_type = all_regular

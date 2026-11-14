@@ -1,0 +1,120 @@
+{
+  "evidence_files": [
+    {
+      "label": "overpressure_dataverse_metadata",
+      "path": "docs/codex_audit/evidence/h2_fire_overpressure_dataverse_metadata_20260805/h2_fire_overpressure_dataverse_metadata_report.json",
+      "sha256": "46f761f0efeb68b1da072f36f9583db2c6e2952a15251fe15def34a7220645c2",
+      "size_bytes": 16886
+    },
+    {
+      "label": "overpressure_reduced_exp002",
+      "path": "docs/codex_audit/evidence/h2_fire_overpressure_reduced_exp002_20260805/h2_fire_overpressure_reduced_exp002_report.json",
+      "sha256": "9cb5633eddf3ba90d4df77ea3ea220b42abe0dd4307f2345e2b5f286a8228482",
+      "size_bytes": 6956
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:56.766494+00:00",
+  "schema_version": 1,
+  "sources": [
+    {
+      "family": "overpressure",
+      "id": "dataverse_no_ignited_h2_jets_overpressure_2026",
+      "known_files": [
+        {
+          "md5": "709a0f899a6495722389484948bd18cf",
+          "name": "00_Readme.txt",
+          "size": "6.6 KB"
+        },
+        {
+          "md5": "76f57dd1efaf3f20acd8572785ddbccf",
+          "name": "Ign_pipe_geom_EXP_001.csv",
+          "size": "393.1 MB"
+        },
+        {
+          "md5": "f0e95dc5a2f1c6a1f98cb266f8360dcc",
+          "name": "Ign_pipe_geom_EXP_002.csv",
+          "size": "387.6 MB"
+        },
+        {
+          "md5": "c44b1920cb828c206c00892d65391aa4",
+          "name": "Ign_pipe_geom_EXP_003.csv",
+          "size": "393.9 MB"
+        }
+      ],
+      "license": "CC0 1.0",
+      "machine_download_candidate": true,
+      "persistent_id": "doi:10.18710/X044QK",
+      "public_access": true,
+      "publication_date": "2026-02-12",
+      "remaining_work": [
+        "Download readme and at least one pressure CSV through the Dataverse API without exceeding disk budget.",
+        "Map CSV headers to pressure sensor positions, ignition timing, obstacle spacing, and release mass-flow metadata.",
+        "Build a reduced validation case aligned with one experiment before strict overpressure credit."
+      ],
+      "reported_measurements": [
+        "high-speed imaging",
+        "pressure sensors",
+        "flame acceleration",
+        "overpressure development",
+        "obstacle/nozzle spacing effects"
+      ],
+      "strict_use": "Candidate for overpressure/time-of-arrival calibration of delayed ignition hydrogen jets with obstacles.",
+      "title": "Replication data for: Laboratory-Scale Experiments on Ignited Hydrogen Jets: Flame Acceleration and Overpressure Analysis",
+      "url": "https://dataverse.no/dataset.xhtml?persistentId=doi%3A10.18710%2FX044QK"
+    },
+    {
+      "family": "radiation",
+      "id": "hysafe_inclined_large_scale_h2_jet_flame_radiation_2026",
+      "known_ranges": {
+        "SEP_IR_kW_m2": "10-16",
+        "SEP_OH_kW_m2": "40-80",
+        "mass_flow_kg_s": "0.0125-0.175",
+        "orifice_diameter_m": "0.03",
+        "radiant_heat_fraction": "0.031-0.043"
+      },
+      "license": "CC BY 4.0",
+      "machine_download_candidate": false,
+      "persistent_id": "doi:10.58895/hysafe.27",
+      "public_access": true,
+      "publication_date": "2026-02-13",
+      "remaining_work": [
+        "Extract machine-readable tables or contact/source supplemental data for sensor positions and measured heat flux values.",
+        "Record wind, inclination, mass-flow, flame-geometry, and radiometer uncertainty fields.",
+        "Build a radiation agreement contract once measured flux tables are repository-ingestable."
+      ],
+      "reported_measurements": [
+        "incident thermal radiation",
+        "infrared flame shape",
+        "OH* flame shape",
+        "surface emissive power",
+        "radiant heat fraction",
+        "constant mass-flow hydrogen jet releases"
+      ],
+      "strict_use": "Candidate radiation metric anchor for large-scale open-field hydrogen jet fires.",
+      "title": "Thermal Radiation Of Inclined Large Scale Hydrogen Jet Flames",
+      "url": "https://hysafejournal.org/articles/10.58895/hysafe.27"
+    }
+  ],
+  "status": "PASS-H2-FIRE-CALIBRATION-CANDIDATE-SOURCES-20260805",
+  "strict_credit_gap": [
+    "No downloaded, hashed, repository-ingestable radiation calibration table is present yet.",
+    "No downloaded, hashed, repository-ingestable overpressure calibration table is present yet.",
+    "No case alignment file links the candidate measurements to a PeleC/PeleLMeX fire-consequence validation case yet."
+  ],
+  "summary": {
+    "both_metric_families_have_public_candidates": true,
+    "candidate_source_count": 2,
+    "overpressure_candidate_available": true,
+    "overpressure_dataverse_metadata_ready": true,
+    "overpressure_dataverse_metadata_status": "PASS-H2-FIRE-OVERPRESSURE-DATAVERSE-METADATA",
+    "overpressure_experiment_matrix_row_count": 40,
+    "overpressure_pressure_sensor_count": 4,
+    "overpressure_reduced_exp002_ready": true,
+    "overpressure_reduced_exp002_ready_for_validation_case": true,
+    "overpressure_reduced_exp002_row_count": 5000004,
+    "overpressure_reduced_exp002_status": "PASS-H2-FIRE-OVERPRESSURE-REDUCED-EXP002",
+    "radiation_candidate_available": true,
+    "repository_ingestable_calibration_package_ready": false,
+    "strict_fire_calibration_blocker_cleared": false
+  }
+}

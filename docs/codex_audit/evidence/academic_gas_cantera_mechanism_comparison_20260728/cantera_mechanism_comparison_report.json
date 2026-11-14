@@ -1,0 +1,221 @@
+{
+  "blocking_gaps": [
+    "compiled_pelephysics_rate_kernel_equivalence"
+  ],
+  "cantera_version": "3.2.0",
+  "comparison_csv": "docs/codex_audit/evidence/academic_gas_cantera_mechanism_comparison_20260728/cantera_mechanism_comparison_curve.csv",
+  "comparison_csv_sha256": "a2220f6685f683439477e3c65265655e8bf20ecff05360260041012311a6c8d1",
+  "composition": "H2:2,O2:1,N2:3.76",
+  "evidence_files": [
+    {
+      "label": "pelephysics_lidryer_mechanism_yaml",
+      "path": "external/PelePhysics/Mechanisms/LiDryer/mechanism.yaml",
+      "sha256": "d0f5a97e56a52ef70af0bab90d98df01fc6034b5ac384747594fa2255ac62cb7",
+      "size_bytes": 12995
+    },
+    {
+      "label": "cantera_mechanism_comparison_csv",
+      "path": "docs/codex_audit/evidence/academic_gas_cantera_mechanism_comparison_20260728/cantera_mechanism_comparison_curve.csv",
+      "sha256": "a2220f6685f683439477e3c65265655e8bf20ecff05360260041012311a6c8d1",
+      "size_bytes": 3630
+    }
+  ],
+  "generated_at_utc": "2026-07-28T02:01:58+00:00",
+  "ignition_delay_comparison": [
+    {
+      "cantera_h2o2_delay_s": 0.0003212730681333078,
+      "delay_ratio": 1.4254867317045181,
+      "pelephysics_lidryer_delay_s": 0.00022537780323577425,
+      "temperature_k": 1000.0
+    },
+    {
+      "cantera_h2o2_delay_s": 0.00010540866688079981,
+      "delay_ratio": 1.170170248789493,
+      "pelephysics_lidryer_delay_s": 9.007977000769078e-05,
+      "temperature_k": 1100.0
+    },
+    {
+      "cantera_h2o2_delay_s": 6.721699675695292e-05,
+      "delay_ratio": 1.2270673039997813,
+      "pelephysics_lidryer_delay_s": 5.47785737081011e-05,
+      "temperature_k": 1200.0
+    },
+    {
+      "cantera_h2o2_delay_s": 5.4113919943847135e-05,
+      "delay_ratio": 1.3453859889818638,
+      "pelephysics_lidryer_delay_s": 4.022185483349538e-05,
+      "temperature_k": 1300.0
+    }
+  ],
+  "limitations": [
+    "This clears the readiness-level Cantera mechanism comparison gap by checking two Cantera-loaded mechanisms.",
+    "It does not prove bitwise or tolerance-bound equivalence between Cantera and the compiled PelePhysics C++ rate kernel.",
+    "The 0D ignition-delay ratio is a coarse same-order gate, not a detonation validation benchmark."
+  ],
+  "mechanisms": [
+    {
+      "element_names": [
+        "H",
+        "O",
+        "N"
+      ],
+      "label": "pelephysics_lidryer",
+      "mechanism": "external/PelePhysics/Mechanisms/LiDryer/mechanism.yaml",
+      "n_elements": 3,
+      "n_reactions": 21,
+      "n_species": 9,
+      "species_names": [
+        "H2",
+        "O2",
+        "H2O",
+        "H",
+        "O",
+        "OH",
+        "HO2",
+        "H2O2",
+        "N2"
+      ]
+    },
+    {
+      "element_names": [
+        "O",
+        "H",
+        "Ar",
+        "N"
+      ],
+      "label": "cantera_h2o2",
+      "mechanism": "h2o2.yaml",
+      "n_elements": 4,
+      "n_reactions": 29,
+      "n_species": 10,
+      "species_names": [
+        "H2",
+        "H",
+        "O",
+        "O2",
+        "OH",
+        "H2O",
+        "HO2",
+        "H2O2",
+        "AR",
+        "N2"
+      ]
+    }
+  ],
+  "next_required_artifacts": [
+    "compiled PelePhysics generated C++ rate-kernel equivalence harness",
+    "forward/reverse progress-rate comparison against Cantera over a thermochemical sample grid"
+  ],
+  "pelephysics_mechanism": "external/PelePhysics/Mechanisms/LiDryer/mechanism.yaml",
+  "pressure_pa": 101325.0,
+  "quality_gate_matrix": [
+    {
+      "evidence": [
+        "cantera_version"
+      ],
+      "gap": "",
+      "name": "cantera_importable",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "external/PelePhysics/Mechanisms/LiDryer/mechanism.yaml"
+      ],
+      "gap": "",
+      "name": "pelephysics_lidryer_loadable",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "h2o2.yaml"
+      ],
+      "gap": "",
+      "name": "reference_h2o2_loadable",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "H",
+        "H2",
+        "H2O",
+        "H2O2",
+        "HO2",
+        "N2",
+        "O",
+        "O2",
+        "OH"
+      ],
+      "gap": "",
+      "name": "required_h2_species_shared",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_cantera_mechanism_comparison_20260728/cantera_mechanism_comparison_curve.csv"
+      ],
+      "gap": "",
+      "name": "finite_thermochemistry_samples",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_cantera_mechanism_comparison_20260728/cantera_mechanism_comparison_curve.csv"
+      ],
+      "gap": "",
+      "name": "finite_reaction_rate_samples",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gas_cantera_mechanism_comparison_20260728/cantera_mechanism_comparison_curve.csv"
+      ],
+      "gap": "",
+      "name": "paired_0d_ignition_delay_curves",
+      "status": "PASS"
+    },
+    {
+      "evidence": [],
+      "gap": "Not exercised here; this report compares the PelePhysics YAML through Cantera, not the generated C++ rate kernel.",
+      "name": "compiled_pelephysics_rate_kernel_equivalence",
+      "status": "PARTIAL"
+    }
+  ],
+  "reference_mechanism": "h2o2.yaml",
+  "schema_version": 1,
+  "scope": "Cantera-loadable PelePhysics LiDryer vs Cantera h2o2 thermochemistry, finite rates, and 0D ignition-delay comparison",
+  "status": "PASS-ACADEMIC-GAS-CANTERA-MECHANISM-COMPARISON",
+  "summary": {
+    "clears_cantera_mechanism_comparison_gap": true,
+    "clears_full_pelephysics_source_rate_equivalence": false,
+    "ignition_case_count": 8,
+    "ignition_delay_curves_monotonic": true,
+    "ignition_delay_curves_same_order": true,
+    "ignition_delay_pair_count": 4,
+    "ignition_delay_ratio_limit": 50.0,
+    "max_ignition_delay_ratio": 1.4254867317045181,
+    "mechanism_count": 2,
+    "pelephysics_yaml_loads_in_cantera": true,
+    "reaction_rate_samples_finite": true,
+    "reference_h2o2_yaml_loads_in_cantera": true,
+    "shared_required_h2_species": [
+      "H",
+      "H2",
+      "H2O",
+      "H2O2",
+      "HO2",
+      "N2",
+      "O",
+      "O2",
+      "OH"
+    ],
+    "state_rate_sample_count": 8,
+    "thermochemistry_samples_finite": true
+  },
+  "temperatures_k": [
+    1000.0,
+    1100.0,
+    1200.0,
+    1300.0
+  ],
+  "title": "Academic Gas Cantera Mechanism Comparison"
+}

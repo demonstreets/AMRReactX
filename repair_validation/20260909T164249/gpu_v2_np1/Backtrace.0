@@ -1,0 +1,28 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/bench_2gpu/repair_20260909_hotspot_v23d.gnu.MPI.CUDA.ex(+0x3eea76) [0x5d1d7b44ea76]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: /home/cj/my-pele/examples/academic/bench_2gpu/repair_20260909_hotspot_v23d.gnu.MPI.CUDA.ex(+0x3f36e1) [0x5d1d7b4536e1]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/bench_2gpu/repair_20260909_hotspot_v23d.gnu.MPI.CUDA.ex(+0xbffb3) [0x5d1d7b11ffb3]
+    main at /home/cj/my-pele/examples/academic/bench_2gpu/../../../external/PeleC/Source/main.cpp:286
+
+ 3: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x77718522a1ca]
+
+ 4: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x77718522a28b]
+
+ 5: /home/cj/my-pele/examples/academic/bench_2gpu/repair_20260909_hotspot_v23d.gnu.MPI.CUDA.ex(+0xc1295) [0x5d1d7b121295]
+    ?? ??:0
+

@@ -1,0 +1,81 @@
+{
+  "evidence_files": [
+    {
+      "label": "single_cuda_delayed_ignition_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cuda_20260805/engineering_h2_pipe_rack_delayed_ignition_cuda_report.json",
+      "sha256": "6703e1feb990d9973cd279a68f304cb6b8c80f56612c37249a41f5ecabe79094",
+      "size_bytes": 5205
+    },
+    {
+      "label": "cpu_mpi_delayed_ignition_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_mpi_20260805/engineering_h2_pipe_rack_delayed_ignition_mpi_report.json",
+      "sha256": "643818c985df181d4e07106b1a344f8b48a1bf0bf3ae85a175ee20264cdd2670",
+      "size_bytes": 4882
+    },
+    {
+      "label": "exp002_pressure_target_table",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/h2_fire_exp002_overpressure_calibration_table_report.json",
+      "sha256": "169d4c3ccc1f0f5751094c7388d23b00dec572e4c19b1ecae3fe129030950bc7",
+      "size_bytes": 3677
+    },
+    {
+      "label": "pressure_proxy_timeseries_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_pressure_cfd_proxy_20260805/pressure_cfd_proxy_timeseries.csv",
+      "sha256": "dd9d2e40f8281a8d149b5ecb450231b157b85a2ae31c860684f38a3b3693c088",
+      "size_bytes": 3072
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:57.887899+00:00",
+  "limitations": [
+    "avg_pressure is a pressure-like solver field and may be signed; it is not a direct experimental overpressure sensor.",
+    "No EXP002 sensor positions or arrival-time waveforms are mapped in this report.",
+    "The delayed-ignition smoke window is not the full EXP002 release and ignition timeline."
+  ],
+  "output_files": {
+    "pressure_proxy_timeseries_csv": "docs/codex_audit/evidence/h2_fire_exp002_pressure_cfd_proxy_20260805/pressure_cfd_proxy_timeseries.csv"
+  },
+  "proxy_definition": {
+    "purpose": "pressure observability and CPU/GPU parity gate",
+    "source_field": "avg_pressure min/max/mean from delayed-ignition plotfiles",
+    "strict_credit_policy": "does not clear EXP002 pressure agreement without mapped sensor locations, peak overpressure, and arrival-time comparison"
+  },
+  "run_proxies": {
+    "cpu_mpi": {
+      "final_avg_pressure_abs_max": 381000505.2937223,
+      "final_avg_pressure_mean": -6109991.496544998,
+      "peak_abs_pressure_plotfile": "plt00030",
+      "peak_abs_pressure_proxy_pa": 85176888798.45113,
+      "peak_abs_pressure_time_s": 3.0000000000000015e-07,
+      "plotfile_count": 13,
+      "run_label": "cpu_mpi",
+      "source_run_dir": ""
+    },
+    "single_cuda": {
+      "final_avg_pressure_abs_max": 358984116.0078319,
+      "final_avg_pressure_mean": -6414320.842174106,
+      "peak_abs_pressure_plotfile": "plt00030",
+      "peak_abs_pressure_proxy_pa": 85227143395.71616,
+      "peak_abs_pressure_time_s": 3.0000000000000015e-07,
+      "plotfile_count": 13,
+      "run_label": "single_cuda",
+      "source_run_dir": ""
+    }
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-EXP002-PRESSURE-CFD-PROXY",
+  "summary": {
+    "avg_pressure_field_present": true,
+    "case_aligned_pressure_sensor_agreement": false,
+    "cpu_gpu_peak_abs_pressure_rel_diff": 0.0005896548360384903,
+    "cpu_gpu_pressure_proxy_parity_passed": true,
+    "cpu_mpi_peak_abs_pressure_proxy_pa": 85176888798.45113,
+    "current_outputs_sufficient_for_exp002_pressure_agreement": false,
+    "exp002_pressure_target_count": 4,
+    "extraction_mode": "cached_extraction_csv",
+    "pressure_proxy_extracted": true,
+    "pressure_proxy_plotfile_count_per_run": 13,
+    "single_cuda_peak_abs_pressure_proxy_pa": 85227143395.71616,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire EXP002 Pressure CFD Proxy"
+}

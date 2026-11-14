@@ -1,0 +1,65 @@
+{
+  "case": "/home/cj/my-pele/repair_validation/thermal_20260911/replay_cfl20_v1",
+  "captured_utc": "2026-09-11T02:57:40.260923+00:00",
+  "original_manifest_backup": "/home/cj/my-pele/repair_validation/thermal_20260911/metadata_history/replay_cfl20_v1/case_before_normalization_v1.json",
+  "original_manifest_sha256": "5a86b36cddd1d21fd73cf7a16a6defdcc1427649a74287b3966598cd84e7d271",
+  "new_manifest_sha256": "dd8e900bb0217ccdc3c6585b9ec248f03b91dc815f3bdc25ef3bf026787ec8bb",
+  "unchanged_input_sha256": "477b4ac0e69753b15ec3b459a63676aa5ac7af825f4db29eae899389f0e80f2b",
+  "changes": {
+    "binary": {
+      "before": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_stoich_v12d.gnu.MPI.CUDA.ex",
+      "after": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_thermal_v12d.gnu.MPI.CUDA.ex"
+    },
+    "binary_sha256": {
+      "before": "bf81156edc44d138a4cd09cc520db98dd5bc8c3bee74b84563e6dec659738443",
+      "after": "14d0f7f573e8c8ea6dd9ea65f115ba868825bf8cd57da6e7a9ff0b1efe3236dc"
+    },
+    "transverse_boundary": {
+      "before": "slip walls",
+      "after": "lower y: SlipWall; upper y: SlipWall"
+    },
+    "history_output_interval_s": {
+      "before": 1e-06,
+      "after": null
+    },
+    "previous_run": {
+      "before": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_wet_2d_2800x800_cfl20_tol4_gpu_v2",
+      "after": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_stoich_wet_2d_2800x800_two_gpu_continuation_v2"
+    },
+    "history_scope": {
+      "before": "New per-step maxima begin at restart; previous state trajectory retained separately.",
+      "after": "thermal_stages.csv records the four split-operator stages; the legacy wave-history writer is disabled."
+    },
+    "boundary_conditions": {
+      "before": null,
+      "after": {
+        "lower": [
+          "FOExtrap",
+          "SlipWall"
+        ],
+        "upper": [
+          "FOExtrap",
+          "SlipWall"
+        ]
+      }
+    },
+    "thermal_probe_index": {
+      "before": null,
+      "after": [
+        2444,
+        1
+      ]
+    },
+    "cell_shape": {
+      "before": null,
+      "after": [
+        2800,
+        800
+      ]
+    },
+    "metadata_reconciled_from_actual_inputs": {
+      "before": null,
+      "after": true
+    }
+  }
+}

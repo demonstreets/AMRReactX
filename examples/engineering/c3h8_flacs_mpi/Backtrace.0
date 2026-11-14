@@ -1,0 +1,120 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX3d.gnu.MPI.ex(+0x7588e6) [0x63ae442f08e6]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleLMeX3d.gnu.MPI.ex(+0x75d6a1) [0x63ae442f56a1]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /lib/x86_64-linux-gnu/libc.so.6(+0x45330) [0x7c91bf245330]
+
+ 3: /lib/x86_64-linux-gnu/libc.so.6(pthread_kill+0x11c) [0x7c91bf29eb2c]
+
+ 4: /lib/x86_64-linux-gnu/libc.so.6(gsignal+0x1e) [0x7c91bf24527e]
+
+ 5: /lib/x86_64-linux-gnu/libc.so.6(abort+0xdf) [0x7c91bf2288ff]
+
+ 6: /lib/x86_64-linux-gnu/libstdc++.so.6(+0xa5ff5) [0x7c91bf6a5ff5]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long) at /usr/include/c++/13/bits/basic_string.tcc:336
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long) at /usr/include/c++/13/bits/basic_string.tcc:424
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) at /usr/include/c++/13/bits/basic_string.h:1459
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::__str_concat<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::allocator_type const&) at /usr/include/c++/13/bits/basic_string.h:3539
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /usr/include/c++/13/bits/basic_string.h:3578
+ (inlined by) PeleLM::parseComposition(amrex::Vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, double*) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Utils.cpp:2177
+
+ 7: /lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb0da) [0x7c91bf6bb0da]
+    PeleLM::fluxDivergenceRD(amrex::Vector<amrex::MultiFab const*, std::allocator<amrex::MultiFab const*> > const&, int, amrex::Vector<amrex::MultiFab*, std::allocator<amrex::MultiFab*> > const&, int, amrex::Vector<std::array<amrex::MultiFab*, 3ul>, std::allocator<std::array<amrex::MultiFab*, 3ul> > > const&, int, amrex::Vector<amrex::MultiFab*, std::allocator<amrex::MultiFab*> > const&, int, int, int, amrex::BCRec const*, double const&, double const&) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Utils.cpp:192
+
+ 8: /lib/x86_64-linux-gnu/libstdc++.so.6(_ZSt10unexpectedv+0) [0x7c91bf6a5a55]
+    ?? ??:0
+
+ 9: /lib/x86_64-linux-gnu/libstdc++.so.6(+0xbbfc3) [0x7c91bf6bbfc3]
+    int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long) at /usr/include/c++/13/bits/stl_uninitialized.h:668
+ (inlined by) int* std::__uninitialized_default_n_1<true>::__uninit_default_n<int*, unsigned long>(int*, unsigned long) at /usr/include/c++/13/bits/stl_uninitialized.h:660
+ (inlined by) int* std::__uninitialized_default_n<int*, unsigned long>(int*, unsigned long) at /usr/include/c++/13/bits/stl_uninitialized.h:712
+ (inlined by) int* std::__uninitialized_default_n_a<int*, unsigned long, int>(int*, unsigned long, std::allocator<int>&) at /usr/include/c++/13/bits/stl_uninitialized.h:779
+ (inlined by) std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) at /usr/include/c++/13/bits/vector.tcc:650
+ (inlined by) std::vector<int, std::allocator<int> >::_M_default_append(unsigned long) at /usr/include/c++/13/bits/vector.tcc:634
+ (inlined by) std::vector<int, std::allocator<int> >::resize(unsigned long) at /usr/include/c++/13/bits/stl_vector.h:1016
+
+10: ./PeleLMeX3d.gnu.MPI.ex(+0x63eca) [0x63ae43bfbeca]
+    amrex::BaseFab<double>::clear() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BaseFab.H:1714
+ (inlined by) amrex::BaseFab<double>::~BaseFab() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BaseFab.H:1577
+ (inlined by) amrex::FArrayBox::~FArrayBox() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_FArrayBox.H:268
+ (inlined by) amrex::FArrayBox::~FArrayBox() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_FArrayBox.H:268
+
+11: ./PeleLMeX3d.gnu.MPI.ex(+0x87556) [0x63ae43c1f556]
+    amrex::FabArray<amrex::FArrayBox>::clear() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_FabArray.H:1923 (discriminator 1)
+
+12: ./PeleLMeX3d.gnu.MPI.ex(+0x629ef7) [0x63ae441c1ef7]
+    std::unique_ptr<amrex::FabArray<amrex::FArrayBox>, std::default_delete<amrex::FabArray<amrex::FArrayBox> > >::~unique_ptr() at /usr/include/c++/13/bits/unique_ptr.h:403
+ (inlined by) amrex::FabArray<amrex::FArrayBox>::~FabArray() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_FabArray.H:2144
+
+13: ./PeleLMeX3d.gnu.MPI.ex(+0x87962) [0x63ae43c1f962]
+    std::array<amrex::MultiFab, 3ul>::~array() at /usr/include/c++/13/array:94 (discriminator 5)
+ (inlined by) amrex::EB2::Level::~Level() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2_Level.H:41 (discriminator 5)
+
+14: ./PeleLMeX3d.gnu.MPI.ex(+0x8d40f) [0x63ae43c2540f]
+    void std::_Destroy_aux<false>::__destroy<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*>(amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*, amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*) at /usr/include/c++/13/bits/stl_construct.h:162 (discriminator 1)
+ (inlined by) void std::_Destroy<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*>(amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*, amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*) at /usr/include/c++/13/bits/stl_construct.h:196 (discriminator 1)
+ (inlined by) void std::_Destroy<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*, amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> > >(amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*, amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >*, std::allocator<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> > >&) at /usr/include/c++/13/bits/alloc_traits.h:948 (discriminator 1)
+ (inlined by) std::vector<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >, std::allocator<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> > > >::~vector() at /usr/include/c++/13/bits/stl_vector.h:735 (discriminator 1)
+ (inlined by) amrex::Vector<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >, std::allocator<amrex::EB2::GShopLevel<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> > > >::~Vector() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Vector.H:25 (discriminator 1)
+ (inlined by) amrex::EB2::IndexSpaceImp<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >::~IndexSpaceImp() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2.H:98 (discriminator 1)
+ (inlined by) amrex::EB2::IndexSpaceImp<amrex::EB2::GeometryShop<amrex::EB2::UnionIF<amrex::EB2::CylinderIF, amrex::EB2::CylinderIF, amrex::EB2::CylinderIF>, int> >::~IndexSpaceImp() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/EB/AMReX_EB2.H:98 (discriminator 1)
+
+15: ./PeleLMeX3d.gnu.MPI.ex(+0xc483a2) [0x63ae447e03a2]
+    void std::_Destroy_aux<false>::__destroy<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*>(std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*, std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*) at /usr/include/c++/13/bits/stl_construct.h:162 (discriminator 1)
+ (inlined by) void std::_Destroy<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*>(std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*, std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*) at /usr/include/c++/13/bits/stl_construct.h:196 (discriminator 1)
+ (inlined by) void std::_Destroy<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*, std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> > >(std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*, std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >*, std::allocator<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> > >&) at /usr/include/c++/13/bits/alloc_traits.h:948 (discriminator 1)
+ (inlined by) std::vector<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >, std::allocator<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> > > >::~vector() at /usr/include/c++/13/bits/stl_vector.h:735 (discriminator 1)
+ (inlined by) amrex::Vector<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> >, std::allocator<std::unique_ptr<amrex::EB2::IndexSpace, std::default_delete<amrex::EB2::IndexSpace> > > >::~Vector() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Vector.H:25 (discriminator 1)
+
+16: /lib/x86_64-linux-gnu/libc.so.6(+0x47a76) [0x7c91bf247a76]
+
+17: /lib/x86_64-linux-gnu/libc.so.6(+0x47bbe) [0x7c91bf247bbe]
+
+18: /lib/x86_64-linux-gnu/libmpich.so.12(+0x26d140) [0x7c91bfc6d140]
+    void amrex::ParallelDescriptor::detail::DoAllReduce<double>(double*, int, int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParallelDescriptor.H:1330 (discriminator 2)
+ (inlined by) std::enable_if<is_floating_point_v<double>, void>::type amrex::ParallelDescriptor::ReduceRealMin<double>(double&) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParallelDescriptor.H:1462 (discriminator 2)
+ (inlined by) PeleLM::estConvectiveDt(PeleLM::TimeStamp) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Timestep.cpp:152 (discriminator 2)
+ (inlined by) PeleLM::computeDt(int, PeleLM::TimeStamp) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Timestep.cpp:23 (discriminator 2)
+
+19: /lib/x86_64-linux-gnu/libmpich.so.12(+0x200b5b) [0x7c91bfc00b5b]
+    PeleLM::getDiffusivity(int, int, int, int, amrex::Vector<amrex::BCRec, std::allocator<amrex::BCRec> > const&, amrex::MultiFab const&, int) at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_TransportProp.cpp:419 (discriminator 1)
+
+20: /lib/x86_64-linux-gnu/libmpich.so.12(MPI_Abort+0xb0) [0x7c91bfaf34c0]
+    ?? ??:0
+
+21: ./PeleLMeX3d.gnu.MPI.ex(+0x75da96) [0x63ae442f5a96]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const at /usr/include/c++/13/bits/basic_string.h:264
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() at /usr/include/c++/13/bits/basic_string.h:282
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:81
+
+22: /lib/x86_64-linux-gnu/libc.so.6(+0x45330) [0x7c91bf245330]
+
+23: ./PeleLMeX3d.gnu.MPI.ex(+0x711da) [0x63ae43c091da]
+    PeleLM::~PeleLM() at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.cpp:24 (discriminator 1)
+
+24: ./PeleLMeX3d.gnu.MPI.ex(+0x53908) [0x63ae43beb908]
+    main at /home/cj/my-pele/external/PeleLMeX/Source/main.cpp:77
+
+25: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7c91bf22a1ca]
+
+26: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7c91bf22a28b]
+
+27: ./PeleLMeX3d.gnu.MPI.ex(+0x5c8b5) [0x63ae43bf48b5]
+    ?? ??:0
+

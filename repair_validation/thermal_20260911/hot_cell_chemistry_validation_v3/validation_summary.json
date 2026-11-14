@@ -1,0 +1,76 @@
+{
+  "raw_validation_sha256": "05b105643cef224d304947f1e7b44a4677d8c29e92884917bd2d51de06bc83c5",
+  "sample_count": 16,
+  "levels": [
+    {
+      "rtol": 0.0001,
+      "completed": 16,
+      "requested": 16,
+      "maximum_temperature_error_K": 0.002015164019212534,
+      "maximum_mass_fraction_error": 4.324797881344322e-07,
+      "maximum_difference_from_recorded_flow_stage_K": 2.7284841053187847e-12
+    },
+    {
+      "rtol": 1e-05,
+      "completed": 16,
+      "requested": 16,
+      "maximum_temperature_error_K": 0.0005297689140206785,
+      "maximum_mass_fraction_error": 1.1507934667698283e-07,
+      "maximum_difference_from_recorded_flow_stage_K": 0.0018758977093966678
+    },
+    {
+      "rtol": 1e-06,
+      "completed": 16,
+      "requested": 16,
+      "maximum_temperature_error_K": 8.243309457611758e-05,
+      "maximum_mass_fraction_error": 1.7905001606366433e-08,
+      "maximum_difference_from_recorded_flow_stage_K": 0.0020012846925965277
+    },
+    {
+      "rtol": 1e-08,
+      "completed": 12,
+      "requested": 16,
+      "maximum_temperature_error_K": 6.203772500157356e-07,
+      "maximum_mass_fraction_error": 1.345556860377073e-10,
+      "maximum_difference_from_recorded_flow_stage_K": 0.0018595379042380955
+    }
+  ],
+  "incomplete_runs": [
+    {
+      "sample": "replay_cfl20_v1__15860_chemistry_2",
+      "rtol": 1e-08,
+      "accepted_steps": 19992,
+      "rejected_steps": 8,
+      "reason": "Native integrate returned false; total attempted substeps reached 20000.",
+      "interpretation": "Partial state is not a completed endpoint; excluded from accuracy statistics."
+    },
+    {
+      "sample": "replay_cfl20_v1__15480_chemistry_2",
+      "rtol": 1e-08,
+      "accepted_steps": 19994,
+      "rejected_steps": 6,
+      "reason": "Native integrate returned false; total attempted substeps reached 20000.",
+      "interpretation": "Partial state is not a completed endpoint; excluded from accuracy statistics."
+    },
+    {
+      "sample": "replay_cfl10_v1__19088_chemistry_2",
+      "rtol": 1e-08,
+      "accepted_steps": 19994,
+      "rejected_steps": 6,
+      "reason": "Native integrate returned false; total attempted substeps reached 20000.",
+      "interpretation": "Partial state is not a completed endpoint; excluded from accuracy statistics."
+    },
+    {
+      "sample": "replay_cfl10_v1__19147_chemistry_2",
+      "rtol": 1e-08,
+      "accepted_steps": 19993,
+      "rejected_steps": 7,
+      "reason": "Native integrate returned false; total attempted substeps reached 20000.",
+      "interpretation": "Partial state is not a completed endpoint; excluded from accuracy statistics."
+    }
+  ],
+  "all_requested_native_integrations_completed": false,
+  "reference_self_comparison_max_temperature_difference_K": 9.094947017729282e-13,
+  "reference_self_comparison_max_mass_fraction_difference": 9.71445146547012e-17,
+  "interpretation": "Numerical chemistry verification at recorded high-temperature states of the active WD6 model. Does not validate extrapolated thermodynamics, high-temperature kinetic completeness, wall physics, or the full coupled trajectory."
+}

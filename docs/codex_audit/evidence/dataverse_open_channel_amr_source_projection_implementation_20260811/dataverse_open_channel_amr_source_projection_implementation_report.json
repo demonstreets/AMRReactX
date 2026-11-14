@@ -1,0 +1,119 @@
+{
+  "build_checks": {
+    "mpi_cpu_build_has_no_error": true,
+    "mpi_cpu_build_has_success_marker": true,
+    "mpi_cpu_build_linked_executable": true,
+    "mpi_cpu_build_log_present": true,
+    "mpi_cpu_build_recompiled_forces": true
+  },
+  "checks": {
+    "coarse_level_guard_present": true,
+    "fine_mask_constructed": true,
+    "fine_mask_uses_next_level_grids": true,
+    "fine_mask_uses_ref_ratio": true,
+    "gpu_parallel_restore_present": true,
+    "mask_has_owner_semantics": true,
+    "pre_user_source_snapshot_present": true,
+    "restore_synchronized": true,
+    "restores_non_user_sources_on_fine_covered_coarse_cells": true,
+    "user_source_hook_present": true
+  },
+  "cuda_build_summary": {
+    "blocked_by_cuda_toolkit_version": false,
+    "blocked_by_missing_cuda_sundials_link_libraries": false,
+    "compiled_forces_object": true,
+    "linked_executable": true,
+    "log_path": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/build_mpi_cuda_sundials_local.log",
+    "log_present": true,
+    "requires_cuda_12_2_or_newer": false,
+    "uses_cuda_12_6": true,
+    "uses_local_sundials_cuda": true
+  },
+  "evidence_files": [
+    {
+      "label": "pelelmex_forces_cpp",
+      "path": "external/PeleLMeX/Source/PeleLMeX_Forces.cpp",
+      "sha256": "3e18130e034d3287d81a2a6ad80da999265843aca8d4eac95fbc4fba226b3ef4",
+      "size_bytes": 18476
+    },
+    {
+      "label": "dataverse_amr_source_projection_contract",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_contract_20260811/dataverse_open_channel_amr_source_projection_contract_report.json",
+      "sha256": "d24577301208906bfbacc30275f8b55ede12290981f14fb40e75ecc3fe98b545",
+      "size_bytes": 4490
+    },
+    {
+      "label": "mpi_cpu_build_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/build_mpi_cpu.log",
+      "sha256": "0356ef51660b178135fdfeebd74e056cc23fc94d46c442c4e4cffb029625f124",
+      "size_bytes": 893097
+    },
+    {
+      "label": "cuda_env_script",
+      "path": "tools/codex_setup_cuda126_sundials_env.sh",
+      "sha256": "08a9863237ee1bdaffef69ff02650604d00aba825ec4f35283784be19065376c",
+      "size_bytes": 890
+    },
+    {
+      "label": "cuda_repro_build_script",
+      "path": "tools/codex_build_h2_leak_mpi_cuda_repro.sh",
+      "sha256": "954d4acd6a7a2398f865b637ce21eeacd1cf7554d1d56fb2fbd9eca34a2aeae5",
+      "size_bytes": 823
+    },
+    {
+      "label": "mpi_cuda_build_failed_probe_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/build_mpi_cuda.log",
+      "sha256": "970e55cb9d5bc20b7dc2b95fc69d3473ae55514a0525b0626b66b57afb3c810f",
+      "size_bytes": 1022064
+    },
+    {
+      "label": "mpi_cuda_sundials_local_build_log",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/build_mpi_cuda_sundials_local.log",
+      "sha256": "18406db517d2e614dd7cad4fc907cb5879d00d6e0db9a01bf3d81a283a5901f0",
+      "size_bytes": 25898
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:06:42.146943+00:00",
+  "implementation_notes": [
+    "User-defined external sources are still authored through the problem hook.",
+    "For coarse levels covered by a finer AMR level, the framework snapshots ext_src before the user hook and restores those cells after the hook.",
+    "This preserves pre-existing non-user external sources while preventing user source double counting across coarse/fine overlap.",
+    "This implementation satisfies the AMR projection precondition, but a longer DataverseNO plume agreement run is still required for strict external-source credit."
+  ],
+  "reproducible_cuda_entrypoint_checks": {
+    "cuda_env_exports_sundials_lib_dir": true,
+    "cuda_env_script_present": true,
+    "cuda_env_uses_cuda_12_6_default": true,
+    "cuda_env_uses_home_relative_sundials": true,
+    "cuda_repro_build_passes_sundials_lib_dir": true,
+    "cuda_repro_build_script_present": true,
+    "cuda_repro_build_sources_env": true,
+    "cuda_repro_build_writes_success_log": true
+  },
+  "schema_version": 1,
+  "status": "PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-IMPLEMENTATION",
+  "summary": {
+    "amr_source_projection_implementation_ready": true,
+    "clears_external_plume_reference_blocker": false,
+    "coarse_cells_covered_by_fine_level_receive_no_user_source_delta": true,
+    "contract_ready": true,
+    "contract_status": "PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-CONTRACT",
+    "framework_level_owner_mask_implemented": true,
+    "gpu_mpi_safe_restore_path_present": true,
+    "mpi_cpu_build_log": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/build_mpi_cpu.log",
+    "mpi_cpu_build_verified": true,
+    "mpi_cuda_linked_executable": true,
+    "mpi_cuda_rebuild_attempted": true,
+    "mpi_cuda_rebuild_blocked_by_missing_sundials": false,
+    "mpi_cuda_rebuild_blocked_by_toolkit_version": false,
+    "mpi_cuda_reproducible_build_entrypoint_ready": true,
+    "mpi_cuda_reproducible_build_log": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/build_mpi_cuda_sundials_local.log",
+    "mpi_cuda_reproducible_build_uses_cuda_12_6": true,
+    "mpi_cuda_reproducible_build_uses_local_sundials_cuda": true,
+    "mpi_cuda_source_compile_verified": true,
+    "non_user_ext_sources_preserved_on_fine_covered_coarse_cells": true,
+    "source_projected_only_on_finest_available_level": true,
+    "strict_blocker_still_open": true,
+    "strict_external_plume_blocker_cleared": false
+  }
+}

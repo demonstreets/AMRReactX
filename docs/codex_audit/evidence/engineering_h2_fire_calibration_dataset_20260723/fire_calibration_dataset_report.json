@@ -1,0 +1,42 @@
+{
+  "blocking_gaps": [
+    "fire_calibration_dataset_ingestion_not_passed",
+    "fire_calibration_metadata_case_alignment_release_or_cloud_mass_not_true",
+    "fire_calibration_metadata_case_alignment_ignition_or_burn_basis_not_true",
+    "fire_calibration_metadata_case_alignment_boundary_conditions_not_true"
+  ],
+  "calibration_dataset_json": null,
+  "calibration_dataset_written": false,
+  "candidate_metric_count": 0,
+  "clears_fire_consequence_blocker": false,
+  "current_inputs": {
+    "dataset_ingestion_passed": false,
+    "distance_summary_keys_available": true,
+    "fire_screening_report_passed": true
+  },
+  "evidence_files": [
+    {
+      "label": "fire_consequence_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "fire_calibration_dataset_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json",
+      "sha256": "ec57ea9833fa93b6f2c4fed712ba4f650252f4a7d2e4b82bdea42b11120f194a",
+      "size_bytes": 6383
+    }
+  ],
+  "fire_calibration_dataset_ingestion_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json",
+  "fire_consequence_report": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This builder writes the calibration dataset JSON consumed by the fire consequence report.",
+    "It does not clear the fire-consequence blocker by itself.",
+    "Production credit requires the official fire consequence report to pass with --calibration-dataset-json."
+  ],
+  "schema_version": 1,
+  "status": "NOT_READY-H2-FIRE-CALIBRATION-DATASET",
+  "title": "Engineering H2 Fire Calibration Dataset Builder"
+}

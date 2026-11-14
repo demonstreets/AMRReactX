@@ -1,0 +1,51 @@
+# Codex DataverseNO full-channel refined-source probe.
+# Full open channel with dx=0.025 m and the experimental 4.6 mm H2 orifice
+# radius represented as a cell-centered source on the full domain.
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 5.80 0.90 0.80
+
+peleLM.lo_bc = Outflow NoSlipWallAdiab NoSlipWallAdiab
+peleLM.hi_bc = Outflow NoSlipWallAdiab NoSlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.n_cell = 232 36 32
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 32
+amr.max_step = 100
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-6
+amr.cfl = 0.25
+amr.plot_int = 25
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 293.0
+prob.wind_u = 0.0
+prob.wind_v = 0.0
+prob.leak_xc = 5.125000000000e-01
+prob.leak_yc = 4.625000000000e-01
+prob.leak_zc = 7.625000000000e-01
+prob.leak_rate = 9.152681907312e-04
+prob.leak_radius = 2.300000000000e-03
+prob.leak_vel_x = 6.567687631723e+02
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 293.0
+
+eb2.geom_type = all_regular
+
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

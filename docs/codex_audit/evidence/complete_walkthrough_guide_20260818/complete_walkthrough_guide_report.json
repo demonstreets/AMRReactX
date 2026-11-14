@@ -1,0 +1,935 @@
+{
+  "status": "PASS-COMPLETE-WALKTHROUGH-GUIDE",
+  "documents": {
+    "index": {
+      "path": "docs/user_guides/README.md",
+      "exists": true,
+      "sha256": "f7d017f00f28653dcf22134a749b86fce32a8444e3d13b657eed8626720e5f70",
+      "bytes": 2552
+    },
+    "complete_walkthrough": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "exists": true,
+      "sha256": "ea30ab0f4502af19739c5baf322bd20ff7f654cd1931b6fff33a4e50fa62da5d",
+      "bytes": 26212
+    }
+  },
+  "checks": {
+    "index_links_complete_walkthrough": {
+      "path": "docs/user_guides/README.md",
+      "pattern": "从目录到排错_完整运行教程.md",
+      "pass": true
+    },
+    "directory_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 1. 目录怎么看",
+      "pass": true
+    },
+    "input_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 2. 输入文件怎么写",
+      "pass": true
+    },
+    "engineering_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 3. 工程泄漏/火灾怎么跑",
+      "pass": true
+    },
+    "academic_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 4. 学术爆轰怎么跑",
+      "pass": true
+    },
+    "parallel_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 5. CPU/GPU/MPI 怎么运行",
+      "pass": true
+    },
+    "output_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 6. 输出怎么看",
+      "pass": true
+    },
+    "troubleshooting_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "## 7. 常见错误怎么查",
+      "pass": true
+    },
+    "case_output_cleanup_section": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "### 7.8 工作区污染和算例输出清理",
+      "pass": true
+    },
+    "engineering_mpi_command": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "MPI_RANKS=2 bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh",
+      "pass": true
+    },
+    "engineering_cuda_fire_command": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "CUDA_VISIBLE_DEVICES=0 bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "pass": true
+    },
+    "academic_cuda_command": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "CUDA_VISIBLE_DEVICES=0 bash tools/codex_smoke_academic_pelec_cuda.sh",
+      "pass": true
+    },
+    "current_scope_command": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "bash tools/run_current_scope_release_refresh.sh",
+      "pass": true
+    },
+    "source_ledger_command": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "python3 tools/write_current_worktree_source_ledger_report.py",
+      "pass": true
+    },
+    "case_output_cleanup_manifest_command": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "python3 tools/write_current_case_output_cleanup_manifest_report.py",
+      "pass": true
+    },
+    "real_case_boundary_statement": {
+      "path": "docs/user_guides/从目录到排错_完整运行教程.md",
+      "pattern": "真实 CAD、真实边界条件和外部标定数据",
+      "pass": true
+    }
+  },
+  "command_references": [
+    {
+      "runner": "bash",
+      "path": "tools/run_current_scope_release_refresh.sh",
+      "exists": true,
+      "sha256": "f80393d71a508f5f5f9b6dd6101ac1983b99bfafcc1b8627156f50c015e4395d",
+      "bytes": 3859
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh",
+      "exists": true,
+      "sha256": "d122d936ced3f45fc96705b0a5ceb0b9c098ffcd922ff800b75c5948b48c3592",
+      "bytes": 1729
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "exists": true,
+      "sha256": "9178b3f2f9af6dfb39ffd37c80077cf9aece679b5d3c79e36b2c57ee797a4cf3",
+      "bytes": 15875
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_cuda.sh",
+      "exists": true,
+      "sha256": "ebeed7c6f60f981c9248dbb8b96f83e4fb729734faba33b12737407248d4023d",
+      "bytes": 2398
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain.sh",
+      "exists": true,
+      "sha256": "48a7432fdb66b15c258c228ca8f526b2521c5c48fae36f3db40472255ffce460",
+      "bytes": 1397
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh",
+      "exists": true,
+      "sha256": "0dc71dcdfd7b2c1360c236649c1dce4393f05e0e19f4aa1ef46d33253d7fd433",
+      "bytes": 6010
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh",
+      "exists": true,
+      "sha256": "8c3e9a9ab1aa6e51697cc4832ef5d31c98433539fccace893e0acfb3b542956c",
+      "bytes": 6222
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh",
+      "exists": true,
+      "sha256": "c7aff17f47dfc5da18e6d7416bff3dee3ebb94bb46ef15146f00882d0fc51a5c",
+      "bytes": 4822
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh",
+      "exists": true,
+      "sha256": "34df5f2a900448ad2e66d2af87a8e2e3525ef8583b552e57312adb2a0092bb38",
+      "bytes": 10915
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh",
+      "exists": true,
+      "sha256": "fc9af0ec7a178228a8bb795616d8a565a198a6b4e42188d98af2446745f5573e",
+      "bytes": 13674
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh",
+      "exists": true,
+      "sha256": "cb02fa89d54802f57cc0f01b85a7d324bd35a12cfdda1b341ab1d3bfa108942c",
+      "bytes": 5365
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh",
+      "exists": true,
+      "sha256": "6118a1edf82934fdc7e59e6f95e15a4c74901fedd0ed106eee05004241cb2e36",
+      "bytes": 1115
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh",
+      "exists": true,
+      "sha256": "0c5f27f0f792efbcb6759e5ffcfc76e27230e89e7f2543df3162349af7bccf1e",
+      "bytes": 8730
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh",
+      "exists": true,
+      "sha256": "11f35b7bdf639431b3c4b366f61d62c3d7960884363790141d3ff721a5e96637",
+      "bytes": 7569
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh",
+      "exists": true,
+      "sha256": "46ab01ee2f6d7ca1fa9e90453e4df6f0595efc84bb8d0d6a304402fd3dc0c16c",
+      "bytes": 2664
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh",
+      "exists": true,
+      "sha256": "52c43183cab5a10bdb620d5d7365f3b41771b894ad11367a5091ecfd35b8c62c",
+      "bytes": 3358
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_multi_fuel_capability_boundary.sh",
+      "exists": true,
+      "sha256": "fce6e905639b5ab563df7081905c20c00d23896a95d37897aa7f9d949af59007",
+      "bytes": 497
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_multi_fuel_template_catalog.sh",
+      "exists": true,
+      "sha256": "ec4bba3327855a85f1867f118611168ed38578b6b91326ddc59fec93cf3856ba",
+      "bytes": 325
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_gasified_lng_lpg_surrogate.sh",
+      "exists": true,
+      "sha256": "1dac151725a1ff7919f3243e50fa5fa148e849d0087a0b3879bc2cdf9a32e86a",
+      "bytes": 477
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_ch4_cold_plume_cpu_probe.sh",
+      "exists": true,
+      "sha256": "4504c617b0f5b08419d75add2f1ae4b96eaebac213ac16eea8d64c34edfd6143",
+      "bytes": 481
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh",
+      "exists": true,
+      "sha256": "1df9e706f4ac9b37e70aca1695c0f67ad8f815be01cd7f73e009f8f6298e1559",
+      "bytes": 535
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh",
+      "exists": true,
+      "sha256": "7e7dcf683c4bfbf61f8af724e214eced25009dc6b503e602664599ecee81826f",
+      "bytes": 257
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_liquefied_breach_preset_templates.sh",
+      "exists": true,
+      "sha256": "9fb563d0b2a3400e0ee79a9fe6eb3bfa71e198e91330ba04068373bd68bae5c1",
+      "bytes": 291
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_liquefied_release_vaporization_source_model.sh",
+      "exists": true,
+      "sha256": "67e85da5658366832d0a7ef1a042fe1cfd81812c341fec6596d936e1513c75b9",
+      "bytes": 616
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh",
+      "exists": true,
+      "sha256": "77a2f04aa8517bfece90aeddfe250349dfa2f67a1a01153be057bbf7d5fe11c0",
+      "bytes": 762
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_external_vaporization_timeseries_cuda.sh",
+      "exists": true,
+      "sha256": "2cc540dc2ee2809cfdc1f0521ea9e5850d798f61182f8ddd38b2952bd5ade18e",
+      "bytes": 492
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_detonation_wave.sh",
+      "exists": true,
+      "sha256": "37cbb04928f71feccadde611b439547dad8c986b8f8e4dfacea7068f427bc8c1",
+      "bytes": 1443
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_mpi.sh",
+      "exists": true,
+      "sha256": "a9577088cecb2f0548f553a32b27412d9e7b05911a44661402b6bdb0dbfca339",
+      "bytes": 2461
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_plan_amr.sh",
+      "exists": true,
+      "sha256": "c1d3089b3b1fef549b8b57f34e29b882987586f874608d99c24dca8c4d2ccf35",
+      "bytes": 1476
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_shock_droplet_spray.sh",
+      "exists": true,
+      "sha256": "2a3340a6dc9617d78adf6101391ac131fd3bd6c352ca4773e82fb49f2ddd18dc",
+      "bytes": 1502
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_d2_law.sh",
+      "exists": true,
+      "sha256": "df9a6dbe936fcacc80b4150403bf029a3f643205544d80a774c56f9aaa149f32",
+      "bytes": 2555
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_vof_advection.sh",
+      "exists": true,
+      "sha256": "88cf3a1eb37def41b17c478a785c2bcb8a8aaad0b4cc587b347493cb42a128f3",
+      "bytes": 1444
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh",
+      "exists": true,
+      "sha256": "0639a79dcb2c34a5f52f5c53659fb2766eae289eacd1029e4a8047a3c70ffac7",
+      "bytes": 628
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_pelelmex.sh",
+      "exists": true,
+      "sha256": "5f5798a53602647293b3f9725822250d4bd12dfa95d95d4914717d64c4592bfb",
+      "bytes": 453
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec.sh",
+      "exists": true,
+      "sha256": "bdcf2f2c7a0ab5dfd16a9f528f0e54383c0aeb1c5bb998261606bef96b930892",
+      "bytes": 456
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_hybrid.sh",
+      "exists": true,
+      "sha256": "73d5c1d83a7d7c4e49332c214719966c7f02908c1f7e56be6eb95694f04dab74",
+      "bytes": 3043
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh",
+      "exists": true,
+      "sha256": "97d1e3352cf9bb29b279c26c4b2ced9498a8ee92078696c6b7b5aa5a7580793c",
+      "bytes": 8369
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_h2_production_evidence.sh",
+      "exists": true,
+      "sha256": "d5de6512c43491bf944f4f2d1e8113500aafafe1416408eb16d434a03aa45d3c",
+      "bytes": 47645
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_parallel_capability_matrix.sh",
+      "exists": true,
+      "sha256": "a2835f7567c08fecc6d76e1dd0f54621faa0a307ea9b905367ad0a65dfde8da5",
+      "bytes": 272
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_worktree_source_ledger_report.py",
+      "exists": true,
+      "sha256": "589b28a9a77ea0d8d7c8ea2d79c43ceb8afa8a047aa9ce51225e0667eee4e2fb",
+      "bytes": 14309
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_worktree_source_ledger.sh",
+      "exists": true,
+      "sha256": "d5a21dbe3cc5b431c722a9378541e8b60e82778dc84ce5d709afacf7260a8a35",
+      "bytes": 289
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_case_output_cleanup_manifest_report.py",
+      "exists": true,
+      "sha256": "f609c49d422f1006eaf015f973d410bfb37d276a349f83fc5a1b0bf356f34039",
+      "bytes": 14639
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_case_output_cleanup_manifest.sh",
+      "exists": true,
+      "sha256": "a94822bb43d39876b508b0128ae4f3899f44344b19f46ac1768614ff9145796d",
+      "bytes": 313
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_phase_release_manifest_report.py",
+      "exists": true,
+      "sha256": "759ef388c286e582534de388a36698a226b82b117bafc0a84165787d9e8e9b7c",
+      "bytes": 22098
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_phase_release_manifest.sh",
+      "exists": true,
+      "sha256": "aa66487e1fbcc87c24dc298c16d7d6cce73b992a6bdfa5c3a86ae80d2cf0eea4",
+      "bytes": 243
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_verification_chain_coverage_report.py",
+      "exists": true,
+      "sha256": "2a142cd56e8897071858b763674ea0bcc3e462c1ea85d84ee106c0e06c14a16b",
+      "bytes": 39519
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_verification_chain_coverage.sh",
+      "exists": true,
+      "sha256": "e555d36ca1a2cd562b79c94dc107e0031312ac3d22ca15926012dea5eb14f5fc",
+      "bytes": 309
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_scope_state_snapshot_report.py",
+      "exists": true,
+      "sha256": "9eab88fe6eca2749af573f06eafc332717c22c6b202d88c1d7e17fbe299cd236",
+      "bytes": 55928
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_scope_state_snapshot.sh",
+      "exists": true,
+      "sha256": "ab0879dea79e26c260fb756ccdce90411d47abb25fb7711d2959c45038682ef8",
+      "bytes": 281
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_status_cli_report.py",
+      "exists": true,
+      "sha256": "ee2e668da0b086cc22b9c987ff43348e2e0512ee6597aa1f756798acfcb1e7d9",
+      "bytes": 125064
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_status_cli.sh",
+      "exists": true,
+      "sha256": "5eb307a96dea6188c0ab2a58a33c596bb7f2e25fd276dc6c0c8d975230892214",
+      "bytes": 241
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_report_hash_cycle_guard_report.py",
+      "exists": true,
+      "sha256": "2e847e0bf764120f2c4ddfc65b94a43b47a8b019f61fe190bf5dc3581794921c",
+      "bytes": 13202
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_report_hash_cycle_guard.sh",
+      "exists": true,
+      "sha256": "5764a52b9e5050efa5076e7a8fc8322b310a318ddd49ccdb1590bbdf2c3e828d",
+      "bytes": 425
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_master_plan_current_scope.sh",
+      "exists": true,
+      "sha256": "cc1116350dd6aebfc23a19fd9d5d39f95f377cf74cadabf9015963c5f9a540e1",
+      "bytes": 2697
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_complete_walkthrough_guide_report.py",
+      "exists": true,
+      "sha256": "12b3c34adcca37b7b2b449e0b38ab0a9f2918425de0a237bd6e7ff3014e316b7",
+      "bytes": 12022
+    }
+  ],
+  "summary": {
+    "documented_command_reference_count": 55,
+    "missing_documented_command_reference_count": 0,
+    "unique_documented_command_target_count": 55,
+    "documented_command_syntax_failure_count": 0
+  },
+  "command_syntax_checks": [
+    {
+      "runner": "bash",
+      "path": "tools/run_current_scope_release_refresh.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_cuda.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_multi_fuel_capability_boundary.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_multi_fuel_template_catalog.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_gasified_lng_lpg_surrogate.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_ch4_cold_plume_cpu_probe.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_liquefied_breach_preset_templates.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_liquefied_release_vaporization_source_model.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_external_vaporization_timeseries_cuda.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_detonation_wave.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_mpi.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_plan_amr.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_shock_droplet_spray.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_d2_law.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_vof_advection.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_pelelmex.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_academic_pelec_hybrid.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_engineering_h2_production_evidence.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_parallel_capability_matrix.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_worktree_source_ledger_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_worktree_source_ledger.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_case_output_cleanup_manifest_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_case_output_cleanup_manifest.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_phase_release_manifest_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_phase_release_manifest.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_verification_chain_coverage_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_verification_chain_coverage.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_scope_state_snapshot_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_scope_state_snapshot.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_status_cli_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_status_cli.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_current_report_hash_cycle_guard_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_current_report_hash_cycle_guard.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "bash",
+      "path": "tools/verify_master_plan_current_scope.sh",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    },
+    {
+      "runner": "python3",
+      "path": "tools/write_complete_walkthrough_guide_report.py",
+      "checked": true,
+      "pass": true,
+      "returncode": 0,
+      "stderr_excerpt": ""
+    }
+  ],
+  "failures": []
+}

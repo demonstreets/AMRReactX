@@ -1,0 +1,154 @@
+[engineering-h2-verify] verify_mpi_link_shim
+[engineering-h2-verify] MPI link shim PASS dir=/home/cj/my-pele/.codex/lib/mpi-link libs=libmpi_cxx.so libopen-rte.so libopen-pal.so libhwloc.so libevent_core.so libevent_pthreads.so
+[engineering-h2-verify] python3 tools/package_engineering_h2_release_evidence.py verify --pack-manifest docs/codex_audit/evidence/engineering_h2_production_full_20260720/release_pack/evidence_pack_manifest.json
+engineering_h2_release_evidence_pack VERIFY-PASS cases=16 manifest=docs/codex_audit/evidence/engineering_h2_production_full_20260720/release_pack/evidence_pack_manifest.json
+[engineering-h2-verify] python3 tools/write_engineering_h2_acceptance_matrix.py --verify-json docs/codex_audit/evidence/engineering_h2_acceptance_matrix_20260720/engineering_h2_acceptance_matrix.json
+engineering_h2_acceptance_matrix VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_acceptance_matrix_20260720/engineering_h2_acceptance_matrix.json status=PASS-PRODUCTION-MATRIX pass_like_rows=7 not_ready_rows=0
+[engineering-h2-verify] python3 tools/write_engineering_production_scorecard.py --verify-json docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json
+engineering_production_scorecard VERIFY-PASS json=docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json status=NOT_PRODUCTION_READY functional=94.9 production=77.9
+[engineering-h2-verify] skipping production evidence verification report because CODEX_ENGINEERING_H2_VERIFY_SKIP_REPORT=TRUE
+[engineering-h2-verify] python3 tools/write_engineering_runtime_affinity_manifest.py --verify-json docs/codex_audit/evidence/engineering_runtime_affinity_20260720/runtime_affinity_manifest.json
+engineering_runtime_affinity_manifest VERIFY-PASS ranks=4 threads=1 warnings=3 json=docs/codex_audit/evidence/engineering_runtime_affinity_20260720/runtime_affinity_manifest.json
+[engineering-h2-verify] python3 tools/write_engineering_runtime_affinity_manifest.py --verify-json docs/codex_audit/evidence/engineering_runtime_affinity_hybrid_20260720/runtime_affinity_manifest.json
+engineering_runtime_affinity_manifest VERIFY-PASS ranks=4 threads=2 warnings=0 json=docs/codex_audit/evidence/engineering_runtime_affinity_hybrid_20260720/runtime_affinity_manifest.json
+[engineering-h2-verify] python3 tools/verify_engineering_scheduler_run.py --verify-json docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_run_report.json
+engineering_scheduler_run_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_run_report.json status=PASS checks=45
+[engineering-h2-verify] python3 tools/write_engineering_h2_ignition_consequence_report.py --verify-json docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/ignition_consequence_report.json
+engineering_h2_ignition_consequence_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/ignition_consequence_report.json status=PASS-SMOKE
+[engineering-h2-verify] python3 tools/write_engineering_h2_fire_consequence_metrics_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json
+engineering_h2_fire_consequence_metrics VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json status=PASS-SCREENING cloud_mass=2.23883994e-04 max_flux=2.86514780e+03 max_overpressure=2.44388282e-01
+[engineering-h2-verify] python3 tools/write_engineering_h2_fire_calibration_public_source_triage_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json
+engineering_h2_fire_calibration_public_source_triage VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json status=PASS-H2-FIRE-CALIBRATION-PUBLIC-SOURCE-TRIAGE missing_artifacts=4
+[engineering-h2-verify] python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json
+engineering_h2_fire_calibration_dataset_ingestion VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json status=NOT_READY-H2-FIRE-CALIBRATION-DATASET-INGESTION gaps=3
+[engineering-h2-verify] python3 tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json
+engineering_h2_fire_calibration_digitization_preflight VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json missing_artifacts=4 templates=5
+[engineering-h2-verify] python3 tools/write_engineering_h2_fire_calibration_package_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json
+engineering_h2_fire_calibration_package VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json status=NOT_READY-H2-FIRE-CALIBRATION-PACKAGE builder_ready=False
+[engineering-h2-verify] python3 tools/write_engineering_h2_fire_calibration_dataset_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_20260723/fire_calibration_dataset_report.json
+engineering_h2_fire_calibration_dataset VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_20260723/fire_calibration_dataset_report.json status=NOT_READY-H2-FIRE-CALIBRATION-DATASET gaps=4
+[engineering-h2-verify] python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json
+engineering_h2_real_cad_cleanup_package VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json status=NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE clears=False
+[engineering-h2-verify] python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json
+engineering_h2_real_cad_intake_preflight VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json missing_artifacts=4 source_cad=0 cleaned_geometry=0
+[engineering-h2-verify] python3 tools/write_engineering_h2_mpi_scaling_report.py --verify-json docs/codex_audit/evidence/engineering_h2_mpi_scaling_20260720/mpi_scaling_report.json
+engineering_h2_mpi_scaling_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_mpi_scaling_20260720/mpi_scaling_report.json ranks=[4, 8, 16] baseline_speedup_4_to_16=1.82066093e+00 amr_speedup_4_to_16=1.82631363e+00
+[engineering-h2-verify] python3 tools/write_engineering_h2_hybrid_cfd_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_hybrid_cfd_scout_20260720/hybrid_cfd_scout_report.json
+engineering_h2_hybrid_cfd_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_hybrid_cfd_scout_20260720/hybrid_cfd_scout_report.json ranks=4 threads=2 cloud_rel_diff=4.46428599e-02 peak_rel_diff=4.55934286e-02
+[engineering-h2-verify] python3 tools/write_engineering_h2_hybrid_cfd_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_scout_20260720/hybrid_production_mesh_scout_report.json
+engineering_h2_hybrid_cfd_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_scout_20260720/hybrid_production_mesh_scout_report.json ranks=4 threads=2 cloud_rel_diff=3.80952381e-02 peak_rel_diff=4.31073584e-02
+[engineering-h2-verify] python3 tools/write_engineering_h2_hybrid_cfd_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/hybrid_production_mesh_8rank_scout_report.json
+engineering_h2_hybrid_cfd_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_scout_20260720/hybrid_production_mesh_8rank_scout_report.json ranks=8 threads=2 cloud_rel_diff=3.80952381e-02 peak_rel_diff=4.31073584e-02
+[engineering-h2-verify] python3 tools/write_engineering_h2_hybrid_cfd_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_600step_stability_scout_20260721/hybrid_production_mesh_8rank_600step_stability_scout_report.json
+engineering_h2_hybrid_cfd_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_8rank_600step_stability_scout_20260721/hybrid_production_mesh_8rank_600step_stability_scout_report.json ranks=8 threads=2 cloud_rel_diff=3.15976518e-02 peak_rel_diff=3.40034177e-02
+[engineering-h2-verify] python3 tools/write_engineering_h2_hybrid_cfd_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/hybrid_production_mesh_600step_stability_scout_report.json
+engineering_h2_hybrid_cfd_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/hybrid_production_mesh_600step_stability_scout_report.json ranks=4 threads=2 cloud_rel_diff=3.15976518e-02 peak_rel_diff=3.40034177e-02
+[engineering-h2-verify] python3 tools/write_engineering_h2_hybrid_cfd_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json --min-ranks 8 --min-threads 2 --min-max-step 120 --min-plotfiles 5 --max-cloud-rel-diff 0.20 --max-peak-rel-diff 0.20 --max-centroid-abs-diff 0.02 --max-downstream-abs-diff 0.02 --max-advance-seconds-ratio 4.0
+engineering_h2_hybrid_cfd_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json ranks=8 threads=2 cloud_rel_diff=1.59761211e-02 peak_rel_diff=1.55533247e-03
+[engineering-h2-verify] python3 tools/write_engineering_h2_reference_agreement_report.py --verify-json docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json
+engineering_h2_reference_agreement_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json status=PASS-REFERENCE-THRESHOLD-AGREEMENT peak=1.86431079e-01 cloud_rel=1.59761211e-02
+[engineering-h2-verify] python3 tools/write_engineering_h2_plume_observation_report.py --verify-json docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json
+engineering_h2_plume_observation_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json plotfiles=11 sensors=3
+[engineering-h2-verify] python3 tools/write_engineering_h2_external_plume_benchmark_spec.py --verify-json docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_spec_20260723/hysafe_sbepv5_d27_benchmark_spec_report.json
+engineering_h2_external_plume_benchmark_spec VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_spec_20260723/hysafe_sbepv5_d27_benchmark_spec_report.json benchmark_id=hysafe_sbepv5_d27
+[engineering-h2-verify] python3 tools/write_engineering_h2_external_plume_public_source_triage_report.py --verify-json docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json
+engineering_h2_external_plume_public_source_triage VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json status=PASS-H2-EXTERNAL-PLUME-PUBLIC-SOURCE-TRIAGE missing_artifacts=4
+[engineering-h2-verify] python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json
+engineering_h2_sbepv5_dataset_ingestion VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json status=NOT_READY-SBEPV5-D27-DATASET-INGESTION gaps=4
+[engineering-h2-verify] python3 tools/write_engineering_h2_sbepv5_digitization_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json
+engineering_h2_sbepv5_digitization_preflight VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json missing_artifacts=4 templates=5
+[engineering-h2-verify] python3 tools/write_engineering_h2_sbepv5_literature_metric_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_literature_metric_preflight_20260724/sbepv5_d27_literature_metric_preflight_report.json
+engineering_h2_sbepv5_literature_metric_preflight VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_sbepv5_d27_literature_metric_preflight_20260724/sbepv5_d27_literature_metric_preflight_report.json metrics=4 missing=2
+[engineering-h2-verify] python3 tools/write_engineering_h2_sbepv5_case_package_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json
+engineering_h2_sbepv5_case_package VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_20260723/sbepv5_d27_case_package_report.json runnable=False
+[engineering-h2-verify] python3 tools/write_engineering_h2_sbepv5_case_package_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_preflight_20260723/sbepv5_d27_case_package_preflight_report.json
+engineering_h2_sbepv5_case_package_preflight VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_sbepv5_d27_case_package_preflight_20260723/sbepv5_d27_case_package_preflight_report.json reference_resolution=True
+[engineering-h2-verify] python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_external_dataset_20260723/sbepv5_d27_external_dataset_report.json
+engineering_h2_sbepv5_external_dataset VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_sbepv5_d27_external_dataset_20260723/sbepv5_d27_external_dataset_report.json status=NOT_READY-SBEPV5-D27-EXTERNAL-PLUME-DATASET gaps=7
+[engineering-h2-verify] python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py --verify-json docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json
+engineering_h2_external_plume_benchmark_readiness VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json status=NOT_READY-EXTERNAL-PLUME-BENCHMARK gaps=2
+[engineering-h2-verify] python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json
+engineering_h2_blocker_clearance_preflight VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json status=NOT_READY-H2-BLOCKER-CLEARANCE-PREFLIGHT remaining=3
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_blocker_data_room_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json
+engineering_h2_production_blocker_data_room VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json missing_artifacts=12 remaining=3
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_handoff_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_handoff_20260723/h2_production_handoff_report.json
+engineering_h2_production_handoff VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_handoff_20260723/h2_production_handoff_report.json status=NOT_READY-H2-PRODUCTION-HANDOFF remaining=3
+[engineering-h2-verify] python3 tools/write_engineering_h2_master_plan_traceability_report.py --verify-json docs/codex_audit/evidence/engineering_h2_master_plan_traceability_20260724/h2_master_plan_traceability_report.json
+engineering_h2_master_plan_traceability VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_master_plan_traceability_20260724/h2_master_plan_traceability_report.json status=NOT_READY-H2-MASTER-PLAN-TRACEABILITY requirements=29
+[engineering-h2-verify] python3 tools/write_academic_gas_cantera_ignition_reference_report.py --verify-json docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_report.json
+academic_gas_cantera_ignition_reference VERIFY-PASS json=docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_report.json status=PASS-ACADEMIC-GAS-CANTERA-IGNITION-REFERENCE cases=4 delay_range=[5.4113919943847135e-05,0.0003212730681333078]
+[engineering-h2-verify] python3 tools/write_academic_gas_detonation_readiness_report.py --verify-json docs/codex_audit/evidence/academic_gas_detonation_readiness_20260724/academic_gas_detonation_readiness_report.json
+academic_gas_detonation_readiness VERIFY-PASS json=docs/codex_audit/evidence/academic_gas_detonation_readiness_20260724/academic_gas_detonation_readiness_report.json status=PARTIAL-ACADEMIC-GAS-DETONATION-READINESS foundation=True missing_or_partial=4
+[engineering-h2-verify] python3 tools/write_engineering_bfs_kepsilon_reference_report.py --verify-json docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_reference_report.json
+engineering_bfs_kepsilon_reference_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_bfs_kepsilon_reference_20260721/bfs_kepsilon_reference_report.json status=PASS-BFS-KEPSILON-REFERENCE bfs_rc=0 loglaw_rc=1
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_scale_scout_20260720/production_scale_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_scale_scout_20260720/production_scale_scout_report.json status=PASS-SCOUT ranks=4 base_cells=27648 fine_cells=221184
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_long_stability_scout_20260720/long_stability_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_long_stability_scout_20260720/long_stability_scout_report.json status=PASS-STABILITY ranks=4 base_cells=27648 fine_cells=221184
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_mesh_scout_20260720/production_mesh_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_mesh_scout_20260720/production_mesh_scout_report.json status=PASS-SCOUT ranks=4 base_cells=65536 fine_cells=524288
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/production_mesh_8rank_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/production_mesh_8rank_scout_report.json status=PASS-SCOUT ranks=8 base_cells=65536 fine_cells=524288
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json status=PASS-SCOUT ranks=16 base_cells=65536 fine_cells=524288
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_mesh_600step_stability_scout_20260720/production_mesh_600step_stability_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_mesh_600step_stability_scout_20260720/production_mesh_600step_stability_scout_report.json status=PASS-STABILITY ranks=4 base_cells=65536 fine_cells=524288
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_mesh_1200step_stability_scout_20260720/production_mesh_1200step_stability_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_mesh_1200step_stability_scout_20260720/production_mesh_1200step_stability_scout_report.json status=PASS-STABILITY ranks=4 base_cells=65536 fine_cells=524288
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_scale_scout_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_600step_stability_scout_20260720/production_mesh_8rank_600step_stability_scout_report.json
+engineering_h2_production_scale_scout_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_600step_stability_scout_20260720/production_mesh_8rank_600step_stability_scout_report.json status=PASS-STABILITY ranks=8 base_cells=65536 fine_cells=524288
+[engineering-h2-verify] python3 tools/check_machine_local_paths.py --strict
+machine_local_paths PASS scanned_files=1004
+[engineering-h2-verify] ctest --test-dir build-codex-smoke --output-on-failure
+Internal ctest changing into directory: /home/cj/my-pele/build-codex-smoke
+Test project /home/cj/my-pele/build-codex-smoke
+      Start  1: amrex_reader_multibox_smoke
+ 1/22 Test  #1: amrex_reader_multibox_smoke ......   Passed    0.21 sec
+      Start  2: weno5_smoke
+ 2/22 Test  #2: weno5_smoke ......................   Passed    0.00 sec
+      Start  3: pelec_weno_smoke
+ 3/22 Test  #3: pelec_weno_smoke .................   Passed    0.00 sec
+      Start  4: geometry_pipeline_smoke
+ 4/22 Test  #4: geometry_pipeline_smoke ..........   Passed    0.00 sec
+      Start  5: refinement_tags_smoke
+ 5/22 Test  #5: refinement_tags_smoke ............   Passed    0.00 sec
+      Start  6: evaporation_model_smoke
+ 6/22 Test  #6: evaporation_model_smoke ..........   Passed    0.00 sec
+      Start  7: pool_vof_coupling_smoke
+ 7/22 Test  #7: pool_vof_coupling_smoke ..........   Passed    0.00 sec
+      Start  8: wind_profile_smoke
+ 8/22 Test  #8: wind_profile_smoke ...............   Passed    0.00 sec
+      Start  9: wall_functions_smoke
+ 9/22 Test  #9: wall_functions_smoke .............   Passed    0.00 sec
+      Start 10: leak_source_smoke
+10/22 Test #10: leak_source_smoke ................   Passed    0.01 sec
+      Start 11: gaussian_plume_smoke
+11/22 Test #11: gaussian_plume_smoke .............   Passed    0.12 sec
+      Start 12: csf_smoke
+12/22 Test #12: csf_smoke ........................   Passed    0.00 sec
+      Start 13: static_droplet_laplace_smoke
+13/22 Test #13: static_droplet_laplace_smoke .....   Passed    0.00 sec
+      Start 14: vof_fct_smoke
+14/22 Test #14: vof_fct_smoke ....................   Passed    0.00 sec
+      Start 15: vof_plic_smoke
+15/22 Test #15: vof_plic_smoke ...................   Passed    0.01 sec
+      Start 16: yaml_parser_smoke
+16/22 Test #16: yaml_parser_smoke ................   Passed    0.01 sec
+      Start 17: twophase_eos_smoke
+17/22 Test #17: twophase_eos_smoke ...............   Passed    0.00 sec
+      Start 18: twophase_hllc_smoke
+18/22 Test #18: twophase_hllc_smoke ..............   Passed    0.00 sec
+      Start 19: d2_law_smoke
+19/22 Test #19: d2_law_smoke .....................   Passed    0.00 sec
+      Start 20: second_order_advection_smoke
+20/22 Test #20: second_order_advection_smoke .....   Passed    0.00 sec
+      Start 21: sod_shock_tube_smoke
+21/22 Test #21: sod_shock_tube_smoke .............   Passed    0.08 sec
+      Start 22: isentropic_vortex_smoke
+22/22 Test #22: isentropic_vortex_smoke ..........   Passed    0.05 sec
+
+100% tests passed, 0 tests failed out of 22
+
+Total Test time (real) =   0.55 sec
+[engineering-h2-verify] PASS engineering H2 production evidence verification
+CODEX_VERIFY_RC:0

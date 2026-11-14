@@ -1,0 +1,174 @@
+{
+  "baseline_evidence": {
+    "production_mesh_campaign_max_base_cells": 65536,
+    "production_mesh_campaign_max_fine_cells": 524288,
+    "production_mesh_campaign_max_step": 7200,
+    "production_mesh_campaign_ranks_covered": [
+      4,
+      8,
+      16
+    ],
+    "production_mesh_campaign_status": "PASS-PRODUCTION-MESH-FULL-DURATION-CAMPAIGN",
+    "stability_scout_cloud_rel_diff": 0.0299314337,
+    "stability_scout_max_step": 1200,
+    "stability_scout_peak_rel_diff": 0.0358285346,
+    "stability_scout_ranks": 4,
+    "stability_scout_status": "PASS-STABILITY"
+  },
+  "blocking_gaps": [],
+  "candidate_tier": "full_duration_execution_candidate",
+  "clears_stability_duration_blocker": true,
+  "disk_cleanup_audit": {
+    "current_free_gb": 161.07383728027344,
+    "deficit_gb": 0.0,
+    "destructive_actions_performed": false,
+    "review_candidate_gb": 87.0781070701778,
+    "review_candidates_cover_deficit": true,
+    "status": "PASS-DISK-CLEANUP-AUDIT"
+  },
+  "evidence_files": [
+    {
+      "label": "production_mesh_campaign_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_campaign_20260722/production_mesh_campaign_report.json",
+      "sha256": "8981aa62e1abd4e57072e8bb807f91a392e905b32cba96f715609bb7d97cf5e3",
+      "size_bytes": 9297
+    },
+    {
+      "label": "production_mesh_1200step_stability_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_1200step_stability_scout_20260720/production_mesh_1200step_stability_scout_report.json",
+      "sha256": "1d0f9891d1ef7700ea3a5158dbad2c4719e5d24fc1d59baabcf50561a05d4f6c",
+      "size_bytes": 10296
+    },
+    {
+      "label": "disk_cleanup_audit_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_full_duration_candidate_20260722/disk_cleanup_audit_report.json",
+      "sha256": "07b6700ddc65fc92c8de2dd5a0abd1ec63e578ec1bec343a26420cb9d35d8f0c",
+      "size_bytes": 21576
+    },
+    {
+      "label": "full_duration_wrapper",
+      "path": "tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_reduced_long.sh",
+      "sha256": "e26bddf6ce6743ab2de66090a28a74988b8edea3d0a37f14de699fba15ebf225",
+      "size_bytes": 12596
+    },
+    {
+      "label": "full_duration_reduced_long_summary",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run/reduced_long_summary.csv",
+      "sha256": "619d48dc1dddebd52a49d7387e21b31d8f80c858461d42031c5f99552ec1d7ee",
+      "size_bytes": 643
+    },
+    {
+      "label": "full_duration_engineering_case_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run/engineering_case_report.json",
+      "sha256": "6a57f688d2b05497f06a6d8afbf0b965593853bdb4f50e18a944843598c0693c",
+      "size_bytes": 14182
+    },
+    {
+      "label": "full_duration_engineering_case_report_md",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run/engineering_case_report.md",
+      "sha256": "c3e830242aa589879f03af4c16f74d90e5e96f5bb457a0751e365b9ce3f292cb",
+      "size_bytes": 2447
+    }
+  ],
+  "executed": true,
+  "executed_evidence": {
+    "amr": {
+      "case": "amr",
+      "centroid_abs_diff": "4.64821000e-04",
+      "cloud_rel_diff": "2.80126911e-02",
+      "downstream_abs_diff": "3.95459000e-04",
+      "fabs": "[(0, 16), (1, 28)]",
+      "final_cloud_volume": "0.1122436523438",
+      "final_flammable_planes": "83",
+      "final_mass": "0.001472900578149",
+      "final_peak_X": "0.2364390186664",
+      "final_step": "7200",
+      "final_time": "7.200000000000e+00",
+      "finest_level": "1",
+      "log_files": "14",
+      "max_cloud_volume": "0.1125946044922",
+      "max_flammable_planes": "83",
+      "max_peak_X": "0.2370389636559",
+      "max_step": "7200",
+      "peak_rel_diff": "3.45775965e-02",
+      "plot_int": "240",
+      "plotfiles": "31",
+      "ranks": "4"
+    },
+    "baseline": {
+      "case": "baseline",
+      "centroid_abs_diff": "",
+      "cloud_rel_diff": "",
+      "downstream_abs_diff": "",
+      "fabs": "[(0, 16)]",
+      "final_cloud_volume": "0.115478515625",
+      "final_flammable_planes": "42",
+      "final_mass": "0.001473730307365",
+      "final_peak_X": "0.2282635260695",
+      "final_step": "7200",
+      "final_time": "7.200000000000e+00",
+      "finest_level": "0",
+      "log_files": "14",
+      "max_cloud_volume": "0.11572265625",
+      "max_flammable_planes": "42",
+      "max_peak_X": "0.2285248010501",
+      "max_step": "7200",
+      "peak_rel_diff": "",
+      "plot_int": "240",
+      "plotfiles": "31",
+      "ranks": "4"
+    },
+    "case_report_generated_at_utc": "2026-07-23T02:05:54+00:00",
+    "case_report_status": "PASS",
+    "engineering_case_report": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run/engineering_case_report.json",
+    "run_root": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run",
+    "summary_csv": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run/reduced_long_summary.csv"
+  },
+  "full_duration_campaign": true,
+  "full_plotfile_archive": true,
+  "generated_at_utc": "2026-07-23T02:10:57+00:00",
+  "limitations": [
+    "This report includes executed full-duration reduced-long evidence and clears the stability-duration blocker.",
+    "It remains an internal engineering evidence artifact and does not replace external safety certification.",
+    "The target command is intentionally machine-readable so it can be submitted by scheduler or run manually under controlled conditions."
+  ],
+  "overnight_campaign": true,
+  "production_campaign": false,
+  "production_size_mesh_campaign": true,
+  "repo": {
+    "branch": "codex/stabilize-my-pele",
+    "commit": "0ec1056ff13bba9ee4062713938d55a75efc93dd",
+    "dirty_short_sha256": "96b29fcc1810c0e0775e0ec1a8cc905d0d39c2108c59f50f3729dd80313aea4d"
+  },
+  "resource_preflight": {
+    "disk_preflight_passed": true,
+    "free_bytes": 174381309952,
+    "free_gb": 162.4052505493164,
+    "min_required_free_gb": 20.0
+  },
+  "schema_version": 1,
+  "status": "PASS-FULL-DURATION-EXECUTED",
+  "target": {
+    "command": [
+      "env",
+      "CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_RANKS=4",
+      "CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_MAX_STEP=7200",
+      "CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_PLOT_INT=240",
+      "CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_MIN_PLOTFILES=31",
+      "RUN_TIMEOUT=43200",
+      "JOBS=8",
+      "CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_LOG_DIR=docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run",
+      "bash",
+      "tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_reduced_long.sh"
+    ],
+    "expected_plotfiles_per_case": 31,
+    "expected_simulation_time_s": 7.2,
+    "jobs": 8,
+    "max_step": 7200,
+    "plot_int": 240,
+    "ranks": 4,
+    "run_timeout_s": 43200,
+    "target_log_dir": "docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run"
+  },
+  "title": "Engineering H2 Full-Duration Candidate"
+}

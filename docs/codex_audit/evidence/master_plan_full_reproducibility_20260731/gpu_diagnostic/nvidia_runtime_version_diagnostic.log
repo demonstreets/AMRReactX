@@ -1,0 +1,67 @@
+== generated_at ==
+2026-07-31T14:53:19+08:00
+== uname ==
+Linux xiaochun-4028 7.0.0-28-generic #28~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 15:50:57 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+== nvidia-smi ==
+Fri Jul 31 14:53:19 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.173.02             Driver Version: 580.173.02     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla P100-PCIE-16GB           Off |   00000000:84:00.0 Off |                    0 |
+| N/A   40C    P0             26W /  250W |       5MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  Tesla P100-PCIE-16GB           Off |   00000000:89:00.0 Off |                    0 |
+| N/A   38C    P0             26W /  250W |       5MiB /  16384MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            4368      G   /usr/lib/xorg/Xorg                        4MiB |
+|    1   N/A  N/A            4368      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+== nvidia-smi query ==
+0, Tesla P100-PCIE-16GB, 580.173.02, 6.0, 16384 MiB
+1, Tesla P100-PCIE-16GB, 580.173.02, 6.0, 16384 MiB
+== proc driver version ==
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  580.173.02  Tue Jun 23 08:38:17 UTC 2026
+GCC version:  
+== modinfo nvidia ==
+filename:       /lib/modules/7.0.0-28-generic/kernel/nvidia-580/nvidia.ko
+alias:          char-major-195-*
+description:    NVIDIA core GPU kernel module
+version:        580.173.02
+supported:      external
+license:        NVIDIA
+firmware:       nvidia/580.173.02/gsp_tu10x.bin
+firmware:       nvidia/580.173.02/gsp_ga10x.bin
+srcversion:     2C5B4E3D34981DF3149D0A0
+alias:          pci:v000010DEd*sv*sd*bc06sc80i00*
+alias:          pci:v000010DEd*sv*sd*bc03sc02i00*
+alias:          pci:v000010DEd*sv*sd*bc03sc00i00*
+alias:          of:N*T*Cnvidia,tegra264-displayC*
+alias:          of:N*T*Cnvidia,tegra264-display
+alias:          of:N*T*Cnvidia,tegra234-displayC*
+alias:          of:N*T*Cnvidia,tegra234-display
+depends:        
+name:           nvidia
+retpoline:      Y
+vermagic:       7.0.0-28-generic SMP preempt mod_unload modversions 
+sig_id:         PKCS#7
+signer:         Canonical Ltd. Kernel Module Signing
+sig_key:        E9:DF:13:0F:92:92:A9:B7
+sig_hashalgo:   sha512
+signature:      5E:47:4A:77:3C:C4:2F:BA:9F:38:68:F2:88:E7:A4:C1:37:B3:BA:54:
+		CB:D5:61:B2:D8:03:54:7C:F7:2F:DA:55:01:43:73:33:56:9C:FE:EF:
+		E0:F3:DC:03:EF:DA:73:E5:4A:83:07:94:E9:4B:3A:3B:6A:38:25:29:
+		D9:AB:9E:05:C4:2A:7D:C6:B2:DF:A8:79:BB:D6:B5:0A:32:6B:D4:B0:
+		0F:BB:48:2B:86:04:F4:28:22:10:41:39:01:A9:3E:DA:E9:73:38:CD:
+		02:01:73:F9:11:FA:BE:E9:72:96:63:82:7B:38:D3:F0:7A:22:D4:D9:

@@ -1,0 +1,27 @@
+preflight PASS command git=/usr/bin/git
+preflight PASS command cmake=/usr/bin/cmake
+preflight PASS command make=/home/cj/bin/make
+preflight PASS command python3=/usr/bin/python3
+preflight PASS command c++=/usr/bin/c++
+preflight PASS command cc=/usr/bin/cc
+preflight PASS release provenance strict log=/tmp/codex_preflight_release_provenance.log
+preflight PASS machine-local path audit strict log=/tmp/codex_preflight_machine_local_paths.log
+preflight PASS external/PeleLMeX/Submodules/AMReX-Hydro git worktree present
+preflight PASS external/PelePhysics/Submodules/amrex symlink=../../amrex
+preflight PASS external/PeleLMeX/Submodules/PelePhysics symlink=../../PelePhysics
+preflight PASS external/PeleC/Submodules/PelePhysics symlink=../../PelePhysics
+preflight PASS external/PelePhysics/Submodules/sundials local CMake shim present
+preflight INFO SUNDIALS_CUDA_DIR=/home/cj/local/sundials-cuda
+preflight PASS SUNDIALS include directory exists
+preflight PASS SUNDIALS lib directory exists
+preflight INFO SUNDIALS_VERSION=6.7.0
+preflight INFO SUN_CUDA_VERSION=12.6.85
+preflight PASS SUNDIALS major version is 6 (validated server uses 6.7.0)
+preflight PASS SUNDIALS library libsundials_cvode present
+preflight PASS SUNDIALS library libsundials_core present
+preflight PASS SUNDIALS library libsundials_nvecserial present
+preflight PASS SUNDIALS CUDA library libsundials_nveccuda present
+preflight PASS SUNDIALS CUDA library libsundials_sunlinsolcusolversp present
+preflight PASS SUNDIALS CUDA library libsundials_sunmatrixcusparse present
+preflight INFO nvcc=/home/cj/local/cuda-12.6/bin/nvcc
+preflight SUMMARY PASS warnings=0

@@ -1,0 +1,310 @@
+{
+  "checks": [
+    {
+      "domain": "external_plume",
+      "kind": "json",
+      "label": "external_plume.dataset_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact"
+    },
+    {
+      "domain": "real_cad",
+      "kind": "json",
+      "label": "real_cad.real_cad_cleanup_manifest",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact"
+    },
+    {
+      "actual_keys": [
+        "case",
+        "case_alignment",
+        "dataset_type",
+        "schema_version",
+        "source",
+        "source_type",
+        "uncertainty"
+      ],
+      "domain": "fire_calibration",
+      "errors": [],
+      "kind": "json",
+      "label": "fire_calibration.calibration_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+      "present": true,
+      "ready": true,
+      "required_keys": [
+        "case",
+        "case_alignment",
+        "dataset_type",
+        "schema_version",
+        "source",
+        "source_type",
+        "uncertainty"
+      ],
+      "sha256": "0afea84c6f6f671c9b0f2e87291c41ededbb567963fa09d4ed49a60104b44445"
+    },
+    {
+      "domain": "external_plume",
+      "kind": "csv",
+      "label": "external_plume.sensor_coordinates",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact",
+      "required": true
+    },
+    {
+      "domain": "external_plume",
+      "kind": "csv",
+      "label": "external_plume.baffle_geometry",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact",
+      "required": true
+    },
+    {
+      "domain": "external_plume",
+      "kind": "csv",
+      "label": "external_plume.experimental_timeseries",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact",
+      "required": true
+    },
+    {
+      "domain": "external_plume",
+      "kind": "csv",
+      "label": "external_plume.digitization_uncertainty_record",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record.csv",
+      "present": false,
+      "ready": true,
+      "reason": "optional_artifact_absent",
+      "required": false
+    },
+    {
+      "domain": "real_cad",
+      "kind": "csv",
+      "label": "real_cad.real_cad_data_room_index",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact",
+      "required": true
+    },
+    {
+      "domain": "real_cad",
+      "kind": "csv",
+      "label": "real_cad.real_cad_cleanup_quality_record",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact",
+      "required": true
+    },
+    {
+      "domain": "real_cad",
+      "kind": "csv",
+      "label": "real_cad.real_cad_boundary_tags",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv",
+      "present": false,
+      "ready": true,
+      "reason": "awaiting_external_artifact",
+      "required": true
+    },
+    {
+      "actual_header": [
+        "metric_id",
+        "distance_m",
+        "reference_flux_w_m2",
+        "tolerance_abs_w_m2",
+        "tolerance_rel",
+        "source_basis"
+      ],
+      "data_row_count": 4,
+      "domain": "fire_calibration",
+      "errors": [],
+      "expected_header": [
+        "metric_id",
+        "distance_m",
+        "reference_flux_w_m2",
+        "tolerance_abs_w_m2",
+        "tolerance_rel",
+        "source_basis"
+      ],
+      "kind": "csv",
+      "label": "fire_calibration.radiation_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv",
+      "present": true,
+      "ready": true,
+      "required": true,
+      "row_count": 5,
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1"
+    },
+    {
+      "actual_header": [
+        "metric_id",
+        "distance_m",
+        "reference_overpressure_kpa",
+        "tolerance_abs_kpa",
+        "tolerance_rel",
+        "source_basis"
+      ],
+      "data_row_count": 4,
+      "domain": "fire_calibration",
+      "errors": [],
+      "expected_header": [
+        "metric_id",
+        "distance_m",
+        "reference_overpressure_kpa",
+        "tolerance_abs_kpa",
+        "tolerance_rel",
+        "source_basis"
+      ],
+      "kind": "csv",
+      "label": "fire_calibration.overpressure_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv",
+      "present": true,
+      "ready": true,
+      "required": true,
+      "row_count": 5,
+      "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613"
+    },
+    {
+      "actual_header": [
+        "family",
+        "candidate_id",
+        "title",
+        "url_or_doi",
+        "selected_for_calibration",
+        "required_digitization"
+      ],
+      "data_row_count": 5,
+      "domain": "fire_calibration",
+      "errors": [],
+      "expected_header": [
+        "family",
+        "candidate_id",
+        "title",
+        "url_or_doi",
+        "selected_for_calibration",
+        "required_digitization"
+      ],
+      "kind": "csv",
+      "label": "fire_calibration.fire_calibration_source_registry",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv",
+      "present": true,
+      "ready": true,
+      "required": true,
+      "row_count": 6,
+      "sha256": "e4183ddbf3c56bca45622e02aa1e050813211835485e24d0729752da4342c735"
+    },
+    {
+      "actual_header": [
+        "artifact",
+        "source_basis",
+        "method",
+        "calibration_points_or_table",
+        "estimated_uncertainty",
+        "review_status"
+      ],
+      "data_row_count": 2,
+      "domain": "fire_calibration",
+      "errors": [],
+      "expected_header": [
+        "artifact",
+        "source_basis",
+        "method",
+        "calibration_points_or_table",
+        "estimated_uncertainty",
+        "review_status"
+      ],
+      "kind": "csv",
+      "label": "fire_calibration.fire_calibration_digitization_uncertainty",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv",
+      "present": true,
+      "ready": true,
+      "required": false,
+      "row_count": 3,
+      "sha256": "318a497d05544963b004e3d4336545c1651665bbd41ffe6867536c0b3cc20532"
+    }
+  ],
+  "domains": {
+    "external_plume": {
+      "drop_root": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset",
+      "invalid_contract_artifact_count": 0,
+      "present_contract_artifact_count": 0
+    },
+    "fire_calibration": {
+      "drop_root": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset",
+      "invalid_contract_artifact_count": 0,
+      "present_contract_artifact_count": 5
+    },
+    "real_cad": {
+      "drop_root": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package",
+      "invalid_contract_artifact_count": 0,
+      "present_contract_artifact_count": 0
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "strict_artifact_drop_preflight",
+      "path": "docs/codex_audit/evidence/master_plan_strict_artifact_drop_preflight_20260731/master_plan_strict_artifact_drop_preflight_report.json",
+      "sha256": "6ebfa14eb96bdb5806679a429cf054bc3c4e4b4db620351d8ad37a64d52400aa",
+      "size_bytes": 17616
+    },
+    {
+      "label": "strict_artifact_template_lint",
+      "path": "docs/codex_audit/evidence/strict_artifact_template_lint_20260803/strict_artifact_template_lint_report.json",
+      "sha256": "71ee88c7ea0aa7af9c71cfb4e39f7d09eac511b9c047d7c4a946f529606caa58",
+      "size_bytes": 19811
+    },
+    {
+      "label": "fire_calibration.calibration_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+      "sha256": "0afea84c6f6f671c9b0f2e87291c41ededbb567963fa09d4ed49a60104b44445",
+      "size_bytes": 1186
+    },
+    {
+      "label": "fire_calibration.radiation_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    },
+    {
+      "label": "fire_calibration.overpressure_metrics",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv",
+      "sha256": "6fee1ae77084eddd314738b50755eb6b3a4296d83f7942195ab3271b5a8aa613",
+      "size_bytes": 1208
+    },
+    {
+      "label": "fire_calibration.fire_calibration_source_registry",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv",
+      "sha256": "e4183ddbf3c56bca45622e02aa1e050813211835485e24d0729752da4342c735",
+      "size_bytes": 1687
+    },
+    {
+      "label": "fire_calibration.fire_calibration_digitization_uncertainty",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv",
+      "sha256": "318a497d05544963b004e3d4336545c1651665bbd41ffe6867536c0b3cc20532",
+      "size_bytes": 620
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:58.180073+00:00",
+  "invalid_checks": [],
+  "schema_version": 1,
+  "status": "PASS-STRICT-ARTIFACT-DROP-CONTRACT-PREFLIGHT",
+  "summary": {
+    "awaiting_missing_artifact_count": 9,
+    "contract_check_count": 14,
+    "drop_preflight_status": "AWAITING-MASTER-PLAN-STRICT-ARTIFACT-DROP-PREFLIGHT-EXTERNAL-ARTIFACTS",
+    "invalid_present_artifact_count": 0,
+    "present_contract_artifact_count": 5,
+    "strict_artifact_drop_contract_preflight_ready": true,
+    "template_lint_status": "PASS-STRICT-ARTIFACT-TEMPLATE-LINT"
+  }
+}

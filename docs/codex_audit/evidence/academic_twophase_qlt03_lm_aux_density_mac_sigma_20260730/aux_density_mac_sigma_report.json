@@ -1,0 +1,77 @@
+{
+  "contracts": {
+    "center_height_error_worse_vs_pre_mac_sigma_baseline": true,
+    "circularity_error_worse_vs_pre_mac_sigma_baseline": true,
+    "lateral_drift_improved_vs_pre_mac_sigma_baseline": true,
+    "mac_projection_aux_density_sigma_present": true,
+    "smoke_passed_after_fix": true,
+    "t3_log_has_no_nan_abort_or_segfault": true,
+    "t3_mass_conserved": true,
+    "t3_reached_final_time": true,
+    "t3_sample_count_sufficient": true,
+    "t3_still_not_ready": true,
+    "velocity_error_improved_vs_pre_mac_sigma_baseline": true
+  },
+  "decision": {
+    "next_route": "Keep the MAC sigma consistency fix as a correctness repair, then continue with pressure-coupled balanced-force treatment or a sharper conservative interface path before declaring academic two-phase QLT-03 ready.",
+    "promote_qlt03_to_ready": false,
+    "retain_aux_density_mac_sigma_fix": true,
+    "why_not_ready": [
+      "t=3 Hysing reference agreement is still not cleared",
+      "center-height and minimum-circularity errors worsened versus the pre-MAC-sigma t=3 baseline",
+      "the remaining issue still points to pressure-coupled balanced force and/or sharper conservative interface representation"
+    ],
+    "why_retain": [
+      "MAC projection and nodal velocity projection now use consistent incompressible Aux-density sigma when the Aux-density option is enabled",
+      "short QLT-03 smoke remains stable, bounded, mass-conserving, and buoyant",
+      "t=3 scout remains stable and mass-conserving, with reduced lateral drift and improved maximum-rise-velocity error versus the pre-fix t=3 baseline"
+    ]
+  },
+  "evidence": {
+    "smoke_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_aux_bridge_smoke_20260730/academic_twophase_qlt03_lm_aux_bridge_smoke_report.json",
+    "source": "external/PeleLMeX/Source/PeleLMeX_UMac.cpp",
+    "t3_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json"
+  },
+  "pre_mac_sigma_baseline": {
+    "center_of_mass_y_at_t3_abs_error": 0.08397702843906696,
+    "final_center_x_drift": 0.20401463328714692,
+    "maximum_mean_rise_velocity_abs_error": 0.03962185343960288,
+    "minimum_circularity_abs_error": 0.19587871606339502
+  },
+  "scope": "Machine-checkable consistency guard for the QLT-03 low-Mach Aux-density MAC projection sigma fix. The fix makes MAC projection use face-centered Aux-alpha density when incompressible Aux-density is enabled, while retaining the constant-density fallback.",
+  "smoke_metrics": {
+    "alpha_center_x": 0.49999960246891273,
+    "alpha_center_y": 0.5530263238877298,
+    "alpha_mass_relative_drift": 0.0,
+    "alpha_max": 0.999999957134503,
+    "alpha_mean_rise_velocity_y": 0.19048669051965494,
+    "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-AUX-BRIDGE-SMOKE",
+    "time": 0.5
+  },
+  "source_contracts": {
+    "constant_density_fallback_retained": true,
+    "face_centered_alpha_to_rho_inverse": true,
+    "helper_present": true,
+    "mac_project_calls_aux_density_sigma": true,
+    "mac_project_has_aux_density_guard": true
+  },
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-AUX-DENSITY-MAC-SIGMA-CONSISTENCY",
+  "t3_metrics_after_fix": {
+    "alpha_mass_relative_drift": 0.0,
+    "final_alpha_max": 0.4464218681538674,
+    "final_center_x": 0.3648167130031677,
+    "final_center_x_drift": 0.1351832869968323,
+    "final_center_y": 0.8377451287151821,
+    "final_circularity": 0.9365273894761413,
+    "max_mean_rise_velocity_y": 0.22018115589600126,
+    "min_circularity": 0.6719879585705043,
+    "reference_errors": {
+      "center_of_mass_y_at_t3_abs_error": 0.2435548712848178,
+      "maximum_mean_rise_velocity_abs_error": 0.021518844103998735,
+      "minimum_circularity_abs_error": 0.22931204142949568
+    },
+    "sample_count": 17,
+    "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT",
+    "time": 3.0
+  }
+}

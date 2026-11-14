@@ -1,0 +1,87 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_3.10c_R1_fix.md)
+tool read_file completed: # TASK 3.10c-R1: 修复审查发现的 UTEMP + 静水压力问题
+
+## 文件
+`/home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H`
+
+## 修复 1 (HIGH): UTEMP EOS 一致化 (~line 49)
+
+当前代码对两相都用 `gamma_gas=1.4` 算 UTEMP，但液相内能已用 StiffenedGas：
+```cpp
+state(i,j,k,UTEMP) = e / (1.0 / (gamma_gas - 1.0));  // 两相同公式
+```
+
+修复：液相用 `sg_T(sg, ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H)
+tool read_file completed: #ifndef PROB_H
+#define PROB_H
+#include <AMReX_Print.H>
+#include <AMReX_ParmParse.H>
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <AMReX_REAL.H>
+#include <AMReX_GpuMemory.H>
+#include <cmath>
+#include "mechanism.H"
+#include "PeleC.H"
+#include "IndexDefines.H"
+#include "Constant...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleTwo fixes to]0;🐳 CodeWhale apply. Let me do both.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H
++++ b//home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H
+@@ -34,6 +34,7 @@
+     const amrex::Real alpha = in_heavy ? 1.0 : 0.0;
+     constexpr amrex::Real gamma_gas = 1.4;
+     constexpr StiffenedGasParams sg = {4.4, 6.0e8};  ...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleNow apply Fix 2 (hydro]0;🐋 CodeWhalestatic pressure) and Fix 1 part 2 (UTEMP):]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H
++++ b//home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H
+@@ -37,9 +37,10 @@
+     constexpr amrex::Real cv_liquid = 4.18e7;  // CGS: erg/(g·K), water-like
+     const amrex::Real gravity = 9.81;
+     const amrex::Real Ly = prob_...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow Fix 1 part 2 — the UTEMP line:]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H
++++ b//home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H
+@@ -48,7 +48,9 @@
+     state(i,j,k,UMX) = 0.0; state(i,j,k,UMY) = 0.0; state(i,j,k,UMZ) = 0.0;
+     state(i,j,k,UEINT) = rho * e;
+     state(i,j,k,UEDEN) = rho * e;
+-   ...
+]0;🐋 CodeWhaleBoth fixes applied. Verify the file, then compile.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/academic/rayleigh_taylor/prob.H)
+tool: exec_shell (command: cd /home/cj/my-pele/examples/academic/rayleigh_taylor && make -j8 2>&1)
+
+tool read_file completed: #ifndef PROB_H
+#define PROB_H
+#include <AMReX_Print.H>
+#include <AMReX_ParmParse.H>
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <AMReX_REAL.H>
+#include <AMReX_GpuMemory.H>
+#include <cmath>
+#include "mechanism.H"
+#include "PeleC.H"
+#include "IndexDefines.H"
+#include "Constant...
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_6f80dff1
+---------------------
+]0;🐳 CodeWhaleFile verified.]0;🐋 CodeWhale Both fixes applied correctly. Waiting for compilation…tool: exec_shell_wait (task_id: shell_6f80dff1)
+
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell_wait completed: fatal: not a git repository (or any of the parent directories): .git
+Loading /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/comps/gnu.mak...
+Loading /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/sites/Make.unknown...
+L...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleCompilation: **SUCCESS**. Both fixes are in and `rayleigh_taylor` compiles cleanly.
+
+Summary of]0;🐋 CodeWhale changes to `prob.H`:
+
+| Fix | Line(s) | Change |
+|-----|---------|--------|
+| **Fix 1 (HIGH)** — UTEMP EOS | 37, 51-53 | Added `cv_liquid = 4.18e7`; UTEMP]0;🐳 CodeWhale now uses `sg_T(sg, rho, e, cv_liquid)` for liquid phase, ideal gas formula for gas |
+| **Fix 2 (MEDIUM)** — hydrostatic pressure | 40-43 | Replaced hardcoded `0.5` with `half_Ly = 0.5 * Ly]0;🐋 CodeWhale`, making pressure continuous when domain height changes |

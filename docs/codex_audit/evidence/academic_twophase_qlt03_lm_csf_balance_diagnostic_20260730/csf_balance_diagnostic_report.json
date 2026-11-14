@@ -1,0 +1,32 @@
+{
+  "contracts": {
+    "baseline_t3_has_large_lateral_drift": true,
+    "canonical_csf_without_gravity_triggers_lateral_drift": true,
+    "no_csf_preserves_lateral_symmetry": true,
+    "qlt03_still_not_ready": true,
+    "zero_net_attempt_did_not_improve_buoyant_short_drift": true,
+    "zero_net_attempt_did_not_improve_no_gravity_drift": true,
+    "zero_net_prototype_not_retained": true
+  },
+  "decision": {
+    "next_route": "Implement a pressure-coupled balanced-force CSF discretization or geometric/height-function curvature treatment; avoid global net-force/net-acceleration compensation and more local limiter changes.",
+    "promote_zero_net_csf": false
+  },
+  "evidence": {
+    "baseline_t3_report": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json",
+    "drift_controls_summary": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_drift_controls_20260730/drift_controls_summary.json",
+    "zero_net_short_summary": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_zero_net_csf_short_20260730/zero_net_short_summary.json"
+  },
+  "metrics": {
+    "baseline_t3_center_x_drift": 0.20401463328714692,
+    "baseline_t3_final_center_x": 0.2959853667128531,
+    "baseline_t3_final_center_y": 0.997322971560933,
+    "baseline_t3_minimum_circularity_error": 0.24352712056133463,
+    "canonical_no_csf_center_x_drift": 4.440892098500626e-16,
+    "canonical_no_gravity_csf_center_x_drift": 0.03927298770870208,
+    "zero_net_buoyant_center_x_drift": 0.05605629280444102,
+    "zero_net_no_gravity_center_x_drift": 0.04114361289494478
+  },
+  "scope": "QLT-03 low-Mach CSF balance diagnosis for the remaining Hysing bubble-rise blocker. This report distinguishes Aux transport, buoyancy, and high-sigma CSF-induced lateral drift, and records a rejected global zero-net correction attempt.",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-BALANCE-DIAGNOSTIC"
+}

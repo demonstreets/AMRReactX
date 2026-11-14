@@ -1,0 +1,77 @@
+# Engineering Multi-Fuel Operator Runbook Report
+
+- Status: `PASS-ENGINEERING-MULTI-FUEL-OPERATOR-RUNBOOK`
+- Fuel entries: `6`
+- LNG warmed fire surrogate passed: `True`
+- LPG fire surrogate passed: `True`
+- LNG/LPG phase-change production claim allowed: `False`
+- External vaporization source contract ready: `True`
+- Liquefied release vaporization source model ready: `True`
+- Liquefied release source model outputs CSV: `True`
+- Liquefied release source model outputs PeleLMeX input: `True`
+- Liquefied release source model negative cases refused: `13`
+- Liquefied release source model CUDA smoke ready: `True`
+- External vaporization negative cases refused: `11`
+- Fixed-mass-flow valve schedule ready: `True`
+- External vaporization time series ready: `True`
+- External vaporization time series CUDA ready: `True`
+- External vaporization multi-fuel source matrix ready: `True`
+- C3H8 external vaporization time series CUDA ready: `True`
+- CFD-internal liquid phase-change claim allowed: `False`
+
+## Runbook
+
+- `docs/codex_audit/engineering_multi_fuel_operator_runbook.md`
+
+## Evidence
+
+- `operator_runbook`: `docs/codex_audit/engineering_multi_fuel_operator_runbook.md`
+- `multi_fuel_boundary`: `docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json`
+- `gasified_lng_lpg_surrogate`: `docs/codex_audit/evidence/engineering_gasified_lng_lpg_surrogate_20260806/engineering_gasified_lng_lpg_surrogate_report.json`
+- `liquefied_external_vaporization_contract`: `docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/engineering_liquefied_external_vaporization_contract_report.json`
+- `liquefied_release_vaporization_source_model`: `docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/engineering_liquefied_release_vaporization_source_model_report.json`
+- `liquefied_release_vaporization_source_model_negative_selftest`: `docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_negative_selftest_20260807/engineering_liquefied_release_vaporization_source_model_negative_selftest_report.json`
+- `liquefied_release_vaporization_source_model_cuda_smoke`: `docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_cuda_smoke_20260807/engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.json`
+- `liquefied_external_vaporization_negative_selftest`: `docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/engineering_liquefied_external_vaporization_negative_selftest_report.json`
+- `fixed_mass_flow_valve_schedule`: `docs/codex_audit/evidence/engineering_fixed_mass_flow_valve_schedule_20260806/engineering_fixed_mass_flow_valve_schedule_report.json`
+- `external_vaporization_timeseries`: `docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/engineering_external_vaporization_timeseries_report.json`
+- `external_vaporization_timeseries_cuda`: `docs/codex_audit/evidence/engineering_external_vaporization_timeseries_cuda_20260807/engineering_external_vaporization_timeseries_cuda_report.json`
+- `external_vaporization_multifuel_source_matrix`: `docs/codex_audit/evidence/engineering_external_vaporization_multifuel_source_matrix_20260807/engineering_external_vaporization_multifuel_source_matrix_report.json`
+- `c3h8_external_vaporization_timeseries_cuda`: `docs/codex_audit/evidence/engineering_external_vaporization_multifuel_runtime_probe_20260807/c3h8_timeseries_cuda/engineering_external_vaporization_c3h8_timeseries_cuda_report.json`
+- `c3h8_matrix`: `docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/engineering_c3h8_gas_phase_cpu_cuda_report.json`
+- `ch4_500step_mpi_cuda_fire`: `docs/codex_audit/evidence/engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_20260806/engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_report.json`
+- `h2_production`: `docs/codex_audit/evidence/engineering_h2_pipe_rack_delayed_ignition_cross_platform_20260805/engineering_h2_pipe_rack_delayed_ignition_cross_platform_report.json`
+- `gasified_lng_ch4_cold_source`: `examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke`
+- `gasified_lng_ch4_warmed_fire`: `examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_warmed_fire_surrogate_mpicuda_500step`
+- `gasified_lpg_c3h8_fire`: `examples/engineering/h2_leak_3d/input.codex_gasified_lpg_c3h8_surrogate_smoke`
+- `fixed_mass_flow_valve_schedule`: `examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_valve_schedule_smoke`
+- `fixed_mass_flow_timeseries`: `examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_timeseries_smoke`
+- `lng_external_vaporization_csv_template`: `examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv`
+- `codex_make_external_vaporization_source_input.py`: `tools/codex_make_external_vaporization_source_input.py`
+- `write_engineering_gasified_lng_lpg_surrogate_report.py`: `tools/write_engineering_gasified_lng_lpg_surrogate_report.py`
+- `verify_engineering_gasified_lng_lpg_surrogate.sh`: `tools/verify_engineering_gasified_lng_lpg_surrogate.sh`
+- `write_engineering_multi_fuel_capability_boundary_report.py`: `tools/write_engineering_multi_fuel_capability_boundary_report.py`
+- `verify_engineering_multi_fuel_capability_boundary.sh`: `tools/verify_engineering_multi_fuel_capability_boundary.sh`
+- `write_engineering_liquefied_external_vaporization_contract_report.py`: `tools/write_engineering_liquefied_external_vaporization_contract_report.py`
+- `verify_engineering_liquefied_external_vaporization_contract.sh`: `tools/verify_engineering_liquefied_external_vaporization_contract.sh`
+- `codex_make_liquefied_release_vaporization_csv.py`: `tools/codex_make_liquefied_release_vaporization_csv.py`
+- `write_engineering_liquefied_release_vaporization_source_model_report.py`: `tools/write_engineering_liquefied_release_vaporization_source_model_report.py`
+- `verify_engineering_liquefied_release_vaporization_source_model.sh`: `tools/verify_engineering_liquefied_release_vaporization_source_model.sh`
+- `write_engineering_liquefied_release_vaporization_source_model_negative_selftest_report.py`: `tools/write_engineering_liquefied_release_vaporization_source_model_negative_selftest_report.py`
+- `verify_engineering_liquefied_release_vaporization_source_model_negative_selftest.sh`: `tools/verify_engineering_liquefied_release_vaporization_source_model_negative_selftest.sh`
+- `run_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh`: `tools/run_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh`
+- `write_engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.py`: `tools/write_engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.py`
+- `verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh`: `tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh`
+- `write_engineering_liquefied_external_vaporization_negative_selftest_report.py`: `tools/write_engineering_liquefied_external_vaporization_negative_selftest_report.py`
+- `verify_engineering_liquefied_external_vaporization_negative_selftest.sh`: `tools/verify_engineering_liquefied_external_vaporization_negative_selftest.sh`
+- `write_engineering_fixed_mass_flow_valve_schedule_report.py`: `tools/write_engineering_fixed_mass_flow_valve_schedule_report.py`
+- `verify_engineering_fixed_mass_flow_valve_schedule.sh`: `tools/verify_engineering_fixed_mass_flow_valve_schedule.sh`
+- `write_engineering_external_vaporization_timeseries_report.py`: `tools/write_engineering_external_vaporization_timeseries_report.py`
+- `verify_engineering_external_vaporization_timeseries.sh`: `tools/verify_engineering_external_vaporization_timeseries.sh`
+- `write_engineering_external_vaporization_timeseries_cuda_report.py`: `tools/write_engineering_external_vaporization_timeseries_cuda_report.py`
+- `verify_engineering_external_vaporization_timeseries_cuda.sh`: `tools/verify_engineering_external_vaporization_timeseries_cuda.sh`
+- `write_engineering_external_vaporization_multifuel_source_matrix_report.py`: `tools/write_engineering_external_vaporization_multifuel_source_matrix_report.py`
+- `verify_engineering_external_vaporization_multifuel_source_matrix.sh`: `tools/verify_engineering_external_vaporization_multifuel_source_matrix.sh`
+- `write_engineering_external_vaporization_c3h8_timeseries_cuda_report.py`: `tools/write_engineering_external_vaporization_c3h8_timeseries_cuda_report.py`
+- `verify_engineering_external_vaporization_c3h8_timeseries_cuda.sh`: `tools/verify_engineering_external_vaporization_c3h8_timeseries_cuda.sh`
+- `codex_verify_current_scope.sh`: `tools/codex_verify_current_scope.sh`

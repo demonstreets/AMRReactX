@@ -1,0 +1,66 @@
+{
+  "case_results": [
+    {
+      "blocking_gap_count": 0,
+      "dataset_root": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids",
+      "label": "positive_numeric_sensor_ids",
+      "report_json": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/positive_numeric_sensor_ids_ingestion_report.json",
+      "sensor_coordinates_available": true,
+      "status": "PASS-SBEPV5-D27-DATASET-INGESTION"
+    },
+    {
+      "blocking_gap_count": 0,
+      "dataset_root": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_gas_sensor_ids",
+      "label": "positive_gas_sensor_ids",
+      "report_json": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/positive_gas_sensor_ids_ingestion_report.json",
+      "sensor_coordinates_available": true,
+      "status": "PASS-SBEPV5-D27-DATASET-INGESTION"
+    },
+    {
+      "blocking_gap_count": 5,
+      "dataset_root": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/negative_placeholder_duplicate_sensor",
+      "label": "negative_placeholder_duplicate_sensor",
+      "report_json": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/negative_placeholder_duplicate_sensor_ingestion_report.json",
+      "sensor_coordinates_available": false,
+      "status": "NOT_READY-SBEPV5-D27-DATASET-INGESTION"
+    }
+  ],
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "positive_numeric_sensor_ids_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/positive_numeric_sensor_ids_ingestion_report.json",
+      "sha256": "86e91d7525de494bfa192acdcfac4eeb3e4d9706a51b8f2f314534458df2f45f",
+      "size_bytes": 6108
+    },
+    {
+      "label": "positive_gas_sensor_ids_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/positive_gas_sensor_ids_ingestion_report.json",
+      "sha256": "b801df548fdda262d44150390dbe5316a15034ad99d63a81e15ab2894ca597d8",
+      "size_bytes": 6071
+    },
+    {
+      "label": "negative_placeholder_duplicate_sensor_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/negative_placeholder_duplicate_sensor_ingestion_report.json",
+      "sha256": "05dc5a645323d810dad6c6c9aa34b9465d3b8a6fe1883bbae118f029fd680385",
+      "size_bytes": 5823
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This is fixture-only gate evidence and must not be used as external SBEPV5 production data.",
+    "Production credit still requires controlled external sensor, baffle, metadata, and time-series artifacts."
+  ],
+  "schema_version": 1,
+  "status": "PASS-SBEPV5-D27-DATASET-INGESTION-SELFTEST",
+  "summary": {
+    "gas_sensor_id_fixture_passed": true,
+    "negative_case_count": 1,
+    "negative_refused_count": 1,
+    "numeric_sensor_id_fixture_passed": true,
+    "positive_case_count": 2,
+    "positive_passed_count": 2
+  },
+  "synthetic_selftest_only": true,
+  "title": "SBEPV5 D27 Dataset Ingestion Gate Selftest"
+}

@@ -1,0 +1,512 @@
+#include "AMReX_Reduce.H"
+#include "ReactorNN.H"
+#include <cstdio>
+#include <cuda_runtime.h>
+#include "/home/cj/NN_Project/ml_chem/LiDryer/rnn_arch.h"
+
+namespace pele::physics::reactions {
+
+static float* g_w0 = nullptr;
+static float* g_b0 = nullptr;
+static float* g_w1 = nullptr;
+static float* g_b1 = nullptr;
+static float* g_w2 = nullptr;
+static float* g_b2 = nullptr;
+static float* g_w3 = nullptr;
+static float* g_b3 = nullptr;
+
+// Stage 3-C: RNNWeightsView — pass device pointers to __device__ functions (RDC-safe)
+struct RNNWeightsView {
+  const float* w0; const float* b0;
+  const float* w1; const float* b1;
+  const float* w2; const float* b2;
+  const float* w3; const float* b3;
+};
+
+// Stage 3-C: rnn_forward_cell — 4-layer MLP with zscore normalization
+// Weights are [out_features][in_features] row-major from PyTorch
+__device__ void rnn_forward_cell(const float* x, float* out, const RNNWeightsView& w)
+{
+    // zscore normalization params (from norm_params.json)
+    const float X_mean[11] = {
+        1850.7604003082765f, 4.970992671390756f, 0.056943065758831214f,
+        0.07042229102310327f, 0.14943557127864052f, 0.04814595163356877f,
+        0.050472474448687334f, 0.05888737507743127f, 0.04751751249201233f,
+        0.0472286799873796f, 0.4709470783003936f};
+    const float X_std[11] = {
+        595.4619932630665f, 7.577168284566935f, 0.08218345932021556f,
+        0.08370845644865148f, 0.08438995353023165f, 0.08377827999339327f,
+        0.0826471259250215f, 0.07958313742917078f, 0.08589392416502574f,
+        0.08458662990025428f, 0.31611285516627213f};
+    const float Y_mean[10] = {
+        1938106.1825473492f, 30011258.55738521f, 51214351.798603974f,
+        -2974633.083938732f, 592989.6731606581f, 11923743.584687173f,
+        -3244914.2946972246f, -89460902.4177484f, 0.0f, 9099615867.437382f};
+    const float Y_std[10] = {
+        8432478.373721123f, 109974641.26455958f, 344007836.7075325f,
+        11871136.023807483f, 19469007.967812136f, 365389473.67746025f,
+        660436653.7047075f, 646159998.4822372f, 1.0f, 97057711101.9245f};
+
+    // normalize input
+    float xn[11];
+    for (int j = 0; j < 11; j++) {
+        xn[j] = (x[j] - X_mean[j]) / X_std[j];
+    }
+
+    // Layer 0: 11->128, ReLU  (W0: [128][11])
+    float h0[128];
+    for (int i = 0; i < 128; i++) {
+        float sum = w.b0[i];
+        for (int j = 0; j < 11; j++) {
+            sum += w.w0[i * 11 + j] * xn[j];
+        }
+        h0[i] = fmaxf(0.0f, sum);
+    }
+
+    // Layer 1: 128->128, ReLU  (W1: [128][128])
+    float h1[128];
+    for (int i = 0; i < 128; i++) {
+        float sum = w.b1[i];
+        for (int j = 0; j < 128; j++) {
+            sum += w.w1[i * 128 + j] * h0[j];
+        }
+        h1[i] = fmaxf(0.0f, sum);
+    }
+
+    // Layer 2: 128->64, ReLU  (W2: [64][128])
+    float h2[64];
+    for (int i = 0; i < 64; i++) {
+        float sum = w.b2[i];
+        for (int j = 0; j < 128; j++) {
+            sum += w.w2[i * 128 + j] * h1[j];
+        }
+        h2[i] = fmaxf(0.0f, sum);
+    }
+
+    // Layer 3: 64->10, linear (denormalize)  (W3: [10][64])
+    for (int i = 0; i < 10; i++) {
+        float sum = w.b3[i];
+        for (int j = 0; j < 64; j++) {
+            sum += w.w3[i * 64 + j] * h2[j];
+        }
+        out[i] = sum * Y_std[i] + Y_mean[i];
+    }
+}
+
+int
+ReactorNN::init(int reactor_type, int /*ncells*/)
+{
+  BL_PROFILE("Pele::ReactorNN::init()");
+  m_reactor_type = reactor_type;
+  ReactorTypes::check_reactor_type(m_reactor_type);
+  amrex::ParmParse pp("ode");
+  pp.query("verbose", verbose);
+  pp.query("atol", absTol);
+  pp.query("rk64_nsubsteps_guess", rk64_nsubsteps_guess);
+  pp.query("rk64_nsubsteps_min", rk64_nsubsteps_min);
+  pp.query("rk64_nsubsteps_max", rk64_nsubsteps_max);
+  pp.query("clean_init_massfrac", m_clean_init_massfrac);
+
+  // Load NN weights
+  const char* weight_path = "/home/cj/NN_Project/ml_chem/LiDryer/rnn_weights.bin";
+  FILE* fp = fopen(weight_path, "rb");
+  if (!fp) {
+    amrex::Print() << "ReactorNN: Failed to open weight file: " << weight_path << "\n";
+    return 1;
+  }
+
+  fseek(fp, 0, SEEK_END);
+  long fsize = ftell(fp);
+  rewind(fp);
+
+  const long expected_size = 107816;
+  if (fsize != expected_size) {
+    amrex::Print() << "ReactorNN: Weight file size mismatch: " << fsize << " != " << expected_size << "\n";
+    fclose(fp);
+    return 1;
+  }
+
+  const int total_floats = 26954;
+  float* h_buf = new float[total_floats];
+  size_t nread = fread(h_buf, sizeof(float), total_floats, fp);
+  fclose(fp);
+
+  if (nread != static_cast<size_t>(total_floats)) {
+    amrex::Print() << "ReactorNN: Failed to read weights, got " << nread << " floats\n";
+    delete[] h_buf;
+    return 1;
+  }
+
+  // W0: 11*128 = 1408 at offset 0
+  cudaMalloc(&g_w0, 1408 * sizeof(float));
+  cudaMemcpy(g_w0, h_buf + 0, 1408 * sizeof(float), cudaMemcpyHostToDevice);
+  // B0: 128 at offset 1408
+  cudaMalloc(&g_b0, 128 * sizeof(float));
+  cudaMemcpy(g_b0, h_buf + 1408, 128 * sizeof(float), cudaMemcpyHostToDevice);
+  // W1: 128*128 = 16384 at offset 1536
+  cudaMalloc(&g_w1, 16384 * sizeof(float));
+  cudaMemcpy(g_w1, h_buf + 1536, 16384 * sizeof(float), cudaMemcpyHostToDevice);
+  // B1: 128 at offset 17920
+  cudaMalloc(&g_b1, 128 * sizeof(float));
+  cudaMemcpy(g_b1, h_buf + 17920, 128 * sizeof(float), cudaMemcpyHostToDevice);
+  // W2: 128*64 = 8192 at offset 18048
+  cudaMalloc(&g_w2, 8192 * sizeof(float));
+  cudaMemcpy(g_w2, h_buf + 18048, 8192 * sizeof(float), cudaMemcpyHostToDevice);
+  // B2: 64 at offset 26240
+  cudaMalloc(&g_b2, 64 * sizeof(float));
+  cudaMemcpy(g_b2, h_buf + 26240, 64 * sizeof(float), cudaMemcpyHostToDevice);
+  // W3: 64*10 = 640 at offset 26304
+  cudaMalloc(&g_w3, 640 * sizeof(float));
+  cudaMemcpy(g_w3, h_buf + 26304, 640 * sizeof(float), cudaMemcpyHostToDevice);
+  // B3: 10 at offset 26944
+  cudaMalloc(&g_b3, 10 * sizeof(float));
+  cudaMemcpy(g_b3, h_buf + 26944, 10 * sizeof(float), cudaMemcpyHostToDevice);
+
+  delete[] h_buf;
+
+  amrex::Print() << "ReactorNN: loaded " << total_floats << " weight floats from " << weight_path << "\n";
+
+  return (0);
+}
+
+void
+ReactorNN::close()
+{
+  if (g_w0) { cudaFree(g_w0); g_w0 = nullptr; }
+  if (g_b0) { cudaFree(g_b0); g_b0 = nullptr; }
+  if (g_w1) { cudaFree(g_w1); g_w1 = nullptr; }
+  if (g_b1) { cudaFree(g_b1); g_b1 = nullptr; }
+  if (g_w2) { cudaFree(g_w2); g_w2 = nullptr; }
+  if (g_b2) { cudaFree(g_b2); g_b2 = nullptr; }
+  if (g_w3) { cudaFree(g_w3); g_w3 = nullptr; }
+  if (g_b3) { cudaFree(g_b3); g_b3 = nullptr; }
+}
+
+int
+ReactorNN::react(
+  amrex::Real* rY_in,
+  amrex::Real* rYsrc_in,
+  amrex::Real* rX_in,
+  amrex::Real* rX_src_in,
+  amrex::Real& dt_react,
+  amrex::Real& time,
+  int ncells
+#ifdef AMREX_USE_GPU
+  ,
+  amrex::gpuStream_t /*stream*/
+#endif
+)
+{
+  BL_PROFILE("Pele::ReactorNN::react()");
+
+  amrex::Real time_init = time;
+  amrex::Real time_out = time + dt_react;
+  const amrex::Real tinyval = 1e-50;
+
+  // Copy to device
+  amrex::Gpu::DeviceVector<amrex::Real> rY(ncells * (NUM_SPECIES + 1), 0);
+  amrex::Gpu::DeviceVector<amrex::Real> rYsrc(ncells * NUM_SPECIES, 0);
+  amrex::Gpu::DeviceVector<amrex::Real> rX(ncells, 0);
+  amrex::Gpu::DeviceVector<amrex::Real> rX_src(ncells, 0);
+  amrex::Real* d_rY = rY.data();
+  amrex::Real* d_rYsrc = rYsrc.data();
+  amrex::Real* d_rX = rX.data();
+  amrex::Real* d_rX_src = rX_src.data();
+  amrex::Gpu::copy(
+    amrex::Gpu::hostToDevice, rY_in, rY_in + ncells * (NUM_SPECIES + 1), d_rY);
+  amrex::Gpu::copy(
+    amrex::Gpu::hostToDevice, rYsrc_in, rYsrc_in + ncells * NUM_SPECIES,
+    d_rYsrc);
+  amrex::Gpu::copy(amrex::Gpu::hostToDevice, rX_in, rX_in + ncells, d_rX);
+  amrex::Gpu::copy(
+    amrex::Gpu::hostToDevice, rX_src_in, rX_src_in + ncells, d_rX_src);
+
+  // capture reactor type
+  const int captured_reactor_type = m_reactor_type;
+  const int captured_nsubsteps_guess = rk64_nsubsteps_guess;
+  const int captured_nsubsteps_min = rk64_nsubsteps_min;
+  const int captured_nsubsteps_max = rk64_nsubsteps_max;
+  const amrex::Real captured_abstol = absTol;
+  const auto* leosparm = m_d_eosparm;
+  RK64Params rkp;
+
+  amrex::Gpu::DeviceVector<int> v_nsteps(ncells, 0);
+  int* d_nsteps = v_nsteps.data();
+
+  amrex::ParallelFor(ncells, [=] AMREX_GPU_DEVICE(int icell) noexcept {
+    amrex::Real soln_reg[NUM_SPECIES + 1] = {0.0};
+    amrex::Real carryover_reg[NUM_SPECIES + 1] = {0.0};
+    amrex::Real error_reg[NUM_SPECIES + 1] = {0.0};
+    amrex::Real ydot[NUM_SPECIES + 1] = {0.0};
+    amrex::Real rYsrc_ext[NUM_SPECIES] = {0.0};
+    amrex::Real current_time = time_init;
+    const int neq = (NUM_SPECIES + 1);
+
+    for (int sp = 0; sp < neq; sp++) {
+      soln_reg[sp] = d_rY[icell * neq + sp];
+      carryover_reg[sp] = soln_reg[sp];
+    }
+
+    amrex::Real dt_rk = dt_react / amrex::Real(captured_nsubsteps_guess);
+    amrex::Real dt_rk_min = dt_react / amrex::Real(captured_nsubsteps_max);
+    amrex::Real dt_rk_max = dt_react / amrex::Real(captured_nsubsteps_min);
+
+    amrex::Real rhoe_init[] = {d_rX[icell]};
+    amrex::Real rhoesrc_ext[] = {d_rX_src[icell]};
+
+    for (int sp = 0; sp < NUM_SPECIES; sp++) {
+      rYsrc_ext[sp] = d_rYsrc[icell * NUM_SPECIES + sp];
+    }
+
+    int nsteps = 0;
+    amrex::Real change_factor;
+    while (current_time < time_out) {
+      for (amrex::Real& sp : error_reg) {
+        sp = 0.0;
+      }
+      for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
+        utils::fKernelSpec<Ordering>(
+          0, 1, current_time - time_init, captured_reactor_type, soln_reg, ydot,
+          rhoe_init, rhoesrc_ext, rYsrc_ext, leosparm);
+
+        for (int sp = 0; sp < neq; sp++) {
+          error_reg[sp] += rkp.err_rk64[stage] * dt_rk * ydot[sp];
+          soln_reg[sp] =
+            carryover_reg[sp] + rkp.alpha_rk64[stage] * dt_rk * ydot[sp];
+          carryover_reg[sp] =
+            soln_reg[sp] + rkp.beta_rk64[stage] * dt_rk * ydot[sp];
+        }
+      }
+
+      current_time += dt_rk;
+      nsteps++;
+
+      amrex::Real max_err = tinyval;
+      for (amrex::Real sp : error_reg) {
+        max_err = fabs(sp) > max_err ? fabs(sp) : max_err;
+      }
+
+      if (max_err < captured_abstol) {
+        change_factor =
+          rkp.betaerr_rk64 * pow((captured_abstol / max_err), rkp.exp1_rk64);
+        dt_rk = amrex::min<amrex::Real>(dt_rk_max, dt_rk * change_factor);
+      } else {
+        change_factor =
+          rkp.betaerr_rk64 * pow((captured_abstol / max_err), rkp.exp2_rk64);
+        dt_rk = amrex::max<amrex::Real>(dt_rk_min, dt_rk * change_factor);
+      }
+      // Don't overstep the integration time
+      dt_rk = amrex::min<amrex::Real>(dt_rk, time_out - current_time);
+    }
+    d_nsteps[icell] = nsteps;
+    // copy data back
+    for (int sp = 0; sp < neq; sp++) {
+      d_rY[icell * neq + sp] = soln_reg[sp];
+    }
+    d_rX[icell] = rhoe_init[0] + dt_react * rhoesrc_ext[0];
+  });
+
+#ifdef MOD_REACTOR
+  time = time_out;
+#endif
+
+  const int avgsteps = amrex::Reduce::Sum<int>(
+    ncells, [=] AMREX_GPU_DEVICE(int i) noexcept -> int { return d_nsteps[i]; },
+    0);
+
+  amrex::Gpu::copy(
+    amrex::Gpu::deviceToHost, d_rY, d_rY + ncells * (NUM_SPECIES + 1), rY_in);
+  amrex::Gpu::copy(
+    amrex::Gpu::deviceToHost, d_rYsrc, d_rYsrc + ncells * NUM_SPECIES,
+    rYsrc_in);
+  amrex::Gpu::copy(amrex::Gpu::deviceToHost, d_rX, d_rX + ncells, rX_in);
+  amrex::Gpu::copy(
+    amrex::Gpu::deviceToHost, d_rX_src, d_rX_src + ncells, rX_src_in);
+
+  return (int(avgsteps / amrex::Real(ncells)));
+}
+
+int
+ReactorNN::react(
+  const amrex::Box& box,
+  amrex::Array4<amrex::Real> const& rY_in,
+  amrex::Array4<amrex::Real> const& rYsrc_in,
+  amrex::Array4<amrex::Real> const& T_in,
+  amrex::Array4<amrex::Real> const& rEner_in,
+  amrex::Array4<amrex::Real> const& rEner_src_in,
+  amrex::Array4<amrex::Real> const& FC_in,
+  amrex::Array4<int> const& /*mask*/,
+  amrex::Real& dt_react,
+  amrex::Real& time
+#ifdef AMREX_USE_GPU
+  ,
+  amrex::gpuStream_t /*stream*/
+#endif
+)
+{
+  BL_PROFILE("Pele::ReactorNN::react()");
+
+  amrex::Real time_init = time;
+  amrex::Real time_out = time + dt_react;
+  const amrex::Real tinyval = 1e-50;
+
+  // capture reactor type
+  const int captured_reactor_type = m_reactor_type;
+  const int captured_nsubsteps_guess = rk64_nsubsteps_guess;
+  const int captured_nsubsteps_min = rk64_nsubsteps_min;
+  const int captured_nsubsteps_max = rk64_nsubsteps_max;
+  const amrex::Real captured_abstol = absTol;
+  const auto* leosparm = m_d_eosparm;
+  RK64Params rkp;
+
+  int ncells = static_cast<int>(box.numPts());
+  const auto len = amrex::length(box);
+  const auto lo = amrex::lbound(box);
+
+  amrex::Gpu::DeviceVector<int> v_nsteps(ncells, 0);
+  int* d_nsteps = v_nsteps.data();
+
+  RNNWeightsView rnn_weights = {g_w0, g_b0, g_w1, g_b1, g_w2, g_b2, g_w3, g_b3};
+  amrex::ParallelFor(box, [=] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+    amrex::Real soln_reg[NUM_SPECIES + 1] = {0.0};
+    amrex::Real carryover_reg[NUM_SPECIES + 1] = {0.0};
+    amrex::Real error_reg[NUM_SPECIES + 1] = {0.0};
+    amrex::Real ydot[NUM_SPECIES + 1] = {0.0};
+    amrex::Real rYsrc_ext[NUM_SPECIES] = {0.0};
+    amrex::Real current_time = time_init;
+    const int neq = (NUM_SPECIES + 1);
+
+    auto eos = pele::physics::PhysicsType::eos(leosparm);
+    for (int sp = 0; sp < NUM_SPECIES; sp++) {
+      soln_reg[sp] = rY_in(i, j, k, sp);
+      carryover_reg[sp] = soln_reg[sp];
+    }
+    amrex::Real rho = 0.0, rho_inv = 0.0;
+    amrex::Real mass_frac[NUM_SPECIES] = {0.0};
+    eos.RY2RRinvY(soln_reg, rho, rho_inv, mass_frac);
+
+    amrex::Real temp = T_in(i, j, k, 0);
+
+    amrex::Real Enrg_loc = rEner_in(i, j, k, 0) * rho_inv;
+    if (captured_reactor_type == ReactorTypes::e_reactor_type) {
+      eos.REY2T(rho, Enrg_loc, mass_frac, temp);
+    } else if (captured_reactor_type == ReactorTypes::h_reactor_type) {
+      eos.RHY2T(rho, Enrg_loc, mass_frac, temp);
+    } else {
+      amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
+    }
+    soln_reg[NUM_SPECIES] = temp;
+    carryover_reg[NUM_SPECIES] = soln_reg[NUM_SPECIES];
+
+    amrex::Real dt_rk = dt_react / amrex::Real(captured_nsubsteps_guess);
+    amrex::Real dt_rk_min = dt_react / amrex::Real(captured_nsubsteps_max);
+    amrex::Real dt_rk_max = dt_react / amrex::Real(captured_nsubsteps_min);
+
+    amrex::Real rhoe_init[] = {rEner_in(i, j, k, 0)};
+    amrex::Real rhoesrc_ext[] = {rEner_src_in(i, j, k, 0)};
+
+    for (int sp = 0; sp < NUM_SPECIES; sp++) {
+      rYsrc_ext[sp] = rYsrc_in(i, j, k, sp);
+    }
+
+    int nsteps = 0;
+    amrex::Real change_factor;
+    while (current_time < time_out) {
+      for (amrex::Real& sp : error_reg) {
+        sp = 0.0;
+      }
+      for (int stage = 0; stage < rkp.nstages_rk64; stage++) {
+        utils::fKernelSpec<Ordering>(
+          0, 1, current_time - time_init, captured_reactor_type, soln_reg, ydot,
+          rhoe_init, rhoesrc_ext, rYsrc_ext, leosparm);
+
+        for (int sp = 0; sp < neq; sp++) {
+          error_reg[sp] += rkp.err_rk64[stage] * dt_rk * ydot[sp];
+          soln_reg[sp] =
+            carryover_reg[sp] + rkp.alpha_rk64[stage] * dt_rk * ydot[sp];
+          carryover_reg[sp] =
+            soln_reg[sp] + rkp.beta_rk64[stage] * dt_rk * ydot[sp];
+        }
+      }
+
+      current_time += dt_rk;
+      nsteps++;
+
+      amrex::Real max_err = tinyval;
+      for (amrex::Real sp : error_reg) {
+        max_err = fabs(sp) > max_err ? fabs(sp) : max_err;
+      }
+
+      if (max_err < captured_abstol) {
+        change_factor =
+          rkp.betaerr_rk64 * pow((captured_abstol / max_err), rkp.exp1_rk64);
+        dt_rk = amrex::min<amrex::Real>(dt_rk_max, dt_rk * change_factor);
+      } else {
+        change_factor =
+          rkp.betaerr_rk64 * pow((captured_abstol / max_err), rkp.exp2_rk64);
+        dt_rk = amrex::max<amrex::Real>(dt_rk_min, dt_rk * change_factor);
+      }
+      // Don't overstep the integration time
+      dt_rk = amrex::min<amrex::Real>(dt_rk, time_out - current_time);
+    }
+
+    // copy data back
+    int icell = (k - lo.z) * len.x * len.y + (j - lo.y) * len.x + (i - lo.x);
+    d_nsteps[icell] = nsteps;
+    for (int sp = 0; sp < NUM_SPECIES; sp++) {
+      rY_in(i, j, k, sp) = soln_reg[sp];
+    }
+    eos.RY2RRinvY(soln_reg, rho, rho_inv, mass_frac);
+
+    temp = soln_reg[NUM_SPECIES];
+
+    // Stage 3-C: NN forward diagnostic (first cell only, read-only, no state write)
+    if (i == lo.x && j == lo.y && k == lo.z) {
+        amrex::Real P_diag;
+        eos.RTY2P(rho, temp, mass_frac, P_diag);
+        float x_nn[11] = {
+            (float)temp, (float)P_diag,
+            (float)mass_frac[0], (float)mass_frac[1], (float)mass_frac[2],
+            (float)mass_frac[3], (float)mass_frac[4], (float)mass_frac[5],
+            (float)mass_frac[6], (float)mass_frac[7], (float)mass_frac[8]
+        };
+        float out_nn[10] = {0};
+        rnn_forward_cell(x_nn, out_nn, rnn_weights);
+        bool has_nan = false;
+        for (int o = 0; o < 10; o++) {
+            if (isnan(out_nn[o])) has_nan = true;
+        }
+        printf("NN3C: cell(%d,%d,%d) T=%.6e P=%.6e Y=[%.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e] "
+               "out=[%.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e] %s\n",
+            i, j, k, x_nn[0], x_nn[1],
+            x_nn[2], x_nn[3], x_nn[4], x_nn[5], x_nn[6], x_nn[7], x_nn[8], x_nn[9], x_nn[10],
+            out_nn[0], out_nn[1], out_nn[2], out_nn[3], out_nn[4],
+            out_nn[5], out_nn[6], out_nn[7], out_nn[8], out_nn[9],
+            has_nan ? "NaN!" : "OK");
+    }
+
+    rEner_in(i, j, k, 0) = rhoe_init[0] + dt_react * rhoesrc_ext[0];
+    Enrg_loc = rEner_in(i, j, k, 0) * rho_inv;
+
+    if (captured_reactor_type == ReactorTypes::e_reactor_type) {
+      eos.REY2T(rho, Enrg_loc, mass_frac, temp);
+    } else if (captured_reactor_type == ReactorTypes::h_reactor_type) {
+      eos.RHY2T(rho, Enrg_loc, mass_frac, temp);
+    } else {
+      amrex::Abort("Wrong reactor type. Choose between 1 (e) or 2 (h).");
+    }
+    T_in(i, j, k, 0) = temp;
+    FC_in(i, j, k, 0) = nsteps;
+  });
+
+#ifdef MOD_REACTOR
+  time = time_out;
+#endif
+
+  const int avgsteps = amrex::Reduce::Sum<int>(
+    ncells, [=] AMREX_GPU_DEVICE(int i) noexcept -> int { return d_nsteps[i]; },
+    0);
+  return (int(avgsteps / amrex::Real(ncells)));
+}
+
+} // namespace pele::physics::reactions

@@ -1,0 +1,114 @@
+Initializing AMReX (26.05)...
+MPI initialized with 4 MPI processes
+MPI initialized with thread support level 0
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1 
+ Density: 2
+ First species: 3
+ Enthalpy: 5
+ Temperature: 6
+ thermo. pressure: 7
+ => Total number of state variables: 8
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 13.47 0 
+	Density:  1.19998361
+	Temp:     293
+	H:        -5163.76942
+	Y_O2:     0.233
+	Y_N2:     0.767
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 2.319970304e-05, divu: 1e+20
+ Initial dt: 2.319970304e-08
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 13.47  V: 0
+ >> After initial velocity projection:   U: 23.0690458  V: 16.36691141
+ Est. time step - Conv: 1.354629068e-05, divu: 8.679854898e+17
+ Initial dt: 1.354629068e-08
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 23.0690458  V: 16.36691141
+ >> After initial velocity projection:   U: 23.39096565  V: 16.75682111
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 1.335985888e-05, divu: 8.679854898e+17
+ STEP [-1] - Time: 0, dt 1.335985888e-08, Ncells 11648
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.048808086
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 1.335985888e-05, divu: 8.679854898e+17
+ STEP [-1] - Time: 0, dt 1.335985888e-08, Ncells 11648
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.045719896
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 1.335985888e-05, divu: 8.679854898e+17
+ STEP [-1] - Time: 0, dt 1.335985888e-08, Ncells 11648
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.045891882
+
+ Writing plotfile: plt_ref00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.335985888e-05, divu: 8.679854898e+17
+ STEP [0] - Time: 0, dt 1.335985888e-08, Ncells 11648
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.047455848
+
+ >> Final simulation time: 1.335985888e-08
+
+ Writing plotfile: plt_ref00001
+amrex::Error::1::Stopped early because NaNs detected in solution !!!
+SIGABRT
+amrex::Error::2::Stopped early because NaNs detected in solution !!!
+SIGABRT
+amrex::Error::3::Stopped early because NaNs detected in solution !!!
+SIGABRT
+amrex::Error::0::Stopped early because NaNs detected in solution !!!
+SIGABRT
+See Backtrace.1 file for details
+See Backtrace.3 file for details
+See Backtrace.0 file for details
+See Backtrace.2 file for details
+Abort(6) on node 1 (rank 1 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 6) - process 1
+Abort(6) on node 2 (rank 2 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 6) - process 2
+Abort(6) on node 3 (rank 3 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 6) - process 3
+Abort(6) on node 0 (rank 0 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 6) - process 0

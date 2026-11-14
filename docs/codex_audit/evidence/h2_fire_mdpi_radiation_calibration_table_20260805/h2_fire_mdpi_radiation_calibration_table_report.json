@@ -1,0 +1,76 @@
+{
+  "evidence_files": [
+    {
+      "label": "literature_metric_preflight",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_literature_metric_preflight_20260724/fire_calibration_literature_metric_preflight_report.json",
+      "sha256": "78e7282ff76b9fa8ffe8ce1b9d1ae6cc09fd8acd34553d052993c011fccab267",
+      "size_bytes": 5512
+    },
+    {
+      "label": "public_source_triage",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_public_source_triage_20260724/fire_calibration_public_source_triage_report.json",
+      "sha256": "41249a0709ec15401ba7d74264c171b828242b1dcab58c6331e5b8516d796c0a",
+      "size_bytes": 7052
+    },
+    {
+      "label": "fire_consequence_screening",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "radiation_metrics_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    },
+    {
+      "label": "partial_metadata_json",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/calibration_metadata.mdpi_radiation_partial.json",
+      "sha256": "3bab233e23312d1dcc54d28360c905fce95c4600f2508aca995d78ecdc7f535d",
+      "size_bytes": 842
+    },
+    {
+      "label": "anchor_targets_json",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/mdpi_radiation_anchor_targets.json",
+      "sha256": "22aeebc81e5974e8bdfe48584aafb2b98680d959791df4165d93d12046649e9c",
+      "size_bytes": 1504
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:56.889924+00:00",
+  "limitations": [
+    "This table promotes recorded MDPI radiation anchors into the repository schema; it is not a CFD radiation agreement result.",
+    "The rows are a partial radiation target set and do not include full experiment-specific radiometer time histories.",
+    "Strict fire credit still requires case-aligned CFD radiation comparison and EXP002 pressure comparison."
+  ],
+  "output_files": {
+    "anchor_targets_json": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/mdpi_radiation_anchor_targets.json",
+    "partial_metadata_json": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/calibration_metadata.mdpi_radiation_partial.json",
+    "radiation_metrics_csv": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/radiation_metrics.csv"
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-MDPI-RADIATION-CALIBRATION-TABLE",
+  "summary": {
+    "csv_columns": [
+      "metric_id",
+      "distance_m",
+      "reference_flux_w_m2",
+      "tolerance_abs_w_m2",
+      "tolerance_rel",
+      "source_basis"
+    ],
+    "max_tolerance_rel": 0.434,
+    "radiation_metric_count": 4,
+    "radiation_metrics_csv_ready": true,
+    "ready_for_cfd_radiation_comparison": true,
+    "ready_for_full_fire_calibration_ingestion": false,
+    "reference_flux_w_m2_range": [
+      412.1,
+      3378.1
+    ],
+    "source_metric_anchor_status": "PASS-H2-FIRE-CALIBRATION-LITERATURE-METRIC-PREFLIGHT",
+    "source_public_triage_status": "PASS-H2-FIRE-CALIBRATION-PUBLIC-SOURCE-TRIAGE",
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire MDPI Radiation Calibration Table"
+}

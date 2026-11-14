@@ -1,0 +1,173 @@
+{
+  "fail_count": 0,
+  "gate_count": 9,
+  "gates": [
+    {
+      "case_count": 4,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "delay_monotonic_decreases_with_temperature": true,
+        "reference_curve_available": true
+      },
+      "name": "zero_d_ignition_reference",
+      "role": "0D ignition-delay reference curve for gas chemistry sanity.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_cantera_ignition_reference_20260724/cantera_ignition_reference_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-CANTERA-IGNITION-REFERENCE",
+      "status": "PASS"
+    },
+    {
+      "case_count": null,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "clears_cantera_mechanism_comparison_gap": true,
+        "pelephysics_yaml_loads_in_cantera": true,
+        "reaction_rate_samples_finite": true,
+        "thermochemistry_samples_finite": true
+      },
+      "name": "cantera_mechanism_comparison",
+      "role": "Mechanism-level reference comparison against Cantera.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_cantera_mechanism_comparison_20260728/cantera_mechanism_comparison_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-CANTERA-MECHANISM-COMPARISON",
+      "status": "PASS"
+    },
+    {
+      "case_count": 12,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "clears_acd_02_rate_kernel_gap": true,
+        "clears_full_pelephysics_source_rate_equivalence": true,
+        "max_active_wdot_relative_error": 2.5923446507006696e-06,
+        "max_cp_mass_relative_error": 1.2886230214163894e-15,
+        "max_density_relative_error": 3.4044001891876536e-16
+      },
+      "name": "pelephysics_rate_kernel_equivalence",
+      "role": "Compiled PelePhysics rate kernel equivalence.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_pelephysics_rate_kernel_equivalence_20260728/pelephysics_rate_kernel_equivalence_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-PELEPHYSICS-RATE-KERNEL-EQUIVALENCE",
+      "status": "PASS"
+    },
+    {
+      "case_count": 3,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "clears_two_d_detonation_reference_validation_gap": true,
+        "max_mass_rel": 2.78862926e-16,
+        "max_species_closure_rel": 9.42117686e-05,
+        "medium_fine_speed_rel_diff": 0.0,
+        "speed_rel_spread": 0.1764705871590312
+      },
+      "name": "two_d_detonation_reference",
+      "role": "2D detonation propagation and resolution-consistency evidence.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_2d_detonation_reference_20260728/academic_gas_2d_detonation_reference_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-2D-DETONATION-REFERENCE",
+      "status": "PASS"
+    },
+    {
+      "case_count": 3,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "clears_three_d_detonation_reference_validation_gap": true,
+        "max_mass_rel": 1.13014782e-12,
+        "max_species_closure_rel": 2.22044605e-16,
+        "medium_fine_speed_rel_diff": 0.07142857142857142,
+        "speed_rel_spread": 0.11811023661330523
+      },
+      "name": "three_d_detonation_reference",
+      "role": "3D detonation propagation and resolution-consistency evidence.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_3d_detonation_reference_20260728/academic_gas_3d_detonation_reference_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-3D-DETONATION-REFERENCE",
+      "status": "PASS"
+    },
+    {
+      "case_count": 2,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "amr_refined_cell_fraction": 0.3125,
+        "amr_uniform_speed_rel_diff": 0.0,
+        "clears_detonation_front_amr_validation_gap": true,
+        "max_mass_rel": 2.74884505e-13,
+        "max_species_closure_rel": 2.22044605e-16
+      },
+      "name": "detonation_front_amr",
+      "role": "AMR tracks the detonation front while matching uniform-fine propagation.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_detonation_front_amr_validation_20260728/academic_gas_detonation_front_amr_validation_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-DETONATION-FRONT-AMR-VALIDATION",
+      "status": "PASS"
+    },
+    {
+      "case_count": null,
+      "evidence_hash": "c01cca2c4c6ed3c4efb6b7ddb02ad0277bbd5f674a600d2a8778e3dd5d7deb4b",
+      "failures": [],
+      "key_summary": {
+        "academic_gas_detonation_mpi_cuda_ready": true,
+        "amrex_finalized": true,
+        "critical_plot_variables_present": true,
+        "cuda_devices": 2,
+        "max_step": 40,
+        "mpi_ranks": 2,
+        "reaction_solver_marker_present": true,
+        "time_advanced": true
+      },
+      "name": "mpi_cuda_detonation_runtime",
+      "role": "Gas detonation reacting runtime gate on 2 MPI ranks and 2 CUDA devices.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/academic_gas_detonation_mpi_cuda_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-DETONATION-MPI-CUDA",
+      "status": "PASS"
+    },
+    {
+      "case_count": null,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "clears_acd_01_weno5_order_gap": true,
+        "clears_qlt_03_weno5_mms_order_subgap": true,
+        "pelec_weno5z_p32_64": 4.911286070252,
+        "pelec_weno5z_p64_128": 4.955275049333,
+        "standalone_weno5_sine_order": 4.93,
+        "weno_to_second_order_error_ratio": 8.268555361656759e-05
+      },
+      "name": "weno5_convergence",
+      "role": "High-order WENO foundation for gas detonation numerics.",
+      "source_report": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/academic_weno5_convergence_validation_report.json",
+      "source_status": "PASS-ACADEMIC-WENO5-CONVERGENCE-VALIDATION",
+      "status": "PASS"
+    },
+    {
+      "case_count": null,
+      "evidence_hash": null,
+      "failures": [],
+      "key_summary": {
+        "clears_qlt_03_double_mach_gap": true,
+        "front_x": 0.729167
+      },
+      "name": "double_mach_shock",
+      "role": "Strong-shock gas dynamics sanity check adjacent to detonation use.",
+      "source_report": "docs/codex_audit/evidence/academic_gas_double_mach_validation_20260728/academic_gas_double_mach_validation_report.json",
+      "source_status": "PASS-ACADEMIC-GAS-DOUBLE-MACH-VALIDATION",
+      "status": "PASS"
+    }
+  ],
+  "pass_count": 9,
+  "ready": true,
+  "scope": "academic gas-phase detonation priority after engineering-scope closure",
+  "status": "PASS-ACADEMIC-GAS-DETONATION-PRIORITY-MATRIX",
+  "strict_external_literature_detonation_benchmark": "not claimed; this gate proves current in-repo 0D/2D/3D/AMR/numerics readiness only",
+  "summary": {
+    "academic_gas_priority_ready": true,
+    "covers_compiled_rate_kernel": true,
+    "covers_detonation_front_amr": true,
+    "covers_high_order_weno": true,
+    "covers_mpi_cuda_detonation_runtime": true,
+    "covers_strong_shock_gas_dynamics": true,
+    "covers_three_d_detonation": true,
+    "covers_two_d_detonation": true,
+    "covers_zero_d_chemistry": true,
+    "remaining_strict_literature_benchmark_gap": true
+  }
+}

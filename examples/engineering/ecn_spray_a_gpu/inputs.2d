@@ -1,0 +1,87 @@
+#-------------------------DOMAIN------------------------
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0
+geometry.prob_hi     = 0.108 0.0675  # 108mm x 67.5mm (dx=dy with 256x160)
+
+# BC: left=inflow (wall-like, zero velocity), right/up/down=outflow
+peleLM.lo_bc = Inflow Outflow
+peleLM.hi_bc = Outflow Outflow
+
+#-------------------------AMR----------------------------
+amr.n_cell          = 256 160
+amr.v               = 1
+amr.max_level       = 0
+amr.blocking_factor = 16
+amr.max_grid_size   = 64
+
+#-------------------------Problem------------------------
+prob.P_mean    = 101325.0           # 1 atm (Pa)
+
+#-------------------------Time Control--------------------
+amr.max_step       = 2000
+amr.plot_int       = 100
+amr.check_int      = 100
+amr.init_dt        = 1.e-8
+amr.cfl            = 0.05
+amr.dt_shrink      = 0.01
+
+#-------------------------PeleLMeX------------------------
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.use_wbar = 1
+peleLM.sdc_iterMax = 6
+peleLM.floor_species = 1
+peleLM.allow_negative_energy = 1
+peleLM.do_spray_particles = 1
+peleLM.deltaT_crashIfFailing = 0
+peleLM.deltaT_iterMax = 20
+peleLM.deltaT_tol = 1.e-6
+
+# Output
+amr.derive_plot_vars = avg_pressure mass_fractions temp
+
+#-------------------------Chemistry------------------------
+peleLM.chem_integrator = "ReactorRK64"
+
+#-------------------------LINEAR SOLVER------------------------
+nodal_proj.verbose = 1
+nodal_proj.rtol = 1.0e-7
+mac_proj.verbose = 1
+mac_proj.rtol = 1.0e-7
+
+#-------------------------Spray Particles-----------------
+particles.v              = 0
+particles.mom_transfer   = 1
+particles.mass_transfer  = 1
+particles.fuel_ref_temp  = 298.15
+particles.fuel_species   = C12H23
+
+particles.C12H23_crit_temp = 658.
+particles.C12H23_boil_temp = 489.
+particles.C12H23_latent  = 3.59E5
+particles.C12H23_cp      = 2.217E3
+particles.C12H23_rho     = 750.
+particles.C12H23_psat    = 4.2654 1741.1453 -80.9035 1.E5
+particles.C12H23_mu      = 0.0134 0.0 0.0 0.0
+particles.C12H23_sigma   = 0.025
+particles.use_splash_model = false
+particles.cfl            = 2.
+particles.parcel_size    = 100.
+particles.fuel_sigma = 25.0
+particles.fuel_mu = 0.0134
+particles.use_breakup_model = KHRT
+particles.KHRT_B0 = 0.61
+particles.KHRT_B1 = 40.0
+
+# Spray jet
+spray.jet1.do_inject      = 1
+spray.jet1.T              = 300.
+spray.jet1.jet_cent       = 0.0 0.03375
+spray.jet1.jet_norm       = 1.0 0.0
+spray.jet1.jet_dia        = 90.0e-6           # nozzle diameter (90 um)
+spray.jet1.dist_type      = Uniform
+spray.jet1.diameter       = 5.0e-6            # droplet diameter (5 um)
+spray.jet1.jet_vel        = 40.               # injection velocity (m/s)
+spray.jet1.mass_flow_rate = 1.0E-5            # mass flow rate (kg/s)
+spray.jet1.spread_angle   = 0.

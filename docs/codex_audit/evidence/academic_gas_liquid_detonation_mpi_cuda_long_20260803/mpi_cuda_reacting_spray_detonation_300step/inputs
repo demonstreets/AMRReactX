@@ -1,0 +1,105 @@
+# ------------------  INPUTS TO MAIN PROGRAM  -------------------
+max_step = 300
+stop_time = -1.0
+
+# PROBLEM SIZE & GEOMETRY (2D pseudo-1D: 2 cells in y, periodic in y)
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0  # 0 => cart
+geometry.prob_lo     = 0.0 0.0
+geometry.prob_hi = 50.0 2.0
+amr.n_cell = 128 32
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+pelec.lo_bc        = "FOExtrap" "SlipWall"
+pelec.hi_bc        = "FOExtrap" "SlipWall"
+
+# WHICH PHYSICS
+pelec.do_hydro = 1
+pelec.diffuse_vel = 1
+pelec.diffuse_temp = 1
+pelec.diffuse_spec = 1
+pelec.do_react = 1
+pelec.allow_negative_energy = 1
+pelec.chem_integrator = "ReactorCvode"
+
+# TIME STEP CONTROL
+pelec.cfl            = 0.05
+pelec.init_shrink    = 0.1      # scale back initial timestep
+pelec.change_max     = 1.1      # max time step growth
+pelec.dt_cutoff      = 5.e-20   # level 0 timestep below which we halt
+
+# DIAGNOSTICS & VERBOSITY
+pelec.sum_interval = -1
+pelec.v = 0
+amr.v = 1
+
+# REFINEMENT / REGRIDDING
+amr.max_level       = 0
+
+amr.blocking_factor = 16 16
+amr.max_grid_size = 64 32
+amr.n_error_buf     = 2 2 2 2
+
+# PARTICLES / SPRAY
+pelec.do_spray_particles = 1
+particles.v = 0
+particles.derive_plot_vars = 1
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.fixed_parts = 0
+
+particles.fuel_ref_temp = 300.0
+
+particles.fuel_species = NC7H16
+particles.NC7H16_crit_temp = 540.0
+particles.NC7H16_boil_temp = 371.6
+particles.NC7H16_latent = 3.63E9
+particles.NC7H16_cp = 2.2483E7
+particles.NC7H16_rho = 0.6814
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+particles.fuel_sigma = 15.
+
+# Heptane liquid transport properties (for KHRT breakup)
+# μ(T) polynomial coefficients (CGS: Poise)
+particles.NC7H16_mu = 0.004 0.0 0.0 0.0
+# λ(T) polynomial coefficients (CGS: erg/(cm·s·K))
+particles.NC7H16_lambda = 120.0 0.0 0.0 0.0
+
+# KHRT breakup model
+particles.use_splash_model = false
+particles.use_breakup_model = KHRT
+particles.KHRT_B0 = 0.61
+particles.KHRT_B1 = 7.3
+particles.KHRT_C3 = 5.3
+particles.breakup_parcel_factor = 0.5
+particles.init_file = "initspraydata_2d.dat"
+
+# CHECKPOINT FILES
+amr.check_file      = chk
+amr.check_int = -1
+
+# PLOTFILES
+amr.plot_file       = plt
+amr.derive_plot_vars = x_velocity y_velocity pressure
+
+# PROBLEM
+# Shock tube: left = driver (high p/T), right = driven (low p/T)
+prob.p_left = 1.8e7
+prob.T_left = 2200.0
+prob.p_right = 1.013e6
+prob.T_right = 300.0
+prob.diaphragm = 25.0
+
+amrex.abort_on_out_of_gpu_memory = 1
+cvode.solve_type = GMRES
+cvode.rtol = 1e-6
+cvode.atol = 1e-10
+amr.checkpoint_files_output = 0
+amr.plot_files_output = 1
+amr.plot_int = 50
+pelec.plot_massfrac = 1
+pelec.plot_rhoy = 1
+particles.plot_src = 1
+prob.Y_NC7H16 = 0.0621
+prob.Y_O2 = 0.2186
+prob.Y_N2 = 0.7193

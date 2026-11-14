@@ -1,0 +1,582 @@
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 13
+ Temperature: 14
+ thermo. pressure: 15
+ => Total number of state variables: 16
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 8.485 8.485 0 
+	Density:  1.171983992
+	Temp:     300
+	H:        1900.577828
+	Y_H2:     0
+	Y_O2:     0.233
+	Y_H2O:    0
+	Y_H:      0
+	Y_O:      0
+	Y_OH:     0
+	Y_HO2:    0
+	Y_H2O2:   0
+	Y_N2:     0.767
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 0.02946375958, divu: 1e+20
+ Initial dt: 0.02946375958
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 8.485  V: 8.485  W: 0
+ >> After initial velocity projection:   U: 12.60030266  V: 15.65661313  W: 14.7677061
+ Est. time step - Conv: 0.01596769351, divu: 5.156129804e+15
+ Initial dt: 0.01596769351
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 12.60030266  V: 15.65661313  W: 14.7677061
+ >> After initial velocity projection:   U: 12.86073802  V: 17.27758951  W: 15.967444
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 0.01446961105, divu: 5.156129804e+15
+ STEP [-1] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(-0.309049,-7.80774) ForceAux[0]=(14.5325,-4.25792) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 79.03713014
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 0.01446961105, divu: 5.156129804e+15
+ STEP [-1] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(-0.296376,-7.57125) ForceAux[0]=(14.5325,-4.25793) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 85.60238206
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 0.01446961105, divu: 5.156129804e+15
+ STEP [-1] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(-0.296376,-7.57125) ForceAux[0]=(14.5325,-4.25792) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 87.54488301
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01446961105, divu: 5.156129804e+15
+ STEP [0] - Time: 0, dt 0.01446961105, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(-0.296376,-7.57125) ForceAux[0]=(14.5325,-4.25793) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 78.09539553
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0169433884, divu: 1.51308639
+ STEP [1] - Time: 0.01446961105, dt 0.01591657215, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.01446961105
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(3.33388,3.84652) ForceAux[0]=(9.65063,-2.85605) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 86.38869403
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01715987525, divu: 1.5056048
+ STEP [2] - Time: 0.0303861832, dt 0.01715987525, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.0303861832
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(12.2286,6.80044) ForceAux[0]=(5.11962,-1.51901) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 86.50540368
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01720090222, divu: 1.506163791
+ STEP [3] - Time: 0.04754605845, dt 0.01720090222, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.04754605845
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(21.2809,8.29072) ForceAux[0]=(1.49394,-0.422765) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 86.53239979
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01715801291, divu: 1.50549327
+ STEP [4] - Time: 0.06474696067, dt 0.01715801291, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.06474696067
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(24.4589,8.68131) ForceAux[0]=(0.364804,-0.0956095) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 86.60546534
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01713506375, divu: 1.504890475
+ STEP [5] - Time: 0.08190497358, dt 0.01713506375, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.08190497358
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.1833,8.7653) ForceAux[0]=(0.0874181,-0.0209815) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 86.88576877
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01712587317, divu: 1.504333876
+ STEP [6] - Time: 0.09904003733, dt 0.01712587317, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.09904003733
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.346,8.78432) ForceAux[0]=(0.0144247,-0.00291701) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 87.4816805
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01710299723, divu: 1.503788846
+ STEP [7] - Time: 0.1161659105, dt 0.01710299723, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1161659105
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3754,8.78791) ForceAux[0]=(-0.00094998,0.000341849) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.33755249
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01700966037, divu: 1.50335649
+ STEP [8] - Time: 0.1332689077, dt 0.01700966037, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1332689077
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3743,8.78782) ForceAux[0]=(-0.00155852,0.000379318) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.07081865
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693657051, divu: 1.503038085
+ STEP [9] - Time: 0.1502785681, dt 0.01693657051, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1502785681
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.371,8.78743) ForceAux[0]=(-0.000844582,0.000236973) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.08640481
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01688476137, divu: 1.502844561
+ STEP [10] - Time: 0.1672151386, dt 0.01688476137, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1672151386
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3691,8.78722) ForceAux[0]=(-0.000579837,0.000113811) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.3859369
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01685268156, divu: 1.50274396
+ STEP [11] - Time: 0.1840999, dt 0.01685268156, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.1840999
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3681,8.78708) ForceAux[0]=(-0.000182647,3.59122e-05) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.51479234
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01683800106, divu: 1.502683751
+ STEP [12] - Time: 0.2009525815, dt 0.01683800106, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.2009525815
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3678,8.78705) ForceAux[0]=(-6.97528e-05,1.38601e-05) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 88.32271572
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01683707446, divu: 1.50267792
+ STEP [13] - Time: 0.2177905826, dt 0.01683707446, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.2177905826
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3677,8.78703) ForceAux[0]=(-2.4678e-05,4.88826e-06) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.09898949
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01684509077, divu: 1.502716791
+ STEP [14] - Time: 0.2346276571, dt 0.01684509077, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.2346276571
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3677,8.78703) ForceAux[0]=(-9.80144e-06,1.82661e-06) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.75284263
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0168584064, divu: 1.502768736
+ STEP [15] - Time: 0.2514727478, dt 0.0168584064, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.2514727478
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-4.09999e-06,7.24449e-07) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.34512253
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01687439951, divu: 1.502822029
+ STEP [16] - Time: 0.2683311542, dt 0.01687439951, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.2683311542
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-1.8321e-06,3.02708e-07) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.87941889
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01688964527, divu: 1.502870946
+ STEP [17] - Time: 0.2852055537, dt 0.01688964527, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.2852055537
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-8.55728e-07,1.32582e-07) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 98.36076097
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01690299672, divu: 1.502913103
+ STEP [18] - Time: 0.302095199, dt 0.01690299672, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.302095199
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-3.79856e-07,5.96287e-08) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.24884799
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01691386371, divu: 1.502947996
+ STEP [19] - Time: 0.3189981957, dt 0.01691386371, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.3189981957
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-9.9544e-08,2.29158e-08) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.98145789
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0169219269, divu: 1.502982914
+ STEP [20] - Time: 0.3359120594, dt 0.0169219269, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.3359120594
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-1.86697e-09,3.64703e-09) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.3963873
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01692723519, divu: 1.503010462
+ STEP [21] - Time: 0.3528339863, dt 0.01692723519, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.3528339863
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(1.03131e-08,-8.77011e-10) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 98.17406977
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693014385, divu: 1.503053303
+ STEP [22] - Time: 0.3697612215, dt 0.01693014385, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.3697612215
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(6.58013e-09,-1.0809e-09) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.28064695
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693156185, divu: 1.503058639
+ STEP [23] - Time: 0.3866913654, dt 0.01693156185, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.3866913654
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(6.14697e-09,-9.31954e-10) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.12829601
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0169321429, divu: 1.503061085
+ STEP [24] - Time: 0.4036229272, dt 0.0169321429, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.4036229272
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(2.35606e-09,-3.10676e-10) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.93620907
+
+ Writing plotfile: plt00025
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693244867, divu: 1.503062627
+ STEP [25] - Time: 0.4205550701, dt 0.01693244867, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.4205550701
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(9.82034e-10,-1.17094e-10) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 81.92897882
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693265896, divu: 1.50306314
+ STEP [26] - Time: 0.4374875188, dt 0.01693265896, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.4374875188
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(4.75644e-10,-4.03707e-11) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.29185068
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0169327638, divu: 1.503063449
+ STEP [27] - Time: 0.4544201778, dt 0.0169327638, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.4544201778
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(1.37102e-10,-2.70969e-11) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.43331694
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693282997, divu: 1.503063703
+ STEP [28] - Time: 0.4713529416, dt 0.01693282997, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.4713529416
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(8.63445e-11,-1.87495e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.25255492
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693283569, divu: 1.503063965
+ STEP [29] - Time: 0.4882857715, dt 0.01693283569, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.4882857715
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(2.92899e-11,-1.86126e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.43529968
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693281545, divu: 1.503064225
+ STEP [30] - Time: 0.5052186072, dt 0.01693281545, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.5052186072
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(9.2408e-12,-1.3911e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.41274813
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693277894, divu: 1.503064482
+ STEP [31] - Time: 0.5221514227, dt 0.01693277894, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.5221514227
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(8.59879e-12,4.16131e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.66315016
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0169327716, divu: 1.503064718
+ STEP [32] - Time: 0.5390842016, dt 0.0169327716, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.5390842016
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-6.14662e-13,-6.97751e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.48093191
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693278635, divu: 1.503064938
+ STEP [33] - Time: 0.5560169732, dt 0.01693278635, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.5560169732
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(9.17434e-12,1.80283e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.49393772
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693282377, divu: 1.503065136
+ STEP [34] - Time: 0.5729497596, dt 0.01693282377, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.5729497596
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-8.50769e-12,-2.06037e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.87570426
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693286172, divu: 1.503065318
+ STEP [35] - Time: 0.5898825833, dt 0.01693286172, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.5898825833
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(4.04491e-12,1.03986e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.75316089
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693292289, divu: 1.503065493
+ STEP [36] - Time: 0.6068154451, dt 0.01693292289, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.6068154451
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(1.16344e-12,2.99727e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 91.11345696
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693296555, divu: 1.503065663
+ STEP [37] - Time: 0.6237483679, dt 0.01693296555, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.6237483679
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(1.07639e-12,2.62097e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 99.38581291
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693300958, divu: 1.50306583
+ STEP [38] - Time: 0.6406813335, dt 0.01693300958, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.6406813335
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-2.89021e-12,-7.07671e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 88.80447706
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693305523, divu: 1.503065997
+ STEP [39] - Time: 0.6576143431, dt 0.01693305523, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.6576143431
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(2.59809e-12,6.40225e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.94012071
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693310599, divu: 1.503066161
+ STEP [40] - Time: 0.6745473983, dt 0.01693310599, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.6745473983
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-6.89094e-13,-1.77147e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.34217441
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693314184, divu: 1.503066331
+ STEP [41] - Time: 0.6914805043, dt 0.01693314184, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.6914805043
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-1.23149e-13,-3.58221e-14) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 97.38498566
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.0169332047, divu: 1.503066507
+ STEP [42] - Time: 0.7084136461, dt 0.0169332047, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.7084136461
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-2.18411e-12,-5.29868e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.6159071
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693326481, divu: 1.503066695
+ STEP [43] - Time: 0.7253468508, dt 0.01693326481, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.7253468508
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(2.68517e-12,6.62302e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.71494452
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693334181, divu: 1.503066891
+ STEP [44] - Time: 0.7422801156, dt 0.01693334181, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.7422801156
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(2.96955e-13,6.43661e-14) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 90.5086467
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693341135, divu: 1.503067102
+ STEP [45] - Time: 0.7592134574, dt 0.01693341135, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.7592134574
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-9.37097e-13,-2.35564e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 88.79096866
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693349687, divu: 1.503067327
+ STEP [46] - Time: 0.7761468688, dt 0.01693349687, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.7761468688
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(4.74932e-12,1.14511e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.67484421
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693356351, divu: 1.503067571
+ STEP [47] - Time: 0.7930803657, dt 0.01693356351, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.7930803657
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(-3.97026e-12,-9.96223e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.59191549
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693364308, divu: 1.503067834
+ STEP [48] - Time: 0.8100139292, dt 0.01693364308, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.8100139292
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(2.80091e-12,6.73174e-13) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 89.83797412
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01693371104, divu: 1.503068124
+ STEP [49] - Time: 0.8269475723, dt 0.01693371104, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0.8269475723
+   SDC iter [1] 
+DEBUG getScalarDiffForce: ke_src_ma ACTIVE, has_ke=true, lev=0
+DEBUG lambda: has_ke=1 ke_src[0]=(25.3676,8.78703) ForceAux[0]=(4.66367e-12,1.10021e-12) -- ke_src NOT added!
+ >> PeleLMeX::Advance() --> Time: 81.32335073
+
+ Writing plotfile: plt00050
+
+ >> Final simulation time: 0.8438812833
+
+Total Time: 4799.218099
+Unused ParmParse Variables:
+  [TOP]::amr.ref_ratio(nvals = 2)  :: [2, 2]
+  [TOP]::amr.regrid_int(nvals = 1)  :: [10]
+  [TOP]::peleLM.do_les(nvals = 1)  :: [1]
+  [TOP]::peleLM.have_divu(nvals = 1)  :: [1]
+  [TOP]::peleLM.sdc_iterations(nvals = 1)  :: [2]
+  [TOP]::peleLM.use_typ_vals(nvals = 1)  :: [1]
+  [TOP]::transport.const_bulk_viscosity(nvals = 1)  :: [0.0]
+  [TOP]::transport.const_conductivity(nvals = 1)  :: [0.0]
+  [TOP]::transport.const_diffusivity(nvals = 1)  :: [0.001]
+  [TOP]::transport.const_viscosity(nvals = 1)  :: [1.85e-5]
+
+AMReX (26.05) finalized

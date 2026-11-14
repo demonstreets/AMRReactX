@@ -1,0 +1,25 @@
+REPO_ROOT ?= $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
+CUDA_HOME ?= /usr/local/cuda
+SUNDIALS_HOME ?= $(or $(SUNDIALS_CUDA_DIR),$(SUNDIALS_DIR))
+DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+PROFILE = FALSE
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = TRUE
+DEBUG = FALSE
+CUDA_ARCH = 60
+CUDA_HOME ?= /usr/local/cuda
+Chemistry_Model = c3h8_mini
+Eos_Model = Fuego
+Transport_Model = Simple
+PELE_HOME := $(REPO_ROOT)/external/PeleLMeX
+INCLUDE_LOCATIONS += $(REPO_ROOT)/src/engineering
+INCLUDE_LOCATIONS += $(REPO_ROOT)/src/engineering/turbulence
+INCLUDE_LOCATIONS += $(SUNDIALS_HOME)/include
+VPATH_LOCATIONS += $(REPO_ROOT)/src/engineering/turbulence
+LIBRARY_LOCATIONS += $(SUNDIALS_HOME)/lib
+include $(PELE_HOME)/Exec/Make.PeleLMeX

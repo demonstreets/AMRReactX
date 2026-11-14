@@ -1,0 +1,51 @@
+#ifndef PELE_STL_PARSER_H
+#define PELE_STL_PARSER_H
+
+#include <AMReX_REAL.H>
+#include <AMReX_Dim3.H>
+#include <AMReX_Array.H>
+
+#include <string>
+#include <vector>
+#include <array>
+
+namespace pele {
+
+struct STLFacet {
+    amrex::XDim3 normal;
+    std::array<amrex::XDim3, 3> vertices;
+};
+
+class STLReader
+{
+public:
+    STLReader() = default;
+
+    void read(const std::string& fname,
+              amrex::Real scale = 1.0,
+              const amrex::Array<amrex::Real,3>& center = {0.0, 0.0, 0.0},
+              int reverse_normal = 0);
+
+    std::size_t numFacets() const noexcept { return m_facets.size(); }
+    const std::vector<STLFacet>& getFacets() const noexcept { return m_facets; }
+    const std::vector<amrex::XDim3>& getVertices() const noexcept { return m_vertices; }
+    std::array<amrex::XDim3,2> boundingBox() const noexcept;
+    void printSummary() const;
+
+private:
+    void readAscii(const std::string& fname,
+                   amrex::Real scale,
+                   const amrex::Array<amrex::Real,3>& center,
+                   int reverse_normal);
+    void readBinary(const std::string& fname,
+                    amrex::Real scale,
+                    const amrex::Array<amrex::Real,3>& center,
+                    int reverse_normal);
+
+    std::vector<STLFacet>     m_facets;
+    std::vector<amrex::XDim3> m_vertices;
+};
+
+} // namespace pele
+
+#endif // PELE_STL_PARSER_H

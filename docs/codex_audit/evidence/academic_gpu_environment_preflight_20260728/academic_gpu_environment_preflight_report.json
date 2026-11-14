@@ -1,0 +1,104 @@
+{
+  "evidence_files": [
+    {
+      "label": "manifest",
+      "path": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/gpu_environment_preflight_manifest.json",
+      "sha256": "36b4533dbe24110526bb7072421ceefb6587d67b3a63e2667e4cd8ec6d9fb16e"
+    },
+    {
+      "label": "nvidia_smi_log",
+      "path": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/nvidia_smi.log",
+      "sha256": "43667f35d8e5aa3aaa554ed14c8bb075f323a026651a060e8e06b4e53a69290e"
+    },
+    {
+      "label": "ldd_log",
+      "path": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/ldd_cuda_exe.log",
+      "sha256": "68ce82e377346d19ecd63a0917a2952e8a32c08892530294bb1e105f4d4df78b"
+    },
+    {
+      "label": "cuda_find_log",
+      "path": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_library_search.log",
+      "sha256": "fb81006822d6d8991fb976892dd643dc3b6ee85385556cf814389dec6e10d82e"
+    },
+    {
+      "label": "smoke_input",
+      "path": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_detonation_smoke/inputs",
+      "sha256": "8687418fc022e6e69dd9b0876a46c1f84a49682baa1253aff9b15af5930daa80"
+    },
+    {
+      "label": "smoke_log",
+      "path": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_detonation_smoke/run.log",
+      "sha256": "f3733ee0021c7871f7548cf3c64f54ee0bab77383d91b9398cb6ec1092de0e8d"
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_gpu_environment_preflight.sh",
+      "sha256": "31ee4d691460ffb5b5aee08fdd7f2e6f2bbebb81c9a0b02c1f5b7ed3fcc5e703"
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_gpu_environment_preflight_report.py",
+      "sha256": "8f3a27c19a83969c09be2121d44e84eefe9c71fe340e3ceee1e675241ca4f471"
+    }
+  ],
+  "generated_at_utc": "2026-07-31T07:20:12+00:00",
+  "limitations": [
+    "This preflight does not install or repair NVIDIA/CUDA drivers or toolkit libraries.",
+    "A NOT_READY result is still useful evidence: it localizes why ACD-10/QLT-05 cannot receive GPU execution credit on the current server state."
+  ],
+  "manifest": {
+    "nvidia_smi_returncode": 0,
+    "paths": {
+      "cuda_find_log": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_library_search.log",
+      "ldd_log": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/ldd_cuda_exe.log",
+      "nvidia_smi_log": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/nvidia_smi.log",
+      "smoke_input": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_detonation_smoke/inputs",
+      "smoke_log": "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_detonation_smoke/run.log"
+    },
+    "schema_version": 1,
+    "smoke_returncode": 0
+  },
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/nvidia_smi.log"
+      ],
+      "gap": "",
+      "name": "gpu_driver_query",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/ldd_cuda_exe.log",
+        "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_library_search.log"
+      ],
+      "gap": "",
+      "name": "cuda_runtime_libraries",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_detonation_smoke/run.log",
+        "docs/codex_audit/evidence/academic_gpu_environment_preflight_20260728/cuda_detonation_smoke/inputs"
+      ],
+      "gap": "",
+      "name": "academic_cuda_detonation_smoke",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "GPU runtime and academic CUDA detonation smoke preflight for ACD-10 and QLT-05 credit",
+  "status": "PASS-ACADEMIC-GPU-ENVIRONMENT-PREFLIGHT",
+  "summary": {
+    "all_missing_libraries": [],
+    "blocking_reasons": [],
+    "driver_library_mismatch": false,
+    "missing_cuda_runtime_libraries": [],
+    "nvidia_smi_returncode": 0,
+    "ready_for_acd_10_gpu_credit": true,
+    "ready_for_qlt_05_gpu_compliance_credit": true,
+    "smoke_finalized": true,
+    "smoke_returncode": 0
+  },
+  "title": "Academic GPU Environment Preflight"
+}

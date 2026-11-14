@@ -1,0 +1,39 @@
+[1/8] verify calibration sweep
+dataverse_open_channel_45s_calibration_sweep PASS json=docs/codex_audit/evidence/dataverse_open_channel_45s_calibration_sweep_20260804/dataverse_open_channel_45s_calibration_sweep_report.json md=docs/codex_audit/evidence/dataverse_open_channel_45s_calibration_sweep_20260804/dataverse_open_channel_45s_calibration_sweep_report.md status=SCREENED-DATAVERSE-OPEN-CHANNEL-H2-45S-CALIBRATION-SWEEP-NO-PROMOTION
+dataverse_open_channel_45s_calibration_sweep VERIFY-PASS json=docs/codex_audit/evidence/dataverse_open_channel_45s_calibration_sweep_20260804/dataverse_open_channel_45s_calibration_sweep_report.json status=SCREENED-DATAVERSE-OPEN-CHANNEL-H2-45S-CALIBRATION-SWEEP-NO-PROMOTION
+[2/8] rewrite strict external-source update
+strict_external_source_update PASS json=docs/codex_audit/evidence/master_plan_strict_external_source_update_20260731/master_plan_strict_external_source_update_report.json md=docs/codex_audit/evidence/master_plan_strict_external_source_update_20260731/master_plan_strict_external_source_update_report.md status=TRIAGED-MASTER-PLAN-STRICT-EXTERNAL-SOURCES-PUBLIC-DATA-INCOMPLETE
+[3/8] verify strict external-source update
+strict_external_source_update VERIFY-PASS json=docs/codex_audit/evidence/master_plan_strict_external_source_update_20260731/master_plan_strict_external_source_update_report.json status=TRIAGED-MASTER-PLAN-STRICT-EXTERNAL-SOURCES-PUBLIC-DATA-INCOMPLETE
+[master-plan-strict-external-source] PASS strict external source update report
+[4/8] rewrite chain coverage
+current_verification_chain_coverage PASS json=docs/codex_audit/evidence/current_verification_chain_coverage_20260803/current_verification_chain_coverage_report.json md=docs/codex_audit/evidence/current_verification_chain_coverage_20260803/current_verification_chain_coverage_report.md status=PASS-CURRENT-VERIFICATION-CHAIN-COVERAGE
+[5/8] verify chain coverage
+current_verification_chain_coverage VERIFY-PASS json=docs/codex_audit/evidence/current_verification_chain_coverage_20260803/current_verification_chain_coverage_report.json status=PASS-CURRENT-VERIFICATION-CHAIN-COVERAGE
+[6/8] rewrite scope snapshot
+current_scope_state_snapshot PASS json=docs/codex_audit/evidence/current_scope_state_snapshot_20260803/current_scope_state_snapshot_report.json md=docs/codex_audit/evidence/current_scope_state_snapshot_20260803/current_scope_state_snapshot_report.md status=PASS-CURRENT-SCOPE-STATE-SNAPSHOT
+[7/8] verify scope snapshot
+current_scope_state_snapshot VERIFY-PASS json=docs/codex_audit/evidence/current_scope_state_snapshot_20260803/current_scope_state_snapshot_report.json status=PASS-CURRENT-SCOPE-STATE-SNAPSHOT
+[8/8] current status json
+{
+  "completion_audit_status": "AUDITED-MASTER-PLAN-CURRENT-SCOPE-PASS-STRICT-INCOMPLETE",
+  "cpu_mpi_ready_for_all_current_scenarios": true,
+  "current_scope_gate_count": 15,
+  "current_scope_passed_gate_count": 15,
+  "current_scope_verification_status": "PASS-MASTER-PLAN-CURRENT-SCOPE-VERIFICATION",
+  "current_user_priority_ready": true,
+  "final_readiness_status": "PASS-MASTER-PLAN-CURRENT-USER-SCOPE-READINESS",
+  "goal_complete": false,
+  "multi_gpu_mpi_cuda_ready_for_all_current_scenarios": true,
+  "open_strict_blocker_count": 3,
+  "open_strict_blockers": [
+    "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+    "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+    "reference_agreement_is_threshold_only_not_external_plume_shape_dataset"
+  ],
+  "single_gpu_ready_for_all_current_scenarios": true,
+  "snapshot_key_report_count": 29,
+  "state_snapshot_status": "PASS-CURRENT-SCOPE-STATE-SNAPSHOT",
+  "strict_master_plan_complete": false,
+  "strict_unblock_runbook": "docs/codex_audit/strict_master_plan_unblock_runbook.md"
+}

@@ -1,0 +1,140 @@
+{
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "clears_reference_data_blocker": false,
+  "evidence_files": [
+    {
+      "label": "external_plume_public_source_triage_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json",
+      "sha256": "a2489e6fd7cfc17b40047c514d62b1823c9cb1de29feda431d5f6a9e433a4cdf",
+      "size_bytes": 12608
+    },
+    {
+      "label": "sbepv5_digitization_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json",
+      "sha256": "dc9d74003eee5c1e6ef267c6c30fe5b179494bbee7b36323b15d7413ef0a6c17",
+      "size_bytes": 7659
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "The metric anchors are literature-level checks, not a replacement for local experimental time series.",
+    "This report cannot clear the external plume-shape blocker without ingested coordinates, baffle geometry, and sensor histories."
+  ],
+  "metric_anchor_count": 4,
+  "metric_anchors": [
+    {
+      "metric_id": "gas09_time_to_15pct_h2_s",
+      "quantity": "time when concentration reaches 15 vol% H2",
+      "reported_interval_s": [
+        16.0,
+        19.0
+      ],
+      "sensor_id": 9,
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "use_in_future_agreement": "arrival-time sanity bound after local experimental time series is ingested"
+    },
+    {
+      "metric_id": "gas10_time_to_15pct_h2_s",
+      "quantity": "time when concentration reaches 15 vol% H2",
+      "reported_interval_s": [
+        17.0,
+        20.0
+      ],
+      "sensor_id": 10,
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "use_in_future_agreement": "arrival-time sanity bound after local experimental time series is ingested"
+    },
+    {
+      "metric_id": "gas12_late_rise_qualitative",
+      "quantity": "relative concentration rise timing",
+      "reported_relation": "Gas12 begins to rise much later than Gas09 and Gas10",
+      "sensor_id": 12,
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "use_in_future_agreement": "qualitative ordering check for baffled-compartment filling"
+    },
+    {
+      "metric_id": "gas09_gas10_sensitive_buoyant_jet_region",
+      "quantity": "sensitive response region for buoyant jet/baffle interaction",
+      "reported_relation": "Gas09 and Gas10 are the most sensitive positions for the baffle-split buoyant jet",
+      "sensor_ids": [
+        9,
+        10
+      ],
+      "source_ids": [
+        "researchgate_311396790"
+      ],
+      "use_in_future_agreement": "priority sensor subset for plume-shape acceptance tolerances"
+    }
+  ],
+  "missing_artifacts": [
+    {
+      "artifact": "experimental_timeseries.csv",
+      "required_action": "ingest original Excel or reviewed digitized curves for Gas01..Gas12 through at least 120 s"
+    },
+    {
+      "artifact": "literature_metric_acceptance_overlay.json",
+      "required_action": "after program sensor probes exist, compare Gas09/Gas10 arrival-time metrics to reported intervals"
+    }
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_plume_public_source_triage_20260724/external_plume_public_source_triage_report.json",
+      "gap": "",
+      "name": "public_source_triage_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_digitization_preflight_20260724/sbepv5_d27_digitization_preflight_report.json",
+      "gap": "",
+      "name": "digitization_preflight_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "reported interval 16-19 s to 15 vol% H2",
+      "gap": "",
+      "name": "gas09_arrival_metric_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "reported interval 17-20 s to 15 vol% H2",
+      "gap": "",
+      "name": "gas10_arrival_metric_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Original Excel or accepted digitized Gas01..Gas12 concentration time series is still required.",
+      "name": "full_timeseries_still_missing",
+      "status": "MISSING"
+    }
+  ],
+  "ready_for_reference_agreement_consumption": false,
+  "schema_version": 1,
+  "status": "PASS-SBEPV5-D27-LITERATURE-METRIC-PREFLIGHT",
+  "summary": {
+    "digitization_preflight_ready": true,
+    "gas09_arrival_interval_s": [
+      16.0,
+      19.0
+    ],
+    "gas10_arrival_interval_s": [
+      17.0,
+      20.0
+    ],
+    "literature_metric_anchor_available": true,
+    "missing_artifact_count": 2,
+    "public_source_triage_ready": true,
+    "ready_for_reference_agreement_consumption": false,
+    "required_response_sensor_ids": [
+      9,
+      10
+    ]
+  },
+  "title": "HySafe SBEPV5 D27 Literature Metric Preflight"
+}

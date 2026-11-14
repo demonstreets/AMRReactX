@@ -1,0 +1,88 @@
+{
+  "cases": [
+    {
+      "campaign_count": 4,
+      "generation_stdout": "engineering_h2_external_evidence_case_validation_plan PASS json=docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/negative_missing_artifacts/h2_external_evidence_case_validation_plan.json md=docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/negative_missing_artifacts/h2_external_evidence_case_validation_plan.md campaigns=4 ready=0",
+      "integrated_replay_ready": false,
+      "name": "negative_missing_artifacts",
+      "plan_json": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/negative_missing_artifacts/h2_external_evidence_case_validation_plan.json",
+      "plan_md": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/negative_missing_artifacts/h2_external_evidence_case_validation_plan.md",
+      "ready_campaign_count": 0,
+      "verify_stdout": "engineering_h2_external_evidence_case_validation_plan VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/negative_missing_artifacts/h2_external_evidence_case_validation_plan.json campaigns=4 ready=0",
+      "worksheet_fixture": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/fixtures/missing_artifacts_worksheet.json",
+      "worksheet_valid_artifact_row_count": 0
+    },
+    {
+      "campaign_count": 4,
+      "generation_stdout": "engineering_h2_external_evidence_case_validation_plan PASS json=docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/positive_all_valid_artifacts/h2_external_evidence_case_validation_plan.json md=docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/positive_all_valid_artifacts/h2_external_evidence_case_validation_plan.md campaigns=4 ready=4",
+      "integrated_replay_ready": true,
+      "name": "positive_all_valid_artifacts",
+      "plan_json": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/positive_all_valid_artifacts/h2_external_evidence_case_validation_plan.json",
+      "plan_md": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/positive_all_valid_artifacts/h2_external_evidence_case_validation_plan.md",
+      "ready_campaign_count": 4,
+      "verify_stdout": "engineering_h2_external_evidence_case_validation_plan VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/positive_all_valid_artifacts/h2_external_evidence_case_validation_plan.json campaigns=4 ready=4",
+      "worksheet_fixture": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/fixtures/all_valid_worksheet.json",
+      "worksheet_valid_artifact_row_count": 14
+    }
+  ],
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_external_evidence_acceptance_worksheet_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_acceptance_worksheet_20260724/h2_external_evidence_acceptance_worksheet.json",
+      "sha256": "1ffebc3a498904915bddbe60764a9eab0591ed30072f596b6133b59d8b03fde3",
+      "size_bytes": 51775
+    },
+    {
+      "label": "negative_missing_artifacts_plan",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/negative_missing_artifacts/h2_external_evidence_case_validation_plan.json",
+      "sha256": "7f7b86e248079393f8b6fe847c02112aaf415be8712b322d9fbfd30aac24201a",
+      "size_bytes": 28859
+    },
+    {
+      "label": "positive_all_valid_artifacts_plan",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724/positive_all_valid_artifacts/h2_external_evidence_case_validation_plan.json",
+      "sha256": "14aa4bc656291a96795d0333bcfae0bae165bc55fb04aa18b54e7b199975135d",
+      "size_bytes": 28456
+    }
+  ],
+  "external_evidence_acceptance_worksheet_report": "docs/codex_audit/evidence/engineering_h2_external_evidence_acceptance_worksheet_20260724/h2_external_evidence_acceptance_worksheet.json",
+  "generated_at_utc": "2026-08-20T10:07:11+00:00",
+  "limitations": [
+    "This is a fixture-only gate selftest; it does not provide real external data or run CFD campaigns.",
+    "The positive fixture proves campaign gating logic only and must not be interpreted as production readiness."
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "ready=0 integrated=False",
+      "gap": "",
+      "name": "negative_fixture_keeps_campaigns_blocked",
+      "status": "PASS"
+    },
+    {
+      "evidence": "ready=4 integrated=True",
+      "gap": "",
+      "name": "positive_fixture_opens_all_campaigns",
+      "status": "PASS"
+    },
+    {
+      "evidence": "fixture-only reports are written under isolated selftest root",
+      "gap": "",
+      "name": "selftest_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "selftest_only": true,
+  "selftest_root": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_selftest_20260724",
+  "status": "PASS-H2-EXTERNAL-EVIDENCE-CASE-VALIDATION-PLAN-SELFTEST",
+  "summary": {
+    "negative_campaign_count": 4,
+    "negative_integrated_replay_ready": false,
+    "negative_ready_campaign_count": 0,
+    "positive_campaign_count": 4,
+    "positive_integrated_replay_ready": true,
+    "positive_ready_campaign_count": 4
+  },
+  "title": "Engineering H2 External Evidence Case Validation Plan Selftest"
+}

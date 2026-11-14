@@ -1,0 +1,142 @@
+diff --git a/external/PeleC/Source/Advance.cpp b/external/PeleC/Source/Advance.cpp
+index 445a4f8..15d581c 100644
+--- a/external/PeleC/Source/Advance.cpp
++++ b/external/PeleC/Source/Advance.cpp
+@@ -106,7 +106,7 @@ PeleC::do_mol_advance(
+ 
+       // add sources to molsrc
+ #ifdef PELE_USE_SPRAY
+-      int ncomp_old = (src == spray_src) ? num_spray_src : NVAR;
++      int ncomp_old = NVAR;
+ #else
+       int ncomp_old = NVAR;
+ #endif
+@@ -145,7 +145,7 @@ PeleC::do_mol_advance(
+ 
+       // add sources to molsrc
+ #ifdef PELE_USE_SPRAY
+-      int ncomp_new = (src == spray_src) ? num_spray_src : NVAR;
++      int ncomp_new = NVAR;
+ #else
+       int ncomp_new = NVAR;
+ #endif
+@@ -312,7 +312,7 @@ PeleC::do_sdc_iteration(
+     // Initialize sources at t_new by copying from t_old
+     for (int src : src_list) {
+ #ifdef PELE_USE_SPRAY
+-      int ncomp_src = (src == spray_src) ? num_spray_src : NVAR;
++      int ncomp_src = NVAR;
+ #else
+       int ncomp_src = NVAR;
+ #endif
+@@ -384,7 +384,7 @@ PeleC::construct_Snew(
+   amrex::MultiFab::Copy(S_new, S_old, 0, 0, NVAR, ng);
+   for (int src : src_list) {
+ #ifdef PELE_USE_SPRAY
+-    int ncomp_snew = (src == spray_src) ? num_spray_src : NVAR;
++    int ncomp_snew = NVAR;
+ #else
+     int ncomp_snew = NVAR;
+ #endif
+diff --git a/external/PeleC/Source/PeleC.H b/external/PeleC/Source/PeleC.H
+index 11f36dd..26a5df1 100644
+--- a/external/PeleC/Source/PeleC.H
++++ b/external/PeleC/Source/PeleC.H
+@@ -191,6 +191,11 @@ public:
+   void defineSpraySource(int amr_ncycle);
+   amrex::MultiFab tmp_spray_source;
+ 
++  const amrex::MultiFab& spraySourceForPlot() const
++  {
++    return *new_sources[spray_src];
++  }
++
+   // Determine the number of ghost cells for the state MF
+   int sprayStateGhosts(int amr_ncycle);
+ 
+diff --git a/external/PeleC/Source/PeleCAmr.cpp b/external/PeleC/Source/PeleCAmr.cpp
+index 0b43a2b..b85993a 100644
+--- a/external/PeleC/Source/PeleCAmr.cpp
++++ b/external/PeleC/Source/PeleCAmr.cpp
+@@ -115,6 +115,29 @@ PeleCAmr::constructPlotMF(
+     }
+ #endif
+   }
++#ifdef PELE_USE_SPRAY
++  amrex::Vector<int> spray_source_plot_comps;
++  if (regular && SprayParticleContainer::plot_spray_src &&
++      PeleC::SprayPC != nullptr) {
++    spray_source_plot_comps.push_back(PeleC::Density);
++    spray_source_plot_comps.push_back(PeleC::Xmom);
++#if AMREX_SPACEDIM >= 2
++    spray_source_plot_comps.push_back(PeleC::Ymom);
++#endif
++#if AMREX_SPACEDIM == 3
++    spray_source_plot_comps.push_back(PeleC::Zmom);
++#endif
++    spray_source_plot_comps.push_back(PeleC::Eden);
++    for (int pc = 0; pc < SprayParticleContainer::m_sprayData->N_pc; ++pc) {
++      spray_source_plot_comps.push_back(
++        PeleC::FirstSpec + SprayParticleContainer::m_sprayData->pc_indx[pc]);
++    }
++  }
++  const int num_spray_source_plot =
++    static_cast<int>(spray_source_plot_comps.size());
++#else
++  const int num_spray_source_plot = 0;
++#endif
+ 
+   // Decide to plot vfrac
+   bool plot_vfrac =
+@@ -123,7 +146,8 @@ PeleCAmr::constructPlotMF(
+   pp.query("plot_vfrac", plot_vfrac);
+ 
+   const auto n_data_items =
+-    plot_var_map.size() + num_derive + static_cast<int>(plot_vfrac);
++    plot_var_map.size() + num_derive + num_spray_source_plot +
++    static_cast<int>(plot_vfrac);
+ 
+   const int nGrow = 0;
+   const amrex::Real cur_time =
+@@ -179,6 +203,18 @@ PeleCAmr::constructPlotMF(
+       PeleC::removeVirtualParticles(lev);
+       cnt += num_spray_derive;
+     }
++    if (num_spray_source_plot > 0) {
++      const auto* pele_level = dynamic_cast<const PeleC*>(amr_level[lev].get());
++      if (pele_level == nullptr) {
++        amrex::Abort("PeleCAmr::constructPlotMF(): expected PeleC level");
++      }
++      for (int isrc = 0; isrc < num_spray_source_plot; ++isrc) {
++        amrex::MultiFab::Copy(
++          *plotMFs[lev], pele_level->spraySourceForPlot(),
++          spray_source_plot_comps[isrc], cnt + isrc, 1, nGrow);
++      }
++      cnt += num_spray_source_plot;
++    }
+ #endif
+ 
+     if (plot_vfrac) {
+@@ -209,6 +245,22 @@ PeleCAmr::constructPlotMF(
+       plt_var_names.push_back(spray_derive_name);
+     }
+   }
++  if (num_spray_source_plot > 0) {
++    plt_var_names.push_back("spray_rho_src");
++    plt_var_names.push_back("spray_xmom_src");
++#if AMREX_SPACEDIM >= 2
++    plt_var_names.push_back("spray_ymom_src");
++#endif
++#if AMREX_SPACEDIM == 3
++    plt_var_names.push_back("spray_zmom_src");
++#endif
++    plt_var_names.push_back("spray_eng_src");
++    for (int pc = 0; pc < SprayParticleContainer::m_sprayData->N_pc; ++pc) {
++      plt_var_names.push_back(
++        "spray_rhoY_" + SprayParticleContainer::m_sprayFuelNames[pc] +
++        "_src");
++    }
++  }
+ #endif
+ 
+   if (plot_vfrac) {

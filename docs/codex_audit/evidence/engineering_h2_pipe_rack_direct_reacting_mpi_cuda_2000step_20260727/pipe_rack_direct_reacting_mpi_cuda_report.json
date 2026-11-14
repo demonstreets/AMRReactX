@@ -1,0 +1,281 @@
+{
+  "decision": "direct_engineering_pipe_rack_leak_obstacle_reacting_ignition_mpi_cuda_pass",
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run.log",
+      "sha256": "990b910f9dd063af105e8518e840faa4df4ba0b275051e4236859524a8f65a93",
+      "size_bytes": 1505232
+    },
+    {
+      "label": "run_summary",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/summary.json",
+      "sha256": "7025a963d538cdec6bebe519a472fc07756103d2608d66ece86e891eaa698d28",
+      "size_bytes": 5827
+    },
+    {
+      "label": "input",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/input.codex_pipe_rack_reacting_single_cuda_20step",
+      "sha256": "73e62a79509083e13c9c8ab06a34c76f7e543c8807a496a5fe836fb2d0858ea8",
+      "size_bytes": 2070
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/plt00000/Header",
+      "sha256": "986cefac729651d645cfbd38b920372f0903ec714c43ba8d212cb9f8e19f4870",
+      "size_bytes": 399
+    },
+    {
+      "label": "plt02000_header",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/plt02000/Header",
+      "sha256": "a732f19fac6d3f861bc47d56190f3fed5fb73a33e00a9cc6de8db247fc7fbe1f",
+      "size_bytes": 447
+    },
+    {
+      "label": "cube_obstacle_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/codex_cube_block.stl",
+      "sha256": "592fa3d7fb200f836370bd2acad3348b1cae57a58b22b65c93af7be0649a1dc0",
+      "size_bytes": 684
+    },
+    {
+      "label": "vertical_cylinder_obstacle_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/codex_vertical_cylinder.stl",
+      "sha256": "63c597dcedd3c2e0b2bc922285caf2f2d32bbd3e919534971aec84dc4316a563",
+      "size_bytes": 4884
+    },
+    {
+      "label": "pipe_rack_obstacle_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/codex_pipe_rack.stl",
+      "sha256": "9b165dd4047a06d991ac6e91d7b4a1a6e0e894111c94b3fc541006ec39f9cf45",
+      "size_bytes": 51284
+    },
+    {
+      "label": "merged_pipe_rack_obstacles_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run/codex_merged_pipe_rack_obstacles.stl",
+      "sha256": "7862d8d94760cffec12db46628b483f9a4cd57a0b34f9a2c9628200885c50f05",
+      "size_bytes": 56684
+    },
+    {
+      "label": "reproducible_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "sha256": "5775a41a957358e2ab57e0724aa15a2687054a832ba2f23ef11727e09bbbacb8",
+      "size_bytes": 14994
+    }
+  ],
+  "generated_at_utc": "2026-07-27T08:03:14+00:00",
+  "input_summary": {
+    "chem_integrator": "ReactorCvode",
+    "cvode_solve_type": "GMRES",
+    "ignition_hotspot": true,
+    "initial_flammable_cloud": true,
+    "max_step": 2000,
+    "n_cell": "32 16 16",
+    "obstacle_geometry": "stl",
+    "obstacle_stl_files": "codex_cube_block.stl codex_vertical_cylinder.stl codex_pipe_rack.stl",
+    "plot_int": 250
+  },
+  "limitations": [
+    "2000-step MPI+CUDA sustained-fire gate, not a production GPU scaling curve.",
+    "Synthetic cube/cylinder/pipe-rack STL geometry, not real plant CAD.",
+    "Not calibrated radiation/overpressure validation."
+  ],
+  "plotfile_checks": {
+    "final_time": 2.000000000000062e-05,
+    "initial_time": 0.0,
+    "plotfiles": [
+      "plt00000",
+      "plt00250",
+      "plt00500",
+      "plt00750",
+      "plt01000",
+      "plt01250",
+      "plt01500",
+      "plt01750",
+      "plt02000"
+    ],
+    "reaction_history": [
+      {
+        "heat_release_abs_max": 14531384.876224255,
+        "heat_release_max": 0.02960073346555363,
+        "heat_release_min": -14531384.876224255,
+        "ir_h2_abs_max": 0.12410068155402354,
+        "ir_h2_max": 3.1225022567582528e-09,
+        "ir_h2_min": -0.12410068155402354,
+        "plotfile": "plt00000",
+        "temp_max": 2000.0,
+        "time": 0.0,
+        "y_h2o_max": 0.0
+      },
+      {
+        "heat_release_abs_max": 1303057389.9499168,
+        "heat_release_max": 1303057389.9499168,
+        "heat_release_min": -0.16058027860400848,
+        "ir_h2_abs_max": 258.96244436230006,
+        "ir_h2_max": 6.938893903907228e-10,
+        "ir_h2_min": -258.96244436230006,
+        "plotfile": "plt00250",
+        "temp_max": 2001.8082493996817,
+        "time": 2.4999999999999862e-06,
+        "y_h2o_max": 0.004146689082322838
+      },
+      {
+        "heat_release_abs_max": 12148451466.298841,
+        "heat_release_max": 12148451466.298841,
+        "heat_release_min": -787.7743509150208,
+        "ir_h2_abs_max": 72.7180657968588,
+        "ir_h2_max": 3.1225022567582528e-09,
+        "ir_h2_min": -72.7180657968588,
+        "plotfile": "plt00500",
+        "temp_max": 2114.846691849832,
+        "time": 4.999999999999962e-06,
+        "y_h2o_max": 0.132306595284286
+      },
+      {
+        "heat_release_abs_max": 8960642904.945343,
+        "heat_release_max": 8960642904.945343,
+        "heat_release_min": -0.3575799730290397,
+        "ir_h2_abs_max": 1.193407256510696,
+        "ir_h2_max": 1.193407256510696,
+        "ir_h2_min": -0.4665664042590958,
+        "plotfile": "plt00750",
+        "temp_max": 2242.4821189862078,
+        "time": 7.499999999999938e-06,
+        "y_h2o_max": 0.1373133133154499
+      },
+      {
+        "heat_release_abs_max": 6944359350.832254,
+        "heat_release_max": 6944359350.832254,
+        "heat_release_min": -0.1865733656099679,
+        "ir_h2_abs_max": 0.6641806859267946,
+        "ir_h2_max": 1.97758476261356e-08,
+        "ir_h2_min": -0.6641806859267946,
+        "plotfile": "plt01000",
+        "temp_max": 2342.167588747603,
+        "time": 9.999999999999914e-06,
+        "y_h2o_max": 0.1405343874327685
+      },
+      {
+        "heat_release_abs_max": 5614743074.5294285,
+        "heat_release_max": 5614743074.5294285,
+        "heat_release_min": -0.10730169453697776,
+        "ir_h2_abs_max": 1.5616207100876809,
+        "ir_h2_max": 1.5612511283791264e-08,
+        "ir_h2_min": -1.5616207100876809,
+        "plotfile": "plt01250",
+        "temp_max": 2423.372069901395,
+        "time": 1.249999999999989e-05,
+        "y_h2o_max": 0.14336584535840874
+      },
+      {
+        "heat_release_abs_max": 4673961878.13544,
+        "heat_release_max": 4673961878.13544,
+        "heat_release_min": -0.060327140304130625,
+        "ir_h2_abs_max": 2.0079117350585176,
+        "ir_h2_max": 1.0755285551056204e-08,
+        "ir_h2_min": -2.0079117350585176,
+        "plotfile": "plt01500",
+        "temp_max": 2491.513514371522,
+        "time": 1.4999999999999867e-05,
+        "y_h2o_max": 0.14589161759550698
+      },
+      {
+        "heat_release_abs_max": 3971841405.3880944,
+        "heat_release_max": 3971841405.3880944,
+        "heat_release_min": -0.026552753440779456,
+        "ir_h2_abs_max": 2.220102712239048,
+        "ir_h2_max": 7.28583859910259e-09,
+        "ir_h2_min": -2.220102712239048,
+        "plotfile": "plt01750",
+        "temp_max": 2549.892188043613,
+        "time": 1.7500000000000222e-05,
+        "y_h2o_max": 0.14816819852937962
+      },
+      {
+        "heat_release_abs_max": 3425778389.957759,
+        "heat_release_max": 3425778389.957759,
+        "heat_release_min": -9.178051919434127e-05,
+        "ir_h2_abs_max": 2.3008091149977656,
+        "ir_h2_max": 5.204170427930421e-09,
+        "ir_h2_min": -2.3008091149977656,
+        "plotfile": "plt02000",
+        "temp_max": 2600.6479003531285,
+        "time": 2.000000000000062e-05,
+        "y_h2o_max": 0.15023479617720176
+      }
+    ],
+    "sustained_reaction_checks": {
+      "final_time": 2.000000000000062e-05,
+      "final_y_h2o_max": 0.15023479617720176,
+      "initial_y_h2o_max": 0.0,
+      "min_h2o_growth": 1e-07,
+      "min_heat_release_abs": 1000.0,
+      "min_ir_h2_abs": 0.001,
+      "min_sustained_outputs": 6,
+      "sustained_output_count": 8
+    },
+    "variables": [
+      "x_velocity",
+      "y_velocity",
+      "z_velocity",
+      "density",
+      "rhoh",
+      "temp",
+      "RhoRT",
+      "divu",
+      "gradpx",
+      "gradpy",
+      "gradpz",
+      "I_R(H2)",
+      "I_R(O2)",
+      "I_R(H2O)",
+      "I_R(H)",
+      "I_R(O)",
+      "I_R(OH)",
+      "I_R(HO2)",
+      "I_R(H2O2)",
+      "I_R(N2)",
+      "FunctCall",
+      "HeatRelease",
+      "volFrac",
+      "Y(H2)",
+      "Y(O2)",
+      "Y(H2O)",
+      "Y(H)",
+      "Y(O)",
+      "Y(OH)",
+      "Y(HO2)",
+      "Y(H2O2)",
+      "Y(N2)",
+      "avg_pressure"
+    ]
+  },
+  "run_dir": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate/run",
+  "run_log_checks": {
+    "amrex_finalized": true,
+    "cuda_devices": 2,
+    "cvode_marker": true,
+    "mpi_ranks": 2,
+    "reactor_marker": true,
+    "solver_failure_marker_count": 0
+  },
+  "run_root": "/tmp/codex_h2_pipe_rack_reacting_mpi_cuda_2rank_20260727_2000step_long_gate",
+  "schema_version": 1,
+  "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-MPI-CUDA-SUSTAINED",
+  "title": "H2 Pipe-Rack Direct Reacting MPI+CUDA Sustained Evidence",
+  "validated_capabilities": {
+    "calibrated_fire_or_blast_model": false,
+    "cuda_devices": 2,
+    "cvode_gmres": true,
+    "direct_engineering_obstacle_reacting_smoke": true,
+    "full_duration_fire_propagation": false,
+    "h2_leak_source": true,
+    "ignition_hotspot": true,
+    "initial_flammable_cloud": true,
+    "mpi_cuda_parallel": true,
+    "mpi_ranks": 2,
+    "pipe_rack_stl_obstacles": true,
+    "reacting_heat_release_variables": true,
+    "reactor_cvode": true,
+    "sustained_reacting_fire_development": true
+  }
+}

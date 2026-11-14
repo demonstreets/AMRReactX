@@ -1,0 +1,50 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x1f4c46) [0x602b0ff25c46]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x1f99f4) [0x602b0ff2a9f4]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x7cb59) [0x602b0fdadb59]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const at /usr/include/c++/13/bits/basic_string.h:264
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() at /usr/include/c++/13/bits/basic_string.h:282
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) amrex::FileOpenFailed(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_Utility.cpp:142
+
+ 3: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0xa7110) [0x602b0fdd8110]
+    amrex::ParallelDescriptor::ReadAndBcastFile(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::Vector<char, std::allocator<char> >&, bool, int const&) at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_ParallelDescriptor.cpp:1518
+
+ 4: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x1effaa) [0x602b0ff20faa]
+    std::vector<char, std::allocator<char> >::data() at /usr/include/c++/13/bits/stl_vector.h:1261
+ (inlined by) amrex::Vector<char, std::allocator<char> >::dataPtr() at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_Vector.H:49
+ (inlined by) amrex::PlotFileDataImpl::PlotFileDataImpl(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_PlotFileDataImpl.cpp:23
+
+ 5: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x24e7a) [0x602b0fd55e7a]
+    std::__uniq_ptr_impl<amrex::PlotFileDataImpl, std::default_delete<amrex::PlotFileDataImpl> >::__uniq_ptr_impl(amrex::PlotFileDataImpl*) at /usr/include/c++/13/bits/unique_ptr.h:176 (discriminator 2)
+ (inlined by) std::__uniq_ptr_data<amrex::PlotFileDataImpl, std::default_delete<amrex::PlotFileDataImpl>, true, true>::__uniq_ptr_impl(amrex::PlotFileDataImpl*) at /usr/include/c++/13/bits/unique_ptr.h:241 (discriminator 2)
+ (inlined by) std::unique_ptr<amrex::PlotFileDataImpl, std::default_delete<amrex::PlotFileDataImpl> >::unique_ptr<std::default_delete<amrex::PlotFileDataImpl>, void>(amrex::PlotFileDataImpl*) at /usr/include/c++/13/bits/unique_ptr.h:318 (discriminator 2)
+ (inlined by) amrex::PlotFileData::PlotFileData(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/external/amrex/Tools/Plotfile/../../Src/Base/AMReX_PlotFileUtil.H:160 (discriminator 2)
+ (inlined by) main_main() at /home/cj/my-pele/external/amrex/Tools/Plotfile/fextrema.cpp:49 (discriminator 2)
+
+ 6: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x234e2) [0x602b0fd544e2]
+    main at /home/cj/my-pele/external/amrex/Tools/Plotfile/fextrema.cpp:153
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7247b2c2a1ca]
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7247b2c2a28b]
+
+ 9: external/amrex/Tools/Plotfile/fextrema.gnu.ex(+0x24a85) [0x602b0fd55a85]
+    ?? ??:0
+

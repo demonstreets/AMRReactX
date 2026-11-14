@@ -1,0 +1,58 @@
+# Codex-maintained tiny PeleLMeX CUDA runtime smoke for ENG-14 GPU coverage.
+# Keeps the c3h8_gpu_test CUDA/EB/k-epsilon/external-source path but shrinks it.
+
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+
+peleLM.lo_bc = Inflow SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc = Outflow Outflow SlipWallAdiab
+
+amr.n_cell          = 16 10 8
+amr.v               = 1
+amr.max_level       = 0
+amr.n_error_buf     = 1 1 1 1
+amr.grid_eff        = 0.7
+amr.blocking_factor = 2
+amr.max_grid_size   = 16
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 8.0
+prob.wind_v = 0.0
+prob.leak_xc = 25.5
+prob.leak_yc = 20.0
+prob.leak_zc = 20.0
+prob.leak_rate = 0.104
+prob.leak_radius = 0.011
+prob.leak_T = 300.0
+prob.ke_inlet_TI = 0.10
+prob.ke_inlet_L = 2.0
+
+
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 0
+peleLM.les_model = kepsilon
+peleLM.aux_vars = k epsilon
+peleLM.ke_k_amb = 0.05
+peleLM.ke_eps_amb = 0.01
+peleLM.ke_prod_lim = 10.0
+
+amr.check_int = -1
+amr.plot_int = 1
+amr.max_step = 1
+amr.stop_time = -1.0
+amr.cfl = 0.5
+amr.derive_plot_vars = avg_pressure mag_vort mass_fractions
+
+fabarray.mfiter_tile_size = 1024 1024 1024
+
+eb2.geom_type = UserDefined
+eb2.small_volfrac = 1.0e-4
+
+amrex.abort_on_unused_inputs = 1

@@ -1,0 +1,40 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0xab8166) [0x62e43849f166]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0xabcf21) [0x62e4384a3f21]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0x107452f) [0x62e438a5b52f]
+    PeleC::react_state(double, double, bool, amrex::MultiFab*) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/React.cpp:233
+
+ 3: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0xd4d242) [0x62e438734242]
+    PeleC::post_init(double) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/PeleC.cpp:1326
+
+ 4: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0xb0dac5) [0x62e4384f4ac5]
+    amrex::Amr::FinalizeInit(double, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:1399 (discriminator 1)
+
+ 5: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0xb1919a) [0x62e43850019a]
+    amrex::Amr::init(double, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:1182
+
+ 6: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0x4d9c4) [0x62e437a349c4]
+    main at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/main.cpp:195 (discriminator 1)
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7ab340c2a1ca]
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7ab340c2a28b]
+
+ 9: /home/cj/my-pele/examples/academic/spray_detonation/spatial_diagnostic_202609102d.gnu.MPI.ex(+0x4ede5) [0x62e437a35de5]
+    ?? ??:0
+

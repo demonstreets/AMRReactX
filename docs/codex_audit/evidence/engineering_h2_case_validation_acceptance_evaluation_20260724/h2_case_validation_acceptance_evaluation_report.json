@@ -1,0 +1,804 @@
+{
+  "acceptance_contract_report": "docs/codex_audit/evidence/engineering_h2_case_validation_acceptance_contract_20260724/h2_case_validation_acceptance_contract_report.json",
+  "campaign_evaluations": [
+    {
+      "campaign_id": "real_cad_large_layout_leak_dispersion",
+      "deferred_metric_count": 1,
+      "failed_metric_count": 9,
+      "metric_count": 10,
+      "metric_evaluations": [
+        {
+          "actual_value": 0,
+          "comparator": ">=",
+          "gap": "actual value did not satisfy >= 3",
+          "metric_id": "real_cad_source_file_count",
+          "source_field": "summary.source_cad_file_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "status": "FAIL",
+          "threshold": 3
+        },
+        {
+          "actual_value": 0,
+          "comparator": ">=",
+          "gap": "actual value did not satisfy >= 3",
+          "metric_id": "real_cad_cleaned_geometry_count",
+          "source_field": "summary.cleaned_geometry_file_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "status": "FAIL",
+          "threshold": 3
+        },
+        {
+          "actual_value": 0,
+          "comparator": ">=",
+          "gap": "actual value did not satisfy >= 3",
+          "metric_id": "real_cad_paired_label_count",
+          "source_field": "summary.data_room_index_paired_label_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "status": "FAIL",
+          "threshold": 3
+        },
+        {
+          "actual_value": 0,
+          "comparator": ">=",
+          "gap": "actual value did not satisfy >= 3",
+          "metric_id": "real_cad_cleanup_quality_rows",
+          "source_field": "summary.cleanup_quality_record_row_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "status": "FAIL",
+          "threshold": 3
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "real_cad_manifest_validates",
+          "source_field": "summary.manifest_validates",
+          "source_report": "real_cad_intake_preflight_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "real_cad_large_layout_valid",
+          "source_field": "summary.large_layout_valid",
+          "source_report": "real_cad_intake_preflight_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "real_cad_cleanup_blocker_cleared",
+          "source_field": "clears_real_cad_cleanup_blocker",
+          "source_report": "real_cad_cleanup_package_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": null,
+          "comparator": "==",
+          "gap": "final verifier is generated after this evaluation in the rebuild cycle",
+          "metric_id": "real_cad_rebuild_verifier_pass",
+          "source_field": "status",
+          "source_report": "production_evidence_verification_report",
+          "status": "DEFERRED",
+          "threshold": "PASS"
+        },
+        {
+          "actual_value": "DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "metric_id": "real_cad_large_layout_leak_dispersion_runner_ledger_pass",
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER"
+        },
+        {
+          "actual_value": null,
+          "comparator": "contains_any",
+          "gap": "no list entries contain field segment: campaign_id",
+          "metric_id": "real_cad_large_layout_leak_dispersion_runner_command_recorded",
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": [
+            "real_cad_large_layout_leak_dispersion"
+          ]
+        }
+      ],
+      "passed_metric_count": 0,
+      "ready_for_production_credit": false,
+      "required_domains": [
+        "real_cad_cleanup"
+      ],
+      "title": "Real-CAD tank/pipe large-layout H2 leak dispersion validation"
+    },
+    {
+      "campaign_id": "sbepv5_d27_external_plume_validation",
+      "deferred_metric_count": 0,
+      "failed_metric_count": 13,
+      "metric_count": 13,
+      "metric_evaluations": [
+        {
+          "actual_value": "NOT_READY-SBEPV5-D27-DATASET-INGESTION",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-SBEPV5-D27-DATASET-INGESTION",
+          "metric_id": "sbepv5_dataset_ingestion_ready",
+          "source_field": "status",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": "PASS-SBEPV5-D27-DATASET-INGESTION"
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "sbepv5_exact_sensor_coordinates",
+          "source_field": "current_inputs.exact_sensor_coordinates_available",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "sbepv5_exact_baffle_geometry",
+          "source_field": "current_inputs.exact_baffle_geometry_available",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "sbepv5_experimental_timeseries",
+          "source_field": "current_inputs.experimental_timeseries_available",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": null,
+          "comparator": "count>=",
+          "gap": "missing field segment: sensor_ids",
+          "metric_id": "sbepv5_sensor_count",
+          "source_field": "sensor_coordinate_summary.sensor_ids",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": 12
+        },
+        {
+          "actual_value": null,
+          "comparator": "count>=",
+          "gap": "missing field segment: baffle_ids",
+          "metric_id": "sbepv5_baffle_count",
+          "source_field": "baffle_geometry_summary.baffle_ids",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": 4
+        },
+        {
+          "actual_value": null,
+          "comparator": ">=",
+          "gap": "missing field segment: max_time_s",
+          "metric_id": "sbepv5_timeseries_duration",
+          "source_field": "timeseries_summary.max_time_s",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": 120.0
+        },
+        {
+          "actual_value": 0,
+          "comparator": ">=",
+          "gap": "actual value did not satisfy >= 2",
+          "metric_id": "external_plume_metric_count",
+          "source_field": "summary.external_plume_metric_count",
+          "source_report": "h2_reference_agreement_report",
+          "status": "FAIL",
+          "threshold": 2
+        },
+        {
+          "actual_value": null,
+          "comparator": "contains_any",
+          "gap": "cannot descend through non-container at segment: metric_types",
+          "metric_id": "external_plume_shape_metric_present",
+          "source_field": "external_plume_shape_comparison.metric_types",
+          "source_report": "h2_reference_agreement_report",
+          "status": "FAIL",
+          "threshold": [
+            "plume_extent",
+            "sensor_concentration",
+            "arrival_time"
+          ]
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "external_plume_all_metrics_passed",
+          "source_field": "summary.external_plume_all_metrics_passed",
+          "source_report": "h2_reference_agreement_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "external_plume_reference_blocker_cleared",
+          "source_field": "clears_reference_data_blocker",
+          "source_report": "h2_reference_agreement_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": "DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "metric_id": "sbepv5_d27_external_plume_validation_runner_ledger_pass",
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER"
+        },
+        {
+          "actual_value": null,
+          "comparator": "contains_any",
+          "gap": "no list entries contain field segment: campaign_id",
+          "metric_id": "sbepv5_d27_external_plume_validation_runner_command_recorded",
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": [
+            "sbepv5_d27_external_plume_validation"
+          ]
+        }
+      ],
+      "passed_metric_count": 0,
+      "ready_for_production_credit": false,
+      "required_domains": [
+        "external_plume_shape_reference"
+      ],
+      "title": "HySafe SBEPV5 D27 external plume-shape validation"
+    },
+    {
+      "campaign_id": "calibrated_fire_consequence_validation",
+      "deferred_metric_count": 0,
+      "failed_metric_count": 11,
+      "metric_count": 11,
+      "metric_evaluations": [
+        {
+          "actual_value": "NOT_READY-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+          "metric_id": "fire_calibration_ingestion_ready",
+          "source_field": "status",
+          "source_report": "fire_calibration_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION"
+        },
+        {
+          "actual_value": null,
+          "comparator": ">=",
+          "gap": "missing field segment: radiation_metrics_summary",
+          "metric_id": "fire_radiation_metric_count",
+          "source_field": "radiation_metrics_summary.row_count",
+          "source_report": "fire_calibration_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": 1
+        },
+        {
+          "actual_value": null,
+          "comparator": ">=",
+          "gap": "missing field segment: overpressure_metrics_summary",
+          "metric_id": "fire_overpressure_metric_count",
+          "source_field": "overpressure_metrics_summary.row_count",
+          "source_report": "fire_calibration_dataset_ingestion_report",
+          "status": "FAIL",
+          "threshold": 1
+        },
+        {
+          "actual_value": "NOT_READY-H2-FIRE-CALIBRATION-DATASET",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-FIRE-CALIBRATION-DATASET",
+          "metric_id": "fire_calibration_dataset_ready",
+          "source_field": "status",
+          "source_report": "fire_calibration_dataset_report",
+          "status": "FAIL",
+          "threshold": "PASS-H2-FIRE-CALIBRATION-DATASET"
+        },
+        {
+          "actual_value": null,
+          "comparator": "contains_all",
+          "gap": "missing field segment: dataset",
+          "metric_id": "fire_calibration_metric_families",
+          "source_field": "dataset.metrics.family",
+          "source_report": "fire_calibration_dataset_report",
+          "status": "FAIL",
+          "threshold": [
+            "radiation",
+            "overpressure"
+          ]
+        },
+        {
+          "actual_value": "PASS-SCREENING",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-CALIBRATED-CONSEQUENCE-AGREEMENT",
+          "metric_id": "fire_consequence_calibrated_status",
+          "source_field": "status",
+          "source_report": "fire_consequence_metrics_report",
+          "status": "FAIL",
+          "threshold": "PASS-CALIBRATED-CONSEQUENCE-AGREEMENT"
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "fire_radiation_model_calibrated",
+          "source_field": "radiation_model_calibrated",
+          "source_report": "fire_consequence_metrics_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "fire_overpressure_model_calibrated",
+          "source_field": "overpressure_model_calibrated",
+          "source_report": "fire_consequence_metrics_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": false,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == True",
+          "metric_id": "fire_consequence_blocker_cleared",
+          "source_field": "clears_calibrated_fire_consequence_blocker",
+          "source_report": "fire_consequence_metrics_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": "DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "metric_id": "calibrated_fire_consequence_validation_runner_ledger_pass",
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER"
+        },
+        {
+          "actual_value": null,
+          "comparator": "contains_any",
+          "gap": "no list entries contain field segment: campaign_id",
+          "metric_id": "calibrated_fire_consequence_validation_runner_command_recorded",
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": [
+            "calibrated_fire_consequence_validation"
+          ]
+        }
+      ],
+      "passed_metric_count": 0,
+      "ready_for_production_credit": false,
+      "required_domains": [
+        "fire_consequence_calibration"
+      ],
+      "title": "Calibrated fire radiation and overpressure consequence validation"
+    },
+    {
+      "campaign_id": "integrated_engineering_production_replay",
+      "deferred_metric_count": 2,
+      "failed_metric_count": 8,
+      "metric_count": 10,
+      "metric_evaluations": [
+        {
+          "actual_value": "NOT_READY-H2-EXTERNAL-ARTIFACT-DROP",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-EXTERNAL-ARTIFACT-DROP",
+          "metric_id": "external_artifact_drop_ready",
+          "source_field": "status",
+          "source_report": "h2_external_artifact_drop_validator_report",
+          "status": "FAIL",
+          "threshold": "PASS-H2-EXTERNAL-ARTIFACT-DROP"
+        },
+        {
+          "actual_value": 0,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == 14",
+          "metric_id": "external_artifact_drop_valid_count",
+          "source_field": "valid_artifact_count",
+          "source_report": "h2_external_artifact_drop_validator_report",
+          "status": "FAIL",
+          "threshold": 14
+        },
+        {
+          "actual_value": null,
+          "comparator": "==",
+          "gap": "missing field segment: controlled_copy_applied",
+          "metric_id": "controlled_copy_applied",
+          "source_field": "controlled_copy_applied",
+          "source_report": "h2_external_artifact_controlled_copy_report",
+          "status": "FAIL",
+          "threshold": true
+        },
+        {
+          "actual_value": 0,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == 14",
+          "metric_id": "controlled_copy_ready_count",
+          "source_field": "ready_copy_action_count",
+          "source_report": "h2_external_artifact_controlled_copy_report",
+          "status": "FAIL",
+          "threshold": 14
+        },
+        {
+          "actual_value": 3,
+          "comparator": "==",
+          "gap": "actual value did not satisfy == 0",
+          "metric_id": "blocker_clearance_zero_remaining",
+          "source_field": "remaining_blocker_count",
+          "source_report": "h2_blocker_clearance_preflight_report",
+          "status": "FAIL",
+          "threshold": 0
+        },
+        {
+          "actual_value": "NOT_PRODUCTION_READY",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PRODUCTION_READY",
+          "metric_id": "scorecard_production_ready",
+          "source_field": "status",
+          "source_report": "engineering_production_scorecard",
+          "status": "FAIL",
+          "threshold": "PRODUCTION_READY"
+        },
+        {
+          "actual_value": null,
+          "comparator": "==",
+          "gap": "final verifier is generated after this evaluation in the rebuild cycle",
+          "metric_id": "production_verifier_pass",
+          "source_field": "status",
+          "source_report": "production_evidence_verification_report",
+          "status": "DEFERRED",
+          "threshold": "PASS"
+        },
+        {
+          "actual_value": null,
+          "comparator": "==",
+          "gap": "final verifier is generated after this evaluation in the rebuild cycle",
+          "metric_id": "production_verifier_ctest_count",
+          "source_field": "summary.ctest_tests",
+          "source_report": "production_evidence_verification_report",
+          "status": "DEFERRED",
+          "threshold": 22
+        },
+        {
+          "actual_value": "DRYRUN-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "comparator": "==",
+          "gap": "actual value did not satisfy == PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "metric_id": "integrated_engineering_production_replay_runner_ledger_pass",
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER"
+        },
+        {
+          "actual_value": null,
+          "comparator": "contains_any",
+          "gap": "no list entries contain field segment: campaign_id",
+          "metric_id": "integrated_engineering_production_replay_runner_command_recorded",
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "status": "FAIL",
+          "threshold": [
+            "integrated_engineering_production_replay"
+          ]
+        }
+      ],
+      "passed_metric_count": 0,
+      "ready_for_production_credit": false,
+      "required_domains": [
+        "real_cad_cleanup",
+        "external_plume_shape_reference",
+        "fire_consequence_calibration"
+      ],
+      "title": "Integrated production replay after all real external evidence is accepted"
+    }
+  ],
+  "case_validation_plan_report": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json",
+  "comparator_selftest": {
+    "all_cases_passed": true,
+    "case_count": 10,
+    "cases": [
+      {
+        "actual": true,
+        "case": "eq_positive",
+        "comparator": "==",
+        "expected": true,
+        "status": "PASS",
+        "threshold": 2,
+        "value": 2
+      },
+      {
+        "actual": false,
+        "case": "eq_negative",
+        "comparator": "==",
+        "expected": false,
+        "status": "PASS",
+        "threshold": 3,
+        "value": 2
+      },
+      {
+        "actual": true,
+        "case": "ge_positive",
+        "comparator": ">=",
+        "expected": true,
+        "status": "PASS",
+        "threshold": 2,
+        "value": 3
+      },
+      {
+        "actual": false,
+        "case": "ge_negative",
+        "comparator": ">=",
+        "expected": false,
+        "status": "PASS",
+        "threshold": 2,
+        "value": 1
+      },
+      {
+        "actual": true,
+        "case": "count_positive",
+        "comparator": "count>=",
+        "expected": true,
+        "status": "PASS",
+        "threshold": 2,
+        "value": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "actual": false,
+        "case": "count_negative",
+        "comparator": "count>=",
+        "expected": false,
+        "status": "PASS",
+        "threshold": 2,
+        "value": [
+          "a"
+        ]
+      },
+      {
+        "actual": true,
+        "case": "contains_any_positive",
+        "comparator": "contains_any",
+        "expected": true,
+        "status": "PASS",
+        "threshold": [
+          "arrival_time",
+          "plume_extent"
+        ],
+        "value": [
+          "plume_extent"
+        ]
+      },
+      {
+        "actual": false,
+        "case": "contains_any_negative",
+        "comparator": "contains_any",
+        "expected": false,
+        "status": "PASS",
+        "threshold": [
+          "arrival_time",
+          "plume_extent"
+        ],
+        "value": [
+          "metadata"
+        ]
+      },
+      {
+        "actual": true,
+        "case": "contains_all_positive",
+        "comparator": "contains_all",
+        "expected": true,
+        "status": "PASS",
+        "threshold": [
+          "radiation",
+          "overpressure"
+        ],
+        "value": [
+          "radiation",
+          "overpressure"
+        ]
+      },
+      {
+        "actual": false,
+        "case": "contains_all_negative",
+        "comparator": "contains_all",
+        "expected": false,
+        "status": "PASS",
+        "threshold": [
+          "radiation",
+          "overpressure"
+        ],
+        "value": [
+          "radiation"
+        ]
+      }
+    ],
+    "passed_case_count": 10
+  },
+  "deferred_source_reports": {
+    "production_evidence_verification_report": "final verifier is generated after this evaluation in the rebuild cycle"
+  },
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_external_evidence_case_validation_plan_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json",
+      "sha256": "c316765c026a3a8e6a9d036d0978de2f35479e33bf2c61562ebad23b085c2df3",
+      "size_bytes": 28847
+    },
+    {
+      "label": "engineering_h2_case_validation_acceptance_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_acceptance_contract_20260724/h2_case_validation_acceptance_contract_report.json",
+      "sha256": "76e52ef19d12a97aea1457d35d700a8e0f85fd2a13ab103c64525b7b1b39be9c",
+      "size_bytes": 5749
+    },
+    {
+      "label": "real_cad_intake_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "sha256": "33e882ad5cc94663d01c9e93f18faa8a1bb385c5dd1a838e5df80423b0b3a5fc",
+      "size_bytes": 6969
+    },
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "e227facfc24e049ebe4d2672e9060475e751bb7d629453ebb5a4b1635b73db82",
+      "size_bytes": 5093
+    },
+    {
+      "label": "sbepv5_d27_dataset_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json",
+      "sha256": "51a726d2e60369c484ff63e0c6a96bd3ef8c2e91f10d7c23de0cd283d8d257b4",
+      "size_bytes": 3288
+    },
+    {
+      "label": "h2_reference_agreement_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json",
+      "sha256": "fab9d5b2ecb52b40765c57fc5b662c65ec061ffb881d9ddb339adef23c579daa",
+      "size_bytes": 7775
+    },
+    {
+      "label": "fire_calibration_dataset_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json",
+      "sha256": "ec57ea9833fa93b6f2c4fed712ba4f650252f4a7d2e4b82bdea42b11120f194a",
+      "size_bytes": 6383
+    },
+    {
+      "label": "fire_calibration_dataset_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_20260723/fire_calibration_dataset_report.json",
+      "sha256": "89436b69d598dad4bea34a2b3d5e49272eefe6352297541e8c051ec791a38e34",
+      "size_bytes": 2082
+    },
+    {
+      "label": "fire_consequence_metrics_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "h2_external_artifact_drop_validator_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+      "sha256": "0108680ab41342c3dd859bc64c71a245c972089bf2b811e6e8f7665d5448bcb9",
+      "size_bytes": 13866
+    },
+    {
+      "label": "h2_external_artifact_controlled_copy_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_controlled_copy_20260724/h2_external_artifact_controlled_copy_report.json",
+      "sha256": "db32de0bbd795cbd8e0757f2c5b30b49c01ed27826e28899b1a2d9e7e0296b7a",
+      "size_bytes": 17424
+    },
+    {
+      "label": "h2_blocker_clearance_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "sha256": "320fe14cf656f8171fec3f7d8f3f66a8c4a8ecb044d1cbf94b0fb9b14396fa52",
+      "size_bytes": 6627
+    },
+    {
+      "label": "engineering_production_scorecard",
+      "path": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "sha256": "5d04d11b450a9b833b61959b0642ee0949935fcd6c1458e5a3fb28ccf905b1d8",
+      "size_bytes": 33300
+    },
+    {
+      "label": "case_validation_runner_ledger",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json",
+      "sha256": "b9a7220b83bf3eab28b38938992e1c16b1b1aded22f2bf4b1e91c7a91db03b71",
+      "size_bytes": 9221
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:10+00:00",
+  "limitations": [
+    "This report evaluates acceptance contracts against the current evidence JSON files; it does not run CFD campaigns.",
+    "Final production-verifier metrics are intentionally deferred here to avoid a circular evidence hash dependency.",
+    "Production credit still requires accepted external data, campaign execution, zero failed metrics, and the final verifier passing."
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_case_validation_acceptance_contract_20260724/h2_case_validation_acceptance_contract_report.json",
+      "gap": "",
+      "name": "acceptance_contract_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "total=44 passed=0 failed=41 deferred=3",
+      "gap": "",
+      "name": "all_contract_metrics_evaluated_or_deferred",
+      "status": "PASS"
+    },
+    {
+      "evidence": "failed_metrics=41",
+      "gap": "",
+      "name": "current_state_retains_unmet_real_data_metrics",
+      "status": "PASS"
+    },
+    {
+      "evidence": "deferred_metrics=3",
+      "gap": "",
+      "name": "final_verifier_metrics_are_deferred_to_avoid_hash_cycle",
+      "status": "PASS"
+    },
+    {
+      "evidence": "10/10",
+      "gap": "",
+      "name": "comparator_selftest_passed",
+      "status": "PASS"
+    },
+    {
+      "evidence": "evaluation is a current-state gate only",
+      "gap": "",
+      "name": "evaluation_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "source_report_paths": {
+    "case_validation_runner_ledger": "docs/codex_audit/evidence/engineering_h2_case_validation_runner_ledger_20260724/h2_case_validation_runner_ledger.json",
+    "engineering_production_scorecard": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+    "fire_calibration_dataset_ingestion_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json",
+    "fire_calibration_dataset_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_20260723/fire_calibration_dataset_report.json",
+    "fire_consequence_metrics_report": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+    "h2_blocker_clearance_preflight_report": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+    "h2_external_artifact_controlled_copy_report": "docs/codex_audit/evidence/engineering_h2_external_artifact_controlled_copy_20260724/h2_external_artifact_controlled_copy_report.json",
+    "h2_external_artifact_drop_validator_report": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+    "h2_reference_agreement_report": "docs/codex_audit/evidence/engineering_h2_reference_agreement_20260721/h2_reference_agreement_report.json",
+    "real_cad_cleanup_package_report": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+    "real_cad_intake_preflight_report": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+    "sbepv5_d27_dataset_ingestion_report": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json"
+  },
+  "status": "NOT_READY-H2-CASE-VALIDATION-ACCEPTANCE-EVALUATION",
+  "summary": {
+    "acceptance_metric_count": 44,
+    "campaign_count": 4,
+    "comparator_selftest_case_count": 10,
+    "comparator_selftest_passed": true,
+    "deferred_metric_count": 3,
+    "failed_metric_count": 41,
+    "passed_metric_count": 0,
+    "ready_campaign_count": 0,
+    "ready_for_production_credit": false
+  },
+  "title": "Engineering H2 Case Validation Acceptance Evaluation"
+}

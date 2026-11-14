@@ -1,0 +1,19 @@
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp: In function ‘int main()’:
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:6:28: error: static assertion failed: requires the separately named WD6 mechanism
+    6 |   static_assert(NUM_SPECIES==6,"requires the separately named WD6 mechanism");
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:6:28: note: the comparison reduces to ‘(1 == 6)’
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:12:5: error: ‘CKXTY’ was not declared in this scope
+   12 |     CKXTY(X,Y);CKRHOX(P,T,X,rho);CKWYP(P,T,Y,wdot);
+      |     ^~~~~
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:12:16: error: ‘CKRHOX’ was not declared in this scope
+   12 |     CKXTY(X,Y);CKRHOX(P,T,X,rho);CKWYP(P,T,Y,wdot);
+      |                ^~~~~~
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:12:34: error: ‘CKWYP’ was not declared in this scope
+   12 |     CKXTY(X,Y);CKRHOX(P,T,X,rho);CKWYP(P,T,Y,wdot);
+      |                                  ^~~~~
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:13:45: error: ‘imw’ was not declared in this scope
+   13 |     for(int k=0;k<6;++k)sc[k]=1.e6*rho*Y[k]*imw(k);
+      |                                             ^~~
+/home/cj/my-pele/test/unit/probe_wd6_chemistry.cpp:14:5: error: ‘aJacobian’ was not declared in this scope
+   14 |     aJacobian(J,sc,T,0);
+      |     ^~~~~~~~~

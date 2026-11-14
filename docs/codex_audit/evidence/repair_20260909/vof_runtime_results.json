@@ -1,0 +1,45 @@
+{
+  "vof_guard": {
+    "exit": 1,
+    "tail": "Initializing AMReX (26.05)...\nInitializing SUNDIALS with 1 threads...\nSUNDIALS initialized.\nAMReX (26.05) initialized\n\nStarting run at 10:05:17 UTC on 2026-09-09.\n\nPeleC git hash: 0ec1056-dirty\nAMReX git hash: 0ec1056-dirty\nPelePhysics git hash: 0ec1056-dirty\nSUNDIALS git hash: 0ec1056-dirty\n\namrex::Abort::0::VOF mixed-cell thermodynamics/PLIC are not validated. For development only set pelec.allow_experimental_vof=1; this does not grant physical acceptance. !!!\nSIGABRT\nSee Backtrace.0 file for details\n",
+    "command": [
+      "/home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex",
+      "inputs",
+      "max_step=1",
+      "amr.plot_int=1",
+      "amr.checkpoint_files_output=0",
+      "pelec.fixed_dt=1e-10"
+    ]
+  },
+  "vof_csf_ghost": {
+    "exit": 0,
+    "tail": "Initializing AMReX (26.05)...\nInitializing SUNDIALS with 1 threads...\nSUNDIALS initialized.\nAMReX (26.05) initialized\n\nStarting run at 10:05:21 UTC on 2026-09-09.\n\nPeleC git hash: 0ec1056-dirty\nAMReX git hash: 0ec1056-dirty\nPelePhysics git hash: 0ec1056-dirty\nSUNDIALS git hash: 0ec1056-dirty\n\nEXPERIMENTAL VOF: mixed-cell EOS and PLIC incomplete; results must not be certified as physical validation.\n1 Advected Variables: \nadv_0  \n1 Species: \nAIR  \n0 Auxiliary Variables: \n\nInitializing EB2\nCSF surface tension enabled: sigma = 72 dyn/cm\n\nEnding run at 10:05:21 UTC on 2026-09-09.\nRun time = 0.01234119\nRun time w/o init = 0.007177312\nAMReX (26.05) finalized\n",
+    "command": [
+      "/home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex",
+      "inputs",
+      "max_step=1",
+      "amr.plot_int=1",
+      "amr.checkpoint_files_output=0",
+      "pelec.fixed_dt=1e-10",
+      "pelec.allow_experimental_vof=1",
+      "pelec.do_mol=0",
+      "pele.use_csf=1",
+      "pele.csf_sigma=72"
+    ]
+  },
+  "mules_guard": {
+    "exit": 1,
+    "tail": "Initializing AMReX (26.05)...\nInitializing SUNDIALS with 1 threads...\nSUNDIALS initialized.\nAMReX (26.05) initialized\n\nStarting run at 10:05:21 UTC on 2026-09-09.\n\nPeleC git hash: 0ec1056-dirty\nAMReX git hash: 0ec1056-dirty\nPelePhysics git hash: 0ec1056-dirty\nSUNDIALS git hash: 0ec1056-dirty\n\nEXPERIMENTAL VOF: mixed-cell EOS and PLIC incomplete; results must not be certified as physical validation.\n1 Advected Variables: \nadv_0  \n1 Species: \nAIR  \n0 Auxiliary Variables: \n\nInitializing EB2\namrex::Abort::0::pele.use_mules is unsupported: the legacy momentum force was not MULES. Use the existing VOF transport with use_mules=0; bounded conservative MULES is not implemented. !!!\nSIGABRT\nSee Backtrace.0 file for details\n",
+    "command": [
+      "/home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex",
+      "inputs",
+      "max_step=1",
+      "amr.plot_int=1",
+      "amr.checkpoint_files_output=0",
+      "pelec.fixed_dt=1e-10",
+      "pelec.allow_experimental_vof=1",
+      "pelec.do_mol=0",
+      "pele.use_mules=1"
+    ]
+  }
+}

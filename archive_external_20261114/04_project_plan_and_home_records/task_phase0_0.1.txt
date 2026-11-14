@@ -1,0 +1,18 @@
+## Phase 0 任务 0.1：编译 PelePhysics
+
+目标：在 ~/my-pele/external/ 下成功编译 PelePhysics。
+
+环境：
+- AMReX 已在 ~/my-pele/external/amrex/
+- PelePhysics 已在 ~/my-pele/external/PelePhysics/
+- Submodules/amrex 已软链接到 external/amrex
+- gcc 13.3, cmake 3.28, openblas, fftw3 已安装
+- SUNDIALS 可能未安装，优先使用系统 apt 安装 libsundials-dev
+
+编译步骤：
+1. cd ~/my-pele/external/PelePhysics
+2. 创建 build 目录
+3. cmake 配置
+4. make -j
+
+请完成编译，报告成功或失败及原因。如失败，分析错误并修复。

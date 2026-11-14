@@ -1,0 +1,88 @@
+{
+  "alpha_center_displacement": 0.5103460937909786,
+  "alpha_center_x": 0.31018069637440354,
+  "alpha_center_y": 0.9737317462654282,
+  "alpha_circularity": 0.9381205959473954,
+  "alpha_equivalent_radius": 0.25084964136157584,
+  "alpha_integral": 0.19768642226493177,
+  "alpha_interface_length": 1.6800982599924743,
+  "alpha_mass_relative_drift": -1.4040203316761912e-16,
+  "alpha_max": 0.4795584327608289,
+  "alpha_mean": 0.09884321113246589,
+  "alpha_mean_rise_velocity_y": 0.13101087494964955,
+  "alpha_min": 2.1079453345897553e-53,
+  "alpha_sum": 202.43089639929013,
+  "aux_transport_scheme": "finite_volume_tvd_minmod_using_mac_projected_face_velocities",
+  "bridge_contracts": {
+    "alpha_bounded_0_1": true,
+    "alpha_center_of_mass_moves": true,
+    "alpha_center_of_mass_rises": true,
+    "alpha_mass_conserved": true,
+    "alpha_mean_rise_velocity_positive": true,
+    "aux_alpha_initialized": true,
+    "aux_alpha_plotted": true,
+    "aux_aware_csf_source_hook_compiles_and_runs": true,
+    "aux_density_force_scaling_compiles_and_runs": true,
+    "aux_density_projection_sigma_compiles_and_runs": true,
+    "aux_transport_uses_mac_face_flux_divergence": true,
+    "aux_transport_uses_tvd_limited_face_states": true,
+    "aux_viscosity_diffusion_coefficients_compile_and_run": true,
+    "canonical_boundary_conditions_configured": true,
+    "canonical_light_phase_convention_configured": true,
+    "canonical_observables_recorded": true,
+    "incompressible_state_does_not_write_thermochemical_components": true,
+    "run_log_has_no_nan_abort_or_segfault": true
+  },
+  "canonical_inputs": {
+    "alpha_is_light_phase": true,
+    "aux_tvd_advection_enabled": true,
+    "domain_1x2": true,
+    "geometry_is_periodic_0_0": true,
+    "no_slip_top_bottom": true,
+    "slip_side_walls": true,
+    "zero_initial_velocity": true
+  },
+  "canonical_observables": {
+    "center_of_mass_y": 0.9737317462654282,
+    "circularity": 0.9381205959473954,
+    "interface_length": 1.6800982599924743,
+    "mean_rise_velocity_y": 0.13101087494964955
+  },
+  "fields": [
+    "x_velocity",
+    "y_velocity",
+    "gradpx",
+    "gradpy",
+    "alpha",
+    "avg_pressure",
+    "mag_vort"
+  ],
+  "finest_level": 0,
+  "initial_alpha_metrics": {
+    "alpha_center_x": 0.5000000000000001,
+    "alpha_center_y": 0.5000000000009374,
+    "alpha_integral": 0.1976864222649318,
+    "alpha_max": 0.999999998407621,
+    "alpha_mean": 0.0988432111324659,
+    "alpha_min": 0.0,
+    "alpha_sum": 202.43089639929016,
+    "circularity": 1.0024815462137553,
+    "equivalent_radius": 0.25084964136157584,
+    "interface_length": 1.572233211541082,
+    "mean_rise_velocity_y": 0.0,
+    "time": 0.0
+  },
+  "plotfile": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_thickness_sweep_20260730/eps_0p022500/run/plt00823",
+  "remaining_qlt03_work": [
+    "validate canonical-strength CSF dynamics against bubble-rise observables",
+    "run to canonical final time and compare center of mass, rise velocity, circularity, and final shape"
+  ],
+  "required_field": "alpha",
+  "scope": "PeleLMeX incompressible velocity state plus explicitly advected auxiliary alpha carrier smoke; not a full VOF/CSF canonical bubble-rise solve.",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-AUX-BRIDGE-SMOKE",
+  "time": 3.0,
+  "velocity_fields_seen": [
+    "x_velocity",
+    "y_velocity"
+  ]
+}

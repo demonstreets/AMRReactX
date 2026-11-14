@@ -1,0 +1,31 @@
+# CGS version of a liquid-water/air material shock tube.
+# This input is a reproducible test setup; agreement requires the exact solver.
+geometry.prob_lo = 0 0
+geometry.prob_hi = 100 1
+geometry.is_periodic = 0 1
+geometry.coord_sys = 0
+amr.n_cell = 400 4
+amr.max_grid_size = 100
+amr.max_level = 0
+tp.gas_eos = gamma_law
+tp.gas_gamma = 1.4
+tp.gas_cv = 7.18e6
+tp.liquid_gamma = 4.4
+tp.liquid_pinf = 6e9
+tp.liquid_cv = 4.18e7
+tp.liquid_reference_energy = 0
+tp.shape = interface
+tp.diaphragm = 70
+tp.alpha = 1
+tp.alpha_right = 0
+tp.pressure = 1e10
+tp.pressure_right = 1e6
+tp.gas_density = 0.001
+tp.gas_density_right = 0.05
+tp.liquid_density = 1
+tp.liquid_density_right = 1
+tp.velocity = 0 0
+tp.cfl = 0.2
+tp.stop_time = 2.29e-5
+tp.max_step = 5000
+tp.plot_int = 200

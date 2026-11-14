@@ -1,0 +1,128 @@
+{
+  "command_records": [
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_drop_validator.py --drop-root docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_fixture/drop --production-blocker-closure-manifest-report docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.md",
+      "output_tail": "engineering_h2_external_artifact_drop_validator PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json md=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.md status=NOT_READY-H2-EXTERNAL-ARTIFACT-DROP valid=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_drop_validator.py --verify-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json",
+      "output_tail": "engineering_h2_external_artifact_drop_validator VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json status=NOT_READY-H2-EXTERNAL-ARTIFACT-DROP valid=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_ingestion_plan.py --external-artifact-drop-validator-report docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json --production-blocker-closure-manifest-report docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.md",
+      "output_tail": "engineering_h2_external_artifact_ingestion_plan PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json md=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.md status=NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN ready=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_ingestion_plan.py --verify-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json",
+      "output_tail": "engineering_h2_external_artifact_ingestion_plan VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json status=NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN ready=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --external-artifact-ingestion-plan-report docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.md",
+      "output_tail": "engineering_h2_external_artifact_controlled_copy_report PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json md=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.md status=NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY ready=0/14 copied=0\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --verify-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json",
+      "output_tail": "engineering_h2_external_artifact_controlled_copy_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json status=NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY ready=0/14 copied=0\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --external-artifact-ingestion-plan-report docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json --apply --confirm-controlled-copy H2_EXTERNAL_ARTIFACTS_READY --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_apply_should_not_exist.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_apply_should_not_exist.md",
+      "output_tail": "engineering_h2_external_artifact_controlled_copy_report FAIL cannot apply a NOT_READY ingestion plan\n",
+      "returncode": 2
+    }
+  ],
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "production_blocker_closure_manifest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    },
+    {
+      "label": "negative_drop_validator_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json",
+      "sha256": "320a2e56ef3140875515ef44c77bb97665aab8f113a693eba00a216f172f9587",
+      "size_bytes": 15753
+    },
+    {
+      "label": "negative_ingestion_plan_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json",
+      "sha256": "1fb5551fcc4bac485b4eb8b36a653f7be1a1b5c8ebdb27f8fff3cb25e9c6582b",
+      "size_bytes": 18339
+    },
+    {
+      "label": "negative_controlled_copy_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json",
+      "sha256": "702e32033555daa3c55231b3e179c154887ff3f16433d762ad698153e7e90298",
+      "size_bytes": 19322
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:15+00:00",
+  "limitations": [
+    "This negative self-test uses deliberately incomplete synthetic input.",
+    "It proves bad external artifact drops stay NOT_READY and cannot be applied.",
+    "It must not be used to clear real-CAD, SBEPV5, or fire-calibration blockers."
+  ],
+  "negative_drop_root": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_fixture/drop",
+  "negative_reports": {
+    "controlled_copy": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json",
+    "drop_validator": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json",
+    "ingestion_plan": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json"
+  },
+  "negative_selftest_only": true,
+  "production_blocker_closure_manifest_report": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_drop_validator_report.json",
+      "gap": "",
+      "name": "negative_drop_is_not_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_ingestion_plan.json",
+      "gap": "",
+      "name": "negative_ingestion_is_not_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_negative_selftest_20260724/negative_controlled_copy_report.json",
+      "gap": "",
+      "name": "negative_controlled_copy_no_writes",
+      "status": "PASS"
+    },
+    {
+      "evidence": "engineering_h2_external_artifact_controlled_copy_report FAIL cannot apply a NOT_READY ingestion plan\n",
+      "gap": "",
+      "name": "negative_apply_refused",
+      "status": "PASS"
+    },
+    {
+      "evidence": "negative self-test is gate-mechanics evidence only",
+      "gap": "",
+      "name": "does_not_clear_production_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-EXTERNAL-ARTIFACT-GATE-NEGATIVE-SELFTEST",
+  "summary": {
+    "apply_refused_returncode": 2,
+    "controlled_copy_applied_copy_actions": false,
+    "controlled_copy_copied_file_count": 0,
+    "controlled_copy_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY",
+    "drop_missing_or_invalid_artifact_count": 14,
+    "drop_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-DROP",
+    "drop_total_expected_artifact_count": 14,
+    "drop_valid_artifact_count": 0,
+    "ingestion_missing_or_invalid_copy_action_count": 14,
+    "ingestion_ready_copy_action_count": 0,
+    "ingestion_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN"
+  },
+  "title": "Engineering H2 External Artifact Gate Negative Synthetic Self-Test"
+}

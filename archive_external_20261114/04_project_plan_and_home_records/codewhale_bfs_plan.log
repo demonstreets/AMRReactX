@@ -1,0 +1,325 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_bfs_kepsilon.md)
+tool read_file completed: # TASK: BFS k-ε 湍流验证算例
+
+## 背景
+
+`/home/cj/my-pele/examples/engineering/backward_facing_step/` 已有层流 BFS 算例。
+需创建湍流版本验证 k-ε + 壁面函数。
+
+## 设计
+
+基于 Driver & Seegmiller (1985), Re_H ≈ 37400:
+- 台阶高度 H=0.0381 m
+- 入口速度 U=13.47 m/s (44.2 ft/s → 13.47 m/s)
+- 空气 ν≈1.54e-5 → Re_H ≈ 33,300 (接近目标)
+
+## 操作
+
+1. **复制**...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleNow let me read the current BFS setup files.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/backward_facing_step/input.yaml)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/backward_facing_step/pelelmex_prob.H)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/backward_facing_step/Makefile)
+tool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+
+tool read_file completed: # =============================================================================
+# my-pele — Backward-Facing Step (Driver & Seegmiller 1985, Re_H ≈ 36000)
+# =============================================================================
+# 2D domain: x ∈ [-0.15, 1.15] m, y ∈ [0, 0.35] m  (~ -4H→30H, ...
+tool read_file completed: <file path="/home/cj/my-pele/examples/engineering/backward_facing_step/pelelmex_prob.H" total_lines="232" shown_lines="1-200" truncated="true" next_start_line="201">
+     1│ #ifndef PELELM_PROB_H
+     2│ #define PELELM_PROB_H
+     3│ 
+     4│ #include <AMReX_Geometry.H>
+     5│ #include <AMReX_FA...
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/examples/engineering/backward_facing_step/Makefile: No such file or directory (os error 2)
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="1-200" truncated="true" next_start_line="201">
+     1│ #!/usr/bin/env python3
+     2│ """
+     3│ validate_bfs.py — Phase 2.7 Backward-Facing Step Validation.
+     4│ 
+     5│ Reads a PeleLMeX AMReX plotfile and va...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+tool: list_dir (path: /home/cj/my-pele/examples/engineering/backward_facing_step)
+tool: file_search (path: /home/cj/my-pele/examples/engineering/backward_facing_step, query: Makefile)
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="201-400" truncated="true" next_start_line="401">
+   201│         u = fields['x_velocity'][:, ix]
+   202│     elif 'velocityx' in fields:
+   203│         u = fields['velocityx'][:, ix]
+   204│     else:
+   205│     ...
+tool list_dir completed: <31 items>
+tool file_search completed: <1 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/tools/validate_bfs.py)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/backward_facing_step/GNUmakefile)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/backward_facing_step/pelelmex_prob.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/tools/validate_bfs.py" total_lines="440" shown_lines="401-440" truncated="false">
+   401│     print(f"Cf (tau=0.5, rho=1.225, U=44.2) = {cf:.6f}")
+   402│ 
+   403│     # Test Cp computation
+   404│     cp = compute_cp(101400, 101325, 1.225, 44.2)
+   405│     print(f"C...
+tool read_file completed: # AMReX
+DIM = 2
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+
+# Profiling
+PROFILE = FALSE
+TINY_PROFILE = FALSE
+COMM_PROFILE = FALSE
+TRACE_PROFILE = FALSE
+MEM_PROFILE = FALSE
+USE_GPROF = FALSE
+
+# Performance
+USE_MPI = TRUE
+USE_OMP = FALSE
+USE_CUDA = FALSE
+USE_HIP = FALSE
+USE_SYCL ...
+tool read_file completed: #include <PeleLMeX.H>
+#include <AMReX_ParmParse.H>
+
+void
+PeleLM::readProbParm() // NOLINT(readability-make-member-function-const)
+{
+  amrex::ParmParse pp("prob");
+
+  pp.query("T_mean", prob_parm->T_mean);
+  pp.query("P_mean", prob_parm->P_mean);
+  pp.query("Y_o2", prob_parm->Y_o2);
+  pp.query("T_...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me check what k-epsilon parameters are available in PeleLMeX and see any existing k-epsilon examples.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX, pattern: ke_inlet_TI|ke_inlet_L|ke_wall_functions)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: les_model.*kepsilon|kepsilon)
+tool: list_dir (path: /home/cj/my-pele/examples/engineering)
+
+tool list_dir completed: <17 items>
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleGood — there are existing k-epsilon examples. Let me inspect them for parameter patterns]0;🐋 CodeWhale.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/h2_leak_3cyl_kepsilon/input.yaml)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/cylinder_kepsilon_validation/input.yaml)
+
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/examples/engineering/h2_leak_3cyl_kepsilon/input.yaml: No such file or directory (os error 2)
+tool read_file completed: # =============================================================================
+# my-pele — Cylinder Wake k-epsilon Validation
+# =============================================================================
+# Single cylinder (r=0.5m) at (5,5,1) in 20×10×2 m domain.
+# Inflow U=8 m/s x-direction, k...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/input.yaml)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/backward_facing_step/CMakeLists.txt)
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/input.yaml: No such file or directory (os error 2)
+tool read_file completed: set(PELE_PHYSICS_EOS_MODEL Fuego)
+set(PELE_PHYSICS_CHEMISTRY_MODEL drm19)
+set(PELE_PHYSICS_TRANSPORT_MODEL Simple)
+set(PELE_PHYSICS_ENABLE_SPRAY OFF)
+set(PELE_PHYSICS_SPRAY_FUEL_NUM 0)
+set(PELE_PHYSICS_SPRAY_GCM OFF)
+set(PELE_PHYSICS_ENABLE_SOOT OFF)
+set(PELE_PHYSICS_ENABLE_RADIATION OFF)
+include...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me check if the `pelelmex_prob.cpp` needs modification for k-epsilon (the cpp file reads prob parameters) and also check the full k-]0;🐋 CodeWhaleepsilon parameter set in Setup.cpp.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: ke_inlet_TI|ke_inlet_L|ke_inlet)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp" total_lines="1703" shown_lines="485-534" truncated="true" next_start_line="535">
+   485│       pp.query("les_cm_wale", m_les_cm_wale);
+   486│     } else if (m_les_model == "Sigma") {
+   487│       pp.query("les_cs_sigma", ...
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX, pattern: inlet_TI|inlet_L|ke_inlet|ke_k_inlet|ke_eps_inlet)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Init.cpp)
+tool: read_file (path: <82 chars>)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Init.cpp" total_lines="605" shown_lines="395-454" truncated="true" next_start_line="455">
+   395│         i, j, k, is_incomp, state_ma[box_no], aux_ma[box_no], geomdata,
+   396│         *lprobparm, lpmfdata);
+   397│     });
+   398│  ...
+tool read_file completed: #ifndef PELELM_PROB_H
+#define PELELM_PROB_H
+
+#include "my_pele_modules.H"
+
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <AMReX_SPACE.H>
+#include <AMReX_REAL.H>
+
+#include <PeleLMeX_ProblemSpecificFunctions.H>
+#include <PeleLMeX_Index.H>
+#include <PMFData.H>
+#include <PelePhysi...
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: list_dir (path: /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test)
+tool: list_dir (path: /home/cj/my-pele/examples/engineering/bfs_sink)
+tool list_dir completed: <13 items>
+tool list_dir completed: <17 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/bfs_sink/input.yaml)
+tool: read_file (path: /home/cj/my-pele/examples/engineering/bfs_sink/pelelmex_prob.H)
+tool read_file completed: #----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 1 1               # For each dir, 0: non-perio, 1: periodic
+geometry.coord_sys   = 0                  # 0 => cart, 1 => RZ
+geometry.prob_lo     = 0.0 0.0         # x_lo y_lo (z_lo)
+geometry.prob_hi     = 1.0 1...
+tool read_file completed: #ifndef PELELM_PROB_H
+#define PELELM_PROB_H
+
+#include "my_pele_modules.H"
+
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <AMReX_SPACE.H>
+#include <AMReX_REAL.H>
+
+#include <PeleLMeX_ProblemSpecificFunctions.H>
+#include <PeleLMeX_Index.H>
+#include <PMFData.H>
+#include <PelePhysi...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/cylinder_kepsilon_validation/GNUmakefile)
+tool: read_file (path: <84 chars>)
+tool read_file completed: # AMReX
+DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+
+# Profiling
+PROFILE = FALSE
+TINY_PROFILE = FALSE
+COMM_PROFILE = FALSE
+TRACE_PROFILE = FALSE
+MEM_PROFILE = FALSE
+USE_GPROF = FALSE
+
+# Performance
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = FALSE
+USE_HIP = FALSE
+USE_SYCL...
+tool read_file completed: #include <PeleLMeX.H>
+#include <AMReX_ParmParse.H>
+#include <AMReX_EB2.H>
+#include <AMReX_EB2_IF.H>
+#include "pelelmex_prob.H"
+
+void
+PeleLM::readProbParm()
+{
+  amrex::ParmParse pp("prob");
+  pp.query("P_mean", prob_parm->P_mean);
+  pp.query("T_mean", prob_parm->T_mean);
+  pp.query("wind_u", prob_...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: bcnormal_aux)
+tool: read_file (path: /home/cj/my-pele/src/engineering)
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/src/engineering: Is a directory (os error 21)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: list_dir (path: /home/cj/my-pele/src/engineering)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_ProblemSpecificFunctions.H)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_ProblemSpecificFunctions.H" total_lines="283" shown_lines="90-119" truncated="true" next_start_line="120">
+    90│     /** Notes:
+    91│      *   1. This function handles the boundary conditions on the domain faces
+    92│      *   2...
+tool list_dir completed: <4 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow I have a complete picture. Here is the assessment.
+
+---
+
+## B]0;🐳 CodeWhaleFS k-ε Assessment Report
+
+### 1. Current BFS Setup (baseline)
+
+| Item | Current Value |
+|------|--------------|
+| **Domain** | x ∈ [-0.15, 1.15] m, y ∈ [0, 0.35] m]0;🐋 CodeWhale |
+| **Grid** | 104×28 (Δ = 0.0125 m, ~3 cells/H) |
+| **Step** | EB box, H=0.0381 m |
+| **BCs** | Inflow (x-lo), Out]0;🐳 CodeWhaleflow (x-hi), NoSlipWallAdiab (y-lo), SlipWallAdiab (y-hi) |
+| **Model** | `les_model = None`, `incompressible = 0` (compressible) |
+| **Chemistry** | `air`, Fuego E]0;🐋 CodeWhaleOS, Simple transport |
+| **CFL** | 0.3, max_step=200, stop_time=-1 |
+| **DIM** | 2D |
+| **bcnormal_aux** | **NOT defined** → will ABORT if called]0;🐳 CodeWhale |
+| **Aux vars** | Not configured |
+
+### 2. What Must Change
+
+#### A. `input.yaml` — REQUIRED changes (6 items)
+
+1. **`peleLM.les_model = kepsilon`** (was `None]0;🐋 CodeWhale`)
+2. **`peleLM.aux_vars = k epsilon`** — **CRITICAL.** Without this, PeleLMeX won't know how many aux variables exist, and k-epsilon won't activate.
+3. **`peleLM.ke_wall_functions = 1`** — enables wall functions for the]0;🐳 CodeWhale bottom no-slip wall and the step face.
+4. **k-ε standard constants** (currently absent):
+   ```
+   peleLM.ke_C_mu = 0.09
+   peleLM.ke_C_eps1 = 1.44
+   peleLM.ke_C_eps2 = 1]0;🐋 CodeWhale.92
+   peleLM.ke_sigma_k = 1.0
+   peleLM.ke_sigma_eps = 1.3
+   peleLM.ke_prod_lim = 10.0
+   ```
+5. **Ambient free-stream maintenance** (prevents k/ε decaying to zero):
+   ```
+   peleLM.ke_k_amb = 1.0e-6
+   pele]0;🐳 CodeWhaleLM.ke_eps_amb = 1.0e-12
+   ```
+6. **Grid and time controls**:
+   - `amr.n_cell = 256 64` (was 104×28, now ~8 cells/H in y)
+   - `peleLM]0;🐋 CodeWhale.cfl = 0.5` (was 0.3)
+   - `peleLM.stop_time = 0.5` (was -1)
+   - `amr.max_step = 10000` (was 200)
+
+#### B. `pelelmex_prob.H` — REQUIRED changes (2 items)
+
+1. **Add `bcnormal_aux`** — the PeleLMeX framework **]0;🐳 CodeWhalewill call** `bcnormal_aux` at the Inflow boundary when `les_model = kepsilon` and `aux_vars` is set. The default implementation **calls `amrex::Abort()`**. Without an]0;🐋 CodeWhale override, the simulation will crash at the first BC fill.
+
+   Inlet values (5% TI, L_t = H = 0.0381 m):
+   - k = 1.5 × (0.05 × 13.47)² = **0.680 m²/s]0;🐳 CodeWhale²**
+   - ε = C_μ^0.75 × k^1.5 / L_t = 0.1643 × 0.5615 / 0.0381 = **2.42 m²/s³**
+
+2. **Modify `initdata` to initialize aux** — change `/*]0;🐋 CodeWhaleaux*/` to `aux` and set k/ε initial field. The PeleLMeX default fallback (Init.cpp:400-420) uses a **hardcoded 1% TI**, which is wrong for this]0;🐳 CodeWhale case.
+
+#### C. `pelelmex_prob.cpp` — OPTIONAL change
+
+Can add `TI` and `L_t` as queryable problem parameters, or hardcode them in `bcnormal_aux`. Hard]0;🐋 CodeWhalecoding is simpler for a validation case.
+
+#### D. Files that do NOT need changes
+
+- **GNUmakefile** — k-ε is built into PeleLMeX. No extra include paths needed.
+- **`peleLM.rho` / `peleLM.mu`** in]0;🐳 CodeWhale input.yaml — harmless in compressible mode, can leave as-is.
+- **`validate_bfs.py`** — field names match PeleLMeX output (`x_velocity`, `density`, `avg_pressure`). No changes expected. Will report if issues arise at validation]0;🐋 CodeWhale time.
+- **`peleLM.incompressible = 0`** — stays. k-ε works in compressible mode.
+
+### 3. Critical Pitfall: `ke_inlet_TI` / `ke_inlet_L`
+
+The task file suggests `peleLM.ke_inlet_TI = 0.05`]0;🐳 CodeWhale and `peleLM.ke_inlet_L = 0.0381`. **These parameters do not exist** in the current PeleLMeX codebase (verified by grep across all 1,171 source files). Inlet turbulence must be set manually in `bcnormal_aux]0;🐋 CodeWhale`.
+
+### 4. K-ε inlet value derivation (verified against cylinder example)
+
+Using the same formula as the working `cylinder_kepsilon_validation` case:
+- k = 1.5 × (TI ×]0;🐳 CodeWhale U)² = 1.5 × (0.05 × 13.47)² = **0.680 m²/s²**
+- ε = C_μ^0.75 × k^1.5 / L_t = 0.1643 × 0.5615 / 0.0381 = **2.42 m²/s³**
+
+Cross-check with cylinder case (]0;🐋 CodeWhaleU=8, TI=1%, L_t≈0.07): yields k=0.0096, ε=0.00221 — matches the cylinder example exactly.
+
+### 5. Estimated Runtime
+
+- **Cells**: 256×64 = 16,384 (5.6× more]0;🐳 CodeWhale than baseline 104×28 = 2,912)
+- **Extra equations**: k and ε transport (2 scalar equations + source terms)
+- **Per-step cost**: ~2-3× the lamin]0;🐋 CodeWhalear BFS
+- **Steps**: 5000–10000 (CFL 0.5, Δx = 1.3/256 ≈ 0.005 m, U=13.47 → Δt ≈]0;🐳 CodeWhale 0.0002 s, 0.5 s / 0.0002 = ~2500 steps minimum, but k-ε stiffness may reduce Δt)
+- **Single-core estimate**: 15–30 minutes]0;🐋 CodeWhale
+- **4-core estimate**: 5–10 minutes
+- **Compilation**: ~1 minute (incremental, air chemistry is small)
+
+### 6. Summary of Changes
+
+| File | Change |]0;🐳 CodeWhale Severity |
+|------|--------|----------|
+| `input.yaml` | 10+ parameter changes | Required |
+| `pelelmex_prob.H` | Add `bcnormal_aux`, modify `initdata` | **CRITICAL** (crash without) |
+| `pelelmex_prob.cpp` | Optional: add]0;🐋 CodeWhale TI/L_t params | Optional |
+| `GNUmakefile` | None | — |
+
+**Total changes**: 3 files modified (1 critical, 1 important]0;🐳 CodeWhale, 1 optional). Ready to proceed when you give the word.

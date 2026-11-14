@@ -1,0 +1,133 @@
+{
+  "blocker_matrix": [
+    {
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "cleared": false,
+      "domain": "external_plume_shape_reference",
+      "failed_quality_gates": [
+        "case_package_runnable",
+        "dataset_metadata_available",
+        "exact_sensor_coordinates_available",
+        "exact_baffle_geometry_available",
+        "digitized_experimental_timeseries_available",
+        "external_dataset_json_written",
+        "reference_agreement_uses_external_shape_dataset"
+      ],
+      "missing_for_strict_credit": [
+        "DataverseNO obstacle/component geometry exact bounds mapped into repository-ingestable geometry form",
+        "longer DataverseNO refined-source/AMR CFD campaign reaching the 113-117 s experimental peak interval",
+        "production agreement metrics passing accepted thresholds on real CFD sensor time histories",
+        "longer boundary-condition parity and refined orifice/source projection screens using the new physics-alignment diagnosis",
+        "controlled digitization uncertainty if plots are used instead of original Excel"
+      ],
+      "next_actions": [
+        "Promote the completed full-channel dx=0.025 refined-source 1000-step dt=5e-6 MPI+CUDA screen into a longer sensor-history agreement window using the implemented AMR finest-owner source projection.",
+        "Do not count the existing 120 s DataverseNO run as strict credit: it reaches the 113-117 s peak interval but uses the older inflated source radius and fails all-sensor agreement thresholds.",
+        "Map exact DataverseNO obstacle/component bounds before claiming full geometry mesh parity.",
+        "Retain SBEPV5/D27 as an optional secondary benchmark if original Excel can be obtained or if controlled digitization is performed."
+      ],
+      "update_status": "TRIAGED-MASTER-PLAN-STRICT-EXTERNAL-SOURCES-PUBLIC-DATA-INCOMPLETE"
+    },
+    {
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "cleared": false,
+      "domain": "real_cad_cleanup",
+      "failed_quality_gates": [
+        "manifest_present",
+        "provenance_complete",
+        "real_cad_source_classified",
+        "source_cad_hashes_verified",
+        "cleaned_geometry_hashes_verified",
+        "large_layout_coverage",
+        "bbox_non_degenerate_m",
+        "scorecard_blocker_clearance"
+      ],
+      "missing_for_strict_credit": [
+        "source CAD files",
+        "cleaned geometry files",
+        "cleanup manifest with source and cleaned geometry hashes",
+        "data-room index/provenance records",
+        "cleanup quality record",
+        "boundary tag CSV/JSON entries for real geometry surfaces and leak/monitor regions",
+        "large-layout coverage with at least three real geometries when claiming large-layout campaign credit"
+      ],
+      "next_actions": [
+        "Provide controlled source CAD files with provenance and hashes.",
+        "Validate the delivery against the real-CAD handoff contract before claiming strict credit.",
+        "Run the existing real-CAD cleanup package workflow to produce cleaned geometry files.",
+        "Populate repository-ingestable cleanup manifest, data-room index, and cleanup quality record.",
+        "Provide boundary tag contract entries for inlet, outlet, walls, leak sources, obstacles, and monitoring regions.",
+        "Regenerate cleanup package, intake preflight, boundary tag contract, production scorecard, and master-plan traceability reports."
+      ],
+      "update_status": "TRIAGED-MASTER-PLAN-STRICT-REAL-CAD-ARTIFACTS-MISSING"
+    },
+    {
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "cleared": false,
+      "domain": "calibrated_fire_radiation_overpressure",
+      "failed_quality_gates": [
+        "ingestion_report_passed",
+        "metadata_available",
+        "case_alignment_complete",
+        "package_ready_for_dataset_builder"
+      ],
+      "missing_for_strict_credit": [
+        "CFD radiation comparison against MDPI heat-flux targets",
+        "exact EXP002 sensor coordinates plus CFD pressure-sensor comparison against EXP002 peak overpressure and arrival time",
+        "case alignment records linking measurements to simulated engineering scenarios",
+        "uncertainty/provenance fields sufficient for calibrated radiation and overpressure agreement"
+      ],
+      "next_actions": [
+        "Replace the synthetic plotfile sensor-sampling CSV with exact EXP002 sensor coordinates once available.",
+        "Run a case-aligned CFD radiation comparison against the MDPI radiation target table.",
+        "Run an EXP002-aligned CFD pressure-sensor comparison and require peak overpressure plus arrival-time acceptance before clearing strict fire credit.",
+        "Run the existing dataset ingestion, package, dataset builder, production scorecard, and master-plan traceability reports after calibrated tables exist."
+      ],
+      "update_status": "TRIAGED-MASTER-PLAN-STRICT-FIRE-CALIBRATION-PARTIAL-DATA-BRIDGED"
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "traceability",
+      "path": "docs/codex_audit/evidence/engineering_h2_master_plan_traceability_20260724/h2_master_plan_traceability_report.json",
+      "sha256": "98e414b147a6537ce2a7c567093b295fd8ac57d7a4827613cc73f481cc8eeaa0",
+      "size_bytes": 32680
+    },
+    {
+      "label": "external_plume_update",
+      "path": "docs/codex_audit/evidence/master_plan_strict_external_source_update_20260731/master_plan_strict_external_source_update_report.json",
+      "sha256": "846d4b4b64cd3b23dc538b63ea70e80ea59fb965d462c3e9d9966dd0f4a3a211",
+      "size_bytes": 48949
+    },
+    {
+      "label": "real_cad_update",
+      "path": "docs/codex_audit/evidence/master_plan_strict_real_cad_update_20260731/master_plan_strict_real_cad_update_report.json",
+      "sha256": "fd421e459dce5004bfde4a1656732a1572ae53207ff79cde1cd2052edaae76eb",
+      "size_bytes": 4359
+    },
+    {
+      "label": "fire_calibration_update",
+      "path": "docs/codex_audit/evidence/master_plan_strict_fire_calibration_update_20260731/master_plan_strict_fire_calibration_update_report.json",
+      "sha256": "cc73b43f24688ceab31e29dceb3c8a1ab33529b1ed3f32953c6d05ffb129ce52",
+      "size_bytes": 13639
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:27.893386+00:00",
+  "schema_version": 1,
+  "status": "TRIAGED-MASTER-PLAN-STRICT-BLOCKER-MATRIX",
+  "summary": {
+    "all_strict_blockers_have_update_reports": true,
+    "all_strict_blockers_triaged": true,
+    "expected_blocker_count": 3,
+    "matrix_blocker_count": 3,
+    "open_strict_blocker_count": 3,
+    "open_strict_blockers": [
+      "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure"
+    ],
+    "strict_master_plan_complete": false,
+    "traceability_blocker_count": 3,
+    "traceability_status": "NOT_READY-H2-MASTER-PLAN-TRACEABILITY"
+  }
+}

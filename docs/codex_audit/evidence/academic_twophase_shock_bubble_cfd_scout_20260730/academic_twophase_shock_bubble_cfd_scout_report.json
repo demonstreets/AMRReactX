@@ -1,0 +1,434 @@
+{
+  "created_utc": "2026-07-31T01:38:33.296510Z",
+  "evidence": [
+    {
+      "exists": true,
+      "name": "GNUmakefile",
+      "path": "examples/academic/shock_bubble/GNUmakefile",
+      "sha256": "2cd2f1189f36efa1e39344ecf04c75554737c5cc02d38269f6b337b6d6d4c80d"
+    },
+    {
+      "exists": true,
+      "name": "Make.package",
+      "path": "examples/academic/shock_bubble/Make.package",
+      "sha256": "ae47c42941f75b72e6a6478cdaaecde67f3179b29b84cbea369ae60a089cbb17"
+    },
+    {
+      "exists": true,
+      "name": "prob.H",
+      "path": "examples/academic/shock_bubble/prob.H",
+      "sha256": "99e1945f7b7ff35f941f62c777e63cee435c1955f961e1c38e3c9ff6b51c7dcb"
+    },
+    {
+      "exists": true,
+      "name": "prob.cpp",
+      "path": "examples/academic/shock_bubble/prob.cpp",
+      "sha256": "f63c29b3e12596e57684ba75942c359f5cab616f4ba01b9b42ee716d63d0ee47"
+    },
+    {
+      "exists": true,
+      "name": "inputs",
+      "path": "examples/academic/shock_bubble/inputs",
+      "sha256": "b5ac7be4488e24b027229c6e4db559ecf4d7093083c6e09a257a1c830afb7f42"
+    },
+    {
+      "exists": true,
+      "name": "PeleC2d.gnu.ex",
+      "path": "examples/academic/shock_bubble/PeleC2d.gnu.ex",
+      "sha256": "96d33c112164a5dfbaec3d221fa53dbd962732e1d0aeb224802f24356cd5e8a4"
+    },
+    {
+      "exists": true,
+      "name": "run_long.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/run_long.log",
+      "sha256": "c45615c96a12b035bebb2446f33eed7d52dcab5e016ee55b6e6dcbfadaf05489"
+    },
+    {
+      "exists": true,
+      "name": "build_gasgas.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_shock_bubble_cfd_scout_20260730/build_gasgas.log",
+      "sha256": "02422b1addea7ac905b061e68aa117414d5a5d71437fb9b57244c32afb818252"
+    }
+  ],
+  "gates": [
+    {
+      "metric": "examples/academic/shock_bubble/PeleC2d.gnu.ex",
+      "name": "compiled_executable_present",
+      "status": "PASS",
+      "target": "executable exists"
+    },
+    {
+      "metric": {
+        "contains_abort": false,
+        "contains_finalized": true,
+        "contains_nan_stop": false,
+        "exists": true,
+        "final_step": 1200,
+        "max_dt": 2.846312229e-09,
+        "min_dt": 1.423156115e-10,
+        "step_count_observed": 1200
+      },
+      "name": "run_reached_max_step",
+      "status": "PASS",
+      "target": "final_step == 1200 and finalized"
+    },
+    {
+      "metric": {
+        "contains_abort": false,
+        "contains_finalized": true,
+        "contains_nan_stop": false,
+        "exists": true,
+        "final_step": 1200,
+        "max_dt": 2.846312229e-09,
+        "min_dt": 1.423156115e-10,
+        "step_count_observed": 1200
+      },
+      "name": "no_nan_or_abort",
+      "status": "PASS",
+      "target": "no NaN stop and no Abort"
+    },
+    {
+      "metric": [
+        "plt00000",
+        "plt00600",
+        "plt01200"
+      ],
+      "name": "plotfiles_readable",
+      "status": "PASS",
+      "target": "initial and final plotfiles readable"
+    },
+    {
+      "metric": {
+        "alpha_max": 1.0,
+        "alpha_min": 3.715971047610452e-08
+      },
+      "name": "alpha_bounded",
+      "status": "PASS",
+      "target": "0 <= alpha <= 1"
+    },
+    {
+      "metric": {
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "min": 0.00011623698971386016
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999146.473376952,
+          "min": 999999.9999999999
+        }
+      },
+      "name": "positive_density_pressure",
+      "status": "PASS",
+      "target": "positive density and pressure"
+    },
+    {
+      "metric": {
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999146.473376952,
+          "min": 999999.9999999999
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8597.75688491925,
+          "min": 0.0
+        }
+      },
+      "name": "physical_extrema_reasonable",
+      "status": "PASS",
+      "target": "pressure max < 1e8 and |u| max < 1e6"
+    },
+    {
+      "metric": {
+        "alpha_mass_delta": 3.0905778081624646e-05,
+        "density_motion_likely": true,
+        "transverse_response_ok": true,
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8597.75688491925,
+          "min": 0.0
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.09053177302059066,
+          "min": -0.09053177302061319
+        }
+      },
+      "name": "interface_motion_response",
+      "status": "PASS",
+      "target": "finite x motion, density change, bounded alpha budget drift, and nonzero transverse response"
+    },
+    {
+      "metric": {
+        "max_dt": 2.846312229e-09,
+        "min_dt": 1.423156115e-10,
+        "ratio": 0.0500000000175666
+      },
+      "name": "dt_health",
+      "status": "PASS",
+      "target": "min_dt/max_dt > 1e-3"
+    }
+  ],
+  "plotfiles": {
+    "plt00000": {
+      "alpha_mass": 7.072390554544077,
+      "alpha_max": 1.0,
+      "alpha_min": 3.677116988676232e-08,
+      "pressure_argmax_x_index": 0,
+      "readable": true,
+      "stats": {
+        "Temp": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 2999.9999007178412,
+          "min": 300.0
+        },
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322860083725182,
+          "min": 0.00011614300802990197
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999999.9999999998,
+          "min": 999999.9999999998
+        },
+        "rho_AIR": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322860083725182,
+          "min": 0.00011614300802990197
+        },
+        "rho_E": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 5000000.000000001,
+          "min": 2500000.0
+        },
+        "rho_adv_0": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322860083725182,
+          "min": 4.270714279427126e-12
+        },
+        "rho_e": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 5000000.000000001,
+          "min": 2500000.0
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "min": 0.0
+        },
+        "xmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "min": 0.0
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "min": 0.0
+        },
+        "zmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "min": 0.0
+        }
+      },
+      "time": 0.0
+    },
+    "plt00600": {
+      "alpha_mass": 7.0723905545485195,
+      "alpha_max": 1.0,
+      "alpha_min": 3.677116996678237e-08,
+      "pressure_argmax_x_index": 0,
+      "readable": true,
+      "stats": {
+        "Temp": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 2999.999901789905,
+          "min": 272.07703058489676
+        },
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0023228600833948396,
+          "min": 0.00011614300813366243
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999999.9996018019,
+          "min": 999999.9999999997
+        },
+        "rho_AIR": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0023228600833948396,
+          "min": 0.00011614300813366243
+        },
+        "rho_E": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4999999.999004506,
+          "min": 2500000.0
+        },
+        "rho_adv_0": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0023228600833948396,
+          "min": 4.270714292536289e-12
+        },
+        "rho_e": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4999999.999004506,
+          "min": 2500000.0
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8595.894106951479,
+          "min": -1.0532870339152033e-11
+        },
+        "xmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 15.371957213447079,
+          "min": -1.2233192038929385e-14
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 2.8898328145712116e-07,
+          "min": -2.8898327927018235e-07
+        },
+        "zmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "min": 0.0
+        }
+      },
+      "time": 1.5870860587264282e-06
+    },
+    "plt01200": {
+      "alpha_mass": 7.0724214603221585,
+      "alpha_max": 1.0,
+      "alpha_min": 3.715971047610452e-08,
+      "pressure_argmax_x_index": 0,
+      "readable": true,
+      "stats": {
+        "Temp": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 3007.029521124097,
+          "min": 271.5223018540254
+        },
+        "density": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "min": 0.00011623698971386016
+        },
+        "pressure": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 1999146.473376952,
+          "min": 999999.9999999999
+        },
+        "rho_AIR": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "min": 0.00011623698971386016
+        },
+        "rho_E": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4997866.313523973,
+          "min": 2500000.0000000005
+        },
+        "rho_adv_0": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.002322152008075014,
+          "min": 4.324482752470288e-12
+        },
+        "rho_e": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 4997866.183442382,
+          "min": 2500000.0000000005
+        },
+        "x_velocity": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 8597.75688491925,
+          "min": 0.0
+        },
+        "xmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 15.454063531702307,
+          "min": 0.0
+        },
+        "ymom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.09053177302059066,
+          "min": -0.09053177302061319
+        },
+        "zmom": {
+          "cell_count": 5120,
+          "finite_count": 5120,
+          "max": 0.0,
+          "min": 0.0
+        }
+      },
+      "time": 3.2927647519803036e-06
+    }
+  },
+  "run": {
+    "contains_abort": false,
+    "contains_finalized": true,
+    "contains_nan_stop": false,
+    "exists": true,
+    "final_step": 1200,
+    "max_dt": 2.846312229e-09,
+    "min_dt": 1.423156115e-10,
+    "step_count_observed": 1200
+  },
+  "schema_version": 1,
+  "scope": "Academic two-phase shock-bubble full-CFD scout for build/run/plotfile/physical-extrema readiness.",
+  "status": "PASS-ACADEMIC-TWOPHASE-SHOCK-BUBBLE-CFD-SCOUT",
+  "summary": {
+    "interpretation": "The gas-gas full-CFD scout now builds with an EOS-consistent two-phase HLLC configuration and runs to 1200 steps without NaN/Abort. The pressure jump drives finite momentum, positive pressure/density are preserved, and the circular alpha interface shows a measurable two-dimensional response. This clears the scout readiness gate, while a separate independent shock-bubble benchmark report remains future work.",
+    "shock_bubble_cfd_scout_dt_health_ready": true,
+    "shock_bubble_cfd_scout_finite_plotfiles": true,
+    "shock_bubble_cfd_scout_interface_response_ready": true,
+    "shock_bubble_cfd_scout_physical_extrema_ready": true,
+    "shock_bubble_cfd_scout_ready": true,
+    "shock_bubble_cfd_scout_run_completed": true,
+    "shock_bubble_cfd_scout_stable_no_abort": true,
+    "shock_bubble_full_cfd_validation_ready": false
+  }
+}

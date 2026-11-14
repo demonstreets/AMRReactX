@@ -1,0 +1,40 @@
+{
+  "limitations": [
+    "This report archives failed exploratory longer-window probes only; it does not replace the passing 6000-step low-CFL gate.",
+    "Large plotfiles/checkpoints are intentionally not archived here to avoid disk growth; logs and the failed plt06813 validation diagnostics are retained."
+  ],
+  "schema_version": 1,
+  "status": "NOT_READY-ACADEMIC-TWOPHASE-BUBBLE-RISE-LONGER-WINDOW-PROBE",
+  "summary": {
+    "cases": [
+      {
+        "case": "run_12000_cfl_0.025",
+        "cfl": "0.025",
+        "last_plotfile": "plt06813",
+        "last_plotfile_validation_failure": "amrex_reader.PlotfileError: Single-level plotfile contains uncovered or non-finite cells",
+        "last_plotfile_validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/run_12000_cfl_0.025/plt06813_validation.log",
+        "last_plotfile_validation_passed": false,
+        "nan_stop": true,
+        "run_failed": true,
+        "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/run_12000_cfl_0.025/run.log",
+        "target_steps": 12000
+      },
+      {
+        "case": "run_8000_cfl_0.025",
+        "cfl": "0.025",
+        "last_plotfile": "plt06813",
+        "last_plotfile_validation_failure": "amrex_reader.PlotfileError: Single-level plotfile contains uncovered or non-finite cells",
+        "last_plotfile_validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/run_8000_cfl_0.025/plt06813_validation.log",
+        "last_plotfile_validation_passed": false,
+        "nan_stop": true,
+        "run_failed": true,
+        "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/run_8000_cfl_0.025/run.log",
+        "target_steps": 8000
+      }
+    ],
+    "clears_long_physical_time_bubble_rise": false,
+    "nonfinite_boundary_observed_near_step": 6813,
+    "stable_formal_gate_steps": 6000
+  },
+  "title": "Academic Two-Phase Bubble-Rise Longer-Window Probe"
+}

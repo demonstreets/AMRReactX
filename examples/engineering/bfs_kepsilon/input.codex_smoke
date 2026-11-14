@@ -1,0 +1,68 @@
+# Codex smoke input: 1-step PeleLMeX bfs_kepsilon baseline.
+# Derived from input.yaml; removes incompressible-only rho/mu knobs because peleLM.incompressible = 0.
+# =============================================================================
+# my-pele — bfs_kepsilon (k-epsilon RANS channel flow test)
+# =============================================================================
+# Simple 2D channel: x ∈ [0, 1.0] m, y ∈ [0, 0.1] m
+# Inflow (x-lo), Outflow (x-hi), NoSlipWall (y-lo), SlipWall (y-hi)
+# k-epsilon with inlet turbulence convenience parameters
+# =============================================================================
+
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0               # For each dir, 0: non-periodic, 1: periodic
+geometry.coord_sys   = 0                  # 0 => cart, 1 => RZ
+geometry.prob_lo     = 0.0 0.0            # x_lo y_lo (z_lo)
+geometry.prob_hi     = 1.0 0.1            # x_hi y_hi (z_hi)
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# Interior, Inflow, Outflow, Symmetry,
+# SlipWallAdiab, NoSlipWallAdiab, SlipWallIsotherm, NoSlipWallIsotherm
+peleLM.lo_bc = Inflow NoSlipWallAdiab
+peleLM.hi_bc = Outflow SlipWallAdiab
+
+peleLM.incompressible = 0
+
+#--------------------------- Problem -------------------------------
+prob.T_mean = 293.0
+prob.P_mean = 101325.0
+prob.Y_o2   = 0.233
+prob.meanFlowMag = 1.0
+prob.T_wall = 300.0
+
+#-------------------------AMR CONTROL----------------------------
+amr.n_cell          = 80 8               # Level 0 number of cells in each direction (square cells, N%4==0)
+amr.v               = 1                  # AMR verbose
+amr.max_level       = 0                  # maximum level number allowed
+amr.n_error_buf     = 1 1 2 2            # number of buffer cells in error est
+amr.blocking_factor = 4                  # block factor in grid generation (min box size)
+amr.max_grid_size   = 64                 # max box size
+amr.grid_eff        = 0.7                # what constitutes an efficient grid
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v = 1
+peleLM.les_model = kepsilon
+
+# k-epsilon model parameters
+peleLM.ke_wall_functions = 0
+
+# Inlet turbulence convenience parameters
+peleLM.ke_inlet_TI = 0.05
+peleLM.ke_inlet_L = 0.0381
+
+# Aux variables for k-epsilon
+peleLM.aux_vars = k epsilon
+peleLM.k.advect = 1
+peleLM.k.Schmidt = 1.0
+peleLM.epsilon.advect = 1
+peleLM.epsilon.Schmidt = 1.3
+
+#-------------------------Time stepping------------------------
+amr.max_step = 1
+amr.stop_time = -1.0
+amr.dt_shrink = 0.1
+amr.cfl = 0.3
+
+#-------------------------IO CONTROL----------------------------
+amr.plot_int = -1
+amr.check_int = -1
+amr.derive_plot_vars = avg_pressure mag_vort

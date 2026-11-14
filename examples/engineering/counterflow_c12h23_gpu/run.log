@@ -1,0 +1,3007 @@
+Initializing AMReX (0ec1056ff13b-dirty)...
+Initializing CUDA...
+CUDA initialized with 1 device.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 0ec1056-dirty
+ AMReX-Hydro git hash: 9446740
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1 
+ Density: 2
+ First species: 3
+ Enthalpy: 55
+ Temperature: 56
+ thermo. pressure: 57
+ => Total number of state variables: 58
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using mixture-averaged transport 
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorRK64
+ Initializing data for 2 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ Update chemistry typical values 
+ ==============================================================================
+ Typical values: 
+	Velocity: 0 0 
+	Density:  1.2234079
+	Temp:     298
+	H:        -94186.41199
+	Y_N2:     0.72865
+	Y_O:      0
+	Y_H2:     0
+	Y_H:      0
+	Y_OH:     0
+	Y_H2O:    0
+	Y_O2:     0.22135
+	Y_HO2:    0
+	Y_H2O2:   0
+	Y_CH:     0
+	Y_HCO:    0
+	Y_CH2:    0
+	Y_CO2:    0
+	Y_CO:     0
+	Y_CH2O:   0
+	Y_CH2GSG: 0
+	Y_CH3:    0
+	Y_CH3O:   0
+	Y_CH4:    0
+	Y_CH3OH:  0
+	Y_C2H6:   0
+	Y_C2H5:   0
+	Y_CH2CO:  0
+	Y_HOCHO:  0
+	Y_CH3O2:  0
+	Y_CH3O2H: 0
+	Y_C2H2:   0
+	Y_HCCO:   0
+	Y_C2H3:   0
+	Y_CH2CHO: 0
+	Y_C3H6:   0
+	Y_C2H4:   0
+	Y_C2H5O:  0
+	Y_CH3CO:  0
+	Y_C2H5O2: 0
+	Y_C3H2:   0
+	Y_C3H3:   0
+	Y_C3H4XA: 0
+	Y_C3H5XA: 0
+	Y_NXC3H7: 0
+	Y_NXC3H7O2:0
+	Y_C4H6:   0
+	Y_C4H7:   0
+	Y_C4H8X1: 0
+	Y_PXC4H9: 0
+	Y_PXC4H9O2:0
+	Y_C5H9:   0
+	Y_C5H10X1:0
+	Y_C5H11X1:0
+	Y_C6H12X1:0
+	Y_C7H15X2:0
+	Y_NXC7H16:0.05
+ ==============================================================================
+ Initial dt: 1e-08
+
+ Doing initial projection(s) 
+
+ Initial velocity projection:   U: 0  V: 0
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 22452.68839
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 22452.68839
+MLMG: Initial residual (resid0) = 22452.68839
+MLMG: Iteration   1 Fine resid/bnorm = 0.01976658004
+MLMG: Iteration   2 Fine resid/bnorm = 0.0004593475579
+MLMG: Iteration   3 Fine resid/bnorm = 1.03742425e-05
+MLMG: Iteration   4 Fine resid/bnorm = 2.290907769e-07
+MLMG: Iteration   5 Fine resid/bnorm = 4.97326163e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.066458206e-10
+MLMG: Iteration   7 Fine resid/bnorm = 2.278115869e-12
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.114982571e-08, 2.278115869e-12
+MLMG: Timers: Solve = 0.022024089 Iter = 0.020259808 Bottom = 0.004427891
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 2230.888006
+
+ >> After initial velocity projection:   U: 1.737208155  V: 4.978043743
+ Initial dt: 1e-08
+ Initial velocity projection:   U: 1.737208155  V: 4.978043743
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 2230.888006
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 2230.888006
+MLMG: Initial residual (resid0) = 2230.888006
+MLMG: Iteration   1 Fine resid/bnorm = 0.0002992673977
+MLMG: Iteration   2 Fine resid/bnorm = 2.597479548e-06
+MLMG: Iteration   3 Fine resid/bnorm = 2.950453655e-08
+MLMG: Iteration   4 Fine resid/bnorm = 4.180644769e-10
+MLMG: Iteration   5 Fine resid/bnorm = 6.5103866e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 1.452394338e-08, 6.5103866e-12
+MLMG: Timers: Solve = 0.014830126 Iter = 0.013810167 Bottom = 0.002944848
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 706.9457363
+
+ >> After initial velocity projection:   U: 1.737211252  V: 5.029880051
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ STEP [-1] - Time: 0, dt 1e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 2.872324743e-16
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4565.473696
+MLMG: Initial residual (resid0) = 4565.473696
+MLMG: Iteration   1 Fine resid/bnorm = 0.01531521609
+MLMG: Iteration   2 Fine resid/bnorm = 0.001340370475
+MLMG: Iteration   3 Fine resid/bnorm = 7.084028284e-05
+MLMG: Iteration   4 Fine resid/bnorm = 2.409399087e-06
+MLMG: Iteration   5 Fine resid/bnorm = 4.653556068e-08
+MLMG: Iteration   6 Fine resid/bnorm = 1.66997379e-09
+MLMG: Iteration   7 Fine resid/bnorm = 9.584308844e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 4.375690992e-07, 9.584308844e-11
+MLMG: Timers: Solve = 0.022697438 Iter = 0.021252861 Bottom = 0.005524973
+   - oneSDC()::MACProjection()   --> Time: 0.03079049
+   - oneSDC()::ScalarAdvection() --> Time: 0.005603902
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914637775
+MLMG: Initial residual (resid0) = 3.682864689e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.49078662e-16
+MLMG: Timers: Solve = 0.020618871 Iter = 0.017742819 Bottom = 0.00052182
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 6.119737724e-11
+MLMG: Initial residual (resid0) = 6.119737724e-11
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.938704561e-26, 3.167953674e-16
+MLMG: Timers: Solve = 0.004419656 Iter = 0.003048141 Bottom = 0.000312805
+   - oneSDC()::ScalarDiffusion() --> Time: 0.0377506
+   - oneSDC()::ScalarReaction()  --> Time: 0.047268681
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013753633
+      Before SDC 2: max relative P mismatch is 4.476989879e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 5119.905784
+MLMG: Initial residual (resid0) = 5119.905784
+MLMG: Iteration   1 Fine resid/bnorm = 0.3536579338
+MLMG: Iteration   2 Fine resid/bnorm = 0.04095906093
+MLMG: Iteration   3 Fine resid/bnorm = 0.002146205094
+MLMG: Iteration   4 Fine resid/bnorm = 4.468645379e-05
+MLMG: Iteration   5 Fine resid/bnorm = 3.088712918e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.628224381e-07
+MLMG: Iteration   7 Fine resid/bnorm = 8.30607736e-09
+MLMG: Iteration   8 Fine resid/bnorm = 3.284825018e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.999383036e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 1.023665277e-07, 1.999383036e-11
+MLMG: Timers: Solve = 0.023660686 Iter = 0.022880043 Bottom = 0.005441283
+   - oneSDC()::MACProjection()   --> Time: 0.02604842
+   - oneSDC()::ScalarAdvection() --> Time: 0.003407426
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914588365
+MLMG: Initial residual (resid0) = 7.099617584e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490800426e-16
+MLMG: Timers: Solve = 0.019486501 Iter = 0.016836849 Bottom = 0.000470555
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8896063431
+MLMG: Initial residual (resid0) = 0.8896063431
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.743980807e-16
+MLMG: Timers: Solve = 0.068325834 Iter = 0.002562102 Bottom = 0.000281123
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.087598369e-07
+MLMG: Initial residual (resid0) = 1.087598369e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.650673864e-16
+MLMG: Timers: Solve = 0.003696288 Iter = 0.002452146 Bottom = 0.000279199
+   - oneSDC()::ScalarDiffusion() --> Time: 0.103983617
+   - oneSDC()::ScalarReaction()  --> Time: 0.04658378
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.152627611
+MLMG: Initial residual (resid0) = 4.578651196e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 4.994560321e-12, 8.117767947e-13
+MLMG: Timers: Solve = 0.005000624 Iter = 0.003383496 Bottom = 0.000318545
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 214.3584811
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 214.3584811
+MLMG: Initial residual (resid0) = 214.3584811
+MLMG: Iteration   1 Fine resid/bnorm = 0.03990372393
+MLMG: Iteration   2 Fine resid/bnorm = 0.000933471869
+MLMG: Iteration   3 Fine resid/bnorm = 2.118324313e-05
+MLMG: Iteration   4 Fine resid/bnorm = 4.694498487e-07
+MLMG: Iteration   5 Fine resid/bnorm = 1.021590839e-08
+MLMG: Iteration   6 Fine resid/bnorm = 2.193963748e-10
+MLMG: Iteration   7 Fine resid/bnorm = 4.685253088e-12
+MLMG: Final Iter. 7 resid, resid/bnorm = 1.004323735e-09, 4.685253088e-12
+MLMG: Timers: Solve = 0.019631309 Iter = 0.018601428 Bottom = 0.004109821
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 13.91690763
+
+   - Advance()::VelocityAdvance  --> Time: 0.032979379
+ >> PeleLMeX::Advance() --> Time: 0.375912487
+
+ ================   INITIAL ITERATION [1]   ================ 
+ STEP [-1] - Time: 0, dt 1e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 2.872324743e-16
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4501.224008
+MLMG: Initial residual (resid0) = 4501.224008
+MLMG: Iteration   1 Fine resid/bnorm = 0.02243481535
+MLMG: Iteration   2 Fine resid/bnorm = 0.001982821868
+MLMG: Iteration   3 Fine resid/bnorm = 0.0001067692998
+MLMG: Iteration   4 Fine resid/bnorm = 3.692427763e-06
+MLMG: Iteration   5 Fine resid/bnorm = 7.158186571e-08
+MLMG: Iteration   6 Fine resid/bnorm = 2.535188992e-09
+MLMG: Iteration   7 Fine resid/bnorm = 1.443753259e-10
+MLMG: Iteration   8 Fine resid/bnorm = 9.341620261e-12
+MLMG: Final Iter. 8 resid, resid/bnorm = 4.204872539e-08, 9.341620261e-12
+MLMG: Timers: Solve = 0.022416266 Iter = 0.021559448 Bottom = 0.006020365
+   - oneSDC()::MACProjection()   --> Time: 0.024826138
+   - oneSDC()::ScalarAdvection() --> Time: 0.003520802
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914637775
+MLMG: Initial residual (resid0) = 3.682864689e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.49078662e-16
+MLMG: Timers: Solve = 0.019532471 Iter = 0.016840853 Bottom = 0.000473425
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 2.668312723e-10
+MLMG: Initial residual (resid0) = 2.668312723e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.033975766e-25, 3.875017185e-16
+MLMG: Timers: Solve = 0.003701369 Iter = 0.002428731 Bottom = 0.000277313
+   - oneSDC()::ScalarDiffusion() --> Time: 0.033834216
+   - oneSDC()::ScalarReaction()  --> Time: 0.046572581
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013215628
+      Before SDC 2: max relative P mismatch is 4.476989877e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 5055.656096
+MLMG: Initial residual (resid0) = 5055.656096
+MLMG: Iteration   1 Fine resid/bnorm = 0.3520081776
+MLMG: Iteration   2 Fine resid/bnorm = 0.04092460434
+MLMG: Iteration   3 Fine resid/bnorm = 0.002142388762
+MLMG: Iteration   4 Fine resid/bnorm = 4.455357062e-05
+MLMG: Iteration   5 Fine resid/bnorm = 3.126599203e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.6571363e-07
+MLMG: Iteration   7 Fine resid/bnorm = 8.380273734e-09
+MLMG: Iteration   8 Fine resid/bnorm = 3.317232389e-10
+MLMG: Iteration   9 Fine resid/bnorm = 2.008283274e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 1.015318958e-07, 2.008283274e-11
+MLMG: Timers: Solve = 0.023624647 Iter = 0.022841718 Bottom = 0.005468787
+   - oneSDC()::MACProjection()   --> Time: 0.025931216
+   - oneSDC()::ScalarAdvection() --> Time: 0.003332895
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914588365
+MLMG: Initial residual (resid0) = 7.09961758e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490800426e-16
+MLMG: Timers: Solve = 0.019500575 Iter = 0.016834944 Bottom = 0.000471956
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.889606343
+MLMG: Initial residual (resid0) = 0.889606343
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.743980807e-16
+MLMG: Timers: Solve = 0.003683826 Iter = 0.002434586 Bottom = 0.000277731
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.087402879e-07
+MLMG: Initial residual (resid0) = 1.087402879e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.651330172e-16
+MLMG: Timers: Solve = 0.003674447 Iter = 0.002427664 Bottom = 0.000276256
+   - oneSDC()::ScalarDiffusion() --> Time: 0.039127795
+   - oneSDC()::ScalarReaction()  --> Time: 0.046532219
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.274427712
+MLMG: Initial residual (resid0) = 4.665065833e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.077493981e-12, 8.092361907e-13
+MLMG: Timers: Solve = 0.004018796 Iter = 0.002633792 Bottom = 0.000266056
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 13.92767774
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 13.92767774
+MLMG: Initial residual (resid0) = 13.92767774
+MLMG: Iteration   1 Fine resid/bnorm = 0.001311998313
+MLMG: Iteration   2 Fine resid/bnorm = 9.846953954e-06
+MLMG: Iteration   3 Fine resid/bnorm = 1.310458562e-07
+MLMG: Iteration   4 Fine resid/bnorm = 1.949669755e-09
+MLMG: Iteration   5 Fine resid/bnorm = 3.088974147e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 4.302223647e-10, 3.088974147e-11
+MLMG: Timers: Solve = 0.013533229 Iter = 0.012596576 Bottom = 0.002947515
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 2.675606263
+
+   - Advance()::VelocityAdvance  --> Time: 0.025038401
+ >> PeleLMeX::Advance() --> Time: 0.294368779
+
+ ================   INITIAL ITERATION [2]   ================ 
+ STEP [-1] - Time: 0, dt 1e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 2.872324743e-16
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4497.196355
+MLMG: Initial residual (resid0) = 4497.196355
+MLMG: Iteration   1 Fine resid/bnorm = 0.0224598977
+MLMG: Iteration   2 Fine resid/bnorm = 0.001984586598
+MLMG: Iteration   3 Fine resid/bnorm = 0.0001068648194
+MLMG: Iteration   4 Fine resid/bnorm = 3.695999855e-06
+MLMG: Iteration   5 Fine resid/bnorm = 7.165350705e-08
+MLMG: Iteration   6 Fine resid/bnorm = 2.537192106e-09
+MLMG: Iteration   7 Fine resid/bnorm = 1.445266078e-10
+MLMG: Iteration   8 Fine resid/bnorm = 9.351174676e-12
+MLMG: Final Iter. 8 resid, resid/bnorm = 4.205406867e-08, 9.351174676e-12
+MLMG: Timers: Solve = 0.020752302 Iter = 0.020026757 Bottom = 0.005595002
+   - oneSDC()::MACProjection()   --> Time: 0.022845176
+   - oneSDC()::ScalarAdvection() --> Time: 0.003277977
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914637775
+MLMG: Initial residual (resid0) = 3.682864689e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.49078662e-16
+MLMG: Timers: Solve = 0.019197351 Iter = 0.016664836 Bottom = 0.000450612
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 3.865092993e-10
+MLMG: Initial residual (resid0) = 3.865092993e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 7.754818243e-26, 2.006373005e-16
+MLMG: Timers: Solve = 0.003385755 Iter = 0.002251238 Bottom = 0.00026479
+   - oneSDC()::ScalarDiffusion() --> Time: 0.032507964
+   - oneSDC()::ScalarReaction()  --> Time: 0.046513159
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.01547571
+      Before SDC 2: max relative P mismatch is 4.476989878e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 5051.628443
+MLMG: Initial residual (resid0) = 5051.628443
+MLMG: Iteration   1 Fine resid/bnorm = 0.3522843907
+MLMG: Iteration   2 Fine resid/bnorm = 0.04095724329
+MLMG: Iteration   3 Fine resid/bnorm = 0.002144096975
+MLMG: Iteration   4 Fine resid/bnorm = 4.458907767e-05
+MLMG: Iteration   5 Fine resid/bnorm = 3.12910752e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.659262433e-07
+MLMG: Iteration   7 Fine resid/bnorm = 8.386985858e-09
+MLMG: Iteration   8 Fine resid/bnorm = 3.320122065e-10
+MLMG: Iteration   9 Fine resid/bnorm = 2.009605412e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 1.015177986e-07, 2.009605412e-11
+MLMG: Timers: Solve = 0.02184916 Iter = 0.021127122 Bottom = 0.005065255
+   - oneSDC()::MACProjection()   --> Time: 0.023908371
+   - oneSDC()::ScalarAdvection() --> Time: 0.003200584
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914588365
+MLMG: Initial residual (resid0) = 7.09961758e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490800426e-16
+MLMG: Timers: Solve = 0.019183102 Iter = 0.016653616 Bottom = 0.000450068
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.889606343
+MLMG: Initial residual (resid0) = 0.889606343
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.743980807e-16
+MLMG: Timers: Solve = 0.003373743 Iter = 0.002242948 Bottom = 0.000257169
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.087433318e-07
+MLMG: Initial residual (resid0) = 1.087433318e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.651227966e-16
+MLMG: Timers: Solve = 0.003412323 Iter = 0.002261798 Bottom = 0.000262067
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037639117
+   - oneSDC()::ScalarReaction()  --> Time: 0.046532346
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.275331891
+MLMG: Initial residual (resid0) = 4.666344571e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.082378962e-12, 8.098980342e-13
+MLMG: Timers: Solve = 0.003938998 Iter = 0.002625527 Bottom = 0.00026891
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 2.677828175
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 2.677828175
+MLMG: Initial residual (resid0) = 2.677828175
+MLMG: Iteration   1 Fine resid/bnorm = 0.0002113708319
+MLMG: Iteration   2 Fine resid/bnorm = 1.459405214e-06
+MLMG: Iteration   3 Fine resid/bnorm = 1.333984904e-08
+MLMG: Iteration   4 Fine resid/bnorm = 1.505275435e-10
+MLMG: Iteration   5 Fine resid/bnorm = 1.823859407e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 4.883982108e-12, 1.823859407e-12
+MLMG: Timers: Solve = 0.01323574 Iter = 0.012312693 Bottom = 0.002638271
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 0.7959272839
+
+   - Advance()::VelocityAdvance  --> Time: 0.024218645
+ >> PeleLMeX::Advance() --> Time: 0.281975946
+ Writing temporals.
+
+ Writing plotfile: plt00000
+
+ Writing checkpoint file: chk00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [0] - Time: 0, dt 1e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 2.872324743e-16
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4496.452446
+MLMG: Initial residual (resid0) = 4496.452446
+MLMG: Iteration   1 Fine resid/bnorm = 0.02246345075
+MLMG: Iteration   2 Fine resid/bnorm = 0.001984907228
+MLMG: Iteration   3 Fine resid/bnorm = 0.00010688251
+MLMG: Iteration   4 Fine resid/bnorm = 3.696621239e-06
+MLMG: Iteration   5 Fine resid/bnorm = 7.166559584e-08
+MLMG: Iteration   6 Fine resid/bnorm = 2.537613297e-09
+MLMG: Iteration   7 Fine resid/bnorm = 1.445513784e-10
+MLMG: Iteration   8 Fine resid/bnorm = 9.352949322e-12
+MLMG: Final Iter. 8 resid, resid/bnorm = 4.205509185e-08, 9.352949322e-12
+MLMG: Timers: Solve = 0.020637303 Iter = 0.019883439 Bottom = 0.005570871
+   - oneSDC()::MACProjection()   --> Time: 0.022727824
+   - oneSDC()::ScalarAdvection() --> Time: 0.003266039
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914637775
+MLMG: Initial residual (resid0) = 3.682864689e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.49078662e-16
+MLMG: Timers: Solve = 0.019230083 Iter = 0.016669683 Bottom = 0.000454305
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 3.006598353e-10
+MLMG: Initial residual (resid0) = 3.006598353e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.169878828e-26, 1.719510962e-16
+MLMG: Timers: Solve = 0.003403288 Iter = 0.002252572 Bottom = 0.000258158
+   - oneSDC()::ScalarDiffusion() --> Time: 0.032630667
+   - oneSDC()::ScalarReaction()  --> Time: 0.046529568
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012767669
+      Before SDC 2: max relative P mismatch is 4.476989877e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 5050.884534
+MLMG: Initial residual (resid0) = 5050.884534
+MLMG: Iteration   1 Fine resid/bnorm = 0.3523364212
+MLMG: Iteration   2 Fine resid/bnorm = 0.04096328246
+MLMG: Iteration   3 Fine resid/bnorm = 0.002144412755
+MLMG: Iteration   4 Fine resid/bnorm = 4.459564292e-05
+MLMG: Iteration   5 Fine resid/bnorm = 3.129568582e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.659654054e-07
+MLMG: Iteration   7 Fine resid/bnorm = 8.38822337e-09
+MLMG: Iteration   8 Fine resid/bnorm = 3.320452379e-10
+MLMG: Iteration   9 Fine resid/bnorm = 2.010154612e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 1.015305884e-07, 2.010154612e-11
+MLMG: Timers: Solve = 0.021871238 Iter = 0.02114471 Bottom = 0.005083494
+   - oneSDC()::MACProjection()   --> Time: 0.023955788
+   - oneSDC()::ScalarAdvection() --> Time: 0.003188228
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914588365
+MLMG: Initial residual (resid0) = 7.09961758e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490800426e-16
+MLMG: Timers: Solve = 0.019180978 Iter = 0.016650893 Bottom = 0.000455752
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.889606343
+MLMG: Initial residual (resid0) = 0.889606343
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.743980807e-16
+MLMG: Timers: Solve = 0.003390815 Iter = 0.002247178 Bottom = 0.000257446
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.087432216e-07
+MLMG: Initial residual (resid0) = 1.087432216e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.651231665e-16
+MLMG: Timers: Solve = 0.003457826 Iter = 0.002298138 Bottom = 0.000260283
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037702064
+   - oneSDC()::ScalarReaction()  --> Time: 0.050241329
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.275424779
+MLMG: Initial residual (resid0) = 4.666524128e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.082823051e-12, 8.099568125e-13
+MLMG: Timers: Solve = 0.003939703 Iter = 0.002617928 Bottom = 0.000267347
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 704.7297055
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 704.7297055
+MLMG: Initial residual (resid0) = 704.7297055
+MLMG: Iteration   1 Fine resid/bnorm = 0.0002541287014
+MLMG: Iteration   2 Fine resid/bnorm = 9.961819389e-07
+MLMG: Iteration   3 Fine resid/bnorm = 9.716008603e-09
+MLMG: Iteration   4 Fine resid/bnorm = 1.169742798e-10
+MLMG: Iteration   5 Fine resid/bnorm = 1.462363763e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 1.030571184e-09, 1.462363763e-12
+MLMG: Timers: Solve = 0.0130873 Iter = 0.012145143 Bottom = 0.002513105
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 326.7816269
+
+   - Advance()::VelocityAdvance  --> Time: 0.02498512
+ >> PeleLMeX::Advance() --> Time: 0.284031134
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 5.133943994e-06, divu: 0.0043021479, sprays: 1e+200
+ STEP [1] - Time: 1e-08, dt 1.1e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.066926852e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4502.953129
+MLMG: Initial residual (resid0) = 4502.953129
+MLMG: Iteration   1 Fine resid/bnorm = 0.007708386695
+MLMG: Iteration   2 Fine resid/bnorm = 0.0006671038077
+MLMG: Iteration   3 Fine resid/bnorm = 3.309898616e-05
+MLMG: Iteration   4 Fine resid/bnorm = 1.049815148e-06
+MLMG: Iteration   5 Fine resid/bnorm = 1.989361679e-08
+MLMG: Iteration   6 Fine resid/bnorm = 7.640607864e-10
+MLMG: Iteration   7 Fine resid/bnorm = 4.38914785e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 1.976412705e-07, 4.38914785e-11
+MLMG: Timers: Solve = 0.018056957 Iter = 0.017321565 Bottom = 0.00481458
+   - oneSDC()::MACProjection()   --> Time: 0.02007583
+   - oneSDC()::ScalarAdvection() --> Time: 0.003224518
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914971784
+MLMG: Initial residual (resid0) = 4.085670654e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.110223025e-16, 1.24534665e-16
+MLMG: Timers: Solve = 0.019181479 Iter = 0.016632102 Bottom = 0.000452187
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.0001288843176
+MLMG: Initial residual (resid0) = 0.0001288843176
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.421010862e-20, 4.206105882e-16
+MLMG: Timers: Solve = 0.003464467 Iter = 0.002307554 Bottom = 0.000265727
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.463559937e-10
+MLMG: Initial residual (resid0) = 1.463559937e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.7661999e-16
+MLMG: Timers: Solve = 0.003382618 Iter = 0.002248077 Bottom = 0.000258564
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037695656
+   - oneSDC()::ScalarReaction()  --> Time: 0.046522755
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012659292
+      Before SDC 2: max relative P mismatch is 2.341029493e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4715.698955
+MLMG: Initial residual (resid0) = 4715.698955
+MLMG: Iteration   1 Fine resid/bnorm = 0.3373798086
+MLMG: Iteration   2 Fine resid/bnorm = 0.03944949542
+MLMG: Iteration   3 Fine resid/bnorm = 0.002068183241
+MLMG: Iteration   4 Fine resid/bnorm = 4.301095703e-05
+MLMG: Iteration   5 Fine resid/bnorm = 3.064469198e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.584249179e-07
+MLMG: Iteration   7 Fine resid/bnorm = 8.17371874e-09
+MLMG: Iteration   8 Fine resid/bnorm = 3.234856236e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.938958805e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 9.143546009e-08, 1.938958805e-11
+MLMG: Timers: Solve = 0.021746337 Iter = 0.02104078 Bottom = 0.004971207
+   - oneSDC()::MACProjection()   --> Time: 0.023804739
+   - oneSDC()::ScalarAdvection() --> Time: 0.003192144
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8914950938
+MLMG: Initial residual (resid0) = 4.458678762e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490699124e-16
+MLMG: Timers: Solve = 0.019269014 Iter = 0.016728486 Bottom = 0.000453687
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8889833414
+MLMG: Initial residual (resid0) = 0.8889833414
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.746604597e-16
+MLMG: Timers: Solve = 0.003385344 Iter = 0.002249265 Bottom = 0.00025781
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.0861739e-07
+MLMG: Initial residual (resid0) = 1.0861739e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.655461562e-16
+MLMG: Timers: Solve = 0.003382304 Iter = 0.002248111 Bottom = 0.000257477
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037640534
+   - oneSDC()::ScalarReaction()  --> Time: 0.046532342
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.171554121
+MLMG: Initial residual (resid0) = 5.083511645e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 6.148637155e-12, 9.962866783e-13
+MLMG: Timers: Solve = 0.003962598 Iter = 0.002629689 Bottom = 0.000269651
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 324.6847363
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 324.6847363
+MLMG: Initial residual (resid0) = 324.6847363
+MLMG: Iteration   1 Fine resid/bnorm = 0.0004275676285
+MLMG: Iteration   2 Fine resid/bnorm = 1.627988886e-06
+MLMG: Iteration   3 Fine resid/bnorm = 1.542101147e-08
+MLMG: Iteration   4 Fine resid/bnorm = 1.833394984e-10
+MLMG: Iteration   5 Fine resid/bnorm = 2.284785686e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 7.418350378e-10, 2.284785686e-12
+MLMG: Timers: Solve = 0.012936844 Iter = 0.01202256 Bottom = 0.002491476
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 202.7337825
+
+   - Advance()::VelocityAdvance  --> Time: 0.02435681
+ >> PeleLMeX::Advance() --> Time: 0.281778859
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 7.631881357e-06, divu: 0.004303224988, sprays: 1e+200
+ STEP [2] - Time: 2.1e-08, dt 1.21e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 4.768587579e-10
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4679.434347
+MLMG: Initial residual (resid0) = 4679.434347
+MLMG: Iteration   1 Fine resid/bnorm = 0.002216584154
+MLMG: Iteration   2 Fine resid/bnorm = 9.354839712e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.749384656e-06
+MLMG: Iteration   4 Fine resid/bnorm = 1.078532012e-07
+MLMG: Iteration   5 Fine resid/bnorm = 3.415544392e-09
+MLMG: Iteration   6 Fine resid/bnorm = 2.004049142e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.2833953e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 6.005564046e-08, 1.2833953e-11
+MLMG: Timers: Solve = 0.017283317 Iter = 0.016565639 Bottom = 0.004059786
+   - oneSDC()::MACProjection()   --> Time: 0.019379739
+   - oneSDC()::ScalarAdvection() --> Time: 0.003196626
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8915362221
+MLMG: Initial residual (resid0) = 4.525807322e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490584223e-16
+MLMG: Timers: Solve = 0.019195274 Iter = 0.01665283 Bottom = 0.000456982
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.0002834364038
+MLMG: Initial residual (resid0) = 0.0002834364038
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.084202172e-19, 3.825204377e-16
+MLMG: Timers: Solve = 0.003425449 Iter = 0.00228215 Bottom = 0.000263475
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.492205337e-10
+MLMG: Initial residual (resid0) = 1.492205337e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.732294712e-16
+MLMG: Timers: Solve = 0.003373448 Iter = 0.002239845 Bottom = 0.000258487
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037591281
+   - oneSDC()::ScalarReaction()  --> Time: 0.046512811
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012920817
+      Before SDC 2: max relative P mismatch is 2.339337382e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4872.679117
+MLMG: Initial residual (resid0) = 4872.679117
+MLMG: Iteration   1 Fine resid/bnorm = 0.3011472143
+MLMG: Iteration   2 Fine resid/bnorm = 0.03501998821
+MLMG: Iteration   3 Fine resid/bnorm = 0.001833884598
+MLMG: Iteration   4 Fine resid/bnorm = 3.814032469e-05
+MLMG: Iteration   5 Fine resid/bnorm = 2.677380328e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.275836074e-07
+MLMG: Iteration   7 Fine resid/bnorm = 7.17995347e-09
+MLMG: Iteration   8 Fine resid/bnorm = 2.841177187e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.719296224e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 8.377578808e-08, 1.719296224e-11
+MLMG: Timers: Solve = 0.022709385 Iter = 0.021964056 Bottom = 0.005300888
+   - oneSDC()::MACProjection()   --> Time: 0.024891054
+   - oneSDC()::ScalarAdvection() --> Time: 0.003348726
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8915341393
+MLMG: Initial residual (resid0) = 4.693707923e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490590042e-16
+MLMG: Timers: Solve = 0.019266156 Iter = 0.016665338 Bottom = 0.000450425
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8883609942
+MLMG: Initial residual (resid0) = 0.8883609942
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.749229306e-16
+MLMG: Timers: Solve = 0.003408095 Iter = 0.002267263 Bottom = 0.000269111
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.085423627e-07
+MLMG: Initial residual (resid0) = 1.085423627e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.657988311e-16
+MLMG: Timers: Solve = 0.003497224 Iter = 0.002346588 Bottom = 0.00027564
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037982322
+   - oneSDC()::ScalarReaction()  --> Time: 0.046521021
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.165753273
+MLMG: Initial residual (resid0) = 5.580643074e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 7.401301794e-12, 1.200388901e-12
+MLMG: Timers: Solve = 0.004059733 Iter = 0.002639793 Bottom = 0.00027052
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 201.8585415
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 201.8585415
+MLMG: Initial residual (resid0) = 201.8585415
+MLMG: Iteration   1 Fine resid/bnorm = 0.0005757401064
+MLMG: Iteration   2 Fine resid/bnorm = 2.180030617e-06
+MLMG: Iteration   3 Fine resid/bnorm = 2.052924804e-08
+MLMG: Iteration   4 Fine resid/bnorm = 2.470266521e-10
+MLMG: Iteration   5 Fine resid/bnorm = 3.167158185e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 6.393179319e-10, 3.167158185e-12
+MLMG: Timers: Solve = 0.013428241 Iter = 0.01246135 Bottom = 0.002598619
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 147.0109478
+
+   - Advance()::VelocityAdvance  --> Time: 0.02540873
+ >> PeleLMeX::Advance() --> Time: 0.283758178
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.041499904e-05, divu: 0.004304379676, sprays: 1e+200
+ STEP [3] - Time: 3.31e-08, dt 1.331e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 5.517500297e-10
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4710.977516
+MLMG: Initial residual (resid0) = 4710.977516
+MLMG: Iteration   1 Fine resid/bnorm = 0.002202986602
+MLMG: Iteration   2 Fine resid/bnorm = 9.255616147e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.755539686e-06
+MLMG: Iteration   4 Fine resid/bnorm = 1.058670478e-07
+MLMG: Iteration   5 Fine resid/bnorm = 3.469064252e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.981783876e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.273878439e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 6.001212682e-08, 1.273878439e-11
+MLMG: Timers: Solve = 0.018243094 Iter = 0.017449159 Bottom = 0.00427283
+   - oneSDC()::MACProjection()   --> Time: 0.02047426
+   - oneSDC()::ScalarAdvection() --> Time: 0.003442168
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8915793788
+MLMG: Initial residual (resid0) = 4.978121516e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490463667e-16
+MLMG: Timers: Solve = 0.019427558 Iter = 0.016764696 Bottom = 0.000452456
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.0004674885087
+MLMG: Initial residual (resid0) = 0.0004674885087
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.626303259e-19, 3.478809058e-16
+MLMG: Timers: Solve = 0.003415201 Iter = 0.00227362 Bottom = 0.000258592
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.751011607e-10
+MLMG: Initial residual (resid0) = 1.751011607e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.476254871e-16
+MLMG: Timers: Solve = 0.003386189 Iter = 0.002253308 Bottom = 0.000256303
+   - oneSDC()::ScalarDiffusion() --> Time: 0.041529461
+   - oneSDC()::ScalarReaction()  --> Time: 0.046524782
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013036165
+      Before SDC 2: max relative P mismatch is 2.337713757e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4886.508677
+MLMG: Initial residual (resid0) = 4886.508677
+MLMG: Iteration   1 Fine resid/bnorm = 0.2727544953
+MLMG: Iteration   2 Fine resid/bnorm = 0.03171663332
+MLMG: Iteration   3 Fine resid/bnorm = 0.00166117388
+MLMG: Iteration   4 Fine resid/bnorm = 3.45499277e-05
+MLMG: Iteration   5 Fine resid/bnorm = 2.425146353e-06
+MLMG: Iteration   6 Fine resid/bnorm = 2.061795481e-07
+MLMG: Iteration   7 Fine resid/bnorm = 6.505469631e-09
+MLMG: Iteration   8 Fine resid/bnorm = 2.573802968e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.557662517e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 7.611531405e-08, 1.557662517e-11
+MLMG: Timers: Solve = 0.021859887 Iter = 0.021123108 Bottom = 0.005074635
+   - oneSDC()::MACProjection()   --> Time: 0.024261839
+   - oneSDC()::ScalarAdvection() --> Time: 0.003538049
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8915772981
+MLMG: Initial residual (resid0) = 4.952296087e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.110223025e-16, 1.24523474e-16
+MLMG: Timers: Solve = 0.019205634 Iter = 0.016678695 Bottom = 0.000459368
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8877393005
+MLMG: Initial residual (resid0) = 0.8877393005
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.751854933e-16
+MLMG: Timers: Solve = 0.003391792 Iter = 0.002256907 Bottom = 0.000265131
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.084013317e-07
+MLMG: Initial residual (resid0) = 1.084013317e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.662747384e-16
+MLMG: Timers: Solve = 0.003428245 Iter = 0.002270618 Bottom = 0.000259089
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038107317
+   - oneSDC()::ScalarReaction()  --> Time: 0.046513177
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.163708083
+MLMG: Initial residual (resid0) = 6.135299011e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 8.955280961e-12, 1.452904784e-12
+MLMG: Timers: Solve = 0.00393435 Iter = 0.002615544 Bottom = 0.00026475
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 146.1378775
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 146.1378775
+MLMG: Initial residual (resid0) = 146.1378775
+MLMG: Iteration   1 Fine resid/bnorm = 0.0006818956573
+MLMG: Iteration   2 Fine resid/bnorm = 2.535097628e-06
+MLMG: Iteration   3 Fine resid/bnorm = 2.414102908e-08
+MLMG: Iteration   4 Fine resid/bnorm = 2.955598287e-10
+MLMG: Iteration   5 Fine resid/bnorm = 3.867540185e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 5.651941137e-10, 3.867540185e-12
+MLMG: Timers: Solve = 0.013004774 Iter = 0.012084663 Bottom = 0.002507971
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 110.0919757
+
+   - Advance()::VelocityAdvance  --> Time: 0.025192583
+ >> PeleLMeX::Advance() --> Time: 0.289094188
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.349868098e-05, divu: 0.004305625297, sprays: 1e+200
+ STEP [4] - Time: 4.641e-08, dt 1.4641e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 6.407425491e-10
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4730.974463
+MLMG: Initial residual (resid0) = 4730.974463
+MLMG: Iteration   1 Fine resid/bnorm = 0.002190530574
+MLMG: Iteration   2 Fine resid/bnorm = 9.163699663e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.755822698e-06
+MLMG: Iteration   4 Fine resid/bnorm = 1.040560677e-07
+MLMG: Iteration   5 Fine resid/bnorm = 3.503410122e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.961663059e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.265182614e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.985546636e-08, 1.265182614e-11
+MLMG: Timers: Solve = 0.017333988 Iter = 0.016603127 Bottom = 0.004056062
+   - oneSDC()::MACProjection()   --> Time: 0.01970385
+   - oneSDC()::ScalarAdvection() --> Time: 0.003590737
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8916270594
+MLMG: Initial residual (resid0) = 5.475612471e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490330487e-16
+MLMG: Timers: Solve = 0.019223448 Iter = 0.016680069 Bottom = 0.000461588
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.0006853810334
+MLMG: Initial residual (resid0) = 0.0006853810334
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.252606517e-19, 4.745690877e-16
+MLMG: Timers: Solve = 0.003376742 Iter = 0.002243982 Bottom = 0.000256238
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.350734199e-10
+MLMG: Initial residual (resid0) = 1.350734199e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.913729153e-16
+MLMG: Timers: Solve = 0.00340862 Iter = 0.00226375 Bottom = 0.00026374
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038211492
+   - oneSDC()::ScalarReaction()  --> Time: 0.046517711
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013039149
+      Before SDC 2: max relative P mismatch is 2.336094793e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4890.413186
+MLMG: Initial residual (resid0) = 4890.413186
+MLMG: Iteration   1 Fine resid/bnorm = 0.2475295586
+MLMG: Iteration   2 Fine resid/bnorm = 0.02878301574
+MLMG: Iteration   3 Fine resid/bnorm = 0.001507798566
+MLMG: Iteration   4 Fine resid/bnorm = 3.136146704e-05
+MLMG: Iteration   5 Fine resid/bnorm = 2.201161838e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.871713785e-07
+MLMG: Iteration   7 Fine resid/bnorm = 5.906450788e-09
+MLMG: Iteration   8 Fine resid/bnorm = 2.336625691e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.414416033e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 6.917078821e-08, 1.414416033e-11
+MLMG: Timers: Solve = 0.021882816 Iter = 0.021164861 Bottom = 0.005103024
+   - oneSDC()::MACProjection()   --> Time: 0.02423799
+   - oneSDC()::ScalarAdvection() --> Time: 0.003678502
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8916249808
+MLMG: Initial residual (resid0) = 5.23674245e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490336293e-16
+MLMG: Timers: Solve = 0.019192155 Iter = 0.016645079 Bottom = 0.000456815
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8871182593
+MLMG: Initial residual (resid0) = 0.8871182593
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.754481478e-16
+MLMG: Timers: Solve = 0.003425788 Iter = 0.002261703 Bottom = 0.000256779
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.083268089e-07
+MLMG: Initial residual (resid0) = 1.083268089e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.64697796e-23, 2.443511433e-16
+MLMG: Timers: Solve = 0.003397164 Iter = 0.002256427 Bottom = 0.000267121
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038198584
+   - oneSDC()::ScalarReaction()  --> Time: 0.046520226
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.162143743
+MLMG: Initial residual (resid0) = 6.746620631e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.08406617e-11, 1.759235447e-12
+MLMG: Timers: Solve = 0.003928384 Iter = 0.002614259 Bottom = 0.000263798
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 109.2075074
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 109.2075074
+MLMG: Initial residual (resid0) = 109.2075074
+MLMG: Iteration   1 Fine resid/bnorm = 0.0007924240105
+MLMG: Iteration   2 Fine resid/bnorm = 2.878070331e-06
+MLMG: Iteration   3 Fine resid/bnorm = 2.807589113e-08
+MLMG: Iteration   4 Fine resid/bnorm = 3.487867858e-10
+MLMG: Iteration   5 Fine resid/bnorm = 4.623935877e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 5.049685114e-10, 4.623935877e-12
+MLMG: Timers: Solve = 0.012999642 Iter = 0.012066229 Bottom = 0.002517207
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 84.92197214
+
+   - Advance()::VelocityAdvance  --> Time: 0.025246463
+ >> PeleLMeX::Advance() --> Time: 0.285377396
+ Writing temporals.
+
+ ====================   NEW TIME STEP   ==================== 
+ Regridding...
+ Est. time step - Conv: 1.551082865e-05, divu: 0.004306971031, sprays: 1e+200
+ STEP [5] - Time: 6.1051e-08, dt 1.61051e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 7.458098901e-10
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4745.587521
+MLMG: Initial residual (resid0) = 4745.587521
+MLMG: Iteration   1 Fine resid/bnorm = 0.002174929542
+MLMG: Iteration   2 Fine resid/bnorm = 9.067874336e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.749205781e-06
+MLMG: Iteration   4 Fine resid/bnorm = 1.022921126e-07
+MLMG: Iteration   5 Fine resid/bnorm = 3.509698617e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.941526148e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.255833686e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.95966867e-08, 1.255833686e-11
+MLMG: Timers: Solve = 0.017330524 Iter = 0.016567443 Bottom = 0.004071313
+   - oneSDC()::MACProjection()   --> Time: 0.019686842
+   - oneSDC()::ScalarAdvection() --> Time: 0.003517837
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8916797157
+MLMG: Initial residual (resid0) = 6.022786486e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490183426e-16
+MLMG: Timers: Solve = 0.01917542 Iter = 0.016648801 Bottom = 0.000449791
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.0009420254362
+MLMG: Initial residual (resid0) = 0.0009420254362
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.252606517e-19, 3.452779928e-16
+MLMG: Timers: Solve = 0.003379938 Iter = 0.002242209 Bottom = 0.000260958
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.461005201e-10
+MLMG: Initial residual (resid0) = 1.461005201e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.769288304e-16
+MLMG: Timers: Solve = 0.00338511 Iter = 0.00225339 Bottom = 0.000258802
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038115942
+   - oneSDC()::ScalarReaction()  --> Time: 0.046513781
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.01302689
+      Before SDC 2: max relative P mismatch is 2.334481099e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4890.406491
+MLMG: Initial residual (resid0) = 4890.406491
+MLMG: Iteration   1 Fine resid/bnorm = 0.2248047329
+MLMG: Iteration   2 Fine resid/bnorm = 0.0261412824
+MLMG: Iteration   3 Fine resid/bnorm = 0.001369684947
+MLMG: Iteration   4 Fine resid/bnorm = 2.849024308e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.999476646e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.700539503e-07
+MLMG: Iteration   7 Fine resid/bnorm = 5.366972654e-09
+MLMG: Iteration   8 Fine resid/bnorm = 2.122838279e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.284894762e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 6.283657683e-08, 1.284894762e-11
+MLMG: Timers: Solve = 0.021915459 Iter = 0.021154119 Bottom = 0.005075057
+   - oneSDC()::MACProjection()   --> Time: 0.024264729
+   - oneSDC()::ScalarAdvection() --> Time: 0.003539335
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8916776394
+MLMG: Initial residual (resid0) = 5.549601214e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490189224e-16
+MLMG: Timers: Solve = 0.019189432 Iter = 0.0166548 Bottom = 0.000456438
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.88649787
+MLMG: Initial residual (resid0) = 0.88649787
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.757108941e-16
+MLMG: Timers: Solve = 0.003383483 Iter = 0.002250929 Bottom = 0.000259027
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.081623586e-07
+MLMG: Initial residual (resid0) = 1.081623586e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.64697796e-23, 2.447226553e-16
+MLMG: Timers: Solve = 0.003420863 Iter = 0.002287111 Bottom = 0.000272459
+   - oneSDC()::ScalarDiffusion() --> Time: 0.03812419
+   - oneSDC()::ScalarReaction()  --> Time: 0.046510773
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.160555609
+MLMG: Initial residual (resid0) = 7.418972095e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.312194797e-11, 2.129994242e-12
+MLMG: Timers: Solve = 0.003941981 Iter = 0.002619908 Bottom = 0.00026762
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 84.01519909
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 84.01519909
+MLMG: Initial residual (resid0) = 84.01519909
+MLMG: Iteration   1 Fine resid/bnorm = 0.0009026504247
+MLMG: Iteration   2 Fine resid/bnorm = 3.199015506e-06
+MLMG: Iteration   3 Fine resid/bnorm = 3.203362887e-08
+MLMG: Iteration   4 Fine resid/bnorm = 4.04053992e-10
+MLMG: Iteration   5 Fine resid/bnorm = 5.429086745e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 4.561258038e-10, 5.429086745e-12
+MLMG: Timers: Solve = 0.013032479 Iter = 0.012078067 Bottom = 0.00250137
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 67.16195523
+
+   - Advance()::VelocityAdvance  --> Time: 0.025098052
+ >> PeleLMeX::Advance() --> Time: 0.284829779
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.551424827e-05, divu: 0.004308426986, sprays: 1e+200
+ STEP [6] - Time: 7.71561e-08, dt 1.771561e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 8.700670892e-10
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4757.019148
+MLMG: Initial residual (resid0) = 4757.019148
+MLMG: Iteration   1 Fine resid/bnorm = 0.002159779211
+MLMG: Iteration   2 Fine resid/bnorm = 8.977882349e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.739743868e-06
+MLMG: Iteration   4 Fine resid/bnorm = 1.006974966e-07
+MLMG: Iteration   5 Fine resid/bnorm = 3.49916371e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.922786358e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.246777165e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.930942848e-08, 1.246777165e-11
+MLMG: Timers: Solve = 0.018800793 Iter = 0.018067826 Bottom = 0.004065042
+   - oneSDC()::MACProjection()   --> Time: 0.021158574
+   - oneSDC()::ScalarAdvection() --> Time: 0.003592919
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8917378446
+MLMG: Initial residual (resid0) = 6.624598139e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.4900211e-16
+MLMG: Timers: Solve = 0.019174085 Iter = 0.016655062 Bottom = 0.00046029
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.001242974861
+MLMG: Initial residual (resid0) = 0.001242974861
+MLMG: Final Iter. 1 resid, resid/bnorm = 4.33680869e-19, 3.489055835e-16
+MLMG: Timers: Solve = 0.003381834 Iter = 0.002242587 Bottom = 0.000257423
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.522870479e-10
+MLMG: Initial residual (resid0) = 1.522870479e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.697412518e-16
+MLMG: Timers: Solve = 0.003422113 Iter = 0.002265194 Bottom = 0.000257845
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038213266
+   - oneSDC()::ScalarReaction()  --> Time: 0.04651485
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013037646
+      Before SDC 2: max relative P mismatch is 2.332873421e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4888.556157
+MLMG: Initial residual (resid0) = 4888.556157
+MLMG: Iteration   1 Fine resid/bnorm = 0.204232701
+MLMG: Iteration   2 Fine resid/bnorm = 0.02375047321
+MLMG: Iteration   3 Fine resid/bnorm = 0.001244692719
+MLMG: Iteration   4 Fine resid/bnorm = 2.589178724e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.816956883e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.545623477e-07
+MLMG: Iteration   7 Fine resid/bnorm = 4.878710453e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.92961603e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.167879305e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 5.709243567e-08, 1.167879305e-11
+MLMG: Timers: Solve = 0.021863708 Iter = 0.021157327 Bottom = 0.00506511
+   - oneSDC()::MACProjection()   --> Time: 0.02421141
+   - oneSDC()::ScalarAdvection() --> Time: 0.003552164
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8917357707
+MLMG: Initial residual (resid0) = 5.893675367e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.490026892e-16
+MLMG: Timers: Solve = 0.019185327 Iter = 0.016646796 Bottom = 0.000450035
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8858781314
+MLMG: Initial residual (resid0) = 0.8858781314
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.759737323e-16
+MLMG: Timers: Solve = 0.003431873 Iter = 0.002268562 Bottom = 0.000258862
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.081143629e-07
+MLMG: Initial residual (resid0) = 1.081143629e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.672469441e-16
+MLMG: Timers: Solve = 0.003383284 Iter = 0.00224503 Bottom = 0.000258081
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038076941
+   - oneSDC()::ScalarReaction()  --> Time: 0.046519117
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.158832385
+MLMG: Initial residual (resid0) = 8.158076265e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.588051912e-11, 2.578495099e-12
+MLMG: Timers: Solve = 0.00396187 Iter = 0.00263227 Bottom = 0.00027099
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 66.22330546
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 66.22330546
+MLMG: Initial residual (resid0) = 66.22330546
+MLMG: Iteration   1 Fine resid/bnorm = 0.001011150949
+MLMG: Iteration   2 Fine resid/bnorm = 3.500409172e-06
+MLMG: Iteration   3 Fine resid/bnorm = 3.605834072e-08
+MLMG: Iteration   4 Fine resid/bnorm = 4.620840145e-10
+MLMG: Iteration   5 Fine resid/bnorm = 6.369941234e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 4.218385641e-10, 6.369941234e-12
+MLMG: Timers: Solve = 0.012962678 Iter = 0.012046818 Bottom = 0.002500122
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 54.65241453
+
+   - Advance()::VelocityAdvance  --> Time: 0.025297168
+ >> PeleLMeX::Advance() --> Time: 0.286388531
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.551820616e-05, divu: 0.004310004301, sprays: 1e+200
+ STEP [7] - Time: 9.487171e-08, dt 1.9487171e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.017253769e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4766.307986
+MLMG: Initial residual (resid0) = 4766.307986
+MLMG: Iteration   1 Fine resid/bnorm = 0.002146053392
+MLMG: Iteration   2 Fine resid/bnorm = 8.898369723e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.729518931e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.932045689e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.480474064e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.906442224e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.238635974e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.903720535e-08, 1.238635974e-11
+MLMG: Timers: Solve = 0.017289903 Iter = 0.016567366 Bottom = 0.004067896
+   - oneSDC()::MACProjection()   --> Time: 0.019588014
+   - oneSDC()::ScalarAdvection() --> Time: 0.00352291
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8918019926
+MLMG: Initial residual (resid0) = 7.286494593e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489841991e-16
+MLMG: Timers: Solve = 0.019158237 Iter = 0.01664137 Bottom = 0.000449633
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.001594502668
+MLMG: Initial residual (resid0) = 0.001594502668
+MLMG: Final Iter. 1 resid, resid/bnorm = 4.33680869e-19, 2.719850381e-16
+MLMG: Timers: Solve = 0.003432598 Iter = 0.002285736 Bottom = 0.000268636
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.508409809e-10
+MLMG: Initial residual (resid0) = 1.508409809e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.7136851e-16
+MLMG: Timers: Solve = 0.003386154 Iter = 0.002257268 Bottom = 0.000257784
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037920077
+   - oneSDC()::ScalarReaction()  --> Time: 0.046520074
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012787463
+      Before SDC 2: max relative P mismatch is 2.331272657e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4885.778271
+MLMG: Initial residual (resid0) = 4885.778271
+MLMG: Iteration   1 Fine resid/bnorm = 0.1855683905
+MLMG: Iteration   2 Fine resid/bnorm = 0.02158185449
+MLMG: Iteration   3 Fine resid/bnorm = 0.001131320549
+MLMG: Iteration   4 Fine resid/bnorm = 2.353490351e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.651406737e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.405107487e-07
+MLMG: Iteration   7 Fine resid/bnorm = 4.435820113e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.754083633e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.061843929e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 5.187933994e-08, 1.061843929e-11
+MLMG: Timers: Solve = 0.021918901 Iter = 0.021173533 Bottom = 0.005079646
+   - oneSDC()::MACProjection()   --> Time: 0.024175166
+   - oneSDC()::ScalarAdvection() --> Time: 0.003352982
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8917999212
+MLMG: Initial residual (resid0) = 6.272040188e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489847775e-16
+MLMG: Timers: Solve = 0.01921576 Iter = 0.016659915 Bottom = 0.000451344
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8852590427
+MLMG: Initial residual (resid0) = 0.8852590427
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.762366622e-16
+MLMG: Timers: Solve = 0.003392781 Iter = 0.002257292 Bottom = 0.000266834
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.080347536e-07
+MLMG: Initial residual (resid0) = 1.080347536e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.675175633e-16
+MLMG: Timers: Solve = 0.005922556 Iter = 0.002357526 Bottom = 0.000290643
+   - oneSDC()::ScalarDiffusion() --> Time: 0.040564487
+   - oneSDC()::ScalarReaction()  --> Time: 0.046753895
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.156938996
+MLMG: Initial residual (resid0) = 8.970426866e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.92161842e-11, 3.121061328e-12
+MLMG: Timers: Solve = 0.00397842 Iter = 0.002621509 Bottom = 0.000275397
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 54.46195517
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 54.46195517
+MLMG: Initial residual (resid0) = 54.46195517
+MLMG: Iteration   1 Fine resid/bnorm = 0.001093008713
+MLMG: Iteration   2 Fine resid/bnorm = 3.706085592e-06
+MLMG: Iteration   3 Fine resid/bnorm = 3.935813676e-08
+MLMG: Iteration   4 Fine resid/bnorm = 5.127194599e-10
+MLMG: Iteration   5 Fine resid/bnorm = 7.311047447e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.981739383e-10, 7.311047447e-12
+MLMG: Timers: Solve = 0.013107929 Iter = 0.0121725 Bottom = 0.00252734
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 47.0520781
+
+   - Advance()::VelocityAdvance  --> Time: 0.025335044
+ >> PeleLMeX::Advance() --> Time: 0.286564006
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.55226654e-05, divu: 0.004311715246, sprays: 1e+200
+ STEP [8] - Time: 1.14358881e-07, dt 2.14358881e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.191870576e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4774.042769
+MLMG: Initial residual (resid0) = 4774.042769
+MLMG: Iteration   1 Fine resid/bnorm = 0.002133568981
+MLMG: Iteration   2 Fine resid/bnorm = 8.829392122e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.719414191e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.81321295e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.456381931e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.892381112e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.231468774e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.879084597e-08, 1.231468774e-11
+MLMG: Timers: Solve = 0.017383086 Iter = 0.016633027 Bottom = 0.004080001
+   - oneSDC()::MACProjection()   --> Time: 0.019773507
+   - oneSDC()::ScalarAdvection() --> Time: 0.003478085
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8918727606
+MLMG: Initial residual (resid0) = 8.014464253e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489644428e-16
+MLMG: Timers: Solve = 0.019189315 Iter = 0.016621126 Bottom = 0.000451102
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.002003690871
+MLMG: Initial residual (resid0) = 0.002003690871
+MLMG: Final Iter. 1 resid, resid/bnorm = 6.505213035e-19, 3.246615099e-16
+MLMG: Timers: Solve = 0.003408179 Iter = 0.002263172 Bottom = 0.000264208
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.287745712e-10
+MLMG: Initial residual (resid0) = 1.287745712e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 2.007336845e-16
+MLMG: Timers: Solve = 0.003391182 Iter = 0.002252384 Bottom = 0.00025827
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038066983
+   - oneSDC()::ScalarReaction()  --> Time: 0.046526892
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012919107
+      Before SDC 2: max relative P mismatch is 2.329679894e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4882.550228
+MLMG: Initial residual (resid0) = 4882.550228
+MLMG: Iteration   1 Fine resid/bnorm = 0.1686154712
+MLMG: Iteration   2 Fine resid/bnorm = 0.01961246699
+MLMG: Iteration   3 Fine resid/bnorm = 0.001028367786
+MLMG: Iteration   4 Fine resid/bnorm = 2.139463465e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.501072861e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.277504613e-07
+MLMG: Iteration   7 Fine resid/bnorm = 4.033619531e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.594799056e-10
+MLMG: Iteration   9 Fine resid/bnorm = 9.653356858e-12
+MLMG: Final Iter. 9 resid, resid/bnorm = 4.713299973e-08, 9.653356858e-12
+MLMG: Timers: Solve = 0.022152928 Iter = 0.02142883 Bottom = 0.005059003
+   - oneSDC()::MACProjection()   --> Time: 0.024523537
+   - oneSDC()::ScalarAdvection() --> Time: 0.003453287
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8918706919
+MLMG: Initial residual (resid0) = 6.688068828e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489650203e-16
+MLMG: Timers: Solve = 0.019206441 Iter = 0.016666551 Bottom = 0.000453101
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.884640603
+MLMG: Initial residual (resid0) = 0.884640603
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.509997893e-16
+MLMG: Timers: Solve = 0.003382473 Iter = 0.002250899 Bottom = 0.000258194
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.080280936e-07
+MLMG: Initial residual (resid0) = 1.080280936e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.64697796e-23, 2.45026814e-16
+MLMG: Timers: Solve = 0.003397796 Iter = 0.002266431 Bottom = 0.000269364
+   - oneSDC()::ScalarDiffusion() --> Time: 0.03819461
+   - oneSDC()::ScalarReaction()  --> Time: 0.046520989
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.154856651
+MLMG: Initial residual (resid0) = 9.863202933e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.32494024e-11, 3.777407618e-12
+MLMG: Timers: Solve = 0.003925387 Iter = 0.002601045 Bottom = 0.000263117
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 46.8470696
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 46.8470696
+MLMG: Initial residual (resid0) = 46.8470696
+MLMG: Iteration   1 Fine resid/bnorm = 0.001136713209
+MLMG: Iteration   2 Fine resid/bnorm = 3.791116892e-06
+MLMG: Iteration   3 Fine resid/bnorm = 4.15901454e-08
+MLMG: Iteration   4 Fine resid/bnorm = 5.603128569e-10
+MLMG: Iteration   5 Fine resid/bnorm = 8.121018033e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.80445897e-10, 8.121018033e-12
+MLMG: Timers: Solve = 0.013043049 Iter = 0.012111224 Bottom = 0.002530663
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 40.76364901
+
+   - Advance()::VelocityAdvance  --> Time: 0.025305466
+ >> PeleLMeX::Advance() --> Time: 0.285045127
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.552762586e-05, divu: 0.004313573347, sprays: 1e+200
+ STEP [9] - Time: 1.357947691e-07, dt 2.357947691e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.399326959e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4780.599642
+MLMG: Initial residual (resid0) = 4780.599642
+MLMG: Iteration   1 Fine resid/bnorm = 0.002122399717
+MLMG: Iteration   2 Fine resid/bnorm = 8.767246512e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.709397567e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.708450817e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.430027827e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.879670618e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.224867803e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.855602581e-08, 1.224867803e-11
+MLMG: Timers: Solve = 0.017251831 Iter = 0.01653635 Bottom = 0.00405356
+   - oneSDC()::MACProjection()   --> Time: 0.019606473
+   - oneSDC()::ScalarAdvection() --> Time: 0.003454799
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8919508095
+MLMG: Initial residual (resid0) = 8.815090165e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489426576e-16
+MLMG: Timers: Solve = 0.019214609 Iter = 0.016678083 Bottom = 0.000451203
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.002478528656
+MLMG: Initial residual (resid0) = 0.002478528656
+MLMG: Final Iter. 1 resid, resid/bnorm = 8.67361738e-19, 3.499502561e-16
+MLMG: Timers: Solve = 0.003395868 Iter = 0.002258156 Bottom = 0.000257414
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.537132861e-10
+MLMG: Initial residual (resid0) = 1.537132861e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.681662972e-16
+MLMG: Timers: Solve = 0.003384105 Iter = 0.002250879 Bottom = 0.000258103
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038221562
+   - oneSDC()::ScalarReaction()  --> Time: 0.046536627
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012911038
+      Before SDC 2: max relative P mismatch is 2.328096449e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4879.147015
+MLMG: Initial residual (resid0) = 4879.147015
+MLMG: Iteration   1 Fine resid/bnorm = 0.1532084064
+MLMG: Iteration   2 Fine resid/bnorm = 0.01782285706
+MLMG: Iteration   3 Fine resid/bnorm = 0.0009348148347
+MLMG: Iteration   4 Fine resid/bnorm = 1.944977708e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.364465388e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.161550838e-07
+MLMG: Iteration   7 Fine resid/bnorm = 3.668127758e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.450043544e-10
+MLMG: Iteration   9 Fine resid/bnorm = 8.777896093e-12
+MLMG: Final Iter. 9 resid, resid/bnorm = 4.282864552e-08, 8.777896093e-12
+MLMG: Timers: Solve = 0.021900283 Iter = 0.021160351 Bottom = 0.00507032
+   - oneSDC()::MACProjection()   --> Time: 0.024218899
+   - oneSDC()::ScalarAdvection() --> Time: 0.003519007
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8919487438
+MLMG: Initial residual (resid0) = 7.14546003e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489432341e-16
+MLMG: Timers: Solve = 0.019207561 Iter = 0.016673746 Bottom = 0.000454688
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8840228113
+MLMG: Initial residual (resid0) = 0.8840228113
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.767627974e-16
+MLMG: Timers: Solve = 0.003411646 Iter = 0.00227281 Bottom = 0.000263884
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.08001538e-07
+MLMG: Initial residual (resid0) = 1.08001538e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.676305926e-16
+MLMG: Timers: Solve = 0.003382775 Iter = 0.00224646 Bottom = 0.000257788
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038104063
+   - oneSDC()::ScalarReaction()  --> Time: 0.046503563
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.152569038
+MLMG: Initial residual (resid0) = 0.0001084429061
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.812594602e-11, 4.57141494e-12
+MLMG: Timers: Solve = 0.003939074 Iter = 0.002623507 Bottom = 0.000272646
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 40.54277626
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 40.54277626
+MLMG: Initial residual (resid0) = 40.54277626
+MLMG: Iteration   1 Fine resid/bnorm = 0.001181956273
+MLMG: Iteration   2 Fine resid/bnorm = 3.899497773e-06
+MLMG: Iteration   3 Fine resid/bnorm = 4.426635325e-08
+MLMG: Iteration   4 Fine resid/bnorm = 6.194879201e-10
+MLMG: Iteration   5 Fine resid/bnorm = 9.07851599e-12
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.680682426e-10, 9.07851599e-12
+MLMG: Timers: Solve = 0.013179179 Iter = 0.012204866 Bottom = 0.002522088
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 35.53121155
+
+   - Advance()::VelocityAdvance  --> Time: 0.025345378
+ >> PeleLMeX::Advance() --> Time: 0.284801252
+ Writing temporals.
+
+ ====================   NEW TIME STEP   ==================== 
+ Regridding...
+ Update chemistry typical values 
+ ==============================================================================
+ Typical values: 
+	Velocity: 1.737213963 5.029579377 
+	Density:  1.223299715
+	Temp:     298.0069529
+	H:        -94094.46251
+	Y_N2:     0.7289241927
+	Y_O:      1.99311271e-94
+	Y_H2:     3.71978362e-89
+	Y_H:      1.538767209e-85
+	Y_OH:     4.264044224e-91
+	Y_H2O:    4.481937696e-92
+	Y_O2:     0.2211238958
+	Y_HO2:    9.310853744e-67
+	Y_H2O2:   1.094287566e-79
+	Y_CH:     2.876290765e-253
+	Y_HCO:    2.348011189e-156
+	Y_CH2:    3.53255923e-171
+	Y_CO2:    3.434158701e-171
+	Y_CO:     2.179786069e-156
+	Y_CH2O:   8.272002648e-91
+	Y_CH2GSG: 2.813963312e-172
+	Y_CH3:    1.469820752e-80
+	Y_CH3O:   1.070056202e-115
+	Y_CH4:    3.316419511e-88
+	Y_CH3OH:  2.579958227e-121
+	Y_C2H6:   3.329075784e-143
+	Y_C2H5:   1.331174785e-63
+	Y_CH2CO:  1.963945506e-160
+	Y_HOCHO:  2.79021846e-244
+	Y_CH3O2:  7.445596324e-79
+	Y_CH3O2H: 6.14298781e-92
+	Y_C2H2:   3.215361008e-165
+	Y_HCCO:   1.861979445e-247
+	Y_C2H3:   7.163132105e-155
+	Y_CH2CHO: 4.840047564e-158
+	Y_C3H6:   7.65069617e-67
+	Y_C2H4:   2.813618104e-67
+	Y_C2H5O:  1.206837727e-127
+	Y_CH3CO:  5.153570059e-175
+	Y_C2H5O2: 2.234105358e-63
+	Y_C3H2:   0
+	Y_C3H3:   6.564475411e-254
+	Y_C3H4XA: 3.527101441e-167
+	Y_C3H5XA: 3.258980946e-128
+	Y_NXC3H7: 3.666916588e-64
+	Y_NXC3H7O2:3.260511623e-63
+	Y_C4H6:   1.503541921e-172
+	Y_C4H7:   5.389806722e-169
+	Y_C4H8X1: 9.741540002e-85
+	Y_PXC4H9: 4.862649528e-64
+	Y_PXC4H9O2:3.870933623e-63
+	Y_C5H9:   1.744691462e-168
+	Y_C5H10X1:7.968316269e-84
+	Y_C5H11X1:5.863713049e-63
+	Y_C6H12X1:1.192121547e-95
+	Y_C7H15X2:3.191455615e-79
+	Y_NXC7H16:0.04995498317
+ ==============================================================================
+ Est. time step - Conv: 1.553310807e-05, divu: 0.004315593508, sprays: 1e+200
+ STEP [10] - Time: 1.59374246e-07, dt 2.59374246e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.646135627e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4786.235676
+MLMG: Initial residual (resid0) = 4786.235676
+MLMG: Iteration   1 Fine resid/bnorm = 0.002112292301
+MLMG: Iteration   2 Fine resid/bnorm = 8.710695015e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.699581168e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.615457137e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.402698281e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.868101424e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.218758614e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.833265959e-08, 1.218758614e-11
+MLMG: Timers: Solve = 0.017287574 Iter = 0.016575941 Bottom = 0.004051879
+   - oneSDC()::MACProjection()   --> Time: 0.019639819
+   - oneSDC()::ScalarAdvection() --> Time: 0.003527202
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8920368661
+MLMG: Initial residual (resid0) = 9.695608598e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489186416e-16
+MLMG: Timers: Solve = 0.019173638 Iter = 0.016635574 Bottom = 0.000452966
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.003028021241
+MLMG: Initial residual (resid0) = 0.003028021241
+MLMG: Final Iter. 1 resid, resid/bnorm = 8.67361738e-19, 2.864450639e-16
+MLMG: Timers: Solve = 0.003390488 Iter = 0.002249794 Bottom = 0.000257921
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.78667472e-10
+MLMG: Initial residual (resid0) = 1.78667472e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.446787927e-16
+MLMG: Timers: Solve = 0.003413636 Iter = 0.002259341 Bottom = 0.000260381
+   - oneSDC()::ScalarDiffusion() --> Time: 0.03823252
+   - oneSDC()::ScalarReaction()  --> Time: 0.046511463
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013112226
+      Before SDC 2: max relative P mismatch is 2.326523912e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4875.733802
+MLMG: Initial residual (resid0) = 4875.733802
+MLMG: Iteration   1 Fine resid/bnorm = 0.1392013196
+MLMG: Iteration   2 Fine resid/bnorm = 0.01619600447
+MLMG: Iteration   3 Fine resid/bnorm = 0.0008497712196
+MLMG: Iteration   4 Fine resid/bnorm = 1.768181802e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.240283819e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.056142865e-07
+MLMG: Iteration   7 Fine resid/bnorm = 3.335870106e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.31839312e-10
+MLMG: Iteration   9 Fine resid/bnorm = 7.981340337e-12
+MLMG: Final Iter. 9 resid, resid/bnorm = 3.891489087e-08, 7.981340337e-12
+MLMG: Timers: Solve = 0.021961021 Iter = 0.021228071 Bottom = 0.005111185
+   - oneSDC()::MACProjection()   --> Time: 0.024247357
+   - oneSDC()::ScalarAdvection() --> Time: 0.003448757
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8920348037
+MLMG: Initial residual (resid0) = 7.648268143e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.489192171e-16
+MLMG: Timers: Solve = 0.01918143 Iter = 0.016650204 Bottom = 0.000452185
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8834056668
+MLMG: Initial residual (resid0) = 0.8834056668
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.770260028e-16
+MLMG: Timers: Solve = 0.003398853 Iter = 0.00225402 Bottom = 0.00025875
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.080710841e-07
+MLMG: Initial residual (resid0) = 1.080710841e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.673940141e-16
+MLMG: Timers: Solve = 0.003408794 Iter = 0.002276217 Bottom = 0.00026383
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038124222
+   - oneSDC()::ScalarReaction()  --> Time: 0.046545649
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.150058669
+MLMG: Initial residual (resid0) = 0.0001192233614
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.402156334e-11, 5.531908747e-12
+MLMG: Timers: Solve = 0.00392654 Iter = 0.002605505 Bottom = 0.000269338
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 35.29221866
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 35.29221866
+MLMG: Initial residual (resid0) = 35.29221866
+MLMG: Iteration   1 Fine resid/bnorm = 0.001228736963
+MLMG: Iteration   2 Fine resid/bnorm = 4.153226542e-06
+MLMG: Iteration   3 Fine resid/bnorm = 4.764078561e-08
+MLMG: Iteration   4 Fine resid/bnorm = 6.895993776e-10
+MLMG: Iteration   5 Fine resid/bnorm = 1.021615286e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.605507004e-10, 1.021615286e-11
+MLMG: Timers: Solve = 0.013044101 Iter = 0.012128149 Bottom = 0.002524341
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 31.14398538
+
+   - Advance()::VelocityAdvance  --> Time: 0.025309821
+ >> PeleLMeX::Advance() --> Time: 0.286989975
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.553914595e-05, divu: 0.004317792164, sprays: 1e+200
+ STEP [11] - Time: 1.853116706e-07, dt 2.853116706e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.940134148e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4791.135578
+MLMG: Initial residual (resid0) = 4791.135578
+MLMG: Iteration   1 Fine resid/bnorm = 0.002102992864
+MLMG: Iteration   2 Fine resid/bnorm = 8.658580964e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.689976054e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.532171932e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.375066819e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.857480246e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.213063079e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.811949677e-08, 1.213063079e-11
+MLMG: Timers: Solve = 0.017292271 Iter = 0.016580445 Bottom = 0.00406439
+   - oneSDC()::MACProjection()   --> Time: 0.019638789
+   - oneSDC()::ScalarAdvection() --> Time: 0.003493723
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8921317296
+MLMG: Initial residual (resid0) = 0.000106639733
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.488921732e-16
+MLMG: Timers: Solve = 0.019190589 Iter = 0.016652242 Bottom = 0.000453037
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.003662314399
+MLMG: Initial residual (resid0) = 0.003662314399
+MLMG: Final Iter. 1 resid, resid/bnorm = 8.67361738e-19, 2.368343194e-16
+MLMG: Timers: Solve = 0.003381697 Iter = 0.002245032 Bottom = 0.000257595
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.352446189e-10
+MLMG: Initial residual (resid0) = 1.352446189e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.911306664e-16
+MLMG: Timers: Solve = 0.003399145 Iter = 0.002265702 Bottom = 0.000264763
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038099829
+   - oneSDC()::ScalarReaction()  --> Time: 0.046507478
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012981568
+      Before SDC 2: max relative P mismatch is 2.324964209e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4872.411794
+MLMG: Initial residual (resid0) = 4872.411794
+MLMG: Iteration   1 Fine resid/bnorm = 0.1264645296
+MLMG: Iteration   2 Fine resid/bnorm = 0.01471679827
+MLMG: Iteration   3 Fine resid/bnorm = 0.0007724464487
+MLMG: Iteration   4 Fine resid/bnorm = 1.607432316e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.127373824e-06
+MLMG: Iteration   6 Fine resid/bnorm = 9.603010908e-08
+MLMG: Iteration   7 Fine resid/bnorm = 3.033764321e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.198724401e-10
+MLMG: Iteration   9 Fine resid/bnorm = 7.258881418e-12
+MLMG: Final Iter. 9 resid, resid/bnorm = 3.536825943e-08, 7.258881418e-12
+MLMG: Timers: Solve = 0.021856846 Iter = 0.021151746 Bottom = 0.005080222
+   - oneSDC()::MACProjection()   --> Time: 0.02422044
+   - oneSDC()::ScalarAdvection() --> Time: 0.003493949
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8921296708
+MLMG: Initial residual (resid0) = 8.20093583e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.110223025e-16, 1.244463738e-16
+MLMG: Timers: Solve = 0.019207961 Iter = 0.016680506 Bottom = 0.000450155
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8827891686
+MLMG: Initial residual (resid0) = 0.8827891686
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.772892999e-16
+MLMG: Timers: Solve = 0.003422032 Iter = 0.002286606 Bottom = 0.000264552
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.080661156e-07
+MLMG: Initial residual (resid0) = 1.080661156e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.674109058e-16
+MLMG: Timers: Solve = 0.003379144 Iter = 0.002247015 Bottom = 0.000257888
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038149288
+   - oneSDC()::ScalarReaction()  --> Time: 0.046524819
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.147305955
+MLMG: Initial residual (resid0) = 0.0001310681151
+MLMG: Final Iter. 1 resid, resid/bnorm = 4.114875107e-11, 6.693786086e-12
+MLMG: Timers: Solve = 0.003955014 Iter = 0.002636154 Bottom = 0.000266098
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 30.88446678
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 30.88446678
+MLMG: Initial residual (resid0) = 30.88446678
+MLMG: Iteration   1 Fine resid/bnorm = 0.001277515823
+MLMG: Iteration   2 Fine resid/bnorm = 4.464749595e-06
+MLMG: Iteration   3 Fine resid/bnorm = 5.279218503e-08
+MLMG: Iteration   4 Fine resid/bnorm = 7.733137933e-10
+MLMG: Iteration   5 Fine resid/bnorm = 1.157639846e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.575308938e-10, 1.157639846e-11
+MLMG: Timers: Solve = 0.012980296 Iter = 0.012045744 Bottom = 0.002487914
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 27.43381552
+
+   - Advance()::VelocityAdvance  --> Time: 0.025259396
+ >> PeleLMeX::Advance() --> Time: 0.284782463
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.554578341e-05, divu: 0.004320187435, sprays: 1e+200
+ STEP [12] - Time: 2.138428377e-07, dt 3.138428377e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 2.290763854e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4795.437199
+MLMG: Initial residual (resid0) = 4795.437199
+MLMG: Iteration   1 Fine resid/bnorm = 0.002092695375
+MLMG: Iteration   2 Fine resid/bnorm = 8.606183422e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.679887677e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.450518396e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.345081314e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.847156348e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.207519147e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.790582236e-08, 1.207519147e-11
+MLMG: Timers: Solve = 0.017342684 Iter = 0.016632987 Bottom = 0.004107275
+   - oneSDC()::MACProjection()   --> Time: 0.019725156
+   - oneSDC()::ScalarAdvection() --> Time: 0.003451325
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8922362787
+MLMG: Initial residual (resid0) = 0.0001172892594
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.488630088e-16
+MLMG: Timers: Solve = 0.019151054 Iter = 0.016623608 Bottom = 0.000452796
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.004392829625
+MLMG: Initial residual (resid0) = 0.004392829625
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.734723476e-18, 3.948988748e-16
+MLMG: Timers: Solve = 0.003404659 Iter = 0.002264906 Bottom = 0.000264593
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.527914976e-10
+MLMG: Initial residual (resid0) = 1.527914976e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.691808415e-16
+MLMG: Timers: Solve = 0.00337967 Iter = 0.002246337 Bottom = 0.000264482
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038166635
+   - oneSDC()::ScalarReaction()  --> Time: 0.046512899
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013008267
+      Before SDC 2: max relative P mismatch is 2.323419669e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4869.242977
+MLMG: Initial residual (resid0) = 4869.242977
+MLMG: Iteration   1 Fine resid/bnorm = 0.1148820274
+MLMG: Iteration   2 Fine resid/bnorm = 0.01337172695
+MLMG: Iteration   3 Fine resid/bnorm = 0.0007021321834
+MLMG: Iteration   4 Fine resid/bnorm = 1.461255705e-05
+MLMG: Iteration   5 Fine resid/bnorm = 1.024703348e-06
+MLMG: Iteration   6 Fine resid/bnorm = 8.73147593e-08
+MLMG: Iteration   7 Fine resid/bnorm = 2.75903613e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.089890237e-10
+MLMG: Iteration   9 Fine resid/bnorm = 6.599817336e-12
+MLMG: Final Iter. 9 resid, resid/bnorm = 3.213611421e-08, 6.599817336e-12
+MLMG: Timers: Solve = 0.021905304 Iter = 0.021168621 Bottom = 0.005068306
+   - oneSDC()::MACProjection()   --> Time: 0.024144716
+   - oneSDC()::ScalarAdvection() --> Time: 0.003433051
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.892234224
+MLMG: Initial residual (resid0) = 8.808329255e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.488635819e-16
+MLMG: Timers: Solve = 0.019184585 Iter = 0.016642922 Bottom = 0.000450065
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8821733157
+MLMG: Initial residual (resid0) = 0.8821733157
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.775526888e-16
+MLMG: Timers: Solve = 0.003379662 Iter = 0.002254277 Bottom = 0.000262493
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.081809156e-07
+MLMG: Initial residual (resid0) = 1.081809156e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.670210146e-16
+MLMG: Timers: Solve = 0.003409271 Iter = 0.002261654 Bottom = 0.000259214
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038089403
+   - oneSDC()::ScalarReaction()  --> Time: 0.046536018
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.144288874
+MLMG: Initial residual (resid0) = 0.0001440808768
+MLMG: Final Iter. 1 resid, resid/bnorm = 4.976397072e-11, 8.099223806e-12
+MLMG: Timers: Solve = 0.003972585 Iter = 0.002650386 Bottom = 0.000268479
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 27.15120103
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 27.15120103
+MLMG: Initial residual (resid0) = 27.15120103
+MLMG: Iteration   1 Fine resid/bnorm = 0.001329095698
+MLMG: Iteration   2 Fine resid/bnorm = 4.83990646e-06
+MLMG: Iteration   3 Fine resid/bnorm = 5.899807678e-08
+MLMG: Iteration   4 Fine resid/bnorm = 8.739380646e-10
+MLMG: Iteration   5 Fine resid/bnorm = 1.321197734e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.587210529e-10, 1.321197734e-11
+MLMG: Timers: Solve = 0.013064616 Iter = 0.012146284 Bottom = 0.002517584
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 24.26822558
+
+   - Advance()::VelocityAdvance  --> Time: 0.025188147
+ >> PeleLMeX::Advance() --> Time: 0.284695415
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.555307272e-05, divu: 0.004322799307, sprays: 1e+200
+ STEP [13] - Time: 2.452271214e-07, dt 3.452271214e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 2.709400731e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4799.245289
+MLMG: Initial residual (resid0) = 4799.245289
+MLMG: Iteration   1 Fine resid/bnorm = 0.002082835112
+MLMG: Iteration   2 Fine resid/bnorm = 8.556473835e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.669938418e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.375514993e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.315320919e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.837481811e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.202255627e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.769919653e-08, 1.202255627e-11
+MLMG: Timers: Solve = 0.017315231 Iter = 0.016583339 Bottom = 0.00406826
+   - oneSDC()::MACProjection()   --> Time: 0.019630273
+   - oneSDC()::ScalarAdvection() --> Time: 0.003472522
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8923514799
+MLMG: Initial residual (resid0) = 0.0001290007337
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.48830881e-16
+MLMG: Timers: Solve = 0.019208308 Iter = 0.016672845 Bottom = 0.000452724
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.005232417432
+MLMG: Initial residual (resid0) = 0.005232417432
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.734723476e-18, 3.315338462e-16
+MLMG: Timers: Solve = 0.00338213 Iter = 0.002242701 Bottom = 0.000257431
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.452416846e-10
+MLMG: Initial residual (resid0) = 1.452416846e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.779750367e-16
+MLMG: Timers: Solve = 0.003370828 Iter = 0.002238635 Bottom = 0.000257229
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038142776
+   - oneSDC()::ScalarReaction()  --> Time: 0.046513004
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013015774
+      Before SDC 2: max relative P mismatch is 2.321893107e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4866.263167
+MLMG: Initial residual (resid0) = 4866.263167
+MLMG: Iteration   1 Fine resid/bnorm = 0.1043485535
+MLMG: Iteration   2 Fine resid/bnorm = 0.01214855106
+MLMG: Iteration   3 Fine resid/bnorm = 0.0006381899381
+MLMG: Iteration   4 Fine resid/bnorm = 1.328325498e-05
+MLMG: Iteration   5 Fine resid/bnorm = 9.313378199e-07
+MLMG: Iteration   6 Fine resid/bnorm = 7.938912219e-08
+MLMG: Iteration   7 Fine resid/bnorm = 2.509197297e-09
+MLMG: Iteration   8 Fine resid/bnorm = 9.909508446e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 4.822227595e-07, 9.909508446e-11
+MLMG: Timers: Solve = 0.019510729 Iter = 0.01879837 Bottom = 0.004504163
+   - oneSDC()::MACProjection()   --> Time: 0.02186483
+   - oneSDC()::ScalarAdvection() --> Time: 0.003479002
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8923494298
+MLMG: Initial residual (resid0) = 9.475776077e-06
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.488314527e-16
+MLMG: Timers: Solve = 0.019180231 Iter = 0.016639313 Bottom = 0.000451735
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8815581073
+MLMG: Initial residual (resid0) = 0.8815581073
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.778161696e-16
+MLMG: Timers: Solve = 0.003380803 Iter = 0.002247343 Bottom = 0.000256359
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.083594557e-07
+MLMG: Initial residual (resid0) = 1.083594557e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.664162868e-16
+MLMG: Timers: Solve = 0.003376106 Iter = 0.002243375 Bottom = 0.000258535
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038148067
+   - oneSDC()::ScalarReaction()  --> Time: 0.046541507
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.140982837
+MLMG: Initial residual (resid0) = 0.0001583751488
+MLMG: Final Iter. 1 resid, resid/bnorm = 6.017708554e-11, 9.799259684e-12
+MLMG: Timers: Solve = 0.004046066 Iter = 0.002690869 Bottom = 0.000280628
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 23.95975881
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 23.95975881
+MLMG: Initial residual (resid0) = 23.95975881
+MLMG: Iteration   1 Fine resid/bnorm = 0.001384625726
+MLMG: Iteration   2 Fine resid/bnorm = 5.297070074e-06
+MLMG: Iteration   3 Fine resid/bnorm = 6.652890022e-08
+MLMG: Iteration   4 Fine resid/bnorm = 9.956765658e-10
+MLMG: Iteration   5 Fine resid/bnorm = 1.518933837e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.639328838e-10, 1.518933837e-11
+MLMG: Timers: Solve = 0.013152689 Iter = 0.012159662 Bottom = 0.002525836
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 21.67645004
+
+   - Advance()::VelocityAdvance  --> Time: 0.025645765
+ >> PeleLMeX::Advance() --> Time: 0.283059235
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.556107394e-05, divu: 0.004325649825, sprays: 1e+200
+ STEP [14] - Time: 2.797498336e-07, dt 3.797498336e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 3.209748497e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4802.641338
+MLMG: Initial residual (resid0) = 4802.641338
+MLMG: Iteration   1 Fine resid/bnorm = 0.00207340646
+MLMG: Iteration   2 Fine resid/bnorm = 8.50909718e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.660127538e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.306627285e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.286060874e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.828383482e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.197240445e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.749916454e-08, 1.197240445e-11
+MLMG: Timers: Solve = 0.017476305 Iter = 0.016757667 Bottom = 0.004122171
+   - oneSDC()::MACProjection()   --> Time: 0.019895503
+   - oneSDC()::ScalarAdvection() --> Time: 0.003567074
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8924783955
+MLMG: Initial residual (resid0) = 0.0001418797223
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.487954958e-16
+MLMG: Timers: Solve = 0.019219339 Iter = 0.016670849 Bottom = 0.000453888
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.006195527443
+MLMG: Initial residual (resid0) = 0.006195527443
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.734723476e-18, 2.799960927e-16
+MLMG: Timers: Solve = 0.003412707 Iter = 0.002267238 Bottom = 0.00025728
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.652149697e-10
+MLMG: Initial residual (resid0) = 1.652149697e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.169878828e-26, 3.12918305e-16
+MLMG: Timers: Solve = 0.003455944 Iter = 0.002283195 Bottom = 0.000257608
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038448935
+   - oneSDC()::ScalarReaction()  --> Time: 0.046704727
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013668525
+      Before SDC 2: max relative P mismatch is 2.320387926e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4863.491217
+MLMG: Initial residual (resid0) = 4863.491217
+MLMG: Iteration   1 Fine resid/bnorm = 0.09476910121
+MLMG: Iteration   2 Fine resid/bnorm = 0.01103622382
+MLMG: Iteration   3 Fine resid/bnorm = 0.0005800421923
+MLMG: Iteration   4 Fine resid/bnorm = 1.207441144e-05
+MLMG: Iteration   5 Fine resid/bnorm = 8.464337739e-07
+MLMG: Iteration   6 Fine resid/bnorm = 7.218162351e-08
+MLMG: Iteration   7 Fine resid/bnorm = 2.281992668e-09
+MLMG: Iteration   8 Fine resid/bnorm = 9.009362137e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 4.381695362e-07, 9.009362137e-11
+MLMG: Timers: Solve = 0.020325438 Iter = 0.019475677 Bottom = 0.004691585
+   - oneSDC()::MACProjection()   --> Time: 0.022953177
+   - oneSDC()::ScalarAdvection() --> Time: 0.003604205
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8924763506
+MLMG: Initial residual (resid0) = 1.020910637e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.487960659e-16
+MLMG: Timers: Solve = 0.019275603 Iter = 0.016668384 Bottom = 0.000454234
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8809435424
+MLMG: Initial residual (resid0) = 0.8809435424
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.780797422e-16
+MLMG: Timers: Solve = 0.003500184 Iter = 0.002260167 Bottom = 0.000262018
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.08603391e-07
+MLMG: Initial residual (resid0) = 1.08603391e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.655932751e-16
+MLMG: Timers: Solve = 0.003398119 Iter = 0.002273444 Bottom = 0.000257824
+   - oneSDC()::ScalarDiffusion() --> Time: 0.074486243
+   - oneSDC()::ScalarReaction()  --> Time: 0.046532113
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.137360528
+MLMG: Initial residual (resid0) = 0.0001740750852
+MLMG: Final Iter. 2 resid, resid/bnorm = 8.881784197e-16, 1.447166768e-16
+MLMG: Timers: Solve = 0.00629633 Iter = 0.004951095 Bottom = 0.000516747
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 21.76389683
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 21.76389683
+MLMG: Initial residual (resid0) = 21.76389683
+MLMG: Iteration   1 Fine resid/bnorm = 0.001408494981
+MLMG: Iteration   2 Fine resid/bnorm = 5.708574488e-06
+MLMG: Iteration   3 Fine resid/bnorm = 7.377815038e-08
+MLMG: Iteration   4 Fine resid/bnorm = 1.114431688e-09
+MLMG: Iteration   5 Fine resid/bnorm = 1.714073312e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.730491471e-10, 1.714073312e-11
+MLMG: Timers: Solve = 0.013083921 Iter = 0.012138084 Bottom = 0.002531016
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 19.79201637
+
+   - Advance()::VelocityAdvance  --> Time: 0.027845008
+ >> PeleLMeX::Advance() --> Time: 0.324269439
+ Writing temporals.
+
+ ====================   NEW TIME STEP   ==================== 
+ Regridding...
+ Est. time step - Conv: 1.556985485e-05, divu: 0.004328763322, sprays: 1e+200
+ STEP [15] - Time: 3.177248169e-07, dt 4.177248169e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 3.808337953e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4805.689813
+MLMG: Initial residual (resid0) = 4805.689813
+MLMG: Iteration   1 Fine resid/bnorm = 0.002064236079
+MLMG: Iteration   2 Fine resid/bnorm = 8.463352196e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.650370667e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.242712238e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.257201293e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.819746557e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.192416756e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.730385055e-08, 1.192416756e-11
+MLMG: Timers: Solve = 0.017346542 Iter = 0.016619654 Bottom = 0.004079576
+   - oneSDC()::MACProjection()   --> Time: 0.019703687
+   - oneSDC()::ScalarAdvection() --> Time: 0.003539296
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8926181938
+MLMG: Initial residual (resid0) = 0.0001560422162
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.487565305e-16
+MLMG: Timers: Solve = 0.019151389 Iter = 0.016625762 Bottom = 0.000448122
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.007298398076
+MLMG: Initial residual (resid0) = 0.007298398076
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.602085214e-18, 3.565282664e-16
+MLMG: Timers: Solve = 0.003428784 Iter = 0.002292902 Bottom = 0.000264292
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.736037336e-10
+MLMG: Initial residual (resid0) = 1.736037336e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.488988377e-16
+MLMG: Timers: Solve = 0.003370688 Iter = 0.00224047 Bottom = 0.000256501
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038073859
+   - oneSDC()::ScalarReaction()  --> Time: 0.046513473
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012963286
+      Before SDC 2: max relative P mismatch is 2.318908244e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4860.934679
+MLMG: Initial residual (resid0) = 4860.934679
+MLMG: Iteration   1 Fine resid/bnorm = 0.08605751809
+MLMG: Iteration   2 Fine resid/bnorm = 0.01002473094
+MLMG: Iteration   3 Fine resid/bnorm = 0.0005271652547
+MLMG: Iteration   4 Fine resid/bnorm = 1.097513894e-05
+MLMG: Iteration   5 Fine resid/bnorm = 7.692266176e-07
+MLMG: Iteration   6 Fine resid/bnorm = 6.562735782e-08
+MLMG: Iteration   7 Fine resid/bnorm = 2.075376118e-09
+MLMG: Iteration   8 Fine resid/bnorm = 8.191509404e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 3.981839214e-07, 8.191509404e-11
+MLMG: Timers: Solve = 0.019843071 Iter = 0.019101956 Bottom = 0.004801391
+   - oneSDC()::MACProjection()   --> Time: 0.022188021
+   - oneSDC()::ScalarAdvection() --> Time: 0.003544844
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8926161549
+MLMG: Initial residual (resid0) = 1.101469741e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.487570987e-16
+MLMG: Timers: Solve = 0.019191303 Iter = 0.01665185 Bottom = 0.00045529
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8803296202
+MLMG: Initial residual (resid0) = 0.8803296202
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.783434065e-16
+MLMG: Timers: Solve = 0.003380816 Iter = 0.002246606 Bottom = 0.000257423
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.08973993e-07
+MLMG: Initial residual (resid0) = 1.08973993e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.64697796e-23, 2.428999696e-16
+MLMG: Timers: Solve = 0.003402919 Iter = 0.002260283 Bottom = 0.000261529
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038068862
+   - oneSDC()::ScalarReaction()  --> Time: 0.046525115
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.13339169
+MLMG: Initial residual (resid0) = 0.0001913164147
+MLMG: Final Iter. 2 resid, resid/bnorm = 1.776356839e-15, 2.896206421e-16
+MLMG: Timers: Solve = 0.006348488 Iter = 0.005037474 Bottom = 0.000527463
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 19.90155282
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 19.90155282
+MLMG: Initial residual (resid0) = 19.90155282
+MLMG: Iteration   1 Fine resid/bnorm = 0.001430485369
+MLMG: Iteration   2 Fine resid/bnorm = 6.192790861e-06
+MLMG: Iteration   3 Fine resid/bnorm = 8.220744114e-08
+MLMG: Iteration   4 Fine resid/bnorm = 1.251925386e-09
+MLMG: Iteration   5 Fine resid/bnorm = 1.939612466e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 3.860129993e-10, 1.939612466e-11
+MLMG: Timers: Solve = 0.012976986 Iter = 0.012029194 Bottom = 0.002491637
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 18.09059245
+
+   - Advance()::VelocityAdvance  --> Time: 0.027694959
+ >> PeleLMeX::Advance() --> Time: 0.285119284
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.557949126e-05, divu: 0.004332166657, sprays: 1e+200
+ STEP [16] - Time: 3.594972986e-07, dt 4.594972986e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 4.5250914e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4808.442401
+MLMG: Initial residual (resid0) = 4808.442401
+MLMG: Iteration   1 Fine resid/bnorm = 0.002055174655
+MLMG: Iteration   2 Fine resid/bnorm = 8.418629414e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.64058402e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.182808549e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.228606732e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.811472164e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.187736097e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.711160611e-08, 1.187736097e-11
+MLMG: Timers: Solve = 0.017289764 Iter = 0.016571404 Bottom = 0.004057436
+   - oneSDC()::MACProjection()   --> Time: 0.019670031
+   - oneSDC()::ScalarAdvection() --> Time: 0.003517896
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8927721591
+MLMG: Initial residual (resid0) = 0.0001716156463
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.487136305e-16
+MLMG: Timers: Solve = 0.01919095 Iter = 0.016655736 Bottom = 0.00045552
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.008559267234
+MLMG: Initial residual (resid0) = 0.008559267234
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.469446952e-18, 4.053439222e-16
+MLMG: Timers: Solve = 0.003372085 Iter = 0.002239194 Bottom = 0.000256272
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.551888269e-10
+MLMG: Initial residual (resid0) = 1.551888269e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.584939414e-26, 1.665673661e-16
+MLMG: Timers: Solve = 0.003385598 Iter = 0.002248916 Bottom = 0.000257156
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038091457
+   - oneSDC()::ScalarReaction()  --> Time: 0.046503032
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013039916
+      Before SDC 2: max relative P mismatch is 2.317459036e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4858.59352
+MLMG: Initial residual (resid0) = 4858.59352
+MLMG: Iteration   1 Fine resid/bnorm = 0.07813553066
+MLMG: Iteration   2 Fine resid/bnorm = 0.009104976583
+MLMG: Iteration   3 Fine resid/bnorm = 0.0004790834948
+MLMG: Iteration   4 Fine resid/bnorm = 9.975549188e-06
+MLMG: Iteration   5 Fine resid/bnorm = 6.990219266e-07
+MLMG: Iteration   6 Fine resid/bnorm = 5.966737534e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.887488627e-09
+MLMG: Iteration   8 Fine resid/bnorm = 7.447544328e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 3.618459061e-07, 7.447544328e-11
+MLMG: Timers: Solve = 0.019563118 Iter = 0.018847509 Bottom = 0.004511915
+   - oneSDC()::MACProjection()   --> Time: 0.021917461
+   - oneSDC()::ScalarAdvection() --> Time: 0.003405021
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8927701271
+MLMG: Initial residual (resid0) = 1.189951875e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.487141966e-16
+MLMG: Timers: Solve = 0.019172564 Iter = 0.01665014 Bottom = 0.000458399
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8797163398
+MLMG: Initial residual (resid0) = 0.8797163398
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.786071627e-16
+MLMG: Timers: Solve = 0.003388324 Iter = 0.002251525 Bottom = 0.000257997
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.094686168e-07
+MLMG: Initial residual (resid0) = 1.094686168e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.62703673e-16
+MLMG: Timers: Solve = 0.003396789 Iter = 0.002258067 Bottom = 0.000260994
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038125553
+   - oneSDC()::ScalarReaction()  --> Time: 0.046518601
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.129042928
+MLMG: Initial residual (resid0) = 0.0002102474275
+MLMG: Final Iter. 2 resid, resid/bnorm = 8.881784197e-16, 1.449130688e-16
+MLMG: Timers: Solve = 0.006260668 Iter = 0.004950411 Bottom = 0.000516022
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 18.22431982
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 18.22431982
+MLMG: Initial residual (resid0) = 18.22431982
+MLMG: Iteration   1 Fine resid/bnorm = 0.001458180985
+MLMG: Iteration   2 Fine resid/bnorm = 6.794730052e-06
+MLMG: Iteration   3 Fine resid/bnorm = 9.243375198e-08
+MLMG: Iteration   4 Fine resid/bnorm = 1.417619389e-09
+MLMG: Iteration   5 Fine resid/bnorm = 2.271035965e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 4.138808575e-10, 2.271035965e-11
+MLMG: Timers: Solve = 0.013132513 Iter = 0.012221523 Bottom = 0.002590447
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 16.54960877
+
+   - Advance()::VelocityAdvance  --> Time: 0.027509774
+ >> PeleLMeX::Advance() --> Time: 0.284548637
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.559006751e-05, divu: 0.004335889489, sprays: 1e+200
+ STEP [17] - Time: 4.054470285e-07, dt 5.054470285e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 5.384042729e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4810.941036
+MLMG: Initial residual (resid0) = 4810.941036
+MLMG: Iteration   1 Fine resid/bnorm = 0.002046057276
+MLMG: Iteration   2 Fine resid/bnorm = 8.375004976e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.630820099e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.126660024e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.200043136e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.803745382e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.18328039e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.692692184e-08, 1.18328039e-11
+MLMG: Timers: Solve = 0.017311844 Iter = 0.016567827 Bottom = 0.00405018
+   - oneSDC()::MACProjection()   --> Time: 0.019720824
+   - oneSDC()::ScalarAdvection() --> Time: 0.003597349
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8929417035
+MLMG: Initial residual (resid0) = 0.0001887399933
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.486664068e-16
+MLMG: Timers: Solve = 0.019165147 Iter = 0.016623059 Bottom = 0.000454376
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.009998607659
+MLMG: Initial residual (resid0) = 0.009998607659
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.469446952e-18, 3.469930084e-16
+MLMG: Timers: Solve = 0.003377678 Iter = 0.002247026 Bottom = 0.000258181
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.574286853e-10
+MLMG: Initial residual (resid0) = 1.574286853e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.169878828e-26, 3.283949694e-16
+MLMG: Timers: Solve = 0.003377784 Iter = 0.002245585 Bottom = 0.000257897
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037997222
+   - oneSDC()::ScalarReaction()  --> Time: 0.046505459
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012992703
+      Before SDC 2: max relative P mismatch is 2.316046317e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4856.462669
+MLMG: Initial residual (resid0) = 4856.462669
+MLMG: Iteration   1 Fine resid/bnorm = 0.07093180522
+MLMG: Iteration   2 Fine resid/bnorm = 0.008268682457
+MLMG: Iteration   3 Fine resid/bnorm = 0.0004353644329
+MLMG: Iteration   4 Fine resid/bnorm = 9.066653389e-06
+MLMG: Iteration   5 Fine resid/bnorm = 6.351884383e-07
+MLMG: Iteration   6 Fine resid/bnorm = 5.424810607e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.716642982e-09
+MLMG: Iteration   8 Fine resid/bnorm = 6.770921678e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 3.288272836e-07, 6.770921678e-11
+MLMG: Timers: Solve = 0.019567221 Iter = 0.018806678 Bottom = 0.004509892
+   - oneSDC()::MACProjection()   --> Time: 0.021895263
+   - oneSDC()::ScalarAdvection() --> Time: 0.003526405
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8929396793
+MLMG: Initial residual (resid0) = 1.287118854e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.486669705e-16
+MLMG: Timers: Solve = 0.019162717 Iter = 0.016643249 Bottom = 0.000451238
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8791037003
+MLMG: Initial residual (resid0) = 0.8791037003
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.788710106e-16
+MLMG: Timers: Solve = 0.003378887 Iter = 0.00224694 Bottom = 0.000257131
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.100021544e-07
+MLMG: Initial residual (resid0) = 1.100021544e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.609444708e-16
+MLMG: Timers: Solve = 0.003393522 Iter = 0.00226429 Bottom = 0.000262538
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038104421
+   - oneSDC()::ScalarReaction()  --> Time: 0.046515234
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.124277466
+MLMG: Initial residual (resid0) = 0.0002310300256
+MLMG: Final Iter. 2 resid, resid/bnorm = 1.776356839e-15, 2.90051659e-16
+MLMG: Timers: Solve = 0.00628147 Iter = 0.004965385 Bottom = 0.000519413
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 16.70985753
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 16.70985753
+MLMG: Initial residual (resid0) = 16.70985753
+MLMG: Iteration   1 Fine resid/bnorm = 0.001512339786
+MLMG: Iteration   2 Fine resid/bnorm = 7.53559757e-06
+MLMG: Iteration   3 Fine resid/bnorm = 1.047840946e-07
+MLMG: Iteration   4 Fine resid/bnorm = 1.616671891e-09
+MLMG: Iteration   5 Fine resid/bnorm = 2.747259178e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 4.590630948e-10, 2.747259178e-11
+MLMG: Timers: Solve = 0.013118827 Iter = 0.012171344 Bottom = 0.002505609
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 15.14861346
+
+   - Advance()::VelocityAdvance  --> Time: 0.027665102
+ >> PeleLMeX::Advance() --> Time: 0.284913676
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.560167708e-05, divu: 0.004339964581, sprays: 1e+200
+ STEP [18] - Time: 4.559917313e-07, dt 5.559917313e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 6.414181448e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4813.220099
+MLMG: Initial residual (resid0) = 4813.220099
+MLMG: Iteration   1 Fine resid/bnorm = 0.002036765524
+MLMG: Iteration   2 Fine resid/bnorm = 8.331999784e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.620998832e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.073569257e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.171339755e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.796493511e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.179012402e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.674846193e-08, 1.179012402e-11
+MLMG: Timers: Solve = 0.017321293 Iter = 0.016598916 Bottom = 0.00407008
+   - oneSDC()::MACProjection()   --> Time: 0.019658466
+   - oneSDC()::ScalarAdvection() --> Time: 0.003511495
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.893128379
+MLMG: Initial residual (resid0) = 0.0002075690024
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.486144323e-16
+MLMG: Timers: Solve = 0.019176331 Iter = 0.016642372 Bottom = 0.000455354
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.01163938803
+MLMG: Initial residual (resid0) = 0.01163938803
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.469446952e-18, 2.980781244e-16
+MLMG: Timers: Solve = 0.003381468 Iter = 0.002253022 Bottom = 0.000256842
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.623323619e-10
+MLMG: Initial residual (resid0) = 1.623323619e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.169878828e-26, 3.184749342e-16
+MLMG: Timers: Solve = 0.003413685 Iter = 0.00225815 Bottom = 0.000257021
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038111769
+   - oneSDC()::ScalarReaction()  --> Time: 0.046515059
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013098933
+      Before SDC 2: max relative P mismatch is 2.314677357e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4854.533786
+MLMG: Initial residual (resid0) = 4854.533786
+MLMG: Iteration   1 Fine resid/bnorm = 0.06438156672
+MLMG: Iteration   2 Fine resid/bnorm = 0.007508324683
+MLMG: Iteration   3 Fine resid/bnorm = 0.0003956146762
+MLMG: Iteration   4 Fine resid/bnorm = 8.240273051e-06
+MLMG: Iteration   5 Fine resid/bnorm = 5.771518013e-07
+MLMG: Iteration   6 Fine resid/bnorm = 4.932079241e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.561302993e-09
+MLMG: Iteration   8 Fine resid/bnorm = 6.156309747e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 2.988601366e-07, 6.156309747e-11
+MLMG: Timers: Solve = 0.019506474 Iter = 0.018789327 Bottom = 0.004498268
+   - oneSDC()::MACProjection()   --> Time: 0.021847904
+   - oneSDC()::ScalarAdvection() --> Time: 0.003479645
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8931263641
+MLMG: Initial residual (resid0) = 1.393802371e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.486149932e-16
+MLMG: Timers: Solve = 0.019165397 Iter = 0.016627772 Bottom = 0.000452511
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8784917007
+MLMG: Initial residual (resid0) = 0.8784917007
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.791349504e-16
+MLMG: Timers: Solve = 0.003408652 Iter = 0.002271794 Bottom = 0.000264749
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.10736791e-07
+MLMG: Initial residual (resid0) = 1.10736791e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.585499369e-16
+MLMG: Timers: Solve = 0.003369556 Iter = 0.002238172 Bottom = 0.000255685
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038122374
+   - oneSDC()::ScalarReaction()  --> Time: 0.046528835
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.119054875
+MLMG: Initial residual (resid0) = 0.0002538408359
+MLMG: Final Iter. 2 resid, resid/bnorm = 1.776356839e-15, 2.902992171e-16
+MLMG: Timers: Solve = 0.00629883 Iter = 0.00497558 Bottom = 0.000519839
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 15.33797274
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 15.33797274
+MLMG: Initial residual (resid0) = 15.33797274
+MLMG: Iteration   1 Fine resid/bnorm = 0.001591706978
+MLMG: Iteration   2 Fine resid/bnorm = 8.441016877e-06
+MLMG: Iteration   3 Fine resid/bnorm = 1.196528074e-07
+MLMG: Iteration   4 Fine resid/bnorm = 1.855302741e-09
+MLMG: Iteration   5 Fine resid/bnorm = 3.332254388e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 5.111002697e-10, 3.332254388e-11
+MLMG: Timers: Solve = 0.012962221 Iter = 0.012046427 Bottom = 0.002506365
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 13.8693844
+
+   - Advance()::VelocityAdvance  --> Time: 0.027607412
+ >> PeleLMeX::Advance() --> Time: 0.284777085
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.561442342e-05, divu: 0.004344428142, sprays: 1e+200
+ STEP [19] - Time: 5.115909045e-07, dt 6.115909045e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 7.650487878e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4815.307745
+MLMG: Initial residual (resid0) = 4815.307745
+MLMG: Iteration   1 Fine resid/bnorm = 0.00202722802
+MLMG: Iteration   2 Fine resid/bnorm = 8.289275732e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.610887039e-06
+MLMG: Iteration   4 Fine resid/bnorm = 9.022292469e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.14240216e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.789345126e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.174756198e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.656812618e-08, 1.174756198e-11
+MLMG: Timers: Solve = 0.017276463 Iter = 0.016549245 Bottom = 0.004042706
+   - oneSDC()::MACProjection()   --> Time: 0.01962626
+   - oneSDC()::ScalarAdvection() --> Time: 0.003559217
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8933338919
+MLMG: Initial residual (resid0) = 0.0002282715103
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.485572382e-16
+MLMG: Timers: Solve = 0.019198772 Iter = 0.016643367 Bottom = 0.000448756
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.01350736389
+MLMG: Initial residual (resid0) = 0.01350736389
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.204170428e-18, 3.852839436e-16
+MLMG: Timers: Solve = 0.003424304 Iter = 0.002272633 Bottom = 0.000258852
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.57164481e-10
+MLMG: Initial residual (resid0) = 1.57164481e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.877409121e-26, 2.467102678e-16
+MLMG: Timers: Solve = 0.003368474 Iter = 0.00224258 Bottom = 0.000257257
+   - oneSDC()::ScalarDiffusion() --> Time: 0.03815647
+   - oneSDC()::ScalarReaction()  --> Time: 0.046519469
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.012970663
+      Before SDC 2: max relative P mismatch is 2.313360944e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4852.796197
+MLMG: Initial residual (resid0) = 4852.796197
+MLMG: Iteration   1 Fine resid/bnorm = 0.05842602627
+MLMG: Iteration   2 Fine resid/bnorm = 0.006817065538
+MLMG: Iteration   3 Fine resid/bnorm = 0.0003594762871
+MLMG: Iteration   4 Fine resid/bnorm = 7.488964157e-06
+MLMG: Iteration   5 Fine resid/bnorm = 5.243892476e-07
+MLMG: Iteration   6 Fine resid/bnorm = 4.484103092e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.420066635e-09
+MLMG: Iteration   8 Fine resid/bnorm = 5.595998142e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 2.71562385e-07, 5.595998142e-11
+MLMG: Timers: Solve = 0.025817693 Iter = 0.025080995 Bottom = 0.00457775
+   - oneSDC()::MACProjection()   --> Time: 0.028217138
+   - oneSDC()::ScalarAdvection() --> Time: 0.003674137
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8933318879
+MLMG: Initial residual (resid0) = 1.510908486e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.485577958e-16
+MLMG: Timers: Solve = 0.019301541 Iter = 0.016637439 Bottom = 0.000449834
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8778803402
+MLMG: Initial residual (resid0) = 0.8778803402
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.79398982e-16
+MLMG: Timers: Solve = 0.003411723 Iter = 0.002251509 Bottom = 0.000258629
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.116604214e-07
+MLMG: Initial residual (resid0) = 1.116604214e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.555840905e-16
+MLMG: Timers: Solve = 0.003385818 Iter = 0.002253035 Bottom = 0.000257407
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038431236
+   - oneSDC()::ScalarReaction()  --> Time: 0.046544239
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.113330797
+MLMG: Initial residual (resid0) = 0.0002788723824
+MLMG: Final Iter. 2 resid, resid/bnorm = 1.776356839e-15, 2.905710321e-16
+MLMG: Timers: Solve = 0.006332824 Iter = 0.00496233 Bottom = 0.000517452
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 14.09062386
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 14.09062386
+MLMG: Initial residual (resid0) = 14.09062386
+MLMG: Iteration   1 Fine resid/bnorm = 0.001678692145
+MLMG: Iteration   2 Fine resid/bnorm = 9.541852574e-06
+MLMG: Iteration   3 Fine resid/bnorm = 1.375152008e-07
+MLMG: Iteration   4 Fine resid/bnorm = 2.141010129e-09
+MLMG: Iteration   5 Fine resid/bnorm = 4.047479529e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 5.703151163e-10, 4.047479529e-11
+MLMG: Timers: Solve = 0.013112991 Iter = 0.012167656 Bottom = 0.002510205
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 12.69580881
+
+   - Advance()::VelocityAdvance  --> Time: 0.028026934
+ >> PeleLMeX::Advance() --> Time: 0.292267645
+ Writing temporals.
+
+ Writing plotfile: plt00020
+
+ ====================   NEW TIME STEP   ==================== 
+ Regridding...
+ Update chemistry typical values 
+ ==============================================================================
+ Typical values: 
+	Velocity: 1.737228382 4.998905543 
+	Density:  1.223065109
+	Temp:     298.0138242
+	H:        -93867.64041
+	Y_N2:     0.7296347689
+	Y_O:      1.691641124e-89
+	Y_H2:     7.084100885e-88
+	Y_H:      7.481573026e-85
+	Y_OH:     1.275358712e-86
+	Y_H2O:    2.179180802e-88
+	Y_O2:     0.2205380411
+	Y_HO2:    4.577300276e-66
+	Y_H2O2:   2.127643091e-78
+	Y_CH:     7.63230474e-169
+	Y_HCO:    3.212132803e-154
+	Y_CH2:    7.418084993e-87
+	Y_CO2:    1.885376682e-88
+	Y_CO:     2.074966969e-86
+	Y_CH2O:   3.351192858e-89
+	Y_CH2GSG: 2.367205601e-86
+	Y_CH3:    1.479922023e-80
+	Y_CH3O:   7.597194742e-114
+	Y_CH4:    1.423094471e-87
+	Y_CH3OH:  7.23849046e-119
+	Y_C2H6:   9.958838157e-142
+	Y_C2H5:   1.803725377e-63
+	Y_CH2CO:  1.549411354e-156
+	Y_HOCHO:  6.73039702e-239
+	Y_CH3O2:  3.198468623e-78
+	Y_CH3O2H: 1.084016225e-90
+	Y_C2H2:   1.130787299e-162
+	Y_HCCO:   0
+	Y_C2H3:   6.41186784e-153
+	Y_CH2CHO: 1.677206708e-155
+	Y_C3H6:   3.138122891e-66
+	Y_C2H4:   1.798759143e-66
+	Y_C2H5O:  3.687034429e-126
+	Y_CH3CO:  1.868602318e-171
+	Y_C2H5O2: 1.428285918e-62
+	Y_C3H2:   0
+	Y_C3H3:   1.145764289e-250
+	Y_C3H4XA: 3.399996857e-165
+	Y_C3H5XA: 8.799859892e-127
+	Y_NXC3H7: 3.679252015e-64
+	Y_NXC3H7O2:1.337366997e-62
+	Y_C4H6:   4.75172302e-170
+	Y_C4H7:   4.313314197e-167
+	Y_C4H8X1: 3.99956265e-84
+	Y_PXC4H9: 4.879036458e-64
+	Y_PXC4H9O2:1.587853147e-62
+	Y_C5H9:   4.118734647e-166
+	Y_C5H10X1:1.029852847e-82
+	Y_C5H11X1:2.107553277e-62
+	Y_C6H12X1:8.947503978e-94
+	Y_C7H15X2:6.205865361e-78
+	Y_NXC7H16:0.04983824431
+ ==============================================================================
+ Est. time step - Conv: 1.562842093e-05, divu: 0.004349320206, sprays: 1e+200
+ STEP [20] - Time: 5.727499949e-07, dt 6.727499949e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 9.135170108e-09
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4817.22766
+MLMG: Initial residual (resid0) = 4817.22766
+MLMG: Iteration   1 Fine resid/bnorm = 0.002017341853
+MLMG: Iteration   2 Fine resid/bnorm = 8.246768807e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.600397447e-06
+MLMG: Iteration   4 Fine resid/bnorm = 8.972342994e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.113057295e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.782242403e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.170489568e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.638514722e-08, 1.170489568e-11
+MLMG: Timers: Solve = 0.017392436 Iter = 0.016672831 Bottom = 0.004158241
+   - oneSDC()::MACProjection()   --> Time: 0.019878251
+   - oneSDC()::ScalarAdvection() --> Time: 0.00358318
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8935601177
+MLMG: Initial residual (resid0) = 0.0002510328954
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.4849431e-16
+MLMG: Timers: Solve = 0.019208549 Iter = 0.016656111 Bottom = 0.000459237
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.01563139976
+MLMG: Initial residual (resid0) = 0.01563139976
+MLMG: Final Iter. 1 resid, resid/bnorm = 6.938893904e-18, 4.439073922e-16
+MLMG: Timers: Solve = 0.003389186 Iter = 0.002247224 Bottom = 0.000257131
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 2.027637247e-10
+MLMG: Initial residual (resid0) = 2.027637247e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.877409121e-26, 1.912279491e-16
+MLMG: Timers: Solve = 0.003395627 Iter = 0.002259184 Bottom = 0.000264819
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038225226
+   - oneSDC()::ScalarReaction()  --> Time: 0.046528407
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013097055
+      Before SDC 2: max relative P mismatch is 2.312107691e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4851.23829
+MLMG: Initial residual (resid0) = 4851.23829
+MLMG: Iteration   1 Fine resid/bnorm = 0.05301150335
+MLMG: Iteration   2 Fine resid/bnorm = 0.006188671719
+MLMG: Iteration   3 Fine resid/bnorm = 0.0003266233532
+MLMG: Iteration   4 Fine resid/bnorm = 6.805951025e-06
+MLMG: Iteration   5 Fine resid/bnorm = 4.764249514e-07
+MLMG: Iteration   6 Fine resid/bnorm = 4.076842387e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.291661705e-09
+MLMG: Iteration   8 Fine resid/bnorm = 5.087625986e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 2.468128599e-07, 5.087625986e-11
+MLMG: Timers: Solve = 0.019593132 Iter = 0.018873344 Bottom = 0.004509836
+   - oneSDC()::MACProjection()   --> Time: 0.021948274
+   - oneSDC()::ScalarAdvection() --> Time: 0.00344716
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8935581264
+MLMG: Initial residual (resid0) = 1.639425059e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.484948638e-16
+MLMG: Timers: Solve = 0.019154004 Iter = 0.016621556 Bottom = 0.000458511
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8772696179
+MLMG: Initial residual (resid0) = 0.8772696179
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.330669074e-16, 3.796631054e-16
+MLMG: Timers: Solve = 0.003367795 Iter = 0.00223726 Bottom = 0.000259424
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.128825811e-07
+MLMG: Initial residual (resid0) = 1.128825811e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.517342447e-16
+MLMG: Timers: Solve = 0.00341068 Iter = 0.002245552 Bottom = 0.000255038
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038068299
+   - oneSDC()::ScalarReaction()  --> Time: 0.046527708
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.107056521
+MLMG: Initial residual (resid0) = 0.0003063343092
+MLMG: Final Iter. 2 resid, resid/bnorm = 8.881784197e-16, 1.454347797e-16
+MLMG: Timers: Solve = 0.006359018 Iter = 0.005033323 Bottom = 0.000524372
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 12.95015472
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 12.95015472
+MLMG: Initial residual (resid0) = 12.95015472
+MLMG: Iteration   1 Fine resid/bnorm = 0.00177543186
+MLMG: Iteration   2 Fine resid/bnorm = 1.087703592e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.589706929e-07
+MLMG: Iteration   4 Fine resid/bnorm = 2.50158931e-09
+MLMG: Iteration   5 Fine resid/bnorm = 4.912779875e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 6.362125948e-10, 4.912779875e-11
+MLMG: Timers: Solve = 0.013072019 Iter = 0.012129578 Bottom = 0.002525237
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 11.61341451
+
+   - Advance()::VelocityAdvance  --> Time: 0.027657898
+ >> PeleLMeX::Advance() --> Time: 0.287262847
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.564379601e-05, divu: 0.004354685062, sprays: 1e+200
+ STEP [21] - Time: 6.400249944e-07, dt 7.400249944e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.091916551e-08
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4818.999643
+MLMG: Initial residual (resid0) = 4818.999643
+MLMG: Iteration   1 Fine resid/bnorm = 0.002007023905
+MLMG: Iteration   2 Fine resid/bnorm = 8.203120395e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.58944312e-06
+MLMG: Iteration   4 Fine resid/bnorm = 8.923228676e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.083172004e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.775134415e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.166171901e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.619781973e-08, 1.166171901e-11
+MLMG: Timers: Solve = 0.017471859 Iter = 0.016756178 Bottom = 0.00418533
+   - oneSDC()::MACProjection()   --> Time: 0.019844312
+   - oneSDC()::ScalarAdvection() --> Time: 0.00354612
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8938091175
+MLMG: Initial residual (resid0) = 0.0002760566593
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.484250838e-16
+MLMG: Timers: Solve = 0.019141639 Iter = 0.016608195 Bottom = 0.000447814
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.01804382859
+MLMG: Initial residual (resid0) = 0.01804382859
+MLMG: Final Iter. 1 resid, resid/bnorm = 6.938893904e-18, 3.845577379e-16
+MLMG: Timers: Solve = 0.003410002 Iter = 0.002275846 Bottom = 0.000267615
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 2.231783467e-10
+MLMG: Initial residual (resid0) = 2.231783467e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.169878828e-26, 2.316478684e-16
+MLMG: Timers: Solve = 0.003376121 Iter = 0.002243561 Bottom = 0.000256528
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038098193
+   - oneSDC()::ScalarReaction()  --> Time: 0.046525899
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013044737
+      Before SDC 2: max relative P mismatch is 2.310930422e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4849.847773
+MLMG: Initial residual (resid0) = 4849.847773
+MLMG: Iteration   1 Fine resid/bnorm = 0.04808912031
+MLMG: Iteration   2 Fine resid/bnorm = 0.005617468415
+MLMG: Iteration   3 Fine resid/bnorm = 0.0002967591686
+MLMG: Iteration   4 Fine resid/bnorm = 6.185065278e-06
+MLMG: Iteration   5 Fine resid/bnorm = 4.328256552e-07
+MLMG: Iteration   6 Fine resid/bnorm = 3.706619261e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.174928826e-09
+MLMG: Iteration   8 Fine resid/bnorm = 4.625330523e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 2.243214894e-07, 4.625330523e-11
+MLMG: Timers: Solve = 0.019542293 Iter = 0.018807264 Bottom = 0.004505579
+   - oneSDC()::MACProjection()   --> Time: 0.021882715
+   - oneSDC()::ScalarAdvection() --> Time: 0.003529188
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8938071412
+MLMG: Initial residual (resid0) = 1.78042743e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.484256331e-16
+MLMG: Timers: Solve = 0.019116498 Iter = 0.016593935 Bottom = 0.000449723
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8766595329
+MLMG: Initial residual (resid0) = 0.8766595329
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.532848804e-16
+MLMG: Timers: Solve = 0.003409865 Iter = 0.002248869 Bottom = 0.000258101
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.142785228e-07
+MLMG: Initial residual (resid0) = 1.142785228e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.474377199e-16
+MLMG: Timers: Solve = 0.003384443 Iter = 0.002243789 Bottom = 0.000257602
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038009661
+   - oneSDC()::ScalarReaction()  --> Time: 0.046535579
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.100178669
+MLMG: Initial residual (resid0) = 0.0003364546609
+MLMG: Final Iter. 2 resid, resid/bnorm = 1.776356839e-15, 2.911975101e-16
+MLMG: Timers: Solve = 0.006365115 Iter = 0.005002774 Bottom = 0.000512719
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 11.95465971
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 11.95465971
+MLMG: Initial residual (resid0) = 11.95465971
+MLMG: Iteration   1 Fine resid/bnorm = 0.001876211531
+MLMG: Iteration   2 Fine resid/bnorm = 1.243918599e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.839376408e-07
+MLMG: Iteration   4 Fine resid/bnorm = 3.013105598e-09
+MLMG: Iteration   5 Fine resid/bnorm = 5.939530412e-11
+MLMG: Final Iter. 5 resid, resid/bnorm = 7.100506494e-10, 5.939530412e-11
+MLMG: Timers: Solve = 0.012972968 Iter = 0.012051474 Bottom = 0.00248951
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 10.82936127
+
+   - Advance()::VelocityAdvance  --> Time: 0.027677378
+ >> PeleLMeX::Advance() --> Time: 0.285001809
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.566068836e-05, divu: 0.004360571728, sprays: 1e+200
+ STEP [22] - Time: 7.140274939e-07, dt 8.140274939e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 1.306395605e-08
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4820.640406
+MLMG: Initial residual (resid0) = 4820.640406
+MLMG: Iteration   1 Fine resid/bnorm = 0.001996150596
+MLMG: Iteration   2 Fine resid/bnorm = 8.157932213e-05
+MLMG: Iteration   3 Fine resid/bnorm = 1.57856165e-06
+MLMG: Iteration   4 Fine resid/bnorm = 8.874553473e-08
+MLMG: Iteration   5 Fine resid/bnorm = 3.052560777e-09
+MLMG: Iteration   6 Fine resid/bnorm = 1.767967622e-10
+MLMG: Iteration   7 Fine resid/bnorm = 1.161779371e-11
+MLMG: Final Iter. 7 resid, resid/bnorm = 5.600520581e-08, 1.161779371e-11
+MLMG: Timers: Solve = 0.017439014 Iter = 0.016719729 Bottom = 0.00415924
+   - oneSDC()::MACProjection()   --> Time: 0.019799413
+   - oneSDC()::ScalarAdvection() --> Time: 0.003538493
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8940831566
+MLMG: Initial residual (resid0) = 0.0003035661521
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.483489408e-16
+MLMG: Timers: Solve = 0.019142258 Iter = 0.016602424 Bottom = 0.00046366
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.02078084878
+MLMG: Initial residual (resid0) = 0.02078084878
+MLMG: Final Iter. 1 resid, resid/bnorm = 6.938893904e-18, 3.339081082e-16
+MLMG: Timers: Solve = 0.003394067 Iter = 0.002251449 Bottom = 0.000262885
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 2.262840031e-10
+MLMG: Initial residual (resid0) = 2.262840031e-10
+MLMG: Final Iter. 1 resid, resid/bnorm = 5.169878828e-26, 2.284685951e-16
+MLMG: Timers: Solve = 0.003377283 Iter = 0.002242849 Bottom = 0.000257797
+   - oneSDC()::ScalarDiffusion() --> Time: 0.038130439
+   - oneSDC()::ScalarReaction()  --> Time: 0.046543368
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.013142878
+      Before SDC 2: max relative P mismatch is 2.309844638e-06
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 4848.612177
+MLMG: Initial residual (resid0) = 4848.612177
+MLMG: Iteration   1 Fine resid/bnorm = 0.0436336876
+MLMG: Iteration   2 Fine resid/bnorm = 0.005101307332
+MLMG: Iteration   3 Fine resid/bnorm = 0.0002698496445
+MLMG: Iteration   4 Fine resid/bnorm = 5.626451304e-06
+MLMG: Iteration   5 Fine resid/bnorm = 3.932813256e-07
+MLMG: Iteration   6 Fine resid/bnorm = 3.370885709e-08
+MLMG: Iteration   7 Fine resid/bnorm = 1.069200147e-09
+MLMG: Iteration   8 Fine resid/bnorm = 4.206368946e-11
+MLMG: Final Iter. 8 resid, resid/bnorm = 2.039505169e-07, 4.206368946e-11
+MLMG: Timers: Solve = 0.019602846 Iter = 0.018872854 Bottom = 0.004512286
+   - oneSDC()::MACProjection()   --> Time: 0.021955888
+   - oneSDC()::ScalarAdvection() --> Time: 0.003446409
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8940811926
+MLMG: Initial residual (resid0) = 1.93619645e-05
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.483494863e-16
+MLMG: Timers: Solve = 0.019089917 Iter = 0.016555066 Bottom = 0.000447717
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0.8760501094
+MLMG: Initial residual (resid0) = 0.8760501094
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.534610778e-16
+MLMG: Timers: Solve = 0.003388575 Iter = 0.002243917 Bottom = 0.000257521
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 1.161133727e-07
+MLMG: Initial residual (resid0) = 1.161133727e-07
+MLMG: Final Iter. 1 resid, resid/bnorm = 3.97046694e-23, 3.419474301e-16
+MLMG: Timers: Solve = 0.003374811 Iter = 0.002240713 Bottom = 0.000257674
+   - oneSDC()::ScalarDiffusion() --> Time: 0.037958682
+   - oneSDC()::ScalarReaction()  --> Time: 0.100427448
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 6.092642585
+MLMG: Initial residual (resid0) = 0.0003694813891
+MLMG: Final Iter. 2 resid, resid/bnorm = 1.776356839e-15, 2.915576968e-16
+MLMG: Timers: Solve = 0.006300745 Iter = 0.004970527 Bottom = 0.000519798
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 441087.4203
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 441087.4203
+MLMG: Initial residual (resid0) = 441087.4203
+MLMG: Iteration   1 Fine resid/bnorm = 0.02546243993
+MLMG: Iteration   2 Fine resid/bnorm = 0.0004704470268
+MLMG: Iteration   3 Fine resid/bnorm = 9.308378915e-06
+MLMG: Iteration   4 Fine resid/bnorm = 1.784964637e-07
+MLMG: Iteration   5 Fine resid/bnorm = 3.360200621e-09
+MLMG: Iteration   6 Fine resid/bnorm = 6.262843945e-11
+MLMG: Final Iter. 6 resid, resid/bnorm = 2.762461679e-05, 6.262843945e-11
+MLMG: Timers: Solve = 0.015400447 Iter = 0.014443574 Bottom = 0.00297375
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 39856.78511
+
+   - Advance()::VelocityAdvance  --> Time: 0.029972944
+ >> PeleLMeX::Advance() --> Time: 0.341444209
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 1.007512967e-07, divu: 5.427100412e-07, sprays: 1e+200
+ STEP [23] - Time: 7.954302433e-07, dt 8.954302433e-08, Ncells 16384
+   SDC iter [1] 
+      Before SDC 1: max relative P mismatch is 0.0008686283415
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 634155.9371
+MLMG: Initial residual (resid0) = 634155.9371
+MLMG: Iteration   1 Fine resid/bnorm = 0.2862325189
+MLMG: Iteration   2 Fine resid/bnorm = 0.02865320796
+MLMG: Iteration   3 Fine resid/bnorm = 0.001098285113
+MLMG: Iteration   4 Fine resid/bnorm = 3.37032755e-05
+MLMG: Iteration   5 Fine resid/bnorm = 3.113183734e-06
+MLMG: Iteration   6 Fine resid/bnorm = 1.618926329e-07
+MLMG: Iteration   7 Fine resid/bnorm = 3.475904269e-09
+MLMG: Iteration   8 Fine resid/bnorm = 1.565102259e-10
+MLMG: Iteration   9 Fine resid/bnorm = 1.068932747e-11
+MLMG: Final Iter. 9 resid, resid/bnorm = 6.778700481e-06, 1.068932747e-11
+MLMG: Timers: Solve = 0.022496932 Iter = 0.021773484 Bottom = 0.005713344
+   - oneSDC()::MACProjection()   --> Time: 0.0248402
+   - oneSDC()::ScalarAdvection() --> Time: 0.003512893
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0.8940922973
+MLMG: Initial residual (resid0) = 0.06385510482
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.220446049e-16, 2.483464018e-16
+MLMG: Timers: Solve = 0.019119078 Iter = 0.016584674 Bottom = 0.000448643
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 324.1231882
+MLMG: Initial residual (resid0) = 324.1231882
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.136868377e-13, 3.507519421e-16
+MLMG: Timers: Solve = 0.003398349 Iter = 0.002250867 Bottom = 0.000255366
+MLMG: DeltaT solve [1]
+MLMG: Initial rhs               = 0.01448227186
+MLMG: Initial residual (resid0) = 0.01448227186
+MLMG: Final Iter. 1 resid, resid/bnorm = 1.734723476e-18, 1.197825516e-16
+MLMG: Timers: Solve = 0.003368863 Iter = 0.002242823 Bottom = 0.000257392
+MLMG: DeltaT solve [2]
+MLMG: Initial rhs               = 1.122975979e-09
+MLMG: Initial residual (resid0) = 1.122975979e-09
+MLMG: Final Iter. 1 resid, resid/bnorm = 2.067951531e-25, 1.841492222e-16
+MLMG: Timers: Solve = 0.003423987 Iter = 0.002266504 Bottom = 0.000261433
+   - oneSDC()::ScalarDiffusion() --> Time: 0.043345322
+   - oneSDC()::ScalarReaction()  --> Time: 2.266169289
+   SDC iter [2] 
+   - oneSDC()::Update t^{n+1,k}  --> Time: 0.016678603
+      Before SDC 2: max relative P mismatch is 0.891348593
+MLMG: MAC Projection
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 768962405.5
+MLMG: Initial residual (resid0) = 768962405.5
+MLMG: Iteration   1 Fine resid/bnorm = -2.337816676e+299
+MLMG: Final Iter. 1 resid, resid/bnorm = -1.797693135e+308, -2.337816676e+299
+MLMG: Timers: Solve = 0.002734784 Iter = 0.001992041 Bottom = 0.000114697
+   - oneSDC()::MACProjection()   --> Time: 0.005147536
+   - oneSDC()::ScalarAdvection() --> Time: 0.003592133
+MLMG: Species Diffusion
+MLMG: Initial rhs               = 0
+MLMG: Initial residual (resid0) = 0
+MLMG: No iterations needed
+MLMG: Timers: Solve = 0.002575921 Iter = 0 Bottom = 0
+MLMG: DeltaT solve [0]
+MLMG: Initial rhs               = 0
+MLMG: Initial residual (resid0) = 0
+MLMG: No iterations needed
+MLMG: Timers: Solve = 0.001152003 Iter = 0 Bottom = 0
+   - oneSDC()::ScalarDiffusion() --> Time: 0.014026713
+   - oneSDC()::ScalarReaction()  --> Time: 0.311984516
+MLMG: Velocity Diffusion
+MLMG: Initial rhs               = 0
+MLMG: Initial residual (resid0) = 0
+MLMG: No iterations needed
+MLMG: Timers: Solve = 0.001598441 Iter = 0 Bottom = 0
+Nodal Projection:
+ >> Before projection:
+  * On lev 0 max(abs(rhs)) = 0
+
+MLMG: # of AMR levels: 1
+      # of MG levels on the coarsest AMR level: 7
+MLMG: Initial rhs               = 0
+MLMG: Initial residual (resid0) = 0
+MLMG: No iterations needed
+MLMG: Timers: Solve = 0.00093716 Iter = 0 Bottom = 0
+ >> After projection:
+  * On lev 0 max(abs(rhs)) = 0
+
+   - Advance()::VelocityAdvance  --> Time: 0.059228176
+ >> PeleLMeX::Advance() --> Time: 2.78472239
+
+ >> Final simulation time: 8.849732676e-07
+
+ Writing plotfile: plt00024
+
+ Writing checkpoint file: chk00024
+amrex::Error::0::Stopped early because NaNs detected in solution !!!
+SIGABRT
+See Backtrace.0 file for details

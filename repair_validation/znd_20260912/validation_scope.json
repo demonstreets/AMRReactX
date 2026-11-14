@@ -1,0 +1,24 @@
+{
+  "physical_model": "Single-phase one-dimensional inviscid reactive Euler, heptane_lu_88sk with the native PeleC solver. This does not validate empirical WD6 high-temperature chemistry or spray coupling.",
+  "upstream": {"temperature_K": 300, "pressure_Pa": 50662.5, "fuel_equivalence_ratio": 0.6},
+  "domain_m": [0.12, 0.0008],
+  "initial_front_m": 0.04,
+  "initial_speed_ratio_to_CJ": 1.00001,
+  "end_time_s": 0.000012,
+  "spatial_cells": [600, 1200, 2400],
+  "transverse_cells": 2,
+  "time_check": "1200 cells, CFL 0.2 versus 0.1; this is not an independent fine-grid time convergence study.",
+  "structural_comparison_window_behind_shock_m": [0.001, 0.015],
+  "acceptance_targets_not_guaranteed_results": {
+    "CJ_sonic_relative_error": 0.0001,
+    "reference_energy_relative_residual": 0.000001,
+    "fine_mean_wave_speed_relative_error": 0.01,
+    "fine_p_T_rho_u_normalized_L1": 0.05,
+    "fine_major_species_mean_absolute_Y_error": 0.005,
+    "fine_fuel_half_length_relative_error": 0.1,
+    "nonfinite_field_values": 0,
+    "species_sum_absolute_error": 0.00000001
+  },
+  "additional_assessment": "Report spatial trends, temporal sensitivity, boundary mass and energy balances and wave-front fit residuals. Targets above do not by themselves establish full asymptotic convergence or exclude physical unsteadiness. Shock peak resolution is reported separately."
+}
+

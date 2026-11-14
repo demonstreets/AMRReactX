@@ -1,0 +1,50 @@
+max_step = 2000
+stop_time = 0.00020000000000000001
+geometry.is_periodic = 1 1
+geometry.coord_sys = 0
+geometry.prob_lo = 0 0
+geometry.prob_hi = 0.1 0.1
+amr.n_cell = 4 4
+amr.blocking_factor = 4
+amr.max_grid_size = 4
+amr.max_level = 0
+pelec.lo_bc = "Interior" "Interior"
+pelec.hi_bc = "Interior" "Interior"
+pelec.do_hydro = 0
+pelec.do_react = 1
+
+pelec.chem_integrator = "ReactorCvode"
+cvode.solve_type = denseAJ_direct
+ode.rtol = 1.0e-8
+ode.atol = 1.e-18
+pelec.allow_negative_energy = 1
+pelec.fixed_dt = 9.9999999999999995e-08
+amr.checkpoint_files_output = 0
+amr.plot_int = 100
+amr.plot_vars = density Temp rho_E
+amr.derive_plot_vars = pressure x_velocity y_velocity
+pelec.plot_massfrac = 1
+amrex.the_arena_init_size = 67108864
+amrex.abort_on_unused_inputs = 1
+
+pelec.do_spray_particles = 0
+
+
+
+
+
+# Uniform upstream state: the profile front lies outside the domain.
+prob.profile = profile_SI.txt
+prob.front = -1
+prob.perturbation = 0
+prob.p0 = 1.e6
+prob.T0 = 1400
+prob.upstream_Y = 0.038276374792422151 0.2240813307168166 0 0 0 0.73764229449076124
+
+pelec.chemistry_transport_split = strang
+pelec.sdc_iters = 1
+prob.expected_wd6_regularization = 1e-10
+
+pelec.cell_chemistry_integrator = wd6_extrapolated
+pelec.cell_chemistry_rtol = 1.e-6
+pelec.cell_chemistry_atol_y = 1.e-13

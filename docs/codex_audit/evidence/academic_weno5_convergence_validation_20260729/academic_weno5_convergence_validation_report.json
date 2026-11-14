@@ -1,0 +1,137 @@
+{
+  "case": {
+    "build_dir": "build-codex-smoke",
+    "build_log": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/build.log",
+    "cmake_log": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/cmake.log",
+    "ctest_list_log": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_list.log",
+    "ctest_log": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_weno_verbose.log",
+    "ctest_returncode": 0,
+    "generated_at_utc": "2026-07-29T02:16:35+00:00",
+    "required_tests": [
+      "weno5_smoke",
+      "pelec_weno_smoke"
+    ]
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/case_summary.json",
+      "sha256": "f73f30dee0840a05b99d6dad7ad8b2cd2811105c9978f30c30efbdd98bc415a6",
+      "size_bytes": 611
+    },
+    {
+      "label": "cmake_log",
+      "path": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/cmake.log",
+      "sha256": "50c5afb5befc9fef19a7f4da43a33cf430a2f989554b2406c07b3568a4d42052",
+      "size_bytes": 125
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/build.log",
+      "sha256": "5f4ffc25a5c6dca59ea3642e3b2c17cd68562eaf1a5b5368a431240462e5c2ca",
+      "size_bytes": 1133
+    },
+    {
+      "label": "ctest_list_log",
+      "path": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_list.log",
+      "sha256": "8c42b8707145526a142ec86dd3c2cac212e1d5ade69f078bee284ce811163646",
+      "size_bytes": 846
+    },
+    {
+      "label": "ctest_log",
+      "path": "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_weno_verbose.log",
+      "sha256": "3f8848a9cfd1dbdf2dbcd3a2805196c6ed4de3c8e4255e4fef2c83bb23c47be7",
+      "size_bytes": 2501
+    },
+    {
+      "label": "standalone_weno5_test_source",
+      "path": "test/unit/test_weno5.cpp",
+      "sha256": "20323ec513d6064d1822a89e27a0549de176be168e98272552d2f72d8c6389b0",
+      "size_bytes": 10889
+    },
+    {
+      "label": "pelec_weno_test_source",
+      "path": "test/unit/test_pelec_weno.cpp",
+      "sha256": "c8dca2b96e495b6ea02e41b1309ef97645d8ed6fe2df8f419f1c2b343727f8e1",
+      "size_bytes": 6430
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_weno5_convergence_validation.sh",
+      "sha256": "599fafb94c3416a2ea9521a94c6f2516a742664eb2c06b0ee501170a8113a8a6",
+      "size_bytes": 2088
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_weno5_convergence_validation_report.py",
+      "sha256": "007bd3adf0164f035292e13cc9e6fa9ce827926d190a612c46a76dd1f5788b22",
+      "size_bytes": 15405
+    }
+  ],
+  "generated_at_utc": "2026-07-29T02:17:21+00:00",
+  "limitations": [
+    "This is a smooth scalar/cell-average WENO order gate; it does not prove characteristic projection accuracy.",
+    "This report strengthens ACD-01/QLT-03 order evidence but does not replace full-flow WENO-vs-PPM detonation comparisons.",
+    "The gate uses current CTest output as authoritative evidence, so report verification also hashes the test sources and logs."
+  ],
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_weno_verbose.log"
+      ],
+      "gap": "",
+      "name": "weno_ctests_built_and_passed",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_weno_verbose.log"
+      ],
+      "gap": "",
+      "name": "standalone_weno5_sine_order",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_weno_verbose.log"
+      ],
+      "gap": "",
+      "name": "pelec_weno5z_sine_order",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_weno5_convergence_validation_20260729/ctest_weno_verbose.log"
+      ],
+      "gap": "",
+      "name": "weno5z_beats_second_order_baseline",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Maintained WENO5/WENO5-Z smooth-field convergence gate using the current CTest weno5_smoke and pelec_weno_smoke executables. This promotes the historical smooth sine regression into a reproducible report with explicit order and baseline-improvement gates.",
+  "status": "PASS-ACADEMIC-WENO5-CONVERGENCE-VALIDATION",
+  "summary": {
+    "blocking_reasons": [],
+    "clears_acd_01_weno5_order_gap": true,
+    "clears_qlt_03_weno5_mms_order_subgap": true,
+    "max_weno_to_second_order_ratio_gate": 0.02,
+    "min_order_gate": 4.5,
+    "missing_tests": [],
+    "passed_tests": [
+      "pelec_weno_smoke",
+      "weno5_smoke"
+    ],
+    "pelec_weno5z_l1_n64": 9.117999350597e-08,
+    "pelec_weno5z_p32_64": 4.911286070252,
+    "pelec_weno5z_p64_128": 4.955275049333,
+    "required_tests": [
+      "pelec_weno_smoke",
+      "weno5_smoke"
+    ],
+    "second_order_face_average_l1_n64": 0.001102731849977,
+    "standalone_weno5_sine_order": 4.93,
+    "weno_to_second_order_error_ratio": 8.268555361656759e-05
+  },
+  "title": "Academic WENO5 Convergence Validation"
+}

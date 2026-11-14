@@ -1,0 +1,743 @@
+{
+  "completed_cases": [
+    "sdc2_4800_cfl30_v1",
+    "ppm_4800_cfl30_v1",
+    "frame_lab_4800_fixed_v1",
+    "frame_shock_4800_fixed_v1",
+    "overdrive120_1200_cfl30_v1",
+    "overdrive120_2400_cfl30_v1",
+    "overdrive120_4800_cfl30_v1",
+    "overdrive120_4800_cfl15_v1",
+    "near_cj_short_1200_cfl30_v1",
+    "near_cj_short_2400_cfl30_v1",
+    "near_cj_short_4800_cfl30_v1",
+    "near_cj_short_4800_cfl15_v1",
+    "near_cj_dense_2400_cfl30_v1"
+  ],
+  "pending_cases": [],
+  "near_CJ_validation": "NOT PASSED",
+  "two_dimensional_quantitative_validation": "NOT ESTABLISHED",
+  "overdrive_matrix_validation": "NOT PASSED: timestep halving also must preserve the width criteria",
+  "overdrive_scope": "Only 0--0.5 us at D=1.2 D_CJ, planar LiDryer Euler/CVODE CPU path. Long-time, other mechanisms and 2D physics are not validated.",
+  "metrics": {
+    "sdc2_4800_cfl30_v1": {
+      "case": "sdc2_4800_cfl30_v1",
+      "dx_um": 5.0,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2e-06,
+      "speed_m_s": 1756.943629458066,
+      "speed_error_percent": -11.133615881831515,
+      "speed_interval_min_m_s": 1573.0551051093435,
+      "speed_interval_max_m_s": 1876.1168565600033,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.22630010973728215,
+        "p": 0.16499602588930962,
+        "T": 0.3219414455158038,
+        "u": 0.06982240591218766
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.30367086074192295,
+        "p": 0.2540662453143555,
+        "T": 0.4515807396987275,
+        "u": 0.08419339906715656
+      },
+      "final_induction_um": 967.6839607567402,
+      "final_FWHM_um": 15.584750098985005,
+      "final_induction_error_percent": 413.5013758316275,
+      "final_FWHM_error_percent": -68.16068068513357,
+      "late_max_abs_induction_error_percent": 413.5013758316275,
+      "late_max_abs_FWHM_error_percent": 68.16068068513357,
+      "late_RMS_induction_error_percent": 238.7927522912005,
+      "late_RMS_FWHM_error_percent": 64.34016191376709,
+      "late_mean_thermicity_shape_relative_L1": 1.0825749461951144,
+      "final_thermicity_shape_relative_L1": 0.9966142964087203,
+      "max_peak_count_late": 4,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2650.4165286219895,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.004283517846268783,
+        "right_to_front_margin_m": 0.006979712340933312
+      },
+      "approximate_mass_balance_relative": 1.5956476254437416e-10,
+      "approximate_energy_balance_relative": 5.478157974620211e-08
+    },
+    "ppm_4800_cfl30_v1": {
+      "case": "ppm_4800_cfl30_v1",
+      "dx_um": 5.0,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2e-06,
+      "speed_m_s": 1708.513203529353,
+      "speed_error_percent": -13.583231658585293,
+      "speed_interval_min_m_s": 1553.1495311788956,
+      "speed_interval_max_m_s": 1898.1755990571453,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.23043691399878607,
+        "p": 0.17150258203126623,
+        "T": 0.3359690393403141,
+        "u": 0.07560652540334202
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.33073352275434226,
+        "p": 0.23730677383572354,
+        "T": 0.4610820099221738,
+        "u": 0.09925806514840303
+      },
+      "final_induction_um": 1061.0629156577438,
+      "final_FWHM_um": 13.172994736711285,
+      "final_induction_error_percent": 463.05290686856574,
+      "final_FWHM_error_percent": -73.08784657493345,
+      "late_max_abs_induction_error_percent": 463.05290686856574,
+      "late_max_abs_FWHM_error_percent": 73.08784657493345,
+      "late_RMS_induction_error_percent": 269.61109302977525,
+      "late_RMS_FWHM_error_percent": 67.76034002620966,
+      "late_mean_thermicity_shape_relative_L1": 0.9781921433320149,
+      "final_thermicity_shape_relative_L1": 0.9999998551864386,
+      "max_peak_count_late": 3,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2660.046787916064,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.004223375763993488,
+        "right_to_front_margin_m": 0.007001333386032309
+      },
+      "approximate_mass_balance_relative": 1.6466157084398486e-10,
+      "approximate_energy_balance_relative": 6.33156639499002e-08
+    },
+    "frame_lab_4800_fixed_v1": {
+      "case": "frame_lab_4800_fixed_v1",
+      "dx_um": 5.0,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2e-06,
+      "speed_m_s": 1763.6332003692567,
+      "speed_error_percent": -10.79525671753495,
+      "speed_interval_min_m_s": 1591.5818640835093,
+      "speed_interval_max_m_s": 1937.0170109439343,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.2354325345394016,
+        "p": 0.15106301908678194,
+        "T": 0.30601506702537146,
+        "u": 0.0716073122889739
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.3221426327889628,
+        "p": 0.20023608641020024,
+        "T": 0.42124559562215597,
+        "u": 0.09256283364638798
+      },
+      "final_induction_um": 484.10998918788084,
+      "final_FWHM_um": 16.993553669289266,
+      "final_induction_error_percent": 156.892906757915,
+      "final_FWHM_error_percent": -65.28252438221263,
+      "late_max_abs_induction_error_percent": 243.15666547597007,
+      "late_max_abs_FWHM_error_percent": 192.64143881284576,
+      "late_RMS_induction_error_percent": 139.61912944356123,
+      "late_RMS_FWHM_error_percent": 83.32831603032044,
+      "late_mean_thermicity_shape_relative_L1": 1.1544416270308766,
+      "final_thermicity_shape_relative_L1": 1.1121261017723978,
+      "max_peak_count_late": 3,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2654.1293926546687,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.0042750924185692065,
+        "right_to_front_margin_m": 0.006973286312502172
+      },
+      "approximate_mass_balance_relative": 1.642165554130519e-10,
+      "approximate_energy_balance_relative": 6.330050696625274e-08
+    },
+    "frame_shock_4800_fixed_v1": {
+      "case": "frame_shock_4800_fixed_v1",
+      "dx_um": 5.0,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2e-06,
+      "speed_m_s": 1870.5125554774904,
+      "speed_error_percent": -5.389288269770864,
+      "speed_interval_min_m_s": 1678.5818366363571,
+      "speed_interval_max_m_s": 2181.1127080413567,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.1539207141038847,
+        "p": 0.10799940956623229,
+        "T": 0.18809652246734113,
+        "u": 0.051221192309612924
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.26589452089463816,
+        "p": 0.19999394163352188,
+        "T": 0.4150985946580388,
+        "u": 0.07351811496238359
+      },
+      "final_induction_um": 480.4156341734955,
+      "final_FWHM_um": 20.627024016019917,
+      "final_induction_error_percent": 154.9324977198094,
+      "final_FWHM_error_percent": -57.85942026723616,
+      "late_max_abs_induction_error_percent": 154.9324977198094,
+      "late_max_abs_FWHM_error_percent": 65.39697429932603,
+      "late_RMS_induction_error_percent": 76.6633735301709,
+      "late_RMS_FWHM_error_percent": 48.567593569991836,
+      "late_mean_thermicity_shape_relative_L1": 1.1066647377104426,
+      "final_thermicity_shape_relative_L1": 1.1186698330901934,
+      "max_peak_count_late": 2,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 917.507381880411,
+        "minimum_u_grid_minus_c_m_s": -2386.482288553935,
+        "left_to_core_margin_m": 0.0037878861066518517,
+        "right_to_front_margin_m": 0.006496155211610764
+      },
+      "approximate_mass_balance_relative": 0.0002072618760652245,
+      "approximate_energy_balance_relative": 0.0004787738446222339
+    },
+    "overdrive120_1200_cfl30_v1": {
+      "case": "overdrive120_1200_cfl30_v1",
+      "dx_um": 2.5,
+      "CFL": 0.3,
+      "reference_D_m_s": 2372.4508352151106,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 2368.992369210818,
+      "speed_error_percent": -0.1457760874517322,
+      "speed_interval_min_m_s": 2339.4551051145554,
+      "speed_interval_max_m_s": 2392.777173708081,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.014094003713869376,
+        "p": 0.008743711767706684,
+        "T": 0.011050470405053683,
+        "u": 0.0041389448926886785
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.017203413646603202,
+        "p": 0.01124117601427473,
+        "T": 0.01549778829955427,
+        "u": 0.005236033426465925
+      },
+      "final_induction_um": 43.08581109539224,
+      "final_FWHM_um": 20.363761818463722,
+      "final_induction_error_percent": 11.821097276812441,
+      "final_FWHM_error_percent": 21.716058869781165,
+      "late_max_abs_induction_error_percent": 17.491696550092218,
+      "late_max_abs_FWHM_error_percent": 29.40513696390964,
+      "late_RMS_induction_error_percent": 9.780032379924727,
+      "late_RMS_FWHM_error_percent": 17.888712995305198,
+      "late_mean_thermicity_shape_relative_L1": 0.2525673924149043,
+      "final_thermicity_shape_relative_L1": 0.24336351689171093,
+      "max_peak_count_late": 1,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 3038.2030002428924,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.0004652343109739464,
+        "right_to_front_margin_m": 0.0006112762266158641
+      },
+      "approximate_mass_balance_relative": 9.176027699791376e-17,
+      "approximate_energy_balance_relative": 5.227312341392443e-12,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": true,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "overdrive120_2400_cfl30_v1": {
+      "case": "overdrive120_2400_cfl30_v1",
+      "dx_um": 1.25,
+      "CFL": 0.3,
+      "reference_D_m_s": 2372.4508352151106,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 2367.8893231680404,
+      "speed_error_percent": -0.1922700348248374,
+      "speed_interval_min_m_s": 2354.2026026011818,
+      "speed_interval_max_m_s": 2378.4857175529132,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.008558497390804781,
+        "p": 0.004478371587044182,
+        "T": 0.00724176973522219,
+        "u": 0.0022024068938082987
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.010393917734011536,
+        "p": 0.00651417701666244,
+        "T": 0.009888262908336047,
+        "u": 0.003009942613187367
+      },
+      "final_induction_um": 38.582244256417724,
+      "final_FWHM_um": 16.654491091791343,
+      "final_induction_error_percent": 0.13293886014398293,
+      "final_FWHM_error_percent": -0.4545900582699658,
+      "late_max_abs_induction_error_percent": 17.084174164013312,
+      "late_max_abs_FWHM_error_percent": 30.981153926446403,
+      "late_RMS_induction_error_percent": 8.075609456310405,
+      "late_RMS_FWHM_error_percent": 17.483407474092896,
+      "late_mean_thermicity_shape_relative_L1": 0.18505434393870612,
+      "final_thermicity_shape_relative_L1": 0.14344444896728292,
+      "max_peak_count_late": 1,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 3036.5491203658876,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00046593268407347436,
+        "right_to_front_margin_m": 0.0006114047934548386
+      },
+      "approximate_mass_balance_relative": 1.009363032388618e-15,
+      "approximate_energy_balance_relative": 5.233487446730664e-12,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": true,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "overdrive120_4800_cfl30_v1": {
+      "case": "overdrive120_4800_cfl30_v1",
+      "dx_um": 0.625,
+      "CFL": 0.3,
+      "reference_D_m_s": 2372.4508352151106,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 2369.892365146365,
+      "speed_error_percent": -0.10784080457092449,
+      "speed_interval_min_m_s": 2362.6949812575385,
+      "speed_interval_max_m_s": 2375.284880354118,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.004481737550326103,
+        "p": 0.002275293699949789,
+        "T": 0.0036948972094173723,
+        "u": 0.0010932799287454028
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.005907642463952944,
+        "p": 0.0030615331869359884,
+        "T": 0.005116879680413895,
+        "u": 0.0015390713639670908
+      },
+      "final_induction_um": 38.58736894426325,
+      "final_FWHM_um": 16.798777625541213,
+      "final_induction_error_percent": 0.14623902099784036,
+      "final_FWHM_error_percent": 0.40782369379486205,
+      "late_max_abs_induction_error_percent": 6.523496337770407,
+      "late_max_abs_FWHM_error_percent": 9.236751716899338,
+      "late_RMS_induction_error_percent": 3.5668363175049684,
+      "late_RMS_FWHM_error_percent": 4.123174710384003,
+      "late_mean_thermicity_shape_relative_L1": 0.09257249246814435,
+      "final_thermicity_shape_relative_L1": 0.03907599199068016,
+      "max_peak_count_late": 1,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 3028.1522646268922,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00047107373663081713,
+        "right_to_front_margin_m": 0.0006104621687669934
+      },
+      "approximate_mass_balance_relative": 1.8352055323423398e-16,
+      "approximate_energy_balance_relative": 5.17876139020558e-12,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": true,
+        "late_FWHM_within_10_percent": true,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": true,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": true
+    },
+    "overdrive120_4800_cfl15_v1": {
+      "case": "overdrive120_4800_cfl15_v1",
+      "dx_um": 0.625,
+      "CFL": 0.15,
+      "reference_D_m_s": 2372.4508352151106,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 2369.9805020377335,
+      "speed_error_percent": -0.10412579012003542,
+      "speed_interval_min_m_s": 2363.575675523096,
+      "speed_interval_max_m_s": 2374.6777245015523,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.004467213348093382,
+        "p": 0.0021097202536587405,
+        "T": 0.003936098598855508,
+        "u": 0.0010325185980924886
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.005640915753330392,
+        "p": 0.002910285434491353,
+        "T": 0.005067572931769178,
+        "u": 0.001505434949081795
+      },
+      "final_induction_um": 38.01128405556348,
+      "final_FWHM_um": 19.022840553162773,
+      "final_induction_error_percent": -1.3488806655359786,
+      "final_FWHM_error_percent": 13.701250352470339,
+      "late_max_abs_induction_error_percent": 6.267875150506752,
+      "late_max_abs_FWHM_error_percent": 19.15729118297158,
+      "late_RMS_induction_error_percent": 4.05038439951691,
+      "late_RMS_FWHM_error_percent": 8.254082259081434,
+      "late_mean_thermicity_shape_relative_L1": 0.09740676855409411,
+      "final_thermicity_shape_relative_L1": 0.07295719898308009,
+      "max_peak_count_late": 1,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 3027.9304444439367,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00047123356183359543,
+        "right_to_front_margin_m": 0.000610413253655693
+      },
+      "approximate_mass_balance_relative": 1.4681644258738719e-15,
+      "approximate_energy_balance_relative": 5.189195572282886e-12,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": true,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": true,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "near_cj_short_1200_cfl30_v1": {
+      "case": "near_cj_short_1200_cfl30_v1",
+      "dx_um": 2.5,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 1976.1598729543955,
+      "speed_error_percent": -0.04563640835476557,
+      "speed_interval_min_m_s": 1972.325152618274,
+      "speed_interval_max_m_s": 1981.513493877509,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.013337165555760784,
+        "p": 0.008921294563336086,
+        "T": 0.009826710834804948,
+        "u": 0.0034085633883127464
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.03574556535251482,
+        "p": 0.025382255360237745,
+        "T": 0.025227355179966344,
+        "u": 0.009631621019072226
+      },
+      "final_induction_um": 165.4835678989088,
+      "final_FWHM_um": 10.614025929084228,
+      "final_induction_error_percent": -12.186164864028582,
+      "final_FWHM_error_percent": -78.31576646234488,
+      "late_max_abs_induction_error_percent": 18.00685326762762,
+      "late_max_abs_FWHM_error_percent": 78.31576646234488,
+      "late_RMS_induction_error_percent": 9.44101961658098,
+      "late_RMS_FWHM_error_percent": 31.454005851852727,
+      "late_mean_thermicity_shape_relative_L1": 0.1890933485250219,
+      "final_thermicity_shape_relative_L1": 0.36336146298212646,
+      "max_peak_count_late": 2,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2663.7252863995905,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00015737092469911371,
+        "right_to_front_margin_m": 0.0008063784698123478
+      },
+      "approximate_mass_balance_relative": 5.151270039111167e-09,
+      "approximate_energy_balance_relative": 5.456315806511544e-07,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": false,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "near_cj_short_2400_cfl30_v1": {
+      "case": "near_cj_short_2400_cfl30_v1",
+      "dx_um": 1.25,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 1976.716327107124,
+      "speed_error_percent": -0.01749090177651791,
+      "speed_interval_min_m_s": 1973.3024829849996,
+      "speed_interval_max_m_s": 1979.5897434173933,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.007173513393712152,
+        "p": 0.004549968519561278,
+        "T": 0.004794127201171377,
+        "u": 0.0017336970227978866
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.020801890905534418,
+        "p": 0.014246198934642006,
+        "T": 0.014661589088217823,
+        "u": 0.005646072817751383
+      },
+      "final_induction_um": 173.25802939136275,
+      "final_FWHM_um": 8.16993240895225,
+      "final_induction_error_percent": -8.060647820630273,
+      "final_FWHM_error_percent": -83.30899853399332,
+      "late_max_abs_induction_error_percent": 14.642448641368311,
+      "late_max_abs_FWHM_error_percent": 83.30899853399332,
+      "late_RMS_induction_error_percent": 6.295462730792173,
+      "late_RMS_FWHM_error_percent": 28.698966913819586,
+      "late_mean_thermicity_shape_relative_L1": 0.09427886996515517,
+      "final_thermicity_shape_relative_L1": 0.21889623692738305,
+      "max_peak_count_late": 2,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2635.636801447992,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00017106462866736693,
+        "right_to_front_margin_m": 0.0008067290083198938
+      },
+      "approximate_mass_balance_relative": 3.0853518014095894e-09,
+      "approximate_energy_balance_relative": 5.462290889845752e-07,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": false,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "near_cj_short_4800_cfl30_v1": {
+      "case": "near_cj_short_4800_cfl30_v1",
+      "dx_um": 0.625,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 1976.932227661354,
+      "speed_error_percent": -0.006570630197033633,
+      "speed_interval_min_m_s": 1976.2521857845618,
+      "speed_interval_max_m_s": 1978.1174170932043,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.003635500178662517,
+        "p": 0.0022389843797522135,
+        "T": 0.0023014115508704514,
+        "u": 0.0008608818354644789
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.011125962843014096,
+        "p": 0.007695498573438846,
+        "T": 0.00795656099440737,
+        "u": 0.003031381128805811
+      },
+      "final_induction_um": 179.0455254435876,
+      "final_FWHM_um": 20.32221884552395,
+      "final_induction_error_percent": -4.989513745912822,
+      "final_FWHM_error_percent": -58.482130871551554,
+      "late_max_abs_induction_error_percent": 11.298616294746555,
+      "late_max_abs_FWHM_error_percent": 58.482130871551554,
+      "late_RMS_induction_error_percent": 4.726323957197675,
+      "late_RMS_FWHM_error_percent": 18.00612196138758,
+      "late_mean_thermicity_shape_relative_L1": 0.047817692993189075,
+      "final_thermicity_shape_relative_L1": 0.12063236071934291,
+      "max_peak_count_late": 2,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2605.6998709378468,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.0001858830899746644,
+        "right_to_front_margin_m": 0.000806879012267669
+      },
+      "approximate_mass_balance_relative": 1.5395466149222974e-09,
+      "approximate_energy_balance_relative": 5.469849560744831e-07,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": false,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "near_cj_short_4800_cfl15_v1": {
+      "case": "near_cj_short_4800_cfl15_v1",
+      "dx_um": 0.625,
+      "CFL": 0.15,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 1976.990971916957,
+      "speed_error_percent": -0.0035993398860512116,
+      "speed_interval_min_m_s": 1976.4112659845293,
+      "speed_interval_max_m_s": 1977.6514412299075,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.003637980003761196,
+        "p": 0.0022582632309632003,
+        "T": 0.002332560906011652,
+        "u": 0.000863473652802093
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.011374726277837421,
+        "p": 0.007893543636857249,
+        "T": 0.008114400066792907,
+        "u": 0.0030449520501118627
+      },
+      "final_induction_um": 178.4202691450089,
+      "final_FWHM_um": 50.950381420149526,
+      "final_induction_error_percent": -5.321305924545683,
+      "final_FWHM_error_percent": 4.0905662873625515,
+      "late_max_abs_induction_error_percent": 11.310113907617136,
+      "late_max_abs_FWHM_error_percent": 13.281068026003528,
+      "late_RMS_induction_error_percent": 4.776857912726426,
+      "late_RMS_FWHM_error_percent": 4.411689012846275,
+      "late_mean_thermicity_shape_relative_L1": 0.04935246295044594,
+      "final_thermicity_shape_relative_L1": 0.11970286136505172,
+      "max_peak_count_late": 2,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2600.3453239301734,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00018856010717992222,
+        "right_to_front_margin_m": 0.0008068792685662477
+      },
+      "approximate_mass_balance_relative": 1.0675775082174525e-09,
+      "approximate_energy_balance_relative": 5.473690594331178e-07,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": false,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    },
+    "near_cj_dense_2400_cfl30_v1": {
+      "case": "near_cj_dense_2400_cfl30_v1",
+      "dx_um": 1.25,
+      "CFL": 0.3,
+      "reference_D_m_s": 1977.0621331028858,
+      "fit_window_start_s": 2.5e-07,
+      "speed_m_s": 1976.7087850563087,
+      "speed_error_percent": -0.017872379459449306,
+      "speed_interval_min_m_s": 1973.298380975694,
+      "speed_interval_max_m_s": 1979.5846811061058,
+      "late_mean_core_normalized_L1": {
+        "rho": 0.007176413117169513,
+        "p": 0.004551872355994808,
+        "T": 0.00479655704247113,
+        "u": 0.0017343431842524357
+      },
+      "late_max_core_normalized_L1": {
+        "rho": 0.02080156338295243,
+        "p": 0.01424554049891674,
+        "T": 0.014660298818887457,
+        "u": 0.005645382404596027
+      },
+      "final_induction_um": 173.25634780867108,
+      "final_FWHM_um": 8.171364416664257,
+      "final_induction_error_percent": -8.061540152280655,
+      "final_FWHM_error_percent": -83.30607297211299,
+      "late_max_abs_induction_error_percent": 14.642176111935811,
+      "late_max_abs_FWHM_error_percent": 83.30607297211299,
+      "late_RMS_induction_error_percent": 6.2955356193524965,
+      "late_RMS_FWHM_error_percent": 28.698675995125082,
+      "late_mean_thermicity_shape_relative_L1": 0.09432769071761792,
+      "final_thermicity_shape_relative_L1": 0.21888734516945504,
+      "max_peak_count_late": 2,
+      "boundary_reach": {
+        "method": "Conservative reach estimate using maximum saved-field frozen characteristic speeds; not a rigorous bound between outputs.",
+        "maximum_u_grid_plus_c_m_s": 2635.636414546778,
+        "minimum_u_grid_minus_c_m_s": -408.7759245774869,
+        "left_to_core_margin_m": 0.00017106314053528236,
+        "right_to_front_margin_m": 0.0008067306899025854
+      },
+      "approximate_mass_balance_relative": 3.0950061050378278e-09,
+      "approximate_energy_balance_relative": 5.462212934921638e-07,
+      "short_window_checks": {
+        "speed_within_1_percent": true,
+        "late_induction_within_10_percent": false,
+        "late_FWHM_within_10_percent": false,
+        "all_late_core_flow_L1_within_5_percent": true,
+        "single_peak_late": false,
+        "finite_fields": true,
+        "species_mass_sum_within_1e_10": true,
+        "estimated_core_boundary_margins_positive": true,
+        "approximate_balances_within_1e_6": true
+      },
+      "short_window_checks_passed": false
+    }
+  },
+  "convergence": {
+    "spatial_late_mean_flow_L1": {
+      "rho": [
+        0.014094003713869376,
+        0.008558497390804781,
+        0.004481737550326103
+      ],
+      "p": [
+        0.008743711767706684,
+        0.004478371587044182,
+        0.002275293699949789
+      ],
+      "T": [
+        0.011050470405053683,
+        0.00724176973522219,
+        0.0036948972094173723
+      ],
+      "u": [
+        0.0041389448926886785,
+        0.0022024068938082987,
+        0.0010932799287454028
+      ]
+    },
+    "spatial_late_RMS_induction_error_percent": [
+      9.780032379924727,
+      8.075609456310405,
+      3.5668363175049684
+    ],
+    "spatial_late_RMS_FWHM_error_percent": [
+      17.888712995305198,
+      17.483407474092896,
+      4.123174710384003
+    ],
+    "spatial_flow_error_decreases_each_refinement": {
+      "rho": true,
+      "p": true,
+      "T": true,
+      "u": true
+    },
+    "time_halving": {
+      "relative_speed_change": 3.715014450882411e-05,
+      "relative_final_induction_change": 0.01495119686533824,
+      "relative_final_FWHM_change": 0.13293426658675486
+    },
+    "caveat": "Three-grid errors and a timestep-halving sensitivity test; no claim of asymptotic order from one instantaneous width or two timesteps."
+  },
+  "completed_frozen_startup_diagnostics": [
+    "frozen_startup_1200_v1",
+    "frozen_startup_2400_v1",
+    "frozen_startup_4800_v1"
+  ],
+  "two_dimensional_gate": "One-dimensional coupled-wave verification must pass before any new quantitative 2D detonation conclusion."
+}

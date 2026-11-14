@@ -1,0 +1,109 @@
+# Current Status CLI Report
+
+- Status: `PASS-CURRENT-STATUS-CLI`
+- Text return code: `0`
+- JSON return code: `0`
+- Current-scope gates: `15/15`
+- Open strict blockers: `3`
+- Strict blocker set ok: `True`
+- Snapshot key reports seen: `112`
+- Snapshot key reports expected: `112`
+- Snapshot key report count matches: `True`
+- State snapshot report key reports: `112`
+- State snapshot report count matches writer: `True`
+- Goal complete: `False`
+- Strict master-plan complete: `False`
+- Release-candidate handoff: `PASS-CURRENT-SCOPE-RELEASE-CANDIDATE-HANDOFF`
+- Release-candidate handoff ready: `True`
+- Release-candidate current scope ready: `True`
+- Release-candidate usable for current priority scope: `True`
+- Release-candidate is full strict master-plan completion: `False`
+- Release-candidate open strict blockers: `3`
+- Project closeout forecast: `PASS-PROJECT-CLOSEOUT-FORECAST`
+- Project closeout current scope can be closed now: `True`
+- Project closeout strict master-plan can be closed now: `False`
+- Project closeout strict external artifacts required: `True`
+- Project closeout acceptance gate: `PASS-PROJECT-CLOSEOUT-ACCEPTANCE-GATE`
+- Project closeout current phase acceptance allowed: `True`
+- Project closeout strict final acceptance allowed: `False`
+- Project closeout strict external artifacts done/missing: `5/9`
+- Strict external evidence receiving pack: `PASS-STRICT-EXTERNAL-EVIDENCE-RECEIVING-PACK`
+- Strict external evidence receiving pack ready: `True`
+- Strict external evidence receiving pack present/missing: `5/9`
+- Strict external evidence receiving pack completion allowed: `False`
+- Strict closeout action pack: `PASS-STRICT-MASTER-PLAN-CLOSEOUT-ACTION-PACK`
+- Strict closeout action pack ready: `True`
+- Strict closeout action pack done/missing: `5/9`
+- Strict closeout action pack completion allowed: `False`
+- Current-scope delivery package: `PASS-CURRENT-SCOPE-DELIVERY-PACKAGE`
+- Current-scope delivery package ready: `True`
+- Current-scope delivery package full log passed: `True`
+- Current-scope delivery package missing required commands: `0`
+- Current-scope final handoff note: `PASS-CURRENT-SCOPE-FINAL-HANDOFF-NOTE`
+- Current-scope final handoff note ready: `True`
+- Current-scope final handoff note README missing snippets: `0`
+- Current-scope final handoff note runbook missing snippets: `0`
+- Current phase closure certificate: `PASS-CURRENT-PHASE-CLOSURE-CERTIFICATE`
+- Current phase closure certificate ready: `True`
+- Current phase closeable: `True`
+- Closure certificate strict master-plan closure allowed: `False`
+- Closure certificate strict master-plan still open: `True`
+- Closure certificate full log passed: `True`
+- Current phase release manifest: `PASS-CURRENT-PHASE-RELEASE-MANIFEST`
+- Current phase release manifest ready: `True`
+- Current phase release manifest hashed artifacts: `86`
+- Current phase release manifest full log passed: `True`
+- Current phase release manifest strict closure allowed: `False`
+- Operator command inventory: `PASS-CURRENT-OPERATOR-COMMAND-INVENTORY`
+- Operator command inventory ready: `True`
+- Operator command inventory source files: `15`
+- Operator command inventory commands: `341`
+- Operator command inventory required snippets: `61`
+- Operator command inventory missing required snippets: `0`
+- Operator command inventory missing tools: `0`
+- Operator command inventory syntax failures: `0`
+- SUNDIALS local link audit: `PASS-SUNDIALS-LOCAL-LINK-AUDIT`
+- SUNDIALS local link audit ready: `True`
+- SUNDIALS local link drift present: `True`
+- SUNDIALS local link current kind: `directory`
+- SUNDIALS expected target exists: `False`
+- SUNDIALS CUDA-ready install candidates: `2`
+- SUNDIALS safe to auto-restore: `False`
+- SUNDIALS restore requires operator review: `True`
+- Multi-fuel capability: `PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY`
+- Multi-fuel template catalog: `PASS-ENGINEERING-MULTI-FUEL-TEMPLATE-CATALOG`
+- Multi-fuel template species: `C3H8, CH4, H2`
+- CH4 gas/fire probes: `True`
+- C3H8 gas/fire probes: `True`
+- Gasified LNG surrogate boundary: `True`
+- Gasified LPG surrogate boundary: `True`
+- External vaporization multi-fuel CUDA: `True`
+- Liquefied-release source-model CUDA smoke: `True`
+- Liquefied-release source balance: `PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE`
+- Liquefied-release source balance ready: `True`
+- Liquefied-release source balance gas mass kg: `6.262612621214`
+- Liquefied-release source balance max mass error: `0.06546339683315126`
+- Liquefied-release source balance negative selftest: `PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE-NEGATIVE-SELFTEST`
+- Liquefied-release source balance negative cases rejected: `5/5`
+- Liquefied-release source balance expected diagnostics: `5/5`
+- Liquefied breach source contract: `PASS-ENGINEERING-LIQUEFIED-BREACH-SOURCE-CONTRACT`
+- Liquefied breach source contract ready: `True`
+- Liquefied breach source cases: `2`
+- Liquefied breach source max mass error: `0.006735779203685908`
+- Liquefied breach preset templates: `PASS-ENGINEERING-LIQUEFIED-BREACH-PRESET-TEMPLATES`
+- Liquefied breach preset templates ready: `True`
+- Liquefied breach preset templates generate CFD CSV: `True`
+- Internal liquid phase-change CFD: `False`
+- Multi-fuel production-ready claim: `False`
+- Overclaim guard: `True`
+- Fire residual budget: `TRIAGED-H2-FIRE-CALIBRATION-RESIDUAL-BUDGET`
+- Fire residual budget ready: `True`
+- Fire residual budget clears strict blocker: `False`
+- Dataverse long-window reconciliation: `TRIAGED-DATAVERSE-OPEN-CHANNEL-LONG-WINDOW-REFINED-SOURCE-GAP`
+- Dataverse existing 120s reaches peak interval: `True`
+- Dataverse existing 120s all sensors passed: `False`
+- Dataverse refined-source time end s: `0.005`
+- Dataverse refined-source steps to 113s: `22600000`
+- Dataverse AMR projection implementation: `PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-IMPLEMENTATION`
+- Dataverse AMR MPI+CUDA linked executable: `True`
+- Dataverse AMR CUDA 12.6 reproducible build: `True`

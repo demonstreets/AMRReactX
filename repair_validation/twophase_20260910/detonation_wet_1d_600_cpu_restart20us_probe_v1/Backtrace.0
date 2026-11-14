@@ -1,0 +1,60 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0xaba1c6) [0x589bf423d1c6]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0xabef81) [0x589bf4241f81]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /lib/x86_64-linux-gnu/libc.so.6(+0x45330) [0x7fa612a45330]
+
+ 3: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0x8e57b1) [0x589bf40687b1]
+    amrex::IntVectND<2>::operator-=(amrex::IntVectND<2> const&) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_IntVect.H:642 (discriminator 1)
+ (inlined by) amrex::IntVectND<2>::operator-(amrex::IntVectND<2> const&) const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_IntVect.H:665 (discriminator 1)
+ (inlined by) amrex::BoxND<2>::index(amrex::IntVectND<2> const&) const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Box.H:1057 (discriminator 1)
+ (inlined by) amrex::BaseFab<int>::operator()(amrex::IntVectND<2> const&, int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BaseFab.H:1275 (discriminator 1)
+ (inlined by) bool amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, std::allocator, amrex::DefaultAssignor>::Where<amrex::Particle<10, 0> >(amrex::Particle<10, 0> const&, amrex::ParticleLocData&, int, int, int, int) const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleContainerI.H:275 (discriminator 1)
+
+ 4: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0x1102b49) [0x589bf4885b49]
+    void amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, std::allocator, amrex::DefaultAssignor>::locateParticle<amrex::Particle<10, 0> >(amrex::Particle<10, 0>&, amrex::ParticleLocData&, int, int, int, int) const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleContainerI.H:464
+ (inlined by) amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, std::allocator, amrex::DefaultAssignor>::hostPartitionTile(amrex::ParticleTile<amrex::Particle<10, 0>, 0, 0, std::allocator>&, int, int, int, int, int, int, int, bool, int, amrex::PODVector<int, std::allocator<int> >&, amrex::PODVector<int, std::allocator<int> >&, amrex::PODVector<int, std::allocator<int> >&, amrex::PODVector<int, std::allocator<int> >&, amrex::PODVector<amrex::IntVectND<2>, std::allocator<amrex::IntVectND<2> > >&) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleContainerI.H:1397
+ (inlined by) amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, std::allocator, amrex::DefaultAssignor>::Redistribute_impl(int, int, int, int, bool) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleContainerI.H:1649
+
+ 5: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0x10f7fb4) [0x589bf487afb4]
+    amrex::ParticleContainer_impl<amrex::Particle<10, 0>, 0, 0, std::allocator, amrex::DefaultAssignor>::Redistribute(int, int, int, int, bool) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Particle/AMReX_ParticleContainerI.H:1248
+ (inlined by) PeleC::particle_redistribute(int, bool) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Particle.cpp:421
+
+ 6: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0xd76c83) [0x589bf44f9c83]
+    PeleC::post_regrid(int, int) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/PeleC.cpp:1302
+
+ 7: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0xb09f0e) [0x589bf428cf0e]
+    amrex::ParallelContext::Frame::MyProc() const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParallelContext.H:27
+ (inlined by) amrex::ParallelContext::MyProcAll() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParallelContext.H:61
+ (inlined by) amrex::ParallelDescriptor::MyProc() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParallelDescriptor.H:130
+ (inlined by) amrex::ParallelDescriptor::IOProcessor() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParallelDescriptor.H:291
+ (inlined by) amrex::Amr::regrid_level_0_on_restart() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2914
+
+ 8: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0xb103ba) [0x589bf42933ba]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:1997
+ (inlined by) amrex::Amr::coarseTimeStep(double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2182
+
+ 9: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0x4dd3e) [0x589bf37d0d3e]
+    main at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/main.cpp:215
+
+10: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7fa612a2a1ca]
+
+11: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7fa612a2a28b]
+
+12: /home/cj/my-pele/examples/academic/spray_detonation/spatial_strang_soot_v22d.gnu.MPI.ex(+0x4f085) [0x589bf37d2085]
+    ?? ??:0
+

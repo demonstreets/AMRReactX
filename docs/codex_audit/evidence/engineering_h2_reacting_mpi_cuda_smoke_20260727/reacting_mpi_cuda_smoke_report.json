@@ -1,0 +1,141 @@
+{
+  "decision": "reacting_solver_mpi_cuda_smoke_pass_not_engineering_fire_propagation",
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/run.log",
+      "sha256": "fc3d17cd5e9bf150f191169e602b71fb701b7b4e402626c4700e51ca3614a383",
+      "size_bytes": 1504
+    },
+    {
+      "label": "input",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/input.codex_mpi_cuda_react_smoke",
+      "sha256": "6d3fc35af525dcdc29e29be1f536a9054d31e2d55ec73ddada8475e2d84e4020",
+      "size_bytes": 1013
+    },
+    {
+      "label": "initial_condition_summary",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/ic.txt",
+      "sha256": "22807cdd0a7fa4ff95a0f21cbb5a409ad30dff77d3452ffbcf847c0ec922e83b",
+      "size_bytes": 166
+    },
+    {
+      "label": "plt00005_job_info",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/plt00005/job_info",
+      "sha256": "0c6e964795669984e3da47576d7418b9500ff4835bfa70d0d2999dd641e4786d",
+      "size_bytes": 5624
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/plt00000/Header",
+      "sha256": "c68b096a9d174787a363f7fb5e23dd8e13f4474381b33fd9781ce4769bc14c39",
+      "size_bytes": 338
+    },
+    {
+      "label": "plt00005_header",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/plt00005/Header",
+      "sha256": "aaedd2ab526aaea1e86e072304ef29c4ac3a67031dc1bda302b6fcbec8c6f23d",
+      "size_bytes": 380
+    },
+    {
+      "label": "launcher_log",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/launcher.log",
+      "sha256": "9bdba60149a8beeb42e2ee3bbcdd05cced182fa53afc91a357c96489910659ab",
+      "size_bytes": 1736
+    },
+    {
+      "label": "script_summary",
+      "path": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727/reacting_mpi_cuda_summary.json",
+      "sha256": "b4fcca0e19dce8b432586d3634e49fa312a6f2a6044baaaf8c1c220775b7a696",
+      "size_bytes": 2563
+    },
+    {
+      "label": "reproducible_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh",
+      "sha256": "8d4df35865a3c74e09bc878accc740047236f44c81b6f9850a0a7e670f96dd1c",
+      "size_bytes": 8316
+    }
+  ],
+  "generated_at_utc": "2026-07-27T05:50:00+00:00",
+  "initial_condition_summary": {
+    "background_density": 9.62981e-05,
+    "background_pressure": 200000.0,
+    "background_temperature": 300.0,
+    "background_y_h2": 0.111907,
+    "background_y_o2": 0.888093,
+    "hotspot_density": 0.00176155,
+    "hotspot_pressure": 18000000.0,
+    "hotspot_radius_cm": 0.55,
+    "hotspot_temperature": 2214.0,
+    "hotspot_velocity_cm_s": 284000.0
+  },
+  "input_summary": {
+    "chem_integrator": "ReactorRK64",
+    "do_react": true,
+    "max_step": 5,
+    "n_cell": "48 16 4",
+    "plot_int": "1"
+  },
+  "limitations": [
+    "Short PeleC reacting hot-spot smoke, not full-duration engineering fire propagation.",
+    "Uses academic H2/O2 hot-spot setup, not pipe-rack leak cloud geometry.",
+    "OpenMPI launcher is required for this executable; MPICH launcher starts singleton ranks for this build.",
+    "Numeric slice statistics are not used as pass criteria; this gate checks solver logs, MPI/CUDA markers, IC metadata, and plotfile headers."
+  ],
+  "plotfile_checks": {
+    "final_time": 3.96359356692384e-08,
+    "initial_time": 0.0,
+    "required_reacting_variables_present": true,
+    "variables": [
+      "density",
+      "Temp",
+      "rho_H2",
+      "rho_O2",
+      "rho_H2O",
+      "rho_H",
+      "rho_O",
+      "rho_OH",
+      "rho_HO2",
+      "rho_H2O2",
+      "rho_N2",
+      "Y(H2)",
+      "Y(O2)",
+      "Y(H2O)",
+      "Y(H)",
+      "Y(O)",
+      "Y(OH)",
+      "Y(HO2)",
+      "Y(H2O2)",
+      "Y(N2)",
+      "x_velocity",
+      "y_velocity",
+      "z_velocity"
+    ]
+  },
+  "postprocessing_notes": {
+    "amrex_fextract_post_write_segfault": false,
+    "amrex_fextract_slice_written": false
+  },
+  "run_dir": "/tmp/codex_pelec_h2_reacting_ignition_openmpi_cuda_2rank_script_20260727",
+  "run_log_checks": {
+    "amrex_finalized": true,
+    "cuda_devices": 2,
+    "mpi_ranks": 2,
+    "reactor_marker": true,
+    "solver_failure_marker_count": 0
+  },
+  "schema_version": 1,
+  "status": "PASS-PELEC-H2-REACTING-MPI-CUDA-SMOKE",
+  "title": "PeleC H2/O2 Reacting MPI+CUDA Smoke Evidence",
+  "validated_capabilities": {
+    "cuda_parallel": true,
+    "direct_engineering_obstacle_fire_propagation": false,
+    "finite_plotfile_headers": true,
+    "h2_o2_lidryer_mechanism": true,
+    "mpi_cuda_2rank_2device": true,
+    "mpi_parallel": true,
+    "pelec_reacting_solver": true,
+    "pipe_rack_leak_cloud_fire_coupling": false,
+    "reactor_rk64": true
+  }
+}

@@ -1,0 +1,54 @@
+Internal ctest changing into directory: /home/cj/my-pele/build-codex-smoke
+UpdateCTestConfiguration  from :/home/cj/my-pele/build-codex-smoke/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/cj/my-pele/build-codex-smoke/DartConfiguration.tcl
+Test project /home/cj/my-pele/build-codex-smoke
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 2
+    Start 2: weno5_smoke
+
+2: Test command: /home/cj/my-pele/build-codex-smoke/test_weno5_smoke
+2: Working Directory: /home/cj/my-pele/build-codex-smoke
+2: Test timeout computed to be: 10000000
+2: === WENO5 Unit Tests ===
+2: [PASS] T01: Sine 5th-order convergence (p=4.93)
+2: [PASS] T02: Constant preservation (max_err=2.2e-16)
+2: [PASS] T03: Linear exact reconstruction (L1=3.2e-16)
+2: [PASS] T04: Sod jump — no overshoot (uL=1.000000 uR=1.000000)
+2: [PASS] T05: Shock capture — monotone transition (uL=0.000000 uR=0.000000)
+2: [PASS] T06: WENO-Z sharper than WENO-JS at discontinuity (JS: uR=1.003996  Z: uR=1.000000  exact=1.001)
+2: [PASS] T07: Symmetry OK (weno5 vs weno5_left) (diff=0.0e+00)
+2: [PASS] T08: float convergence OK (p=3.5)
+2: === 8/8 PASS ===
+1/2 Test #2: weno5_smoke ......................   Passed    0.00 sec
+test 3
+    Start 3: pelec_weno_smoke
+
+3: Test command: /home/cj/my-pele/build-codex-smoke/test_pelec_weno_smoke
+3: Working Directory: /home/cj/my-pele/build-codex-smoke
+3: Test timeout computed to be: 10000000
+3: [PASS] PeleC WENO5-JS constant preservation
+3: [PASS] PeleC WENO5-Z constant preservation
+3: [PASS] PeleC WENO7-Z constant preservation
+3: [PASS] PeleC WENO3-Z constant preservation
+3: [PASS] PeleC WENO5-JS linear exactness
+3: [PASS] PeleC WENO5-Z linear exactness
+3: [PASS] PeleC WENO7-Z linear exactness
+3: [PASS] PeleC WENO3-Z linear exactness
+3: [PASS] PeleC WENO5-Z controlled step response (sm=-0.000000 sp=0.000000)
+3: [PASS] PeleC WENO7-Z controlled step response (sm=-0.000000 sp=0.000000)
+3: [PASS] PeleC WENO5-Z smooth sine regression order (p32-64=4.911286070252e+00 p64-128=4.955275049333e+00)
+3: [PASS] PeleC WENO5-Z beats second-order face average on smooth sine (weno=9.117999350597e-08 linear=1.102731849977e-03)
+2/2 Test #3: pelec_weno_smoke .................   Passed    0.00 sec
+
+The following tests passed:
+	weno5_smoke
+	pelec_weno_smoke
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.01 sec

@@ -1,0 +1,118 @@
+{
+  "contracts": {
+    "center_error_improved_vs_pre_stress_baseline": true,
+    "circularity_error_improved_vs_pre_stress_baseline": true,
+    "interface_sharpness_improved_vs_pre_stress_baseline": true,
+    "short_candidate_passed": true,
+    "source_candidate_present_and_default_off": true,
+    "t3_mass_conserved": true,
+    "t3_no_bad_log_tokens": true,
+    "t3_reached_final_time": true,
+    "t3_reference_agreement_cleared": true,
+    "t3_sample_count_sufficient": true,
+    "velocity_error_improved_vs_pre_stress_baseline": true
+  },
+  "decision": {
+    "promote_as_preferred_qlt03_low_mach_csf_form": true,
+    "promote_full_academic_twophase_readiness": false,
+    "remaining_work": [
+      "rerun 32/64 or better grid-confirmation evidence with force_form=3",
+      "decide whether QLT-03 example inputs should default to force_form=3 after grid confirmation",
+      "repeat academic evidence summary/path-decision records after grid confirmation clears"
+    ],
+    "retain_csf_stress_candidate": true,
+    "why": [
+      "canonical no-gravity short-window lateral drift falls below the target threshold",
+      "buoyant short-window run remains stable, mass-conserving, bounded, and rising",
+      "coarse 32x64 t=3 Hysing center-height, maximum-rise-velocity, and minimum-circularity errors all clear the current tolerances"
+    ]
+  },
+  "evidence": {
+    "short_summary": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_short_20260730/csf_stress_candidate_short_summary.json",
+    "source_prob_cpp": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.cpp",
+    "source_prob_h": "examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+    "t3_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_t3_20260730/csf_stress_candidate_t3_report.json"
+  },
+  "pre_stress_baseline": {
+    "center_of_mass_y_at_t3_abs_error": 0.2435548712848178,
+    "final_alpha_max": 0.4464218681538674,
+    "final_center_x_drift": 0.1351832869968323,
+    "maximum_mean_rise_velocity_abs_error": 0.021518844103998735,
+    "minimum_circularity_abs_error": 0.22931204142949568
+  },
+  "scope": "Promotion evidence for the default-off QLT-03 low-Mach continuum-surface-stress CSF candidate. This clears the coarse 32x64 t=3 Hysing reference gate and records that full canonical readiness still needs grid-confirmation evidence.",
+  "short_metrics": {
+    "stress_buoyant": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.9999996671815677,
+      "alpha_min": 0.0,
+      "case": "stress_buoyant",
+      "center_x_drift": 0.0008171268224348438,
+      "center_x_final": 0.5008171268224348,
+      "center_x_initial": 0.5,
+      "center_y_drift": 0.052522105978077716,
+      "center_y_final": 0.5525221059887973,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 1.0066957477478355,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_short_20260730/stress_buoyant/run/plt00020",
+      "final_time": 0.5,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_short_20260730/stress_buoyant/run/plt00000",
+      "interface_length": 1.5668082962975816,
+      "log_bad_tokens": [],
+      "max_abs_ux": 0.2024570502613626,
+      "max_abs_uy": 0.3646080856754349,
+      "mean_rise_velocity_y": 0.18909439082390261,
+      "plot_count": 2,
+      "status": "RAN"
+    },
+    "stress_no_gravity": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.9999999879263811,
+      "alpha_min": 0.0,
+      "case": "stress_no_gravity",
+      "center_x_drift": -3.911144148027734e-05,
+      "center_x_final": 0.4999608885585197,
+      "center_x_initial": 0.5,
+      "center_y_drift": -7.033381469778721e-05,
+      "center_y_final": 0.49992966619602175,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 1.0044069013245223,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_short_20260730/stress_no_gravity/run/plt00019",
+      "final_time": 0.5,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_candidate_short_20260730/stress_no_gravity/run/plt00000",
+      "interface_length": 1.5703787452463782,
+      "log_bad_tokens": [],
+      "max_abs_ux": 0.03184387776595127,
+      "max_abs_uy": 0.03410692912742892,
+      "mean_rise_velocity_y": -8.664829378453494e-05,
+      "plot_count": 2,
+      "status": "RAN"
+    }
+  },
+  "short_status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-STRESS-CANDIDATE-SHORT",
+  "source_contracts": {
+    "candidate_default_off": true,
+    "continuum_surface_stress_tensor_present": true,
+    "force_form_parameter_present": true,
+    "legacy_csf_default_path_retained": true,
+    "stress_divergence_candidate_present": true
+  },
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-STRESS-CANDIDATE-PROMOTION",
+  "t3_metrics": {
+    "alpha_mass_relative_drift": 0.0,
+    "final_alpha_max": 0.9855180215582039,
+    "final_center_x": 0.5465044923299004,
+    "final_center_x_drift": 0.04650449232990039,
+    "final_center_y": 1.0503910888104113,
+    "final_circularity": 0.9499141465844245,
+    "max_mean_rise_velocity_y": 0.2310564282482914,
+    "min_circularity": 0.917080167499013,
+    "reference_errors": {
+      "center_of_mass_y_at_t3_abs_error": 0.030908911189588606,
+      "maximum_mean_rise_velocity_abs_error": 0.010643571751708603,
+      "minimum_circularity_abs_error": 0.01578016749901301
+    },
+    "sample_count": 12
+  },
+  "t3_status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT"
+}

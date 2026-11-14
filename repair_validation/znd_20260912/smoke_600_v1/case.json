@@ -1,0 +1,24 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "24",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_final_cleanup_v12d.gnu.MPI.ex",
+    "inputs"
+  ],
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_final_cleanup_v12d.gnu.MPI.ex",
+  "binary_sha256": "2508c56b7438e2c8a42dfe7a36aa9b891849ca6c658af4141ebc7db44f75b61f",
+  "reference": "/home/cj/my-pele/repair_validation/znd_20260912/reference_near_cj_v1",
+  "profile_sha256": "9e01c21e492dd4d5cbcfe9434cdf0f0fb24ecf029f27ee2cc3824900e4070e3f",
+  "input_sha256": "b9777a4a12f6490f62db231c98f979535af68b8e446d6c2fb23a6c2003c58962",
+  "nx": 600,
+  "ny": 4,
+  "dx_m": 0.00019999999999999998,
+  "cfl": 0.2,
+  "rtol": 1e-07,
+  "atol_y": 1e-14,
+  "stop_time_s": 2e-05,
+  "plot_root": "/dev/shm/my_pele_znd_20260912/smoke_600_v1",
+  "physical_model": "Single-phase inviscid reactive Euler, heptane_lu_88sk, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+  "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+}

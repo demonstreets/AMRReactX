@@ -1,0 +1,232 @@
+{
+  "article_doi": "10.1016/j.jlp.2025.105669",
+  "case_metadata": {
+    "article_doi": "10.1016/j.jlp.2025.105669",
+    "article_test_id": "test-08-1",
+    "candidate_reason": "peak>=10vol%, >=3 sensors above LFL, duration>=120s",
+    "coordinate_convention": "x width across channel, y from closed end to open end, z vertical",
+    "dataset_doi": "10.23642/USN.26117989",
+    "limitations": [
+      "This package standardizes one experimental reference case for downstream CFD sensor-time-history scoring.",
+      "It does not generate a CFD mesh or simulation input deck for the Dataverse channel.",
+      "It does not run CFD/reference agreement scoring and therefore does not clear the strict plume blocker."
+    ],
+    "raw_case_id": "23_FFI_P101_T00031",
+    "raw_csv_member": "23_FFI_P101_T00031/23_FFI_P101_T00031.csv",
+    "raw_zip_filename": "23_FFI_P101_T00031.zip",
+    "raw_zip_md5": "7de8e76a4bc29e9b5ee32254045f7223",
+    "schema_version": 1,
+    "selected_by": "time-series-index top ranked strong plume candidate",
+    "source_reports": {
+      "geometry_mapping_report": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_open_channel_geometry_mapping_report.json",
+      "timeseries_index_report": "docs/codex_audit/evidence/dataverse_open_channel_timeseries_index_20260803/dataverse_open_channel_timeseries_index_report.json"
+    },
+    "table_summary": {
+      "duration_s": 378.5,
+      "flow_column": "mass flow meter 1 [g/s]",
+      "flow_max_g_s": 1.2379311480316295,
+      "flow_mean_g_s": 0.9152681907312261,
+      "h2_min_vol_percent": -0.09407096774193541,
+      "h2_peak_sensor_id": 20,
+      "h2_peak_vol_percent": 30.827625806451614,
+      "h2_peak_x_h2": 0.30827625806451614,
+      "lfl_sensor_count": 25,
+      "lfl_sensor_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "pressure_max_bar": 8.4152025026351,
+      "sensor_count": 29,
+      "sensor_record_count": 16849,
+      "sensor_time_sample_count": 581,
+      "time_end_s": 378.5,
+      "time_start_s": 0.0
+    },
+    "units": {
+      "H2_vol_percent": "raw experimental hydrogen concentration percent",
+      "X(H2)": "volume fraction from raw H2 concentration percent divided by 100",
+      "filling_pressure_bar": "raw Dataverse filling pressure in bar",
+      "mass_flow_g_s": "raw Dataverse mass flow in grams per second"
+    }
+  },
+  "dataset_doi": "10.23642/USN.26117989",
+  "evidence_files": [
+    {
+      "label": "dataverse_timeseries_index",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_timeseries_index_20260803/dataverse_open_channel_timeseries_index_report.json",
+      "sha256": "6e8f5d27855e59f79a97265d94cad8bdc36d5d00c800b99c32d95f905dda0de0",
+      "size_bytes": 64779
+    },
+    {
+      "label": "dataverse_geometry_mapping",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_open_channel_geometry_mapping_report.json",
+      "sha256": "23f4c54b5e03da715e8c9ca49d10a34a655585cb40fdc37bdbbfa1f7e8bd8c95",
+      "size_bytes": 15294
+    },
+    {
+      "label": "dataverse_raw_zip",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_dataset_20260803/raw/23_FFI_P101_T00031.zip",
+      "sha256": "023cba0cd4dfe1063c7145de2c14dbfe93bd7c240f4dfcda11a4d3f8f0973279",
+      "size_bytes": 2248254
+    },
+    {
+      "label": "reference_long_timeseries_csv",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_timeseries_long.csv",
+      "sha256": "fce4e06cc0d9b68bd5c28b54604fe3ceda81b32cdb323600e44038b666d6a3cc",
+      "size_bytes": 2216190
+    },
+    {
+      "label": "reference_wide_timeseries_csv",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_timeseries_wide.csv",
+      "sha256": "46de351eb9a2b4c22d6e213d9c00a967b34829a120e990c1d283b5074ae2053f",
+      "size_bytes": 693641
+    },
+    {
+      "label": "reference_release_profile_csv",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_release_profile.csv",
+      "sha256": "dfa023f6c74a578083b5225ec44830a27759bd430bb72469675e55c2f5ed2833",
+      "size_bytes": 1871058
+    },
+    {
+      "label": "reference_case_metadata_json",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_case_metadata.json",
+      "sha256": "daf146d544d60044057cc2c7e9bec1ca7b9e2403d96737f11370a8d566283894",
+      "size_bytes": 2418
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:00+00:00",
+  "limitations": [
+    "This report proves reference signal packaging, not CFD validation agreement.",
+    "The raw experimental CSV contains small negative concentration readings from measurement noise; X(H2) preserves the raw converted signal and X_H2_clipped_nonnegative is provided for nonnegative-only consumers.",
+    "The strict external plume blocker remains open until CFD sensor samples are compared against this reference package with accepted metrics."
+  ],
+  "outputs": {
+    "case_metadata_json": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_case_metadata.json",
+    "long_timeseries_csv": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_timeseries_long.csv",
+    "release_profile_csv": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_release_profile.csv",
+    "wide_timeseries_csv": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_reference_timeseries_wide.csv"
+  },
+  "schema_version": 1,
+  "selected_candidate": {
+    "candidate_reason": "peak>=10vol%, >=3 sensors above LFL, duration>=120s",
+    "csv_member": "23_FFI_P101_T00031/23_FFI_P101_T00031.csv",
+    "duration_s": 378.5,
+    "filename": "23_FFI_P101_T00031.zip",
+    "flow_columns": [
+      "mass flow meter 1 [g/s]"
+    ],
+    "flow_max_g_s": 1.2379311480316295,
+    "flow_mean_g_s": 0.9152681907312261,
+    "h2_peak_sensor_column": "sensor 20 h2 concentration [%]",
+    "h2_peak_sensor_id": "20",
+    "h2_peak_vol_percent": 30.827625806451614,
+    "lfl_sensor_count": 25,
+    "lfl_sensor_ids": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26"
+    ],
+    "md5": "7de8e76a4bc29e9b5ee32254045f7223",
+    "path": "docs/codex_audit/evidence/dataverse_open_channel_dataset_20260803/raw/23_FFI_P101_T00031.zip",
+    "peak_sensor_top5": [
+      {
+        "peak_h2_vol_percent": 30.827625806451614,
+        "sensor_column": "sensor 20 h2 concentration [%]",
+        "sensor_id": "20"
+      },
+      {
+        "peak_h2_vol_percent": 30.402477419354838,
+        "sensor_column": "sensor 21 h2 concentration [%]",
+        "sensor_id": "21"
+      },
+      {
+        "peak_h2_vol_percent": 30.254090322580645,
+        "sensor_column": "sensor 22 h2 concentration [%]",
+        "sensor_id": "22"
+      },
+      {
+        "peak_h2_vol_percent": 28.751070967741935,
+        "sensor_column": "sensor 23 h2 concentration [%]",
+        "sensor_id": "23"
+      },
+      {
+        "peak_h2_vol_percent": 28.638229032258064,
+        "sensor_column": "sensor 1 h2 concentration [%]",
+        "sensor_id": "1"
+      }
+    ],
+    "pressure_max_bar": 8.4152025026351,
+    "row_count": 17347,
+    "sensor_column_count": 29,
+    "strong_plume_candidate": true,
+    "time_end_s": 378.5,
+    "time_start_s": 0.0
+  },
+  "status": "PASS-DATAVERSE-OPEN-CHANNEL-H2-REFERENCE-PACKAGE",
+  "summary": {
+    "article_test_id": "test-08-1",
+    "clears_external_plume_reference_blocker": false,
+    "duration_s": 378.5,
+    "flow_column": "mass flow meter 1 [g/s]",
+    "h2_peak_sensor_id": 20,
+    "h2_peak_vol_percent": 30.827625806451614,
+    "h2_peak_x_h2": 0.30827625806451614,
+    "index_peak_h2_vol_percent": 30.827625806451614,
+    "lfl_sensor_count": 25,
+    "peak_delta_abs_vol_percent": 0.0,
+    "raw_case_id": "23_FFI_P101_T00031",
+    "raw_csv_member": "23_FFI_P101_T00031/23_FFI_P101_T00031.csv",
+    "raw_row_count": 17347,
+    "ready_for_cfd_reference_agreement_scoring": false,
+    "ready_for_reference_signal_sampling": true,
+    "selected_case_filename": "23_FFI_P101_T00031.zip",
+    "sensor_count": 29,
+    "sensor_record_count": 16849,
+    "sensor_time_sample_count": 581
+  }
+}

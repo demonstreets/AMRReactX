@@ -1,0 +1,55 @@
+# Short Double Mach Reflection smoke case for Codex validation.
+max_step = 8
+stop_time = 0.008
+
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0 0 0
+geometry.prob_hi     = 4 1 0.0625
+amr.n_cell           = 96 24 4
+
+pelec.lo_bc = "UserBC" "UserBC" "SlipWall"
+pelec.hi_bc = "UserBC" "UserBC" "SlipWall"
+
+pelec.do_hydro = 1
+pelec.diffuse_vel = 0
+pelec.diffuse_temp = 0
+pelec.diffuse_spec = 0
+pelec.do_react = 0
+
+pelec.ppm_type = 1
+pelec.use_hybrid_weno = 1
+pelec.weno_scheme = 0
+
+pelec.cfl = 0.3
+pelec.init_shrink = 0.1
+pelec.change_max = 1.05
+pelec.dt_cutoff = 5.e-20
+
+pelec.sum_interval = 1
+pelec.v = 1
+amr.v = 1
+amr.data_log = datlog
+
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 128
+amr.n_error_buf = 2
+
+amr.checkpoint_files_output = 0
+amr.plot_files_output = 1
+amr.plot_file = plt
+amr.plot_int = 8
+amr.plot_vars = density Temp
+amr.derive_plot_vars = x_velocity y_velocity z_velocity pressure
+
+amrex.abort_on_unused_inputs = 1
+
+prob.shock_M = 10.0
+prob.gamma = 1.4
+prob.shock_x0 = 0.16666667
+prob.rho_pre = 1.4
+prob.p_pre = 1.0
+prob.u_pre = 0.0
+prob.v_pre = 0.0
+prob.wedge_start = 0.16666667

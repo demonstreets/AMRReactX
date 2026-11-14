@@ -1,0 +1,172 @@
+{
+  "baffle_geometry_summary": {
+    "baffle_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "row_count": 4,
+    "sha256": "8a4acc74b5249b500588fc84a72d9a1ea8a2912ed4012b386ad7fa9c11a8bc28"
+  },
+  "benchmark_id": "hysafe_sbepv5_d27",
+  "benchmark_spec_report": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_spec_20260723/hysafe_sbepv5_d27_benchmark_spec_report.json",
+  "blocking_gaps": [],
+  "clears_reference_data_blocker": false,
+  "current_inputs": {
+    "dataset_metadata_available": true,
+    "exact_baffle_geometry_available": true,
+    "exact_sensor_coordinates_available": true,
+    "experimental_timeseries_available": true
+  },
+  "dataset_root": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids",
+  "evidence_files": [
+    {
+      "label": "benchmark_spec_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_spec_20260723/hysafe_sbepv5_d27_benchmark_spec_report.json",
+      "sha256": "edacc94c2996c3a2f1dab3c9b57dc887c69a15b4811cbf3e0cf402d7cae7c739",
+      "size_bytes": 5247
+    },
+    {
+      "label": "dataset_metadata",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/dataset_metadata.json",
+      "sha256": "a5798d83c84cff370f25e0768489d9ee86c46a3a7687abc9a8e37036b84ade5d",
+      "size_bytes": 663
+    },
+    {
+      "label": "sensor_coordinates",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/sensor_coordinates.csv",
+      "sha256": "d84217e36dad9e1939163890084e872daff5e2c27fe3164e50360b14053c541f",
+      "size_bytes": 1130
+    },
+    {
+      "label": "baffle_geometry",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/baffle_geometry.csv",
+      "sha256": "8a4acc74b5249b500588fc84a72d9a1ea8a2912ed4012b386ad7fa9c11a8bc28",
+      "size_bytes": 439
+    },
+    {
+      "label": "experimental_timeseries",
+      "path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/experimental_timeseries.csv",
+      "sha256": "a3bac86d764e8a39b9cb3f45e169fd576cc976b9151f6edd9bbd702c69810143",
+      "size_bytes": 2294
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This report validates the external dataset ingestion package before reference-agreement scoring.",
+    "It cannot clear the production reference-data blocker by itself.",
+    "The official reference-agreement report must still be regenerated with a passing external plume dataset JSON."
+  ],
+  "metadata_summary": {
+    "benchmark_id": "hysafe_sbepv5_d27",
+    "case_alignment": {
+      "boundary_conditions": true,
+      "geometry": true,
+      "release_direction": true,
+      "release_rate": true
+    },
+    "digitization": {
+      "method": "scripted gate validation fixture",
+      "operator_or_tool": "codex ingestion gate verifier",
+      "source_figures_or_tables": [
+        "Figure 2",
+        "Figure 4",
+        "Figure 5"
+      ]
+    },
+    "digitized_dataset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "schema_version": 1,
+    "source": {
+      "type": "controlled_fixture_literature_digitized",
+      "url": "https://example.invalid/sbepv5/numeric_ids/source"
+    }
+  },
+  "required_dataset_files": {
+    "baffle_geometry_csv": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/baffle_geometry.csv",
+    "dataset_metadata_json": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/dataset_metadata.json",
+    "experimental_timeseries_csv": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/experimental_timeseries.csv",
+    "sensor_coordinates_csv": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_selftest_20260724/fixtures/positive_numeric_sensor_ids/sensor_coordinates.csv"
+  },
+  "schema_requirements": {
+    "accepted_sensor_id_formats": [
+      "1",
+      "01",
+      "Gas01"
+    ],
+    "baffle_geometry_csv_columns": [
+      "baffle_id",
+      "x_min_m",
+      "x_max_m",
+      "y_min_m",
+      "y_max_m",
+      "z_min_m",
+      "z_max_m",
+      "source_basis",
+      "digitization_uncertainty_m"
+    ],
+    "content_quality_gate_level": "strict-v1-placeholder-free-and-non-synthetic",
+    "experimental_timeseries_csv_columns": [
+      "time_s",
+      "Gas01_vol_percent",
+      "Gas02_vol_percent",
+      "Gas03_vol_percent",
+      "Gas04_vol_percent",
+      "Gas05_vol_percent",
+      "Gas06_vol_percent",
+      "Gas07_vol_percent",
+      "Gas08_vol_percent",
+      "Gas09_vol_percent",
+      "Gas10_vol_percent",
+      "Gas11_vol_percent",
+      "Gas12_vol_percent"
+    ],
+    "sensor_coordinates_csv_columns": [
+      "sensor_id",
+      "x_m",
+      "y_m",
+      "z_m",
+      "reliability",
+      "source_basis",
+      "digitization_uncertainty_m"
+    ]
+  },
+  "schema_version": 2,
+  "sensor_coordinate_summary": {
+    "max_digitization_uncertainty_m": 0.01,
+    "row_count": 12,
+    "sensor_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "sha256": "d84217e36dad9e1939163890084e872daff5e2c27fe3164e50360b14053c541f"
+  },
+  "status": "PASS-SBEPV5-D27-DATASET-INGESTION",
+  "timeseries_summary": {
+    "reliable_sensor_peak_vol_percent": {
+      "1": 12.1,
+      "10": 18.0,
+      "12": 18.0,
+      "2": 13.2,
+      "5": 16.5,
+      "7": 18.0,
+      "8": 18.0,
+      "9": 18.0
+    },
+    "row_count": 25,
+    "sha256": "a3bac86d764e8a39b9cb3f45e169fd576cc976b9151f6edd9bbd702c69810143",
+    "time_end_s": 120.0,
+    "time_start_s": 0.0
+  },
+  "title": "HySafe SBEPV5 D27 Dataset Ingestion Readiness"
+}

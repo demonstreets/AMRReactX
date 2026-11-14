@@ -1,0 +1,133 @@
+{
+  "allowed_bc_types": [
+    "ground",
+    "inlet",
+    "no_slip_wall",
+    "open",
+    "outlet",
+    "slip_wall",
+    "symmetry",
+    "vent",
+    "wall"
+  ],
+  "boundary_tag_gap_count": 1,
+  "boundary_tag_gaps": [
+    "missing_boundary_tags_csv:docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv"
+  ],
+  "boundary_tag_summary": {},
+  "boundary_tag_template": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv",
+  "boundary_tags": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv",
+  "boundary_tags_valid": false,
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "boundary_tag_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv",
+      "sha256": "fd9f75d380dc22a8bfcdb1a5438ec3c4966a2a09df498e8064c7b48f5595ba15",
+      "size_bytes": 505
+    },
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "e227facfc24e049ebe4d2672e9060475e751bb7d629453ebb5a4b1635b73db82",
+      "size_bytes": 5093
+    },
+    {
+      "label": "real_cad_intake_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+      "sha256": "33e882ad5cc94663d01c9e93f18faa8a1bb385c5dd1a838e5df80423b0b3a5fc",
+      "size_bytes": 6969
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This contract validates CAD face/patch boundary labels but does not create or clean CAD geometry.",
+    "The current default state remains NOT_READY until real-CAD cleanup, intake, and boundary tags are all valid.",
+    "Boundary tags support ENG-05 traceability but cannot clear production blockers without the full engineering H2 verifier."
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv",
+      "gap": "",
+      "name": "boundary_tag_template_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide real_cad_boundary_tags.csv in the real-CAD package root.",
+      "name": "boundary_tags_present",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "missing_boundary_tags_csv:docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv",
+      "name": "boundary_tags_schema_valid",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Boundary tags must cover at least three large-layout geometry labels.",
+      "name": "boundary_tags_cover_large_layout_labels",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Boundary tags must include wall_or_obstacle, release_or_inlet, and outflow_or_vent roles.",
+      "name": "required_engineering_roles_present",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Real-CAD cleanup package must clear its blocker before BC tags can receive production credit.",
+      "name": "real_cad_cleanup_ready",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Real-CAD intake preflight must validate large-layout source and cleaned geometry.",
+      "name": "real_cad_intake_large_layout_ready",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "NOT_READY-H2-REAL-CAD-BOUNDARY-TAG-CONTRACT",
+      "gap": "",
+      "name": "does_not_clear_without_real_cad",
+      "status": "PASS"
+    }
+  ],
+  "ready_for_real_cad_bc_tagging_credit": false,
+  "real_cad_cleanup_package_report": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+  "real_cad_intake_preflight_report": "docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json",
+  "required_columns": [
+    "label",
+    "patch_id",
+    "bc_type",
+    "face_selector",
+    "normal_hint",
+    "area_m2",
+    "source_basis",
+    "engineering_role",
+    "reviewer"
+  ],
+  "required_engineering_roles": [
+    "outflow_or_vent",
+    "release_or_inlet",
+    "wall_or_obstacle"
+  ],
+  "schema_version": 1,
+  "status": "NOT_READY-H2-REAL-CAD-BOUNDARY-TAG-CONTRACT",
+  "summary": {
+    "boundary_tag_label_count": 0,
+    "boundary_tag_patch_count": 0,
+    "boundary_tag_row_count": 0,
+    "boundary_tags_present": false,
+    "boundary_tags_valid": false,
+    "cleanup_package_clears_blocker": false,
+    "intake_preflight_large_layout_valid": false,
+    "observed_required_role_count": 0,
+    "ready_for_real_cad_bc_tagging_credit": false,
+    "required_role_count": 3,
+    "template_available": true
+  },
+  "title": "Engineering H2 Real-CAD Boundary Tag Contract"
+}

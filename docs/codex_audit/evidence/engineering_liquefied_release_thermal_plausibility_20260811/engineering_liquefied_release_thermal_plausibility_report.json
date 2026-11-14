@@ -1,0 +1,140 @@
+{
+  "cases": [
+    {
+      "boiling_T_K": 111.7,
+      "case": "lng_ch4_screening_release",
+      "cfd_solves_flashing_discharge": false,
+      "cfd_solves_liquid_phase_change": false,
+      "cfd_solves_pool_spread_evaporation": false,
+      "default_pool_vapor_fraction": 0.05,
+      "expected_gas_mass_from_inventory_kg": 3.259833373065967,
+      "external_pool_assisted_fraction": 0.05,
+      "external_pool_latent_load_J": 588398.7927373061,
+      "flash_fraction_from_superheat": 0.09127450980392156,
+      "flash_latent_load_J": 1074116.2275263371,
+      "fluid": "LNG_CH4",
+      "gas_mass_integral_kg": 3.046433607355,
+      "gas_mass_relative_error": 0.06546339683315112,
+      "gas_source_latent_load_J": 1553681.13975105,
+      "initial_inventory_kg": 25.0,
+      "liquid_T_K": 125.0,
+      "liquid_mass_released_kg": 23.07446246028651,
+      "remaining_inventory_kg": 1.9255375397134886,
+      "sensible_energy_available_J": 1074116.227526337,
+      "species": "CH4",
+      "thermal_plausibility_ready": true,
+      "vapor_T_max_K": 285.0,
+      "vapor_T_min_K": 285.0,
+      "vaporized_fraction_matches_screening_formula": true,
+      "vaporized_fraction_to_gas_source": 0.14127450980392156
+    },
+    {
+      "boiling_T_K": 231.0,
+      "case": "lpg_c3h8_screening_release",
+      "cfd_solves_flashing_discharge": false,
+      "cfd_solves_liquid_phase_change": false,
+      "cfd_solves_pool_spread_evaporation": false,
+      "default_pool_vapor_fraction": 0.08,
+      "expected_gas_mass_from_inventory_kg": 3.436995494792542,
+      "external_pool_assisted_fraction": 0.08000000000000002,
+      "external_pool_latent_load_J": 470400.71385316167,
+      "flash_fraction_from_superheat": 0.12808988764044943,
+      "flash_latent_load_J": 753169.6822929833,
+      "fluid": "LPG_C3H8",
+      "gas_mass_integral_kg": 3.216179013859,
+      "gas_mass_relative_error": 0.06424695093959398,
+      "gas_source_latent_load_J": 1144959.728933804,
+      "initial_inventory_kg": 18.0,
+      "liquid_T_K": 250.0,
+      "liquid_mass_released_kg": 16.516878997653144,
+      "remaining_inventory_kg": 1.4831210023468542,
+      "sensible_energy_available_J": 753169.6822929834,
+      "species": "C3H8",
+      "thermal_plausibility_ready": true,
+      "vapor_T_max_K": 300.0,
+      "vapor_T_min_K": 300.0,
+      "vaporized_fraction_matches_screening_formula": true,
+      "vaporized_fraction_to_gas_source": 0.20808988764044944
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "liquefied_release_generator",
+      "path": "tools/codex_make_liquefied_release_vaporization_csv.py",
+      "sha256": "090d438dd914232f6829453fdc51972ce96fd770862d7e9fd60a132916bb8eec",
+      "size_bytes": 12589
+    },
+    {
+      "label": "liquefied_release_source_model_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/engineering_liquefied_release_vaporization_source_model_report.json",
+      "sha256": "4be22be889e5df0db88134ec244bc833f1279591025098fabbab677ab263b9fb",
+      "size_bytes": 15190
+    },
+    {
+      "label": "liquefied_release_source_balance_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_source_balance_20260807/engineering_liquefied_release_source_balance_report.json",
+      "sha256": "cb9ab9ff5433d1503ffaf191256345685a229c9f6437fe061d29c814646d9481",
+      "size_bytes": 6865
+    },
+    {
+      "label": "liquefied_release_source_model_cuda_smoke_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_cuda_smoke_20260807/engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.json",
+      "sha256": "a071327cea9eca43e6b74f9016fcbc4c2e51a041961378f40a466c8629f905aa",
+      "size_bytes": 6930
+    },
+    {
+      "label": "lng_ch4_screening_release_source_csv",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv",
+      "sha256": "5b3870efc614ea6c51b68d35e7fa16623676f2c10ed6e09423fc70cca0fb3012",
+      "size_bytes": 773
+    },
+    {
+      "label": "lng_ch4_screening_release_source_model",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_model.json",
+      "sha256": "c9e0ab8e64e8d06a5831aea8a847fb3c2efb115d816a6087320dc7ba7a00752f",
+      "size_bytes": 1961
+    },
+    {
+      "label": "lpg_c3h8_screening_release_source_csv",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv",
+      "sha256": "0302c9a31e12e8c5cb402d3231dec46323b3852b56e2ed27049c7766ca7dc706",
+      "size_bytes": 783
+    },
+    {
+      "label": "lpg_c3h8_screening_release_source_model",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_model.json",
+      "sha256": "6229d01990b54097448b1521f161c62a725906f0b2d6a8f8f9f0bfe89d95825f",
+      "size_bytes": 1968
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:36.764346+00:00",
+  "limitations": [
+    "This report audits the thermal plausibility of generated gas-source schedules only.",
+    "It does not validate internal tank rupture mechanics, flashing multiphase discharge, liquid-pool spread, boiling heat transfer, or ground heat transfer.",
+    "For production liquefied-gas phase-change claims, replace the screening source with measured, process-safety, or high-fidelity external-source data and add validation evidence."
+  ],
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-LIQUEFIED-RELEASE-THERMAL-PLAUSIBILITY",
+  "summary": {
+    "all_external_pool_fraction_bounded": true,
+    "all_flash_fraction_bounded": true,
+    "all_heat_loads_positive": true,
+    "all_vaporized_fraction_matches_screening_formula": true,
+    "case_count": 2,
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_liquid_phase_change": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "claim_level": "screening_external_gas_source_thermal_plausibility_not_internal_liquid_solver",
+    "cuda_smoke_status": "PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL-CUDA-SMOKE",
+    "liquefied_release_thermal_plausibility_ready": true,
+    "max_gas_mass_relative_error": 0.06546339683315112,
+    "production_phase_change_claim_allowed": false,
+    "source_balance_status": "PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE",
+    "source_model_status": "PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL",
+    "species": [
+      "C3H8",
+      "CH4"
+    ],
+    "total_gas_source_latent_load_J": 2698640.868684854
+  }
+}

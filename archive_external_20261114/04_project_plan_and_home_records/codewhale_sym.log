@@ -1,0 +1,114 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: my-pele/examples/engineering/c3h8_flacs/input.3d)
+tool: read_file (path: my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.cpp)
+tool read_file completed: #----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# Inflow on lo-x and lo-y, Outflow on hi-x and hi-y
+peleLM....
+tool read_file completed: #include <PeleLMeX.H>
+#include <AMReX_ParmParse.H>
+#include <AMReX_EB2.H>
+#include <AMReX_EB2_IF.H>
+#include "pelelmex_prob.H"
+
+void
+PeleLM::readProbParm()
+{
+  amrex::ParmParse pp("prob");
+  pp.query("P_mean", prob_parm->P_mean);
+  pp.query("T_mean", prob_parm->T_mean);
+  pp.query("wind_u", prob_...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me also look at the bcnormal_aux function to see how k/epsilon boundary conditions are applied]0;🐋 CodeWhale.]0;🐳 CodeWhaletool: grep_files (path: my-pele/examples/engineering/c3h8_flacs, pattern: bcnormal_aux|bcnormal)
+tool: file_search (path: my-pele/examples/engineering/c3h8_flacs, query: pelelmex_prob.H)
+
+tool grep_files completed: <4 keys>
+tool file_search completed: <1 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: my-pele/examples/engineering/c3h8_flacs/pelelmex_prob.H)
+tool read_file completed: #ifndef PELELM_PROB_H
+#define PELELM_PROB_H
+#include <AMReX_Geometry.H>
+#include <AMReX_FArrayBox.H>
+#include <PeleLMeX_ProblemSpecificFunctions.H>
+#include <PeleLMeX_Index.H>
+#include <PelePhysics.H>
+#include <cmath>
+
+struct MyProbParm : public ProbParmDefault {
+  amrex::Real P_mean=101325.0, T_...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale看清楚问题了]0;🐋 CodeWhale。`wind_v=0`，y方向无来流，但 `input.3d` 把 lo-y 设为 `Inflow`，导致 `bcnormal_aux` 在 y=0 边界强制注入 k≈0.96（基于 TI=10%, U=8），而 hi]0;🐳 CodeWhale-y 的 Outflow 给 k=1e-6。上下严重不对称。
+
+走 Option A——把 lo-y 从 `Inflow` 改为 `SlipWallAdiab`。y方向无流动，两壁对称滑移最合适]0;🐋 CodeWhale。]0;🐳 CodeWhaletool: edit_file (path: my-pele/examples/engineering/c3h8_flacs/input.3d)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
++++ b//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
+@@ -6,7 +6,7 @@
+ 
+ # >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+ # Inflow on lo-x and lo-y, Outflow on hi-x and hi-y
+-peleLM.lo_bc = Inflow Inflow SlipWallAdiab
++peleLM.lo...
+]0;🐋 CodeWhale]0;🐳 CodeWhale同时更新注释，避免误导：]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: my-pele/examples/engineering/c3h8_flacs/input.3d)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
++++ b//home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
+@@ -5,7 +5,7 @@
+ geometry.prob_hi     = 80.0 50.0 40.0
+ 
+ # >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+-# Inflow on lo-x and lo-y, Outflow on hi-x and hi-y
++# Inflow on lo...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale现在检查算例是否正在运行：]0;🐳 CodeWhaletool: exec_shell (command: ps aux | grep -E 'c3h8_flacs|PeleLMeX.*exe|pelelmex' | grep -v grep)
+
+tool exec_shell completed
+--- stdout/stderr ---
+cj       2307045  0.0  0.0  23176  7684 ?        S    09:39   0:00 /home/cj/bin/codewhale exec --auto c3h8_flacs圆柱已验证生效(volFrac<1)。现在运行500步 amr.plot_int=100，监控直到完成。
+cj       2307046  0.1  0.0 4312208 43320 ?       Sl   09:39   0:33 /home/cj/bin/codewhale-tui exec --auto c3h8_flacs圆柱已验证生效(volFrac<1)。现在运行500步 amr.plot_int=100，监控直到完成。
+cj       2307170  0.0  0.0   9940  3640 ?        S    09:40   0:00 bash -c cd /home/cj/my-pele/examples/engineering/c3h8_flacs && ./PeleLMeX3d.gnu.ex input.3d 2>&1 | tee run_500.log
+cj       2320256  0.0  0.0  23176  7688 ?        S    14:25   0:00 /home/cj/bin/codewhale exec --auto c3h8_flacs: wind_v=0但lo-y面是Inflow，bcnormal_aux给y=0边界强加了k~0.96，而y=50边界k=1e-6，导致k上下严重不对称。修改input.3d将lo_bc第二项从Inflow改为SlipWallAdiab，或修改bcnormal_aux让非流动面无条件设1e-6。重新编译运行验证。
+cj       2320257  1.3  0.0 4041828 42924 ?       Sl   14:25   0:00 /home/cj/bin/codewhale-tui exec --auto c3h8_flacs: wind_v=0但lo-y面是Inflow，bcnormal_aux给y=0边界强加了k~0.96，而y=50边界k=1e-6，导致k上下严重不对称。修改input.3d将lo_bc第二项从Inflow改为SlipWallAdiab，或修改bcnormal_aux让非流动面无条件设1e-6。重新编译运行验证。
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale算例正在运行中（PID 2307170，09:40 启动）。看看跑了多少步：]0;🐳 CodeWhaletool: exec_shell (command: <105 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.02014162866, divu: 3.061560475
+ STEP [210] - Time: 4.138075573, dt 0.02014162866, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 4.138075573
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 77.63212781
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.02026533394, divu: 3.041020016
+ STEP [211] - Time: 4.158217201, dt 0.02026533394, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 4.158217201
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 77.48405749
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.02039444102, divu: 3.019157214
+ STEP [212] - Time: 4.178482535, dt 0.02039444102, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 4.178482535
+   SDC iter [1] 
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale现状汇总：
+
+**修改已完成** — `input.3d` 中 `lo_bc` 第二项从 `Inflow` → `SlipWallAdiab`：
+```
+peleLM.lo_bc = Inflow SlipWallAdiab SlipWallAdiab
+```
+BC ]0;🐋 CodeWhale标志是运行期参数，**无需重新编译**。下次启动 `PeleLMeX3d.gnu.ex` 时自动生效。
+
+**当前运行状态**：算例正在跑 step 212/500（09:40 启动），使用的是旧 BC。有两个]0;🐳 CodeWhale选项：
+
+1. **杀掉当前算例，立即重启** — 用新 BC 从头跑 500 步，直接验证 k 对称性
+2. **等当前跑完再重启** — 已跑 212/500，但旧结果上下]0;🐋 CodeWhale k 不对称，参考价值有限
+
+走哪个？

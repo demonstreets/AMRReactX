@@ -1,0 +1,65 @@
+{
+  "cleared_gates": [
+    "32x64 and 64x128 both reach t=3 without recorded NaN/Abort/Segfault",
+    "alpha mass is conserved on both grids",
+    "final center-of-mass height is grid-consistent and within the Hysing center-y tolerance on the fine grid"
+  ],
+  "coarse_metrics": {
+    "center_y_final": 0.997322971560933,
+    "mass_relative_drift": 0.0,
+    "max_mean_rise_velocity_y": 0.24516645017043967,
+    "min_circularity": 0.6577728794386654,
+    "sample_count": 16
+  },
+  "coarse_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json",
+  "coarse_status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT",
+  "contracts": {
+    "center_height_grid_consistency_cleared": true,
+    "circularity_grid_consistency_cleared": false,
+    "coarse_mass_conserved": true,
+    "coarse_reaches_t3": true,
+    "coarse_time_series_sample_count_sufficient": true,
+    "fine_center_reference_error_cleared": true,
+    "fine_circularity_reference_error_cleared": false,
+    "fine_mass_conserved": true,
+    "fine_reaches_t3": true,
+    "fine_time_series_sample_count_sufficient": false,
+    "fine_velocity_reference_error_cleared": false,
+    "full_grid_confirmation_cleared": false,
+    "velocity_grid_consistency_cleared": false
+  },
+  "fine_metrics": {
+    "center_y_final": 0.9938762869613927,
+    "mass_relative_drift": -1.4020484468317865e-16,
+    "max_mean_rise_velocity_y": 0.5468252453968272,
+    "min_circularity": 0.48496055235376495,
+    "sample_count": 5
+  },
+  "fine_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_grid_confirmation_20260730/qlt03_lm_t3_64x128_strict_report.json",
+  "fine_status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT",
+  "grid_differences": {
+    "center_y_final_abs_delta": 0.0034466845995402284,
+    "max_mean_rise_velocity_abs_delta": 0.3016587952263875,
+    "min_circularity_abs_delta": 0.1728123270849004
+  },
+  "reference_errors": {
+    "coarse": {
+      "center_of_mass_y_at_t3_abs_error": 0.08397702843906696,
+      "maximum_mean_rise_velocity_abs_error": 0.003466450170439672,
+      "minimum_circularity_abs_error": 0.24352712056133463
+    },
+    "fine": {
+      "center_of_mass_y_at_t3_abs_error": 0.08742371303860719,
+      "maximum_mean_rise_velocity_abs_error": 0.30512524539682717,
+      "minimum_circularity_abs_error": 0.41633944764623504
+    }
+  },
+  "remaining_gates": [
+    "64x128 fine-grid time series needs at least 10 samples before shape/velocity extrema can be promoted",
+    "minimum circularity is not grid-converged and remains below the Hysing Case 1 tolerance",
+    "maximum mean rise velocity overshoots the Hysing Case 1 reference on the 64x128 run",
+    "CSF curvature/balanced-force treatment needs improvement before claiming strict QLT-03 academic completion"
+  ],
+  "scope": "QLT-03 low-Mach grid confirmation comparing 32x64 and 64x128 t=3 evidence under the same canonical Hysing settings.",
+  "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-GRID-CONFIRMATION"
+}

@@ -1,0 +1,49 @@
+{
+  "case": "/home/cj/my-pele/repair_validation/thermal_20260911/chemistry10_from48_v1",
+  "captured_utc": "2026-09-11T02:57:42.017774+00:00",
+  "original_manifest_backup": "/home/cj/my-pele/repair_validation/thermal_20260911/metadata_history/chemistry10_from48_v1/case_before_normalization_v1.json",
+  "original_manifest_sha256": "f7dd8626ad752383a9866de6833ff3637a94a42b0048aab57f58b8b859e1ee29",
+  "new_manifest_sha256": "c54790561836f99448d3fe1576a3507cde38f122c895d30968a610ecd3650aa8",
+  "unchanged_input_sha256": "ea042cf538589507e2aba583ddc7eab458ea0395a6c9481e4c7f3d21df4bede5",
+  "changes": {
+    "transverse_boundary": {
+      "before": "slip walls",
+      "after": "lower y: SlipWall; upper y: SlipWall"
+    },
+    "history_scope": {
+      "before": "New per-step maxima begin at restart; previous state trajectory retained separately.",
+      "after": "thermal_stages.csv records the four split-operator stages; the legacy wave-history writer is disabled."
+    },
+    "boundary_conditions": {
+      "before": null,
+      "after": {
+        "lower": [
+          "FOExtrap",
+          "SlipWall"
+        ],
+        "upper": [
+          "FOExtrap",
+          "SlipWall"
+        ]
+      }
+    },
+    "thermal_probe_index": {
+      "before": null,
+      "after": [
+        2444,
+        1
+      ]
+    },
+    "cell_shape": {
+      "before": null,
+      "after": [
+        2800,
+        800
+      ]
+    },
+    "metadata_reconciled_from_actual_inputs": {
+      "before": null,
+      "after": true
+    }
+  }
+}

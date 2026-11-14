@@ -1,0 +1,47 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x728486) [0x578ecdca1486]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x72d0f1) [0x578ecdca60f1]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x3c191e) [0x578ecd93a91e]
+    amrex::Abort(char const*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:188
+ (inlined by) MyProblemSpecificFunctions::modify_ext_sources(double, double, amrex::MultiFab const&, amrex::MultiFab const&, std::unique_ptr<amrex::MultiFab, std::default_delete<amrex::MultiFab> >&, amrex::GeometryData const&, MyProbParm const*) at /home/cj/my-pele/examples/engineering/h2_leak_3d/./pelelmex_prob.H:436
+
+ 3: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x3c36ec) [0x578ecd93c6ec]
+    PeleLM::getExternalSources(int, PeleLM::TimeStamp, PeleLM::TimeStamp) at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX_Forces.cpp:400 (discriminator 1)
+
+ 4: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x327000) [0x578ecd8a0000]
+    PeleLM::Advance(int) at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX_Advance.cpp:143
+
+ 5: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x259a00) [0x578ecd7d2a00]
+    PeleLM::initialIterations() at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX_Init.cpp:568
+
+ 6: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0x25afec) [0x578ecd7d3fec]
+    PeleLM::initData() at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX_Init.cpp:271
+
+ 7: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0xec5ed) [0x578ecd6655ed]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /usr/include/c++/13/bits/basic_string.h:551
+ (inlined by) PeleLM::runMode[abi:cxx11]() const at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX.H:1737
+ (inlined by) main at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/main.cpp:52
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x70a52a82a1ca]
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x70a52a82a28b]
+
+10: ./codex_h2_leak3d.gnu.MPI.CUDA.ex(+0xf7b25) [0x578ecd670b25]
+    ?? ??:0
+

@@ -1,0 +1,48 @@
+max_step = 1200
+stop_time = 1.0e-5
+
+geometry.is_periodic = 0 0 0
+geometry.prob_lo = 0.0 0.0 0.0
+geometry.prob_hi = 0.8 0.25 0.002
+amr.n_cell = 128 40 1
+
+pelec.lo_bc = "FOExtrap" "SlipWall" "SlipWall"
+pelec.hi_bc = "FOExtrap" "SlipWall" "SlipWall"
+pelec.do_hydro = 1
+pelec.do_mol = 0
+pelec.do_react = 0
+pelec.allow_negative_energy = 1
+pelec.cfl = 0.05
+pelec.init_shrink = 0.05
+pelec.change_max = 1.05
+pelec.dt_cutoff = 1.0e-30
+pelec.plm_iorder = 1
+pelec.sum_interval = 200
+pelec.v = 0
+amr.v = 1
+
+amr.max_level = 0
+amr.blocking_factor = 8
+amr.max_grid_size = 64
+amr.checkpoint_files_output = 0
+amr.plot_files_output = 1
+amr.plot_file = plt
+amr.plot_int = 600
+amr.derive_plot_vars = alpha x_velocity pressure
+
+prob.T_heavy = 300.0
+prob.T_light = 3000.0
+prob.p_left = 2.0e6
+prob.p_right = 1.0e6
+prob.shock_x = 0.20
+prob.driver_u = 0.0
+prob.bubble_cx = 0.42
+prob.bubble_cy = 0.125
+prob.bubble_r = 0.055
+prob.interface_width = 0.006
+prob.positivity_rhoe_floor = 1.0e-12
+prob.positivity_temp_floor = 1.0e-12
+
+tagging.denerr = 3
+tagging.dengrad = 0.01
+amrex.abort_on_unused_inputs = 1

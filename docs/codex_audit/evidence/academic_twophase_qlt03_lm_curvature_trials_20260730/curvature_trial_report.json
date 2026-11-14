@@ -1,0 +1,75 @@
+{
+  "baseline": {
+    "center_of_mass_y_at_t3_abs_error": 0.08397702843906696,
+    "maximum_mean_rise_velocity_abs_error": 0.003466450170439672,
+    "minimum_circularity_abs_error": 0.24352712056133463,
+    "report": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_t3_scout_20260730/academic_twophase_qlt03_lm_t3_scout_report.json",
+    "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT"
+  },
+  "contracts": {
+    "all_trials_mass_conserved": true,
+    "all_trials_reached_t3": true,
+    "all_trials_remain_not_ready": true,
+    "default_curvature_scheme_remains_baseline": true,
+    "filtered_curvature_prototype_not_retained": true,
+    "no_rejected_trial_promoted": true
+  },
+  "decision": {
+    "promote_trial": false,
+    "reason": "scheme2, scheme3, and scheme4 do not jointly clear center-height, maximum-rise-velocity, and minimum-circularity reference gates; next work should target a more faithful balanced-force/curvature or sharper conservative interface method."
+  },
+  "inputs": "/home/cj/my-pele/examples/academic/qlt03_lm_aux_bridge/inputs",
+  "scope": "Reproducibility guard for rejected QLT-03 low-Mach curvature trials. This report proves the trials were stable and informative but did not clear Hysing reference agreement and were not promoted into the active example.",
+  "source": "/home/cj/my-pele/examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CURVATURE-TRIAL-REJECTION",
+  "trials": [
+    {
+      "alpha_center_y_final": 0.9316378945750324,
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max_mean_rise_velocity_y": 0.1922777042641939,
+      "alpha_min_circularity": 0.6230990892740894,
+      "name": "scheme2_divergence_of_normal",
+      "reference_errors": {
+        "center_of_mass_y_at_t3_abs_error": 0.1496621054249675,
+        "maximum_mean_rise_velocity_abs_error": 0.04942229573580609,
+        "minimum_circularity_abs_error": 0.2782009107259106
+      },
+      "report": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_curvature_scheme2_scout_20260730/report.json",
+      "sample_count": 9,
+      "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT",
+      "time": 3.0
+    },
+    {
+      "alpha_center_y_final": 0.8629691875849199,
+      "alpha_mass_relative_drift": 1.401948012240244e-16,
+      "alpha_max_mean_rise_velocity_y": 0.19083763108481966,
+      "alpha_min_circularity": 0.685030753299997,
+      "name": "scheme3_filtered_curvature_and_delta",
+      "reference_errors": {
+        "center_of_mass_y_at_t3_abs_error": 0.21833081241508,
+        "maximum_mean_rise_velocity_abs_error": 0.05086236891518034,
+        "minimum_circularity_abs_error": 0.21626924670000303
+      },
+      "report": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_curvature_scheme3_scout_20260730/report.json",
+      "sample_count": 16,
+      "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT",
+      "time": 3.0
+    },
+    {
+      "alpha_center_y_final": 1.0669999519712414,
+      "alpha_mass_relative_drift": -1.401948012240244e-16,
+      "alpha_max_mean_rise_velocity_y": 0.2834951239403625,
+      "alpha_min_circularity": 0.5756800684210761,
+      "name": "scheme4_filtered_curvature_raw_delta",
+      "reference_errors": {
+        "center_of_mass_y_at_t3_abs_error": 0.014300048028758505,
+        "maximum_mean_rise_velocity_abs_error": 0.04179512394036253,
+        "minimum_circularity_abs_error": 0.3256199315789239
+      },
+      "report": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_curvature_scheme4_scout_20260730/report.json",
+      "sample_count": 13,
+      "status": "NOT_READY-ACADEMIC-TWOPHASE-QLT03-LM-T3-REFERENCE-AGREEMENT",
+      "time": 3.0
+    }
+  ]
+}

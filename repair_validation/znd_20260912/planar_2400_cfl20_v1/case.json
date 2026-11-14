@@ -1,0 +1,25 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "24",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_final_cleanup_v12d.gnu.MPI.ex",
+    "inputs"
+  ],
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_final_cleanup_v12d.gnu.MPI.ex",
+  "binary_sha256": "2508c56b7438e2c8a42dfe7a36aa9b891849ca6c658af4141ebc7db44f75b61f",
+  "reference": "/home/cj/my-pele/repair_validation/znd_20260912/reference_near_cj_v1",
+  "profile_sha256": "9e01c21e492dd4d5cbcfe9434cdf0f0fb24ecf029f27ee2cc3824900e4070e3f",
+  "input_sha256": "9be323a7bc57d97d87d901d271964a80080f9c2b89610d036b680fca8cddd327",
+  "nx": 2400,
+  "ny": 2,
+  "dx_m": 4.9999999999999996e-05,
+  "cfl": 0.2,
+  "rtol": 1e-07,
+  "atol_y": 1e-14,
+  "stop_time_s": 1.2e-05,
+  "plot_root": "/dev/shm/my_pele_znd_20260912/planar_2400_cfl20_v1",
+  "mapping": "ROUNDROBIN",
+  "physical_model": "Single-phase inviscid reactive Euler, heptane_lu_88sk, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+  "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+}

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /home/cj/my-pele
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_REUSE_EXISTING=FALSE
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_RANKS=4
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_MAX_STEP=7200
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_PLOT_INT=240
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_MIN_PLOTFILES=31
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_LOG_DIR=docs/codex_audit/evidence/engineering_h2_production_mesh_4rank_full_duration_20260722/run
+export CODEX_H2_LEAK_PLAN_AMR_N_CELL="64 32 32"
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_BASE_MAX_GRID_SIZE=16
+export CODEX_H2_LEAK_PLAN_AMR_MPI_LONG_LEVEL1_MAX_GRID_SIZE=16
+export RUN_TIMEOUT=43200
+export JOBS=8
+bash tools/codex_smoke_engineering_h2_leak_open_domain_plan_amr_mpi_reduced_long.sh

@@ -1,0 +1,580 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+cd "$repo_root"
+
+echo "[current-scope] check machine-local path hygiene"
+python3 tools/check_machine_local_paths.py --strict
+
+echo "[current-scope] verify academic gas detonation single-CUDA gate"
+python3 tools/write_academic_gas_detonation_single_cuda_report.py
+bash tools/verify_academic_gas_detonation_single_cuda.sh
+
+echo "[current-scope] rebuild and verify parallel capability matrix"
+python3 tools/write_current_parallel_capability_matrix_report.py
+bash tools/verify_current_parallel_capability_matrix.sh
+
+echo "[current-scope] rebuild and verify scenario readiness matrix"
+python3 tools/write_current_scenario_readiness_matrix_report.py
+bash tools/verify_current_scenario_readiness_matrix.sh
+
+echo "[current-scope] rebuild and verify engineering CH4 cold plume CPU probe"
+python3 tools/write_engineering_ch4_cold_plume_cpu_probe_report.py
+bash tools/verify_engineering_ch4_cold_plume_cpu_probe.sh
+
+echo "[current-scope] rebuild and verify engineering CH4 pipe-rack delayed-ignition CUDA probe"
+python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_cuda_report.py
+bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh
+
+echo "[current-scope] rebuild and verify engineering CH4 pipe-rack delayed-ignition CPU/MPI probe"
+python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_report.py
+bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi.sh
+
+echo "[current-scope] rebuild and verify engineering CH4 pipe-rack delayed-ignition MPI+CUDA probe"
+python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_report.py
+bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda.sh
+
+echo "[current-scope] rebuild and verify engineering CH4 pipe-rack delayed-ignition MPI+CUDA 500-step probe"
+python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_report.py
+bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step.sh
+
+echo "[current-scope] rebuild and verify engineering C3H8 gas-phase CPU/CUDA probe"
+python3 tools/write_engineering_c3h8_gas_phase_cpu_cuda_report.py
+bash tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh
+
+echo "[current-scope] rebuild and verify engineering gasified LNG/LPG surrogate boundary"
+python3 tools/write_engineering_gasified_lng_lpg_surrogate_report.py
+bash tools/verify_engineering_gasified_lng_lpg_surrogate.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied external vaporization contract"
+python3 tools/write_engineering_liquefied_external_vaporization_contract_report.py
+bash tools/verify_engineering_liquefied_external_vaporization_contract.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied release vaporization source model"
+python3 tools/write_engineering_liquefied_release_vaporization_source_model_report.py
+bash tools/verify_engineering_liquefied_release_vaporization_source_model.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied release vaporization source model negative selftest"
+python3 tools/write_engineering_liquefied_release_vaporization_source_model_negative_selftest_report.py
+bash tools/verify_engineering_liquefied_release_vaporization_source_model_negative_selftest.sh
+
+echo "[current-scope] run and verify engineering liquefied release vaporization source model CUDA smoke"
+bash tools/run_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh
+python3 tools/write_engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.py
+bash tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied release source balance"
+python3 tools/write_engineering_liquefied_release_source_balance_report.py
+bash tools/verify_engineering_liquefied_release_source_balance.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied release source balance negative selftest"
+python3 tools/write_engineering_liquefied_release_source_balance_negative_selftest_report.py
+bash tools/verify_engineering_liquefied_release_source_balance_negative_selftest.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied release thermal plausibility"
+python3 tools/write_engineering_liquefied_release_thermal_plausibility_report.py
+bash tools/verify_engineering_liquefied_release_thermal_plausibility.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied breach source contract"
+python3 tools/write_engineering_liquefied_breach_source_contract_report.py
+bash tools/verify_engineering_liquefied_breach_source_contract.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied breach preset templates"
+python3 tools/write_engineering_liquefied_breach_preset_templates_report.py
+bash tools/verify_engineering_liquefied_breach_preset_templates.sh
+
+echo "[current-scope] rebuild and verify engineering multifuel/liquefied user answer"
+python3 tools/write_engineering_multifuel_liquefied_user_answer_report.py
+bash tools/verify_engineering_multifuel_liquefied_user_answer.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied external vaporization negative selftest"
+python3 tools/write_engineering_liquefied_external_vaporization_negative_selftest_report.py
+bash tools/verify_engineering_liquefied_external_vaporization_negative_selftest.sh
+
+echo "[current-scope] rebuild and verify engineering fixed-mass-flow valve schedule"
+python3 tools/write_engineering_fixed_mass_flow_valve_schedule_report.py
+bash tools/verify_engineering_fixed_mass_flow_valve_schedule.sh
+
+echo "[current-scope] rebuild and verify engineering external vaporization time series"
+python3 tools/write_engineering_external_vaporization_timeseries_report.py
+bash tools/verify_engineering_external_vaporization_timeseries.sh
+
+echo "[current-scope] rebuild and verify engineering external vaporization time series CUDA"
+python3 tools/write_engineering_external_vaporization_timeseries_cuda_report.py
+bash tools/verify_engineering_external_vaporization_timeseries_cuda.sh
+
+echo "[current-scope] rebuild and verify engineering external vaporization multi-fuel source matrix"
+python3 tools/write_engineering_external_vaporization_multifuel_source_matrix_report.py
+bash tools/verify_engineering_external_vaporization_multifuel_source_matrix.sh
+
+echo "[current-scope] rebuild and verify engineering external vaporization CH4 time series CUDA runtime"
+python3 tools/write_engineering_external_vaporization_ch4_timeseries_cuda_report.py
+bash tools/verify_engineering_external_vaporization_ch4_timeseries_cuda.sh
+
+echo "[current-scope] rebuild and verify engineering external vaporization C3H8 time series CUDA runtime"
+python3 tools/write_engineering_external_vaporization_c3h8_timeseries_cuda_report.py
+bash tools/verify_engineering_external_vaporization_c3h8_timeseries_cuda.sh
+
+echo "[current-scope] rebuild and verify engineering multi-fuel capability boundary"
+python3 tools/write_engineering_multi_fuel_capability_boundary_report.py
+bash tools/verify_engineering_multi_fuel_capability_boundary.sh
+
+echo "[current-scope] rebuild and verify engineering liquefied phase-change overclaim guard"
+python3 tools/write_engineering_liquefied_phase_change_overclaim_guard_report.py
+bash tools/verify_engineering_liquefied_phase_change_overclaim_guard.sh
+
+echo "[current-scope] rebuild and verify engineering multi-fuel operator runbook"
+python3 tools/write_engineering_multi_fuel_operator_runbook_report.py
+bash tools/verify_engineering_multi_fuel_operator_runbook.sh
+
+echo "[current-scope] rebuild and verify engineering multi-fuel template catalog"
+python3 tools/write_engineering_multi_fuel_template_catalog_report.py
+bash tools/verify_engineering_multi_fuel_template_catalog.sh
+
+echo "[current-scope] rebuild and verify engineering fuel-species guard"
+python3 tools/write_engineering_fuel_species_guard_report.py
+bash tools/verify_engineering_fuel_species_guard.sh
+
+echo "[current-scope] rebuild and verify engineering log-marker compatibility"
+python3 tools/write_engineering_log_marker_compatibility_report.py
+bash tools/verify_engineering_log_marker_compatibility.sh
+
+echo "[current-scope] rebuild and verify operator runbook"
+python3 tools/write_current_scope_operator_runbook_report.py
+bash tools/verify_current_scope_operator_runbook.sh
+
+echo "[current-scope] rebuild and verify strict unblock runbook"
+python3 tools/write_strict_master_plan_unblock_runbook_report.py
+bash tools/verify_strict_master_plan_unblock_runbook.sh
+
+echo "[current-scope] rebuild and verify strict unblock command inventory"
+python3 tools/write_strict_unblock_command_inventory_report.py
+bash tools/verify_strict_unblock_command_inventory.sh
+
+echo "[current-scope] rebuild and verify strict artifact template lint"
+python3 tools/write_strict_artifact_template_lint_report.py
+bash tools/verify_strict_artifact_template_lint.sh
+
+echo "[current-scope] rebuild and verify strict artifact drop contract preflight"
+python3 tools/write_strict_artifact_drop_contract_preflight_report.py
+bash tools/verify_strict_artifact_drop_contract_preflight.sh
+
+echo "[current-scope] rebuild and verify strict artifact drop contract selftest"
+python3 tools/write_strict_artifact_drop_contract_selftest_report.py
+bash tools/verify_strict_artifact_drop_contract_selftest.sh
+
+echo "[current-scope] rebuild and verify final readiness"
+python3 tools/write_master_plan_final_readiness_report.py
+bash tools/verify_master_plan_final_readiness.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel dataset audit"
+python3 tools/write_dataverse_open_channel_dataset_audit_report.py
+bash tools/verify_dataverse_open_channel_dataset_audit.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel time-series index"
+python3 tools/write_dataverse_open_channel_timeseries_index_report.py
+bash tools/verify_dataverse_open_channel_timeseries_index.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel geometry mapping"
+python3 tools/write_dataverse_open_channel_geometry_mapping_report.py
+bash tools/verify_dataverse_open_channel_geometry_mapping.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel reference package"
+python3 tools/write_dataverse_open_channel_reference_package_report.py
+bash tools/verify_dataverse_open_channel_reference_package.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel agreement contract"
+python3 tools/write_dataverse_open_channel_agreement_contract_report.py
+bash tools/verify_dataverse_open_channel_agreement_contract.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel CFD scout"
+python3 tools/write_dataverse_open_channel_cfd_scout_report.py
+bash tools/verify_dataverse_open_channel_cfd_scout.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel CFD agreement attempt"
+python3 tools/write_dataverse_open_channel_cfd_agreement_attempt_report.py
+bash tools/verify_dataverse_open_channel_cfd_agreement_attempt.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel CFD 45s agreement attempt"
+bash tools/verify_dataverse_open_channel_cfd_45s_agreement_attempt.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel CFD 120s peak-window agreement attempt"
+bash tools/verify_dataverse_open_channel_cfd_120s_agreement_attempt.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel 120s calibration diagnosis"
+bash tools/verify_dataverse_open_channel_120s_calibration_diagnosis.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel 45s calibration r005 z08 screen"
+bash tools/verify_dataverse_open_channel_45s_calibration_r005_z08.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel 45s calibration sweep"
+bash tools/verify_dataverse_open_channel_45s_calibration_sweep.sh
+
+echo "[current-scope] rebuild and verify DataverseNO open-channel physics alignment diagnosis"
+bash tools/verify_dataverse_open_channel_physics_alignment.sh
+
+echo "[current-scope] verify DataverseNO open-channel orifice velocity MPI+CUDA scout"
+bash tools/verify_dataverse_open_channel_orifice_velocity_scout.sh
+
+echo "[current-scope] verify DataverseNO open-channel open/open boundary MPI+CUDA scout"
+bash tools/verify_dataverse_open_channel_open_boundary_scout.sh
+
+echo "[current-scope] verify DataverseNO open-channel open/open orifice 0.1s MPI+CUDA window"
+bash tools/verify_dataverse_open_channel_open_boundary_orifice_extended_01s.sh
+
+echo "[current-scope] verify DataverseNO open-channel open/open orifice 1.0s MPI+CUDA window"
+bash tools/verify_dataverse_open_channel_open_boundary_orifice_extended_1s.sh
+
+echo "[current-scope] verify DataverseNO open-channel open/open orifice 2.0s MPI+CUDA screen"
+bash tools/verify_dataverse_open_channel_open_boundary_orifice_extended_2s.sh
+
+echo "[current-scope] verify DataverseNO refined source projection MPI+CUDA probe"
+bash tools/verify_dataverse_open_channel_refined_source_projection_probe.sh
+
+echo "[current-scope] verify DataverseNO full-channel dx=0.025 refined-source MPI+CUDA probe"
+bash tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_probe.sh
+
+echo "[current-scope] verify DataverseNO full-channel dx=0.025 refined-source 500-step MPI+CUDA screen"
+bash tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_500step.sh
+
+echo "[current-scope] verify DataverseNO full-channel dx=0.025 refined-source 1000-step dt=5e-6 MPI+CUDA screen"
+bash tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_1000step_dt5em6.sh
+
+echo "[current-scope] rebuild and verify DataverseNO AMR source projection contract"
+python3 tools/write_dataverse_open_channel_amr_source_projection_contract_report.py
+bash tools/verify_dataverse_open_channel_amr_source_projection_contract.sh
+
+echo "[current-scope] rebuild and verify DataverseNO AMR source projection implementation"
+bash tools/codex_build_h2_leak_mpi_cuda_repro.sh
+python3 tools/write_dataverse_open_channel_amr_source_projection_implementation_report.py
+bash tools/verify_dataverse_open_channel_amr_source_projection_implementation.sh
+
+echo "[current-scope] rebuild and verify DataverseNO long-window reconciliation"
+python3 tools/write_dataverse_open_channel_long_window_reconciliation_report.py
+bash tools/verify_dataverse_open_channel_long_window_reconciliation.sh
+
+echo "[current-scope] rebuild and verify strict external source update"
+python3 tools/write_master_plan_strict_external_source_update_report.py
+bash tools/verify_master_plan_strict_external_source_update.sh
+
+echo "[current-scope] rebuild and verify strict real CAD update"
+python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py
+python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json
+python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py
+python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json
+python3 tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py
+python3 tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_boundary_tag_contract_20260724/real_cad_boundary_tag_contract_report.json
+python3 tools/write_engineering_h2_real_cad_negative_selftest_report.py
+bash tools/verify_engineering_h2_real_cad_negative_selftest.sh
+python3 tools/write_engineering_h2_real_cad_handoff_contract_report.py
+bash tools/verify_engineering_h2_real_cad_handoff_contract.sh
+python3 tools/write_master_plan_strict_real_cad_update_report.py
+bash tools/verify_master_plan_strict_real_cad_update.sh
+
+echo "[current-scope] rebuild and verify H2 fire overpressure Dataverse metadata"
+python3 tools/write_h2_fire_overpressure_dataverse_metadata_report.py
+bash tools/verify_h2_fire_overpressure_dataverse_metadata.sh
+
+echo "[current-scope] rebuild and verify H2 fire overpressure reduced EXP002"
+python3 tools/write_h2_fire_overpressure_reduced_exp002_report.py
+bash tools/verify_h2_fire_overpressure_reduced_exp002.sh
+
+echo "[current-scope] rebuild and verify H2 fire EXP002 overpressure calibration table"
+python3 tools/write_h2_fire_exp002_overpressure_calibration_table_report.py
+bash tools/verify_h2_fire_exp002_overpressure_calibration_table.sh
+
+echo "[current-scope] rebuild and verify H2 fire EXP002 pressure comparison contract"
+python3 tools/write_h2_fire_exp002_pressure_comparison_contract_report.py
+bash tools/verify_h2_fire_exp002_pressure_comparison_contract.sh
+
+echo "[current-scope] rebuild and verify H2 fire calibration 2026 candidate sources"
+python3 tools/write_h2_fire_calibration_candidate_sources_20260805_report.py
+bash tools/verify_h2_fire_calibration_candidate_sources_20260805.sh
+
+echo "[current-scope] rebuild and verify H2 fire MDPI radiation calibration table"
+python3 tools/write_h2_fire_mdpi_radiation_calibration_table_report.py
+bash tools/verify_h2_fire_mdpi_radiation_calibration_table.sh
+
+echo "[current-scope] rebuild and verify H2 fire MDPI radiation comparison contract"
+python3 tools/write_h2_fire_mdpi_radiation_comparison_contract_report.py
+bash tools/verify_h2_fire_mdpi_radiation_comparison_contract.sh
+
+echo "[current-scope] rebuild and verify H2 fire MDPI radiation screening comparison"
+python3 tools/write_h2_fire_mdpi_radiation_screening_comparison_report.py
+bash tools/verify_h2_fire_mdpi_radiation_screening_comparison.sh
+
+echo "[current-scope] rebuild and verify H2 pipe-rack delayed ignition single-CUDA evidence"
+python3 tools/write_engineering_h2_pipe_rack_delayed_ignition_cuda_report.py
+bash tools/verify_engineering_h2_pipe_rack_delayed_ignition_cuda.sh
+
+echo "[current-scope] rebuild and verify H2 pipe-rack delayed ignition CPU/MPI evidence"
+python3 tools/write_engineering_h2_pipe_rack_delayed_ignition_mpi_report.py
+bash tools/verify_engineering_h2_pipe_rack_delayed_ignition_mpi.sh
+
+echo "[current-scope] rebuild and verify H2 pipe-rack delayed ignition CPU/GPU parity"
+python3 tools/write_engineering_h2_pipe_rack_delayed_ignition_cross_platform_report.py
+bash tools/verify_engineering_h2_pipe_rack_delayed_ignition_cross_platform.sh
+
+echo "[current-scope] rebuild and verify H2 fire EXP002 pressure CFD proxy"
+python3 tools/write_h2_fire_exp002_pressure_cfd_proxy_report.py
+bash tools/verify_h2_fire_exp002_pressure_cfd_proxy.sh
+
+echo "[current-scope] rebuild and verify H2 fire plotfile sensor sampling contract"
+python3 tools/write_h2_fire_plotfile_sensor_sampling_contract_report.py
+bash tools/verify_h2_fire_plotfile_sensor_sampling_contract.sh
+
+echo "[current-scope] rebuild and verify H2 fire plotfile sensor sampling negative selftest"
+python3 tools/write_h2_fire_plotfile_sensor_sampling_negative_selftest_report.py
+bash tools/verify_h2_fire_plotfile_sensor_sampling_negative_selftest.sh
+
+echo "[current-scope] rebuild and verify H2 fire MDPI radiation CFD proxy"
+python3 tools/write_h2_fire_mdpi_radiation_cfd_proxy_report.py
+bash tools/verify_h2_fire_mdpi_radiation_cfd_proxy.sh
+
+echo "[current-scope] rebuild and verify H2 fire MDPI integrated radiation CFD proxy"
+python3 tools/write_h2_fire_mdpi_radiation_integrated_cfd_proxy_report.py
+bash tools/verify_h2_fire_mdpi_radiation_integrated_cfd_proxy.sh
+
+echo "[current-scope] rebuild and verify H2 fire calibration residual budget"
+python3 tools/write_h2_fire_calibration_residual_budget_report.py
+bash tools/verify_h2_fire_calibration_residual_budget.sh
+
+echo "[current-scope] rebuild and verify H2 fire EXP002 delayed ignition bridge"
+python3 tools/write_engineering_h2_fire_exp002_delayed_ignition_bridge_report.py
+bash tools/verify_engineering_h2_fire_exp002_delayed_ignition_bridge.sh
+
+echo "[current-scope] rebuild fire calibration ingestion/package/dataset inputs"
+python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py
+python3 tools/write_engineering_h2_fire_calibration_package_report.py
+python3 tools/write_engineering_h2_fire_calibration_dataset_report.py
+
+echo "[current-scope] rebuild and verify strict fire calibration update"
+python3 tools/write_master_plan_strict_fire_calibration_update_report.py
+bash tools/verify_master_plan_strict_fire_calibration_update.sh
+
+echo "[current-scope] rebuild and verify strict blocker matrix"
+python3 tools/write_master_plan_strict_blocker_matrix_report.py
+bash tools/verify_master_plan_strict_blocker_matrix.sh
+
+echo "[current-scope] rebuild and verify strict artifact intake manifest after blocker refresh"
+python3 tools/write_master_plan_strict_artifact_intake_manifest_report.py
+bash tools/verify_master_plan_strict_artifact_intake_manifest.sh
+
+echo "[current-scope] rebuild and verify strict artifact drop preflight after blocker refresh"
+python3 tools/write_master_plan_strict_artifact_drop_preflight_report.py
+bash tools/verify_master_plan_strict_artifact_drop_preflight.sh
+
+echo "[current-scope] rebuild and verify H2 evidence chain after strict refresh"
+bash tools/rebuild_engineering_h2_evidence_chain.sh
+
+echo "[current-scope] rebuild and verify academic readiness after H2 evidence rebuild"
+python3 tools/write_academic_readiness_summary_report.py
+python3 tools/write_academic_readiness_summary_report.py --verify-json docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json
+python3 tools/write_academic_readiness_qlt03_closure_delta_report.py
+python3 tools/write_academic_readiness_qlt03_closure_delta_report.py --verify-json docs/codex_audit/evidence/academic_readiness_qlt03_closure_delta_20260730/academic_readiness_qlt03_closure_delta_report.json
+python3 tools/write_academic_gas_liquid_detonation_certification_report.py
+python3 tools/write_academic_gas_liquid_detonation_certification_report.py --verify-json docs/codex_audit/evidence/academic_gas_liquid_detonation_certification_20260731/academic_gas_liquid_detonation_certification_report.json
+python3 tools/write_academic_twophase_broader_matrix_report.py
+python3 tools/write_academic_twophase_broader_matrix_report.py --verify-json docs/codex_audit/evidence/academic_twophase_broader_matrix_20260730/academic_twophase_broader_matrix_report.json
+python3 tools/write_academic_current_priority_scope_report.py
+bash tools/verify_academic_current_priority_scope.sh
+
+echo "[current-scope] rebuild and verify strict upper reports after H2 evidence rebuild"
+python3 tools/write_dataverse_open_channel_amr_source_projection_contract_report.py
+bash tools/verify_dataverse_open_channel_amr_source_projection_contract.sh
+bash tools/codex_build_h2_leak_mpi_cuda_repro.sh
+python3 tools/write_dataverse_open_channel_amr_source_projection_implementation_report.py
+bash tools/verify_dataverse_open_channel_amr_source_projection_implementation.sh
+python3 tools/write_dataverse_open_channel_long_window_reconciliation_report.py
+bash tools/verify_dataverse_open_channel_long_window_reconciliation.sh
+python3 tools/write_master_plan_strict_external_source_update_report.py
+bash tools/verify_master_plan_strict_external_source_update.sh
+python3 tools/write_master_plan_strict_real_cad_update_report.py
+bash tools/verify_master_plan_strict_real_cad_update.sh
+echo "[current-scope] rebuild fire calibration ingestion/package/dataset inputs after H2 evidence rebuild"
+python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py
+python3 tools/write_engineering_h2_fire_calibration_package_report.py
+python3 tools/write_engineering_h2_fire_calibration_dataset_report.py
+python3 tools/write_engineering_h2_production_evidence_verification_report.py --log docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_final_20260724.log --returncode 0
+python3 tools/write_engineering_h2_production_evidence_verification_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json
+python3 tools/write_master_plan_strict_fire_calibration_update_report.py
+bash tools/verify_master_plan_strict_fire_calibration_update.sh
+python3 tools/write_master_plan_strict_blocker_matrix_report.py
+bash tools/verify_master_plan_strict_blocker_matrix.sh
+python3 tools/write_master_plan_strict_artifact_intake_manifest_report.py
+bash tools/verify_master_plan_strict_artifact_intake_manifest.sh
+python3 tools/write_master_plan_strict_artifact_drop_preflight_report.py
+bash tools/verify_master_plan_strict_artifact_drop_preflight.sh
+
+echo "[current-scope] verify academic gas detonation single-CUDA gate after strict refresh"
+python3 tools/write_academic_gas_detonation_single_cuda_report.py
+bash tools/verify_academic_gas_detonation_single_cuda.sh
+
+echo "[current-scope] rebuild and verify parallel capability matrix after strict refresh"
+python3 tools/write_current_parallel_capability_matrix_report.py
+bash tools/verify_current_parallel_capability_matrix.sh
+
+echo "[current-scope] rebuild and verify scenario readiness matrix after strict refresh"
+python3 tools/write_current_scenario_readiness_matrix_report.py
+bash tools/verify_current_scenario_readiness_matrix.sh
+
+echo "[current-scope] rebuild and verify operator runbook after strict refresh"
+python3 tools/write_current_scope_operator_runbook_report.py
+bash tools/verify_current_scope_operator_runbook.sh
+
+echo "[current-scope] rebuild and verify final readiness after strict refresh"
+python3 tools/write_master_plan_final_readiness_report.py
+bash tools/verify_master_plan_final_readiness.sh
+
+echo "[current-scope] run master current-scope gates"
+bash tools/verify_master_plan_current_scope.sh
+
+echo "[current-scope] rebuild and verify master current-scope report"
+python3 tools/write_master_plan_current_scope_verification_report.py
+bash tools/verify_master_plan_current_scope_verification.sh
+
+echo "[current-scope] rebuild and verify master-plan completion audit"
+python3 tools/write_master_plan_completion_audit_report.py
+bash tools/verify_master_plan_completion_audit.sh
+
+echo "[current-scope] rebuild and verify worktree hygiene audit"
+python3 tools/write_current_worktree_hygiene_report.py
+bash tools/verify_current_worktree_hygiene.sh
+
+echo "[current-scope] rebuild and verify worktree source ledger"
+python3 tools/write_current_worktree_source_ledger_report.py
+bash tools/verify_current_worktree_source_ledger.sh
+
+echo "[current-scope] rebuild and verify case-output cleanup manifest"
+python3 tools/write_current_case_output_cleanup_manifest_report.py
+bash tools/verify_current_case_output_cleanup_manifest.sh
+
+echo "[current-scope] rebuild and verify disk usage manifest"
+python3 tools/write_current_disk_usage_manifest_report.py
+bash tools/verify_current_disk_usage_manifest.sh
+
+echo "[current-scope] rebuild and verify disk cleanup plan"
+python3 tools/write_current_disk_cleanup_plan_report.py
+bash tools/verify_current_disk_cleanup_plan.sh
+
+echo "[current-scope] rebuild and verify current operator command inventory"
+python3 tools/write_current_operator_command_inventory_report.py
+bash tools/verify_current_operator_command_inventory.sh
+
+echo "[current-scope] rebuild and verify current-scope release-candidate handoff"
+python3 tools/write_current_scope_release_candidate_handoff_report.py
+bash tools/verify_current_scope_release_candidate_handoff.sh
+
+echo "[current-scope] rebuild and verify project closeout forecast"
+python3 tools/write_project_closeout_forecast_report.py
+bash tools/verify_project_closeout_forecast.sh
+
+echo "[current-scope] rebuild and verify strict master-plan completion gate"
+python3 tools/write_strict_master_plan_completion_gate_report.py
+bash tools/verify_strict_master_plan_completion_gate.sh
+
+echo "[current-scope] rebuild and verify strict external artifact drop index"
+python3 tools/write_strict_external_artifact_drop_index_report.py
+bash tools/verify_strict_external_artifact_drop_index.sh
+
+echo "[current-scope] rebuild and verify strict external artifact drop index CLI"
+python3 tools/write_strict_external_artifact_drop_index_cli_report.py
+bash tools/verify_strict_external_artifact_drop_index_cli.sh
+
+echo "[current-scope] rebuild and verify strict external artifact drop checklist"
+python3 tools/write_strict_external_artifact_drop_checklist_report.py
+bash tools/verify_strict_external_artifact_drop_checklist.sh
+
+echo "[current-scope] rebuild and verify strict fire calibration source registry artifact"
+python3 tools/write_strict_fire_calibration_source_registry_artifact_report.py
+bash tools/verify_strict_fire_calibration_source_registry_artifact.sh
+
+echo "[current-scope] rebuild and verify strict fire calibration metric artifacts"
+python3 tools/write_strict_fire_calibration_metric_artifacts_report.py
+bash tools/verify_strict_fire_calibration_metric_artifacts.sh
+
+echo "[current-scope] rebuild and verify strict fire calibration metadata artifacts"
+python3 tools/write_strict_fire_calibration_metadata_artifacts_report.py
+bash tools/verify_strict_fire_calibration_metadata_artifacts.sh
+
+echo "[current-scope] rebuild fire calibration ingestion/package/dataset inputs after strict fire artifacts"
+python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py
+python3 tools/write_engineering_h2_fire_calibration_package_report.py
+python3 tools/write_engineering_h2_fire_calibration_dataset_report.py
+python3 tools/write_engineering_h2_production_evidence_verification_report.py --log docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/full_verify_after_rebuild_final_20260724.log --returncode 0
+python3 tools/write_engineering_h2_production_evidence_verification_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json
+python3 tools/write_master_plan_strict_fire_calibration_update_report.py
+bash tools/verify_master_plan_strict_fire_calibration_update.sh
+python3 tools/write_master_plan_strict_blocker_matrix_report.py
+bash tools/verify_master_plan_strict_blocker_matrix.sh
+
+echo "[current-scope] rebuild and verify strict external evidence receiving pack"
+python3 tools/write_strict_external_evidence_receiving_pack_report.py
+bash tools/verify_strict_external_evidence_receiving_pack.sh
+
+echo "[current-scope] rebuild and verify strict external artifact template clone selftest"
+python3 tools/write_strict_external_artifact_template_clone_selftest_report.py
+bash tools/verify_strict_external_artifact_template_clone_selftest.sh
+
+echo "[current-scope] rebuild and verify strict external artifact cross-benchmark alias selftest"
+python3 tools/write_strict_external_artifact_cross_benchmark_alias_selftest_report.py
+bash tools/verify_strict_external_artifact_cross_benchmark_alias_selftest.sh
+
+echo "[current-scope] rebuild and verify strict external plume source separation audit"
+python3 tools/write_strict_external_plume_source_separation_audit_report.py
+bash tools/verify_strict_external_plume_source_separation_audit.sh
+
+echo "[current-scope] rebuild and verify strict external artifact progress selftest"
+python3 tools/write_strict_external_artifact_progress_selftest_report.py
+bash tools/verify_strict_external_artifact_progress_selftest.sh
+
+echo "[current-scope] rebuild and verify current-scope delivery package"
+python3 tools/write_current_scope_delivery_package_report.py
+bash tools/verify_current_scope_delivery_package.sh
+
+echo "[current-scope] rebuild and verify project closeout acceptance gate"
+python3 tools/write_project_closeout_acceptance_gate_report.py
+bash tools/verify_project_closeout_acceptance_gate.sh
+
+echo "[current-scope] rebuild and verify current-scope final handoff note"
+python3 tools/write_current_scope_final_handoff_note_report.py
+bash tools/verify_current_scope_final_handoff_note.sh
+
+echo "[current-scope] rebuild and verify current operator quickstart smoke"
+python3 tools/write_current_operator_quickstart_smoke_report.py
+bash tools/verify_current_operator_quickstart_smoke.sh
+
+echo "[current-scope] rebuild and verify current phase closure certificate"
+python3 tools/write_current_phase_closure_certificate_report.py
+bash tools/verify_current_phase_closure_certificate.sh
+
+echo "[current-scope] rebuild and verify strict master-plan closeout action pack"
+python3 tools/write_strict_master_plan_closeout_action_pack_report.py
+bash tools/verify_strict_master_plan_closeout_action_pack.sh
+
+echo "[current-scope] rebuild and verify current-scope release refresh entrypoint"
+python3 tools/write_current_scope_release_refresh_entrypoint_report.py
+bash tools/verify_current_scope_release_refresh_entrypoint.sh
+
+echo "[current-scope] rebuild and verify current phase release manifest"
+python3 tools/write_current_phase_release_manifest_report.py
+bash tools/verify_current_phase_release_manifest.sh
+
+echo "[current-scope] rebuild and verify current verification chain coverage"
+python3 tools/write_current_verification_chain_coverage_report.py
+bash tools/verify_current_verification_chain_coverage.sh
+
+echo "[current-scope] pre-refresh state snapshot before current status CLI"
+python3 tools/write_current_scope_state_snapshot_report.py
+bash tools/verify_current_scope_state_snapshot.sh
+
+echo "[current-scope] rebuild and verify current status CLI"
+python3 tools/write_current_status_cli_report.py
+bash tools/verify_current_status_cli.sh
+
+echo "[current-scope] rebuild and verify state snapshot"
+python3 tools/write_current_scope_state_snapshot_report.py
+bash tools/verify_current_scope_state_snapshot.sh
+
+echo "[current-scope] PASS current-scope verification chain"

@@ -1,0 +1,707 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-20T10:07:19+00:00",
+  "status": "PASS-ACADEMIC-SPRAY-SOURCE-BUDGET-VALIDATION",
+  "title": "Academic Spray Source Budget Validation",
+  "scope": "Closed periodic PeleC spray smoke case validating mapped gas-phase spray source output against gas density and fuel species changes",
+  "run_dir": "/tmp/codex_academic_spray_source_budget.58pifL",
+  "case": {
+    "base_case": "examples/academic/shock_droplet",
+    "steps": 20,
+    "plot_count": 21,
+    "particles_plot_src": true,
+    "particles_dtmod": 0.5,
+    "periodic": true,
+    "reaction": false,
+    "diffusion": false
+  },
+  "summary": {
+    "gas_mass_delta": 5.94246873930615e-14,
+    "rho_source_integral_right_endpoint": 5.942221861389279e-14,
+    "gas_mass_source_residual": 2.468779168717746e-18,
+    "gas_mass_source_relative_error": 4.1546398406278134e-05,
+    "fuel_mass_delta": 5.942222683858269e-14,
+    "fuel_source_integral_right_endpoint": 5.942221861389279e-14,
+    "fuel_source_residual": 8.224689899663901e-21,
+    "fuel_source_relative_error": 1.3841102017925978e-07,
+    "gas_energy_delta": -0.001116037368774414,
+    "energy_source_integral_right_endpoint": -0.0011160442585950122,
+    "energy_source_residual": 6.889820598158375e-09,
+    "energy_source_relative_error": 6.173429543763765e-06,
+    "particle_mass_delta": -4.6423615319830217e-14,
+    "particle_comparable_rho_source_integral": 4.642360829210374e-14,
+    "spray_particle_mass_measure_factor": 0.78125,
+    "particle_plus_rho_source_residual": -7.027726477939636e-21,
+    "particle_source_relative_mismatch": 1.5138259899403366e-07,
+    "max_abs_rho_source_rate_integral": 7.174571127906747e-07,
+    "max_abs_momentum_source_rate_integral": 0.0,
+    "pure_fuel_rho_rhoY_source_absmax_mismatch": 0.0,
+    "clears_plot_src_dead_switch": true,
+    "clears_spray_source_mapping_bug": true,
+    "clears_acd_05_gas_source_history_budget": true,
+    "clears_acd_05_full_gas_particle_budget": true,
+    "clears_acd_07_reacting_spray_detonation_budget": false
+  },
+  "quality_gates": [
+    {
+      "name": "run_finalized",
+      "status": "PASS",
+      "metric": "AMReX finalized marker"
+    },
+    {
+      "name": "source_fields_present",
+      "status": "PASS",
+      "metric": [
+        "spray_rho_src",
+        "spray_xmom_src",
+        "spray_ymom_src",
+        "spray_eng_src",
+        "spray_rhoY_NC7H16_src"
+      ]
+    },
+    {
+      "name": "source_terms_nonzero",
+      "status": "PASS",
+      "metric": 7.174571127906747e-07
+    },
+    {
+      "name": "gas_total_mass_matches_integrated_rho_source",
+      "status": "PASS",
+      "metric": 4.1546398406278134e-05
+    },
+    {
+      "name": "fuel_species_mass_matches_integrated_rhoY_source",
+      "status": "PASS",
+      "metric": 1.3841102017925978e-07
+    },
+    {
+      "name": "pure_fuel_rho_and_rhoY_sources_match",
+      "status": "PASS",
+      "metric": 0.0
+    },
+    {
+      "name": "debug_spray_log_noise_absent",
+      "status": "PASS",
+      "metric": false
+    },
+    {
+      "name": "particle_loss_sign_consistent",
+      "status": "PASS",
+      "metric": {
+        "particle_mass_delta": -4.6423615319830217e-14,
+        "rho_src_integral": 5.942221861389279e-14,
+        "particle_comparable_rho_src_integral": 4.642360829210374e-14,
+        "spray_particle_mass_measure_factor": 0.78125
+      }
+    },
+    {
+      "name": "particle_mass_matches_gas_source",
+      "status": "PASS",
+      "metric": 1.5138259899403366e-07,
+      "note": "Native particle mass reconstructed from diameter/parcel density closes to the gas source integral."
+    },
+    {
+      "name": "energy_budget_matches_integrated_energy_source",
+      "status": "OBSERVED_ONLY",
+      "metric": 6.173429543763765e-06,
+      "note": "Energy source output is mapped to the correct state slot; full energy closure needs a dedicated total-energy gate with hydro and thermodynamic accounting."
+    }
+  ],
+  "records": [
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00000",
+      "time": 0.0,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503777,
+        "rho_NC7H16": 0.0,
+        "rho_E": 1158067395.6930864
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 0.0,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": 0.0,
+        "spray_rhoY_NC7H16_src": 0.0
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459752571158511e-08,
+        "xmom_sum": 0.0,
+        "ymom_sum": 0.0,
+        "thermal_mass_temperature_sum": 1.3379257713475533e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00001",
+      "time": 1.4460711489104051e-09,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375037874,
+        "rho_NC7H16": 1.0374940737388004e-15,
+        "rho_E": 1158067395.693067
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174571127906747e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.982492321209,
+        "spray_rhoY_NC7H16_src": 7.174571127906747e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459752490104284e-08,
+        "xmom_sum": -5.801287724899508e-26,
+        "ymom_sum": 1.4076665790694957e-24,
+        "thermal_mass_temperature_sum": 1.3379257339446497e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00002",
+      "time": 3.0367494127118508e-09,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375037988,
+        "rho_NC7H16": 2.1787373761275292e-15,
+        "rho_E": 1158067395.6930454
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174569977711132e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.98066870183,
+        "spray_rhoY_NC7H16_src": 7.174569977711132e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459752400944648e-08,
+        "xmom_sum": -2.5734183016886173e-25,
+        "ymom_sum": 6.2415965327507984e-24,
+        "thermal_mass_temperature_sum": 1.337925692801464e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00003",
+      "time": 4.786495502893441e-09,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038112,
+        "rho_NC7H16": 3.43410479869096e-15,
+        "rho_E": 1158067395.693022
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174568806215594e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.97883874075,
+        "spray_rhoY_NC7H16_src": 7.174568806215594e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.4597523028690644e-08,
+        "xmom_sum": -6.442592211811831e-25,
+        "ymom_sum": 1.5616438861690775e-23,
+        "thermal_mass_temperature_sum": 1.3379256475439694e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00004",
+      "time": 6.711216202093191e-09,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503825,
+        "rho_NC7H16": 4.815008704318652e-15,
+        "rho_E": 1158067395.692996
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174567397956499e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.97660112936,
+        "spray_rhoY_NC7H16_src": 7.174567397956499e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459752194985942e-08,
+        "xmom_sum": -1.2776458581055434e-24,
+        "ymom_sum": 3.094747340708797e-23,
+        "thermal_mass_temperature_sum": 1.3379255977607373e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00005",
+      "time": 8.828408971212916e-09,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038404,
+        "rho_NC7H16": 6.334002697271316e-15,
+        "rho_E": 1158067395.6929674
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174565917684154e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.974268997743,
+        "spray_rhoY_NC7H16_src": 7.174565917684154e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459752076314538e-08,
+        "xmom_sum": -2.2323100486039135e-24,
+        "ymom_sum": 5.402929469166944e-23,
+        "thermal_mass_temperature_sum": 1.337925542999198e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00006",
+      "time": 1.1157321017244613e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503857,
+        "rho_NC7H16": 8.004895701578158e-15,
+        "rho_E": 1158067395.6929362
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.17456421555281e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.971564985011,
+        "spray_rhoY_NC7H16_src": 7.17456421555281e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.4597519457760205e-08,
+        "xmom_sum": -3.6032367731891576e-24,
+        "ymom_sum": 8.713542486392264e-23,
+        "thermal_mass_temperature_sum": 1.337925482761522e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00007",
+      "time": 1.371912426787948e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375038756,
+        "rho_NC7H16": 9.842877550611959e-15,
+        "rho_E": 1158067395.6929016
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174562377198053e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.968654408858,
+        "spray_rhoY_NC7H16_src": 7.174562377198053e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459751802183686e-08,
+        "xmom_sum": -5.510984522855487e-24,
+        "ymom_sum": 1.3314480919947827e-22,
+        "thermal_mass_temperature_sum": 1.337925416500099e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00008",
+      "time": 1.6537107843577836e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503896,
+        "rho_NC7H16": 1.1864657036518827e-14,
+        "rho_E": 1158067395.6928637
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174560387350362e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.965513519222,
+        "spray_rhoY_NC7H16_src": 7.174560387350362e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459751644232157e-08,
+        "xmom_sum": -8.108566932841087e-24,
+        "ymom_sum": 1.9570257133938014e-22,
+        "thermal_mass_temperature_sum": 1.337925343612558e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00009",
+      "time": 1.9636889776846024e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837503918,
+        "rho_NC7H16": 1.4088613800166282e-14,
+        "rho_E": 1158067395.692822
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174558163049317e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.96199192465,
+        "spray_rhoY_NC7H16_src": 7.174558163049317e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459751470485529e-08,
+        "xmom_sum": -1.1590208200538155e-23,
+        "ymom_sum": 2.7942478124755776e-22,
+        "thermal_mass_temperature_sum": 1.3379252634362945e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00010",
+      "time": 2.3046649903441032e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375039422,
+        "rho_NC7H16": 1.653496543380312e-14,
+        "rho_E": 1158067395.692776
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174555753431255e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.958187874472,
+        "spray_rhoY_NC7H16_src": 7.174555753431255e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459751279364305e-08,
+        "xmom_sum": -1.6202567566047681e-23,
+        "ymom_sum": 3.901592323989382e-22,
+        "thermal_mass_temperature_sum": 1.3379251752424434e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00011",
+      "time": 2.6797386042695542e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375039694,
+        "rho_NC7H16": 1.922595125332762e-14,
+        "rho_E": 1158067395.6927254
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174553093140648e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.953985180451,
+        "spray_rhoY_NC7H16_src": 7.174553093140648e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.4597510691310356e-08,
+        "xmom_sum": -2.2259090160359414e-23,
+        "ymom_sum": 5.353186160670048e-22,
+        "thermal_mass_temperature_sum": 1.3379250782292526e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00012",
+      "time": 3.0923195795875503e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375039991,
+        "rho_NC7H16": 2.218603446811141e-14,
+        "rho_E": 1158067395.6926699
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174550136805972e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.949305843473,
+        "spray_rhoY_NC7H16_src": 7.174550136805972e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.4597508378745325e-08,
+        "xmom_sum": -3.0158295689847906e-23,
+        "ymom_sum": 7.243078789176823e-22,
+        "thermal_mass_temperature_sum": 1.3379249715147977e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00013",
+      "time": 3.5461586524373465e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375040316,
+        "rho_NC7H16": 2.5442124569499762e-14,
+        "rho_E": 1158067395.6926086
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174546915446342e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.944216059697,
+        "spray_rhoY_NC7H16_src": 7.174546915446342e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.4597505834924874e-08,
+        "xmom_sum": -4.0407067219686846e-23,
+        "ymom_sum": 9.69070824299879e-22,
+        "thermal_mass_temperature_sum": 1.337924854128963e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00014",
+      "time": 4.045381632572122e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375040671,
+        "rho_NC7H16": 2.9023821945456446e-14,
+        "rho_E": 1158067395.6925414
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174543345583992e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.938567775685,
+        "spray_rhoY_NC7H16_src": 7.174543345583992e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.45975030367238e-08,
+        "xmom_sum": -5.365026973703329e-23,
+        "ymom_sum": 1.2847922637913755e-21,
+        "thermal_mass_temperature_sum": 1.3379247250046272e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00015",
+      "time": 4.594526910720375e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375041066,
+        "rho_NC7H16": 3.296368695752006e-14,
+        "rho_E": 1158067395.6924672
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174539433913182e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.932383168454,
+        "spray_rhoY_NC7H16_src": 7.174539433913182e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.4597499958704225e-08,
+        "xmom_sum": -7.070826363173276e-23,
+        "ymom_sum": 1.6908014617904954e-21,
+        "thermal_mass_temperature_sum": 1.3379245829679543e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00016",
+      "time": 5.198586716683453e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.144582283750415,
+        "rho_NC7H16": 3.729753592799712e-14,
+        "rho_E": 1158067395.692386
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174535120642675e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.925560505071,
+        "spray_rhoY_NC7H16_src": 7.174535120642675e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459749657288471e-08,
+        "xmom_sum": -9.26239514463376e-23,
+        "ymom_sum": 2.211735521679361e-21,
+        "thermal_mass_temperature_sum": 1.3379244267277329e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00017",
+      "time": 5.863052503242839e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.1445822837504198,
+        "rho_NC7H16": 4.206476672248635e-14,
+        "rho_E": 1158067395.6922963
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174530381093158e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.918065054777,
+        "spray_rhoY_NC7H16_src": 7.174530381093158e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459749284848563e-08,
+        "xmom_sum": -1.2072093615135695e-22,
+        "ymom_sum": 2.8790392821880455e-21,
+        "thermal_mass_temperature_sum": 1.3379242548636315e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00018",
+      "time": 6.593964868458164e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375042503,
+        "rho_NC7H16": 4.730871687540877e-14,
+        "rho_E": 1158067395.692198
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174525170810348e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.90982610832,
+        "spray_rhoY_NC7H16_src": 7.174525170810348e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459748875164955e-08,
+        "xmom_sum": -1.5667376028916582e-22,
+        "ymom_sum": 3.7329017234133375e-21,
+        "thermal_mass_temperature_sum": 1.3379240658132921e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00019",
+      "time": 7.397968470195022e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375043078,
+        "rho_NC7H16": 5.3077057545031446e-14,
+        "rho_E": 1158067395.6920896
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174519435453745e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.90075566677,
+        "spray_rhoY_NC7H16_src": 7.174519435453745e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459748424513336e-08,
+        "xmom_sum": -2.0258967818763702e-22,
+        "ymom_sum": 4.824762941409488e-21,
+        "thermal_mass_temperature_sum": 1.3379238578581274e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    },
+    {
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00020",
+      "time": 8.282372432105566e-08,
+      "cell_volume": 0.048828125,
+      "gas": {
+        "mass": 0.14458228375043713,
+        "rho_NC7H16": 5.942222683858269e-14,
+        "rho_E": 1158067395.6919703
+      },
+      "source_rate_integrals": {
+        "spray_rho_src": 7.174513129664575e-07,
+        "spray_xmom_src": 0.0,
+        "spray_ymom_src": 0.0,
+        "spray_eng_src": -13474.890784006326,
+        "spray_rhoY_NC7H16_src": 7.174513129664575e-07
+      },
+      "spray_particle_mass_measure_factor": 0.78125,
+      "particle_binary_budget": {
+        "mass_sum": 4.459747928796979e-08,
+        "xmom_sum": -2.610975994123348e-22,
+        "ymom_sum": 6.220557289570668e-21,
+        "thermal_mass_temperature_sum": 1.3379236291076983e-05,
+        "mass_model": "number_density_times_liquid_density_spherical_volume",
+        "particle_count": 1
+      }
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_spray_source_budget_validation_report.py",
+      "sha256": "dc2e838abf50ac3429efe546fdc9d1cd66919c2afee72b15d7f669780629221d",
+      "size_bytes": 19658
+    },
+    {
+      "label": "run_script",
+      "path": "tools/codex_run_academic_spray_source_budget_validation.sh",
+      "sha256": "7030bc5e0c126c4f461eed177a2e0f48068a0369782734c4beaddf9c36c009fa",
+      "size_bytes": 1878
+    },
+    {
+      "label": "run_log",
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/run.log",
+      "sha256": "c77ee492ea9029081de728e4266dbaadc607f59108569ac6f481036413ce35f3",
+      "size_bytes": 8214
+    },
+    {
+      "label": "input_file",
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/inputs",
+      "sha256": "54e3298a9aff6f87680a588f524a3152baf1da58c8244fb079e9b1f36c38751a",
+      "size_bytes": 2669
+    },
+    {
+      "label": "initial_header",
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00000/Header",
+      "sha256": "d1014b9ae4c65699c18e8ac404ed6733acfc48f996ec0dce8a2711abd1235c5c",
+      "size_bytes": 456
+    },
+    {
+      "label": "final_header",
+      "path": "/tmp/codex_academic_spray_source_budget.58pifL/plt00020/Header",
+      "sha256": "da7b1e7d07f920f4c30e681c7244a324638ff146689aae9fa70d7ffef4622940",
+      "size_bytes": 500
+    },
+    {
+      "label": "code_diff",
+      "path": "docs/codex_audit/evidence/academic_spray_source_budget_validation_20260729/spray_source_mapping_code_diff.patch",
+      "sha256": "e31c8fc81e0fd6c5e471f1f1f609b6a8cbb6f5e3ad8224bec8c95cdc28266f69",
+      "size_bytes": 4639
+    }
+  ],
+  "limitations": [
+    "This report clears gas-side source-history accounting for total mass and fuel species in a closed periodic spray smoke case.",
+    "Particle mass reconstruction from particle DATA closes to the 2D-spray effective-thickness gas source integral for this closed periodic spray budget case.",
+    "ACD-07 reacting spray detonation closure remains open until this mapped-source path is exercised in a reacting detonation spray case."
+  ]
+}

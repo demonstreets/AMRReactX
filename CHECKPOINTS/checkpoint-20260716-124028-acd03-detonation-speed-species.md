@@ -1,0 +1,161 @@
+# Checkpoint - ACD-03 detonation wave speed and species sanity
+
+> Date: 2026-07-16T12:40:28+08:00
+> Agent: Codex
+> Related items: ACD-03
+
+## Summary
+
+- Strengthened validate_detonation_wave.py with smoke-bounded thermal-front speed, final species nonnegativity, species-density closure, and H2O field-change checks.
+- Fresh 20-step PeleC/LiDryer/CVODE detonation_2D smoke and the full codex_smoke_all gate both pass with the strengthened validator.
+
+## Changed Files / Modules
+
+- tools/validate_detonation_wave.py
+- docs/codex_audit/MASTER_PLAN_TRACEABILITY.md
+- docs/codex_audit/SMOKE_MATRIX.md
+
+## Verification
+
+- python3 -m py_compile tools/validate_detonation_wave.py: PASS
+- python3 tools/validate_detonation_wave.py --initial /tmp/codex_detonation_wave_validation_20260716/run/plt00000 --final /tmp/codex_detonation_wave_validation_20260716/run/plt00020: PASS
+- CODEX_DETONATION_LOG_DIR=/tmp/codex_detonation_wave_speed_species_20260716 JOBS=2 RUN_TIMEOUT=180 tools/codex_smoke_academic_detonation_wave.sh: PASS
+- CODEX_SMOKE_LOG_DIR=/tmp/codex_smoke_all_post_detonation_speed_species_20260716 JOBS=2 RUN_TIMEOUT=180 tools/codex_smoke_all.sh: PASS
+
+## Evidence Paths
+
+- /tmp/codex_detonation_wave_validator_replay_20260716.log
+- /tmp/codex_detonation_wave_speed_species_20260716/validation.log
+- /tmp/codex_smoke_all_post_detonation_speed_species_20260716/academic_detonation_wave.log
+- /tmp/codex_smoke_all_post_detonation_speed_species_20260716
+
+## Known Limitations
+
+- The front-speed bounds are smoke guardrails, not calibrated detonation-speed or ZND/reference validation.
+- ACD-03 remains PARTIAL until reference structure, mesh convergence, longer stability, and AMR-refinement benefit are validated.
+
+## Git Status Snapshot
+
+```text
+ M AGENTS.md
+ M PROGRESS.md
+ M examples/academic/detonation_2D/GNUmakefile
+ M examples/academic/vof_advection_1D/prob.H
+ M examples/engineering/bfs_kepsilon/pelelmex_prob.H
+ M examples/engineering/bfs_kepsilon/pelelmex_prob.cpp
+ M examples/engineering/h2_ignition/GNUmakefile
+ M examples/engineering/h2_ignition/pelelmex_prob.cpp
+ M examples/engineering/h2_leak_3d/GNUmakefile
+ M examples/engineering/h2_leak_3d/pelelmex_prob.H
+ M external/PeleC/Exec/Make.PeleC
+ M external/PeleC/Source/Hydro.cpp
+ M external/PeleC/Source/PeleC.cpp
+ M external/PeleC/Source/Tagging.H
+ M external/PeleC/Source/Tagging.cpp
+ M external/PeleC/Source/WENO.H
+ M external/PeleLMeX/CMake/BuildPelePhysicsLib.cmake
+ M external/PeleLMeX/Exec/Make.PeleLMeX
+ M external/PeleLMeX/Exec/RegTests/CMakeLists.txt
+ M external/PeleLMeX/Source/PeleLMeX.H
+ M external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+ M external/PeleLMeX/Source/PeleLMeX_Setup.cpp
+ M external/PeleLMeX/Source/PeleLMeX_Tagging.cpp
+ M external/PelePhysics/Source/Reactions/Make.package
+ M external/PelePhysics/Source/Reactions/ReactorCvode.cpp
+ D external/PelePhysics/Submodules/sundials
+ M external/PelePhysics/Testing/Exec/Make.PelePhysics
+ M external/amrex/Src/Extern/SUNDIALS/AMReX_Sundials_Core.cpp
+ M src/academic/twophase/CSF.H
+ M src/academic/twophase/TwoPhaseEOS.H
+ M src/academic/vof/VOF_FCT.H
+ M src/academic/vof/vof_modules.H
+ M src/common/input_parser/yaml_parser.cpp
+ M src/common/input_parser/yaml_schema.H
+ M src/engineering/evaporation/evaporation_model.H
+ M src/engineering/evaporation/pool_evaporation.H
+ M src/engineering/evaporation/pool_vof_coupling.H
+ M src/engineering/my_pele_modules.H
+ M src/engineering/turbulence/wall_functions.H
+ M src/engineering/turbulence/wall_functions.cpp
+ M src/engineering/wind/wind_profile.H
+ M src/geometry/bc_tags.H
+ M src/geometry/bc_tags.cpp
+ M src/geometry/eb2_factory.H
+ M src/geometry/eb2_factory.cpp
+ M src/geometry/stl_parser.cpp
+ M test/unit/test_csf.cpp
+ M test/unit/test_full.yaml
+ M test/unit/test_twophase_eos.cpp
+ M test/unit/test_twophase_hllc.cpp
+ M test/unit/test_vof_fct.cpp
+ M test/unit/test_wall_functions.cpp
+ M test/unit/test_yaml_parser.cpp
+ M tools/__pycache__/amrex_reader.cpython-312.pyc
+ M tools/amrex_reader.py
+?? .gitmodules
+?? CHECKPOINTS/checkpoint-20260716-120912-codex-gpu-source-audit-second-order-numerics.md
+?? CHECKPOINTS/checkpoint-20260716-123526-eng01-geometry-step-guard.md
+?? CMakeLists.txt
+?? case_test_records/
+?? docs/codex_audit/
+?? examples/academic/bench_1gpu/
+?? examples/academic/bench_1gpu_h2o2/
+?? examples/academic/bench_1gpu_nn_A/
+?? examples/academic/bench_1gpu_ppm1_test/
+?? examples/academic/bench_1gpu_znd/
+?? examples/academic/bench_2gpu/
+?? examples/academic/bench_cpu16/
+?? examples/academic/d2_law/input.codex_long_slope_smoke
+?? examples/academic/d2_law/input.codex_smoke
+?? examples/academic/d2_law/input.codex_trend_smoke
+?? examples/academic/deton_cpu_build/
+?? examples/academic/detonation_2D/inputs.codex_plan_amr_smoke
+?? examples/academic/detonation_2D/inputs.codex_smoke
+?? examples/academic/detonation_2D/inputs.codex_wave_smoke
+?? examples/academic/detonation_hotspot/
+?? examples/academic/detonation_znd_gpu/
+?? examples/academic/shock_droplet/input.codex_sod_smoke
+?? examples/academic/vof_advection_1D/input.codex_smoke
+?? examples/engineering/bfs_kepsilon/input.codex_smoke
+?? examples/engineering/bfs_kepsilon/input.codex_yaml_profile_smoke.yaml
+?? examples/engineering/bfs_kepsilon/input.codex_yaml_smoke.yaml
+?? examples/engineering/c3h8_flacs/AMReX_buildInfo.cpp
+?? examples/engineering/counterflow_c12h23_gpu/
+?? examples/engineering/counterflow_c12h23_v2/
+?? examples/engineering/ecn_spray_a_gpu/
+?? examples/engineering/h2_ignition/input.codex_history_sdc2_smoke
+?? examples/engineering/h2_ignition/input.codex_history_smoke
+?? examples/engineering/h2_ignition/input.codex_plot_smoke
+?? examples/engineering/h2_ignition/input.codex_smoke
+?? examples/engineering/h2_leak_3d/input.codex_plume_history_smoke
+?? examples/engineering/h2_leak_3d/input.codex_plume_smoke
+?? examples/engineering/h2_leak_3d/input.codex_smoke
+?? examples/engineering/jet_flame_c12h23/
+?? examples/engineering/spray_combust_3d/
+?? examples/engineering/spray_heptane_1gpu/
+?? external/PeleLMeX/Exec/RegTests/EB_EnclosedFlame/AMReX_buildInfo.cpp
+?? external/PeleLMeX/Exec/RegTests/EB_FlowPastCylinder/input.codex_amr_smoke
+?? external/PeleLMeX/Exec/RegTests/EB_FlowPastCylinder/input.codex_plan_amr_smoke
+?? external/PeleLMeX/Exec/RegTests/EB_FlowPastCylinder/input.codex_smoke
+?? external/PeleLMeX/Exec/RegTests/H2_HotBubble/
+?? external/PeleLMeX_BAK_20260708/
+?? external/PelePhysics/Mechanisms/C12H23/
+?? external/PelePhysics/Mechanisms/h2o2/
+?? external/PelePhysics/Source/Reactions/ReactorNN.H
+?? external/PelePhysics/Source/Reactions/ReactorNN.H.nullbak
+?? external/PelePhysics/Source/Reactions/ReactorNN.H.shell
+?? external/PelePhysics/Source/Reactions/ReactorNN.H_BAK_20260712
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.bak2
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.bak_codex_v41_forward
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.bak_codex_v4_ooddiag
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.nullbak
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.planb
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.shell
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp.stage4a_bak
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp_BAK_20260712
+?? external/PelePhysics/Source/Reactions/ReactorNN.cpp_BAK_planA_pre_20260712_115348
+?? external/PelePhysics/Testing/Exec/ReactEval/inputs.nn_test
+?? external/amrex/Src/Extern/SUNDIALS/arkode
+... truncated after 120 entries
+```

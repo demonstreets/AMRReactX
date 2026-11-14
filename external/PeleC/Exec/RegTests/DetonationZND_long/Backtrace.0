@@ -1,0 +1,48 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleC3d.gnu.ex(+0x34c6a6) [0x5d508d0896a6]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleC3d.gnu.ex(+0x351454) [0x5d508d08e454]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleC3d.gnu.ex(+0x3bee07) [0x5d508d0fbe07]
+    amrex::Abort(char const*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:188
+ (inlined by) amrex::AmrLevel::FillPatcherFill(amrex::MultiFab&, int, int, int, double, int, int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_AmrLevel.cpp:2180
+
+ 3: ./PeleC3d.gnu.ex(+0x68226d) [0x5d508d3bf26d]
+    PeleC::do_sdc_iteration(double, double, int, int, int, int) at /home/cj/my-pele/external/PeleC/Exec/RegTests/DetonationZND/../../../Source/Advance.cpp:278
+ (inlined by) PeleC::do_sdc_advance(double, double, int, int) at /home/cj/my-pele/external/PeleC/Exec/RegTests/DetonationZND/../../../Source/Advance.cpp:223
+
+ 4: ./PeleC3d.gnu.ex(+0x394744) [0x5d508d0d1744]
+    std::vector<double, std::allocator<double> >::operator[](unsigned long) at /usr/include/c++/13/bits/stl_vector.h:1129
+ (inlined by) amrex::Vector<double, std::allocator<double> >::operator[](unsigned long) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Vector.H:38
+ (inlined by) amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2077
+
+ 5: ./PeleC3d.gnu.ex(+0x394e51) [0x5d508d0d1e51]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2120 (discriminator 1)
+
+ 6: ./PeleC3d.gnu.ex(+0x39921b) [0x5d508d0d621b]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2120 (discriminator 2)
+ (inlined by) amrex::Amr::coarseTimeStep(double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2182 (discriminator 2)
+
+ 7: ./PeleC3d.gnu.ex(+0x43cc2) [0x5d508cd80cc2]
+    main at /home/cj/my-pele/external/PeleC/Exec/RegTests/DetonationZND/../../../Source/main.cpp:179
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x74560b22a1ca]
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x74560b22a28b]
+
+10: ./PeleC3d.gnu.ex(+0x44d75) [0x5d508cd81d75]
+    ?? ??:0
+

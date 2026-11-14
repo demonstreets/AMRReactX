@@ -1,0 +1,42 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "1",
+    "bash",
+    "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_dry_2d_2800x800_cfl20_tol4_gpu_v2/bind_rank.sh",
+    "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_cell_v22d.gnu.MPI.CUDA.ex",
+    "inputs"
+  ],
+  "binary": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_cell_v22d.gnu.MPI.CUDA.ex",
+  "mechanism": "heptane_wd6",
+  "species_names": [
+    "nc7h16",
+    "o2",
+    "co",
+    "h2o",
+    "co2",
+    "n2"
+  ],
+  "binary_sha256": "04e6cf128d17998b683900a2b9e894e4e68360cb84a1c5d602dba1cc379865fa",
+  "profile_sha256": "9c3f0df46dc3750ded867ee4dc45c5096aa1d7706de319e51ad30cfbc423719b",
+  "input_sha256": "278fe81333947baca297840b08497abd3e6e224cc0ad9542fe8210ba1655498c",
+  "gas_phi": 0.6000000000000001,
+  "liquid_phi": 0.0,
+  "diameter_um": 10.0,
+  "effective_depth_cm": 0.005,
+  "liquid_mass_density_g_cm3": 0.0,
+  "parcel_count": 0,
+  "real_droplets_per_parcel": 0.0,
+  "transverse_boundary": "slip walls",
+  "chemistry_transport_split": "strang",
+  "reference": "/home/cj/my-pele/repair_validation/twophase_20260910/reference_wd6_v1",
+  "linear_solver": "custom_direct",
+  "wd6_concentration_epsilon_mol_m3": 1e-10,
+  "output_interval_s": 2e-06,
+  "chemistry_tile_size": null,
+  "cell_chemistry_integrator": "wd6_extrapolated",
+  "cell_chemistry_rtol": 0.0001,
+  "cell_chemistry_atol_y": 1e-13,
+  "history_output_interval_s": 1e-06
+}

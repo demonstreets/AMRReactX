@@ -1,0 +1,197 @@
+{
+  "cleanup_candidates": [
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_1_lowest_risk_after_rebuild_checks",
+      "kind": "test_output_tree",
+      "manual_approval_required": true,
+      "path": "test/gpu_correctness",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "low_to_medium",
+      "size_kib": 10634324,
+      "size_mib": 10385.08
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_1_lowest_risk_after_rebuild_checks",
+      "kind": "rebuildable_build_tree",
+      "manual_approval_required": true,
+      "path": "build-gpu2",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "low_to_medium",
+      "size_kib": 4546664,
+      "size_mib": 4440.1
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_1_lowest_risk_after_rebuild_checks",
+      "kind": "rebuildable_build_tree",
+      "manual_approval_required": true,
+      "path": "build-gpu-mpi",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "low_to_medium",
+      "size_kib": 1720748,
+      "size_mib": 1680.42
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_2_case_output_after_evidence_export",
+      "kind": "plotfile_heavy_example_output",
+      "manual_approval_required": true,
+      "path": "examples/academic/bench_1gpu_znd",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "medium",
+      "size_kib": 16292060,
+      "size_mib": 15910.21
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_2_case_output_after_evidence_export",
+      "kind": "plotfile_heavy_example_output",
+      "manual_approval_required": true,
+      "path": "examples/academic/bench_1gpu",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "medium",
+      "size_kib": 10185532,
+      "size_mib": 9946.81
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_2_case_output_after_evidence_export",
+      "kind": "plotfile_heavy_example_output",
+      "manual_approval_required": true,
+      "path": "examples/academic/bench_1gpu_nn_A",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "medium",
+      "size_kib": 9762788,
+      "size_mib": 9533.97
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "stage_2_case_output_after_evidence_export",
+      "kind": "plotfile_heavy_example_output",
+      "manual_approval_required": true,
+      "path": "examples/academic/bench_cpu16",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "medium",
+      "size_kib": 4160504,
+      "size_mib": 4062.99
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "review_only",
+      "kind": "review_only",
+      "manual_approval_required": true,
+      "path": "examples/engineering/h2_leak_3d",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "unknown_review_required",
+      "size_kib": 4817332,
+      "size_mib": 4704.43
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "review_only",
+      "kind": "review_only",
+      "manual_approval_required": true,
+      "path": "examples/academic/detonation_znd_gpu",
+      "preconditions": [
+        "rerun bash tools/codex_verify_current_scope.sh before cleanup",
+        "confirm no running CFD job is writing this path",
+        "preserve required logs/reports/inputs before deletion"
+      ],
+      "risk_level": "unknown_review_required",
+      "size_kib": 1769288,
+      "size_mib": 1727.82
+    },
+    {
+      "cleanup_performed": false,
+      "cleanup_stage": "protect",
+      "kind": "protected_evidence",
+      "manual_approval_required": true,
+      "path": "docs/codex_audit/evidence",
+      "preconditions": [
+        "export or replace evidence chain before considering cleanup",
+        "do not include in routine disk cleanup"
+      ],
+      "risk_level": "protected_do_not_delete",
+      "size_kib": 19814588,
+      "size_mib": 19350.18
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "current_disk_usage_manifest_report",
+      "path": "docs/codex_audit/evidence/current_disk_usage_manifest_20260803/current_disk_usage_manifest_report.json",
+      "sha256": "d29a4a247eaf06fa206c381fcf7a518a37d28d61bd9aa56809bc64fc1134e23f",
+      "size_bytes": 71539
+    },
+    {
+      "label": "current_case_output_cleanup_manifest_report",
+      "path": "docs/codex_audit/evidence/current_case_output_cleanup_manifest_20260803/current_case_output_cleanup_manifest_report.json",
+      "sha256": "4f4a22f1d9e52de42b47f6e031163bfeb5f837337f76a5b7524e026bbf2be514",
+      "size_bytes": 57354
+    }
+  ],
+  "explicitly_protected": [
+    "docs/codex_audit/evidence",
+    "docs/codex_audit/current_scope_operator_runbook.md",
+    "PROGRESS.md",
+    "README.md"
+  ],
+  "generated_at_utc": "2026-08-20T10:07:05.668401+00:00",
+  "required_before_any_cleanup": [
+    "obtain explicit user approval for concrete paths",
+    "run bash tools/codex_verify_current_scope.sh immediately before cleanup",
+    "stop active CFD jobs that may write candidate paths",
+    "preserve audit evidence and current input decks needed for reproducibility",
+    "after cleanup, regenerate disk usage, cleanup plan, state snapshot, and PROGRESS evidence"
+  ],
+  "schema_version": 1,
+  "status": "AUDITED-CURRENT-DISK-CLEANUP-PLAN",
+  "summary": {
+    "actionable_candidate_count": 9,
+    "candidate_count": 10,
+    "case_output_cleanup_manifest_status": "AUDITED-CURRENT-CASE-OUTPUT-CLEANUP-MANIFEST",
+    "cleanup_performed": false,
+    "cleanup_policy": "decision plan only; no files are deleted, restored, staged, or ignored",
+    "disk_cleanup_plan_audited": true,
+    "disk_usage_manifest_status": "AUDITED-CURRENT-DISK-USAGE-MANIFEST",
+    "estimated_actionable_reclaim_kib": 63889240,
+    "protected_candidate_count": 1,
+    "repo_size_kib": 110466108,
+    "stage_1_reclaim_kib": 16901736,
+    "stage_2_reclaim_kib": 40400884
+  }
+}

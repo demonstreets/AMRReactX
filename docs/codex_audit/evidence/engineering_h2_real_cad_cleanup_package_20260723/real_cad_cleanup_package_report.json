@@ -1,0 +1,119 @@
+{
+  "blocking_gaps": [
+    "real_cad_cleanup_manifest_missing",
+    "source_cad_files_missing",
+    "cleaned_geometry_files_missing",
+    "large_layout_requires_at_least_three_real_geometries"
+  ],
+  "campaign": "engineering-h2-production-full",
+  "clears_real_cad_cleanup_blocker": false,
+  "current_inputs": {
+    "cad_source_is_real": false,
+    "cleaned_geometry_files_verified": false,
+    "geometry_count": 0,
+    "large_layout_campaign": false,
+    "source_cad_files_verified": false
+  },
+  "evidence_files": [
+    {
+      "label": "real_cad_cleanup_package_readme",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/README.md",
+      "sha256": "aefb4f33983acf9419ef177c2032a6ff9d1254b411d4d1839374aca024f51774",
+      "size_bytes": 759
+    },
+    {
+      "label": "real_cad_cleanup_manifest_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest_template.json",
+      "sha256": "2829bb399a8b89dc5bb5caa46b559b58ff77c06300087decf42dec63cad11f58",
+      "size_bytes": 3389
+    },
+    {
+      "label": "real_cad_intake_checklist",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_intake_checklist.csv",
+      "sha256": "250b076944eeec4acabf18f1fdd8e4c8c3735c0383ac064e0b96f95fbc45e5d9",
+      "size_bytes": 1328
+    },
+    {
+      "label": "source_cad_readme",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/source_cad/README.md",
+      "sha256": "71d81c28748ac34262cd3565720131f683464c3ba1243d80d52ea168ec130c31",
+      "size_bytes": 132
+    },
+    {
+      "label": "cleaned_geometry_readme",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/cleaned_geometry/README.md",
+      "sha256": "b6ba5717c8c76ae3b05cda276ce29229b05e6b95acb116900f08112bac18bb76",
+      "size_bytes": 110
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This report prepares and validates a real-CAD cleanup evidence package; it is not external safety certification.",
+    "The current default package is NOT_READY until real source CAD, cleaned geometry, hashes, provenance, and cleanup checks are supplied.",
+    "The production scorecard can clear the real-CAD blocker only after a validated large-layout CAD manifest is attached to the campaign manifest."
+  ],
+  "manifest_present": false,
+  "package_root": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package",
+  "quality_gate_matrix": [
+    {
+      "evidence": "",
+      "gap": "Provide real_cad_cleanup_manifest.json in the package root.",
+      "name": "manifest_present",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Populate title, owner_or_supplier, drawing_or_package_id, revision, received_at_utc, and confidentiality.",
+      "name": "provenance_complete",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Set source_type to an accepted real-CAD source classification.",
+      "name": "real_cad_source_classified",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Stage source CAD files and record exact SHA-256 hashes.",
+      "name": "source_cad_hashes_verified",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Stage cleaned geometry files and record exact SHA-256 hashes.",
+      "name": "cleaned_geometry_hashes_verified",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Mark large_layout_campaign true and provide at least three real geometries.",
+      "name": "large_layout_coverage",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "Provide finite meter-space bbox_min_m/bbox_max_m with nondegenerate layout extents.",
+      "name": "bbox_non_degenerate_m",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "",
+      "gap": "All real-CAD package gates must pass before the production scorecard can clear this blocker.",
+      "name": "scorecard_blocker_clearance",
+      "status": "MISSING"
+    }
+  ],
+  "real_cad_cleanup_manifest": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json",
+  "schema_version": 2,
+  "status": "NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE",
+  "template_files": [
+    "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest_template.json",
+    "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_intake_checklist.csv",
+    "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/README.md",
+    "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/source_cad/README.md",
+    "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/cleaned_geometry/README.md"
+  ],
+  "title": "Engineering H2 Real-CAD Cleanup Package",
+  "validation_summary": null
+}

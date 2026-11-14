@@ -1,0 +1,215 @@
+{
+  "case": {
+    "backend": "CPU-serial",
+    "bubble_center": [
+      0.5,
+      0.5
+    ],
+    "bubble_radius": 0.25,
+    "build_log": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/build.log",
+    "case_name": "canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke",
+    "cfl": 0.025,
+    "density_ratio_heavy_over_light": 10.0,
+    "dimension": 2,
+    "do_mol": 1,
+    "domain": [
+      1.0,
+      2.0
+    ],
+    "expected_plot_samples": 2,
+    "final_plot": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run/plt01000",
+    "gravity": 0.98,
+    "grid": [
+      32,
+      64
+    ],
+    "initial_plot": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run/plt00000",
+    "input_file": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run/input.canonical_bubble_rise_candidate",
+    "interface_width": 0.03125,
+    "max_step": 1000,
+    "phase_viscosity_force_cap": 1.0,
+    "phase_viscosity_mu_heavy": 10.0,
+    "phase_viscosity_mu_light": 1.0,
+    "plot_int": 1000,
+    "positivity_rhoe_floor": 1e-08,
+    "positivity_temp_floor": 1e-08,
+    "role": "academic_twophase_canonical_bubble_rise_geometry_gravity_candidate",
+    "run_log": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run.log",
+    "run_returncode": 0,
+    "solver": "PeleC",
+    "stop_time": 0.001,
+    "surface_tension_force_cap": 10.0,
+    "surface_tension_sigma": 24.5,
+    "validation_log": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/validation.log",
+    "validation_returncode": 0
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/case_summary.json",
+      "sha256": "c9ace7d02bc34a3b529be26621343452b9ef5cc500bfc1e17ec4e43e11cb9604",
+      "size_bytes": 2018
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run/input.canonical_bubble_rise_candidate",
+      "sha256": "a314e8d2bc9fb9cbac74dcefa96bcfc78658357bfac7a249a69e85e2a28422b5",
+      "size_bytes": 1140
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/build.log",
+      "sha256": "57bf3bb7a9c1658c541943f53563892896a502065aa0940ec6741f68148dcba3",
+      "size_bytes": 16929
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/run.log",
+      "sha256": "c4960e7e1bc36a038103b12c1538e78c1096323c5fd28372c94e576d4ad03063",
+      "size_bytes": 507
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_candidate_20260730/canonical_bubble_rise_geometry_gravity_csf_viscosity_1000step_smoke/validation.log",
+      "sha256": "41d95ed7ed64414f52391b22988ad0e1dc2a63f2fe036bf92546931047fa4dc2",
+      "size_bytes": 348
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_twophase_canonical_bubble_rise_candidate.sh",
+      "sha256": "57a3bf2e535cd1c41f0ac267a2f425ce4340f3aa124a862255fc145788baa7a0",
+      "size_bytes": 6018
+    },
+    {
+      "label": "validator",
+      "path": "tools/validate_academic_twophase_bubble_rise.py",
+      "sha256": "85b7ffa62d71c62c236a1f841d2c26aa39b96d6f6a504c2336a98640166add96",
+      "size_bytes": 5610
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_twophase_canonical_bubble_rise_candidate_report.py",
+      "sha256": "233b71dfc15206c59672530bcfb9de963a35e4577b4098630c6973287eb239ed",
+      "size_bytes": 14636
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:07+00:00",
+  "limitations": [
+    "This is a geometry/gravity plus capped-CSF and capped phase-viscosity candidate smoke, not a full Hysing benchmark validation.",
+    "The current PeleC problem now has explicit sigma=24.5 and mu_heavy/mu_light=10/1 smoke controls, but the implementation remains a capped explicit source path rather than a calibrated production VOF viscous stress discretization.",
+    "The run intentionally stops at a short smoke time; canonical t=3 comparison remains open."
+  ],
+  "quality_gates": [
+    {
+      "metric": [],
+      "name": "candidate_smoke_run_finalized",
+      "status": "PASS"
+    },
+    {
+      "metric": [
+        1.0,
+        2.0
+      ],
+      "name": "domain_matches_hysing_1x2",
+      "status": "PASS",
+      "target": [
+        1.0,
+        2.0
+      ]
+    },
+    {
+      "metric": 0.25,
+      "name": "bubble_radius_fraction_matches_hysing",
+      "status": "PASS",
+      "target": 0.25
+    },
+    {
+      "metric": [
+        0.5,
+        0.25
+      ],
+      "name": "bubble_center_matches_hysing",
+      "status": "PASS",
+      "target": [
+        0.5,
+        0.25
+      ]
+    },
+    {
+      "metric": 10.0,
+      "name": "density_ratio_matches_hysing_case_1",
+      "status": "PASS",
+      "target": 10.0
+    },
+    {
+      "metric": 0.98,
+      "name": "gravity_matches_hysing_case_1",
+      "status": "PASS",
+      "target": 0.98
+    },
+    {
+      "metric": 0.001,
+      "name": "candidate_short_time_smoke_not_canonical_final_time",
+      "status": "PASS",
+      "target": "short smoke only; canonical target t=3.0 remains open"
+    },
+    {
+      "metric": 24.5,
+      "name": "surface_tension_model_contract",
+      "status": "PASS",
+      "target": 24.5
+    },
+    {
+      "metric": {
+        "force_cap": 1.0,
+        "mu_heavy": 10.0,
+        "mu_light": 1.0
+      },
+      "name": "phase_viscosity_model_contract",
+      "status": "PASS",
+      "target": "phase viscosity model equivalent to mu_liquid/mu_bubble=10/1 with capped explicit smoke source"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Short PeleC smoke case that aligns Hysing-style domain, initial bubble geometry, density ratio, gravity scale, an explicit capped CSF surface-tension source, and an explicit capped phase-viscosity source without claiming t=3 benchmark completion.",
+  "status": "PASS-ACADEMIC-TWOPHASE-CANONICAL-BUBBLE-RISE-CANDIDATE",
+  "summary": {
+    "adv_mass_rel_drift": 4.99244987077e-16,
+    "blocking_reasons": [],
+    "centroid_rise": -5.80837742348e-08,
+    "clears_canonical_geometry_gravity_case_package": true,
+    "clears_qlt_03_canonical_long_time_bubble_rise_gap": false,
+    "derived_contract": {
+      "bubble_center_over_domain": [
+        0.5,
+        0.25
+      ],
+      "bubble_radius_over_domain_width": 0.25,
+      "density_ratio_heavy_over_light": 10.0,
+      "domain_aspect_height_over_width": 2.0,
+      "domain_height": 2.0,
+      "domain_width": 1.0,
+      "gravity": 0.98,
+      "phase_viscosity_force_cap": 1.0,
+      "phase_viscosity_mu_heavy": 10.0,
+      "phase_viscosity_mu_light": 1.0,
+      "plot_int": 1000.0,
+      "stop_time": 0.001,
+      "surface_tension_sigma": 24.5
+    },
+    "grid_nx": 32,
+    "grid_ny": 64,
+    "light_y0": 0.500000000895,
+    "light_y1": 0.499999942812,
+    "mass_rel_drift": 4.87738829356e-16,
+    "ready_for_surface_tension_viscosity_model_work": true,
+    "remaining_canonical_model_gaps": [
+      "canonical_final_time_contract"
+    ],
+    "time0": 0.0,
+    "time1": 3.04725008623e-05,
+    "ymom_absmax": 0.000327155853117,
+    "ymom_sum": 3.33841126454e-05
+  },
+  "title": "Academic Two-Phase Canonical Bubble-Rise Geometry/Gravity Candidate"
+}

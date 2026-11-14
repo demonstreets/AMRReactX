@@ -1,0 +1,60 @@
+{
+  "raw_validation_sha256": "fc0edb2f2c2ab33b135385b2bc2b27baf36dd21abd05a78e7f4f4f24ac230778",
+  "sample_count": 8,
+  "levels": [
+    {
+      "rtol": 0.0001,
+      "completed": 8,
+      "requested": 8,
+      "maximum_temperature_error_K": 0.002015164019212534,
+      "maximum_mass_fraction_error": 4.324797881344322e-07,
+      "maximum_difference_from_recorded_flow_stage_K": 9.094947017729282e-13
+    },
+    {
+      "rtol": 1e-05,
+      "completed": 8,
+      "requested": 8,
+      "maximum_temperature_error_K": 0.00024291821227961918,
+      "maximum_mass_fraction_error": 5.2469683070599515e-08,
+      "maximum_difference_from_recorded_flow_stage_K": 0.0018758977093966678
+    },
+    {
+      "rtol": 1e-06,
+      "completed": 8,
+      "requested": 8,
+      "maximum_temperature_error_K": 3.8591276279476006e-05,
+      "maximum_mass_fraction_error": 8.335614504195732e-09,
+      "maximum_difference_from_recorded_flow_stage_K": 0.0020012846925965277
+    },
+    {
+      "rtol": 1e-08,
+      "completed": 6,
+      "requested": 8,
+      "maximum_temperature_error_K": 2.1670439309673384e-07,
+      "maximum_mass_fraction_error": 4.682489118668087e-11,
+      "maximum_difference_from_recorded_flow_stage_K": 0.0018595379042380955
+    }
+  ],
+  "incomplete_runs": [
+    {
+      "sample": "15480_chemistry_2",
+      "rtol": 1e-08,
+      "accepted_steps": 19994,
+      "rejected_steps": 6,
+      "reason": "Native integrate returned false; total attempted substeps reached 20000.",
+      "interpretation": "Partial state is not a completed endpoint; excluded from accuracy statistics."
+    },
+    {
+      "sample": "15860_chemistry_2",
+      "rtol": 1e-08,
+      "accepted_steps": 19992,
+      "rejected_steps": 8,
+      "reason": "Native integrate returned false; total attempted substeps reached 20000.",
+      "interpretation": "Partial state is not a completed endpoint; excluded from accuracy statistics."
+    }
+  ],
+  "all_requested_native_integrations_completed": false,
+  "reference_self_comparison_max_temperature_difference_K": 9.094947017729282e-13,
+  "reference_self_comparison_max_mass_fraction_difference": 9.71445146547012e-17,
+  "interpretation": "Numerical chemistry verification at recorded high-temperature states of the active WD6 model. Does not validate extrapolated thermodynamics, high-temperature kinetic completeness, wall physics, or the full coupled trajectory."
+}

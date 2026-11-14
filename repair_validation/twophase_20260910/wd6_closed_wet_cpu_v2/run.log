@@ -1,0 +1,48 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Initializing AMReX (0ec1056ff13b-dirty)...
+MPI initialized with 1 MPI processes
+MPI initialized with thread support level 0
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+
+Starting run at 06:59:06 UTC on 2026-09-10.
+
+PeleC git hash: 0ec1056-dirty
+AMReX git hash: 0ec1056-dirty
+PelePhysics git hash: 0ec1056-dirty
+SUNDIALS git hash: 0ec1056-dirty
+
+
+ Reading spray model parameters ...
+ Warning: Spray model in 2D assumes narrow domain in z-direction (Lz = dz)!
+0 Advected Variables: 
+
+6 Species: 
+nc7h16  o2  co  h2o  co2  n2  
+0 Auxiliary Variables: 
+
+Initializing EB2
+Finite-rate ZND initialization: 5001 rows, 6 species, 3 reactions; no imposed wave speed.
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+
+[CVODE ERROR]  CVode
+  At t = 3.29817e-05, unable to satisfy inequality constraints.
+
+amrex::Abort::0::CVODE failed to reach the requested reaction time !!!
+SIGABRT
+See Backtrace.0 file for details
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 6.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------

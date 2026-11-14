@@ -1,0 +1,155 @@
+{
+  "cpu_log_checks": {
+    "amrex_finalized": true,
+    "cuda_devices": null,
+    "cuda_initialized": false,
+    "failure_marker_count": 0,
+    "mpi_ranks": null,
+    "stl_qa_marker": true
+  },
+  "cpu_metrics": {
+    "active_planes": 5,
+    "case": "pipe_rack_cube_cylinder_pipes",
+    "cloud_cells": 0,
+    "cloud_volume": 0.0209796873,
+    "flammable_planes": 2,
+    "mass_ratio": 1.00000188,
+    "max_X": 0.183799903,
+    "merged_stl_file": "codex_merged_pipe_rack_obstacles.stl",
+    "stl_source_files": [
+      "codex_cube_block.stl",
+      "codex_vertical_cylinder.stl",
+      "codex_pipe_rack.stl"
+    ],
+    "stl_triangles": 0,
+    "stl_vertices": 4260
+  },
+  "decision": "pipe_rack_obstacle_cpu_single_gpu_mpi_cuda_and_fire_screening_smoke_pass",
+  "evidence_files": [
+    {
+      "label": "cpu_pipe_rack_summary",
+      "path": "/tmp/codex_h2_leak_pipe_rack_obstacle_20260727_cpu_v2/pipe_rack_obstacle_summary.csv",
+      "sha256": "b6fe70b8cbb34ba8314b68b33b15ff4273d0bbee51c3a60e9b11ce9b0c668ba6",
+      "size_bytes": 828
+    },
+    {
+      "label": "cpu_pipe_rack_run_log",
+      "path": "/tmp/codex_h2_leak_pipe_rack_obstacle_20260727_cpu_v2/run.log",
+      "sha256": "c26208c4356627e76c0fd08a169b899c78a23ecfb5b547a6c8d20d760a8c7b68",
+      "size_bytes": 92145
+    },
+    {
+      "label": "gpu_pipe_rack_summary",
+      "path": "/tmp/codex_h2_leak_pipe_rack_obstacle_20260727_cuda_v8c_ppfix/pipe_rack_obstacle_summary.csv",
+      "sha256": "7782f2c35ece346e27dafb9bc3aee154b71ec1fc7e6815756c709d7332672da9",
+      "size_bytes": 836
+    },
+    {
+      "label": "gpu_pipe_rack_run_log",
+      "path": "/tmp/codex_h2_leak_pipe_rack_obstacle_20260727_cuda_v8c_ppfix/run.log",
+      "sha256": "7df03df296b94648f6b9dbba5ebf74db5b34531013a8c7452e6bb42846f0e530",
+      "size_bytes": 92569
+    },
+    {
+      "label": "mpi_cuda_pipe_rack_summary",
+      "path": "/tmp/codex_h2_leak_pipe_rack_obstacle_20260727_mpi_cuda_2rank_bg/pipe_rack_obstacle_summary.csv",
+      "sha256": "a9028cc51cac82ced10e94a5a3d750be5897b0a417a2bcb75ce004f3a8ac9cef",
+      "size_bytes": 839
+    },
+    {
+      "label": "mpi_cuda_pipe_rack_run_log",
+      "path": "/tmp/codex_h2_leak_pipe_rack_obstacle_20260727_mpi_cuda_2rank_bg/run.log",
+      "sha256": "5b4c9e8562fc4dad7c378e235fcfc448bb7202a424137c8048fecef6c3b71c6c",
+      "size_bytes": 93015
+    },
+    {
+      "label": "pipe_rack_fire_consequence_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_fire_consequence_metrics_20260727/fire_consequence_metrics_report.json",
+      "sha256": "d401253eb7998853920f91525992db00109fbf80ec06ca2f36fe5c92885994ec",
+      "size_bytes": 5882
+    }
+  ],
+  "fire_screening_summary": {
+    "flammable_cloud_energy_j": 24299.52012,
+    "flammable_cloud_h2_mass_kg": 0.000202496001,
+    "max_screening_flux_w_m2": 2864.7943710066866,
+    "max_screening_overpressure_kpa": 0.22338670289012086,
+    "model_scope": "engineering_screening_not_calibrated",
+    "source_limited_heat_release_w": 240000.452,
+    "status": "PASS-SCREENING"
+  },
+  "generated_at_utc": "2026-07-27T05:28:44+00:00",
+  "gpu_log_checks": {
+    "amrex_finalized": true,
+    "cuda_devices": 1,
+    "cuda_initialized": true,
+    "failure_marker_count": 0,
+    "mpi_ranks": null,
+    "stl_qa_marker": true
+  },
+  "gpu_metrics": {
+    "active_planes": 5,
+    "case": "pipe_rack_cube_cylinder_pipes",
+    "cloud_cells": 0,
+    "cloud_volume": 0.0209796873,
+    "flammable_planes": 2,
+    "mass_ratio": 1.00000188,
+    "max_X": 0.18379998,
+    "merged_stl_file": "codex_merged_pipe_rack_obstacles.stl",
+    "stl_source_files": [
+      "codex_cube_block.stl",
+      "codex_vertical_cylinder.stl",
+      "codex_pipe_rack.stl"
+    ],
+    "stl_triangles": 0,
+    "stl_vertices": 4260
+  },
+  "limitations": [
+    "This is a smoke/engineering-screening obstacle case, not a production-size AMR pipe-rack campaign.",
+    "Fire consequence evidence is source/cloud based screening, not calibrated direct 3D fire propagation.",
+    "GPU evidence includes single-GPU CUDA and 2-rank MPI+CUDA execution on server P100 class devices; it is not a production GPU scaling curve."
+  ],
+  "mpi_cuda_log_checks": {
+    "amrex_finalized": true,
+    "cuda_devices": 2,
+    "cuda_initialized": true,
+    "failure_marker_count": 0,
+    "mpi_ranks": 2,
+    "stl_qa_marker": true
+  },
+  "mpi_cuda_metrics": {
+    "active_planes": 5,
+    "case": "pipe_rack_cube_cylinder_pipes",
+    "cloud_cells": 0,
+    "cloud_volume": 0.0209796873,
+    "flammable_planes": 2,
+    "mass_ratio": 1.00000188,
+    "max_X": 0.18379998,
+    "merged_stl_file": "codex_merged_pipe_rack_obstacles.stl",
+    "stl_source_files": [
+      "codex_cube_block.stl",
+      "codex_vertical_cylinder.stl",
+      "codex_pipe_rack.stl"
+    ],
+    "stl_triangles": 0,
+    "stl_vertices": 4260
+  },
+  "schema_version": 1,
+  "status": "PASS-H2-PIPE-RACK-GPU-FIRE-OBSTACLE-SMOKE",
+  "title": "H2 Pipe-Rack Obstacle GPU and Fire-Screening Evidence",
+  "validated_capabilities": {
+    "calibrated_fire_or_blast_model": false,
+    "cpu_obstacle_leak_dispersion": true,
+    "cube_obstacle_stl": true,
+    "direct_coupled_3d_fire_propagation": false,
+    "fire_consequence_screening": true,
+    "gpu_cuda_arch": "sm_60",
+    "gpu_obstacle_leak_dispersion": true,
+    "merged_multi_file_stl_obstacle": true,
+    "mpi_cuda_devices": 2,
+    "mpi_cuda_obstacle_leak_dispersion": true,
+    "mpi_cuda_ranks": 2,
+    "pipe_rack_multi_pipe_obstacle_stl": true,
+    "vertical_cylinder_obstacle_stl": true
+  }
+}

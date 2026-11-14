@@ -1,0 +1,47 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX2d.gnu.ex(+0x53edc6) [0x61b71f69cdc6]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleLMeX2d.gnu.ex(+0x543b74) [0x61b71f6a1b74]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /lib/x86_64-linux-gnu/libc.so.6(+0x45330) [0x79901d445330]
+
+ 3: /lib/x86_64-linux-gnu/libc.so.6(+0x1914cd) [0x79901d5914cd]
+
+ 4: ./PeleLMeX2d.gnu.ex(+0xac3aa) [0x61b71f20a3aa]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned long) at /usr/include/c++/13/bits/basic_string.h:257
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned long) at /usr/include/c++/13/bits/basic_string.tcc:426
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned long) at /usr/include/c++/13/bits/basic_string.h:1459
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::__str_concat<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::value_type const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size_type, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::allocator_type const&) at /usr/include/c++/13/bits/basic_string.h:3539
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /usr/include/c++/13/bits/basic_string.h:3578
+
+ 5: ./PeleLMeX2d.gnu.ex(+0xb3ee7) [0x61b71f211ee7]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, char const*) at /usr/include/c++/13/bits/basic_string.h:3690
+ (inlined by) PeleLM::variablesSetup() at /home/cj/my-pele/examples/engineering/backward_facing_step/../../../external/PeleLMeX/Source/PeleLMeX_Setup.cpp:1008
+
+ 6: ./PeleLMeX2d.gnu.ex(+0xbc02d) [0x61b71f21a02d]
+    PeleLM::Setup() at /home/cj/my-pele/examples/engineering/backward_facing_step/../../../external/PeleLMeX/Source/PeleLMeX_Setup.cpp:106
+
+ 7: ./PeleLMeX2d.gnu.ex(+0x4fb2e) [0x61b71f1adb2e]
+    main at /home/cj/my-pele/examples/engineering/backward_facing_step/../../../external/PeleLMeX/Source/main.cpp:50
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x79901d42a1ca]
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x79901d42a28b]
+
+10: ./PeleLMeX2d.gnu.ex(+0x58c75) [0x61b71f1b6c75]
+    ?? ??:0
+

@@ -1,0 +1,70 @@
+{
+  "case": "pelec_lidryer_h2_o2_hotspot_reacting_smoke",
+  "chem_integrator": "ReactorRK64",
+  "cuda_devices": 2,
+  "do_react": true,
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/run.log",
+      "sha256": "17fb8782f75fbb20700eed82de9de803c1bb9ade31c368853c07a847bcfb653e"
+    },
+    {
+      "label": "launcher_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/launcher.log",
+      "sha256": "162ff9f76ca3fc897d4a40b25e60eeb6c9288d129b8f4bea52ba6d595f0e5614"
+    },
+    {
+      "label": "input",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/input.codex_mpi_cuda_react_smoke",
+      "sha256": "6d3fc35af525dcdc29e29be1f536a9054d31e2d55ec73ddada8475e2d84e4020"
+    },
+    {
+      "label": "initial_condition_summary",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/ic.txt",
+      "sha256": "22807cdd0a7fa4ff95a0f21cbb5a409ad30dff77d3452ffbcf847c0ec922e83b"
+    },
+    {
+      "label": "plt00005_job_info",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/plt00005/job_info",
+      "sha256": "93d303bcd8f030c573412208a49ebaa80c308726fdc36cbbd4802d642a23e44c"
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/plt00000/Header",
+      "sha256": "c68b096a9d174787a363f7fb5e23dd8e13f4474381b33fd9781ce4769bc14c39"
+    },
+    {
+      "label": "plt00005_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda/plt00005/Header",
+      "sha256": "aaedd2ab526aaea1e86e072304ef29c4ac3a67031dc1bda302b6fcbec8c6f23d"
+    }
+  ],
+  "final_time": 3.96359356692384e-08,
+  "hotspot": {
+    "density": 0.00176155,
+    "pressure": 18000000.0,
+    "radius_cm": 0.55,
+    "temperature": 2214.0,
+    "velocity_cm_s": 284000.0
+  },
+  "initial_time": 0.0,
+  "max_step": 5,
+  "mpi_launcher": "OpenMPI mpirun",
+  "mpi_ranks": 2,
+  "plotfiles": [
+    "plt00000",
+    "plt00005"
+  ],
+  "run_dir": "/home/cj/my-pele/docs/codex_audit/evidence/master_plan_cuda_revalidation_20260731/logs/engineering_pipe_rack_reacting_mpi_cuda",
+  "schema_version": 1,
+  "status": "PASS-PELEC-H2-REACTING-MPI-CUDA-SMOKE",
+  "validated_capabilities": {
+    "cuda_parallel": true,
+    "direct_engineering_obstacle_fire_propagation": false,
+    "h2_o2_lidryer_mechanism": true,
+    "mpi_cuda_2rank_2device": true,
+    "mpi_parallel": true,
+    "pelec_reacting_solver": true
+  }
+}

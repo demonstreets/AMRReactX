@@ -1,0 +1,217 @@
+PELE_HOME      ?= ../
+AMREX_HYDRO_HOME   ?= $(abspath $(lastword ${PELE_HOME}/Submodules/AMReX-Hydro))
+PELE_PHYSICS_HOME  ?= $(abspath $(lastword ${PELE_HOME}/Submodules/PelePhysics))
+AMREX_HOME         ?= $(abspath $(lastword ${PELE_PHYSICS_HOME}/Submodules/amrex))
+SUNDIALS_HOME      ?= $(abspath $(lastword ${PELE_PHYSICS_HOME}/Submodules/sundials))
+
+USE_SUNDIALS = TRUE
+BL_NO_FORT = TRUE
+CXXSTD = c++20
+
+# Raise an error if case files and source versions are incompatible
+define ERROR_MESSAGE
+    ERROR:
+    Presence of file `pelelmex_prob_parm.H` indicates you may be attempting to compile
+    case files designed for an older version of PeleLMeX (v0.25.04 or earlier) with a
+    newer version of the PeleLMeX source code (v1.0.0 or later). See instructions for
+    updating your case for compatibility with newer PeleLMeX versions in the v1.0.0
+    section of PeleLMeX/CHANGES.md or revert your version of the PeleLMeX source to
+    v0.25.04/v25.04 (`git checkout v0.25.04`).
+endef
+ifneq (,$(wildcard ./pelelmex_prob_parm.H))
+   $(error ${ERROR_MESSAGE})
+endif
+
+# AMReX definitions
+include $(AMREX_HOME)/Tools/GNUMake/Make.defs
+
+EBASE := PeleLMeX
+
+# AMReX-Hydro
+HYDROdirs := Projections Godunov BDS MOL Utils
+ifeq ($(USE_EB),TRUE)
+  HYDROdirs += EBGodunov EBMOL
+  INCLUDE_LOCATIONS += $(AMREX_HOME)/Src/EB
+endif
+INCLUDE_LOCATIONS += $(foreach dir, $(HYDROdirs), $(AMREX_HYDRO_HOME)/$(dir))
+Bpack += $(foreach dir, $(HYDROdirs), $(AMREX_HYDRO_HOME)/$(dir)/Make.package)
+Blocs += $(foreach dir, $(HYDROdirs), $(AMREX_HYDRO_HOME)/$(dir))
+
+# buildInfo support
+CEXE_sources += AMReX_buildInfo.cpp
+CEXE_headers += $(AMREX_HOME)/Tools/C_scripts/buildInfo.H
+INCLUDE_LOCATIONS += $(AMREX_HOME)/Tools/C_scripts
+
+ifeq ($(USE_PLASMA),TRUE)
+   USERSuffix += .PLASMA
+endif
+
+all: $(executable)
+ifneq ($(KEEP_BUILDINFO_CPP),TRUE)
+	$(SILENT) $(RM) AMReX_buildInfo.cpp
+endif
+	@echo SUCCESS
+
+ifeq ($(USE_CUDA),TRUE)
+   CXXFLAGS += -Xptxas --disable-optimizer-constants
+endif
+
+#---------------
+# PeleLM sources
+#---------------
+LMdirs := Source
+ifeq ($(USE_PLASMA),TRUE)
+   DEFINES += -DPELE_USE_PLASMA
+   LMdirs += Source/Plasma Source/Plasma/GMRES Source/Plasma/LinOps
+endif
+ifeq ($(USE_PARTICLES), TRUE)
+   ifdef SPRAY_FUEL_NUM
+      # This tells PelePhysics that PeleC is not being used
+      DEFINES += -DPELE_USE_SPRAY -DPELELM_USE_SPRAY
+      DEFINES += -DSPRAY_FUEL_NUM=$(SPRAY_FUEL_NUM)
+      ifeq ($(SPRAY_GCM), TRUE)
+         DEFINES += -DPELE_SPRAY_GCM=$(SPRAY_GCM)
+      endif
+   endif
+endif
+ifeq ($(USE_SOOT), TRUE)
+   # Ensure the number of soot moments is correct
+   ifeq (,$(filter $(NUM_SOOT_MOMENTS),3 6))
+       $(error NUM_SOOT_MOMENTS must be 3 or 6)
+   endif
+   # This tells PeleMP that PeleC is not being used
+   DEFINES += -DPELE_USE_SOOT -DPELELM_USE_SOOT
+   DEFINES += -DNUM_SOOT_MOMENTS=$(NUM_SOOT_MOMENTS)
+endif
+
+ifeq ($(USE_RADIATION), TRUE)
+   DEFINES += -DPELE_USE_RADIATION
+endif
+
+ifeq ($(shell test 0$(PELELM_NUM_ODE) -gt 0; echo $$?), 0)
+   DEFINES += -DNUM_ODE=$(PELELM_NUM_ODE)
+endif
+
+Bpack += $(foreach dir, $(LMdirs), $(PELE_HOME)/$(dir)/Make.package)
+Blocs += $(foreach dir, $(LMdirs), $(PELE_HOME)/$(dir))
+
+#---------------
+# PelePhysics sources
+#---------------
+# EOS models switches
+ifeq ($(Eos_Model),$(filter $(Eos_Model),GammaLaw))
+   DEFINES += -DUSE_GAMMALAW_EOS
+endif
+ifeq ($(Eos_Model),$(filter $(Eos_Model),Fuego))
+   DEFINES += -DUSE_FUEGO_EOS
+endif
+ifeq ($(Eos_Model),$(filter $(Eos_Model),Soave-Redlich-Kwong))
+   DEFINES += -DUSE_SRK_EOS
+endif
+ifeq ($(Eos_Model),$(filter $(Eos_Model),Manifold))
+   DEFINES += -DUSE_MANIFOLD_EOS
+   DEFINES += -DMANIFOLD_DIM=$(Manifold_Dim)
+   ifeq ($(Manifold_Type),Table)
+      DEFINES += -DMANIFOLD_EOS_TYPE=1
+   else
+      ifeq ($(Manifold_Type),Network)
+         DEFINES += -DMANIFOLD_EOS_TYPE=2
+      else
+         DEFINES += -DMANIFOLD_EOS_TYPE=0
+      endif
+   endif
+endif
+
+# Transport model switches
+ifeq ($(Transport_Model), Simple)
+  DEFINES += -DUSE_SIMPLE_TRANSPORT
+endif
+ifeq ($(Transport_Model), EGLib)
+  DEFINES += -DEGLIB_TRANSPORT
+  USE_FUEGO = TRUE
+endif
+ifeq ($(Transport_Model), Constant)
+  DEFINES += -DUSE_CONSTANT_TRANSPORT
+endif
+ifeq ($(Transport_Model), Sutherland)
+  DEFINES += -DUSE_SUTHERLAND_TRANSPORT
+endif
+ifeq ($(Transport_Model), Manifold)
+   DEFINES += -DUSE_MANIFOLD_TRANSPORT
+endif
+
+ifeq ($(PELE_USE_KLU), TRUE)
+  DEFINES += -DPELE_USE_KLU
+endif
+
+PELE_COMPILE_AJACOBIAN ?= TRUE
+
+ifeq ($(PELE_COMPILE_AJACOBIAN), TRUE)
+  DEFINES += -DPELE_COMPILE_AJACOBIAN
+endif
+
+ifeq ($(PELE_CVODE_FORCE_YCORDER), TRUE)
+  DEFINES += -DPELE_CVODE_FORCE_YCORDER
+endif
+
+PPdirs := Source/Utility/PMF Source/Utility/TurbInflow Source/Utility/PltFileManager
+PPdirs += Source/Utility/Diagnostics Source/Utility/BlackBoxFunction
+PPdirs += Source/Utility/TurbForcing
+PPdirs += Source/Utility/Utilities
+PPdirs += Source Source/Reactions Source/Eos Source/Transport
+
+ifeq ($(USE_CUSTOM_CHEMISTRY), TRUE)
+  Bpack += $(Chemistry_Model)/Make.package
+  Blocs += $(Chemistry_Model)
+else
+  PPdirs += Mechanisms/$(Chemistry_Model)
+endif
+
+Bpack += $(foreach dir, $(PPdirs), $(PELE_PHYSICS_HOME)/$(dir)/Make.package)
+Blocs += $(foreach dir, $(PPdirs), $(PELE_PHYSICS_HOME)/$(dir))
+
+include $(PELE_PHYSICS_HOME)/ThirdParty/Make.ThirdParty
+
+# AMReX core source directories
+Pdirs := Base Boundary AmrCore LinearSolvers/MLMG
+ifeq ($(USE_EB),TRUE)
+  Pdirs += EB
+endif
+Bpack += $(foreach dir, $(Pdirs), $(AMREX_HOME)/Src/$(dir)/Make.package)
+Blocs += $(foreach dir, $(Pdirs), $(AMREX_HOME)/Src/$(dir))
+
+include $(Bpack)
+
+INCLUDE_LOCATIONS += $(Blocs)
+VPATH_LOCATIONS   += $(Blocs)
+
+#---------------
+# ReactorNN (NN chemical kinetics surrogate)
+#---------------
+# Enable with USE_REACTORNN=TRUE in the case GNUmakefile
+ifdef USE_REACTORNN
+  DEFINES += -DPELE_USE_REACTORNN
+  RNNLIB_HOME ?= $(HOME)/NN_Project/ml_chem/h2o2/rnn_torch
+  TORCH_DIR  ?= $(HOME)/.local/lib/python3.12/site-packages/torch
+  INCLUDE_LOCATIONS += $(RNNLIB_HOME)
+  INCLUDE_LOCATIONS += $(TORCH_DIR)/include
+  INCLUDE_LOCATIONS += $(TORCH_DIR)/include/torch/csrc/api/include
+  LIBRARIES += -L$(RNNLIB_HOME) -lrnn
+  LIBRARIES += -L$(TORCH_DIR)/lib -ltorch -ltorch_cpu -lc10
+  LDFLAGS += -Wl,-rpath,$(TORCH_DIR)/lib
+endif
+
+MNAMES := EOS=$(Eos_Model) REACTIONS=ReactorNN TRANSPORT=$(Transport_Model)
+MNAMES += CHEMISTRY=$(Chemistry_Model) DIM=$(DIM)
+
+AMReX_buildInfo.cpp:
+	$(AMREX_HOME)/Tools/C_scripts/makebuildinfo_C.py \
+          --amrex_home "$(AMREX_HOME)" \
+          --COMP "$(COMP)" --COMP_VERSION "$(COMP_VERSION)" \
+          --MODULES "$(MNAMES)" \
+          --GIT "$(PELE_HOME) $(AMREX_HOME) $(SUNDIALS_HOME)"
+
+clean::
+	$(SILENT) $(RM) AMReX_buildInfo.cpp
+
+include $(AMREX_HOME)/Tools/GNUMake/Make.rules

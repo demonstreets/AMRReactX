@@ -1,0 +1,108 @@
+{
+  "case_validation_plan_report": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json",
+  "command_contract_report": "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_20260724/h2_case_validation_command_contract_report.json",
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_external_evidence_case_validation_plan_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json",
+      "sha256": "c316765c026a3a8e6a9d036d0978de2f35479e33bf2c61562ebad23b085c2df3",
+      "size_bytes": 28847
+    },
+    {
+      "label": "engineering_h2_case_validation_command_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_20260724/h2_case_validation_command_contract_report.json",
+      "sha256": "38a7e3f17cff3a7b8485b3811645cdb418ec95788d66413e20a7002fbe4bdf97",
+      "size_bytes": 12509
+    },
+    {
+      "label": "engineering_h2_case_validation_command_contract_tool",
+      "path": "tools/write_engineering_h2_case_validation_command_contract_report.py",
+      "sha256": "1398f389626479626e779173d49e158d28ad3b246083ea1368a6ae7d1ba93d4b",
+      "size_bytes": 13305
+    },
+    {
+      "label": "missing_script_negative_fixture_plan",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_selftest_20260724/fixtures/missing_script_case_validation_plan.json",
+      "sha256": "c0704d818d0cdbec029185b7f0b1033bc51d8ca8448e50e67aea8c2678f0bdfa",
+      "size_bytes": 28870
+    },
+    {
+      "label": "unsupported_option_negative_fixture_plan",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_selftest_20260724/fixtures/unsupported_option_case_validation_plan.json",
+      "sha256": "44bcf3910b7aa618a161fe4434639f3a6ce7a813e97a85f47af6e3d63d22a6ee",
+      "size_bytes": 28862
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:14+00:00",
+  "limitations": [
+    "This selftest mutates isolated copies of the case-validation plan and does not run CFD validation campaigns.",
+    "Negative fixture rejection proves command-contract gate behavior only and does not clear production blockers."
+  ],
+  "negative_cases": [
+    {
+      "fixture_plan": "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_selftest_20260724/fixtures/missing_script_case_validation_plan.json",
+      "name": "missing_script",
+      "refused": true,
+      "returncode": 2,
+      "stderr_tail": "engineering_h2_case_validation_command_contract FAIL missing evidence file: tools/missing_case_validation_contract_selftest.py",
+      "stdout_tail": ""
+    },
+    {
+      "fixture_plan": "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_selftest_20260724/fixtures/unsupported_option_case_validation_plan.json",
+      "name": "unsupported_option",
+      "refused": true,
+      "returncode": 2,
+      "stderr_tail": "engineering_h2_case_validation_command_contract FAIL placeholder command count mismatch",
+      "stdout_tail": ""
+    }
+  ],
+  "positive_verify": {
+    "argv": [
+      "/usr/bin/python3",
+      "tools/write_engineering_h2_case_validation_command_contract_report.py",
+      "--verify-json",
+      "docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_20260724/h2_case_validation_command_contract_report.json"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "engineering_h2_case_validation_command_contract VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_20260724/h2_case_validation_command_contract_report.json commands=17 options=4"
+  },
+  "quality_gate_matrix": [
+    {
+      "evidence": "engineering_h2_case_validation_command_contract VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_case_validation_command_contract_20260724/h2_case_validation_command_contract_report.json commands=17 options=4",
+      "gap": "",
+      "name": "positive_contract_verifies",
+      "status": "PASS"
+    },
+    {
+      "evidence": "returncode=2",
+      "gap": "",
+      "name": "missing_script_fixture_refused",
+      "status": "PASS"
+    },
+    {
+      "evidence": "returncode=2",
+      "gap": "",
+      "name": "unsupported_option_fixture_refused",
+      "status": "PASS"
+    },
+    {
+      "evidence": "fixture-only command-contract selftest",
+      "gap": "",
+      "name": "selftest_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "selftest_only": true,
+  "status": "PASS-H2-CASE-VALIDATION-COMMAND-CONTRACT-SELFTEST",
+  "summary": {
+    "missing_script_refused": true,
+    "negative_case_count": 2,
+    "negative_refused_count": 2,
+    "positive_verify_returncode": 0,
+    "unsupported_option_refused": true
+  },
+  "title": "Engineering H2 Case Validation Command Contract Selftest"
+}

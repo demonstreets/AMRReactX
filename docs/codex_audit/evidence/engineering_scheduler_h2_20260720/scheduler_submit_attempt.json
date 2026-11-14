@@ -1,0 +1,30 @@
+{
+  "attempt": {
+    "available": true,
+    "command": [
+      "sbatch",
+      "--parsable",
+      "${REPO_ROOT}/docs/codex_audit/evidence/engineering_scheduler_h2_20260720/run_engineering_h2_slurm.sh"
+    ],
+    "detail": "sbatch could not contact the SLURM controller",
+    "duration_s": 19.476723375963047,
+    "executable": "/usr/bin/sbatch",
+    "job_id": "",
+    "returncode": 1,
+    "status": "CONTROLLER_UNAVAILABLE",
+    "stderr": "sbatch: error: Batch job submission failed: Unable to contact slurm controller (connect failure)",
+    "stderr_sha256": "81645d48e5addb139f4c604643cde34305a883d12ab553e56140f59ed35d50ea",
+    "stdout": "",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timed_out": false,
+    "timeout_s": 45
+  },
+  "generated_at_utc": "2026-07-20T05:12:44+00:00",
+  "limitations": [
+    "SUBMITTED only proves that the scheduler accepted the job; completed scheduler-run evidence still requires runtime-affinity and campaign summary outputs.",
+    "CONTROLLER_UNAVAILABLE documents a scheduler control-plane failure and does not satisfy the production scheduler gate."
+  ],
+  "schema_version": 1,
+  "script": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/run_engineering_h2_slurm.sh",
+  "status": "CONTROLLER_UNAVAILABLE"
+}

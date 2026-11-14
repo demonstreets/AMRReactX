@@ -1,0 +1,106 @@
+{
+  "case": "academic_bench2gpu_hotspot_lidryer_detonation_mpi_cuda",
+  "cuda_devices": 2,
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run.log",
+      "sha256": "c01cca2c4c6ed3c4efb6b7ddb02ad0277bbd5f674a600d2a8778e3dd5d7deb4b"
+    },
+    {
+      "label": "launcher_log",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/launcher.log",
+      "sha256": "5388bc402e5071a2c5e6fe6a761cf99bc51c5948c7e45539b8c7006ea815d004"
+    },
+    {
+      "label": "input",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run/input.codex_academic_bench2gpu_detonation_mpi_cuda",
+      "sha256": "f72ed62b730a9aa03702bc09dd30c288bf76c74f60124feba299fc1b523059b7"
+    },
+    {
+      "label": "initial_condition_summary",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run/ic.txt",
+      "sha256": "86fd5f64fdf0bf4fe7864d494f6f18e9064b8699f5ce3bdce209d9d3d4470e27"
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run/plt00000/Header",
+      "sha256": "99f544d56e2c282c0e6f2ae714e2193ca310e92794a55e8cd2538fa61a28b992"
+    },
+    {
+      "label": "plt00040_header",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run/plt00040/Header",
+      "sha256": "6f1dba7bc6d3e8bf9a61b73e8874dba466917a8b70f4773dcca38a06991e3d4b"
+    },
+    {
+      "label": "plt00040_job_info",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run/plt00040/job_info",
+      "sha256": "218725928e491b660d6de8a724b40c8346dfad570b4304d58cef3b310c9459d9"
+    },
+    {
+      "label": "rebuilt_executable",
+      "path": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/run/PeleC3d.gnu.MPI.CUDA.ex",
+      "sha256": "f744de6ea2d745d54f4eaef149d850449dfdba1efda294a4c9e9bc241b7670ee"
+    }
+  ],
+  "evidence_hash": "c01cca2c4c6ed3c4efb6b7ddb02ad0277bbd5f674a600d2a8778e3dd5d7deb4b",
+  "final_time": 1.8535905659764919e-06,
+  "initial_time": 0.0,
+  "limitations": [
+    "40-step academic gas detonation MPI+CUDA gate; not a full convergence study.",
+    "Hotspot detonation initialization is used as a robust parallel execution gate.",
+    "pressure was not emitted in this plotfile configuration; density, temperature, species, and velocity fields are verified."
+  ],
+  "max_step": 40,
+  "mpi_launcher": "OpenMPI mpirun",
+  "mpi_ranks": 2,
+  "plot_variables": [
+    "density",
+    "Temp",
+    "rho_H2",
+    "rho_O2",
+    "rho_H2O",
+    "rho_H",
+    "rho_O",
+    "rho_OH",
+    "rho_HO2",
+    "rho_H2O2",
+    "rho_N2",
+    "Y(H2)",
+    "Y(O2)",
+    "Y(H2O)",
+    "Y(H)",
+    "Y(O)",
+    "Y(OH)",
+    "Y(HO2)",
+    "Y(H2O2)",
+    "Y(N2)",
+    "x_velocity",
+    "y_velocity",
+    "z_velocity"
+  ],
+  "ready": true,
+  "run_root": "/home/cj/my-pele/docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731",
+  "scope": "gas-phase H2/O2 detonation MPI+CUDA runtime gate",
+  "status": "PASS-ACADEMIC-GAS-DETONATION-MPI-CUDA",
+  "summary": {
+    "academic_gas_detonation_mpi_cuda_ready": true,
+    "amrex_finalized": true,
+    "critical_plot_variables_present": true,
+    "cuda_devices": 2,
+    "final_time": 1.8535905659764919e-06,
+    "initial_time": 0.0,
+    "max_step": 40,
+    "mpi_ranks": 2,
+    "reaction_solver_marker_present": true,
+    "time_advanced": true
+  },
+  "validated_capabilities": {
+    "cuda_parallel": true,
+    "gas_phase_detonation_hotspot": true,
+    "h2_o2_lidryer_mechanism": true,
+    "mpi_cuda_2rank_2device": true,
+    "mpi_parallel": true,
+    "pelec_reacting_solver": true
+  }
+}

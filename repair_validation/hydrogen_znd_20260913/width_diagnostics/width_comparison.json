@@ -1,0 +1,2588 @@
+{
+  "definition": {
+    "url": "https://raw.githubusercontent.com/harryzhou2000/sdtoolbox/main/Python3/sdtoolbox/znd.py",
+    "sha256": "517357d72707a6268e5a8c514ab4d8ae1c46e0d79f5fdacc77cf52260052cac8",
+    "official_documentation": "https://shepherd.caltech.edu/EDL/PublicResources/sdt/nb/sdt_intro.slides.html",
+    "definition": "Induction length = distance from shock to maximum positive thermicity; reaction width = spatial full width at half maximum of that connected positive thermicity peak. Use linear interpolation at half-maximum and report additional peaks separately."
+  },
+  "reference": {
+    "reference_v1": {
+      "peak_distance_m": 0.0001884481729361588,
+      "peak_rate_s_inv": 4540594.049434875,
+      "half_rise_m": 0.000167533211060276,
+      "half_fall_m": 0.00021648133694470145,
+      "fwhm_m": 4.8948125884425435e-05,
+      "cells_above_half": 59,
+      "significant_peak_count": 1,
+      "significant_peaks": [
+        {
+          "peak_distance_m": 0.0001884481729361588,
+          "peak_rate_s_inv": 4540594.049434875,
+          "half_rise_m": 0.000167533211060276,
+          "half_fall_m": 0.00021648133694470145,
+          "fwhm_m": 4.8948125884425435e-05,
+          "cells_above_half": 59
+        }
+      ],
+      "global_peak_at_window_edge": false,
+      "density_EOS_max_relative_difference": 5.551115123125783e-16
+    },
+    "reference_tight_v1": {
+      "peak_distance_m": 0.0001884481726026899,
+      "peak_rate_s_inv": 4540594.016085114,
+      "half_rise_m": 0.0001675332118182572,
+      "half_fall_m": 0.0002164813380078175,
+      "fwhm_m": 4.894812618956031e-05,
+      "cells_above_half": 59,
+      "significant_peak_count": 1,
+      "significant_peaks": [
+        {
+          "peak_distance_m": 0.0001884481726026899,
+          "peak_rate_s_inv": 4540594.016085114,
+          "half_rise_m": 0.0001675332118182572,
+          "half_fall_m": 0.0002164813380078175,
+          "fwhm_m": 4.894812618956031e-05,
+          "cells_above_half": 59
+        }
+      ],
+      "global_peak_at_window_edge": false,
+      "density_EOS_max_relative_difference": 5.551115123125783e-16
+    }
+  },
+  "window_m": [
+    0,
+    0.003
+  ],
+  "cases": {
+    "hydrogen_2400_cfl30_v1": {
+      "case": {
+        "command": [
+          "mpirun",
+          "-np",
+          "16",
+          "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+          "inputs"
+        ],
+        "binary": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+        "binary_sha256": "d4f03582a37563516954b14dbdd71f5eba204c3c724f8de6aa91dfc045180c9d",
+        "reference": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/reference_v1",
+        "profile_sha256": "e21e67926f015458b415540fc42d2402bd9e16bbda270200e870984c1bd83248",
+        "input_sha256": "fc8e465e3d8468c3b64bf407a9b2bd168c2a769ba2e95588a0643ded81f61c9c",
+        "nx": 2400,
+        "ny": 2,
+        "dx_m": 1e-05,
+        "front_m": 0.008,
+        "length_m": 0.024,
+        "cfl": 0.3,
+        "ode_rtol": 1e-08,
+        "ode_atol": 1e-18,
+        "stop_time_s": 4e-06,
+        "plot_root": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1",
+        "mapping": "ROUNDROBIN",
+        "physical_model": "Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+        "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+      },
+      "mean_speed_2_to_4us_m_s": 1885.9646874572836,
+      "reference_reaction_width_in_cells": 4.8948125884425435,
+      "history": [
+        {
+          "peak_distance_m": 0.00018500000039725802,
+          "peak_rate_s_inv": 4438737.340487607,
+          "half_rise_m": 0.00016695222191843298,
+          "half_fall_m": 0.00021759420996590937,
+          "fwhm_m": 5.064198804747639e-05,
+          "cells_above_half": 5,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00018500000039725802,
+              "peak_rate_s_inv": 4438737.340487607,
+              "half_rise_m": 0.00016695222191843298,
+              "half_fall_m": 0.00021759420996590937,
+              "fwhm_m": 5.064198804747639e-05,
+              "cells_above_half": 5
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 0.0,
+          "local_speed_m_s": 2008.7617257804923,
+          "induction_error_percent": -1.8297723374951058,
+          "reaction_width_error_percent": 3.4605250608581883,
+          "reaction_fwhm_cells": 5.0641988047476385,
+          "near_shock_T_K": 1540.993239288649,
+          "near_shock_p_Pa": 2805792.550664139,
+          "near_shock_YH2": 0.02852167548149852,
+          "near_shock_u_m_s": 1610.320541864438,
+          "EOS_density_max_relative_error": 6.661338147750939e-16,
+          "EOS_energy_max_scaled_error": 4.741224596896079e-16,
+          "initialization_max_abs_difference": {
+            "p_Pa": 0.003979031462222338,
+            "T_K": 7.574828487122431e-06,
+            "u_m_s": 2.3692343802395044e-06
+          }
+        },
+        {
+          "peak_distance_m": 0.00020380310912984125,
+          "peak_rate_s_inv": 4404330.070127661,
+          "half_rise_m": 0.00017943842682644634,
+          "half_fall_m": 0.00024093304993194097,
+          "fwhm_m": 6.149462310549463e-05,
+          "cells_above_half": 6,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00020380310912984125,
+              "peak_rate_s_inv": 4404330.070127661,
+              "half_rise_m": 0.00017943842682644634,
+              "half_fall_m": 0.00024093304993194097,
+              "fwhm_m": 6.149462310549463e-05,
+              "cells_above_half": 6
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.5032966169758164e-07,
+          "local_speed_m_s": 1976.4081126638102,
+          "induction_error_percent": 8.148095019676461,
+          "reaction_width_error_percent": 25.632232070934723,
+          "reaction_fwhm_cells": 6.149462310549462,
+          "near_shock_T_K": 1550.5206069729809,
+          "near_shock_p_Pa": 2802237.713768059,
+          "near_shock_YH2": 0.028522311719584473,
+          "near_shock_u_m_s": 1609.3816299595999,
+          "EOS_density_max_relative_error": 6.217248937900877e-15,
+          "EOS_energy_max_scaled_error": 1.820209624525678e-10
+        },
+        {
+          "peak_distance_m": 0.0001441937378242556,
+          "peak_rate_s_inv": 6154585.94067887,
+          "half_rise_m": 0.00013785346502379753,
+          "half_fall_m": 0.00016752747070292843,
+          "fwhm_m": 2.96740056791309e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001441937378242556,
+              "peak_rate_s_inv": 6154585.94067887,
+              "half_rise_m": 0.00013785346502379753,
+              "half_fall_m": 0.00016752747070292843,
+              "fwhm_m": 2.96740056791309e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 5.004981091223542e-07,
+          "local_speed_m_s": 1992.6199006971801,
+          "induction_error_percent": -23.483610598281256,
+          "reaction_width_error_percent": -39.376625472452,
+          "reaction_fwhm_cells": 2.96740056791309,
+          "near_shock_T_K": 1511.6553190408645,
+          "near_shock_p_Pa": 2662191.200810341,
+          "near_shock_YH2": 0.02852229326758619,
+          "near_shock_u_m_s": 1567.3455009005975,
+          "EOS_density_max_relative_error": 1.0436096431476471e-14,
+          "EOS_energy_max_scaled_error": 1.6402415168909275e-10
+        },
+        {
+          "peak_distance_m": 0.00017102151015694136,
+          "peak_rate_s_inv": 4544283.089083833,
+          "half_rise_m": 0.00015966069817663573,
+          "half_fall_m": 0.00018821557680079017,
+          "fwhm_m": 2.855487862415444e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00017102151015694136,
+              "peak_rate_s_inv": 4544283.089083833,
+              "half_rise_m": 0.00015966069817663573,
+              "half_fall_m": 0.00018821557680079017,
+              "fwhm_m": 2.855487862415444e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 7.507818225694863e-07,
+          "local_speed_m_s": 2038.4507188831922,
+          "induction_error_percent": -9.247456479782967,
+          "reaction_width_error_percent": -41.66297869794402,
+          "reaction_fwhm_cells": 2.855487862415444,
+          "near_shock_T_K": 1630.014342674315,
+          "near_shock_p_Pa": 3206449.0458183596,
+          "near_shock_YH2": 0.028521013617082484,
+          "near_shock_u_m_s": 1744.2023700777654,
+          "EOS_density_max_relative_error": 1.532107773982716e-14,
+          "EOS_energy_max_scaled_error": 1.5768546589618114e-10
+        },
+        {
+          "peak_distance_m": 0.00026404365466012325,
+          "peak_rate_s_inv": 3769482.081264629,
+          "half_rise_m": 0.00022667302600498434,
+          "half_fall_m": 0.00029359409498114534,
+          "fwhm_m": 6.6921068976161e-05,
+          "cells_above_half": 6,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00012404365466012202,
+              "peak_rate_s_inv": 2607725.190561625,
+              "half_rise_m": 8.849641397549166e-05,
+              "half_fall_m": 0.00014515181340846723,
+              "fwhm_m": 5.6655399432975565e-05,
+              "cells_above_half": 6
+            },
+            {
+              "peak_distance_m": 0.00026404365466012325,
+              "peak_rate_s_inv": 3769482.081264629,
+              "half_rise_m": 0.00022667302600498434,
+              "half_fall_m": 0.00029359409498114534,
+              "fwhm_m": 6.6921068976161e-05,
+              "cells_above_half": 6
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.0008078924835345e-06,
+          "local_speed_m_s": 1999.7849839488044,
+          "induction_error_percent": 40.11473316304011,
+          "reaction_width_error_percent": 36.71834777530121,
+          "reaction_fwhm_cells": 6.6921068976161,
+          "near_shock_T_K": 1567.8626081666598,
+          "near_shock_p_Pa": 2613507.1011135844,
+          "near_shock_YH2": 0.02852228221332828,
+          "near_shock_u_m_s": 1563.796692114242,
+          "EOS_density_max_relative_error": 1.9761969838327786e-14,
+          "EOS_energy_max_scaled_error": 2.1685134155051302e-10
+        },
+        {
+          "peak_distance_m": 9.005729330779574e-05,
+          "peak_rate_s_inv": 5974807.085623651,
+          "half_rise_m": 8.394031828154756e-05,
+          "half_fall_m": 0.00011419238633330972,
+          "fwhm_m": 3.0252068051762163e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 9.005729330779574e-05,
+              "peak_rate_s_inv": 5974807.085623651,
+              "half_rise_m": 8.394031828154756e-05,
+              "half_fall_m": 0.00011419238633330972,
+              "fwhm_m": 3.0252068051762163e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.2503270406702978e-06,
+          "local_speed_m_s": 2040.2380349927917,
+          "induction_error_percent": -52.2111082826445,
+          "reaction_width_error_percent": -38.19565610501153,
+          "reaction_fwhm_cells": 3.025206805176216,
+          "near_shock_T_K": 1539.5165584440672,
+          "near_shock_p_Pa": 3227981.0086650606,
+          "near_shock_YH2": 0.028522312142772982,
+          "near_shock_u_m_s": 1717.667346696109,
+          "EOS_density_max_relative_error": 2.353672812205332e-14,
+          "EOS_energy_max_scaled_error": 2.1466491120039193e-10
+        },
+        {
+          "peak_distance_m": 0.0001236454196581454,
+          "peak_rate_s_inv": 5222810.183457987,
+          "half_rise_m": 0.00010819130632949315,
+          "half_fall_m": 0.0001405796500291808,
+          "fwhm_m": 3.2388343699687636e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001236454196581454,
+              "peak_rate_s_inv": 5222810.183457987,
+              "half_rise_m": 0.00010819130632949315,
+              "half_fall_m": 0.0001405796500291808,
+              "fwhm_m": 3.2388343699687636e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.5004954575423116e-06,
+          "local_speed_m_s": 2205.6768561405734,
+          "induction_error_percent": -34.38757312864309,
+          "reaction_width_error_percent": -33.83128952442054,
+          "reaction_fwhm_cells": 3.2388343699687634,
+          "near_shock_T_K": 1749.3648981769347,
+          "near_shock_p_Pa": 3302099.6145177814,
+          "near_shock_YH2": 0.028504533102440832,
+          "near_shock_u_m_s": 1764.537724944264,
+          "EOS_density_max_relative_error": 2.6423307986078726e-14,
+          "EOS_energy_max_scaled_error": 1.7468001074100644e-10
+        },
+        {
+          "peak_distance_m": 2.2347176210640515e-05,
+          "peak_rate_s_inv": 7639987.453215823,
+          "half_rise_m": 8.051701772999854e-06,
+          "half_fall_m": 3.983429632976672e-05,
+          "fwhm_m": 3.1782594556766865e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 2.2347176210640515e-05,
+              "peak_rate_s_inv": 7639987.453215823,
+              "half_rise_m": 8.051701772999854e-06,
+              "half_fall_m": 3.983429632976672e-05,
+              "fwhm_m": 3.1782594556766865e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.7501145465361103e-06,
+          "local_speed_m_s": 2366.289942334206,
+          "induction_error_percent": -88.14147366755785,
+          "reaction_width_error_percent": -35.06882238594632,
+          "reaction_fwhm_cells": 3.1782594556766863,
+          "near_shock_T_K": 2949.8699636121137,
+          "near_shock_p_Pa": 4336326.760669891,
+          "near_shock_YH2": 0.00616293991362398,
+          "near_shock_u_m_s": 1943.6081599526826,
+          "EOS_density_max_relative_error": 2.930988785010413e-14,
+          "EOS_energy_max_scaled_error": 1.26203777368746e-10
+        },
+        {
+          "peak_distance_m": 2.5994788707196445e-05,
+          "peak_rate_s_inv": 5933388.95437496,
+          "half_rise_m": 8.6294783943159e-06,
+          "half_fall_m": 3.734626906412683e-05,
+          "fwhm_m": 2.8716790669810932e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 2.5994788707196445e-05,
+              "peak_rate_s_inv": 5933388.95437496,
+              "half_rise_m": 8.6294783943159e-06,
+              "half_fall_m": 3.734626906412683e-05,
+              "fwhm_m": 2.8716790669810932e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.0001297449961595e-06,
+          "local_speed_m_s": 2335.373885486777,
+          "induction_error_percent": -86.20586854084131,
+          "reaction_width_error_percent": -41.332195766563174,
+          "reaction_fwhm_cells": 2.871679066981093,
+          "near_shock_T_K": 2896.165135371701,
+          "near_shock_p_Pa": 3178124.784348374,
+          "near_shock_YH2": 0.005864632108755107,
+          "near_shock_u_m_s": 1634.615495334592,
+          "EOS_density_max_relative_error": 2.9753977059954195e-14,
+          "EOS_energy_max_scaled_error": 1.93897809078577e-10
+        },
+        {
+          "peak_distance_m": 2.0636475843091584e-05,
+          "peak_rate_s_inv": 6079943.780247196,
+          "half_rise_m": 1.3063419557216133e-05,
+          "half_fall_m": 4.159738854558352e-05,
+          "fwhm_m": 2.853396898836739e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 2.0636475843091584e-05,
+              "peak_rate_s_inv": 6079943.780247196,
+              "half_rise_m": 1.3063419557216133e-05,
+              "half_fall_m": 4.159738854558352e-05,
+              "fwhm_m": 2.853396898836739e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.2503983238500827e-06,
+          "local_speed_m_s": 2168.768398045835,
+          "induction_error_percent": -89.04925660909291,
+          "reaction_width_error_percent": -41.70569664762901,
+          "reaction_fwhm_cells": 2.8533968988367384,
+          "near_shock_T_K": 2581.655591182875,
+          "near_shock_p_Pa": 2947270.957065909,
+          "near_shock_YH2": 0.006614882148654628,
+          "near_shock_u_m_s": 1567.1808643086945,
+          "EOS_density_max_relative_error": 3.219646771412954e-14,
+          "EOS_energy_max_scaled_error": 2.512292731958674e-10
+        },
+        {
+          "peak_distance_m": 3.084229271228117e-05,
+          "peak_rate_s_inv": 6200443.65892597,
+          "half_rise_m": 2.1192162717316e-05,
+          "half_fall_m": 4.8561496474373147e-05,
+          "fwhm_m": 2.7369333757057146e-05,
+          "cells_above_half": 2,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 3.084229271228117e-05,
+              "peak_rate_s_inv": 6200443.65892597,
+              "half_rise_m": 2.1192162717316e-05,
+              "half_fall_m": 4.8561496474373147e-05,
+              "fwhm_m": 2.7369333757057146e-05,
+              "cells_above_half": 2
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.5003285871281735e-06,
+          "local_speed_m_s": 2071.5978878822825,
+          "induction_error_percent": -83.63354113137,
+          "reaction_width_error_percent": -44.08502212795513,
+          "reaction_fwhm_cells": 2.7369333757057146,
+          "near_shock_T_K": 2340.1383429278662,
+          "near_shock_p_Pa": 2795060.1282639587,
+          "near_shock_YH2": 0.008610439651405517,
+          "near_shock_u_m_s": 1538.3368181282817,
+          "EOS_density_max_relative_error": 3.108624468950438e-14,
+          "EOS_energy_max_scaled_error": 2.5035861751963804e-10
+        },
+        {
+          "peak_distance_m": 5.777155745605514e-05,
+          "peak_rate_s_inv": 4629083.892643758,
+          "half_rise_m": 4.632732074821356e-05,
+          "half_fall_m": 7.665662206130217e-05,
+          "fwhm_m": 3.0329301313088616e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 5.777155745605514e-05,
+              "peak_rate_s_inv": 4629083.892643758,
+              "half_rise_m": 4.632732074821356e-05,
+              "half_fall_m": 7.665662206130217e-05,
+              "fwhm_m": 3.0329301313088616e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.751083006565846e-06,
+          "local_speed_m_s": 1961.4796041227964,
+          "induction_error_percent": -69.34353007729791,
+          "reaction_width_error_percent": -38.03787016340303,
+          "reaction_fwhm_cells": 3.0329301313088615,
+          "near_shock_T_K": 1691.2536421112109,
+          "near_shock_p_Pa": 2592274.1948558614,
+          "near_shock_YH2": 0.024183245334646476,
+          "near_shock_u_m_s": 1546.6862460411096,
+          "EOS_density_max_relative_error": 3.019806626980426e-14,
+          "EOS_energy_max_scaled_error": 3.5729444986376784e-10
+        },
+        {
+          "peak_distance_m": 0.00011316186168770781,
+          "peak_rate_s_inv": 3502373.7564597833,
+          "half_rise_m": 9.753694868286734e-05,
+          "half_fall_m": 0.00012940618082626332,
+          "fwhm_m": 3.186923214339598e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00011316186168770781,
+              "peak_rate_s_inv": 3502373.7564597833,
+              "half_rise_m": 9.753694868286734e-05,
+              "half_fall_m": 0.00012940618082626332,
+              "fwhm_m": 3.186923214339598e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.001088104522106e-06,
+          "local_speed_m_s": 1854.6664381640367,
+          "induction_error_percent": -39.95067188789141,
+          "reaction_width_error_percent": -34.89182360394253,
+          "reaction_fwhm_cells": 3.186923214339598,
+          "near_shock_T_K": 1421.5899937624258,
+          "near_shock_p_Pa": 2371355.1954811863,
+          "near_shock_YH2": 0.028522373634334984,
+          "near_shock_u_m_s": 1476.471378337591,
+          "EOS_density_max_relative_error": 3.019806626980426e-14,
+          "EOS_energy_max_scaled_error": 2.364564501870642e-10
+        },
+        {
+          "peak_distance_m": 0.00017378628295827876,
+          "peak_rate_s_inv": 3362335.4125792203,
+          "half_rise_m": 0.0001632709686822014,
+          "half_fall_m": 0.00019131031035211796,
+          "fwhm_m": 2.8039341669916555e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00017378628295827876,
+              "peak_rate_s_inv": 3362335.4125792203,
+              "half_rise_m": 0.0001632709686822014,
+              "half_fall_m": 0.00019131031035211796,
+              "fwhm_m": 2.8039341669916555e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.2503337873083055e-06,
+          "local_speed_m_s": 1775.5539878479613,
+          "induction_error_percent": -7.7803301297312615,
+          "reaction_width_error_percent": -42.71620994004542,
+          "reaction_fwhm_cells": 2.803934166991655,
+          "near_shock_T_K": 1328.2556143990878,
+          "near_shock_p_Pa": 2183896.7266285825,
+          "near_shock_YH2": 0.0285223839710346,
+          "near_shock_u_m_s": 1408.817489753906,
+          "EOS_density_max_relative_error": 3.042011087472929e-14,
+          "EOS_energy_max_scaled_error": 4.2610147069491845e-10
+        },
+        {
+          "peak_distance_m": 0.00024905396947032254,
+          "peak_rate_s_inv": 2755011.953128209,
+          "half_rise_m": 0.00023350613348292938,
+          "half_fall_m": 0.00026433956387608075,
+          "fwhm_m": 3.083343039315137e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00024905396947032254,
+              "peak_rate_s_inv": 2755011.953128209,
+              "half_rise_m": 0.00023350613348292938,
+              "half_fall_m": 0.00026433956387608075,
+              "fwhm_m": 3.083343039315137e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.500043477537951e-06,
+          "local_speed_m_s": 1717.3061820552794,
+          "induction_error_percent": 32.16045854405569,
+          "reaction_width_error_percent": -37.00794497024429,
+          "reaction_fwhm_cells": 3.0833430393151366,
+          "near_shock_T_K": 1264.0753339019966,
+          "near_shock_p_Pa": 2048961.1674634842,
+          "near_shock_YH2": 0.02852238599133299,
+          "near_shock_u_m_s": 1358.4971702154598,
+          "EOS_density_max_relative_error": 3.108624468950438e-14,
+          "EOS_energy_max_scaled_error": 5.535753043695658e-10
+        },
+        {
+          "peak_distance_m": 0.00032367433679853126,
+          "peak_rate_s_inv": 2561413.0318601727,
+          "half_rise_m": 0.00030820398405335107,
+          "half_fall_m": 0.00033863760046222034,
+          "fwhm_m": 3.043361640886927e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00032367433679853126,
+              "peak_rate_s_inv": 2561413.0318601727,
+              "half_rise_m": 0.00030820398405335107,
+              "half_fall_m": 0.00033863760046222034,
+              "fwhm_m": 3.043361640886927e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.751093271792702e-06,
+          "local_speed_m_s": 1672.8044840787843,
+          "induction_error_percent": 71.7577473718376,
+          "reaction_width_error_percent": -37.82475659900027,
+          "reaction_fwhm_cells": 3.043361640886927,
+          "near_shock_T_K": 1215.255846868121,
+          "near_shock_p_Pa": 1960465.277250925,
+          "near_shock_YH2": 0.028522386980131608,
+          "near_shock_u_m_s": 1323.4846010347067,
+          "EOS_density_max_relative_error": 3.1308289294429414e-14,
+          "EOS_energy_max_scaled_error": 3.201238957138186e-10
+        },
+        {
+          "peak_distance_m": 0.00039546275540922396,
+          "peak_rate_s_inv": 2708433.081234028,
+          "half_rise_m": 0.00038673522460960937,
+          "half_fall_m": 0.00041270204199052085,
+          "fwhm_m": 2.596681738091148e-05,
+          "cells_above_half": 2,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00039546275540922396,
+              "peak_rate_s_inv": 2708433.081234028,
+              "half_rise_m": 0.00038673522460960937,
+              "half_fall_m": 0.00041270204199052085,
+              "fwhm_m": 2.596681738091148e-05,
+              "cells_above_half": 2
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 4e-06,
+          "local_speed_m_s": 1635.9724347013544,
+          "induction_error_percent": 109.85226295783517,
+          "reaction_width_error_percent": -46.950333824376855,
+          "reaction_fwhm_cells": 2.5966817380911476,
+          "near_shock_T_K": 1178.655171446613,
+          "near_shock_p_Pa": 1881883.2867099773,
+          "near_shock_YH2": 0.028522387259299745,
+          "near_shock_u_m_s": 1292.8608075777101,
+          "EOS_density_max_relative_error": 3.175237850427948e-14,
+          "EOS_energy_max_scaled_error": 4.278407671675476e-10
+        }
+      ]
+    },
+    "hydrogen_4800_cfl30_v1": {
+      "case": {
+        "command": [
+          "mpirun",
+          "-np",
+          "16",
+          "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+          "inputs"
+        ],
+        "binary": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+        "binary_sha256": "d4f03582a37563516954b14dbdd71f5eba204c3c724f8de6aa91dfc045180c9d",
+        "reference": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/reference_v1",
+        "profile_sha256": "e21e67926f015458b415540fc42d2402bd9e16bbda270200e870984c1bd83248",
+        "input_sha256": "c1303ac8665b67a21cb162a87698b637c0e01ad116502ca4e49c44d543a0ee82",
+        "nx": 4800,
+        "ny": 2,
+        "dx_m": 5e-06,
+        "front_m": 0.008,
+        "length_m": 0.024,
+        "cfl": 0.3,
+        "ode_rtol": 1e-08,
+        "ode_atol": 1e-18,
+        "stop_time_s": 4e-06,
+        "plot_root": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_4800_cfl30_v1",
+        "mapping": "ROUNDROBIN",
+        "physical_model": "Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+        "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+      },
+      "mean_speed_2_to_4us_m_s": 1759.7102005975244,
+      "reference_reaction_width_in_cells": 9.789625176885087,
+      "history": [
+        {
+          "peak_distance_m": 0.0001875000001029612,
+          "peak_rate_s_inv": 4530792.074614479,
+          "half_rise_m": 0.00016749440613690803,
+          "half_fall_m": 0.00021662527033282014,
+          "fwhm_m": 4.913086419591211e-05,
+          "cells_above_half": 10,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001875000001029612,
+              "peak_rate_s_inv": 4530792.074614479,
+              "half_rise_m": 0.00016749440613690803,
+              "half_fall_m": 0.00021662527033282014,
+              "fwhm_m": 4.913086419591211e-05,
+              "cells_above_half": 10
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 0.0,
+          "local_speed_m_s": 1990.3518153201076,
+          "induction_error_percent": -0.5031477983704291,
+          "reaction_width_error_percent": 0.37333055798325354,
+          "reaction_fwhm_cells": 9.826172839182421,
+          "near_shock_T_K": 1540.988417528632,
+          "near_shock_p_Pa": 2805794.441884717,
+          "near_shock_YH2": 0.02852199276114893,
+          "near_shock_u_m_s": 1610.3216679535071,
+          "EOS_density_max_relative_error": 6.661338147750939e-16,
+          "EOS_energy_max_scaled_error": 6.32163244880321e-16,
+          "initialization_max_abs_difference": {
+            "p_Pa": 0.0010548154823482037,
+            "T_K": 1.999314008571673e-06,
+            "u_m_s": 6.28068164587603e-07
+          }
+        },
+        {
+          "peak_distance_m": 0.0001944068824787041,
+          "peak_rate_s_inv": 4487699.798368834,
+          "half_rise_m": 0.00017506858263619774,
+          "half_fall_m": 0.00022270451450915024,
+          "fwhm_m": 4.76359318729525e-05,
+          "cells_above_half": 9,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001944068824787041,
+              "peak_rate_s_inv": 4487699.798368834,
+              "half_rise_m": 0.00017506858263619774,
+              "half_fall_m": 0.00022270451450915024,
+              "fwhm_m": 4.76359318729525e-05,
+              "cells_above_half": 9
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.5041179031315995e-07,
+          "local_speed_m_s": 1978.3661252714555,
+          "induction_error_percent": 3.1619884924880326,
+          "reaction_width_error_percent": -2.680784989748619,
+          "reaction_fwhm_cells": 9.5271863745905,
+          "near_shock_T_K": 1537.1612423459892,
+          "near_shock_p_Pa": 2806003.7377862893,
+          "near_shock_YH2": 0.028522033790094162,
+          "near_shock_u_m_s": 1610.3021879983226,
+          "EOS_density_max_relative_error": 9.325873406851315e-15,
+          "EOS_energy_max_scaled_error": 4.663695367697154e-10
+        },
+        {
+          "peak_distance_m": 0.00015773564187594562,
+          "peak_rate_s_inv": 5095727.694990479,
+          "half_rise_m": 0.00014950973841902962,
+          "half_fall_m": 0.00016728636141008821,
+          "fwhm_m": 1.777662299105859e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00015773564187594562,
+              "peak_rate_s_inv": 5095727.694990479,
+              "half_rise_m": 0.00014950973841902962,
+              "half_fall_m": 0.00016728636141008821,
+              "fwhm_m": 1.777662299105859e-05,
+              "cells_above_half": 3
+            },
+            {
+              "peak_distance_m": 0.00024273564187594562,
+              "peak_rate_s_inv": 2130587.1494068755,
+              "half_rise_m": 0.00014692344107996617,
+              "half_fall_m": 0.00026704844130455977,
+              "fwhm_m": 0.0001201250002245936,
+              "cells_above_half": 24
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 5.005302687086257e-07,
+          "local_speed_m_s": 1986.8174399628224,
+          "induction_error_percent": -16.29760086377583,
+          "reaction_width_error_percent": -63.68273009464731,
+          "reaction_fwhm_cells": 3.5553245982117176,
+          "near_shock_T_K": 1531.7791025456256,
+          "near_shock_p_Pa": 2754068.3181395917,
+          "near_shock_YH2": 0.028522134906425967,
+          "near_shock_u_m_s": 1595.2273529420738,
+          "EOS_density_max_relative_error": 1.7763568394002505e-14,
+          "EOS_energy_max_scaled_error": 3.9153037617545033e-10
+        },
+        {
+          "peak_distance_m": 0.0002124840377811365,
+          "peak_rate_s_inv": 4135061.829067746,
+          "half_rise_m": 0.0001719415010645872,
+          "half_fall_m": 0.00022841133999444246,
+          "fwhm_m": 5.646983892985526e-05,
+          "cells_above_half": 12,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0002124840377811365,
+              "peak_rate_s_inv": 4135061.829067746,
+              "half_rise_m": 0.0001719415010645872,
+              "half_fall_m": 0.00022841133999444246,
+              "fwhm_m": 5.646983892985526e-05,
+              "cells_above_half": 12
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 7.50250688362473e-07,
+          "local_speed_m_s": 1986.8417818580092,
+          "induction_error_percent": 12.75462875043123,
+          "reaction_width_error_percent": 15.366702829828105,
+          "reaction_fwhm_cells": 11.293967785971052,
+          "near_shock_T_K": 1563.8769492200433,
+          "near_shock_p_Pa": 2882568.5958072217,
+          "near_shock_YH2": 0.028521862857851354,
+          "near_shock_u_m_s": 1649.1547468841961,
+          "EOS_density_max_relative_error": 2.375877272697835e-14,
+          "EOS_energy_max_scaled_error": 1.9342959633569284e-10
+        },
+        {
+          "peak_distance_m": 0.00022527616631089036,
+          "peak_rate_s_inv": 3851670.212042969,
+          "half_rise_m": 0.00021570595051129013,
+          "half_fall_m": 0.00023683725208298157,
+          "fwhm_m": 2.1131301571691445e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00022527616631089036,
+              "peak_rate_s_inv": 3851670.212042969,
+              "half_rise_m": 0.00021570595051129013,
+              "half_fall_m": 0.00023683725208298157,
+              "fwhm_m": 2.1131301571691445e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.0000888765625288e-06,
+          "local_speed_m_s": 1947.189563976648,
+          "induction_error_percent": 19.54277019560593,
+          "reaction_width_error_percent": -56.82919174150627,
+          "reaction_fwhm_cells": 4.226260314338289,
+          "near_shock_T_K": 1491.6255553547564,
+          "near_shock_p_Pa": 2598957.135247505,
+          "near_shock_YH2": 0.028522323053706763,
+          "near_shock_u_m_s": 1546.2454598827928,
+          "EOS_density_max_relative_error": 3.019806626980426e-14,
+          "EOS_energy_max_scaled_error": 2.1264135448635311e-10
+        },
+        {
+          "peak_distance_m": 0.0001516035567299765,
+          "peak_rate_s_inv": 5881111.068398659,
+          "half_rise_m": 0.00014609089929638736,
+          "half_fall_m": 0.00016217677720601543,
+          "fwhm_m": 1.608587790962807e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001516035567299765,
+              "peak_rate_s_inv": 5881111.068398659,
+              "half_rise_m": 0.00014609089929638736,
+              "half_fall_m": 0.00016217677720601543,
+              "fwhm_m": 1.608587790962807e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.00030660355672997713,
+              "peak_rate_s_inv": 1577937.875830302,
+              "half_rise_m": 0.00025134244421164744,
+              "half_fall_m": 0.0003270200012462058,
+              "fwhm_m": 7.567755703455836e-05,
+              "cells_above_half": 16
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.2505359876947889e-06,
+          "local_speed_m_s": 1958.3829177460793,
+          "induction_error_percent": -19.551591099089215,
+          "reaction_width_error_percent": -67.13688702278516,
+          "reaction_fwhm_cells": 3.217175581925614,
+          "near_shock_T_K": 1490.0977442184926,
+          "near_shock_p_Pa": 2722256.009834961,
+          "near_shock_YH2": 0.028522300312817633,
+          "near_shock_u_m_s": 1580.2135956088957,
+          "EOS_density_max_relative_error": 3.863576125695545e-14,
+          "EOS_energy_max_scaled_error": 3.48546240823211e-10
+        },
+        {
+          "peak_distance_m": 0.00024004722416179694,
+          "peak_rate_s_inv": 3584869.9880950707,
+          "half_rise_m": 0.00023164604852102846,
+          "half_fall_m": 0.00025181465280216725,
+          "fwhm_m": 2.0168604281138786e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00024004722416179694,
+              "peak_rate_s_inv": 3584869.9880950707,
+              "half_rise_m": 0.00023164604852102846,
+              "half_fall_m": 0.00025181465280216725,
+              "fwhm_m": 2.0168604281138786e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.500406315895461e-06,
+          "local_speed_m_s": 1979.3385361259461,
+          "induction_error_percent": 27.381030243853054,
+          "reaction_width_error_percent": -58.79596222180156,
+          "reaction_fwhm_cells": 4.033720856227757,
+          "near_shock_T_K": 1589.7905497044353,
+          "near_shock_p_Pa": 2873060.9055194277,
+          "near_shock_YH2": 0.028521656667925964,
+          "near_shock_u_m_s": 1639.1470305111689,
+          "EOS_density_max_relative_error": 4.418687638008123e-14,
+          "EOS_energy_max_scaled_error": 1.8513648262457887e-10
+        },
+        {
+          "peak_distance_m": 0.0003552291697655474,
+          "peak_rate_s_inv": 2743437.0166438175,
+          "half_rise_m": 0.0003468890464099135,
+          "half_fall_m": 0.0003745902201784601,
+          "fwhm_m": 2.7701173768546628e-05,
+          "cells_above_half": 5,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0003552291697655474,
+              "peak_rate_s_inv": 2743437.0166438175,
+              "half_rise_m": 0.0003468890464099135,
+              "half_fall_m": 0.0003745902201784601,
+              "fwhm_m": 2.7701173768546628e-05,
+              "cells_above_half": 5
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.7500044605075373e-06,
+          "local_speed_m_s": 1891.6526312820133,
+          "induction_error_percent": 88.50231563979638,
+          "reaction_width_error_percent": -43.40707990750524,
+          "reaction_fwhm_cells": 5.540234753709325,
+          "near_shock_T_K": 1465.254532959478,
+          "near_shock_p_Pa": 2428912.317701911,
+          "near_shock_YH2": 0.028522300556877034,
+          "near_shock_u_m_s": 1499.878447465713,
+          "EOS_density_max_relative_error": 5.084821452783217e-14,
+          "EOS_energy_max_scaled_error": 3.7067328079198636e-10
+        },
+        {
+          "peak_distance_m": 0.00023556720863103682,
+          "peak_rate_s_inv": 3774372.6958823567,
+          "half_rise_m": 0.00021997463536859452,
+          "half_fall_m": 0.00028708554200385393,
+          "fwhm_m": 6.711090663525941e-05,
+          "cells_above_half": 14,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00023556720863103682,
+              "peak_rate_s_inv": 3774372.6958823567,
+              "half_rise_m": 0.00021997463536859452,
+              "half_fall_m": 0.00028708554200385393,
+              "fwhm_m": 6.711090663525941e-05,
+              "cells_above_half": 14
+            },
+            {
+              "peak_distance_m": 0.00036556720863103846,
+              "peak_rate_s_inv": 2954575.8673028527,
+              "half_rise_m": 0.0003360016070879385,
+              "half_fall_m": 0.0004849697297761558,
+              "fwhm_m": 0.0001489681226882173,
+              "cells_above_half": 29
+            },
+            {
+              "peak_distance_m": 0.00047056720863103765,
+              "peak_rate_s_inv": 2799623.705527254,
+              "half_rise_m": 0.0003355504471031685,
+              "half_fall_m": 0.00048556708945568213,
+              "fwhm_m": 0.00015001664235251362,
+              "cells_above_half": 30
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.0002975215582607e-06,
+          "local_speed_m_s": 1774.1471573389317,
+          "induction_error_percent": 25.003710548491597,
+          "reaction_width_error_percent": 37.10618215234487,
+          "reaction_fwhm_cells": 13.42218132705188,
+          "near_shock_T_K": 1320.6774959666886,
+          "near_shock_p_Pa": 2155131.080210089,
+          "near_shock_YH2": 0.028522383469092666,
+          "near_shock_u_m_s": 1398.858113537381,
+          "EOS_density_max_relative_error": 5.750955267558311e-14,
+          "EOS_energy_max_scaled_error": 5.476582535765631e-10
+        },
+        {
+          "peak_distance_m": 0.00023321334956732769,
+          "peak_rate_s_inv": 4829198.3832974,
+          "half_rise_m": 0.00022718581129747148,
+          "half_fall_m": 0.000244567396804121,
+          "fwhm_m": 1.73815855066495e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00023321334956732769,
+              "peak_rate_s_inv": 4829198.3832974,
+              "half_rise_m": 0.00022718581129747148,
+              "half_fall_m": 0.000244567396804121,
+              "fwhm_m": 1.73815855066495e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.2505138222228817e-06,
+          "local_speed_m_s": 1744.2500582587927,
+          "induction_error_percent": 23.75463552322905,
+          "reaction_width_error_percent": -64.4897834338126,
+          "reaction_fwhm_cells": 3.4763171013299,
+          "near_shock_T_K": 1256.1654721912944,
+          "near_shock_p_Pa": 2098361.9933159235,
+          "near_shock_YH2": 0.028522386453826074,
+          "near_shock_u_m_s": 1370.376980596209,
+          "EOS_density_max_relative_error": 6.261657858885883e-14,
+          "EOS_energy_max_scaled_error": 2.4392495816151544e-10
+        },
+        {
+          "peak_distance_m": 0.00026742585904958316,
+          "peak_rate_s_inv": 3809237.0288986675,
+          "half_rise_m": 0.00026140616624511034,
+          "half_fall_m": 0.0002820581114578131,
+          "fwhm_m": 2.065194521270276e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00026742585904958316,
+              "peak_rate_s_inv": 3809237.0288986675,
+              "half_rise_m": 0.00026140616624511034,
+              "half_fall_m": 0.0002820581114578131,
+              "fwhm_m": 2.065194521270276e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.5001547937123916e-06,
+          "local_speed_m_s": 1842.4401698632973,
+          "induction_error_percent": 41.90949951007479,
+          "reaction_width_error_percent": -57.808506782332394,
+          "reaction_fwhm_cells": 4.130389042540552,
+          "near_shock_T_K": 1351.4350092312873,
+          "near_shock_p_Pa": 2759902.3336233436,
+          "near_shock_YH2": 0.028522383524483167,
+          "near_shock_u_m_s": 1564.2351814721571,
+          "EOS_density_max_relative_error": 7.105427357601002e-14,
+          "EOS_energy_max_scaled_error": 4.406568107747698e-10
+        },
+        {
+          "peak_distance_m": 0.00039853814141375954,
+          "peak_rate_s_inv": 2650141.314995964,
+          "half_rise_m": 0.00039059531932818486,
+          "half_fall_m": 0.0004098925139396305,
+          "fwhm_m": 1.9297194611445653e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00039853814141375954,
+              "peak_rate_s_inv": 2650141.314995964,
+              "half_rise_m": 0.00039059531932818486,
+              "half_fall_m": 0.0004098925139396305,
+              "fwhm_m": 1.9297194611445653e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.7500086876027713e-06,
+          "local_speed_m_s": 1890.3559027324009,
+          "induction_error_percent": 111.48421616630561,
+          "reaction_width_error_percent": -60.576233997171826,
+          "reaction_fwhm_cells": 3.8594389222891303,
+          "near_shock_T_K": 1482.5570333354694,
+          "near_shock_p_Pa": 2504796.113590608,
+          "near_shock_YH2": 0.028522255224392393,
+          "near_shock_u_m_s": 1522.7259153647626,
+          "EOS_density_max_relative_error": 7.327471962526033e-14,
+          "EOS_energy_max_scaled_error": 3.96845495825311e-10
+        },
+        {
+          "peak_distance_m": 0.0005329199228386438,
+          "peak_rate_s_inv": 2373374.514215317,
+          "half_rise_m": 0.0005273020917579259,
+          "half_fall_m": 0.0005449095617028196,
+          "fwhm_m": 1.760746994489365e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0005329199228386438,
+              "peak_rate_s_inv": 2373374.514215317,
+              "half_rise_m": 0.0005273020917579259,
+              "half_fall_m": 0.0005449095617028196,
+              "fwhm_m": 1.760746994489365e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.0003398168767353e-06,
+          "local_speed_m_s": 1809.2065231468514,
+          "induction_error_percent": 182.79389210060572,
+          "reaction_width_error_percent": -64.02830623900131,
+          "reaction_fwhm_cells": 3.52149398897873,
+          "near_shock_T_K": 1366.1596627382487,
+          "near_shock_p_Pa": 2256197.165678577,
+          "near_shock_YH2": 0.02852237727323854,
+          "near_shock_u_m_s": 1436.1502731227167,
+          "EOS_density_max_relative_error": 7.216449660063518e-14,
+          "EOS_energy_max_scaled_error": 4.854182362120099e-10
+        },
+        {
+          "peak_distance_m": 0.0006539659344849316,
+          "peak_rate_s_inv": 2133183.9972136226,
+          "half_rise_m": 0.0006502325678178033,
+          "half_fall_m": 0.0006679884329139033,
+          "fwhm_m": 1.775586509609995e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0006539659344849316,
+              "peak_rate_s_inv": 2133183.9972136226,
+              "half_rise_m": 0.0006502325678178033,
+              "half_fall_m": 0.0006679884329139033,
+              "fwhm_m": 1.775586509609995e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.250453405082457e-06,
+          "local_speed_m_s": 1723.94798288526,
+          "induction_error_percent": 247.02694342729328,
+          "reaction_width_error_percent": -63.72513804098554,
+          "reaction_fwhm_cells": 3.5511730192199895,
+          "near_shock_T_K": 1270.5981870049345,
+          "near_shock_p_Pa": 2039969.9067185384,
+          "near_shock_YH2": 0.0285223857525588,
+          "near_shock_u_m_s": 1356.9534296735624,
+          "EOS_density_max_relative_error": 7.238654120556021e-14,
+          "EOS_energy_max_scaled_error": 3.643065255939788e-10
+        },
+        {
+          "peak_distance_m": 0.0007700863697365414,
+          "peak_rate_s_inv": 2142962.792575791,
+          "half_rise_m": 0.0007623585047985194,
+          "half_fall_m": 0.0007793563972230046,
+          "fwhm_m": 1.6997892424485263e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0007700863697365414,
+              "peak_rate_s_inv": 2142962.792575791,
+              "half_rise_m": 0.0007623585047985194,
+              "half_fall_m": 0.0007793563972230046,
+              "fwhm_m": 1.6997892424485263e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.500445915430977e-06,
+          "local_speed_m_s": 1653.134676502581,
+          "induction_error_percent": 308.6462382404875,
+          "reaction_width_error_percent": -65.27366039586464,
+          "reaction_fwhm_cells": 3.3995784848970523,
+          "near_shock_T_K": 1192.0743881298738,
+          "near_shock_p_Pa": 1890949.013665728,
+          "near_shock_YH2": 0.02852238724746528,
+          "near_shock_u_m_s": 1297.8147049141537,
+          "EOS_density_max_relative_error": 7.327471962526033e-14,
+          "EOS_energy_max_scaled_error": 6.046942590602702e-10
+        },
+        {
+          "peak_distance_m": 0.0008703720583769902,
+          "peak_rate_s_inv": 2235931.6434120024,
+          "half_rise_m": 0.0008659369500104754,
+          "half_fall_m": 0.0008814696334600932,
+          "fwhm_m": 1.5532683449617714e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0004903720583769883,
+              "peak_rate_s_inv": 1610429.8689676076,
+              "half_rise_m": 0.0004551244442352578,
+              "half_fall_m": 0.0005063606584706096,
+              "fwhm_m": 5.123621423535181e-05,
+              "cells_above_half": 11
+            },
+            {
+              "peak_distance_m": 0.0008703720583769902,
+              "peak_rate_s_inv": 2235931.6434120024,
+              "half_rise_m": 0.0008659369500104754,
+              "half_fall_m": 0.0008814696334600932,
+              "fwhm_m": 1.5532683449617714e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.750352626099844e-06,
+          "local_speed_m_s": 1600.9710523030008,
+          "induction_error_percent": 361.86282669445086,
+          "reaction_width_error_percent": -68.26705176354876,
+          "reaction_fwhm_cells": 3.1065366899235425,
+          "near_shock_T_K": 1137.5995650338484,
+          "near_shock_p_Pa": 1786494.5076647531,
+          "near_shock_YH2": 0.028522387445204432,
+          "near_shock_u_m_s": 1255.0831943014387,
+          "EOS_density_max_relative_error": 7.172040739078511e-14,
+          "EOS_energy_max_scaled_error": 7.169489800997891e-10
+        },
+        {
+          "peak_distance_m": 0.00063486876901208,
+          "peak_rate_s_inv": 2603561.163659867,
+          "half_rise_m": 0.0006228070371077818,
+          "half_fall_m": 0.0006444035797683558,
+          "fwhm_m": 2.1596542660574057e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.000529868769012079,
+              "peak_rate_s_inv": 2521319.1017561955,
+              "half_rise_m": 0.0005260665596648106,
+              "half_fall_m": 0.000542285878826686,
+              "fwhm_m": 1.6219319161875356e-05,
+              "cells_above_half": 3
+            },
+            {
+              "peak_distance_m": 0.00063486876901208,
+              "peak_rate_s_inv": 2603561.163659867,
+              "half_rise_m": 0.0006228070371077818,
+              "half_fall_m": 0.0006444035797683558,
+              "fwhm_m": 2.1596542660574057e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0009698687690120784,
+              "peak_rate_s_inv": 2208553.522427768,
+              "half_rise_m": 0.0009632220117601708,
+              "half_fall_m": 0.000979224208228468,
+              "fwhm_m": 1.600219646829724e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 4e-06,
+          "local_speed_m_s": 1559.46043529491,
+          "induction_error_percent": 236.89303489673873,
+          "reaction_width_error_percent": -55.878713903026565,
+          "reaction_fwhm_cells": 4.319308532114811,
+          "near_shock_T_K": 1100.891662676919,
+          "near_shock_p_Pa": 1711218.4555065949,
+          "near_shock_YH2": 0.02852238748786763,
+          "near_shock_u_m_s": 1223.8397971051093,
+          "EOS_density_max_relative_error": 7.238654120556021e-14,
+          "EOS_energy_max_scaled_error": 6.968122075551991e-10
+        }
+      ]
+    },
+    "hydrogen_9600_cfl30_v1": {
+      "case": {
+        "command": [
+          "mpirun",
+          "-np",
+          "16",
+          "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+          "inputs"
+        ],
+        "binary": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+        "binary_sha256": "d4f03582a37563516954b14dbdd71f5eba204c3c724f8de6aa91dfc045180c9d",
+        "reference": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/reference_v1",
+        "profile_sha256": "e21e67926f015458b415540fc42d2402bd9e16bbda270200e870984c1bd83248",
+        "input_sha256": "27e8b45289d3ce885d599bd0803c224596805bdea9b84af323216a26b308ec34",
+        "nx": 9600,
+        "ny": 2,
+        "dx_m": 2.5e-06,
+        "front_m": 0.008,
+        "length_m": 0.024,
+        "cfl": 0.3,
+        "ode_rtol": 1e-08,
+        "ode_atol": 1e-18,
+        "stop_time_s": 4e-06,
+        "plot_root": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_9600_cfl30_v1",
+        "mapping": "ROUNDROBIN",
+        "physical_model": "Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+        "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+      },
+      "mean_speed_2_to_4us_m_s": 1792.9956689351095,
+      "reference_reaction_width_in_cells": 19.579250353770174,
+      "history": [
+        {
+          "peak_distance_m": 0.00018875000002608125,
+          "peak_rate_s_inv": 4540897.204397518,
+          "half_rise_m": 0.00016750888303509141,
+          "half_fall_m": 0.0002164869105983299,
+          "fwhm_m": 4.897802756323848e-05,
+          "cells_above_half": 20,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00018875000002608125,
+              "peak_rate_s_inv": 4540897.204397518,
+              "half_rise_m": 0.00016750888303509141,
+              "half_fall_m": 0.0002164869105983299,
+              "fwhm_m": 4.897802756323848e-05,
+              "cells_above_half": 20
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 0.0,
+          "local_speed_m_s": 1982.7123125170656,
+          "induction_error_percent": 0.1601645084798431,
+          "reaction_width_error_percent": 0.06108850599029214,
+          "reaction_fwhm_cells": 19.59121102529539,
+          "near_shock_T_K": 1540.9869615320686,
+          "near_shock_p_Pa": 2805794.9982421114,
+          "near_shock_YH2": 0.028522097866335184,
+          "near_shock_u_m_s": 1610.321999225273,
+          "EOS_density_max_relative_error": 6.661338147750939e-16,
+          "EOS_energy_max_scaled_error": 4.741224314953237e-16,
+          "initialization_max_abs_difference": {
+            "p_Pa": 0.00026807887479662895,
+            "T_K": 5.072511157777626e-07,
+            "u_m_s": 1.5962223187671043e-07
+          }
+        },
+        {
+          "peak_distance_m": 0.00019189420405555865,
+          "peak_rate_s_inv": 4494270.135576914,
+          "half_rise_m": 0.00016980311104222332,
+          "half_fall_m": 0.0002187442333168109,
+          "fwhm_m": 4.894112227458758e-05,
+          "cells_above_half": 19,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00019189420405555865,
+              "peak_rate_s_inv": 4494270.135576914,
+              "half_rise_m": 0.00016980311104222332,
+              "half_fall_m": 0.0002187442333168109,
+              "fwhm_m": 4.894112227458758e-05,
+              "cells_above_half": 19
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.5025397220248684e-07,
+          "local_speed_m_s": 1978.4172525188878,
+          "induction_error_percent": 1.8286359934979401,
+          "reaction_width_error_percent": -0.014308228785697708,
+          "reaction_fwhm_cells": 19.57644890983503,
+          "near_shock_T_K": 1541.7374200537067,
+          "near_shock_p_Pa": 2805798.993922057,
+          "near_shock_YH2": 0.02852213412415049,
+          "near_shock_u_m_s": 1610.3406897754062,
+          "EOS_density_max_relative_error": 1.687538997430238e-14,
+          "EOS_energy_max_scaled_error": 4.3998870441459835e-10
+        },
+        {
+          "peak_distance_m": 0.0001657819044561179,
+          "peak_rate_s_inv": 4880272.524933562,
+          "half_rise_m": 0.00016151667762823413,
+          "half_fall_m": 0.00017223798951252812,
+          "fwhm_m": 1.0721311884293993e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001657819044561179,
+              "peak_rate_s_inv": 4880272.524933562,
+              "half_rise_m": 0.00016151667762823413,
+              "half_fall_m": 0.00017223798951252812,
+              "fwhm_m": 1.0721311884293993e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.00022328190445611816,
+              "peak_rate_s_inv": 2404460.319964134,
+              "half_rise_m": 0.0001591066634105492,
+              "half_fall_m": 0.0002477929049175932,
+              "fwhm_m": 8.8686241507044e-05,
+              "cells_above_half": 35
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 5.001626533267492e-07,
+          "local_speed_m_s": 1986.1609036320406,
+          "induction_error_percent": -12.027852606307633,
+          "reaction_width_error_percent": -78.09658349410809,
+          "reaction_fwhm_cells": 4.288524753717597,
+          "near_shock_T_K": 1538.673537277803,
+          "near_shock_p_Pa": 2794378.46609009,
+          "near_shock_YH2": 0.028522185033073168,
+          "near_shock_u_m_s": 1606.8269518247664,
+          "EOS_density_max_relative_error": 3.574918139293004e-14,
+          "EOS_energy_max_scaled_error": 3.9576132749543686e-10
+        },
+        {
+          "peak_distance_m": 0.00019222985434987593,
+          "peak_rate_s_inv": 4493955.119026055,
+          "half_rise_m": 0.00018241196383048027,
+          "half_fall_m": 0.0002227086526289293,
+          "fwhm_m": 4.029668879844902e-05,
+          "cells_above_half": 16,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00019222985434987593,
+              "peak_rate_s_inv": 4493955.119026055,
+              "half_rise_m": 0.00018241196383048027,
+              "half_fall_m": 0.0002227086526289293,
+              "fwhm_m": 4.029668879844902e-05,
+              "cells_above_half": 16
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 7.50130133048892e-07,
+          "local_speed_m_s": 1980.1441012559553,
+          "induction_error_percent": 2.006748781267431,
+          "reaction_width_error_percent": -17.674705475759957,
+          "reaction_fwhm_cells": 16.118675519379607,
+          "near_shock_T_K": 1557.3178642785113,
+          "near_shock_p_Pa": 2832446.5532114194,
+          "near_shock_YH2": 0.028521939606482763,
+          "near_shock_u_m_s": 1630.6699302337902,
+          "EOS_density_max_relative_error": 5.861977570020827e-14,
+          "EOS_energy_max_scaled_error": 4.1406346172314804e-10
+        },
+        {
+          "peak_distance_m": 0.00020576412490066857,
+          "peak_rate_s_inv": 4295211.6355964495,
+          "half_rise_m": 0.0001823379541016816,
+          "half_fall_m": 0.00023960183189057686,
+          "fwhm_m": 5.726387778889525e-05,
+          "cells_above_half": 23,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00020576412490066857,
+              "peak_rate_s_inv": 4295211.6355964495,
+              "half_rise_m": 0.0001823379541016816,
+              "half_fall_m": 0.00023960183189057686,
+              "fwhm_m": 5.726387778889525e-05,
+              "cells_above_half": 23
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.0001176091405441e-06,
+          "local_speed_m_s": 1954.7116179257791,
+          "induction_error_percent": 9.18870779945209,
+          "reaction_width_error_percent": 16.98890765318508,
+          "reaction_fwhm_cells": 22.905551115558097,
+          "near_shock_T_K": 1499.9453618221014,
+          "near_shock_p_Pa": 2724672.9512888347,
+          "near_shock_YH2": 0.028522295981763084,
+          "near_shock_u_m_s": 1580.3411741655536,
+          "EOS_density_max_relative_error": 7.904787935331115e-14,
+          "EOS_energy_max_scaled_error": 3.860209907462646e-10
+        },
+        {
+          "peak_distance_m": 0.00016187364127475713,
+          "peak_rate_s_inv": 5735288.171160327,
+          "half_rise_m": 0.00014762028586792357,
+          "half_fall_m": 0.00016950494162224167,
+          "fwhm_m": 2.1884655754318097e-05,
+          "cells_above_half": 9,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00016187364127475713,
+              "peak_rate_s_inv": 5735288.171160327,
+              "half_rise_m": 0.00014762028586792357,
+              "half_fall_m": 0.00016950494162224167,
+              "fwhm_m": 2.1884655754318097e-05,
+              "cells_above_half": 9
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.2500208451375262e-06,
+          "local_speed_m_s": 1982.1300152671647,
+          "induction_error_percent": -14.10177198714705,
+          "reaction_width_error_percent": -55.29010486327635,
+          "reaction_fwhm_cells": 8.753862301727239,
+          "near_shock_T_K": 1506.8802848026469,
+          "near_shock_p_Pa": 2728894.8819381963,
+          "near_shock_YH2": 0.028522266546076827,
+          "near_shock_u_m_s": 1584.9740201972106,
+          "EOS_density_max_relative_error": 9.392486788328824e-14,
+          "EOS_energy_max_scaled_error": 3.788022897940115e-10
+        },
+        {
+          "peak_distance_m": 0.00024670397729070065,
+          "peak_rate_s_inv": 3318882.807312511,
+          "half_rise_m": 0.00024199485189896184,
+          "half_fall_m": 0.00027996661933948696,
+          "fwhm_m": 3.7971767440525116e-05,
+          "cells_above_half": 15,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00024670397729070065,
+              "peak_rate_s_inv": 3318882.807312511,
+              "half_rise_m": 0.00024199485189896184,
+              "half_fall_m": 0.00027996661933948696,
+              "fwhm_m": 3.7971767440525116e-05,
+              "cells_above_half": 15
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.5000497810712375e-06,
+          "local_speed_m_s": 1983.7802788511108,
+          "induction_error_percent": 30.91343548036274,
+          "reaction_width_error_percent": -22.424471306250425,
+          "reaction_fwhm_cells": 15.188706976210046,
+          "near_shock_T_K": 1633.4638660017285,
+          "near_shock_p_Pa": 2826414.124564402,
+          "near_shock_YH2": 0.028519866715933973,
+          "near_shock_u_m_s": 1632.691149116827,
+          "EOS_density_max_relative_error": 1.021405182655144e-13,
+          "EOS_energy_max_scaled_error": 3.5043121350940284e-10
+        },
+        {
+          "peak_distance_m": 0.00029629253420307596,
+          "peak_rate_s_inv": 3654851.909956019,
+          "half_rise_m": 0.0002759169136051057,
+          "half_fall_m": 0.0003658218288102704,
+          "fwhm_m": 8.990491520516472e-05,
+          "cells_above_half": 36,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001487925342030759,
+              "peak_rate_s_inv": 1213356.2851522374,
+              "half_rise_m": 0.00013395120371454701,
+              "half_fall_m": 0.00015958243829972943,
+              "fwhm_m": 2.5631234585182414e-05,
+              "cells_above_half": 10
+            },
+            {
+              "peak_distance_m": 0.00029629253420307596,
+              "peak_rate_s_inv": 3654851.909956019,
+              "half_rise_m": 0.0002759169136051057,
+              "half_fall_m": 0.0003658218288102704,
+              "fwhm_m": 8.990491520516472e-05,
+              "cells_above_half": 36
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.7500337385234945e-06,
+          "local_speed_m_s": 1876.9333614942625,
+          "induction_error_percent": 57.227597161927356,
+          "reaction_width_error_percent": 83.67386611991026,
+          "reaction_fwhm_cells": 35.961966082065885,
+          "near_shock_T_K": 1437.7117056471682,
+          "near_shock_p_Pa": 2361758.1530524287,
+          "near_shock_YH2": 0.028522347869245176,
+          "near_shock_u_m_s": 1476.3843835610353,
+          "EOS_density_max_relative_error": 1.1235457009206584e-13,
+          "EOS_energy_max_scaled_error": 4.4407633832608553e-10
+        },
+        {
+          "peak_distance_m": 0.00017799696316585928,
+          "peak_rate_s_inv": 5386257.081476519,
+          "half_rise_m": 0.0001743575457862362,
+          "half_fall_m": 0.00018792420664318562,
+          "fwhm_m": 1.3566660856949417e-05,
+          "cells_above_half": 5,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00017799696316585928,
+              "peak_rate_s_inv": 5386257.081476519,
+              "half_rise_m": 0.0001743575457862362,
+              "half_fall_m": 0.00018792420664318562,
+              "fwhm_m": 1.3566660856949417e-05,
+              "cells_above_half": 5
+            },
+            {
+              "peak_distance_m": 0.0003004969631658586,
+              "peak_rate_s_inv": 3698163.692849341,
+              "half_rise_m": 0.0002707211471501447,
+              "half_fall_m": 0.00032201395434124916,
+              "fwhm_m": 5.129280719110447e-05,
+              "cells_above_half": 20
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.0002406349960685e-06,
+          "local_speed_m_s": 1829.7714318525504,
+          "induction_error_percent": -5.5459331907877445,
+          "reaction_width_error_percent": -72.2835949041593,
+          "reaction_fwhm_cells": 5.426664342779766,
+          "near_shock_T_K": 1326.9832453960043,
+          "near_shock_p_Pa": 2282241.122955333,
+          "near_shock_YH2": 0.028522383897884154,
+          "near_shock_u_m_s": 1434.2864738763255,
+          "EOS_density_max_relative_error": 1.2145839889399213e-13,
+          "EOS_energy_max_scaled_error": 2.3715561305086184e-10
+        },
+        {
+          "peak_distance_m": 0.00020365962443221787,
+          "peak_rate_s_inv": 3704847.017502237,
+          "half_rise_m": 0.00020084324244699935,
+          "half_fall_m": 0.00022653958455307423,
+          "fwhm_m": 2.569634210607488e-05,
+          "cells_above_half": 11,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00020365962443221787,
+              "peak_rate_s_inv": 3704847.017502237,
+              "half_rise_m": 0.00020084324244699935,
+              "half_fall_m": 0.00022653958455307423,
+              "fwhm_m": 2.569634210607488e-05,
+              "cells_above_half": 11
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.2500345850149942e-06,
+          "local_speed_m_s": 1935.605611408424,
+          "induction_error_percent": 8.071954882370935,
+          "reaction_width_error_percent": -47.50290916806873,
+          "reaction_fwhm_cells": 10.27853684242995,
+          "near_shock_T_K": 1458.1512587075217,
+          "near_shock_p_Pa": 2981253.1114080767,
+          "near_shock_YH2": 0.028522340287764257,
+          "near_shock_u_m_s": 1659.2916189034363,
+          "EOS_density_max_relative_error": 1.3011813848606835e-13,
+          "EOS_energy_max_scaled_error": 3.8117065228921215e-10
+        },
+        {
+          "peak_distance_m": 0.00034293106355249604,
+          "peak_rate_s_inv": 2657773.5771295503,
+          "half_rise_m": 0.00033623799084654205,
+          "half_fall_m": 0.00036928715978319616,
+          "fwhm_m": 3.304916893665411e-05,
+          "cells_above_half": 13,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00034293106355249604,
+              "peak_rate_s_inv": 2657773.5771295503,
+              "half_rise_m": 0.00033623799084654205,
+              "half_fall_m": 0.00036928715978319616,
+              "fwhm_m": 3.304916893665411e-05,
+              "cells_above_half": 13
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.500032944096789e-06,
+          "local_speed_m_s": 1948.0911375662035,
+          "induction_error_percent": 81.97632707676709,
+          "reaction_width_error_percent": -32.481237351786206,
+          "reaction_fwhm_cells": 13.219667574661642,
+          "near_shock_T_K": 1544.7087356462168,
+          "near_shock_p_Pa": 2607656.209185449,
+          "near_shock_YH2": 0.028522120502624437,
+          "near_shock_u_m_s": 1559.8128384798483,
+          "EOS_density_max_relative_error": 1.3811174426336947e-13,
+          "EOS_energy_max_scaled_error": 4.915060152859709e-10
+        },
+        {
+          "peak_distance_m": 0.00047816755899103384,
+          "peak_rate_s_inv": 2433460.242600058,
+          "half_rise_m": 0.00047464455750726976,
+          "half_fall_m": 0.00048482956498974584,
+          "fwhm_m": 1.0185007482476076e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00023066755899103265,
+              "peak_rate_s_inv": 1801967.2509389585,
+              "half_rise_m": 0.0002105469012635376,
+              "half_fall_m": 0.00023970555593862648,
+              "fwhm_m": 2.9158654675088874e-05,
+              "cells_above_half": 12
+            },
+            {
+              "peak_distance_m": 0.00047816755899103384,
+              "peak_rate_s_inv": 2433460.242600058,
+              "half_rise_m": 0.00047464455750726976,
+              "half_fall_m": 0.00048482956498974584,
+              "fwhm_m": 1.0185007482476076e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.750290285539691e-06,
+          "local_speed_m_s": 1816.5470103699627,
+          "induction_error_percent": 153.7395568982376,
+          "reaction_width_error_percent": -79.19224219835392,
+          "reaction_fwhm_cells": 4.0740029929904304,
+          "near_shock_T_K": 1372.2338251793738,
+          "near_shock_p_Pa": 2242420.2958791167,
+          "near_shock_YH2": 0.028522375654378554,
+          "near_shock_u_m_s": 1432.9197797301783,
+          "EOS_density_max_relative_error": 1.4654943925052066e-13,
+          "EOS_energy_max_scaled_error": 5.158119354395055e-10
+        },
+        {
+          "peak_distance_m": 0.00023913718218832557,
+          "peak_rate_s_inv": 3828439.399547227,
+          "half_rise_m": 0.0002357388083395161,
+          "half_fall_m": 0.0002618789422557871,
+          "fwhm_m": 2.614013391627102e-05,
+          "cells_above_half": 11,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00023913718218832557,
+              "peak_rate_s_inv": 3828439.399547227,
+              "half_rise_m": 0.0002357388083395161,
+              "half_fall_m": 0.0002618789422557871,
+              "fwhm_m": 2.614013391627102e-05,
+              "cells_above_half": 11
+            },
+            {
+              "peak_distance_m": 0.00038913718218832466,
+              "peak_rate_s_inv": 3281948.0496545555,
+              "half_rise_m": 0.00038077107799289824,
+              "half_fall_m": 0.00039327160874601014,
+              "fwhm_m": 1.2500530753111903e-05,
+              "cells_above_half": 5
+            },
+            {
+              "peak_distance_m": 0.0006041371821883246,
+              "peak_rate_s_inv": 2383297.571856331,
+              "half_rise_m": 0.0005985673643935225,
+              "half_fall_m": 0.0006109194462006155,
+              "fwhm_m": 1.2352081807093089e-05,
+              "cells_above_half": 5
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.0002506862063384e-06,
+          "local_speed_m_s": 1724.9773872934202,
+          "induction_error_percent": 26.898116581548837,
+          "reaction_width_error_percent": -46.5962517584592,
+          "reaction_fwhm_cells": 10.456053566508407,
+          "near_shock_T_K": 1258.4289256885727,
+          "near_shock_p_Pa": 2040240.9527603956,
+          "near_shock_YH2": 0.028522386332464216,
+          "near_shock_u_m_s": 1354.3497022595127,
+          "EOS_density_max_relative_error": 1.5276668818842154e-13,
+          "EOS_energy_max_scaled_error": 4.070701554231202e-10
+        },
+        {
+          "peak_distance_m": 0.0002930915451630229,
+          "peak_rate_s_inv": 2974984.675720934,
+          "half_rise_m": 0.00029034849190420536,
+          "half_fall_m": 0.00031455953973384183,
+          "fwhm_m": 2.4211047829636467e-05,
+          "cells_above_half": 10,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0002930915451630229,
+              "peak_rate_s_inv": 2974984.675720934,
+              "half_rise_m": 0.00029034849190420536,
+              "half_fall_m": 0.00031455953973384183,
+              "fwhm_m": 2.4211047829636467e-05,
+              "cells_above_half": 10
+            },
+            {
+              "peak_distance_m": 0.0005505915451630254,
+              "peak_rate_s_inv": 2777039.129654891,
+              "half_rise_m": 0.0005437926509352228,
+              "half_fall_m": 0.0005558142933174097,
+              "fwhm_m": 1.2021642382186912e-05,
+              "cells_above_half": 5
+            },
+            {
+              "peak_distance_m": 0.000730591545163025,
+              "peak_rate_s_inv": 2519029.0366915287,
+              "half_rise_m": 0.0007267451886296898,
+              "half_fall_m": 0.0007435294460755319,
+              "fwhm_m": 1.6784257445842145e-05,
+              "cells_above_half": 7
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.250254233285893e-06,
+          "local_speed_m_s": 1735.6276237279963,
+          "induction_error_percent": 55.528992717968386,
+          "reaction_width_error_percent": -50.537334387831876,
+          "reaction_fwhm_cells": 9.684419131854586,
+          "near_shock_T_K": 1257.5264619863983,
+          "near_shock_p_Pa": 2299968.938859434,
+          "near_shock_YH2": 0.028522386898724977,
+          "near_shock_u_m_s": 1422.589434600953,
+          "EOS_density_max_relative_error": 1.525446435834965e-13,
+          "EOS_energy_max_scaled_error": 4.967599066284367e-10
+        },
+        {
+          "peak_distance_m": 0.0004017928636482031,
+          "peak_rate_s_inv": 2811616.533479208,
+          "half_rise_m": 0.00038353785508675177,
+          "half_fall_m": 0.0004149578919966859,
+          "fwhm_m": 3.142003690993414e-05,
+          "cells_above_half": 13,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0004017928636482031,
+              "peak_rate_s_inv": 2811616.533479208,
+              "half_rise_m": 0.00038353785508675177,
+              "half_fall_m": 0.0004149578919966859,
+              "fwhm_m": 3.142003690993414e-05,
+              "cells_above_half": 13
+            },
+            {
+              "peak_distance_m": 0.0007367928636482016,
+              "peak_rate_s_inv": 2470422.77650372,
+              "half_rise_m": 0.0007297224593866869,
+              "half_fall_m": 0.0007416151986427171,
+              "fwhm_m": 1.1892739256030198e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0009067928636482033,
+              "peak_rate_s_inv": 2523357.3894538246,
+              "half_rise_m": 0.0009039769959185248,
+              "half_fall_m": 0.0009132958812759434,
+              "fwhm_m": 9.318885357418693e-06,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.5001638867971034e-06,
+          "local_speed_m_s": 1742.6632191590252,
+          "induction_error_percent": 113.21133412331874,
+          "reaction_width_error_percent": -35.80952009455477,
+          "reaction_fwhm_cells": 12.568014763973656,
+          "near_shock_T_K": 1304.1721775051476,
+          "near_shock_p_Pa": 2100070.651841897,
+          "near_shock_YH2": 0.02852238405199867,
+          "near_shock_u_m_s": 1380.1889371804562,
+          "EOS_density_max_relative_error": 1.5165646516379638e-13,
+          "EOS_energy_max_scaled_error": 5.201645839767397e-10
+        },
+        {
+          "peak_distance_m": 0.0010695202980936028,
+          "peak_rate_s_inv": 2553212.0694496394,
+          "half_rise_m": 0.0010664813215087818,
+          "half_fall_m": 0.0010757933505254145,
+          "fwhm_m": 9.312029016632665e-06,
+          "cells_above_half": 4,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0004920202980936029,
+              "peak_rate_s_inv": 2539806.0893050707,
+              "half_rise_m": 0.00048775167234583816,
+              "half_fall_m": 0.0004982090453185198,
+              "fwhm_m": 1.0457372972681614e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0009095202980936024,
+              "peak_rate_s_inv": 2285178.0132639515,
+              "half_rise_m": 0.0009032619764228634,
+              "half_fall_m": 0.0009152878422505485,
+              "fwhm_m": 1.2025865827685082e-05,
+              "cells_above_half": 5
+            },
+            {
+              "peak_distance_m": 0.0010695202980936028,
+              "peak_rate_s_inv": 2553212.0694496394,
+              "half_rise_m": 0.0010664813215087818,
+              "half_fall_m": 0.0010757933505254145,
+              "fwhm_m": 9.312029016632665e-06,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.7503192258911304e-06,
+          "local_speed_m_s": 1690.3579957693437,
+          "induction_error_percent": 467.5408158273457,
+          "reaction_width_error_percent": -80.97571899153014,
+          "reaction_fwhm_cells": 3.724811606653066,
+          "near_shock_T_K": 1226.1102250997121,
+          "near_shock_p_Pa": 2016540.9149466013,
+          "near_shock_YH2": 0.02852238695622885,
+          "near_shock_u_m_s": 1341.880238374954,
+          "EOS_density_max_relative_error": 1.5409895581797173e-13,
+          "EOS_energy_max_scaled_error": 6.242435630669747e-10
+        },
+        {
+          "peak_distance_m": 0.0012217133145243121,
+          "peak_rate_s_inv": 2509261.0786060747,
+          "half_rise_m": 0.001219145675694061,
+          "half_fall_m": 0.0012283370210930387,
+          "fwhm_m": 9.191345398977622e-06,
+          "cells_above_half": 4,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0005967133145243116,
+              "peak_rate_s_inv": 2485098.940607853,
+              "half_rise_m": 0.0005781692873529732,
+              "half_fall_m": 0.0006050599927895926,
+              "fwhm_m": 2.6890705436619393e-05,
+              "cells_above_half": 11
+            },
+            {
+              "peak_distance_m": 0.0010767133145243094,
+              "peak_rate_s_inv": 2116108.4123213575,
+              "half_rise_m": 0.0010692252527523323,
+              "half_fall_m": 0.0010812663429733784,
+              "fwhm_m": 1.204109022104609e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0012217133145243121,
+              "peak_rate_s_inv": 2509261.0786060747,
+              "half_rise_m": 0.001219145675694061,
+              "half_fall_m": 0.0012283370210930387,
+              "fwhm_m": 9.191345398977622e-06,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 4e-06,
+          "local_speed_m_s": 1651.4533064400748,
+          "induction_error_percent": 548.3020214466054,
+          "reaction_width_error_percent": -81.22227310463347,
+          "reaction_fwhm_cells": 3.6765381595910482,
+          "near_shock_T_K": 1186.4772235236842,
+          "near_shock_p_Pa": 1896792.2767828982,
+          "near_shock_YH2": 0.028522387272532874,
+          "near_shock_u_m_s": 1298.4908718548995,
+          "EOS_density_max_relative_error": 1.5409895581797173e-13,
+          "EOS_energy_max_scaled_error": 6.556277933048745e-10
+        }
+      ]
+    },
+    "hydrogen_4800_cfl15_v1": {
+      "case": {
+        "command": [
+          "mpirun",
+          "-np",
+          "16",
+          "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+          "inputs"
+        ],
+        "binary": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+        "binary_sha256": "d4f03582a37563516954b14dbdd71f5eba204c3c724f8de6aa91dfc045180c9d",
+        "reference": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/reference_v1",
+        "profile_sha256": "e21e67926f015458b415540fc42d2402bd9e16bbda270200e870984c1bd83248",
+        "input_sha256": "7fe875b236d49736c3d0766a1518d6261f0c14deb28d9cf3cec230798332b9a1",
+        "nx": 4800,
+        "ny": 2,
+        "dx_m": 5e-06,
+        "front_m": 0.008,
+        "length_m": 0.024,
+        "cfl": 0.15,
+        "ode_rtol": 1e-08,
+        "ode_atol": 1e-18,
+        "stop_time_s": 4e-06,
+        "plot_root": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_4800_cfl15_v1",
+        "mapping": "ROUNDROBIN",
+        "physical_model": "Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+        "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+      },
+      "mean_speed_2_to_4us_m_s": 1766.5185685262352,
+      "reference_reaction_width_in_cells": 9.789625176885087,
+      "history": [
+        {
+          "peak_distance_m": 0.0001875000001029612,
+          "peak_rate_s_inv": 4530792.074614479,
+          "half_rise_m": 0.00016749440613690803,
+          "half_fall_m": 0.00021662527033282014,
+          "fwhm_m": 4.913086419591211e-05,
+          "cells_above_half": 10,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001875000001029612,
+              "peak_rate_s_inv": 4530792.074614479,
+              "half_rise_m": 0.00016749440613690803,
+              "half_fall_m": 0.00021662527033282014,
+              "fwhm_m": 4.913086419591211e-05,
+              "cells_above_half": 10
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 0.0,
+          "local_speed_m_s": 1990.4631141674836,
+          "induction_error_percent": -0.5031477983704291,
+          "reaction_width_error_percent": 0.37333055798325354,
+          "reaction_fwhm_cells": 9.826172839182421,
+          "near_shock_T_K": 1540.988417528632,
+          "near_shock_p_Pa": 2805794.441884717,
+          "near_shock_YH2": 0.02852199276114893,
+          "near_shock_u_m_s": 1610.3216679535071,
+          "EOS_density_max_relative_error": 6.661338147750939e-16,
+          "EOS_energy_max_scaled_error": 6.32163244880321e-16,
+          "initialization_max_abs_difference": {
+            "p_Pa": 0.0010548154823482037,
+            "T_K": 1.999314008571673e-06,
+            "u_m_s": 6.28068164587603e-07
+          }
+        },
+        {
+          "peak_distance_m": 0.00019875145446755262,
+          "peak_rate_s_inv": 4421122.302545994,
+          "half_rise_m": 0.0001764103340204466,
+          "half_fall_m": 0.0002242863539576455,
+          "fwhm_m": 4.787601993719889e-05,
+          "cells_above_half": 10,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00019875145446755262,
+              "peak_rate_s_inv": 4421122.302545994,
+              "half_rise_m": 0.0001764103340204466,
+              "half_fall_m": 0.0002242863539576455,
+              "fwhm_m": 4.787601993719889e-05,
+              "cells_above_half": 10
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.500996561782485e-07,
+          "local_speed_m_s": 1977.9666065907732,
+          "induction_error_percent": 5.467435088842332,
+          "reaction_width_error_percent": -2.190290083338353,
+          "reaction_fwhm_cells": 9.575203987439778,
+          "near_shock_T_K": 1536.9296910226476,
+          "near_shock_p_Pa": 2806527.356179094,
+          "near_shock_YH2": 0.02852203468968681,
+          "near_shock_u_m_s": 1610.385466343869,
+          "EOS_density_max_relative_error": 1.6653345369377348e-14,
+          "EOS_energy_max_scaled_error": 4.109704685030867e-10
+        },
+        {
+          "peak_distance_m": 0.00015670594289545273,
+          "peak_rate_s_inv": 5435123.3827120615,
+          "half_rise_m": 0.0001502328544201765,
+          "half_fall_m": 0.00016746807198751373,
+          "fwhm_m": 1.723521756733724e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00015670594289545273,
+              "peak_rate_s_inv": 5435123.3827120615,
+              "half_rise_m": 0.0001502328544201765,
+              "half_fall_m": 0.00016746807198751373,
+              "fwhm_m": 1.723521756733724e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.00024170594289545273,
+              "peak_rate_s_inv": 2567047.535698899,
+              "half_rise_m": 0.00014802662188472974,
+              "half_fall_m": 0.00026334074198193556,
+              "fwhm_m": 0.00011531412009720582,
+              "cells_above_half": 23
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 5.001120083074598e-07,
+          "local_speed_m_s": 1980.4119740465721,
+          "induction_error_percent": -16.84401050227189,
+          "reaction_width_error_percent": -64.78881008022161,
+          "reaction_fwhm_cells": 3.447043513467448,
+          "near_shock_T_K": 1527.1946853292266,
+          "near_shock_p_Pa": 2732945.947921925,
+          "near_shock_YH2": 0.028522133855936854,
+          "near_shock_u_m_s": 1589.003692178854,
+          "EOS_density_max_relative_error": 3.4861002973229915e-14,
+          "EOS_energy_max_scaled_error": 3.468989602559591e-10
+        },
+        {
+          "peak_distance_m": 0.00020895826433874054,
+          "peak_rate_s_inv": 4121053.738065443,
+          "half_rise_m": 0.00016728120958001315,
+          "half_fall_m": 0.00022836359891909347,
+          "fwhm_m": 6.108238933908033e-05,
+          "cells_above_half": 12,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00020895826433874054,
+              "peak_rate_s_inv": 4121053.738065443,
+              "half_rise_m": 0.00016728120958001315,
+              "half_fall_m": 0.00022836359891909347,
+              "fwhm_m": 6.108238933908033e-05,
+              "cells_above_half": 12
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 7.501002829988229e-07,
+          "local_speed_m_s": 1983.9233630057242,
+          "induction_error_percent": 10.883677502954626,
+          "reaction_width_error_percent": 24.790047086390764,
+          "reaction_fwhm_cells": 12.216477867816064,
+          "near_shock_T_K": 1545.9011641522914,
+          "near_shock_p_Pa": 2899384.4180791164,
+          "near_shock_YH2": 0.028521874911570804,
+          "near_shock_u_m_s": 1652.4615499908364,
+          "EOS_density_max_relative_error": 5.906386491005833e-14,
+          "EOS_energy_max_scaled_error": 3.558581149476445e-10
+        },
+        {
+          "peak_distance_m": 0.00021903958387356134,
+          "peak_rate_s_inv": 3797696.598728062,
+          "half_rise_m": 0.00021177901979562436,
+          "half_fall_m": 0.00023277089497119788,
+          "fwhm_m": 2.099187517557352e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00021903958387356134,
+              "peak_rate_s_inv": 3797696.598728062,
+              "half_rise_m": 0.00021177901979562436,
+              "half_fall_m": 0.00023277089497119788,
+              "fwhm_m": 2.099187517557352e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.0003006027194146e-06,
+          "local_speed_m_s": 1951.25049816331,
+          "induction_error_percent": 16.2333284853688,
+          "reaction_width_error_percent": -57.11403695998742,
+          "reaction_fwhm_cells": 4.198375035114704,
+          "near_shock_T_K": 1502.9242915628986,
+          "near_shock_p_Pa": 2608442.22907145,
+          "near_shock_YH2": 0.028522352862219415,
+          "near_shock_u_m_s": 1550.1545919112507,
+          "EOS_density_max_relative_error": 7.793765632868599e-14,
+          "EOS_energy_max_scaled_error": 2.3754151128130426e-10
+        },
+        {
+          "peak_distance_m": 0.0001597106892250212,
+          "peak_rate_s_inv": 5040303.522217831,
+          "half_rise_m": 0.00015145740880236267,
+          "half_fall_m": 0.00016868537720714263,
+          "fwhm_m": 1.7227968404779953e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0001597106892250212,
+              "peak_rate_s_inv": 5040303.522217831,
+              "half_rise_m": 0.00015145740880236267,
+              "half_fall_m": 0.00016868537720714263,
+              "fwhm_m": 1.7227968404779953e-05,
+              "cells_above_half": 3
+            },
+            {
+              "peak_distance_m": 0.00028971068922502285,
+              "peak_rate_s_inv": 3543075.7615331663,
+              "half_rise_m": 0.0002546549839791179,
+              "half_fall_m": 0.00030373342021487753,
+              "fwhm_m": 4.9078436235759626e-05,
+              "cells_above_half": 10
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.2501557404094306e-06,
+          "local_speed_m_s": 1940.0051288526156,
+          "induction_error_percent": -15.249542228712976,
+          "reaction_width_error_percent": -64.80361996809026,
+          "reaction_fwhm_cells": 3.4455936809559904,
+          "near_shock_T_K": 1484.2053103669982,
+          "near_shock_p_Pa": 2654418.7884832853,
+          "near_shock_YH2": 0.02852229488353564,
+          "near_shock_u_m_s": 1562.8619260434093,
+          "EOS_density_max_relative_error": 9.170442183403793e-14,
+          "EOS_energy_max_scaled_error": 1.9433809045547862e-10
+        },
+        {
+          "peak_distance_m": 0.0002239022692846638,
+          "peak_rate_s_inv": 3746287.997706933,
+          "half_rise_m": 0.00021793054210073336,
+          "half_fall_m": 0.00023789789501123807,
+          "fwhm_m": 1.9967352910504714e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0002239022692846638,
+              "peak_rate_s_inv": 3746287.997706933,
+              "half_rise_m": 0.00021793054210073336,
+              "half_fall_m": 0.00023789789501123807,
+              "fwhm_m": 1.9967352910504714e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.5002249227207959e-06,
+          "local_speed_m_s": 1964.2605301600815,
+          "induction_error_percent": 18.81371190609309,
+          "reaction_width_error_percent": -59.207114573393646,
+          "reaction_fwhm_cells": 3.9934705821009424,
+          "near_shock_T_K": 1532.2021353342882,
+          "near_shock_p_Pa": 2880173.057432807,
+          "near_shock_YH2": 0.028522104339476453,
+          "near_shock_u_m_s": 1631.1767037494992,
+          "EOS_density_max_relative_error": 1.0524914273446484e-13,
+          "EOS_energy_max_scaled_error": 4.026831558609509e-10
+        },
+        {
+          "peak_distance_m": 0.0003420533107553348,
+          "peak_rate_s_inv": 2888749.359723461,
+          "half_rise_m": 0.000330727079195444,
+          "half_fall_m": 0.0003641913831566456,
+          "fwhm_m": 3.346430396120162e-05,
+          "cells_above_half": 7,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0003420533107553348,
+              "peak_rate_s_inv": 2888749.359723461,
+              "half_rise_m": 0.000330727079195444,
+              "half_fall_m": 0.0003641913831566456,
+              "fwhm_m": 3.346430396120162e-05,
+              "cells_above_half": 7
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 1.7502640960454401e-06,
+          "local_speed_m_s": 1906.0653642977268,
+          "induction_error_percent": 81.51054766193637,
+          "reaction_width_error_percent": -31.633125157403708,
+          "reaction_fwhm_cells": 6.692860792240323,
+          "near_shock_T_K": 1490.2704507111268,
+          "near_shock_p_Pa": 2485968.0321298535,
+          "near_shock_YH2": 0.028522341376274168,
+          "near_shock_u_m_s": 1519.6979454671246,
+          "EOS_density_max_relative_error": 1.1590728377086634e-13,
+          "EOS_energy_max_scaled_error": 5.053530210199059e-10
+        },
+        {
+          "peak_distance_m": 0.0003870908325191644,
+          "peak_rate_s_inv": 3056632.61078727,
+          "half_rise_m": 0.00034240870735432186,
+          "half_fall_m": 0.00047119877529501827,
+          "fwhm_m": 0.0001287900679406964,
+          "cells_above_half": 25,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00024209083251916334,
+              "peak_rate_s_inv": 486534.0723890154,
+              "half_rise_m": 0.00021262426920961547,
+              "half_fall_m": 0.0002610812967558406,
+              "fwhm_m": 4.845702754622511e-05,
+              "cells_above_half": 9
+            },
+            {
+              "peak_distance_m": 0.0003870908325191644,
+              "peak_rate_s_inv": 3056632.61078727,
+              "half_rise_m": 0.00034240870735432186,
+              "half_fall_m": 0.00047119877529501827,
+              "fwhm_m": 0.0001287900679406964,
+              "cells_above_half": 25
+            },
+            {
+              "peak_distance_m": 0.0004620908325191648,
+              "peak_rate_s_inv": 2771193.9621352763,
+              "half_rise_m": 0.00034126914404050744,
+              "half_fall_m": 0.00047237136444602156,
+              "fwhm_m": 0.00013110222040551412,
+              "cells_above_half": 27
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.0003069608636703e-06,
+          "local_speed_m_s": 1789.2282766702047,
+          "induction_error_percent": 105.40970309661763,
+          "reaction_width_error_percent": 163.1154219158276,
+          "reaction_fwhm_cells": 25.75801358813928,
+          "near_shock_T_K": 1340.8087214406498,
+          "near_shock_p_Pa": 2180937.3185577546,
+          "near_shock_YH2": 0.02852238345829781,
+          "near_shock_u_m_s": 1409.6604985276124,
+          "EOS_density_max_relative_error": 1.2789769243681803e-13,
+          "EOS_energy_max_scaled_error": 5.077483114572818e-10
+        },
+        {
+          "peak_distance_m": 0.0002763140061726715,
+          "peak_rate_s_inv": 4988346.583370163,
+          "half_rise_m": 0.00026519728492251625,
+          "half_fall_m": 0.0002870198879117859,
+          "fwhm_m": 2.1822602989269636e-05,
+          "cells_above_half": 5,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0002763140061726715,
+              "peak_rate_s_inv": 4988346.583370163,
+              "half_rise_m": 0.00026519728492251625,
+              "half_fall_m": 0.0002870198879117859,
+              "fwhm_m": 2.1822602989269636e-05,
+              "cells_above_half": 5
+            },
+            {
+              "peak_distance_m": 0.0003863140061726722,
+              "peak_rate_s_inv": 4375143.441385555,
+              "half_rise_m": 0.0003674972663834886,
+              "half_fall_m": 0.00043411548680707897,
+              "fwhm_m": 6.661822042359036e-05,
+              "cells_above_half": 13
+            },
+            {
+              "peak_distance_m": 0.00042131400617267077,
+              "peak_rate_s_inv": 4064578.2495383006,
+              "half_rise_m": 0.0003659846900509155,
+              "half_fall_m": 0.0004349352259901318,
+              "fwhm_m": 6.895053593921626e-05,
+              "cells_above_half": 14
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.25004958285712e-06,
+          "local_speed_m_s": 1716.737376524463,
+          "induction_error_percent": 46.62599369763021,
+          "reaction_width_error_percent": -55.41687736769252,
+          "reaction_fwhm_cells": 4.364520597853927,
+          "near_shock_T_K": 1252.6076640878834,
+          "near_shock_p_Pa": 2046858.3225390182,
+          "near_shock_YH2": 0.0285223865990225,
+          "near_shock_u_m_s": 1355.4810896569043,
+          "EOS_density_max_relative_error": 1.3367085216486885e-13,
+          "EOS_energy_max_scaled_error": 3.597829937118187e-10
+        },
+        {
+          "peak_distance_m": 0.00025518756377958945,
+          "peak_rate_s_inv": 4239804.95109665,
+          "half_rise_m": 0.000250570171518233,
+          "half_fall_m": 0.0002691335409554921,
+          "fwhm_m": 1.8563369437259137e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00025518756377958945,
+              "peak_rate_s_inv": 4239804.95109665,
+              "half_rise_m": 0.000250570171518233,
+              "half_fall_m": 0.0002691335409554921,
+              "fwhm_m": 1.8563369437259137e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.5001579022085867e-06,
+          "local_speed_m_s": 1784.1900000726419,
+          "induction_error_percent": 35.41524961668914,
+          "reaction_width_error_percent": -62.075423518583115,
+          "reaction_fwhm_cells": 3.7126738874518272,
+          "near_shock_T_K": 1226.5064000352957,
+          "near_shock_p_Pa": 2062681.2442604164,
+          "near_shock_YH2": 0.02852238704901551,
+          "near_shock_u_m_s": 1355.1390702111923,
+          "EOS_density_max_relative_error": 1.4144241333724494e-13,
+          "EOS_energy_max_scaled_error": 3.8445675994015635e-10
+        },
+        {
+          "peak_distance_m": 0.00035374963372568347,
+          "peak_rate_s_inv": 2817898.0548522086,
+          "half_rise_m": 0.0003462828750592096,
+          "half_fall_m": 0.00036917639362566356,
+          "fwhm_m": 2.289351856645395e-05,
+          "cells_above_half": 5,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00035374963372568347,
+              "peak_rate_s_inv": 2817898.0548522086,
+              "half_rise_m": 0.0003462828750592096,
+              "half_fall_m": 0.00036917639362566356,
+              "fwhm_m": 2.289351856645395e-05,
+              "cells_above_half": 5
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 2.7502428409620748e-06,
+          "local_speed_m_s": 1883.2748252773454,
+          "induction_error_percent": 87.71720002057243,
+          "reaction_width_error_percent": -53.2290191855163,
+          "reaction_fwhm_cells": 4.57870371329079,
+          "near_shock_T_K": 1523.7067596438471,
+          "near_shock_p_Pa": 2609426.867457322,
+          "near_shock_YH2": 0.028522171344712265,
+          "near_shock_u_m_s": 1560.3441580071622,
+          "EOS_density_max_relative_error": 1.454392162258955e-13,
+          "EOS_energy_max_scaled_error": 4.576444525900707e-10
+        },
+        {
+          "peak_distance_m": 0.0004917223719007723,
+          "peak_rate_s_inv": 2309622.045483644,
+          "half_rise_m": 0.0004879446994386548,
+          "half_fall_m": 0.0005066559388048213,
+          "fwhm_m": 1.871123936616646e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0004917223719007723,
+              "peak_rate_s_inv": 2309622.045483644,
+              "half_rise_m": 0.0004879446994386548,
+              "half_fall_m": 0.0005066559388048213,
+              "fwhm_m": 1.871123936616646e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.0001056982368817e-06,
+          "local_speed_m_s": 1846.06394662405,
+          "induction_error_percent": 160.9324167166931,
+          "reaction_width_error_percent": -61.773328338766696,
+          "reaction_fwhm_cells": 3.7422478732332913,
+          "near_shock_T_K": 1405.3455283084597,
+          "near_shock_p_Pa": 2354239.5756693026,
+          "near_shock_YH2": 0.02852236322807695,
+          "near_shock_u_m_s": 1469.7247015887865,
+          "EOS_density_max_relative_error": 1.5010215292932116e-13,
+          "EOS_energy_max_scaled_error": 4.893549972967877e-10
+        },
+        {
+          "peak_distance_m": 0.0006216717178193602,
+          "peak_rate_s_inv": 2291176.2593742143,
+          "half_rise_m": 0.0006155807113454251,
+          "half_fall_m": 0.0006330796401920547,
+          "fwhm_m": 1.7498928846629617e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 1,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0006216717178193602,
+              "peak_rate_s_inv": 2291176.2593742143,
+              "half_rise_m": 0.0006155807113454251,
+              "half_fall_m": 0.0006330796401920547,
+              "fwhm_m": 1.7498928846629617e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.2501948075062527e-06,
+          "local_speed_m_s": 1758.118894622552,
+          "induction_error_percent": 229.89002128981423,
+          "reaction_width_error_percent": -64.2500534383125,
+          "reaction_fwhm_cells": 3.499785769325923,
+          "near_shock_T_K": 1308.542147632455,
+          "near_shock_p_Pa": 2134181.4958127975,
+          "near_shock_YH2": 0.02852238426800671,
+          "near_shock_u_m_s": 1391.4400818378217,
+          "EOS_density_max_relative_error": 1.5276668818842154e-13,
+          "EOS_energy_max_scaled_error": 5.037628366530632e-10
+        },
+        {
+          "peak_distance_m": 0.0003610883995477255,
+          "peak_rate_s_inv": 2467378.4930449123,
+          "half_rise_m": 0.0003274946580091328,
+          "half_fall_m": 0.00037885302282329974,
+          "fwhm_m": 5.135836481416693e-05,
+          "cells_above_half": 10,
+          "significant_peak_count": 2,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.0003610883995477255,
+              "peak_rate_s_inv": 2467378.4930449123,
+              "half_rise_m": 0.0003274946580091328,
+              "half_fall_m": 0.00037885302282329974,
+              "fwhm_m": 5.135836481416693e-05,
+              "cells_above_half": 10
+            },
+            {
+              "peak_distance_m": 0.0007410883995477256,
+              "peak_rate_s_inv": 2117415.7020395743,
+              "half_rise_m": 0.0007333144577463121,
+              "half_fall_m": 0.0007511477181195547,
+              "fwhm_m": 1.7833260373242583e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.5002798900078133e-06,
+          "local_speed_m_s": 1682.0170106829828,
+          "induction_error_percent": 91.61151520957043,
+          "reaction_width_error_percent": 4.924067849773173,
+          "reaction_fwhm_cells": 10.271672962833385,
+          "near_shock_T_K": 1225.0451905014568,
+          "near_shock_p_Pa": 1956244.6394576945,
+          "near_shock_YH2": 0.02852238693668325,
+          "near_shock_u_m_s": 1323.7567001125622,
+          "EOS_density_max_relative_error": 1.545430450278218e-13,
+          "EOS_energy_max_scaled_error": 5.960203348392658e-10
+        },
+        {
+          "peak_distance_m": 0.00040250917163229746,
+          "peak_rate_s_inv": 2898568.9200346344,
+          "half_rise_m": 0.0003977782972662271,
+          "half_fall_m": 0.00041373578816007386,
+          "fwhm_m": 1.5957490893846768e-05,
+          "cells_above_half": 3,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00040250917163229746,
+              "peak_rate_s_inv": 2898568.9200346344,
+              "half_rise_m": 0.0003977782972662271,
+              "half_fall_m": 0.00041373578816007386,
+              "fwhm_m": 1.5957490893846768e-05,
+              "cells_above_half": 3
+            },
+            {
+              "peak_distance_m": 0.0005225091716322978,
+              "peak_rate_s_inv": 2697153.5422940366,
+              "half_rise_m": 0.0005098929858626431,
+              "half_fall_m": 0.0005298371885156602,
+              "fwhm_m": 1.9944202653017127e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0008475091716322967,
+              "peak_rate_s_inv": 2193145.57141722,
+              "half_rise_m": 0.000840786654176822,
+              "half_fall_m": 0.0008579235047804789,
+              "fwhm_m": 1.7136850603656907e-05,
+              "cells_above_half": 4
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 3.750081292037011e-06,
+          "local_speed_m_s": 1624.3101392455283,
+          "induction_error_percent": 113.5914428677729,
+          "reaction_width_error_percent": -67.39917901754804,
+          "reaction_fwhm_cells": 3.1914981787693533,
+          "near_shock_T_K": 1162.4440343860067,
+          "near_shock_p_Pa": 1831963.2802801598,
+          "near_shock_YH2": 0.028522387366827814,
+          "near_shock_u_m_s": 1273.925779017957,
+          "EOS_density_max_relative_error": 1.532107773982716e-13,
+          "EOS_energy_max_scaled_error": 6.644251779778102e-10
+        },
+        {
+          "peak_distance_m": 0.00047278351843999325,
+          "peak_rate_s_inv": 2837264.0297177453,
+          "half_rise_m": 0.00046758285143409686,
+          "half_fall_m": 0.0004842335485897484,
+          "fwhm_m": 1.6650697155651565e-05,
+          "cells_above_half": 4,
+          "significant_peak_count": 3,
+          "significant_peaks": [
+            {
+              "peak_distance_m": 0.00047278351843999325,
+              "peak_rate_s_inv": 2837264.0297177453,
+              "half_rise_m": 0.00046758285143409686,
+              "half_fall_m": 0.0004842335485897484,
+              "fwhm_m": 1.6650697155651565e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0006627835184399959,
+              "peak_rate_s_inv": 2382771.318867932,
+              "half_rise_m": 0.0006505350190729112,
+              "half_fall_m": 0.0006699624603815307,
+              "fwhm_m": 1.942744130861956e-05,
+              "cells_above_half": 4
+            },
+            {
+              "peak_distance_m": 0.0009577835184399943,
+              "peak_rate_s_inv": 2620777.557490598,
+              "half_rise_m": 0.0009523493406767553,
+              "half_fall_m": 0.0009675064508655003,
+              "fwhm_m": 1.5157110188745082e-05,
+              "cells_above_half": 3
+            }
+          ],
+          "global_peak_at_window_edge": false,
+          "time_s": 4e-06,
+          "local_speed_m_s": 1578.9262256525835,
+          "induction_error_percent": 150.88251643604931,
+          "reaction_width_error_percent": -65.9829730867192,
+          "reaction_fwhm_cells": 3.3301394311303127,
+          "near_shock_T_K": 1124.0123055457602,
+          "near_shock_p_Pa": 1778381.6224482674,
+          "near_shock_YH2": 0.028522387465295708,
+          "near_shock_u_m_s": 1249.7583463847493,
+          "EOS_density_max_relative_error": 1.5698553568199713e-13,
+          "EOS_energy_max_scaled_error": 6.547556719163806e-10
+        }
+      ]
+    }
+  },
+  "caveats": [
+    "Global thermicity peak on the fixed 0\u20133 mm window. FWHM refers to its connected peak, not the full span of all pulses.",
+    "Peak position uses resolved sample maximum. Half-height crossings use linear interpolation. No smoothing.",
+    "The 4-us CFD fields are unsteady; these are instantaneous apparent lengths, not established steady ZND parameters.",
+    "Local shock speed is a derivative of output positions at about 0.25 us intervals, not a step-resolved velocity."
+  ]
+}

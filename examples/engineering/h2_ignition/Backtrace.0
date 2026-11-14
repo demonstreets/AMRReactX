@@ -1,0 +1,41 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX2d.gnu.MPI.ex(+0x521f66) [0x5a8405014f66]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleLMeX2d.gnu.MPI.ex(+0x526d21) [0x5a8405019d21]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleLMeX2d.gnu.MPI.ex(+0x2d48e5) [0x5a8404dc78e5]
+    amrex::Abort(char const*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:187
+ (inlined by) pele::physics::reactions::ReactorCvode::checkCvodeOptions(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int&, int&, int&) const at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp:680
+
+ 3: ./PeleLMeX2d.gnu.MPI.ex(+0x2d7b53) [0x5a8404dcab53]
+    pele::physics::reactions::ReactorCvode::init(int, int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp:45
+
+ 4: ./PeleLMeX2d.gnu.MPI.ex(+0xb0f8c) [0x5a8404ba3f8c]
+    std::__uniq_ptr_impl<pele::physics::reactions::ReactorBase, std::default_delete<pele::physics::reactions::ReactorBase> >::_M_ptr() const at /usr/include/c++/13/bits/unique_ptr.h:199 (discriminator 1)
+ (inlined by) std::unique_ptr<pele::physics::reactions::ReactorBase, std::default_delete<pele::physics::reactions::ReactorBase> >::get() const at /usr/include/c++/13/bits/unique_ptr.h:470 (discriminator 1)
+ (inlined by) std::unique_ptr<pele::physics::reactions::ReactorBase, std::default_delete<pele::physics::reactions::ReactorBase> >::operator->() const at /usr/include/c++/13/bits/unique_ptr.h:463 (discriminator 1)
+ (inlined by) PeleLM::Setup() at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp:157 (discriminator 1)
+
+ 5: ./PeleLMeX2d.gnu.MPI.ex(+0x48e33) [0x5a8404b3be33]
+    main at /home/cj/my-pele/external/PeleLMeX/Source/main.cpp:50
+
+ 6: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x712780c2a1ca]
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x712780c2a28b]
+
+ 8: ./PeleLMeX2d.gnu.MPI.ex(+0x518c5) [0x5a8404b448c5]
+    ?? ??:0
+

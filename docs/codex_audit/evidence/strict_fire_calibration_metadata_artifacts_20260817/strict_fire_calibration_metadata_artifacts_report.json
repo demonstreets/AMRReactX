@@ -1,0 +1,93 @@
+{
+  "calibration_metadata": {
+    "case": "engineering_h2_fire_consequence_metric_artifacts",
+    "case_alignment": {
+      "boundary_conditions": false,
+      "fuel": true,
+      "ignition_or_burn_basis": false,
+      "overpressure_measurement_basis": true,
+      "radiation_measurement_basis": true,
+      "release_or_cloud_mass": false
+    },
+    "dataset_type": "h2_fire_consequence_calibration_agreement",
+    "schema_version": 1,
+    "source": {
+      "doi": "10.18710/X044QK",
+      "notes": "Radiation metrics use MDPI Applied Sciences 14(16):7098 anchors; overpressure metrics use DataverseNO DOI 10.18710/X044QK EXP002 reduced pressure channels. The two metric families are retained as partial strict artifacts and do not by themselves prove full fire calibration closure.",
+      "title": "MDPI hydrogen jet-fire radiation anchors and Dataverse EXP002 overpressure anchors",
+      "url": "https://www.mdpi.com/2076-3417/14/16/7098"
+    },
+    "source_type": "literature_digitized",
+    "uncertainty": {
+      "overpressure": "4 overpressure anchors; tolerance_rel max 0.5 from reduced EXP002 pressure-channel guard.",
+      "radiation": "4 radiation anchors; tolerance_rel max 0.434 from MDPI optimized multi-point-source residual guard."
+    }
+  },
+  "digitization_uncertainty_rows": [
+    {
+      "artifact": "radiation_metrics.csv",
+      "calibration_points_or_table": "4 radiation metric rows",
+      "estimated_uncertainty": "max relative tolerance 0.434; absolute tolerance stored per metric row",
+      "method": "literature table and anchor extraction",
+      "review_status": "reviewed_partial_metric_artifact",
+      "source_basis": "MDPI Applied Sciences 14(16):7098 hydrogen jet-fire radiation anchors"
+    },
+    {
+      "artifact": "overpressure_metrics.csv",
+      "calibration_points_or_table": "4 overpressure metric rows",
+      "estimated_uncertainty": "max relative tolerance 0.5; absolute tolerance stored per metric row",
+      "method": "baseline-corrected pressure-channel reduction",
+      "review_status": "reviewed_partial_metric_artifact",
+      "source_basis": "DataverseNO DOI 10.18710/X044QK EXP002 reduced pressure channels"
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "strict_fire_calibration_metric_artifacts",
+      "path": "docs/codex_audit/evidence/strict_fire_calibration_metric_artifacts_20260817/strict_fire_calibration_metric_artifacts_report.json",
+      "sha256": "ec35b9cb3e9bee1ea0c265e679eb1dd390e81233bf07a7e7091be673715a79a9",
+      "size_bytes": 6857
+    },
+    {
+      "label": "radiation_calibration_table_report",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/h2_fire_mdpi_radiation_calibration_table_report.json",
+      "sha256": "26506a1e7e4d69bb668b74e5429e7aca4015853de14d745f91183c52e687a258",
+      "size_bytes": 3576
+    },
+    {
+      "label": "overpressure_calibration_table_report",
+      "path": "docs/codex_audit/evidence/h2_fire_exp002_overpressure_calibration_table_20260805/h2_fire_exp002_overpressure_calibration_table_report.json",
+      "sha256": "169d4c3ccc1f0f5751094c7388d23b00dec572e4c19b1ecae3fe129030950bc7",
+      "size_bytes": 3677
+    },
+    {
+      "label": "calibration_metadata_target",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+      "sha256": "0afea84c6f6f671c9b0f2e87291c41ededbb567963fa09d4ed49a60104b44445",
+      "size_bytes": 1186
+    },
+    {
+      "label": "digitization_uncertainty_target",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv",
+      "sha256": "318a497d05544963b004e3d4336545c1651665bbd41ffe6867536c0b3cc20532",
+      "size_bytes": 620
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:07.947948+00:00",
+  "schema_version": 1,
+  "scope": "strict fire calibration metadata and digitization uncertainty artifacts",
+  "status": "PASS-STRICT-FIRE-CALIBRATION-METADATA-ARTIFACTS",
+  "summary": {
+    "calibration_metadata_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json",
+    "digitization_uncertainty_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv",
+    "metadata_case": "engineering_h2_fire_consequence_metric_artifacts",
+    "overpressure_uncertainty_recorded": true,
+    "radiation_uncertainty_recorded": true,
+    "ready_for_full_fire_calibration_ingestion": false,
+    "strict_completion_allowed": false,
+    "strict_fire_calibration_blocker_cleared": false,
+    "strict_fire_calibration_metadata_artifacts_ready": true,
+    "strict_master_plan_still_open": true,
+    "uncertainty_row_count": 2
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "evidence_files": [
+    {
+      "label": "nvidia_runtime_version_diagnostic_log",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/nvidia_runtime_version_diagnostic.log",
+      "sha256": "c356432bc27b604940c54e23fce138fdb69cf2203542876a40c294dc8b66db64",
+      "size_bytes": 4002
+    },
+    {
+      "label": "nvidia_runtime_version_diagnostic_summary",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/nvidia_runtime_version_diagnostic_summary.json",
+      "sha256": "c44be92c92a6f61f2605c4d4617adfc95183e25e7663138aebac322d2e981e73",
+      "size_bytes": 348
+    },
+    {
+      "label": "nvidia_reload_preflight_log",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/nvidia_reload_preflight.log",
+      "sha256": "b86bb945770babff6ad3f608cbadb34c52dec7121a1a3211da82e9d7a90b65f4",
+      "size_bytes": 514
+    },
+    {
+      "label": "nvidia_reload_preflight_summary",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/nvidia_reload_preflight_summary.json",
+      "sha256": "250b9e381fdde19b216c1f2c7118d0b9e6746cc0a3f3c0bacf56c752124b3e10",
+      "size_bytes": 226
+    },
+    {
+      "label": "cuda_preflight_diagnostic_log",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/cuda_preflight_diagnostic.log",
+      "sha256": "64fe7339dc8afcbb893a8603c0e342a1944f92d796784653dff1d0c989ed05c7",
+      "size_bytes": 2083
+    },
+    {
+      "label": "cuda_preflight_diagnostic_exitcode",
+      "path": "docs/codex_audit/evidence/master_plan_full_reproducibility_20260731/gpu_diagnostic/cuda_preflight_diagnostic.exitcode",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    }
+  ],
+  "generated_at_utc": "2026-07-31T06:57:55.958259+00:00",
+  "schema_version": 1,
+  "status": "PASS-MASTER-PLAN-GPU-RUNTIME-READY",
+  "summary": {
+    "cuda_require_preflight_exitcode": 0,
+    "current_cuda_runtime_ready": true,
+    "hot_reload_preflight_note": "GPU device users were detected; do not hot reload until those jobs are stopped.",
+    "kernel_module_version_proc": "580.173.02",
+    "modinfo_nvidia_version": "580.173.02",
+    "nvidia_device_users_detected": true,
+    "nvidia_smi_driver_library_mismatch": false,
+    "nvml_library_version_reported_by_nvidia_smi": "580.173.02",
+    "recovery_recommendation": "Reboot the server or, with administrator approval and after confirming no GPU users, reload the NVIDIA kernel modules so the loaded kernel module matches the 580.173 user-space NVML libraries. After recovery, rerun tools/codex_preflight_environment.sh --require-cuda and the relevant CUDA smoke/engineering GPU cases.",
+    "reload_action_recommended": "no_reload_required_runtime_versions_match"
+  }
+}

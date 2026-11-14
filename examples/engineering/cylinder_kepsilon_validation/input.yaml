@@ -1,0 +1,83 @@
+# =============================================================================
+# my-pele — Cylinder Wake k-epsilon Validation
+# =============================================================================
+# Single cylinder (r=0.5m) at (5,5,1) in 20×10×2 m domain.
+# Inflow U=8 m/s x-direction, k-epsilon turbulence model, 1% TI.
+# No reaction, no leakage.  Quasi-2D (3D with thin z).
+# =============================================================================
+
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic: 0 0 0
+geometry.coord_sys:   0
+geometry.prob_lo:     0.0  0.0  0.0
+geometry.prob_hi:     20.0 10.0 2.0
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# lo-x: Inflow, hi-x: Outflow
+# lo-y/hi-y/lo-z/hi-z: SlipWallAdiab (cylinder handles no-slip via EB)
+peleLM.lo_bc: Inflow SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc: Outflow SlipWallAdiab SlipWallAdiab
+
+#-------------------------AMR CONTROL----------------------------
+amr.n_cell:          128 64 8
+amr.v:               1
+amr.max_level:       0
+amr.ref_ratio:       2 2
+amr.regrid_int:      10
+amr.n_error_buf:     1 1 2 2
+amr.grid_eff:        0.7
+amr.blocking_factor: 8
+amr.max_grid_size:   64
+
+#--------------------------- Problem -------------------------------
+prob.P_mean:   101325.0
+prob.T_mean:   300.0
+prob.wind_u:   8.0
+prob.wind_v:   0.0
+
+#------------  TRANSPORT -----------------
+transport.const_viscosity:      1.85e-5
+transport.const_bulk_viscosity: 0.0
+transport.const_conductivity:   0.0
+transport.const_diffusivity:    0.0
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v:                      1
+peleLM.incompressible:         0
+peleLM.sdc_iterations:         2
+peleLM.floor_species:          1
+peleLM.user_defined_ext_sources: 0
+peleLM.have_divu:              1
+peleLM.use_typ_vals:           1
+peleLM.do_react:               0
+
+peleLM.chem_integrator: ReactorNull
+
+amr.plot_int:  10
+amr.max_step:  30
+amr.stop_time: -1.0
+amr.cfl:       0.5
+amr.derive_plot_vars: avg_pressure mag_vort
+
+fabarray.mfiter_tile_size: 1024 1024 1024
+
+#------------------------- EB SETUP -----------------------------
+eb2.geom_type:      UserDefined
+eb2.small_volfrac:  1.0e-4
+
+#-------------------- TURBULENCE (k-epsilon) --------------------
+peleLM.les_model: kepsilon
+peleLM.aux_vars:  k epsilon
+
+# k-epsilon standard constants
+peleLM.ke_C_mu:    0.09
+peleLM.ke_C_eps1:  1.44
+peleLM.ke_C_eps2:  1.92
+peleLM.ke_sigma_k: 1.0
+peleLM.ke_sigma_eps: 1.3
+peleLM.ke_kappa:   0.41
+peleLM.ke_prod_lim: 10.0
+
+# Ambient free-stream maintenance (prevent excessive decay)
+peleLM.ke_k_amb:   1.0e-6
+peleLM.ke_eps_amb: 1.0e-12

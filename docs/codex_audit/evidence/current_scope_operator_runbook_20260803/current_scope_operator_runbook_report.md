@@ -1,0 +1,42 @@
+# Current-Scope Operator Runbook Report
+
+- Status: `PASS-CURRENT-SCOPE-OPERATOR-RUNBOOK`
+- Runbook: `docs/codex_audit/current_scope_operator_runbook.md`
+- README: `README.md`
+- Missing README snippets: `0`
+- Missing commands: `0`
+- Missing tools: `0`
+- Missing report paths: `0`
+- Missing reports: `0`
+- Final readiness: `PASS-MASTER-PLAN-CURRENT-USER-SCOPE-READINESS`
+- Master current-scope: `PASS-MASTER-PLAN-CURRENT-SCOPE-VERIFICATION`
+- Parallel capability: `PASS-CURRENT-PARALLEL-CAPABILITY-MATRIX`
+- Multi-fuel capability: `PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY`
+- Multi-fuel operator runbook: `PASS-ENGINEERING-MULTI-FUEL-OPERATOR-RUNBOOK`
+- Multi-fuel operator runbook ready: `True`
+- Multi-fuel template catalog: `PASS-ENGINEERING-MULTI-FUEL-TEMPLATE-CATALOG`
+- Multi-fuel template catalog ready: `True`
+- Multi-fuel overclaim guard: `True`
+- Liquefied phase-change ready: `False`
+- Liquefied source-model CUDA smoke: `PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL-CUDA-SMOKE`
+- Liquefied source balance: `PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE`
+- Liquefied source balance negative selftest: `PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE-NEGATIVE-SELFTEST`
+- Liquefied source balance negative rejected: `5`
+- Liquefied breach source contract: `PASS-ENGINEERING-LIQUEFIED-BREACH-SOURCE-CONTRACT`
+- Liquefied breach source contract ready: `True`
+- Liquefied breach source cases: `2`
+- Multifuel/liquefied user answer: `PASS-ENGINEERING-MULTIFUEL-LIQUEFIED-USER-ANSWER`
+- Multifuel/liquefied user answer ready: `True`
+- Release-candidate handoff: `PASS-CURRENT-SCOPE-RELEASE-CANDIDATE-HANDOFF`
+- Release-candidate handoff ready: `True`
+- Release-candidate usable for current priority scope: `True`
+- Release-candidate is full strict master-plan completion: `False`
+- Release-candidate open strict blockers: `3`
+- Dataverse AMR source projection implementation: `PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-IMPLEMENTATION`
+- Dataverse AMR MPI+CUDA linked executable: `True`
+- Dataverse AMR CUDA 12.6 reproducible build: `True`
+- Dataverse long-window reconciliation: `TRIAGED-DATAVERSE-OPEN-CHANNEL-LONG-WINDOW-REFINED-SOURCE-GAP`
+- Dataverse existing 120s reaches peak interval: `True`
+- Dataverse existing 120s all sensors passed: `False`
+- Dataverse refined-source steps to 113s: `22600000`
+- Strict blocker set ok: `True`

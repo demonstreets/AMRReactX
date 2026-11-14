@@ -1,0 +1,59 @@
+ifeq ($(USE_CUDA),TRUE)
+  ifeq ($(lowercase_nvcc_host_comp),$(filter $(lowercase_nvcc_host_comp),gcc gnu g++))
+    HOSTCC = $(COMP)
+  else
+    HOSTCC = pgi
+  endif
+else
+  HOSTCC = $(COMP)
+endif
+configSpecificTPSuffix=$(shell cd $(PELE_PHYSICS_HOME)/ThirdParty; $(MAKE) -s tp_suffix AMREX_HOME=$(AMREX_HOME) USE_CUDA=$(USE_CUDA) USE_HIP=$(USE_HIP) USE_SYCL=$(USE_SYCL) PELE_USE_KLU=$(PELE_USE_KLU) PELE_USE_MAGMA=$(PELE_USE_MAGMA) PRECISION=$(PRECISION) DEBUG=$(DEBUG) COMP=$(COMP) NVCC=$(COMP) 2>/dev/null | tail -1)
+REL_SUNDIALS_LIB_DIR := $(PELE_PHYSICS_HOME)/ThirdParty/INSTALL/$(configSpecificTPSuffix)/lib
+SUNDIALS_LIB_DIR := $(abspath $(lastword $(REL_SUNDIALS_LIB_DIR)))
+INCLUDE_LOCATIONS += $(SUNDIALS_LIB_DIR)/../include
+LIBRARIES += -L$(SUNDIALS_LIB_DIR) -lsundials_cvode -lsundials_arkode
+LIBRARIES += -L$(SUNDIALS_LIB_DIR) -lsundials_core -lsundials_nvecserial
+ifeq ($(USE_CUDA),TRUE)
+    LIBRARY_LOCATIONS += $(SUNDIALS_LIB_DIR)
+    LIBRARIES += -L$(SUNDIALS_LIB_DIR) -lsundials_nveccuda
+    LIBRARIES += -lcusolver -lcusparse -lsundials_sunlinsolcusolversp -lsundials_sunmatrixcusparse
+else
+  ifeq ($(USE_HIP),TRUE)
+     LIBRARY_LOCATIONS += $(SUNDIALS_LIB_DIR)
+     LIBRARIES += -L$(SUNDIALS_LIB_DIR) -lsundials_nvechip
+  else
+    ifeq ($(USE_SYCL),TRUE)
+       LIBRARY_LOCATIONS += $(SUNDIALS_LIB_DIR)
+       LIBRARIES += -L$(SUNDIALS_LIB_DIR) -lsundials_nvecsycl
+    endif
+  endif
+endif
+ifneq ($(shell uname),Darwin)
+  LIBRARIES += -Wl,-rpath=${SUNDIALS_LIB_DIR}
+endif
+ifeq ($(PELE_USE_KLU), TRUE)
+  SUITESPARSE_DIR := $(PELE_PHYSICS_HOME)/ThirdParty/INSTALL/$(configSpecificTPSuffix)
+  DEFINES   += -DPELE_USE_KLU
+  LIBRARIES += -L$(SUNDIALS_LIB_DIR) -lsundials_sunmatrixsparse  -lsundials_sunlinsolklu
+  LIBRARIES += -L$(SUITESPARSE_DIR)/lib -lklu -lamd -lcolamd -lbtf -lsuitesparseconfig
+  INCLUDE_LOCATIONS+=${SUITESPARSE_DIR}/include
+  ifneq ($(shell uname),Darwin)
+    LIBRARIES += -Wl,-rpath=${SUITESPARSE_DIR}/lib
+  endif
+endif
+ifeq ($(PELE_USE_MAGMA), TRUE)
+  ifeq ($(USE_CUDA),FALSE)
+    ifeq ($(USE_HIP),FALSE)
+      $(error PELE_USE_MAGMA only available when using HIP or CUDA)
+    endif
+  endif
+  DEFINES   += -DPELE_USE_MAGMA
+  REL_MAGMA_DIR := $(PELE_PHYSICS_HOME)/ThirdParty/INSTALL/$(configSpecificTPSuffix)
+  MAGMA_DIR := $(abspath $(lastword $(REL_MAGMA_DIR)))
+  LIBRARIES += -L$(SUNDIALS_LIB_DIR)  -lsundials_sunmatrixmagmadense -lsundials_sunlinsolmagmadense
+  LIBRARIES += -L$(MAGMA_DIR)/lib -lmagma
+  INCLUDE_LOCATIONS += $(MAGMA_DIR)/include
+  ifneq ($(shell uname),Darwin)
+    LIBRARIES += -Wl,-rpath=${MAGMA_DIR}/lib
+  endif
+endif

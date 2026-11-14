@@ -1,0 +1,19 @@
+REPO_ROOT ?= $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
+DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+PROFILE = FALSE
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = FALSE
+DEBUG = FALSE
+Chemistry_Model = LiDryer
+Eos_Model = Fuego
+Transport_Model = Simple
+PELE_HOME := $(REPO_ROOT)/external/PeleLMeX
+INCLUDE_LOCATIONS += $(REPO_ROOT)/src/engineering
+INCLUDE_LOCATIONS += $(REPO_ROOT)/src/engineering/turbulence
+VPATH_LOCATIONS += $(REPO_ROOT)/src/engineering/turbulence
+include $(PELE_HOME)/Exec/Make.PeleLMeX

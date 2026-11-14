@@ -1,0 +1,243 @@
+{
+  "cases": [
+    {
+      "artifacts": {
+        "generated_input": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/input.lng_ch4_screening_release.generated",
+        "generator_json": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_model.json",
+        "mapping_json": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_mapping.json",
+        "source_csv": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv"
+      },
+      "converter_run": {
+        "command": "/usr/bin/python3 tools/codex_make_external_vaporization_source_input.py --source-csv docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv --base-input examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke --time 2.0 --output-input docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/input.lng_ch4_screening_release.generated --output-json docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_mapping.json",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "external_vaporization_source_input PASS input=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/input.lng_ch4_screening_release.generated json=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_mapping.json"
+      },
+      "csv_summary": {
+        "jet_vx_max_m_s": 42.8333665947,
+        "mdot_final_kg_s": 0.163948931673,
+        "mdot_max_kg_s": 0.590748463093,
+        "point_count": 9,
+        "source_radius_m": 0.08,
+        "species": "CH4",
+        "time_end_s": 8.0,
+        "time_start_s": 0.0,
+        "vapor_T_max_K": 285.0,
+        "vapor_T_min_K": 285.0
+      },
+      "fluid": "LNG_CH4",
+      "generator_run": {
+        "command": "/usr/bin/python3 tools/codex_make_liquefied_release_vaporization_csv.py --fluid LNG_CH4 --inventory-kg 25.0 --initial-pressure-Pa 650000.0 --hole-diameter-m 0.020 --duration-s 8.0 --points 9 --liquid-T-K 125.0 --vapor-T-K 285.0 --source-radius-m 0.08 --output-csv docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv --output-json docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_model.json",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "liquefied_release_vaporization_csv PASS csv=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv json=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_model.json"
+      },
+      "generator_summary": {
+        "ambient_pressure_Pa": 101325.0,
+        "cfd_solves_flashing_discharge": false,
+        "cfd_solves_liquid_phase_change": false,
+        "cfd_solves_pool_spread_evaporation": false,
+        "discharge_coeff": 0.62,
+        "fluid": "LNG_CH4",
+        "fuel_species": "CH4",
+        "gas_mdot_decays": true,
+        "gas_mdot_max_kg_s": 0.5907484630930385,
+        "gas_mdot_positive": true,
+        "hole_diameter_m": 0.02,
+        "initial_inventory_kg": 25.0,
+        "initial_pressure_Pa": 650000.0,
+        "inventory_depleted": false,
+        "liquid_T_K": 125.0,
+        "liquid_mdot_max_kg_s": 4.181564416064534,
+        "model_is_screening_source_generator": true,
+        "pressure_decays": true,
+        "remaining_inventory_kg": 1.9255375397134886,
+        "screening_model": "orifice_liquid_discharge_inventory_decay_plus_vaporized_fraction",
+        "time_end_s": 8.0,
+        "time_point_count": 9,
+        "time_start_s": 0.0,
+        "vapor_T_K": 285.0,
+        "vaporized_fraction_to_gas_source": 0.14127450980392156
+      },
+      "label": "lng_ch4_screening_release",
+      "mapping_summary": {
+        "emitted_to_input": true,
+        "fuel_species": "CH4",
+        "mapping_status": "PASS-EXTERNAL-VAPORIZATION-SOURCE-INPUT",
+        "point_count": 9,
+        "sample_mdot_kg_s": 0.487180512879,
+        "sample_time_s": 2.0
+      },
+      "species": "CH4",
+      "status": "PASS-LIQUEFIED-RELEASE-TO-GAS-SOURCE-CASE"
+    },
+    {
+      "artifacts": {
+        "generated_input": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/input.lpg_c3h8_screening_release.generated",
+        "generator_json": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_model.json",
+        "mapping_json": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_mapping.json",
+        "source_csv": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv"
+      },
+      "converter_run": {
+        "command": "/usr/bin/python3 tools/codex_make_external_vaporization_source_input.py --source-csv docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv --base-input examples/engineering/h2_leak_3d/input.codex_gasified_lpg_c3h8_surrogate_smoke --time 2.0 --output-input docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/input.lpg_c3h8_screening_release.generated --output-json docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_mapping.json",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "external_vaporization_source_input PASS input=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/input.lpg_c3h8_screening_release.generated json=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_mapping.json"
+      },
+      "csv_summary": {
+        "jet_vx_max_m_s": 17.2034944549,
+        "mdot_final_kg_s": 0.177808381046,
+        "mdot_max_kg_s": 0.619441342912,
+        "point_count": 9,
+        "source_radius_m": 0.08,
+        "species": "C3H8",
+        "time_end_s": 8.0,
+        "time_start_s": 0.0,
+        "vapor_T_max_K": 300.0,
+        "vapor_T_min_K": 300.0
+      },
+      "fluid": "LPG_C3H8",
+      "generator_run": {
+        "command": "/usr/bin/python3 tools/codex_make_liquefied_release_vaporization_csv.py --fluid LPG_C3H8 --inventory-kg 18.0 --initial-pressure-Pa 850000.0 --hole-diameter-m 0.015 --duration-s 8.0 --points 9 --liquid-T-K 250.0 --vapor-T-K 300.0 --source-radius-m 0.08 --output-csv docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv --output-json docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_model.json",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "liquefied_release_vaporization_csv PASS csv=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv json=docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_model.json"
+      },
+      "generator_summary": {
+        "ambient_pressure_Pa": 101325.0,
+        "cfd_solves_flashing_discharge": false,
+        "cfd_solves_liquid_phase_change": false,
+        "cfd_solves_pool_spread_evaporation": false,
+        "discharge_coeff": 0.62,
+        "fluid": "LPG_C3H8",
+        "fuel_species": "C3H8",
+        "gas_mdot_decays": true,
+        "gas_mdot_max_kg_s": 0.6194413429117319,
+        "gas_mdot_positive": true,
+        "hole_diameter_m": 0.015,
+        "initial_inventory_kg": 18.0,
+        "initial_pressure_Pa": 850000.0,
+        "inventory_depleted": false,
+        "liquid_T_K": 250.0,
+        "liquid_mdot_max_kg_s": 2.976796950277761,
+        "model_is_screening_source_generator": true,
+        "pressure_decays": true,
+        "remaining_inventory_kg": 1.4831210023468542,
+        "screening_model": "orifice_liquid_discharge_inventory_decay_plus_vaporized_fraction",
+        "time_end_s": 8.0,
+        "time_point_count": 9,
+        "time_start_s": 0.0,
+        "vapor_T_K": 300.0,
+        "vaporized_fraction_to_gas_source": 0.20808988764044944
+      },
+      "label": "lpg_c3h8_screening_release",
+      "mapping_summary": {
+        "emitted_to_input": true,
+        "fuel_species": "C3H8",
+        "mapping_status": "PASS-EXTERNAL-VAPORIZATION-SOURCE-INPUT",
+        "point_count": 9,
+        "sample_mdot_kg_s": 0.512131259169,
+        "sample_time_s": 2.0
+      },
+      "species": "C3H8",
+      "status": "PASS-LIQUEFIED-RELEASE-TO-GAS-SOURCE-CASE"
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "liquefied_release_vaporization_csv_generator",
+      "path": "tools/codex_make_liquefied_release_vaporization_csv.py",
+      "sha256": "090d438dd914232f6829453fdc51972ce96fd770862d7e9fd60a132916bb8eec",
+      "size_bytes": 12589
+    },
+    {
+      "label": "external_vaporization_source_input_converter",
+      "path": "tools/codex_make_external_vaporization_source_input.py",
+      "sha256": "d93abe566025a5aa50881b4f5c9e34cfc2e4cc35c0df4b917e9b422dde448172",
+      "size_bytes": 11494
+    },
+    {
+      "label": "liquefied_external_vaporization_contract_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/engineering_liquefied_external_vaporization_contract_report.json",
+      "sha256": "138891231f5cd5eb7dcaa9daf1a70322095c29523b2c0a7e518cbbc08f1b8816",
+      "size_bytes": 5470
+    },
+    {
+      "label": "multi_fuel_capability_boundary_report",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "719661db78e161ed2dff8bca2f1f23a9754ec4fa10c8cc588877254a8318e075",
+      "size_bytes": 19158
+    },
+    {
+      "label": "lng_source_csv",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv",
+      "sha256": "5b3870efc614ea6c51b68d35e7fa16623676f2c10ed6e09423fc70cca0fb3012",
+      "size_bytes": 773
+    },
+    {
+      "label": "lng_generator_json",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_model.json",
+      "sha256": "c9e0ab8e64e8d06a5831aea8a847fb3c2efb115d816a6087320dc7ba7a00752f",
+      "size_bytes": 1961
+    },
+    {
+      "label": "lng_generated_input",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/input.lng_ch4_screening_release.generated",
+      "sha256": "86ea32b461971dc09532ddf71034acf3f210555887374187f434599ddfdb8a9a",
+      "size_bytes": 3180
+    },
+    {
+      "label": "lng_mapping_json",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_mapping.json",
+      "sha256": "9c627dbb8767c0e07ea5755f63ec8f9c05e7505a21b158f5e19d83c407d78566",
+      "size_bytes": 5073
+    },
+    {
+      "label": "lpg_source_csv",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source.csv",
+      "sha256": "0302c9a31e12e8c5cb402d3231dec46323b3852b56e2ed27049c7766ca7dc706",
+      "size_bytes": 783
+    },
+    {
+      "label": "lpg_generator_json",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_model.json",
+      "sha256": "6229d01990b54097448b1521f161c62a725906f0b2d6a8f8f9f0bfe89d95825f",
+      "size_bytes": 1968
+    },
+    {
+      "label": "lpg_generated_input",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/input.lpg_c3h8_screening_release.generated",
+      "sha256": "70576ce522a71de1dd45156dd85c0c65dcb2d849d4b10f7c29440ccc0e9fd177",
+      "size_bytes": 3192
+    },
+    {
+      "label": "lpg_mapping_json",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lpg_c3h8_screening_release/lpg_c3h8_screening_release_source_mapping.json",
+      "sha256": "3803438bbe85b217f73c96668103422ef9c0373300d863e1138c7d086aeb1884",
+      "size_bytes": 5090
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:30+00:00",
+  "limitations": [
+    "This evidence adds a reproducible engineering source generator upstream of the existing gas-source bridge.",
+    "It does not implement internal tank rupture mechanics, flashing two-phase discharge, liquid-pool spread, boiling, or ground heat-transfer closure inside PeleLMeX.",
+    "For production consequence work, replace the screening schedule with measured data or a validated process-safety release model when available."
+  ],
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL",
+  "summary": {
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_liquid_phase_change": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "claim_level": "screening_external_gas_source_generator_not_internal_liquid_solver",
+    "liquefied_release_vaporization_source_model_ready": true,
+    "lng_ch4_screening_release_source_ready": true,
+    "lpg_c3h8_screening_release_source_ready": true,
+    "multi_fuel_cuda_runtime_evidence_still_required_and_present": true,
+    "outputs_external_vaporization_csv": true,
+    "outputs_pelelmex_fixed_mass_flow_schedule_input": true,
+    "production_phase_change_claim_allowed": false,
+    "uses_existing_external_vaporization_converter": true
+  },
+  "title": "Engineering Liquefied Release Vaporization Source Model"
+}

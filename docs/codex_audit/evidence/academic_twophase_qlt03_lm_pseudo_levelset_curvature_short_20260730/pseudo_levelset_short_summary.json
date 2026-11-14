@@ -1,0 +1,62 @@
+{
+  "baseline_comparison": {
+    "canonical_no_gravity_csf_center_x_drift": 0.03927298770870208
+  },
+  "cases": {
+    "pseudo_levelset_buoyant": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.9999995951522977,
+      "alpha_min": 0.0,
+      "center_x_drift": -0.0012328055525640536,
+      "center_x_final": 0.49876719444743595,
+      "center_x_initial": 0.5,
+      "center_y_drift": 0.05268339348830975,
+      "center_y_final": 0.5526833934990293,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 0.9727015803858795,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_buoyant/run/plt00020",
+      "final_time": 0.5,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_buoyant/run/plt00000",
+      "interface_length": 1.621565422761087,
+      "log_bad_tokens": [],
+      "mean_rise_velocity_y": 0.1887128964359529,
+      "plot_step": "plt00020"
+    },
+    "pseudo_levelset_no_gravity": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.9999999878923415,
+      "alpha_min": 0.0,
+      "center_x_drift": -0.0005594239141731849,
+      "center_x_final": 0.4994405760858268,
+      "center_x_initial": 0.5,
+      "center_y_drift": 6.870265065583858e-05,
+      "center_y_final": 0.5000687026613754,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 0.9352652933416975,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_no_gravity/run/plt00024",
+      "final_time": 0.5,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pseudo_levelset_curvature_short_20260730/pseudo_levelset_no_gravity/run/plt00000",
+      "interface_length": 1.686472555592355,
+      "log_bad_tokens": [],
+      "mean_rise_velocity_y": -0.0009247008108406846,
+      "plot_step": "plt00024"
+    }
+  },
+  "contracts": {
+    "alpha_bounded": true,
+    "alpha_mass_conserved": true,
+    "buoyant_center_rises": true,
+    "buoyant_has_no_log_failure_tokens": true,
+    "buoyant_mean_rise_positive": true,
+    "compiled": true,
+    "no_gravity_has_no_log_failure_tokens": true,
+    "no_gravity_lateral_drift_improved_vs_canonical_csf": true,
+    "short_window_reaches_required_time": true
+  },
+  "decision": {
+    "promote_to_t3_scout": true,
+    "reason": "Candidate must compile, remain bounded/mass-conservative, reach t>=0.45, reduce no-gravity lateral drift, and keep buoyant rise positive before any t=3 scout."
+  },
+  "scope": "Default-off QLT-03 pseudo-levelset geometric curvature scheme=3 candidate; short-window CPU test only.",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-PSEUDO-LEVELSET-CURVATURE-SHORT"
+}

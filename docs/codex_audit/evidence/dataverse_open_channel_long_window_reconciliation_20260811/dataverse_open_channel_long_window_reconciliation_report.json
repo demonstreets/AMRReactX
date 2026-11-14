@@ -1,0 +1,81 @@
+{
+  "evidence_files": [
+    {
+      "label": "120s_agreement_attempt",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_120s_peak_window_mpi_cuda_20260804/dataverse_open_channel_cfd_agreement_attempt_report.json",
+      "sha256": "2394370f311ead9fd47ff58c1378311fbe7b40569ce105ef6e90df95ad043479",
+      "size_bytes": 28259
+    },
+    {
+      "label": "120s_input",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_120s_peak_window_mpi_cuda_20260804/input.dataverse_open_channel_h2_scout_3d",
+      "sha256": "9e757d047e3fc15595aaf6bddcddb434a907d74e9081b0897cc72642aa6dc800",
+      "size_bytes": 1511
+    },
+    {
+      "label": "refined_1000step_report",
+      "path": "docs/codex_audit/evidence/dataverse_full_channel_refined_source_dx025_1000step_dt5em6_mpi_cuda_20260807/dataverse_full_channel_refined_source_dx025_1000step_dt5em6_report.json",
+      "sha256": "8e0f99d459be52b6d50c4adf060d272e300707d69091d53533e1f88bd7dd76fd",
+      "size_bytes": 3992
+    },
+    {
+      "label": "refined_1000step_input",
+      "path": "docs/codex_audit/evidence/dataverse_full_channel_refined_source_dx025_1000step_dt5em6_mpi_cuda_20260807/input.dataverse_full_channel_refined_source_dx025_1000step_dt5em6_3d",
+      "sha256": "52d8407b3a2eaa0b85c123861a5ac4210f92b0706d83d66c2c3f241471534bea",
+      "size_bytes": 1393
+    },
+    {
+      "label": "amr_source_projection_implementation",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_amr_source_projection_implementation_20260811/dataverse_open_channel_amr_source_projection_implementation_report.json",
+      "sha256": "aa32b4e9fceb820448ff4dc3670d0cd4084214bd910dc725233e9e069c4db213",
+      "size_bytes": 5683
+    },
+    {
+      "label": "reference_package",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_open_channel_reference_package_report.json",
+      "sha256": "1a22b8c0dc839122e9b1b895f8059e698c5c25266af30dbd62a09b735d284476",
+      "size_bytes": 8831
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:06:42+00:00",
+  "interpretation": [
+    "The repository already contains a 120 s MPI+CUDA agreement attempt that reaches the 113-117 s reference peak interval.",
+    "That 120 s attempt used an inflated 0.08 m numerical source radius and did not pass the production agreement thresholds.",
+    "The current refined 2.3 mm source plus AMR finest-owner projection is implemented and build-verified, but its full-channel run evidence currently reaches only 0.005 s.",
+    "At dt=5e-6 s, a direct refined-source run to 113 s would require about 22.6 million steps, so a production long-window campaign needs either a calibrated stable larger timestep strategy, more resources, or additional modeling changes."
+  ],
+  "schema_version": 1,
+  "status": "TRIAGED-DATAVERSE-OPEN-CHANNEL-LONG-WINDOW-REFINED-SOURCE-GAP",
+  "summary": {
+    "amr_finest_owner_projection_ready": true,
+    "baseline_to_refined_source_radius_ratio": 34.78260869565217,
+    "clears_external_plume_reference_blocker": false,
+    "current_refined_source_dt_s": 5e-06,
+    "current_refined_source_leak_radius_m": 0.0023,
+    "current_refined_source_ready": true,
+    "current_refined_source_source_cfl": 0.13135375263446003,
+    "current_refined_source_time_end_s": 0.005,
+    "existing_120s_all_sensors_passed": false,
+    "existing_120s_arrival_pass_count": 6,
+    "existing_120s_failed_sensor_count": 29,
+    "existing_120s_input_leak_radius_m": 0.08,
+    "existing_120s_max_nrmse": 6.5534924800254934,
+    "existing_120s_max_peak_rel_error": 46.677414947104005,
+    "existing_120s_nrmse_pass_count": 3,
+    "existing_120s_peak_pass_count": 2,
+    "existing_120s_peak_window_common_sample_count_min": 183,
+    "existing_120s_simulation_time_end_s": 119.99999999999326,
+    "existing_120s_window_quantified_against_reference": true,
+    "existing_120s_window_reaches_experimental_peak_interval": true,
+    "long_window_reconciliation_ready": true,
+    "production_agreement_completed": false,
+    "reference_peak_interval_s": [
+      113.0,
+      117.0
+    ],
+    "reference_selected_case_filename": "23_FFI_P101_T00031.zip",
+    "steps_to_113s_at_current_refined_dt": 22600000,
+    "steps_to_120s_at_current_refined_dt": 24000000,
+    "strict_blocker_still_open": true
+  }
+}

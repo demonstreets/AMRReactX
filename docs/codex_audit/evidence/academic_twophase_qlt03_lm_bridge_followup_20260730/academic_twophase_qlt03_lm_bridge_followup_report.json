@@ -1,0 +1,40 @@
+{
+  "alpha_center_displacement": 0.05267262682156118,
+  "alpha_mass_relative_drift": 1.401948012240244e-16,
+  "aux_transport_scheme": "finite_volume_tvd_minmod_using_mac_projected_face_velocities",
+  "bridge_report": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_aux_bridge_smoke_20260730/academic_twophase_qlt03_lm_aux_bridge_smoke_report.json",
+  "bridge_status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-AUX-BRIDGE-SMOKE",
+  "bridge_time": 0.5,
+  "cleared_gates": [
+    "PeleLMeX incompressible state can carry Aux alpha without thermochemical state writes",
+    "Aux alpha is advanced with MAC-projected face-flux divergence and optional TVD limited face states",
+    "Alpha integral is conserved in the QLT-03 bridge smoke",
+    "Alpha center of mass moves over the bridge window",
+    "User-defined PeleLMeX external sources can access Aux alpha for CSF-style forcing",
+    "Aux alpha can drive local incompressible velocity-force density scaling",
+    "Aux alpha can drive local incompressible projection sigma and grad-pressure scaling",
+    "Aux alpha can drive local incompressible velocity diffusion viscosity coefficients",
+    "QLT-03 bridge uses nonperiodic 1x2 canonical bubble-rise boundary conditions",
+    "QLT-03 bridge records center-of-mass, rise-velocity, circularity, and interface-length observables",
+    "QLT-03 bridge treats alpha=1 as the light bubble phase and demonstrates upward buoyant response"
+  ],
+  "remaining_gates": [
+    "higher-resolution/grid-convergence confirmation for final-shape fidelity",
+    "true production VOF/CSF transport replacement if topology-changing interface fidelity is required"
+  ],
+  "scope": "Tracks what QLT-03 low-Mach bridge evidence now proves and what still blocks a canonical VOF/CSF bubble-rise solve.",
+  "source_contracts": {
+    "incompressible_aux_advance_uses_mac_face_flux": true,
+    "incompressible_aux_density_projection_uses_alpha_sigma": true,
+    "incompressible_aux_viscosity_sets_diffusion_coefficients": true,
+    "incompressible_setup_still_uses_constant_rho_mu": true,
+    "incompressible_velocity_force_scaling_reads_aux_density": true,
+    "problem_specific_ext_source_hook_accepts_aux_argument": true,
+    "qlt03_bridge_csf_source_reads_aux_alpha": true,
+    "qlt03_bridge_enables_aux_density_ratio": true,
+    "qlt03_bridge_records_canonical_observables": true,
+    "qlt03_bridge_rises_with_light_alpha_phase": true,
+    "qlt03_bridge_uses_canonical_boundary_conditions": true
+  },
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-BRIDGE-FOLLOWUP"
+}

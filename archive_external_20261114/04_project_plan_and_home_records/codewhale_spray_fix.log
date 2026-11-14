@@ -1,0 +1,75 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_spray_fix.md)
+tool: file_search (path: /home/cj/my-pele, query: Particle.cpp)
+tool read_file completed: # TASK: 修复 Spray-Jet RegTest — NUM_ADV>0 集成
+
+## 问题
+
+Spray-Jet 在启用 VOF (`NUM_ADV=1`) 后，`Particle.cpp` 中 spray source MultiFab 的维度与状态变量 MultiFab 不匹配，导致 `MultiFab::Copy` 崩溃。
+
+## 修复位置
+
+**文件**: `/home/cj/my-pele/external/PeleC/Source/Particle.cpp`
+
+关键代码（约 290-310 行）：
+```cpp
+if (do_diffuse || do_spray_...
+tool file_search completed: <20 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleC/Source/Particle.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleC/Source/Particle.cpp" total_lines="439" shown_lines="270-329" truncated="true" next_start_line="330">
+   270│   SprayPC->transferSource(
+   271│     spray_source_ghosts, level, tmp_spray_source, *old_sources[spray_src]);
+   272│ }
+   273│ 
+   274│ void
+ ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNow let me find where `Sborder` is allocated and how its component count is set.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: <81 chars>)
+tool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: spray_state_ghosts|sprayStateGhosts)
+
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me examine the spray source MultiFab definitions and the `transferSource` logic.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: <95 chars>)
+tool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: <92 chars>)
+
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: num_spray_src)
+tool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: getSourceGhostCells|transferSource.*ncomp|transferSource.*NVAR)
+]0;🐳 CodeWhaletool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleC/Source/Particle.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleC/Source/Particle.cpp" total_lines="439" shown_lines="1-120" truncated="true" next_start_line="121">
+     1│ #include "PeleC.H"
+     2│ #include "SprayParticles.H"
+     3│ 
+     4│ namespace {
+     5│ bool virtual_particles_set = false;
+     6│ 
+     7│ /...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: new_sources\[spray_src\]|old_sources\[spray_src\]|spray_src\s*=)
+tool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: NVAR|NUM_ADV|spray_src)
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me check where spray source MultiFabs are allocated with their nComp.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleC/Source, pattern: src_list|num_src|define.*sources|spray_src\s)
+
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleC/Source/PeleC.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleC/Source/IO.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleC/Source/PeleC.cpp" total_lines="2345" shown_lines="465-524" truncated="true" next_start_line="525">
+   465│ 
+   466│   init_eb();
+   467│ 
+   468│   const amrex::MultiFab& S_new = get_new_data(State_Type);
+   469│ 
+   470│   for (int src : src_list) {
+  ...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleC/Source/IO.cpp" total_lines="877" shown_lines="120-169" truncated="true" next_start_line="170">
+   120│   }
+   121│   buildMetrics();
+   122│ 
+   123│   init_eb();
+   124│ 
+   125│   const amrex::MultiFab& S_new = get_new_data(State_Type);
+   126│ 
+   12...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleerror: Stream read error: error decoding response body
+Error: exec turn failed: Stream read error: error decoding response body

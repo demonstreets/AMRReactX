@@ -1,0 +1,304 @@
+{
+  "case": "engineering-h2-open-domain-plan-amr-hybrid-cfd-scout",
+  "cases": [
+    {
+      "active_planes": 40,
+      "advance_seconds": 369.53263,
+      "case": "baseline",
+      "cloud_species_mass": 0.00115216264,
+      "cloud_volume": 0.0987548828,
+      "finest_fab_count": 4,
+      "finest_level": 0,
+      "flammable_planes": 36,
+      "hybrid_validation": {
+        "final_time": 0.6,
+        "finalized": 1,
+        "mode": "hybrid",
+        "ranks": 4,
+        "raw": "parallel_smoke_log_validation PASS solver=pelelmex mode=hybrid ranks=4 threads=2 final_time=0.6 finalized=1 warning=mpi_thread_support_level_0",
+        "solver": "pelelmex",
+        "threads": 2,
+        "warning": "mpi_thread_support_level_0"
+      },
+      "made_level1": 0,
+      "mass_ratio": 1.0,
+      "mass_ratioN": 1.0,
+      "max_X": 0.228405343,
+      "mean_ncells": 65536.0,
+      "plot_metadata": {
+        "finest_level": 0,
+        "header_sha256": "40738b40b026f7463cb9ee3edbb42ca2e0547ddce85c5db553a6a09724957537",
+        "levels": [
+          {
+            "fab_count": 4,
+            "level": 0
+          }
+        ],
+        "path": "/tmp/codex_h2_leak_open_domain_plan_amr_hybrid_prodmesh_600step_20260720/baseline/run/plt00600",
+        "total_fab_count": 4
+      },
+      "plotfiles": 11,
+      "regrid_count": 0,
+      "total_fab_count": 4
+    },
+    {
+      "active_planes": 77,
+      "advance_seconds": 741.853288,
+      "case": "amr",
+      "cloud_species_mass": 0.00115826445,
+      "cloud_volume": 0.0956344604,
+      "finest_fab_count": 28,
+      "finest_level": 1,
+      "flammable_planes": 72,
+      "hybrid_validation": {
+        "final_time": 0.6,
+        "finalized": 1,
+        "mode": "hybrid",
+        "ranks": 4,
+        "raw": "parallel_smoke_log_validation PASS solver=pelelmex mode=hybrid ranks=4 threads=2 final_time=0.6 finalized=1 warning=mpi_thread_support_level_0",
+        "solver": "pelelmex",
+        "threads": 2,
+        "warning": "mpi_thread_support_level_0"
+      },
+      "made_level1": 1,
+      "mass_ratio": 1.0000253,
+      "mass_ratioN": 1.0000253,
+      "max_X": 0.236445291,
+      "mean_ncells": 129530.027,
+      "plot_metadata": {
+        "finest_level": 1,
+        "header_sha256": "dbd0e1be09aea0611ce962e83e902aaa67169d379bc974c73dc6b8de9eb6b46e",
+        "levels": [
+          {
+            "fab_count": 16,
+            "level": 0
+          },
+          {
+            "fab_count": 28,
+            "level": 1
+          }
+        ],
+        "path": "/tmp/codex_h2_leak_open_domain_plan_amr_hybrid_prodmesh_600step_20260720/amr/run/plt00600",
+        "total_fab_count": 44
+      },
+      "plotfiles": 11,
+      "regrid_count": 299,
+      "total_fab_count": 44
+    }
+  ],
+  "criteria": {
+    "expected_mode": "hybrid",
+    "expected_solver": "pelelmex",
+    "max_advance_seconds_ratio": 4.0,
+    "max_centroid_abs_diff": 0.08,
+    "max_cloud_rel_diff": 0.2,
+    "max_downstream_abs_diff": 0.15,
+    "max_peak_rel_diff": 0.2,
+    "min_max_step": 600,
+    "min_plotfiles": 11,
+    "min_ranks": 4,
+    "min_threads_per_rank": 2
+  },
+  "evidence_root": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720",
+  "files": [
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/plan_amr_compare_summary.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/plan_amr_compare_summary.csv",
+      "sanitized": true,
+      "sha256": "29dfe6d475baf6df4cdde09401bf3ec72665919475c05c5267386ba4f7e5c70a",
+      "size_bytes": 835
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr_overhead_summary.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr_overhead_summary.csv",
+      "sanitized": true,
+      "sha256": "743bd32e1706df3d54ad4b0a0ef63b8ca91797db5d79f8a5479b6f934bdb0ef0",
+      "size_bytes": 939
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_baseline_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_baseline_smoke",
+      "sanitized": false,
+      "sha256": "305bff86eecd7f2bc4bbdd0622ec56f78d06095bb3c5b2f00ea783014bc496f7",
+      "size_bytes": 1139
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_level1_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/inputs/input.codex_open_domain_plan_amr_level1_smoke",
+      "sanitized": false,
+      "sha256": "9804f132135b9bfade506ca777609d79e5116d77f38ac89997a9ad9b3e55e2bf",
+      "size_bytes": 1492
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/validation.log",
+      "sanitized": false,
+      "sha256": "32c8730f023b52fe9465f4d5af41856ce6ebe4da84eabd068621432a0e7341e3",
+      "size_bytes": 483
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/profile_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/profile_validation.log",
+      "sanitized": true,
+      "sha256": "d647c935d5698c075fb4c0c0044413892b8a3a705e61184d7ef1f350920c33b8",
+      "size_bytes": 421
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_summary.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_summary.log",
+      "sanitized": true,
+      "sha256": "d2b32331241d5c05a35de5c6d38354c3e36eae4d542558f7f9614c4b418c86c8",
+      "size_bytes": 343
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_planes.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_planes.log",
+      "sanitized": true,
+      "sha256": "199891c5166bc330672de152fe137e4415ccd0883d7a88f9bf94c21961e681fa",
+      "size_bytes": 361
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_planes.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_planes.csv",
+      "sanitized": false,
+      "sha256": "cd03aff7eecf0b21f450f417a3450e765174569216d8607c51af1ecb29fb4136",
+      "size_bytes": 10894
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_timeseries.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_timeseries.log",
+      "sanitized": true,
+      "sha256": "ba2e65a141c5efebdd09d13763f96a4e1edb1b4ed1ae5b538ad6f41727459c42",
+      "size_bytes": 431
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_timeseries.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hazard_timeseries.csv",
+      "sanitized": false,
+      "sha256": "0eb662d740c487da087d8ef9b898e2e268a158a0aa20cbe58569eccb528ecb22",
+      "size_bytes": 1907
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hybrid_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/hybrid_validation.log",
+      "sanitized": false,
+      "sha256": "5fb47889fc83fb37dd255d8069516b4e9651f939fe3013c322d273fa45d0294b",
+      "size_bytes": 143
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/run/input.codex_open_domain_plan_amr_baseline_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/baseline/run/input.codex_open_domain_plan_amr_baseline_smoke",
+      "sanitized": false,
+      "sha256": "305bff86eecd7f2bc4bbdd0622ec56f78d06095bb3c5b2f00ea783014bc496f7",
+      "size_bytes": 1139
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/validation.log",
+      "sanitized": false,
+      "sha256": "7f2eb7234d1ef68f1096a50220389de8e296d057f4b5367653085e07ff4bb9b2",
+      "size_bytes": 498
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/profile_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/profile_validation.log",
+      "sanitized": true,
+      "sha256": "7995ceef9ce2fc035cda6fa2faf87811cae9d33418c3dafd4c55af2ed3df2b46",
+      "size_bytes": 416
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_summary.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_summary.log",
+      "sanitized": true,
+      "sha256": "2c6dc42566be60b82edc809ae3b963e21d7e87438c484f0cd56745e167a42df4",
+      "size_bytes": 339
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_planes.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_planes.log",
+      "sanitized": true,
+      "sha256": "5e72f2010ba853d86b879a64836c0328bf94a2af33f7214cafe9db5a4f177a13",
+      "size_bytes": 352
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_planes.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_planes.csv",
+      "sanitized": false,
+      "sha256": "5fd8b3b8186276d3099577073b420312d30a60c21b35bb4d65ce6d5b0a6736f1",
+      "size_bytes": 21781
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_timeseries.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_timeseries.log",
+      "sanitized": true,
+      "sha256": "b839598ea0ddcc76fef1e844659cf0050c163e8b6df3c49417924d2de061973f",
+      "size_bytes": 421
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_timeseries.csv",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hazard_timeseries.csv",
+      "sanitized": false,
+      "sha256": "f5635b59c26cdad33f5a127e128d9478ab01ebac0fb484cc7ce75d557c31edc5",
+      "size_bytes": 1919
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hybrid_validation.log",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/hybrid_validation.log",
+      "sanitized": false,
+      "sha256": "5fb47889fc83fb37dd255d8069516b4e9651f939fe3013c322d273fa45d0294b",
+      "size_bytes": 143
+    },
+    {
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/run/input.codex_open_domain_plan_amr_level1_smoke",
+      "relative_path": "docs/codex_audit/evidence/engineering_h2_hybrid_production_mesh_600step_stability_scout_20260720/files/amr/run/input.codex_open_domain_plan_amr_level1_smoke",
+      "sanitized": false,
+      "sha256": "9804f132135b9bfade506ca777609d79e5116d77f38ac89997a9ad9b3e55e2bf",
+      "size_bytes": 1492
+    }
+  ],
+  "generated_at_utc": "2026-07-20T08:56:34+00:00",
+  "limitations": [
+    "This is a production-mesh interactive hybrid MPI/OpenMP CFD scout, not a scheduler-managed full production campaign.",
+    "The scout verifies the real PeleLMeX hybrid executable, AMR Level_1 creation, H2 hazard post-processing, and bounded AMR-vs-baseline drift.",
+    "It does not prove long-duration hybrid scaling, production-size geometry, queue integration, calibrated fire consequences, or reference-data agreement.",
+    "The MPI implementation reports thread support level 0; this run does not request MPI calls from multiple OpenMP threads, so the warning is tracked but accepted for this scout."
+  ],
+  "plotfile_metadata_note": "Plotfiles are intentionally not copied; only Header hashes and FAB metadata are preserved.",
+  "schema_version": 1,
+  "source_log_root": "/tmp/codex_h2_leak_open_domain_plan_amr_hybrid_prodmesh_600step_20260720",
+  "status": "PASS-HYBRID-CFD-SCOUT",
+  "summary": {
+    "advance_seconds_ratio": 2.00754474,
+    "amr_equivalent_fine_cell_count": 524288,
+    "amr_final_time": 0.6,
+    "amr_finest_fab_count": 28,
+    "amr_finest_level": 1,
+    "amr_n_cell": [
+      64,
+      32,
+      32
+    ],
+    "amr_plotfiles": 11,
+    "amr_total_fab_count": 44,
+    "base_cell_count": 65536,
+    "base_n_cell": [
+      64,
+      32,
+      32
+    ],
+    "baseline_final_time": 0.6,
+    "baseline_plotfiles": 11,
+    "centroid_abs_diff": 0.000537634,
+    "cloud_rel_diff": 0.0315976518,
+    "downstream_abs_diff": 0.000498946,
+    "final_plotfile_bytes_ratio": 2.62860423,
+    "max_step": 600,
+    "mean_ncells_ratio": 1.97647135,
+    "peak_rel_diff": 0.0340034177,
+    "plot_int": 60,
+    "ranks": 4,
+    "regrid_count": 299,
+    "threads_per_rank": 2
+  },
+  "title": "Engineering H2 Hybrid MPI/OpenMP CFD Scout"
+}

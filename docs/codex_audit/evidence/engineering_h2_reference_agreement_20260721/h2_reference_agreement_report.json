@@ -1,0 +1,182 @@
+{
+  "agreement_tier": "reference_threshold_agreement",
+  "case_checks": {
+    "amr": {
+      "final_active_planes": 21,
+      "final_flammable_planes": 14,
+      "final_peak_x": 0.1864310791707,
+      "lel_cloud_species_mass": 0.000225728566,
+      "lel_cloud_volume": 0.0253408927,
+      "lfl_matches_reference": true,
+      "peak_above_aloha_red_loc": true,
+      "peak_above_aloha_yellow_loc": true,
+      "peak_above_lel": true,
+      "peak_below_uel": true,
+      "peak_x": 0.186431079,
+      "total_species_mass": 0.000240003797,
+      "ufl_matches_reference": true
+    },
+    "baseline": {
+      "final_active_planes": 11,
+      "final_flammable_planes": 7,
+      "final_peak_x": 0.1867214925972,
+      "lel_cloud_species_mass": 0.000225987032,
+      "lel_cloud_volume": 0.0257523148,
+      "lfl_matches_reference": true,
+      "peak_above_aloha_red_loc": true,
+      "peak_above_aloha_yellow_loc": true,
+      "peak_above_lel": true,
+      "peak_below_uel": true,
+      "peak_x": 0.186721493,
+      "total_species_mass": 0.000240000015,
+      "ufl_matches_reference": true
+    }
+  },
+  "clears_reference_data_blocker": false,
+  "criteria": {
+    "max_cloud_rel_diff": 0.05,
+    "max_peak_rel_diff": 0.05,
+    "min_base_cells": 200000,
+    "min_ranks": 8,
+    "min_threads": 2
+  },
+  "evidence_files": [
+    {
+      "label": "scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json",
+      "sha256": "c542c808e81dc86f53d389036941d9bbdd56dd2db2a41e9ad05e45f2e807b3de",
+      "size_bytes": 14733
+    },
+    {
+      "label": "baseline_hazard_summary",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/files/baseline/hazard_summary.log",
+      "sha256": "d621d3c4b4e3d717bea852691257a7c2e8bb31ed862f4ae25c352a3971d6e831",
+      "size_bytes": 344
+    },
+    {
+      "label": "amr_hazard_summary",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/files/amr/hazard_summary.log",
+      "sha256": "c81ea94011469dcec608a36e7ad667416cb1d44242a0cd31ca2ec9e3962f5c67",
+      "size_bytes": 340
+    },
+    {
+      "label": "baseline_hazard_timeseries",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/files/baseline/hazard_timeseries.csv",
+      "sha256": "8f8c21d93d198ab3d96371f90bfdf40956e8a80f5d611eb180319998cf22c5d6",
+      "size_bytes": 956
+    },
+    {
+      "label": "amr_hazard_timeseries",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/files/amr/hazard_timeseries.csv",
+      "sha256": "6d3dd829fe3cbd44fd54452d2384e73d9b8f280cd5622511ecf845e3eaa18e83",
+      "size_bytes": 959
+    },
+    {
+      "label": "plan_amr_compare_summary",
+      "path": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/files/plan_amr_compare_summary.csv",
+      "sha256": "94373f806a244b830da0a931c27a19d1439c726f646b969cbd1b8a48cd7c3308",
+      "size_bytes": 848
+    },
+    {
+      "label": "plume_observation_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json",
+      "sha256": "45ff3306c5de60d952db0836c44068e3ce3ed74d68e1bcdb787dc182d21741c2",
+      "size_bytes": 2433
+    }
+  ],
+  "external_consequence_dataset_agreement": false,
+  "external_plume_shape_comparison": null,
+  "external_plume_shape_dataset_agreement": false,
+  "field_or_wind_tunnel_dataset_agreement": false,
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This is an engineering threshold-agreement report, not external field-test or wind-tunnel plume validation.",
+    "It verifies H2 LEL/UEL thresholds, ALOHA-style LOC interpretation, positive flammable-cloud metrics, and AMR-vs-baseline drift on maintained large-grid evidence.",
+    "It does not clear the reference-data blocker by itself; experimental/literature plume-shape and consequence comparisons remain required."
+  ],
+  "plume_observation_report": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/h2_plume_observation_report.json",
+  "plume_observation_summary": {
+    "observation_metric_keys": [
+      "observation_all_sensors_inside_domain",
+      "observation_case_matched_external_benchmark",
+      "observation_extent_rows",
+      "observation_max_cloud_volume",
+      "observation_max_flammable_x",
+      "observation_max_flammable_x_extent",
+      "observation_max_flammable_z",
+      "observation_max_flammable_z_extent",
+      "observation_max_nearest_cell_distance",
+      "observation_max_peak_X",
+      "observation_max_sensor_sample_distance",
+      "observation_plume_extents_available",
+      "observation_sensor_domain_line_25pct_arrival_time_lfl",
+      "observation_sensor_domain_line_25pct_final_X",
+      "observation_sensor_domain_line_25pct_peak_X",
+      "observation_sensor_domain_line_25pct_peak_time",
+      "observation_sensor_domain_line_50pct_final_X",
+      "observation_sensor_domain_line_50pct_peak_X",
+      "observation_sensor_domain_line_50pct_peak_time",
+      "observation_sensor_domain_line_75pct_final_X",
+      "observation_sensor_domain_line_75pct_peak_X",
+      "observation_sensor_domain_line_75pct_peak_time",
+      "observation_sensor_rows",
+      "observation_sensor_timeseries_available",
+      "observation_time_end",
+      "observation_time_start"
+    ],
+    "path": {
+      "plume_extents_csv": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/plume_extents.csv",
+      "sensor_timeseries_csv": "docs/codex_audit/evidence/engineering_h2_plume_observation_20260723/sensor_timeseries.csv"
+    },
+    "sensor_count": 3
+  },
+  "reference_sources": [
+    {
+      "label": "NOAA CAMEO Chemicals HYDROGEN datasheet",
+      "retrieved_utc": "2026-07-21",
+      "url": "https://cameochemicals.noaa.gov/chemical/8729",
+      "used_for": "H2 Lower Explosive Limit 4% and Upper Explosive Limit 75% by volume."
+    },
+    {
+      "label": "NOAA ORR Flammable Levels of Concern",
+      "retrieved_utc": "2026-07-21",
+      "url": "https://response.restoration.noaa.gov/oil-and-chemical-spills/chemical-spills/resources/flammable-levels-concern.html",
+      "used_for": "ALOHA default flammable LOCs: 60% LEL red zone and 10% LEL yellow zone."
+    },
+    {
+      "label": "NIST glossary: Flammable Limit",
+      "retrieved_utc": "2026-07-21",
+      "url": "https://www.nist.gov/glossary-term/24026",
+      "used_for": "Flammable limits are expressed as fuel volume percent in air."
+    }
+  ],
+  "reference_thresholds": {
+    "aloha_red_loc_volume_fraction": 0.024,
+    "aloha_yellow_loc_volume_fraction": 0.004,
+    "h2_lel_volume_fraction": 0.04,
+    "h2_uel_volume_fraction": 0.75
+  },
+  "schema_version": 1,
+  "scout_report": "docs/codex_audit/evidence/engineering_h2_hybrid_largegrid_8rank_120step_scout_20260721/hybrid_largegrid_8rank_120step_scout_report.json",
+  "status": "PASS-REFERENCE-THRESHOLD-AGREEMENT",
+  "summary": {
+    "all_threshold_checks_passed": true,
+    "amr_equivalent_fine_cell_count": 1769472,
+    "amr_final_flammable_planes": 14,
+    "amr_lel_cloud_volume": 0.0253408927,
+    "amr_peak_x": 0.186431079,
+    "base_cell_count": 221184,
+    "baseline_lel_cloud_volume": 0.0257523148,
+    "baseline_peak_x": 0.186721493,
+    "cloud_rel_diff": 0.0159761211,
+    "external_plume_all_metrics_passed": false,
+    "external_plume_metric_count": 0,
+    "max_step": 120,
+    "peak_rel_diff": 0.00155533247,
+    "plume_observation_metric_count": 26,
+    "ranks": 8,
+    "threads_per_rank": 2
+  },
+  "threshold_reference_agreement": true,
+  "title": "Engineering H2 Reference Threshold Agreement"
+}

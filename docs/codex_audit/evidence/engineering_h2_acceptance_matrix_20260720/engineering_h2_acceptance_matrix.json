@@ -1,0 +1,210 @@
+{
+  "evidence_files": [
+    {
+      "label": "release_pack",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_full_20260720/release_pack/evidence_pack_manifest.json",
+      "sha256": "012adc15d0dff150c61b621f5f4ecc63f5b92e1e5f2fa593965bc930675891d8",
+      "size_bytes": 33973
+    },
+    {
+      "label": "production_mesh_1200step_stability_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_1200step_stability_scout_20260720/production_mesh_1200step_stability_scout_report.json",
+      "sha256": "1d0f9891d1ef7700ea3a5158dbad2c4719e5d24fc1d59baabcf50561a05d4f6c",
+      "size_bytes": 10296
+    },
+    {
+      "label": "production_mesh_8rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/production_mesh_8rank_scout_report.json",
+      "sha256": "6b4c05d1d48a02057d144188e39cf24875b94cb043a01db0d276e3ec228704c1",
+      "size_bytes": 9446
+    },
+    {
+      "label": "production_mesh_16rank_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_16rank_scout_20260720/production_mesh_16rank_scout_report.json",
+      "sha256": "976464cb31a86f6cc4570ba55e913a8cbfbe4b8701bbf1f315e6c13d58ffeb85",
+      "size_bytes": 9489
+    },
+    {
+      "label": "production_mesh_8rank_600step_stability_scout_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_600step_stability_scout_20260720/production_mesh_8rank_600step_stability_scout_report.json",
+      "sha256": "76cf3ad46f4f9720f45ed8ca7b2bc2970656cfe71d04fedf0f6ba86f4b0b616a",
+      "size_bytes": 10198
+    },
+    {
+      "label": "ignition_consequence_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/ignition_consequence_report.json",
+      "sha256": "3f1eb940bc75c59eac932e4314787b961b02b1bef898b7b9b688d374ea469937",
+      "size_bytes": 3232
+    },
+    {
+      "label": "fire_consequence_metrics_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "scheduler_run_report",
+      "path": "docs/codex_audit/evidence/engineering_scheduler_h2_20260720/scheduler_run_report.json",
+      "sha256": "262da4919c55fc24a12f4d211aaed5b991173112905e89323d9f1c69cb4ce66a",
+      "size_bytes": 8054
+    }
+  ],
+  "generated_at_utc": "2026-08-06T07:30:18+00:00",
+  "limitations": [
+    "This matrix is an internal engineering acceptance ledger, not an external safety certification.",
+    "PASS smoke/screening/scout rows do not prove external reference-data agreement or calibrated consequence prediction."
+  ],
+  "production_blockers": [
+    "1200-step production-mesh, 8-rank/600-step stability, and 16-rank short scouts exist; scheduler-managed overnight/full-duration production campaigns remain open",
+    "screening consequence metrics exist; calibrated radiation, overpressure, flame-speed, and reference fire validation remain open",
+    "smoke-scale internal campaign only; external reference-data agreement and production-size case matrix remain open"
+  ],
+  "rows": [
+    {
+      "evidence_level": "smoke_campaign",
+      "missing_or_failed_cases": [],
+      "name": "dispersion_core",
+      "passed_cases": [
+        "crosswind",
+        "low-wind",
+        "open-domain",
+        "release-rate"
+      ],
+      "production_gaps": [
+        "smoke-scale internal campaign only; external reference-data agreement and production-size case matrix remain open"
+      ],
+      "required_cases": [
+        "crosswind",
+        "low-wind",
+        "open-domain",
+        "release-rate"
+      ],
+      "status": "PASS-SMOKE",
+      "title": "Open-domain dispersion, wind, and release-rate response"
+    },
+    {
+      "evidence_level": "smoke_campaign",
+      "missing_or_failed_cases": [],
+      "name": "source_physics",
+      "passed_cases": [
+        "linepack-blowdown",
+        "linepack-valve-schedule",
+        "pipe-loss",
+        "pressure-orifice",
+        "real-gas-orifice",
+        "real-gas-tank-blowdown",
+        "tank-blowdown"
+      ],
+      "production_gaps": [
+        "smoke-scale internal campaign only; external reference-data agreement and production-size case matrix remain open"
+      ],
+      "required_cases": [
+        "linepack-blowdown",
+        "linepack-valve-schedule",
+        "pipe-loss",
+        "pressure-orifice",
+        "real-gas-orifice",
+        "real-gas-tank-blowdown",
+        "tank-blowdown"
+      ],
+      "status": "PASS-SMOKE",
+      "title": "Tank/pipe/orifice/linepack source physics"
+    },
+    {
+      "evidence_level": "smoke_campaign",
+      "missing_or_failed_cases": [],
+      "name": "geometry_obstacles",
+      "passed_cases": [
+        "stl-multifile",
+        "stl-perfile-transform",
+        "tank-farm"
+      ],
+      "production_gaps": [
+        "smoke-scale internal campaign only; external reference-data agreement and production-size case matrix remain open"
+      ],
+      "required_cases": [
+        "stl-multifile",
+        "stl-perfile-transform",
+        "tank-farm"
+      ],
+      "status": "PASS-SMOKE",
+      "title": "Tank-farm and STL obstacle geometry"
+    },
+    {
+      "evidence_level": "smoke_campaign",
+      "missing_or_failed_cases": [],
+      "name": "amr_mpi_smoke",
+      "passed_cases": [
+        "plan-amr-mpi-rank-sweep",
+        "plan-amr-mpi-reduced-long"
+      ],
+      "production_gaps": [
+        "smoke-scale internal campaign only; external reference-data agreement and production-size case matrix remain open"
+      ],
+      "required_cases": [
+        "plan-amr-mpi-rank-sweep",
+        "plan-amr-mpi-reduced-long"
+      ],
+      "status": "PASS-SMOKE",
+      "title": "Dynamic AMR and MPI smoke campaign"
+    },
+    {
+      "evidence_level": "production_mesh_scout",
+      "metrics": {
+        "advance_seconds_ratio": 2.5321528,
+        "amr_equivalent_fine_cell_count": 524288,
+        "base_cell_count": 65536,
+        "cloud_rel_diff": 0.0299314337,
+        "max_step": 1200,
+        "peak_rel_diff": 0.0358285346,
+        "rank16_scout_advance_seconds_ratio": 1.73497799,
+        "rank16_scout_ranks": 16,
+        "rank8_stability_advance_seconds_ratio": 2.38748687,
+        "rank8_stability_max_step": 600,
+        "rank_scaling_scout_ranks": 8,
+        "ranks": 4
+      },
+      "name": "production_mesh_amr_mpi_stability",
+      "production_gaps": [
+        "1200-step production-mesh, 8-rank/600-step stability, and 16-rank short scouts exist; scheduler-managed overnight/full-duration production campaigns remain open"
+      ],
+      "status": "PASS-SCOUT",
+      "title": "Production-mesh AMR/MPI stability scout"
+    },
+    {
+      "evidence_level": "screening_not_calibrated",
+      "metrics": {
+        "delay_fine_ignition_time_s": 4.52388239e-05,
+        "max_screening_flux_w_m2": 2865.1478024099374,
+        "max_screening_overpressure_kpa": 0.24438828165257487
+      },
+      "name": "ignition_fire_consequence_screening",
+      "production_gaps": [
+        "screening consequence metrics exist; calibrated radiation, overpressure, flame-speed, and reference fire validation remain open"
+      ],
+      "status": "PASS-SCREENING",
+      "title": "Ignition and fire consequence screening"
+    },
+    {
+      "evidence_level": "scheduler_allocation",
+      "metrics": {
+        "scheduler_report_status": "PASS",
+        "submit_attempt_status": null
+      },
+      "name": "scheduler_managed_campaign",
+      "production_gaps": [],
+      "status": "PASS",
+      "title": "Scheduler-managed production campaign handoff"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "engineering H2 storage/pipeline leak dispersion, ignition, and fire screening acceptance matrix",
+  "status": "PASS-PRODUCTION-MATRIX",
+  "summary": {
+    "campaign_case_count": 16,
+    "campaign_suite_count": 5,
+    "not_ready_rows": [],
+    "pass_like_rows": 7,
+    "row_count": 7
+  }
+}

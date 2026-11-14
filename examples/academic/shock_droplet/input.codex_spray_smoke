@@ -1,0 +1,77 @@
+# Codex-maintained shock-droplet spray startup/output smoke.
+# This is a tiny gas + spray-particle path check, not a production breakup benchmark.
+max_step = 5
+stop_time = 1.0e-6
+
+geometry.is_periodic = 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0
+geometry.prob_hi     = 50.0 2.0
+amr.n_cell           = 64 8
+
+pelec.lo_bc        = "FOExtrap" "SlipWall"
+pelec.hi_bc        = "FOExtrap" "SlipWall"
+
+pelec.do_hydro = 1
+pelec.diffuse_vel = 1
+pelec.diffuse_temp = 1
+pelec.diffuse_spec = 1
+pelec.do_react = 0
+pelec.allow_negative_energy = 1
+pelec.chem_integrator = "ReactorNull"
+
+pelec.cfl            = 0.05
+pelec.init_shrink    = 0.1
+pelec.change_max     = 1.1
+pelec.dt_cutoff      = 5.e-20
+
+pelec.sum_interval   = -1
+pelec.v              = 0
+amr.v                = 1
+
+amr.max_level       = 0
+amr.blocking_factor = 8 4
+amr.max_grid_size   = 64 8
+amr.n_error_buf     = 2 2 2 2
+
+pelec.do_spray_particles = 1
+particles.v = 0
+particles.derive_plot_vars = 1
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.fixed_parts = 0
+particles.fuel_ref_temp = 300.0
+particles.fuel_species = NC7H16
+particles.NC7H16_crit_temp = 540.0
+particles.NC7H16_boil_temp = 371.6
+particles.NC7H16_latent = 3.63E9
+particles.NC7H16_cp = 2.2483E7
+particles.NC7H16_rho = 0.6814
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+particles.fuel_sigma = 15.0
+particles.NC7H16_mu = 0.004 0.0 0.0 0.0
+particles.NC7H16_lambda = 120.0 0.0 0.0 0.0
+particles.use_splash_model = false
+particles.use_breakup_model = KHRT
+particles.KHRT_B0 = 0.61
+particles.KHRT_B1 = 7.3
+particles.KHRT_C3 = 5.3
+particles.breakup_parcel_factor = 0.5
+particles.init_file = "initspraydata_2d_single.dat"
+
+amr.checkpoint_files_output = 0
+amr.check_int       = -1
+amr.plot_file       = plt
+amr.plot_int        = 5
+amr.plot_vars       = density xmom ymom rho_E rho_e Temp rho_NC7H16 rho_O2 rho_N2
+amr.derive_plot_vars = x_velocity y_velocity pressure spray_mass spray_density spray_num spray_vol spray_surf_area spray_vol_frac d10 d32 spray_temp num_parcels spray_x_vel spray_y_vel
+
+prob.p_left = 1.0e7
+prob.T_left = 2000.0
+prob.p_right = 1.0e6
+prob.T_right = 300.0
+prob.diaphragm = 25.0
+prob.Y_O2 = 0.233
+prob.Y_N2 = 0.767
+
+amrex.abort_on_unused_inputs = 1

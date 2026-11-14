@@ -1,0 +1,395 @@
+{
+  "blocker_domain_map": [
+    {
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "domain": "external_plume_shape_reference"
+    },
+    {
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "domain": "real_cad_cleanup"
+    },
+    {
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "domain": "fire_consequence_calibration"
+    }
+  ],
+  "case_validation_closure_matrix_report": "docs/codex_audit/evidence/engineering_h2_case_validation_closure_matrix_20260724/h2_case_validation_closure_matrix_report.json",
+  "does_not_clear_production_blockers": true,
+  "domain_unlock_records": [
+    {
+      "artifact_count": 6,
+      "artifact_unlock_requirements": [
+        {
+          "artifact": "cleaned_geometry/*",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/cleaned_geometry",
+          "problem_metric_count": 24,
+          "required_action": "stage at least three cleaned simulation geometries derived from the source CAD files",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/cleaned_geometry/"
+        },
+        {
+          "artifact": "cleanup_quality_records",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_quality_record.csv",
+          "problem_metric_count": 24,
+          "required_action": "record units, watertightness, degeneracy, positive volume/area, and meter-space bounding boxes per geometry",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv"
+        },
+        {
+          "artifact": "real_cad_cleanup_manifest.json",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_manifest.json",
+          "problem_metric_count": 24,
+          "required_action": "fill the package manifest from the template with controlled provenance and exact file hashes",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json"
+        },
+        {
+          "artifact": "real_cad_cleanup_quality_record.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_cleanup_quality_record.csv",
+          "problem_metric_count": 24,
+          "required_action": "provide cleanup quality records for at least three geometries with true cleanup checks, bbox fields, tool/method, and reviewer",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv"
+        },
+        {
+          "artifact": "real_cad_data_room_index.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/real_cad_data_room_index.csv",
+          "problem_metric_count": 24,
+          "required_action": "provide a controlled data-room index with source/cleaned file roles, labels, relative paths, hashes, source type, revision, and owner/supplier",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv"
+        },
+        {
+          "artifact": "source_cad/*",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/real_cad_cleanup/source_cad",
+          "problem_metric_count": 24,
+          "required_action": "stage at least three real source CAD files for a tank/pipe large-layout campaign",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/source_cad/"
+        }
+      ],
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "current_ready_for_execution": false,
+      "deferred_metric_count": 3,
+      "domain": "real_cad_cleanup",
+      "domain_rebuild_command_sequence_after_controlled_copy": [
+        "python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py",
+        "python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py",
+        "python3 tools/write_engineering_production_scorecard.py",
+        "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py"
+      ],
+      "failed_metric_count": 21,
+      "missing_or_invalid_artifact_count": 6,
+      "priority": 10,
+      "problem_metric_count": 24,
+      "scorecard_gates_affected": [
+        {
+          "gaps": [
+            "synthetic cube/cylinder/pipe-rack STL validated on CPU and single-GPU CUDA; real CAD cleanup, GPU scaling, and larger plant-layout repeats remain open"
+          ],
+          "name": "obstacle_geometry_and_stl_pipeline",
+          "production_points": 8.2,
+          "production_weight": 10,
+          "status": "PASS-CPU-GPU-PIPE-RACK-SMOKE"
+        },
+        {
+          "gaps": [
+            "production-mesh full-duration evidence exists; remaining stability credibility gaps are repeat campaigns on real CAD layouts and external field/experiment agreement"
+          ],
+          "name": "long_duration_stability",
+          "production_points": 10.32,
+          "production_weight": 12,
+          "status": "PASS-FULL-DURATION"
+        }
+      ],
+      "unlock_completion_criteria": [
+        "all listed artifacts are present under the external drop root and pass the strict drop validator",
+        "operator receipt is present and valid",
+        "controlled copy is applied with the explicit confirmation token",
+        "domain reports and scorecard are rebuilt",
+        "case-validation acceptance evaluation passes or no longer reports domain-linked failures",
+        "full engineering H2 production verifier passes"
+      ],
+      "valid_artifact_count": 0
+    },
+    {
+      "artifact_count": 4,
+      "artifact_unlock_requirements": [
+        {
+          "artifact": "baffle_geometry.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/baffle_geometry.csv",
+          "problem_metric_count": 28,
+          "required_action": "digitize or obtain baffles 1..4 bounds with source basis and <=0.02 m uncertainty",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv"
+        },
+        {
+          "artifact": "dataset_metadata.json",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/dataset_metadata.json",
+          "problem_metric_count": 28,
+          "required_action": "replace the metadata template with URL/DOI, source file hash, digitization method, uncertainty basis, and case-alignment booleans",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json"
+        },
+        {
+          "artifact": "experimental_timeseries.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/experimental_timeseries.csv",
+          "problem_metric_count": 28,
+          "required_action": "obtain original Excel or digitize Gas01..Gas12 concentration histories through at least 120 s",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv"
+        },
+        {
+          "artifact": "sensor_coordinates.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/external_plume_shape_reference/sensor_coordinates.csv",
+          "problem_metric_count": 28,
+          "required_action": "digitize or obtain Gas01..Gas12 coordinates with reliability tags and <=0.02 m uncertainty",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv"
+        }
+      ],
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "current_ready_for_execution": false,
+      "deferred_metric_count": 3,
+      "domain": "external_plume_shape_reference",
+      "domain_rebuild_command_sequence_after_controlled_copy": [
+        "python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py",
+        "python3 tools/write_engineering_h2_reference_agreement_report.py --external-plume-dataset-json <generated_external_plume_dataset_json>",
+        "python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py",
+        "python3 tools/write_engineering_production_scorecard.py",
+        "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py"
+      ],
+      "failed_metric_count": 25,
+      "missing_or_invalid_artifact_count": 4,
+      "priority": 20,
+      "problem_metric_count": 28,
+      "scorecard_gates_affected": [
+        {
+          "gaps": [
+            "Gaussian-profile smoke only; no experimental or field reference agreement"
+          ],
+          "name": "h2_dispersion_and_hazard_outputs",
+          "production_points": 9.0,
+          "production_weight": 12,
+          "status": "PASS-SMOKE+"
+        },
+        {
+          "gaps": [
+            "H2 LEL/UEL and ALOHA LOC threshold agreement exists, but external plume-shape datasets and case-specific acceptance tolerances remain missing"
+          ],
+          "name": "production_scale_and_reference_accuracy",
+          "production_points": 4.96,
+          "production_weight": 8,
+          "status": "PARTIAL++++"
+        },
+        {
+          "gaps": [
+            "production-mesh full-duration evidence exists; remaining stability credibility gaps are repeat campaigns on real CAD layouts and external field/experiment agreement"
+          ],
+          "name": "long_duration_stability",
+          "production_points": 10.32,
+          "production_weight": 12,
+          "status": "PASS-FULL-DURATION"
+        }
+      ],
+      "unlock_completion_criteria": [
+        "all listed artifacts are present under the external drop root and pass the strict drop validator",
+        "operator receipt is present and valid",
+        "controlled copy is applied with the explicit confirmation token",
+        "domain reports and scorecard are rebuilt",
+        "case-validation acceptance evaluation passes or no longer reports domain-linked failures",
+        "full engineering H2 production verifier passes"
+      ],
+      "valid_artifact_count": 0
+    },
+    {
+      "artifact_count": 4,
+      "artifact_unlock_requirements": [
+        {
+          "artifact": "calibrated_fire_consequence_report",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/calibrated_fire_consequence_report.json",
+          "problem_metric_count": 26,
+          "required_action": "rerun the official fire consequence report with the generated calibration dataset JSON",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json"
+        },
+        {
+          "artifact": "calibration_metadata.json",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/calibration_metadata.json",
+          "problem_metric_count": 26,
+          "required_action": "select calibration sources and record source hash, uncertainty, and all case-alignment booleans",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json"
+        },
+        {
+          "artifact": "overpressure_metrics.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/overpressure_metrics.csv",
+          "problem_metric_count": 26,
+          "required_action": "digitize or obtain peak overpressure measurements with distances, tolerances, and source basis",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv"
+        },
+        {
+          "artifact": "radiation_metrics.csv",
+          "drop_path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/fire_consequence_calibration/radiation_metrics.csv",
+          "problem_metric_count": 26,
+          "required_action": "digitize or obtain heat-flux measurements with distances, tolerances, and source basis",
+          "target_path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv"
+        }
+      ],
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "current_ready_for_execution": false,
+      "deferred_metric_count": 3,
+      "domain": "fire_consequence_calibration",
+      "domain_rebuild_command_sequence_after_controlled_copy": [
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_package_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_report.py",
+        "python3 tools/write_engineering_h2_fire_consequence_metrics_report.py --calibration-dataset-json <generated_fire_calibration_dataset_json>",
+        "python3 tools/write_engineering_production_scorecard.py",
+        "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py"
+      ],
+      "failed_metric_count": 23,
+      "missing_or_invalid_artifact_count": 4,
+      "priority": 30,
+      "problem_metric_count": 26,
+      "scorecard_gates_affected": [
+        {
+          "gaps": [
+            "direct pipe-rack leak-cloud reacting CUDA sustained-fire gates now pass on single GPU, 2-rank MPI+CUDA, and 64x32x32 large-grid single-GPU; full-duration flame spread, flame speed, calibrated radiation, calibrated overpressure, and validated fire metrics remain missing"
+          ],
+          "name": "ignition_fire_consequence_chain",
+          "production_points": 10.32,
+          "production_weight": 12,
+          "status": "PARTIAL+++++++++++"
+        }
+      ],
+      "unlock_completion_criteria": [
+        "all listed artifacts are present under the external drop root and pass the strict drop validator",
+        "operator receipt is present and valid",
+        "controlled copy is applied with the explicit confirmation token",
+        "domain reports and scorecard are rebuilt",
+        "case-validation acceptance evaluation passes or no longer reports domain-linked failures",
+        "full engineering H2 production verifier passes"
+      ],
+      "valid_artifact_count": 0
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "engineering_production_scorecard",
+      "path": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "sha256": "5d04d11b450a9b833b61959b0642ee0949935fcd6c1458e5a3fb28ccf905b1d8",
+      "size_bytes": 33300
+    },
+    {
+      "label": "engineering_h2_production_blocker_closure_manifest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    },
+    {
+      "label": "engineering_h2_case_validation_closure_matrix_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_case_validation_closure_matrix_20260724/h2_case_validation_closure_matrix_report.json",
+      "sha256": "6a0114b1680a924b5d5512b3873331f058fae5c787f374840e160bc13ff18a28",
+      "size_bytes": 226089
+    },
+    {
+      "label": "engineering_h2_external_evidence_operations_dashboard_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_operations_dashboard_20260724/h2_external_evidence_operations_dashboard.json",
+      "sha256": "1d744568de6afa2b883538f2569bb55861bee7a15fc390cc80cc9b8097816c19",
+      "size_bytes": 9264
+    }
+  ],
+  "external_evidence_operations_dashboard_report": "docs/codex_audit/evidence/engineering_h2_external_evidence_operations_dashboard_20260724/h2_external_evidence_operations_dashboard.json",
+  "generated_at_utc": "2026-08-20T10:07:11+00:00",
+  "limitations": [
+    "This forecast orders and traces the remaining external-artifact work; it does not supply real data or change scorecard credit.",
+    "Projected readiness remains unclaimed until strict artifact gates, controlled copy, case-validation campaigns, and final production verification all pass."
+  ],
+  "operator_execution_order": [
+    {
+      "command": "place supplier/lab files under docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop/",
+      "purpose": "Populate the real-CAD, SBEPV5, and fire-calibration drop folders without touching controlled evidence.",
+      "step": "stage_external_artifacts"
+    },
+    {
+      "command": "python3 tools/write_engineering_h2_external_artifact_drop_validator.py",
+      "purpose": "Validate file presence, schemas, columns, counts, and domain-specific identifiers.",
+      "step": "validate_drop"
+    },
+    {
+      "command": "python3 tools/write_engineering_h2_external_artifact_ingestion_plan.py",
+      "purpose": "Regenerate controlled-copy source/target mapping from validated drop evidence.",
+      "step": "plan_ingestion"
+    },
+    {
+      "command": "python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py",
+      "purpose": "Inspect target conflicts and copy readiness without writing evidence files.",
+      "step": "dry_run_controlled_copy"
+    },
+    {
+      "command": "python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --apply --confirm-controlled-copy H2_EXTERNAL_ARTIFACTS_READY",
+      "purpose": "Copy only after every external artifact gate is PASS and the operator explicitly confirms.",
+      "step": "apply_controlled_copy"
+    },
+    {
+      "command": "bash tools/rebuild_engineering_h2_evidence_chain.sh",
+      "purpose": "Rebuild all dependent evidence, run the verifier, and update the production-readiness ledger.",
+      "step": "rebuild_and_verify"
+    }
+  ],
+  "production_blocker_closure_manifest_report": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "gap": "",
+      "name": "scorecard_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "blockers=3 unmapped=0",
+      "gap": "",
+      "name": "all_scorecard_blockers_mapped_to_domains",
+      "status": "PASS"
+    },
+    {
+      "evidence": "artifacts=14 missing=14",
+      "gap": "",
+      "name": "artifact_unlock_inventory_complete",
+      "status": "PASS"
+    },
+    {
+      "evidence": "mapped=44 problem=44",
+      "gap": "",
+      "name": "case_validation_metrics_mapped",
+      "status": "PASS"
+    },
+    {
+      "evidence": "production=82.2 target=90.0",
+      "gap": "",
+      "name": "production_credit_not_forecast_as_cleared",
+      "status": "PASS"
+    },
+    {
+      "evidence": "commands=6",
+      "gap": "",
+      "name": "operator_command_sequence_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": "forecast is planning/traceability evidence only",
+      "gap": "",
+      "name": "unlock_forecast_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scorecard_report": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+  "status": "PASS-H2-EXTERNAL-ARTIFACT-UNLOCK-FORECAST",
+  "summary": {
+    "artifact_unlock_requirement_count": 14,
+    "case_validation_mapped_problem_metric_count": 44,
+    "case_validation_problem_metric_count": 44,
+    "domain_unlock_count": 3,
+    "functional_coverage_percent": 96.9,
+    "missing_or_invalid_artifact_count": 14,
+    "production_credibility_gap_to_target_percent": 7.8,
+    "production_credibility_percent": 82.2,
+    "production_ready_target_percent": 90.0,
+    "ready_for_controlled_copy": false,
+    "ready_for_production_blocker_clearance": false,
+    "scorecard_status": "NOT_PRODUCTION_READY",
+    "unmapped_blocker_count": 0,
+    "unresolved_blocker_count": 3
+  },
+  "title": "Engineering H2 External Artifact Unlock Forecast"
+}

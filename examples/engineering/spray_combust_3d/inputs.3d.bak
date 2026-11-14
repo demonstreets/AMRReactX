@@ -1,0 +1,89 @@
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     =  0.0  0.0  0.0
+geometry.prob_hi     =  0.02 0.02 0.02
+
+# BC
+peleLM.lo_bc = SlipWallAdiab SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc = SlipWallAdiab SlipWallAdiab SlipWallAdiab
+
+#-------------------------AMR CONTROL----------------------------
+amr.n_cell          = 128 128 128
+amr.v               = 1
+amr.max_level       = 0
+amr.blocking_factor = 16
+amr.max_grid_size   = 64
+
+#--------------------------- Problem -------------------------------
+prob.P_mean = 101325.0
+prob.init_T      = 800.
+prob.init_vel    = 0.0
+prob.num_particles = (256, 256, 256)
+prob.part_temp     = 300.
+prob.part_dia      = 5.E-5
+prob.part_vel      = 0. 0. -1.
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.use_wbar = 1
+peleLM.sdc_iterMax = 2
+peleLM.floor_species = 1
+
+peleLM.do_temporals = 1
+peleLM.do_mass_balance = 1
+peleLM.num_init_iter = 1
+
+amr.plot_int = 50
+amr.max_step = 500
+amr.dt_shrink = 0.01
+amr.init_dt = 1.e-7
+amr.stop_time = 0.1
+amr.cfl = 0.5
+amr.plot_speciesState = 1
+amr.derive_plot_vars = avg_pressure mass_fractions
+
+# --------------- CHEMISTRY ---------------
+peleLM.chem_integrator = "ReactorRK64"
+#peleLM.use_typ_vals_chem = 1
+#ode.rtol = 1.0e-6
+#ode.atol = 1.0e-5
+#cvode.solve_type = sparse_direct
+#cvode.max_order  = 4
+
+#------------------------- EB SETUP -----------------------------
+eb2.geom_type = sphere
+eb2.sphere_radius = 0.005
+eb2.sphere_center = 0.01 0.01 0.0
+eb2.sphere_has_fluid_inside = 0
+eb2.small_volfrac = 1.e-3
+peleLM.eb_boundary_T = 1500.
+peleLM.eb_isothermal = 1
+
+#--------------------SPRAY PARTICLE DATA-----------------------
+peleLM.do_spray_particles = 1
+particles.derive_plot_vars = 1
+particles.fuel_ref_temp = 298.15
+particles.fuel_species = NC10H22
+# Decane properties (MKS)
+particles.NC10H22_crit_temp = 617.8
+particles.NC10H22_boil_temp = 447.27
+particles.NC10H22_latent = 3.5899E5
+particles.NC10H22_cp = 2.1921E3
+particles.NC10H22_rho = 640.
+particles.NC10H22_psat = 4.07857 1501.268 -78.67 1.E5
+particles.use_splash_model = false
+
+particles.v             = 0
+particles.cfl           = 2.
+particles.mom_transfer  = 1
+particles.mass_transfer = 1
+particles.write_ascii_files = 0
+particles.parcel_size = 10.
+
+#--------------------LINEAR SOLVER------------------------
+nodal_proj.verbose = 1
+nodal_proj.rtol = 1.0e-7
+mac_proj.verbose = 1
+mac_proj.rtol = 1.0e-7

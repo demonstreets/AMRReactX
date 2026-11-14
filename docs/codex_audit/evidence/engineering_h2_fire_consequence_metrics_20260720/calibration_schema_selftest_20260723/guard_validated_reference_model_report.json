@@ -1,0 +1,193 @@
+{
+  "case": "engineering-h2-fire-consequence-screening",
+  "checks": {
+    "flammable_cloud_detected": "PASS",
+    "ignition_report_status": "PASS",
+    "overpressure_monotonic_with_distance": "PASS",
+    "positive_cloud_mass": "PASS",
+    "positive_heat_release": "PASS",
+    "radiation_monotonic_with_distance": "PASS"
+  },
+  "clears_calibrated_fire_consequence_blocker": false,
+  "consequence_model_tier": "screening_metrics",
+  "evidence_files": [
+    {
+      "label": "ignition_consequence_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/ignition_consequence_report.json",
+      "sha256": "3f1eb940bc75c59eac932e4314787b961b02b1bef898b7b9b688d374ea469937",
+      "size_bytes": 3232
+    },
+    {
+      "label": "hazard_summary_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/files/amr/hazard_summary.log",
+      "sha256": "7115f180c02f83bd7446ab8c7ddf2f87c82e5f150852af8935e47881a29d73fd",
+      "size_bytes": 339
+    },
+    {
+      "label": "hazard_timeseries_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/files/amr/hazard_timeseries.log",
+      "sha256": "0ebfd31cc7c1f8ecd3bdd706e3ebfb2bec95d5cc6ee28a97c1fb4657579be1b5",
+      "size_bytes": 421
+    },
+    {
+      "label": "hazard_planes_log",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_8rank_scout_20260720/files/amr/hazard_planes.log",
+      "sha256": "f0b32effe73265d00b947ee41c40eab588307302439f7e8e71934545d23b5cb0",
+      "size_bytes": 353
+    },
+    {
+      "label": "fire_calibration_dataset",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/calibration_schema_selftest_20260723/guard_validated_reference_model_dataset.json",
+      "sha256": "a4adb739f2b6cec4f26176bee02d4f5fb658445b9369572567a9d845bd4fa527",
+      "size_bytes": 880
+    }
+  ],
+  "fire_calibration_agreement": {
+    "all_metrics_passed": true,
+    "checks": [
+      {
+        "abs_error": 0.0,
+        "family": "radiation",
+        "name": "guard_max_radiation_flux",
+        "passed": true,
+        "reference_value": 2865.1478024099374,
+        "rel_error": 0.0,
+        "simulation_summary_key": "max_screening_flux_w_m2",
+        "simulation_value": 2865.1478024099374,
+        "tolerance_abs": null,
+        "tolerance_rel": 1e-12,
+        "units": "W/m2"
+      },
+      {
+        "abs_error": 0.0,
+        "family": "overpressure",
+        "name": "guard_max_overpressure",
+        "passed": true,
+        "reference_value": 0.24438828165257487,
+        "rel_error": 0.0,
+        "simulation_summary_key": "max_screening_overpressure_kpa",
+        "simulation_value": 0.24438828165257487,
+        "tolerance_abs": null,
+        "tolerance_rel": 1e-12,
+        "units": "kPa"
+      }
+    ],
+    "clears_blocker": false,
+    "dataset_path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/calibration_schema_selftest_20260723/guard_validated_reference_model_dataset.json",
+    "dataset_sha256": "a4adb739f2b6cec4f26176bee02d4f5fb658445b9369572567a9d845bd4fa527",
+    "metric_count": 2,
+    "metric_families": [
+      "overpressure",
+      "radiation"
+    ],
+    "requires_experimental_source_to_clear_blocker": true,
+    "source": {
+      "title": "SCHEMA SELFTEST ONLY - non-clearing guard",
+      "url": "https://example.invalid/codex-guard"
+    },
+    "source_type": "validated_reference_model"
+  },
+  "flame_geometry_model": false,
+  "generated_at_utc": "2026-07-23T04:24:16+00:00",
+  "inputs": {
+    "assumed_burn_duration_s": 1.0,
+    "blast_efficiency": 0.03,
+    "distances_m": [
+      1.0,
+      3.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "h2_lhv_j_per_kg": 120000000.0,
+    "radiative_fraction": 0.15,
+    "tnt_j_per_kg": 4184000.0
+  },
+  "limitations": [
+    "Screening-only consequence metrics derived from smoke/scout CFD evidence.",
+    "Radiation uses an isotropic point-source fraction and does not model flame geometry, soot, view factors, terrain, or shielding.",
+    "Overpressure uses a TNT-equivalent screening metric and is not a calibrated deflagration or congestion model.",
+    "This report does not replace site-specific safety engineering, regulatory compliance, or validated consequence tools."
+  ],
+  "model_scope": "engineering_screening_not_calibrated",
+  "overpressure_by_distance": [
+    {
+      "distance_m": 1.0,
+      "scaled_distance_m_kg13": 17.314981945794003,
+      "screening_peak_overpressure_kpa": 0.24438828165257487
+    },
+    {
+      "distance_m": 3.0,
+      "scaled_distance_m_kg13": 51.944945837382015,
+      "screening_peak_overpressure_kpa": 0.011277163463010435
+    },
+    {
+      "distance_m": 5.0,
+      "scaled_distance_m_kg13": 86.57490972897003,
+      "screening_peak_overpressure_kpa": 0.0025490223784542395
+    },
+    {
+      "distance_m": 10.0,
+      "scaled_distance_m_kg13": 173.14981945794005,
+      "screening_peak_overpressure_kpa": 0.00032975638839852125
+    },
+    {
+      "distance_m": 20.0,
+      "scaled_distance_m_kg13": 346.2996389158801,
+      "screening_peak_overpressure_kpa": 4.193667932768679e-05
+    }
+  ],
+  "overpressure_model_calibrated": false,
+  "radiation_by_distance": [
+    {
+      "cloud_average_flux_w_m2": 320.6901989183061,
+      "distance_m": 1.0,
+      "source_limited_flux_w_m2": 2865.1478024099374
+    },
+    {
+      "cloud_average_flux_w_m2": 35.63224432425624,
+      "distance_m": 3.0,
+      "source_limited_flux_w_m2": 318.3497558233264
+    },
+    {
+      "cloud_average_flux_w_m2": 12.827607956732246,
+      "distance_m": 5.0,
+      "source_limited_flux_w_m2": 114.60591209639749
+    },
+    {
+      "cloud_average_flux_w_m2": 3.2069019891830615,
+      "distance_m": 10.0,
+      "source_limited_flux_w_m2": 28.651478024099372
+    },
+    {
+      "cloud_average_flux_w_m2": 0.8017254972957654,
+      "distance_m": 20.0,
+      "source_limited_flux_w_m2": 7.162869506024843
+    }
+  ],
+  "radiation_model_calibrated": false,
+  "schema_version": 1,
+  "status": "PASS-SCREENING",
+  "summary": {
+    "active_planes": 15,
+    "cloud_average_heat_release_w": 26866.07928,
+    "cloud_average_radiative_power_w": 4029.911892,
+    "flammable_cloud_energy_j": 26866.07928,
+    "flammable_cloud_h2_mass_kg": 0.000223883994,
+    "flammable_cloud_volume_m3": 0.0246582031,
+    "flammable_planes": 10,
+    "ignition_heat_release_sdc_rel_linf": 0.00125728742,
+    "ignition_time_s": 4.52388239e-05,
+    "inferred_mass_rate_kg_s": 0.002000250508333333,
+    "leak_final_time_s": 0.12,
+    "max_h2_mole_fraction": 0.189474519,
+    "max_screening_flux_w_m2": 2865.1478024099374,
+    "max_screening_overpressure_kpa": 0.24438828165257487,
+    "source_limited_heat_release_w": 240030.061,
+    "source_limited_radiative_power_w": 36004.50915,
+    "tnt_equivalent_mass_kg": 0.00019263441166347993,
+    "total_h2_mass_kg": 0.000240030061
+  },
+  "validated_against_blast_experiment": false,
+  "validated_against_fire_experiment": false
+}

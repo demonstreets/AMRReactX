@@ -1,0 +1,28 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/engineering/backward_facing_step/PeleLMeX2d.gnu.MPI.ex(+0x531206) [0x58169346f206]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/engineering/backward_facing_step/PeleLMeX2d.gnu.MPI.ex(+0x535fc1) [0x581693473fc1]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/engineering/backward_facing_step/PeleLMeX2d.gnu.MPI.ex(+0x525db) [0x581692f905db]
+    main at /home/cj/my-pele/examples/engineering/backward_facing_step/../../../external/PeleLMeX/Source/main.cpp:61
+
+ 3: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x753a9762a1ca]
+
+ 4: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x753a9762a28b]
+
+ 5: /home/cj/my-pele/examples/engineering/backward_facing_step/PeleLMeX2d.gnu.MPI.ex(+0x5b7f5) [0x581692f997f5]
+    ?? ??:0
+

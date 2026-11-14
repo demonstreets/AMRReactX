@@ -1,0 +1,888 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_final_verify.md)
+tool: read_file (path: /home/cj/PASS/FAIL)
+tool read_file completed: # TASK: 最终验证 — 重跑全部单元测试
+
+审查已完成。现在重新编译运行全部 11 个单元测试，确认依然全部 PASS。
+
+测试清单同前，在 `/home/cj/my-pele/test/unit/`。
+
+编译+运行每个测试，报告 PASS/FAIL。只运行不修改代码。
+
+tool read_file completed: PASS
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: list_dir (path: /home/cj/my-pele/test/unit)
+tool: list_dir (path: /home/cj/my-pele/build_test)
+tool list_dir completed: <24 items>
+tool list_dir completed: <20 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me check the build system to identify exactly which 11 tests are in the unit test suite.]0;🐋 CodeWhaletool: file_search (path: /home/cj/my-pele/test, query: CMakeLists.txt)
+
+tool file_search completed: <0 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <93 chars>)
+tool: exec_shell (command: <87 chars>)
+tool: grep_files (path: /home/cj/my-pele/build_test, pattern: <180 chars>)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+NOT FOUND
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+NOT FOUND
+
+---------------------
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: file_search (path: /home/cj/my-pele, query: Makefile)
+tool: file_search (path: /home/cj/my-pele, query: CMakeLists.txt)
+]0;🐋 CodeWhaletool file_search completed: <20 items>
+tool file_search completed: <20 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: ls -la /home/cj/my-pele/build_test/ | head -5)
+tool: grep_files (path: /home/cj/my-pele, pattern: test_.*\.cpp)
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+total 28356
+drwxrwxr-x  2 cj cj    4096 Jun 26 09:04 .
+drwxrwxr-x 15 cj cj    4096 Jun 26 09:35 ..
+-rwxrwxr-x  1 cj cj 4812568 Jun 26 08:31 sphere_flow
+-rwxrwxr-x  1 cj cj 4840728 Jun 26 08:31 tank_flow
+
+---------------------
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: file_search (path: /home/cj/my-pele/test, query: Makefile*)
+tool: exec_shell (command: <88 chars>)
+tool file_search completed: <0 items>
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(2))
+
+STDOUT:
+ls: cannot access '/home/cj/my-pele/Makefile': No such file or directory
+ls: cannot access '/home/cj/my-pele/makefile': No such file or directory
+ls: cannot access '/home/cj/my-pele/GNUmakefile': No such file or directory
+
+
+STDERR:
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele, pattern: g\+\+.*test_|compile.*test|build.*test)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_all_tests.md)
+tool read_file completed: # TASK: 全部单元测试编译运行（只报告，不修复）
+
+## 测试清单
+
+编译运行以下所有测试文件，只报告 PASS/FAIL，**不要修改任何代码**：
+
+### Phase 2 工程模块
+| 测试 | 源文件 | 依赖 |
+|------|------|------|
+| k-ε 核心 | test_k_epsilon.cpp | k_epsilon_core.H, amrex_stubs |
+| 壁面函数 | test_wall_functions.cpp | wall_functions.H, amrex_stubs |
+| 湍流输运 | test_turbulent_tran...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleNow let me get the precise build commands for each test from the spec files.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/docs/phase2_9_integration_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_2_kepsilon_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_3_wallfunctions_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_4_transport_spec.md)
+
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_9_integration_spec.md" total_lines="173" shown_lines="1-40" truncated="true" next_start_line="41">
+     1│ # Phase 2.9 — PeleLMeX 端到端集成规格文档
+     2│ 
+     3│ **版本：** v1.0（初稿）
+     4│ **日期：** 2026-06-10
+     5│ **状态：** 待审查
+     6│ 
+     7│ ---
+     8│ 
+     ...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_2_kepsilon_spec.md" total_lines="226" shown_lines="1-12" truncated="true" next_start_line="13">
+     1│ # Phase 2.2 — k-ε 湍流模型核心实现 Spec
+     2│ 
+     3│ **日期**: 2026-06-09  
+     4│ **位置**: `~/my-pele/src/engineering/turbulence/`  
+     5│ **依赖**: 无外部库（纯数值...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_3_wallfunctions_spec.md" total_lines="202" shown_lines="1-12" truncated="true" next_start_line="13">
+     1│ # Phase 2.3 — Launder-Spalding 壁面函数 Spec
+     2│ 
+     3│ **日期**: 2026-06-09  
+     4│ **位置**: `~/my-pele/src/engineering/turbulence/`  
+     5│ **...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_4_transport_spec.md" total_lines="148" shown_lines="1-12" truncated="true" next_start_line="13">
+     1│ # Phase 2.4 — 湍流-扩散耦合 Spec
+     2│ 
+     3│ **日期**: 2026-06-09  
+     4│ **位置**: `~/my-pele/src/engineering/turbulence/`  
+     5│ **依赖**: 2.2 k-ε 核心（提...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs, pattern: ^g\+\+.*test_.*-o build_test)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs, pattern: g\+\+.*-o build_test/test)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs/phase2_9_integration_spec.md, pattern: build_test/test)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/docs/phase2_9_integration_spec.md)
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_9_integration_spec.md" total_lines="173" shown_lines="100-172" truncated="true" next_start_line="173">
+   100│ mpirun -np 4 ./PeleLMeX2d inputs.yaml
+   101│ # max_step=100, 验证不崩溃
+   102│ # 检查 plotfile 中 k, epsilon 等湍流变量出现
+   103│ # 检查风场速度剖面方向正确
+   104│ # 检...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/docs/phase2_2_kepsilon_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_3_wallfunctions_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_4_transport_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_5_evaporation_spec.md)
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_2_kepsilon_spec.md" total_lines="226" shown_lines="210-225" truncated="true" next_start_line="226">
+   210│ g++ -std=c++17 -Isrc/engineering/turbulence \
+   211│     test/unit/test_k_epsilon.cpp \
+   212│     src/engineering/turbulence/k_epsilon_core.cpp \...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_3_wallfunctions_spec.md" total_lines="202" shown_lines="180-201" truncated="true" next_start_line="202">
+   180│     test/unit/test_wall_functions.cpp \
+   181│     src/engineering/turbulence/k_epsilon_core.cpp \
+   182│     src/engineering/turbulence/wall...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_4_transport_spec.md" total_lines="148" shown_lines="131-147" truncated="true" next_start_line="148">
+   131│ ```bash
+   132│ g++ -std=c++17 -Isrc/engineering/turbulence \
+   133│     test/unit/test_turbulent_transport.cpp \
+   134│     -o build_test/test_t...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_5_evaporation_spec.md" total_lines="373" shown_lines="1-5" truncated="true" next_start_line="6">
+     1│ # Phase 2.5 — 液体池蒸发源项规格文档
+     2│ 
+     3│ **版本：** v1.0（初稿）
+     4│ **日期：** 2026-06-09
+     5│ **状态：** 待审查
+
+[TRUNCATED] Showing lines 1-5 of 373. To co...
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs, pattern: g\+\+.*test_)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs, pattern: build_test/test_)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/docs/phase2_5_evaporation_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_6_wind_spec.md)
+tool: read_file (path: /home/cj/my-pele/docs/phase2_1_yaml_spec.md)
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_5_evaporation_spec.md" total_lines="373" shown_lines="340-372" truncated="true" next_start_line="373">
+   340│ ## 6. 风险与局限性
+   341│ 
+   342│ | 风险 | 等级 | 缓解 |
+   343│ |------|------|------|
+   344│ | Antoine 常数与 PelePhysics 机理不匹配 | MEDIUM | 内置常见物种预设，允许用户覆盖 ...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_6_wind_spec.md" total_lines="293" shown_lines="1-5" truncated="true" next_start_line="6">
+     1│ # Phase 2.6 — 风场边界条件规格文档
+     2│ 
+     3│ **版本：** v1.0（初稿）
+     4│ **日期：** 2026-06-09
+     5│ **状态：** 待审查
+
+[TRUNCATED] Showing lines 1-5 of 293. To continue, ...
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_1_yaml_spec.md" total_lines="379" shown_lines="345-362" truncated="true" next_start_line="363">
+   345│ 测试框架：手写 `assert()`，不需要外部测试库。测试通过打印 `[PASS]` / `[FAIL]` 到 stdout。
+   346│ 
+   347│ 编译：
+   348│ ```bash
+   349│ cd ~/my-pele
+   350│ g++ -std=c++17 -Isrc/...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs, pattern: g\+\+|build_test|compile|编译)
+tool: grep_files (path: /home/cj/my-pele/docs, pattern: g\+\+|build_test|compile|编译)
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/docs, pattern: test_evap|test_wind|单元测试|unit test|test/unit)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/docs/phase2_5_evaporation_spec.md)
+tool read_file completed: <file path="/home/cj/my-pele/docs/phase2_5_evaporation_spec.md" total_lines="373" shown_lines="220-339" truncated="true" next_start_line="340">
+   220│     double m_dot_per_area_;  // kg/m²/s
+   221│     int    vapor_species_idx_;
+   222│ };
+   223│ } // namespace Evaporation
+   224│ ```
+   225│ ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me check the includes and dependencies of the remaining test sources.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: head -20 /home/cj/my-pele/test/unit/test_evaporation.cpp)
+tool: exec_shell (command: head -20 /home/cj/my-pele/test/unit/test_wind.cpp)
+tool: exec_shell (command: <233 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+#include "evaporation_model.H"
+#include "antoine_data.H"
+#include "pool_evaporation.H"
+
+#include <cmath>
+#include <iostream>
+#include <string>
+#include <cstring>
+
+// ─── minimal test harness (matching test_k_epsilon.cpp style) ───
+static int  g_passed = 0;
+static int  g_failed = 0;
+static std::string g_current_test;
+
+#define TEST(name) static void test_##name()
+
+#define CHECK(cond)                                                    \
+    do {                                                               \
+        if (!(cond)) {                                                 \
+            std::cerr << "  FAIL: " << g_current_test                  \
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+#include "wind_bc.H"
+#include "k_epsilon_constants.H"
+
+#include <cmath>
+#include <iostream>
+#include <string>
+
+// ─── minimal test harness (matching test_k_epsilon.cpp style) ───────
+static int  g_passed = 0;
+static int  g_failed = 0;
+static std::string g_current_test;
+
+#define TEST(name) static void test_##name()
+
+#define CHECK(cond)                                                    \
+    do {                                                               \
+        if (!(cond)) {                                                 \
+            std::cerr << "  FAIL: " << g_current_test                  \
+                      << " [" << __LINE__ << "]: " << #cond << "\n";   \
+            ++g_failed;                                                \
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+==> /home/cj/my-pele/test/unit/test_vof_fct.cpp <==
+// Standalone unit test for VOF FCT limiter
+// Compile: g++ -std=c++17 test_vof_fct.cpp -o test_vof_fct
+//
+// This test validates the mathematical logic of the Zalesak FCT limiter
+// using the CORRECTED Zalesak 1979 Eq.13 formulation.
+// It does NOT include VOF_FCT.H (which requires AMReX headers).
+// Instead, it replicates the core algorithm inlined.
+
+#include <cmath>
+#include <cstdio>
+#include <algorithm>
+
+// ── Replicated from VOF_Constants.H ──
+constexpr double VOF_TINY = 1.0e-12;
+
+
+==> /home/cj/my-pele/test/unit/test_csf.cpp <==
+// ── CSF surface tension unit tests ──
+// Standalone: no AMReX headers, replicates core algorithm inline.
+// Validates mathematical correctness of the CSF model.
+// Compile:
+//   cd ~/my-pele && g++ -std=c++17 test/unit/test_csf.cpp -o build_test/test_csf
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <vector>
+
+static int nfail = 0;
+
+void check(bool cond, const char* msg)
+{
+
+==> /home/cj/my-pele/test/unit/test_twophase_eos.cpp <==
+// test_twophase_eos.cpp — standalone unit test for two-phase EOS
+// Uses stub AMReX headers — no full AMReX build needed
+// Compile: g++ -std=c++17 -I test/unit/amrex_stubs -I src/academic/twophase test/unit/test_twophase_eos.cpp -o build_test/test_twophase_eos
+
+#include "StiffenedGas.H"
+#include "TwoPhaseEOS.H"
+#include <iostream>
+#include <cmath>
+
+// ---------------------------------------------------------------------------
+// Mock gas EOS that mimics the pele::physics::eos interface
+// ---------------------------------------------------------------------------
+struct MockGasEOS {
+    void Y2WBAR(const amrex::Real* /*Y*/, amrex::Real& wbar) const {
+        wbar = 28.97e-3;
+
+==> /home/cj/my-pele/test/unit/test_twophase_hllc.cpp <==
+// Standalone unit test for TwoPhaseHLLC.H
+// No AMReX runtime — uses stubs from test/unit/amrex_stubs/
+//
+// Compile:
+//   g++ -std=c++17 -I test/unit/amrex_stubs -I src/academic/twophase \
+//       test/unit/test_twophase_hllc.cpp -o build_test/test_twophase_hllc
+// Run:
+//   ./build_test/test_twophase_hllc
+
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+
+#include "TwoPhaseHLLC.H"
+
+
+==> /home/cj/my-pele/test/unit/test_weno5.cpp <==
+#include "weno5.H"
+
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <cstdint>
+
+using namespace reconstruction;
+
+static int g_passed = 0;
+
+static void check(const char* name, bool cond, const std::string& detail = "")
+{
+    if (cond) {
+        g_passed++;
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow I]0;🐳 CodeWhale have the build commands. Let me set up the checklist and compile/run all 11 tests.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <12 items>)
+
+tool checklist_write completed: Todo list updated (12 items, 0% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Compile & run test_k_epsilon",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "content": "Compile & run test_wall_functions",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+    ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleBatch-compiling all 11 tests in parallel:]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <215 chars>)
+tool: exec_shell (command: <271 chars>)
+tool: exec_shell (command: <189 chars>)
+tool: exec_shell (command: <203 chars>)
+tool: exec_shell (command: <182 chars>)
+tool: exec_shell (command: <221 chars>)
+tool: exec_shell (command: <136 chars>)
+tool: exec_shell (command: <128 chars>)
+tool: exec_shell (command: <196 chars>)
+tool: exec_shell (command: <198 chars>)
+tool: exec_shell (command: <155 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+test/unit/test_weno5.cpp:1:10: fatal error: weno5.H: No such file or directory
+    1 | #include "weno5.H"
+      |          ^~~~~~~~~
+compilation terminated.
+BUILD_FAIL
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhaletest_weno5 build failed — `weno5.H` not found. Let me locate it.]0;🐳 CodeWhaletool: file_search (path: /home/cj/my-pele, query: weno5.H)
+
+tool file_search completed: <1 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <164 chars>)
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+BUILD_OK
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhaleAll 11 compiled. Now running all tests in parallel:]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_k_epsilon 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_wall_functions 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: <81 chars>)
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_evaporation 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_wind 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_yaml_parser 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_vof_fct 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_csf 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_twophase_eos 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_twophase_hllc 2>&1; echo "EXIT:$?")
+tool: exec_shell (command: cd /home/cj/my-pele && ./build_test/test_weno5 2>&1; echo "EXIT:$?")
+
+tool exec_shell completed
+--- stdout/stderr ---
+
+=== Results: 16 passed, 0 failed ===
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+
+=== Results ===
+  Passed: 14
+  Failed: 0
+EXIT:0
+
+---------------------
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+
+=== Results: 7 passed, 0 failed ===
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+
+=== Results: 15 passed, 0 failed ===
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+
+=== Results: 12 passed, 0 failed ===
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+=== Phase 2.1 YAML Parser Tests ===
+
+
+=== Test 1: Full YAML parse ===
+  [PASS] std::strcmp((cfg.geometry.type.c_str()), ("stl")) == 0
+  [PASS] std::strcmp((cfg.geometry.file.c_str()), ("test/tanks.stl")) == 0
+  [PASS] std::abs((cfg.geometry.scale) - (0.5)) < (1e-12)
+  [PASS] std::abs((cfg.domain.xmin) - (-10.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.xmax) - (10.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.ymin) - (-5.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.ymax) - (5.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.zmin) - (0.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.zmax) - (12.0)) < (1e-12)
+  [PASS] (cfg.mesh.n_cell.size()) == (3u)
+  [PASS] (cfg.mesh.n_cell[0]) == (256)
+  [PASS] (cfg.mesh.n_cell[1]) == (128)
+  [PASS] (cfg.mesh.n_cell[2]) == (64)
+  [PASS] (cfg.mesh.max_level) == (3)
+  [PASS] (cfg.mesh.blocking_factor) == (16)
+  [PASS] (cfg.mesh.max_grid_size) == (64)
+  [PASS] cfg.mesh.refine.near_wall == true
+  [PASS] cfg.mesh.refine.near_leak == false
+  [PASS] std::strcmp((cfg.physics.model.c_str()), ("dispersion")) == 0
+  [PASS] std::strcmp((cfg.physics.chemistry.mechanism.c_str()), ("drm19")) == 0
+  [PASS] std::strcmp((cfg.physics.chemistry.mechanism_file.c_str()), ("")) == 0
+  [PASS] (cfg.physics.species.tracked.size()) == (3u)
+  [PASS] std::strcmp((cfg.physics.species.tracked[0].c_str()), ("CH4")) == 0
+  [PASS] std::strcmp((cfg.physics.species.tracked[1].c_str()), ("C3H8")) == 0
+  [PASS] std::strcmp((cfg.physics.species.tracked[2].c_str()), ("H2")) == 0
+  [PASS] std::strcmp((cfg.physics.transport.model.c_str()), ("Simple")) == 0
+  [PASS] std::strcmp((cfg.physics.eos.type.c_str()), ("ideal_gas")) == 0
+  [PASS] std::abs((cfg.time.stop_time) - (30.0)) < (1e-12)
+  [PASS] (cfg.time.max_step) == (50000)
+  [PASS] std::abs((cfg.time.cfl) - (0.5)) < (1e-12)
+  [PASS] std::abs((cfg.time.dt_init) - (5.0e-7)) < (1e-15)
+  [PASS] std::abs((cfg.time.dt_max) - (0.005)) < (1e-15)
+  [PASS] (cfg.leaks.size()) == (2u)
+  [PASS] std::strcmp((cfg.leaks[0].name.c_str()), ("leak_main")) == 0
+  [PASS] std::abs((cfg.leaks[0].position[0]) - (0.0)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].position[1]) - (0.3)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].position[2]) - (1.5)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].radius) - (0.02)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].direction[0]) - (0.0)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].direction[1]) - (0.0)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].direction[2]) - (1.0)) < (1e-12)
+  [PASS] (cfg.leaks[0].species.size()) == (2u)
+  [PASS] std::abs((cfg.leaks[0].species.at("CH4")) - (0.9)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].species.at("C3H8")) - (0.1)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].mass_flow_rate) - (0.25)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].temperature) - (310.0)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].velocity) - (12.0)) < (1e-12)
+  [PASS] std::strcmp((cfg.leaks[1].name.c_str()), ("leak_secondary")) == 0
+  [PASS] std::abs((cfg.leaks[1].position[0]) - (2.0)) < (1e-12)
+  [PASS] (cfg.leaks[1].species.size()) == (1u)
+  [PASS] std::abs((cfg.leaks[1].species.at("H2")) - (1.0)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[1].mass_flow_rate) - (0.05)) < (1e-12)
+  [PASS] std::strcmp((cfg.wind.model.c_str()), ("power_law")) == 0
+  [PASS] std::abs((cfg.wind.reference_height) - (10.0)) < (1e-12)
+  [PASS] std::abs((cfg.wind.reference_speed) - (4.0)) < (1e-12)
+  [PASS] std::abs((cfg.wind.roughness_length) - (0.05)) < (1e-12)
+  [PASS] std::abs((cfg.wind.direction[0]) - (1.0)) < (1e-12)
+  [PASS] cfg.pool.enabled == true
+  [PASS] std::abs((cfg.pool.position[0]) - (0.0)) < (1e-12)
+  [PASS] std::abs((cfg.pool.position[1]) - (-1.0)) < (1e-12)
+  [PASS] std::abs((cfg.pool.area) - (2.5)) < (1e-12)
+  [PASS] std::strcmp((cfg.pool.species.c_str()), ("C8H18")) == 0
+  [PASS] std::abs((cfg.pool.temperature) - (298.0)) < (1e-12)
+  [PASS] cfg.ignition.enabled == false
+  [PASS] std::strcmp((cfg.ignition.type.c_str()), ("spark")) == 0
+  [PASS] std::strcmp((cfg.turbulence.model.c_str()), ("k_epsilon")) == 0
+  [PASS] std::abs((cfg.turbulence.constants.C_mu) - (0.09)) < (1e-12)
+  [PASS] std::abs((cfg.turbulence.constants.C_eps1) - (1.44)) < (1e-12)
+  [PASS] std::abs((cfg.turbulence.constants.C_eps2) - (1.92)) < (1e-12)
+  [PASS] std::abs((cfg.turbulence.constants.sigma_k) - (1.0)) < (1e-12)
+  [PASS] std::abs((cfg.turbulence.constants.sigma_eps) - (1.3)) < (1e-12)
+  [PASS] std::strcmp((cfg.turbulence.wall_function.c_str()), ("launder_spalding")) == 0
+  [PASS] (cfg.output.plot_int) == (50)
+  [PASS] (cfg.output.chk_int) == (200)
+  [PASS] cfg.output.diagnostics == true
+  [PASS] (cfg.output.diagnostics_interval) == (5)
+  [PASS] std::strcmp((cfg.output.format.c_str()), ("hdf5")) == 0
+
+=== Test 2: Minimal YAML (only required fields) ===
+  [PASS] std::strcmp((cfg.geometry.type.c_str()), ("builtin")) == 0
+  [PASS] std::strcmp((cfg.geometry.file.c_str()), ("")) == 0
+  [PASS] std::abs((cfg.geometry.scale) - (1.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.xmin) - (-5.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.xmax) - (5.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.ymin) - (-3.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.ymax) - (3.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.zmin) - (0.0)) < (1e-12)
+  [PASS] std::abs((cfg.domain.zmax) - (8.0)) < (1e-12)
+  [PASS] (cfg.mesh.n_cell.size()) == (3u)
+  [PASS] (cfg.mesh.n_cell[0]) == (128)
+  [PASS] (cfg.mesh.n_cell[1]) == (64)
+  [PASS] (cfg.mesh.n_cell[2]) == (96)
+  [PASS] (cfg.mesh.max_level) == (2)
+  [PASS] (cfg.mesh.blocking_factor) == (8)
+  [PASS] (cfg.mesh.max_grid_size) == (32)
+  [PASS] cfg.mesh.refine.near_wall == true
+  [PASS] cfg.mesh.refine.near_leak == true
+  [PASS] std::strcmp((cfg.physics.model.c_str()), ("dispersion")) == 0
+  [PASS] std::strcmp((cfg.physics.chemistry.mechanism.c_str()), ("drm19")) == 0
+  [PASS] (cfg.physics.species.tracked.size()) == (1u)
+  [PASS] std::strcmp((cfg.physics.species.tracked[0].c_str()), ("CH4")) == 0
+  [PASS] std::strcmp((cfg.physics.transport.model.c_str()), ("Simple")) == 0
+  [PASS] std::strcmp((cfg.physics.eos.type.c_str()), ("ideal_gas")) == 0
+  [PASS] std::abs((cfg.time.stop_time) - (10.0)) < (1e-12)
+  [PASS] (cfg.time.max_step) == (10000)
+  [PASS] std::abs((cfg.time.cfl) - (0.7)) < (1e-12)
+  [PASS] std::abs((cfg.time.dt_init) - (1.0e-6)) < (1e-12)
+  [PASS] std::abs((cfg.time.dt_max) - (0.01)) < (1e-12)
+  [PASS] (cfg.leaks.size()) == (0u)
+  [PASS] std::strcmp((cfg.wind.model.c_str()), ("log_law")) == 0
+  [PASS] std::abs((cfg.wind.reference_height) - (10.0)) < (1e-12)
+  [PASS] std::abs((cfg.wind.reference_speed) - (5.0)) < (1e-12)
+  [PASS] std::abs((cfg.wind.roughness_length) - (0.03)) < (1e-12)
+  [PASS] cfg.pool.enabled == false
+  [PASS] cfg.ignition.enabled == false
+  [PASS] std::strcmp((cfg.turbulence.model.c_str()), ("k_epsilon")) == 0
+  [PASS] std::strcmp((cfg.turbulence.wall_function.c_str()), ("launder_spalding")) == 0
+  [PASS] (cfg.output.plot_int) == (100)
+  [PASS] (cfg.output.chk_int) == (500)
+  [PASS] cfg.output.diagnostics == true
+  [PASS] (cfg.output.diagnostics_interval) == (10)
+  [PASS] std::strcmp((cfg.output.format.c_str()), ("plotfile")) == 0
+
+=== Test 3: Missing required field (domain) ===
+[YAMLPARSER ERROR] Missing required section/field: domain
+  [PASS] status == 1
+
+=== Test 4: Multiple leak sources ===
+  [PASS] (cfg.leaks.size()) == (3u)
+  [PASS] std::strcmp((cfg.leaks[0].name.c_str()), ("L1")) == 0
+  [PASS] std::strcmp((cfg.leaks[1].name.c_str()), ("L2")) == 0
+  [PASS] std::strcmp((cfg.leaks[2].name.c_str()), ("L3")) == 0
+  [PASS] (cfg.leaks[0].species.size()) == (2u)
+  [PASS] std::abs((cfg.leaks[0].species.at("CH4")) - (0.5)) < (1e-12)
+  [PASS] std::abs((cfg.leaks[0].species.at("H2")) - (0.5)) < (1e-12)
+  [PASS] (cfg.leaks[1].species.size()) == (1u)
+  [PASS] std::abs((cfg.leaks[1].species.at("C3H8")) - (1.0)) < (1e-12)
+  [PASS] (cfg.leaks[2].species.size()) == (0u)
+
+=== Test 5: Optional modules disabled ===
+  [PASS] cfg.pool.enabled == false
+  [PASS] std::strcmp((cfg.pool.species.c_str()), ("C8H18")) == 0
+  [PASS] std::abs((cfg.pool.area) - (1.0)) < (1e-12)
+  [PASS] cfg.ignition.enabled == false
+  [PASS] std::strcmp((cfg.ignition.type.c_str()), ("spark")) == 0
+  [PASS] std::abs((cfg.ignition.energy) - (0.0)) < (1e-12)
+
+=== Test 6: Type error (string where double expected) ===
+[YAMLPARSER ERROR] Type error: zmax expected double
+  [PASS] status == 1
+
+=== Test 7: STL geometry without file → abort ===
+[YAMLPARSER ERROR] geometry.file is required when geometry.type = "stl"
+  [PASS] status == 1
+
+=== Test 8: n_cell wrong size → abort ===
+[YAMLPARSER ERROR] Type error: n_cell expected 3 elements, got 2
+  [PASS] status == 1
+
+=== Results: 140 passed, 0 failed ===
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+PASS Test 1: zero anti-diffusive flux → flux=flux_high
+PASS Test 2: A>0 large margins → C=1 → full anti-diffusion
+PASS Test 3: A>0 zero margins → C=0 → pure upwind
+PASS Test 4: A>0 partial limiting (C=0.5) → 0.25
+PASS Test 5: A<0 partial limiting (C=0.5) → 0.25
+PASS Test 6: fct_flux (ustar>0, flux_low=0.5, flux_high=0.9 → C=1 → 0.9)
+PASS Test 7: fct_flux (ustar<0, low=0.5, high=0.9 → C=0 → 0.5)
+PASS Test 8: ustar=0 → centered flux = 0.5
+PASS Test 9: MULES compression at interface (comp=1.150000 > pure=0.900000)
+PASS Test 10: far from interface (alpha=0) → compression zero
+PASS Test 11: full liquid (alpha=1) → compression zero
+PASS Test 12: uniform alpha (no gradient) → compression zero
+PASS Test 13: negative ustar MULES compression (comp=0.127500 > pure=-0.100000)
+PASS Test 14: compression flux sign-decoupled (a=0.200000 b=0.200000 c=-0.150000)
+
+ALL TESTS PASSED (14/14)
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+
+--- Test 1: uniform alpha=0 ---
+PASS: fx == 0 for uniform 0
+PASS: fy == 0 for uniform 0
+
+--- Test 2: uniform alpha=1 ---
+PASS: fx == 0 for uniform 1
+PASS: fy == 0 for uniform 1
+
+--- Test 3: 1D linear gradient (flat interface) ---
+PASS: fx == 0 for flat interface
+PASS: fy == 0 for flat interface
+
+--- Test 4: circular droplet (inward force) ---
+PASS: at least some inward-force cells found
+PASS: mostly inward force (inward=28 outward=8)
+  inward=28 outward=8
+
+--- Test 5: force ∝ sigma ---
+PASS: found interface cell with non-zero force
+  testing at (10,10) mag1=11.135228
+PASS: force non-zero at interface
+PASS: mag2/mag1 = 2.000000 ≈ 2.0
+
+--- Test 6: no NaN ---
+PASS: no NaN in csf_force output
+
+=== ALL PASSED ===
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+=== Phase 3.7 Two-Phase EOS Unit Tests ===
+
+Test 1: StiffenedGas analytical functions
+  PASS: sg_p matches analytical
+  PASS: sg_p > 0
+  PASS: sg_e round-trip
+  PASS: sg_T = e/cv
+  PASS: sg_cs matches analytical
+  PASS: sg_cs > 0
+  PASS: sg_dpdr_e = (gamma-1)*e
+  PASS: sg_dpde = (gamma-1)*rho
+
+Test 2: Pure liquid (alpha=1)
+  PASS: p matches sg_p
+  PASS: T matches sg_T
+  PASS: cs matches sg_cs
+  PASS: gam1 = gamma_liquid
+  PASS: p > 0
+  PASS: cs > 0
+
+Test 3: Pure gas (alpha=0)
+  PASS: p > 0
+  PASS: T > 0
+  PASS: cs > 0
+  PASS: T matches mock gas
+  PASS: p matches mock gas
+  PASS: gam1 = gamma_gas
+
+Test 4: alpha=1e-16 → pure gas path
+  PASS: p matches alpha=0
+  PASS: T matches alpha=0
+  PASS: cs matches alpha=0
+
+Test 5: alpha=0.9999999999999999 → pure liquid path
+  PASS: p matches alpha=1
+  PASS: T matches alpha=1
+
+Test 6: Interface cell (alpha=0.5)
+  PASS: p is finite
+  PASS: T is finite
+  PASS: cs is finite
+  PASS: gam1 is finite
+  PASS: dpdr_e is finite
+  PASS: dpde is finite
+  PASS: p > 0
+  PASS: cs > 0
+  PASS: T > 0
+  PASS: no NaN in p
+  PASS: no NaN in T
+  PASS: no NaN in cs
+
+Test 7: Safety floor on p and cs
+  PASS: p floored to >= 1
+  PASS: cs floored to >= 1
+
+========================================
+Results: 39 passed, 0 failed
+========================================
+EXIT:0
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+
+=== TwoPhaseHLLC Unit Tests ===
+
+  TEST: Sound speed for stiffened-gas EOS ... PASS
+  TEST: Internal energy for stiffened-gas EOS ... PASS
+  TEST: Gas-gas Sod shock tube (ρL=1, uL=0, pL=1e5, ρR=0.125, uR=0, pR=1e4, γ=1.4) ... PASS
+  TEST: Pure liquid-liquid (water-like, γ=4.4, p_inf=6e8) ... PASS
+  TEST: Gas-liquid interface (γ_gas=1.4, γ_liq=4.4, p_inf=6e8) ... PASS
+  TEST: Passive scalar Ystar follows ustar upwinding ... PASS
+  TEST: L/R symmetry ... PASS
+  TEST: Wave speed ordering SL < Sstar < SR ... PASS
+
+=== Results: 8 passed, 0 failed ===
+EXIT:0
+
+---------------------
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+=== WENO5 Unit Tests ===
+[PASS] T01: Sine 5th-order convergence (p=4.93)
+[PASS] T02: Constant preservation (max_err=2.2e-16)
+[PASS] T03: Linear exact reconstruction (L1=3.2e-16)
+[PASS] T04: Sod jump — no overshoot (uL=1.000000 uR=1.000000)
+[PASS] T05: Shock capture — monotone transition (uL=0.000000 uR=0.000000)
+[PASS] T06: WENO-Z sharper than WENO-JS at discontinuity (JS: uR=1.003996  Z: uR=1.000000  exact=1.001)
+[PASS] T07: Symmetry OK (weno5 vs weno5_left) (diff=0.0e+00)
+[PASS] T08: float convergence OK (p=3.5)
+=== 8/8 PASS ===
+EXIT:0
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <12 items>)
+tool checklist_write completed: Todo list updated (12 items, 92% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Compile & run test_k_epsilon",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Compile & run test_wall_functions",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+   ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleAll 11 tests compiled clean and passed]0;🐳 CodeWhale with 0 failures. Updating the status file:]0;🐋 CodeWhale]0;🐳 CodeWhaletool: write_file (path: /home/cj/PASS/FAIL, content: <529 chars>)
+
+tool write_file completed: --- a//home/cj/PASS/FAIL
++++ b//home/cj/PASS/FAIL
+@@ -1 +1,16 @@
+-PASS
+\ No newline at end of file
++# Final Verify — 2026-06-26
++# All 11 unit tests: PASS (0 failures)
++
++test_k_epsilon          16/16  PASS
++test_wall_functions     14/14  PASS
++test_turbulent_transport  7/7  PASS
++test_evaporatio...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: cat /home/cj/PASS/FAIL)
+tool exec_shell completed
+--- stdout/stderr ---
+# Final Verify — 2026-06-26
+# All 11 unit tests: PASS (0 failures)
+
+test_k_epsilon          16/16  PASS
+test_wall_functions     14/14  PASS
+test_turbulent_transport  7/7  PASS
+test_evaporation        15/15  PASS
+test_wind               12/12  PASS
+test_yaml_parser       140/140 PASS
+test_vof_fct            14/14  PASS
+test_csf                  6/6  PASS
+test_twophase_eos       39/39  PASS
+test_twophase_hllc        8/8  PASS
+test_weno5                8/8  PASS
+
+Total: 11/11 PASS, 0 FAIL, 279/279 individual assertions passed.
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <12 items>)
+tool checklist_write completed: Todo list updated (12 items, 100% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Compile & run test_k_epsilon",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Compile & run test_wall_functions",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+  ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale## 最终验证结果：**11/11 PASS，0 FAIL**
+
+全部 11 个单元测试重新编译成功，运行全部通过，279 个独立断言零失败。
+
+| #]0;🐳 CodeWhale | 测试 | 通过/总计 | 状态 |
+|---|------|-----------|------|
+| 1 | test_k_epsilon | 16/16 | PASS |
+| 2 | test_wall_functions | 14/14 | PASS |
+| 3 | test_turbulent_transport | 7/7 | PASS |
+| 4 | test_evaporation | 15/15 | PASS |
+| 5 | test_wind | 12/12 | PASS |
+| 6 | test_yaml]0;🐋 CodeWhale_parser | 140/140 | PASS |
+| 7 | test_vof_fct | 14/14 | PASS |
+| 8 | test_csf | 6/6 | PASS |
+| 9 | test_twophase_eos | 39/39 | PASS |
+| 10 | test_twophase_hllc | 8/8 | PASS |
+| 11 | test_weno5 | 8/8 | PASS |
+
+注：test_weno5 编译时需]0;🐳 CodeWhale `-Isrc/common/reconstruction`（非原先的 `-Isrc/academic/vof`），`weno5.H` 实际位于 `src/common/reconstruction/`。
+
+结果已写入 `/home/cj/PASS/FAIL`。

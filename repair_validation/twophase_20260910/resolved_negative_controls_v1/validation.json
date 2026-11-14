@@ -1,0 +1,33 @@
+{
+  "meaning": "Intentionally altered validation metadata and return period using immutable existing fields; no solver rerun and no production case edited.",
+  "checks": [
+    {
+      "case": "incomplete",
+      "expected_exit": 3,
+      "actual_exit": 3,
+      "passed": true,
+      "stderr": ""
+    },
+    {
+      "case": "failed_exit",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/validate_resolved_two_phase.py\", line 165, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/cj/my-pele/tools/validate_resolved_two_phase.py\", line 110, in main\n    raise ValueError('successful exit_code and configured tp.stop_time required; --partial is only for explicit inspection')\nValueError: successful exit_code and configured tp.stop_time required; --partial is only for explicit inspection\n"
+    },
+    {
+      "case": "explicit_partial",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "stderr": ""
+    },
+    {
+      "case": "wrong_return_period",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

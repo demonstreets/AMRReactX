@@ -1,0 +1,351 @@
+{
+  "capabilities": {
+    "academic_gas_detonation": {
+      "claim": "Gas-phase detonation can run on CPU/MPI-oriented gates, a single CUDA GPU, and multi-GPU MPI+CUDA detonation runtime gates in the current academic gas priority scope.",
+      "integration_evidence": [],
+      "limitation": "The gate demonstrates current runtime capability and stability, not final publication-grade grid convergence for every mechanism/domain variant.",
+      "modes": {
+        "cpu_mpi": {
+          "expected_status": "PASS-ACADEMIC-GAS-DETONATION-PRIORITY-MATRIX",
+          "failures": [],
+          "mode": "CPU/MPI-capable gas detonation priority matrix",
+          "path": "docs/codex_audit/evidence/academic_gas_detonation_priority_matrix_20260731/academic_gas_detonation_priority_matrix_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-DETONATION-PRIORITY-MATRIX"
+        },
+        "multi_gpu_mpi_cuda": {
+          "expected_status": "PASS-ACADEMIC-GAS-DETONATION-MPI-CUDA",
+          "failures": [],
+          "mode": "2-rank / 2-device MPI+CUDA gas detonation",
+          "path": "docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/academic_gas_detonation_mpi_cuda_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-DETONATION-MPI-CUDA"
+        },
+        "single_gpu": {
+          "expected_status": "PASS-ACADEMIC-GAS-DETONATION-SINGLE-CUDA",
+          "failures": [],
+          "mode": "1-rank / 1-device CUDA gas detonation",
+          "path": "docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/academic_gas_detonation_single_cuda_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-DETONATION-SINGLE-CUDA"
+        }
+      },
+      "ready": true
+    },
+    "academic_gas_liquid_twophase_detonation": {
+      "claim": "Gas-liquid/two-phase droplet/spray detonation-adjacent capability can run on CPU-oriented two-phase gates, single GPU, and extended 2-GPU MPI+CUDA reacting spray gates.",
+      "integration_evidence": [
+        {
+          "expected_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CERTIFICATION",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_certification_20260731/academic_gas_liquid_detonation_certification_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CERTIFICATION"
+        },
+        {
+          "expected_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-LONG",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/academic_gas_liquid_detonation_mpi_cuda_long_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-LONG"
+        }
+      ],
+      "limitation": "The 1000-step MPI+CUDA gate is a reduced-resolution stability proof for reacting spray coupling; final quantitative two-phase detonation validation still needs case-specific grid convergence and external comparison.",
+      "modes": {
+        "cpu_mpi": {
+          "expected_status": "PASS-ACADEMIC-TWOPHASE-BROADER-MATRIX-AUDIT",
+          "failures": [],
+          "mode": "CPU-oriented broader two-phase matrix",
+          "path": "docs/codex_audit/evidence/academic_twophase_broader_matrix_20260730/academic_twophase_broader_matrix_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-TWOPHASE-BROADER-MATRIX-AUDIT"
+        },
+        "multi_gpu_mpi_cuda": {
+          "expected_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-EXTENDED",
+          "failures": [],
+          "mode": "1000-step 2-rank / 2-device MPI+CUDA reacting spray",
+          "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_extended_20260803/academic_gas_liquid_detonation_mpi_cuda_extended_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-MPI-CUDA-EXTENDED"
+        },
+        "single_gpu": {
+          "expected_status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CUDA-SCOUT",
+          "failures": [],
+          "mode": "single CUDA GPU reacting spray scout",
+          "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_cuda_scout_20260731/academic_gas_liquid_detonation_cuda_scout_report.json",
+          "ready": true,
+          "status": "PASS-ACADEMIC-GAS-LIQUID-DETONATION-CUDA-SCOUT"
+        }
+      },
+      "ready": true
+    },
+    "engineering_h2_leak_diffusion_fire": {
+      "claim": "H2 plant/tank-farm/pipe-rack leak, dispersion, ignition, and reacting fire can run on CPU/MPI, single CUDA GPU, and multi-GPU MPI+CUDA in the current user-priority scope.",
+      "integration_evidence": [
+        {
+          "expected_status": "PASS-H2-INTEGRATED-ENGINEERING-INITIAL-ACCEPTANCE",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/engineering_h2_integrated_initial_acceptance_20260728/h2_integrated_initial_acceptance_report.json",
+          "ready": true,
+          "status": "PASS-H2-INTEGRATED-ENGINEERING-INITIAL-ACCEPTANCE"
+        },
+        {
+          "expected_status": "PASS-H2-LARGE-ENGINEERING-ACCEPTANCE",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/engineering_h2_large_acceptance_20260727/h2_large_acceptance_report.json",
+          "ready": true,
+          "status": "PASS-H2-LARGE-ENGINEERING-ACCEPTANCE"
+        },
+        {
+          "expected_status": "PASS-H2-PIPE-RACK-GPU-FIRE-OBSTACLE-SMOKE",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_gpu_fire_obstacle_20260727/pipe_rack_gpu_fire_obstacle_report.json",
+          "ready": true,
+          "status": "PASS-H2-PIPE-RACK-GPU-FIRE-OBSTACLE-SMOKE"
+        }
+      ],
+      "limitation": "Current engineering production credibility excludes strict external plume-shape agreement, real CAD cleanup, and calibrated radiation/overpressure closure until controlled artifacts are supplied.",
+      "modes": {
+        "cpu_mpi": {
+          "expected_status": "PASS-PRODUCTION-MESH-FULL-DURATION-CAMPAIGN",
+          "failures": [],
+          "mode": "multi-core CPU / MPI",
+          "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_campaign_20260722/production_mesh_campaign_report.json",
+          "ready": true,
+          "status": "PASS-PRODUCTION-MESH-FULL-DURATION-CAMPAIGN"
+        },
+        "multi_gpu_mpi_cuda": {
+          "expected_status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-MPI-CUDA-SUSTAINED",
+          "failures": [],
+          "mode": "multi-GPU MPI+CUDA",
+          "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_mpi_cuda_long_revalidation_20260731/pipe_rack_direct_reacting_mpi_cuda_report.json",
+          "ready": true,
+          "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-MPI-CUDA-SUSTAINED"
+        },
+        "single_gpu": {
+          "expected_status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-SINGLE-CUDA-SUSTAINED",
+          "failures": [],
+          "mode": "single CUDA GPU",
+          "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_cuda_2000step_20260727/pipe_rack_direct_reacting_cuda_report.json",
+          "ready": true,
+          "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-SINGLE-CUDA-SUSTAINED"
+        }
+      },
+      "ready": true
+    },
+    "engineering_multifuel_lng_lpg_surrogate_sources": {
+      "claim": "Engineering gas-source cases can be configured for H2, CH4, C3H8, gasified LNG/CH4, gasified LPG/C3H8, and external vaporization schedules with CPU/MPI, single CUDA GPU, and MPI+CUDA evidence in the current user-priority scope.",
+      "integration_evidence": [
+        {
+          "expected_status": "PASS-ENGINEERING-MULTI-FUEL-TEMPLATE-CATALOG",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/engineering_multi_fuel_template_catalog_20260811/engineering_multi_fuel_template_catalog_report.json",
+          "ready": true,
+          "status": "PASS-ENGINEERING-MULTI-FUEL-TEMPLATE-CATALOG"
+        },
+        {
+          "expected_status": "PASS-ENGINEERING-GASIFIED-LNG-LPG-SURROGATE-BOUNDARY",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/engineering_gasified_lng_lpg_surrogate_20260806/engineering_gasified_lng_lpg_surrogate_report.json",
+          "ready": true,
+          "status": "PASS-ENGINEERING-GASIFIED-LNG-LPG-SURROGATE-BOUNDARY"
+        },
+        {
+          "expected_status": "PASS-ENGINEERING-LIQUEFIED-PHASE-CHANGE-OVERCLAIM-GUARD",
+          "failures": [],
+          "path": "docs/codex_audit/evidence/engineering_liquefied_phase_change_overclaim_guard_20260811/engineering_liquefied_phase_change_overclaim_guard_report.json",
+          "ready": true,
+          "status": "PASS-ENGINEERING-LIQUEFIED-PHASE-CHANGE-OVERCLAIM-GUARD"
+        }
+      ],
+      "limitation": "This is evidence for gas-phase configurable-source and screening vaporization workflows; it does not claim CFD-internal flashing discharge, liquid pool spread, boiling, or pool evaporation.",
+      "modes": {
+        "cpu_mpi": {
+          "expected_status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY",
+          "failures": [],
+          "mode": "multi-fuel gas-source CPU/MPI evidence",
+          "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+          "ready": true,
+          "status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY"
+        },
+        "multi_gpu_mpi_cuda": {
+          "expected_status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY",
+          "failures": [],
+          "mode": "multi-fuel gasified LNG/LPG MPI+CUDA evidence",
+          "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+          "ready": true,
+          "status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY"
+        },
+        "single_gpu": {
+          "expected_status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY",
+          "failures": [],
+          "mode": "multi-fuel gas-source single CUDA evidence",
+          "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+          "ready": true,
+          "status": "PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY"
+        }
+      },
+      "ready": true
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "multi-core CPU / MPI",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_mesh_campaign_20260722/production_mesh_campaign_report.json",
+      "sha256": "8981aa62e1abd4e57072e8bb807f91a392e905b32cba96f715609bb7d97cf5e3",
+      "size_bytes": 9297
+    },
+    {
+      "label": "single CUDA GPU",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_cuda_2000step_20260727/pipe_rack_direct_reacting_cuda_report.json",
+      "sha256": "12b98e8c794016bee3ebf7f74a580104141634085350f8db98fadb87d14d45b4",
+      "size_bytes": 10075
+    },
+    {
+      "label": "multi-GPU MPI+CUDA",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_mpi_cuda_long_revalidation_20260731/pipe_rack_direct_reacting_mpi_cuda_report.json",
+      "sha256": "d0efd78a633e2a1fbb9290ef7f36bdff474d0844448ee11fbeae7e4e9d7f4435",
+      "size_bytes": 10987
+    },
+    {
+      "label": "engineering_h2_leak_diffusion_fire_integration",
+      "path": "docs/codex_audit/evidence/engineering_h2_integrated_initial_acceptance_20260728/h2_integrated_initial_acceptance_report.json",
+      "sha256": "009bb2fa07249fdcce97a7842f11b91861d7a7959eec947edeaec5a3c26c2b01",
+      "size_bytes": 6168
+    },
+    {
+      "label": "engineering_h2_leak_diffusion_fire_integration",
+      "path": "docs/codex_audit/evidence/engineering_h2_large_acceptance_20260727/h2_large_acceptance_report.json",
+      "sha256": "e062a10c0e456d5b14f288754f6a41c97f8ce0d5828bdea0f9d6608114e238fb",
+      "size_bytes": 9523
+    },
+    {
+      "label": "engineering_h2_leak_diffusion_fire_integration",
+      "path": "docs/codex_audit/evidence/engineering_h2_pipe_rack_gpu_fire_obstacle_20260727/pipe_rack_gpu_fire_obstacle_report.json",
+      "sha256": "f8d2a16e319e9bb16b87619480e09ed0c77e8e52a796d79908fd1cf13b09ca13",
+      "size_bytes": 5497
+    },
+    {
+      "label": "multi-fuel gas-source CPU/MPI evidence",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "f4128fea19ade36f29d4513c3a3bdd7a92cc8e6d2b35e0935af3009197a95a9c",
+      "size_bytes": 19158
+    },
+    {
+      "label": "multi-fuel gas-source single CUDA evidence",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "f4128fea19ade36f29d4513c3a3bdd7a92cc8e6d2b35e0935af3009197a95a9c",
+      "size_bytes": 19158
+    },
+    {
+      "label": "multi-fuel gasified LNG/LPG MPI+CUDA evidence",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "f4128fea19ade36f29d4513c3a3bdd7a92cc8e6d2b35e0935af3009197a95a9c",
+      "size_bytes": 19158
+    },
+    {
+      "label": "engineering_multifuel_lng_lpg_surrogate_sources_integration",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_template_catalog_20260811/engineering_multi_fuel_template_catalog_report.json",
+      "sha256": "5e121f3af0f1077e6e152af6afc91e1cac870aaf3c538771a1a2d11be765ce04",
+      "size_bytes": 5470
+    },
+    {
+      "label": "engineering_multifuel_lng_lpg_surrogate_sources_integration",
+      "path": "docs/codex_audit/evidence/engineering_gasified_lng_lpg_surrogate_20260806/engineering_gasified_lng_lpg_surrogate_report.json",
+      "sha256": "f11e1b65a32fcf713235a377ca68a222d5a059aa165b8be4e30a3c5cdbffc5c5",
+      "size_bytes": 12121
+    },
+    {
+      "label": "engineering_multifuel_lng_lpg_surrogate_sources_integration",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_phase_change_overclaim_guard_20260811/engineering_liquefied_phase_change_overclaim_guard_report.json",
+      "sha256": "8541f290e73d63904ccf77add0b901da36ca25c0988d42ff9741785cdf0cfb26",
+      "size_bytes": 6409
+    },
+    {
+      "label": "CPU/MPI-capable gas detonation priority matrix",
+      "path": "docs/codex_audit/evidence/academic_gas_detonation_priority_matrix_20260731/academic_gas_detonation_priority_matrix_report.json",
+      "sha256": "2c215c8ec43f5eb3a1b3b63709d5c434f67762fcf1a16173834b682dd60f5983",
+      "size_bytes": 7259
+    },
+    {
+      "label": "1-rank / 1-device CUDA gas detonation",
+      "path": "docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/academic_gas_detonation_single_cuda_report.json",
+      "sha256": "40855b3114a33ed000e0eb390ba3aed2d19c129665001ce4405c5a445ebf603f",
+      "size_bytes": 4124
+    },
+    {
+      "label": "2-rank / 2-device MPI+CUDA gas detonation",
+      "path": "docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/academic_gas_detonation_mpi_cuda_report.json",
+      "sha256": "308837f606f63a31a4ef5129496906f7f801d3e7c69e9d83974f190e96440d1e",
+      "size_bytes": 3861
+    },
+    {
+      "label": "CPU-oriented broader two-phase matrix",
+      "path": "docs/codex_audit/evidence/academic_twophase_broader_matrix_20260730/academic_twophase_broader_matrix_report.json",
+      "sha256": "e8717685b7702ee585949591678ba8ae0250115801b4d30b19850536fbe03384",
+      "size_bytes": 25483
+    },
+    {
+      "label": "single CUDA GPU reacting spray scout",
+      "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_cuda_scout_20260731/academic_gas_liquid_detonation_cuda_scout_report.json",
+      "sha256": "beca121259dc2957d8f350ce04626fa4942ae0f42c4836126b10cbb49a2a01af",
+      "size_bytes": 11768
+    },
+    {
+      "label": "1000-step 2-rank / 2-device MPI+CUDA reacting spray",
+      "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_extended_20260803/academic_gas_liquid_detonation_mpi_cuda_extended_report.json",
+      "sha256": "6c2e069d42202a5ca049c2f46ec1fb7a10f256511e7794e098f2b65618404870",
+      "size_bytes": 5819
+    },
+    {
+      "label": "academic_gas_liquid_twophase_detonation_integration",
+      "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_certification_20260731/academic_gas_liquid_detonation_certification_report.json",
+      "sha256": "352a501972997a859112551d1c8dda6275aea59582fd2695b41f770e70921851",
+      "size_bytes": 13832
+    },
+    {
+      "label": "academic_gas_liquid_twophase_detonation_integration",
+      "path": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_long_20260803/academic_gas_liquid_detonation_mpi_cuda_long_report.json",
+      "sha256": "052ce53b7d7e3deb0196114f9e4e156351f2aa68914c23c80a7e127528f2bdbb",
+      "size_bytes": 5746
+    },
+    {
+      "label": "strict_blocker_matrix",
+      "path": "docs/codex_audit/evidence/master_plan_strict_blocker_matrix_20260731/master_plan_strict_blocker_matrix_report.json",
+      "sha256": "c3accb1ccabf2c11b721486f181bc36a6cafa8ab61e03db1734f2844f26e3b69",
+      "size_bytes": 7100
+    },
+    {
+      "label": "master_plan_current_scope_verification",
+      "path": "docs/codex_audit/evidence/master_plan_current_scope_verification_20260731/master_plan_current_scope_verification_report.json",
+      "sha256": "0436a26de0e9f3c4a1431a3116cbc2f58163230404683315c58bd0131eb2323c",
+      "size_bytes": 13217
+    },
+    {
+      "label": "academic_current_priority_scope",
+      "path": "docs/codex_audit/evidence/academic_current_priority_scope_20260731/academic_current_priority_scope_report.json",
+      "sha256": "eb66a55cc9d64e9a4293c6695b99e0291d0a2a9f2ece80c8e957048f46e5704b",
+      "size_bytes": 5923
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:37.811980+00:00",
+  "schema_version": 1,
+  "status": "PASS-CURRENT-PARALLEL-CAPABILITY-MATRIX",
+  "summary": {
+    "academic_current_priority_ready": true,
+    "cpu_mpi_ready_for_all_current_scenarios": true,
+    "current_parallel_capability_matrix_ready": true,
+    "current_scope_verification_ready": true,
+    "multi_gpu_mpi_cuda_ready_for_all_current_scenarios": true,
+    "open_strict_blocker_count": 3,
+    "open_strict_blockers": [
+      "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure"
+    ],
+    "ready_scenario_count": 4,
+    "scenario_count": 4,
+    "single_gpu_ready_for_all_current_scenarios": true,
+    "strict_master_plan_complete": false
+  }
+}

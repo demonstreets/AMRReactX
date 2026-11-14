@@ -1,0 +1,92 @@
+{
+  "evidence_files": [
+    {
+      "label": "h2_leak_3d_prob_header",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "dataverse_refined_source_projection_probe",
+      "path": "docs/codex_audit/evidence/dataverse_refined_source_projection_probe_mpi_cuda_20260807/dataverse_refined_source_projection_probe_report.json",
+      "sha256": "0c91b3d778c11e588c46be30c9e8849f80612778aae3c1e295fa4457c11d5310",
+      "size_bytes": 4480
+    },
+    {
+      "label": "dataverse_full_channel_refined_source_dx025_1000step_dt5em6",
+      "path": "docs/codex_audit/evidence/dataverse_full_channel_refined_source_dx025_1000step_dt5em6_mpi_cuda_20260807/dataverse_full_channel_refined_source_dx025_1000step_dt5em6_report.json",
+      "sha256": "8e0f99d459be52b6d50c4adf060d272e300707d69091d53533e1f88bd7dd76fd",
+      "size_bytes": 3992
+    },
+    {
+      "label": "dataverse_physics_alignment",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_physics_alignment_20260804/dataverse_open_channel_physics_alignment_report.json",
+      "sha256": "cd1c72ef4aad327018a9fa36050c6f3e1cb96ad342ca8be195f5fd7162c6f1bd",
+      "size_bytes": 4797
+    },
+    {
+      "label": "input_deck_0",
+      "path": "examples/engineering/h2_leak_3d/input.dataverse_refined_source_projection_probe_3d",
+      "sha256": "e29b558eb30e1a8a4194ec8b5a8db6221ffb5c46d524368818d47e5604b79bdd",
+      "size_bytes": 1356
+    },
+    {
+      "label": "input_deck_1",
+      "path": "examples/engineering/h2_leak_3d/input.dataverse_full_channel_refined_source_dx025_1000step_dt5em6_3d",
+      "sha256": "52d8407b3a2eaa0b85c123861a5ac4210f92b0706d83d66c2c3f241471534bea",
+      "size_bytes": 1393
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:06:21.284058+00:00",
+  "implementation_notes": [
+    "The current h2_leak_3d source uses cell-centered active volume on the GeometryData passed to modify_ext_sources.",
+    "A strict AMR implementation must normalize over the finest uncovered cells only, avoiding coarse/fine double counting.",
+    "The contract recommends at least 16x refinement from dx=0.025 m so the 2.3 mm Dataverse orifice radius is represented by at least one finest cell radius.",
+    "Passing this contract is a precondition for a future longer Dataverse plume-shape agreement run; it does not clear the strict blocker by itself."
+  ],
+  "input_dx": {
+    "examples/engineering/h2_leak_3d/input.dataverse_full_channel_refined_source_dx025_1000step_dt5em6_3d": [
+      0.024999999999999998,
+      0.025,
+      0.025
+    ],
+    "examples/engineering/h2_leak_3d/input.dataverse_refined_source_projection_probe_3d": [
+      0.012499999999999999,
+      0.0125,
+      0.012500000000000011
+    ]
+  },
+  "required_acceptance": {
+    "coarse_cells_covered_by_fine_level_receive_zero_source": true,
+    "dataverse_agreement_not_cleared_by_contract_alone": true,
+    "gpu_mpi_parity_for_projected_source_mass": true,
+    "source_mass_integral_conserved_across_amr_regrid": true,
+    "source_projected_only_on_finest_available_level": true,
+    "sum_active_volume_over_all_levels_counts_each_physical_cell_once": true
+  },
+  "schema_version": 1,
+  "status": "PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-CONTRACT",
+  "summary": {
+    "amr_source_projection_contract_ready": true,
+    "applies_source_to_all_ext_src_tiles": true,
+    "clears_external_plume_reference_blocker": false,
+    "current_full_channel_min_dx_m": 0.024999999999999998,
+    "current_refined_probe_min_dx_m": 0.012499999999999999,
+    "current_single_level_projection_probe_ready": true,
+    "current_source_projection_is_single_level_cell_centered": true,
+    "experimental_orifice_radius_m": 0.0023,
+    "lacks_finest_level_owner_guard": true,
+    "lacks_level_aware_mask": true,
+    "physics_alignment_active_cell_count_for_experimental_radius": null,
+    "physics_alignment_status": "DIAGNOSED-DATAVERSE-OPEN-CHANNEL-H2-PHYSICS-ALIGNMENT-GAPS",
+    "recommended_cells_per_orifice_radius": 1.4720000000000002,
+    "recommended_finest_dx_m": 0.0015624999999999999,
+    "recommended_refinement_ratio_from_dx025": 16,
+    "required_refinement_from_full_dx025": 11,
+    "strict_blocker_still_open": true,
+    "strict_external_plume_blocker_cleared": false,
+    "target_finest_dx_m": 0.0023,
+    "uses_cell_centered_active_volume": true,
+    "uses_current_geometry_cell_size": true
+  }
+}

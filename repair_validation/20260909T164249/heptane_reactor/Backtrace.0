@@ -1,0 +1,46 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x2d9726) [0x5930c855e726]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x2de4d4) [0x5930c85634d4]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x1538cd) [0x5930c83d88cd]
+    std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long) at /usr/include/c++/13/bits/stl_vector.h:389
+ (inlined by) std::_Vector_base<char, std::allocator<char> >::~_Vector_base() at /usr/include/c++/13/bits/stl_vector.h:369
+ (inlined by) std::vector<char, std::allocator<char> >::~vector() at /usr/include/c++/13/bits/stl_vector.h:738
+ (inlined by) amrex::Assert_host(char const*, char const*, int, char const*, unsigned long) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.cpp:322
+
+ 3: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x7de038) [0x5930c8a63038]
+    amrex::Assert(char const*, char const*, int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:211
+ (inlined by) PeleC::variableSetUp() at /home/cj/my-pele/examples/academic/shock_droplet/../../../external/PeleC/Source/Setup.cpp:339
+
+ 4: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x32aaf0) [0x5930c85afaf0]
+    amrex::Amr::InitAmr() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:291
+
+ 5: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x32d41b) [0x5930c85b241b]
+    amrex::Amr::Amr(amrex::LevelBld*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:264
+
+ 6: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x49526) [0x5930c82ce526]
+    PeleCAmr::Amr(amrex::LevelBld*) at /home/cj/my-pele/examples/academic/shock_droplet/../../../external/PeleC/Source/PeleCAmr.H:20 (discriminator 1)
+ (inlined by) std::__detail::_MakeUniq<PeleCAmr>::__single_object std::make_unique<PeleCAmr, amrex::LevelBld*>(amrex::LevelBld*&&) at /usr/include/c++/13/bits/unique_ptr.h:1070 (discriminator 1)
+ (inlined by) main at /home/cj/my-pele/examples/academic/shock_droplet/../../../external/PeleC/Source/main.cpp:175 (discriminator 1)
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x770c9d22a1ca]
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x770c9d22a28b]
+
+ 9: /home/cj/my-pele/examples/academic/shock_droplet/repair_20260909_heptane2d.gnu.ex(+0x4a955) [0x5930c82cf955]
+    ?? ??:0
+

@@ -1,0 +1,53 @@
+{
+  "contracts": {
+    "interface_sharpness_diagnosis_points_to_transport_plus_balanced_force": true,
+    "low_mach_aux_bridge_present": true,
+    "low_mach_route_has_no_existing_plic": true,
+    "pelec_mules_like_compression_is_not_low_mach_aux_transport": true,
+    "pelec_route_has_vof_fct_reference_components": true,
+    "qlt03_path_still_not_ready": true,
+    "rejected_curvature_and_transport_trials_are_guarded": true
+  },
+  "decision": {
+    "avoid_next": [
+      "promoting PeleC VOF/FCT code as a direct PeleLMeX replacement without an adaptation layer",
+      "additional local curvature smoothing without sharper interface transport",
+      "additional one-dimensional slope limiter swaps without a geometry-aware interface model"
+    ],
+    "qlt03_ready": false,
+    "recommended_next_route": "design a dedicated low-Mach Aux-alpha conservative geometric/reinitialization or THINC-like sharp-interface transport gate, then couple it to balanced-force CSF"
+  },
+  "evidence_inputs": {
+    "interface_sharpness": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_interface_sharpness_20260730/interface_sharpness_report.json",
+    "qlt03_path_decision": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json",
+    "rejected_curvature_trials": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_curvature_trials_20260730/curvature_trial_report.json",
+    "rejected_transport_trials": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_transport_trials_20260730/transport_trial_report.json"
+  },
+  "findings": [
+    {
+      "detail": "PeleLMeX QLT-03 currently advects Aux alpha with finite-volume MAC-face fluxes and applies explicit CSF from diffuse alpha gradients.",
+      "name": "low_mach_aux_bridge_is_diffuse_interface_not_plic",
+      "status": "PASS"
+    },
+    {
+      "detail": "The inspected PeleLMeX low-Mach path does not expose an existing PLIC/geometric interface reconstruction to switch on.",
+      "name": "no_existing_low_mach_geometric_reconstruction_found",
+      "status": "PASS"
+    },
+    {
+      "detail": "PeleC has VOF/FCT flux and MULES-like compression references, but they are coupled to PeleC's compressible two-phase flux path rather than PeleLMeX incompressible Aux transport.",
+      "name": "pelec_vof_fct_is_reference_not_drop_in",
+      "status": "PASS"
+    }
+  ],
+  "inspected_files": {
+    "low_mach_aux_transport": "/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp",
+    "low_mach_problem": "/home/cj/my-pele/examples/academic/qlt03_lm_aux_bridge/pelelmex_prob.H",
+    "low_mach_problem_specific_functions": "/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_ProblemSpecificFunctions.H",
+    "pelec_godunov": "/home/cj/my-pele/external/PeleC/Source/Godunov.H",
+    "pelec_hydro": "/home/cj/my-pele/external/PeleC/Source/Hydro.cpp",
+    "pelec_mol": "/home/cj/my-pele/external/PeleC/Source/MOL.cpp"
+  },
+  "scope": "Capability audit for the next QLT-03 academic two-phase route after rejecting local curvature smoothing and one-dimensional MC limiter trials.",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-ROUTE-CAPABILITY-AUDIT"
+}

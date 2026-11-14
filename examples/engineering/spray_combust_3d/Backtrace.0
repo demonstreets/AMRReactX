@@ -1,0 +1,28 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX3d.gnu.CUDA.ex(+0x735a27) [0x63486ba38a27]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: ./PeleLMeX3d.gnu.CUDA.ex(+0x73a774) [0x63486ba3d774]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleLMeX3d.gnu.CUDA.ex(+0xf3ac6) [0x63486b3f6ac6]
+    main at /home/cj/my-pele/external/PeleLMeX/Source/main.cpp:61
+
+ 3: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x755391e2a1ca]
+
+ 4: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x755391e2a28b]
+
+ 5: ./PeleLMeX3d.gnu.CUDA.ex(+0x1014d5) [0x63486b4044d5]
+    ?? ??:0
+

@@ -1,0 +1,65 @@
+# =============================================================================
+# my-pele — Backward-Facing Step (Driver & Seegmiller 1985, Re_H ≈ 36000)
+# =============================================================================
+# 2D domain: x ∈ [-0.15, 1.15] m, y ∈ [0, 0.35] m  (~ -4H→30H, ~ 0→9H)
+# Step height H = 0.0381 m (1.5 inch), inlet channel height = 8H = 0.3048 m
+# Uniform grid 104×28, Δ = 0.0125 m (square cells, ≈3 cells across H)
+# Inlet: uniform profile, U_ref = 13.47 m/s (44.2 ft/s)
+# y_lo: SlipWall (x<0) / NoSlipWall (x≥0), y_hi: SlipWall
+# Low-Mach incompressible mode, EB step geometry, air model (non-reacting)
+# =============================================================================
+
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0               # For each dir, 0: non-periodic, 1: periodic
+geometry.coord_sys   = 0                  # 0 => cart, 1 => RZ
+geometry.prob_lo     = -0.15 0.0          # x_lo y_lo (z_lo)
+geometry.prob_hi     = 1.15 0.35          # x_hi y_hi (z_hi)
+
+# >>>>>>>>>>>>>  BC FLAGS <<<<<<<<<<<<<<<<
+# Interior, Inflow, Outflow, Symmetry,
+# SlipWallAdiab, NoSlipWallAdiab, SlipWallIsotherm, NoSlipWallIsotherm
+peleLM.lo_bc = Inflow NoSlipWallAdiab
+peleLM.hi_bc = Outflow SlipWallAdiab
+
+peleLM.incompressible = 0
+peleLM.rho = 1.17
+peleLM.mu = 1.8e-5
+
+#--------------------------- Problem -------------------------------
+prob.T_mean = 293.0
+prob.P_mean = 101325.0
+prob.Y_o2   = 0.233
+prob.meanFlowMag = 13.47
+prob.T_wall = 300.0
+
+#-------------------------AMR CONTROL----------------------------
+amr.n_cell          = 104 28             # Level 0 number of cells in each direction
+amr.v               = 1                  # AMR verbose
+amr.max_level       = 0                  # maximum level number allowed
+amr.n_error_buf     = 1 1 2 2            # number of buffer cells in error est
+amr.blocking_factor = 4                  # block factor in grid generation (min box size)
+amr.max_grid_size   = 64                 # max box size
+amr.grid_eff        = 0.7                # what constitutes an efficient grid
+
+#-------------------------PeleLM CONTROL----------------------------
+peleLM.v = 1
+peleLM.les_model = None
+
+#-------------------------Time stepping------------------------
+amr.max_step = 200
+amr.stop_time = -1.0
+amr.dt_shrink = 0.1
+amr.cfl = 0.3
+
+#-------------------------IO CONTROL----------------------------
+amr.plot_int = 50
+amr.check_int = 100
+amr.derive_plot_vars = avg_pressure mag_vort
+
+#-------------------------EB SETUP--------------------------------
+eb2.geom_type = box
+eb2.box_lo    = -0.15  0.0
+eb2.box_hi    =  0.0    0.0381
+eb2.box_has_fluid_inside = 0
+eb2.small_volfrac = 1.0e-4
+peleLM.isothermal_EB = 1

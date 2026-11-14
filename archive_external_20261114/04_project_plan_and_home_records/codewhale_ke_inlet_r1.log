@@ -1,0 +1,184 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_ke_inlet_R1.md)
+tool read_file completed: # TASK: 修复 k-ε 入口湍流审查 3 个问题
+
+## 修复 1 (HIGH): aux 索引硬编码 → 加运行时检查
+
+在 PeleLMeX_BC.cpp 的 inlet BC 代码块开头加：
+```cpp
+// k-ε aux convention: aux[0]=k, aux[1]=ε (established in 3.10d)
+AMREX_ASSERT(m_aux_names.size() >= 2);
+AMREX_ASSERT(m_aux_names[0] == "k" || m_aux_names[0] == "turb_kin_energy");
+AMREX_AS...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleGot it. Three fixes: (1) aux index assertions, (2) default TI=]0;🐳 CodeWhale0, (3) L_t division guard. Let me read both files first.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: m_ke_inlet_TI)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: m_ke_inlet_L)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2345" shown_lines="1-100" truncated="true" next_start_line="101">
+     1│ #ifndef PeleLMeX_H
+     2│ #define PeleLMeX_H
+     3│ 
+     4│ // PeleLMeX includes
+     5│ #include "PeleLMeX_UserKeys.H"
+     6│ #include "Pel...
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhaleGood. Now let me read the BC code block and the exact]0;🐋 CodeWhale header lines for all three fixes.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp" total_lines="1967" shown_lines="365-404" truncated="true" next_start_line="405">
+   365│     const amrex::Real time = getTime(lev, a_time);
+   366│     fillpatch_aux(lev, time, ldata_p->auxiliaries, m_nGrowState);
+   367│   }
+...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2345" shown_lines="2158-2172" truncated="true" next_start_line="2173">
+  2158│   amrex::Real m_ke_prod_lim = 10.0;
+  2159│   int m_ke_wall_functions = 0;
+  2160│    // Ambient k and epsilon for free-stream maintenance ...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me read the rest of the inlet BC code to find where `1.0 / m_ke_inlet_L` or `1.0 / L_t` is used.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp" total_lines="1967" shown_lines="404-453" truncated="true" next_start_line="454">
+   404│         auto const& aux_arr = aux.array(mfi);
+   405│ 
+   406│         for (int idim = 0; idim < AMREX_SPACEDIM; ++idim) {
+   407│       ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow I have full context. All three edits are independent — applying them now.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp)
+tool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp)
+tool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp
+@@ -366,8 +366,13 @@
+     fillpatch_aux(lev, time, ldata_p->auxiliaries, m_nGrowState);
+   }
+ 
++  // k-ε aux convention: aux[0]=k, aux[1]=ε (established in 3.10d)
++  AMR...
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp
+@@ -375,7 +375,7 @@
+   if (m_les_model == "kepsilon" && m_nAux >= 2 && m_ke_inlet_TI > 1e-10) {
+     const amrex::Real C_mu = m_ke_C_mu;
+     const amrex::Real TI = m_ke...
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H
+@@ -2161,7 +2161,7 @@
+    amrex::Real m_ke_k_amb = -1.0;
+    amrex::Real m_ke_eps_amb = -1.0;
+    // Inlet turbulence convenience parameters (k-epsilon RANS)
+-   amrex::Real m_ke_...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleAll three edits applied. Let me verify the changes, then build.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_BC.cpp" total_lines="1972" shown_lines="367-386" truncated="true" next_start_line="387">
+   367│   }
+   368│ 
+   369│   // k-ε aux convention: aux[0]=k, aux[1]=ε (established in 3.10d)
+   370│   AMREX_ASSERT(m_aux_names.size() >= 2);
+...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2345" shown_lines="2161-2166" truncated="true" next_start_line="2167">
+  2161│    amrex::Real m_ke_k_amb = -1.0;
+  2162│    amrex::Real m_ke_eps_amb = -1.0;
+  2163│    // Inlet turbulence convenience parameters (k-epsi...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleAll three fixes verified in place. Now let me check the bfs_kepsilon input config]0;🐳 CodeWhale — since default TI is now 0.0, I need to make sure TI=0.05 is explicitly set in the inputs for the test run.]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/examples/engineering/bfs_kepsilon, pattern: ke_inlet_TI|ke_inlet_L)
+
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleInput file already has `ke_inlet_TI = 0.05` — it will override the new default. Now build and run.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <6 items>)
+
+tool checklist_write completed: Todo list updated (6 items, 50% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Fix 1: aux index assertions in PeleLMeX_BC.cpp",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Fix 2: default m_ke_inlet_TI = 0.0, guard > 1e-10",
+      "status": "completed...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: cd /home/cj/my-pele/examples/engineering/bfs_kepsilon && make -j8 2>&1)
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_6aa573b2
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell_wait (task_id: shell_6aa573b2)
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell_wait completed: fatal: not a git repository (or any of the parent directories): .git
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/comps/gnu.mak...
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/sites/Make.unknow...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleBuild succeeded (`SUCCESS`). Now run 100 steps. Let me check the run script.]0;🐳 CodeWhaletool: list_dir (path: /home/cj/my-pele/examples/engineering/bfs_kepsilon)
+
+tool list_dir completed: <13 items>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/examples/engineering/bfs_kepsilon/input.yaml, pattern: max_step|stop_time|amr\.max_step)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale`max_step = 100` already configured. Running the simulation now.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <133 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_c2362765
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell_wait (task_id: shell_c2362765)
+tool exec_shell_wait completed: Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash:...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleAll 100 steps completed successfully. Let me verify the checkpoint was written and check for any issues.]0;🐳 CodeWhaletool: exec_shell (command: <145 chars>)
+
+]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+-rw-rw-r-- 1 cj cj 325 Jun 26 10:41 /home/cj/my-pele/examples/engineering/bfs_kepsilon/chk00100/Header
+-rw-rw-r-- 1 cj cj 371 Jun 26 10:41 /home/cj/my-pele/examples/engineering/bfs_kepsilon/plt00100/Header
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me confirm the run parameters and check for any error messages.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <148 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+peleLM.ke_inlet_L = 0.0381
+peleLM.ke_inlet_TI = 0.05
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleClean — no errors, no assertion failures. Writing PASS result.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: write_file (path: /home/cj/PASS/FAIL, content: <938 chars>)
+
+tool write_file completed: --- a//home/cj/PASS/FAIL
++++ b//home/cj/PASS/FAIL
+@@ -1,34 +1,27 @@
+-# PASS
++PASS
+ 
+-bfs_kepsilon: 100-step k-epsilon channel flow test — 2026-06-26
++## TASK_ke_inlet_R1 — 3 Review Fixes
+ 
+-## Implementation
+-- PeleLMeX.H: Added m_ke_inlet_TI (default 0.01) and m_ke_inlet_L (default 1.0)
+-- PeleL...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <6 items>)
+tool checklist_write completed: Todo list updated (6 items, 100% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Fix 1: aux index assertions in PeleLMeX_BC.cpp",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Fix 2: default m_ke_inlet_TI = 0.0, guard > 1e-10",
+      "status": "complete...
+]0;🐋 CodeWhale]0;🐳 CodeWhale## PASS
+
+All three review fixes applied, built, and verified:
+
+**Fix 1 (HIGH)** — aux index assertions @ PeleLMeX]0;🐋 CodeWhale_BC.cpp:369-372. Runtime-checked `m_aux_names[0]` ("k"/"turb_kin_energy") and `m_aux_names[1]` ("epsilon"/"turb_diss_rate") before the inlet BC block. Assertions passed at runtime with no failures]0;🐳 CodeWhale.
+
+**Fix 2 (MEDIUM)** — default `m_ke_inlet_TI` changed from 0.01 → 0.0 in PeleLMeX.H:2164. Guard changed from `TI > 0.0` → `TI > 1e-10` in PeleLMeX_BC.cpp:375. User]0;🐋 CodeWhale must now explicitly set a positive `ke_inlet_TI` in `input.yaml` to enable inlet turbulence.
+
+**Fix 3 (MEDIUM)** — L_t division guarded with `amrex::max(m_ke_inlet_L, 1e-10_rt)` at PeleLMeX]0;🐳 CodeWhale_BC.cpp:378. Prevents division by zero if `ke_inlet_L` is unset or zero.
+
+Build succeeded (`make -j8`, SUCCESS). 100 steps ran cleanly with TI=0.]0;🐋 CodeWhale05 — no crashes, no assertions, k-ε applied throughout. Result written to `/home/cj/PASS/FAIL`.

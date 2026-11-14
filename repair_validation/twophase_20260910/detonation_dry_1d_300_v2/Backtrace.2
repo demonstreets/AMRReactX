@@ -1,0 +1,60 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xab8266) [0x620b08df7266]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xabd021) [0x620b08dfc021]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0x910cfd) [0x620b08c4fcfd]
+    std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long) at /usr/include/c++/13/bits/stl_vector.h:389
+ (inlined by) std::_Vector_base<char, std::allocator<char> >::~_Vector_base() at /usr/include/c++/13/bits/stl_vector.h:369
+ (inlined by) std::vector<char, std::allocator<char> >::~vector() at /usr/include/c++/13/bits/stl_vector.h:738
+ (inlined by) amrex::Assert_host(char const*, char const*, int, char const*, unsigned long) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.cpp:322
+
+ 3: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xe8cfab) [0x620b091cbfab]
+    double const& amrex::ArrayND<double const, 4, true>::operator()<double const, 0>(int, int, int, int) const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Array4.H:961
+ (inlined by) double const& amrex::ArrayND<double const, 4, true>::operator()<2, double const, 0>(amrex::IntVectND<2> const&, int) const at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Array4.H:1016
+ (inlined by) pc_cmpflx(int, int, int, int, int, int, int, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, int, amrex::ArrayND<double const, 4, true> const&, amrex::GpuArray<double, 2u> const&, double) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Godunov.H:399
+ (inlined by) operator() at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Godunov.cpp:1124
+
+ 4: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xf29449) [0x620b09268449]
+    pc_umeth_2D(amrex::BoxND<2> const&, int const*, int const*, int const*, int const*, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::GpuArray<amrex::ArrayND<double, 4, true> const, 2u> const&, amrex::GpuArray<amrex::ArrayND<double, 4, true> const, 2u> const&, amrex::GpuArray<amrex::ArrayND<double const, 4, true> const, 2u> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::GpuArray<double, 2u> const&, double, int, int, bool, bool, int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:270 (discriminator 3)
+ (inlined by) ParallelFor<pc_umeth_2D(const amrex::Box&, int const*, int const*, int const*, int const*, amrex::Array4<double const>&, amrex::Array4<double const>&, amrex::Array4<double const>&, const amrex::GpuArray<const amrex::ArrayND<double, 4, true>, 2>&, const amrex::GpuArray<const amrex::ArrayND<double, 4, true>, 2>&, const amrex::GpuArray<const amrex::ArrayND<double const, 4, true>, 2>&, amrex::Array4<double>&, amrex::Array4<double const>&, const amrex::GpuArray<double, 2>&, amrex::Real, int, int, bool, bool, int)::<lambda(int, int, int)>, 2> at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:297 (discriminator 3)
+ (inlined by) pc_umeth_2D(amrex::BoxND<2> const&, int const*, int const*, int const*, int const*, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::GpuArray<amrex::ArrayND<double, 4, true> const, 2u> const&, amrex::GpuArray<amrex::ArrayND<double, 4, true> const, 2u> const&, amrex::GpuArray<amrex::ArrayND<double const, 4, true> const, 2u> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::GpuArray<double, 2u> const&, double, int, int, bool, bool, int) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Godunov.cpp:1122 (discriminator 3)
+
+ 5: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xe098ec) [0x620b091488ec]
+    pc_umdrv(double, amrex::BoxND<2> const&, int const*, int const*, int const*, int const*, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::ArrayND<double const, 4, true> const&, amrex::GpuArray<double, 2u> const&, double, int, int, bool, bool, int, double, amrex::GpuArray<amrex::ArrayND<double, 4, true> const, 2u> const&, amrex::GpuArray<amrex::ArrayND<double const, 4, true> const, 2u> const&, amrex::ArrayND<double, 4, true> const&, double) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Hydro.cpp:463 (discriminator 1)
+
+ 6: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xe0f809) [0x620b0914e809]
+    PeleC::construct_hydro_source(amrex::MultiFab const&, double, double, int, int, int, int) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Hydro.cpp:353 (discriminator 5)
+
+ 7: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xdc8e06) [0x620b09107e06]
+    PeleC::construct_Snew(amrex::MultiFab&, amrex::MultiFab const&, double) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Advance.cpp:384
+ (inlined by) PeleC::do_sdc_iteration(double, double, int, int, int, int) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Advance.cpp:331
+ (inlined by) PeleC::do_sdc_advance(double, double, int, int) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Advance.cpp:233
+
+ 8: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0xb0e0fe) [0x620b08e4d0fe]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2077 (discriminator 1)
+ (inlined by) amrex::Amr::coarseTimeStep(double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2182 (discriminator 1)
+
+ 9: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0x4db9e) [0x620b0838cb9e]
+    main at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/main.cpp:215
+
+10: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7043ab22a1ca]
+
+11: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7043ab22a28b]
+
+12: /home/cj/my-pele/examples/academic/spray_detonation/spatial_clean32_202609102d.gnu.MPI.ex(+0x4eee5) [0x620b0838dee5]
+    ?? ??:0
+

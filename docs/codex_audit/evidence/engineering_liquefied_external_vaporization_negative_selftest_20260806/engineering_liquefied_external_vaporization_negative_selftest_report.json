@@ -1,0 +1,164 @@
+{
+  "evidence_files": [
+    {
+      "label": "converter",
+      "path": "tools/codex_make_external_vaporization_source_input.py",
+      "sha256": "d93abe566025a5aa50881b4f5c9e34cfc2e4cc35c0df4b917e9b422dde448172",
+      "size_bytes": 11494
+    },
+    {
+      "label": "base_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+      "sha256": "639f22b5006f42c36ff3d112cbca721c07092f2dceb13b754c923aac1d48a435",
+      "size_bytes": 2315
+    },
+    {
+      "label": "valid_template",
+      "path": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+      "sha256": "15aa5d14fb2ca7b5d1fb2c78b1126f4e4c8b25474096b2bdb73ca6fbde558116",
+      "size_bytes": 405
+    },
+    {
+      "label": "positive_mapping_json",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/positive/codex_lng_external_vaporization_source_template.json",
+      "sha256": "5bad06035a1070356ec7a58e18c36c5302dc07991d52cdbb8d57a429d0894bd8",
+      "size_bytes": 3785
+    },
+    {
+      "label": "contract_report",
+      "path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/engineering_liquefied_external_vaporization_contract_report.json",
+      "sha256": "138891231f5cd5eb7dcaa9daf1a70322095c29523b2c0a7e518cbbc08f1b8816",
+      "size_bytes": 5470
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:38+00:00",
+  "negative_cases": [
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/negative_mdot.csv",
+      "expected_message": "mdot_kg_s must be nonnegative",
+      "name": "negative_mdot",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 77, in read_source_csv\n    require(mdot >= 0.0, f\"row {idx} mdot_kg_s must be nonnegative\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: row 1 mdot_kg_s must be nonnegative",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/negative_vapor_temperature.csv",
+      "expected_message": "vapor_T_K must be positive",
+      "name": "negative_vapor_temperature",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 78, in read_source_csv\n    require(temp > 0.0, f\"row {idx} vapor_T_K must be positive\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: row 1 vapor_T_K must be positive",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/unknown_species.csv",
+      "expected_message": "fuel_species must be one of",
+      "name": "unknown_species",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 79, in read_source_csv\n    require(species in ALLOWED_SURROGATE_SPECIES, f\"row {idx} fuel_species must be one of {sorted(ALLOWED_SURROGATE_SPECIES)}\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: row 1 fuel_species must be one of ['C3H8', 'CH4', 'H2']",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/nonmonotonic_time.csv",
+      "expected_message": "time_s values must be strictly increasing",
+      "name": "nonmonotonic_time",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 76, in read_source_csv\n    require(time_s > last_time, \"source CSV time_s values must be strictly increasing\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: source CSV time_s values must be strictly increasing",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/missing_temperature_column.csv",
+      "expected_message": "source CSV missing columns",
+      "name": "missing_temperature_column",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 67, in read_source_csv\n    require(not missing, f\"source CSV missing columns: {', '.join(missing)}\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: source CSV missing columns: vapor_T_K",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/mixed_species.csv",
+      "expected_message": "exactly one fuel_species",
+      "name": "mixed_species",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 109, in read_source_csv\n    require(len(species_set) == 1, \"one generated PeleLMeX input supports exactly one fuel_species\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: one generated PeleLMeX input supports exactly one fuel_species",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/negative_sample_time.csv",
+      "expected_message": "sample time must be nonnegative",
+      "name": "negative_sample_time",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 221, in main\n    sample = interpolate(rows, args.time)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 118, in interpolate\n    require(time_s >= 0.0, \"sample time must be nonnegative\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: sample time must be nonnegative",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/too_many_schedule_rows.csv",
+      "expected_message": "source CSV supports at most 64 schedule rows",
+      "name": "too_many_schedule_rows",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 95, in read_source_csv\n    require(len(rows) <= MAX_SCHEDULE_POINTS, f\"source CSV supports at most {MAX_SCHEDULE_POINTS} schedule rows\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: source CSV supports at most 64 schedule rows",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/partial_optional_velocity_column.csv",
+      "expected_message": "optional source CSV column leak_vel_x_m_s must be present on every row or omitted from every row",
+      "name": "partial_optional_velocity_column",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 98, in read_source_csv\n    require(\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: optional source CSV column leak_vel_x_m_s must be present on every row or omitted from every row",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/negative_source_radius.csv",
+      "expected_message": "source_radius_m must be positive",
+      "name": "negative_source_radius",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 91, in read_source_csv\n    require(float(parsed[\"source_radius_m\"]) > 0.0, f\"row {idx} source_radius_m must be positive\")\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: row 1 source_radius_m must be positive",
+      "stdout": ""
+    },
+    {
+      "csv_path": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/partial_location_columns.csv",
+      "expected_message": "source_x_m, source_y_m, and source_z_m must be provided together or omitted together",
+      "name": "partial_location_columns",
+      "refused": true,
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 271, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 220, in main\n    rows = read_source_csv(source_csv)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 104, in read_source_csv\n    require(\n  File \"/home/cj/my-pele/tools/codex_make_external_vaporization_source_input.py\", line 41, in require\n    raise SourceInputError(message)\nSourceInputError: source_x_m, source_y_m, and source_z_m must be provided together or omitted together",
+      "stdout": ""
+    }
+  ],
+  "positive_case": {
+    "mapping_json": "docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/positive/codex_lng_external_vaporization_source_template.json",
+    "returncode": 0,
+    "source_csv": "examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv",
+    "status": "PASS-EXTERNAL-VAPORIZATION-SOURCE-INPUT",
+    "stderr": "",
+    "stdout": "external_vaporization_source_input PASS input=docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/positive/codex_lng_external_vaporization_source_template.input json=docs/codex_audit/evidence/engineering_liquefied_external_vaporization_negative_selftest_20260806/positive/codex_lng_external_vaporization_source_template.json"
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-LIQUEFIED-EXTERNAL-VAPORIZATION-NEGATIVE-SELFTEST",
+  "summary": {
+    "failed_negative_count": 0,
+    "guards_missing_required_column": true,
+    "guards_mixed_species": true,
+    "guards_negative_mdot": true,
+    "guards_negative_sample_time": true,
+    "guards_negative_source_radius": true,
+    "guards_negative_vapor_temperature": true,
+    "guards_nonmonotonic_time": true,
+    "guards_partial_location_columns": true,
+    "guards_partial_optional_velocity_column": true,
+    "guards_too_many_schedule_rows": true,
+    "guards_unknown_species": true,
+    "negative_case_count": 11,
+    "negative_refused_count": 11,
+    "negative_selftest_ready": true,
+    "positive_template_conversion_passed": true
+  }
+}

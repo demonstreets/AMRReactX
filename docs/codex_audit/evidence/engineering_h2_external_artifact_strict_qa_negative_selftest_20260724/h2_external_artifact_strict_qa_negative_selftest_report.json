@@ -1,0 +1,176 @@
+{
+  "all_expected_artifacts_present_fixture": true,
+  "command_records": [
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_drop_validator.py --drop-root docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop --production-blocker-closure-manifest-report docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.md --no-ensure-scaffold",
+      "output_tail": "engineering_h2_external_artifact_drop_validator PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json md=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.md status=NOT_READY-H2-EXTERNAL-ARTIFACT-DROP valid=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_drop_validator.py --verify-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json",
+      "output_tail": "engineering_h2_external_artifact_drop_validator VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json status=NOT_READY-H2-EXTERNAL-ARTIFACT-DROP valid=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_ingestion_plan.py --external-artifact-drop-validator-report docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json --production-blocker-closure-manifest-report docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.md",
+      "output_tail": "engineering_h2_external_artifact_ingestion_plan PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json md=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.md status=NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN ready=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_ingestion_plan.py --verify-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json",
+      "output_tail": "engineering_h2_external_artifact_ingestion_plan VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json status=NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN ready=0/14\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --external-artifact-ingestion-plan-report docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.md",
+      "output_tail": "engineering_h2_external_artifact_controlled_copy_report PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json md=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.md status=NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY ready=0/14 copied=0\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --verify-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json",
+      "output_tail": "engineering_h2_external_artifact_controlled_copy_report VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json status=NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY ready=0/14 copied=0\n",
+      "returncode": 0
+    },
+    {
+      "command": "/usr/bin/python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --external-artifact-ingestion-plan-report docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json --apply --confirm-controlled-copy H2_EXTERNAL_ARTIFACTS_READY --output-json docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_apply_should_not_exist.json --output-md docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_apply_should_not_exist.md",
+      "output_tail": "engineering_h2_external_artifact_controlled_copy_report FAIL cannot apply a NOT_READY ingestion plan\n",
+      "returncode": 2
+    }
+  ],
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "production_blocker_closure_manifest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    },
+    {
+      "label": "strict_qa_negative_drop_validator_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json",
+      "sha256": "28a1373b682a8dcaca0cb9dc45bd83d11d6355a39faab8ed5c4298f8b32dc38d",
+      "size_bytes": 34210
+    },
+    {
+      "label": "strict_qa_negative_ingestion_plan_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json",
+      "sha256": "1991df89f7044f71c7680a2a93e2c66f6ab3de9ea903e5615ad74946aea200b3",
+      "size_bytes": 29824
+    },
+    {
+      "label": "strict_qa_negative_controlled_copy_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json",
+      "sha256": "27fb6cd561b04ac0ff08d9fba2956daf541a5e5910f6ee061e769682c8446e39",
+      "size_bytes": 37344
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:15+00:00",
+  "limitations": [
+    "This negative self-test uses a deliberately invalid complete fixture.",
+    "It proves that all expected files being present is insufficient to pass strict-v5 placeholder-free content QA.",
+    "It must not be used to clear real-CAD, SBEPV5, or fire-calibration blockers."
+  ],
+  "negative_selftest_only": true,
+  "production_blocker_closure_manifest_report": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+  "quality_gate_matrix": [
+    {
+      "evidence": "present=14 expected=14",
+      "gap": "",
+      "name": "all_expected_artifacts_are_present_in_fixture",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json",
+      "gap": "",
+      "name": "strict_content_qa_rejects_bad_complete_drop",
+      "status": "PASS"
+    },
+    {
+      "evidence": "real_cad_cleanup:domain_quality_gap:cad_index_manifest_path_mismatch:pipe_b:cleaned_geometry:cleaned_geometry/pipe_b_index_mismatch.stl!=cleaned_geometry/pipe_b.stl;real_cad_cleanup:domain_quality_gap:cad_unreferenced_file:cleaned_geometry/pipe_b_index_mismatch.stl;real_cad_cleanup_manifest.json:synthetic_or_selftest_marker_present_without_allow_synthetic_selftest;real_cad_cleanup_manifest.json:placeholder_or_template_marker_present_without_replacement;source_cad/*:source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/dike_c.stp;source_cad/*:source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/dike_c.stp;source_cad/*:source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/pipe_b.stp;source_cad/*:source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/pipe_b.stp;source_cad/*:source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/tank_a.stp;source_cad/*:source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/tank_a.stp;cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/dike_c.stl;cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/dike_c.stl;cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b.stl;cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b.stl;cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b_index_mismatch.stl;cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b_index_mismatch.stl;cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/tank_a.stl;cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/tank_a.stl;cleanup_quality_records:cleanup_quality_units_not_m:tank_a;cleanup_quality_records:cleanup_quality_boolean_not_true:tank_a:watertight_or_closed_surface;cleanup_quality_records:cleanup_quality_boolean_not_true:tank_a:positive_volume_or_area;cleanup_quality_records:cleanup_quality_bbox_not_positive:tank_a;cleanup_quality_records:cleanup_quality_units_not_m:pipe_b;cleanup_quality_records:cleanup_quality_boolean_not_true:pipe_b:watertight_or_closed_surface;cleanup_quality_records:cleanup_quality_boolean_not_true:pipe_b:positive_volume_or_area;cleanup_quality_records:cleanup_quality_bbox_not_positive:pipe_b;cleanup_quality_records:cleanup_quality_units_not_m:dike_c;cleanup_quality_records:cleanup_quality_boolean_not_true:dike_c:watertight_or_closed_surface;cleanup_quality_records:cleanup_quality_boolean_not_true:dike_c:positive_volume_or_area;cleanup_quality_records:cleanup_quality_bbox_not_positive:dike_c",
+      "gap": "",
+      "name": "strict_placeholder_qa_rejects_template_values",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json",
+      "gap": "",
+      "name": "ingestion_plan_stays_not_ready",
+      "status": "PASS"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json",
+      "gap": "",
+      "name": "controlled_copy_stays_no_write",
+      "status": "PASS"
+    },
+    {
+      "evidence": "engineering_h2_external_artifact_controlled_copy_report FAIL cannot apply a NOT_READY ingestion plan\n",
+      "gap": "",
+      "name": "apply_refused_for_invalid_complete_drop",
+      "status": "PASS"
+    },
+    {
+      "evidence": "strict QA negative self-test is gate-mechanics evidence only",
+      "gap": "",
+      "name": "does_not_clear_production_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS-H2-EXTERNAL-ARTIFACT-STRICT-QA-NEGATIVE-SELFTEST",
+  "strict_qa_negative_drop_root": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop",
+  "strict_qa_negative_reports": {
+    "controlled_copy": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_controlled_copy_report.json",
+    "drop_validator": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_drop_validator_report.json",
+    "ingestion_plan": "docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_ingestion_plan.json"
+  },
+  "summary": {
+    "apply_refused_returncode": 2,
+    "controlled_copy_applied_copy_actions": false,
+    "controlled_copy_copied_file_count": 0,
+    "controlled_copy_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY",
+    "drop_content_quality_gate_level": "strict-v5-placeholder-free",
+    "drop_domain_quality_gap_count": 4,
+    "drop_missing_or_invalid_artifact_count": 14,
+    "drop_placeholder_gap_detected": true,
+    "drop_present_artifact_count": 14,
+    "drop_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-DROP",
+    "drop_total_expected_artifact_count": 14,
+    "drop_valid_artifact_count": 0,
+    "gap_sample": [
+      "real_cad_cleanup:domain_quality_gap:cad_index_manifest_path_mismatch:pipe_b:cleaned_geometry:cleaned_geometry/pipe_b_index_mismatch.stl!=cleaned_geometry/pipe_b.stl",
+      "real_cad_cleanup:domain_quality_gap:cad_unreferenced_file:cleaned_geometry/pipe_b_index_mismatch.stl",
+      "real_cad_cleanup_manifest.json:synthetic_or_selftest_marker_present_without_allow_synthetic_selftest",
+      "real_cad_cleanup_manifest.json:placeholder_or_template_marker_present_without_replacement",
+      "source_cad/*:source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/dike_c.stp",
+      "source_cad/*:source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/dike_c.stp",
+      "source_cad/*:source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/pipe_b.stp",
+      "source_cad/*:source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/pipe_b.stp",
+      "source_cad/*:source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/tank_a.stp",
+      "source_cad/*:source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/tank_a.stp",
+      "cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/dike_c.stl",
+      "cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/dike_c.stl",
+      "cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b.stl",
+      "cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b.stl",
+      "cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b_index_mismatch.stl",
+      "cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b_index_mismatch.stl",
+      "cleaned_geometry/*:cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/tank_a.stl",
+      "cleaned_geometry/*:cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/tank_a.stl",
+      "cleanup_quality_records:cleanup_quality_units_not_m:tank_a",
+      "cleanup_quality_records:cleanup_quality_boolean_not_true:tank_a:watertight_or_closed_surface",
+      "cleanup_quality_records:cleanup_quality_boolean_not_true:tank_a:positive_volume_or_area",
+      "cleanup_quality_records:cleanup_quality_bbox_not_positive:tank_a",
+      "cleanup_quality_records:cleanup_quality_units_not_m:pipe_b",
+      "cleanup_quality_records:cleanup_quality_boolean_not_true:pipe_b:watertight_or_closed_surface",
+      "cleanup_quality_records:cleanup_quality_boolean_not_true:pipe_b:positive_volume_or_area",
+      "cleanup_quality_records:cleanup_quality_bbox_not_positive:pipe_b",
+      "cleanup_quality_records:cleanup_quality_units_not_m:dike_c",
+      "cleanup_quality_records:cleanup_quality_boolean_not_true:dike_c:watertight_or_closed_surface",
+      "cleanup_quality_records:cleanup_quality_boolean_not_true:dike_c:positive_volume_or_area",
+      "cleanup_quality_records:cleanup_quality_bbox_not_positive:dike_c"
+    ],
+    "ingestion_ready_copy_action_count": 0,
+    "ingestion_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN"
+  },
+  "title": "Engineering H2 External Artifact Strict-QA Negative Self-Test"
+}

@@ -1,0 +1,67 @@
+geometry:
+  type: builtin
+
+domain:
+  xmin: 0.0
+  xmax: 1.0
+  ymin: 0.0
+  ymax: 0.1
+  zmin: 0.0
+  zmax: 0.0
+
+mesh:
+  n_cell: [80, 8, 1]
+  max_level: 0
+  blocking_factor: 4
+  max_grid_size: 64
+
+physics:
+  model: dispersion
+  species:
+    tracked: [O2]
+
+time:
+  max_step: 1
+  stop_time: -1.0
+  cfl: 0.3
+
+output:
+  plot_int: -1
+  chk_int: -1
+
+boundaries:
+  faces:
+    xlo: inlet
+    xhi: outlet
+    ylo: wall
+    yhi: slip_wall
+
+wind:
+  model: log_law
+  reference_height: 10.0
+  reference_speed: 2.0
+  roughness_length: 0.03
+  direction: [1.0, 0.0, 0.0]
+
+turbulence:
+  model: k_epsilon
+  wall_function: none
+
+parmparse:
+  peleLM.v: 1
+  peleLM.ke_wall_functions: 0
+  peleLM.ke_inlet_TI: 0.05
+  peleLM.ke_inlet_L: 0.0381
+  peleLM.k.advect: 1
+  peleLM.k.Schmidt: 1.0
+  peleLM.epsilon.advect: 1
+  peleLM.epsilon.Schmidt: 1.3
+  prob.T_mean: 293.0
+  prob.P_mean: 101325.0
+  prob.Y_o2: 0.233
+  prob.T_wall: 300.0
+  amr.v: 1
+  amr.n_error_buf: 1 1 2 2
+  amr.grid_eff: 0.7
+  amr.dt_shrink: 0.1
+  amr.derive_plot_vars: avg_pressure mag_vort

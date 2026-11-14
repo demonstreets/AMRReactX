@@ -1,0 +1,54 @@
+{
+  "case": "engineering-h2-ignition-consequence-smoke",
+  "checks": {
+    "delay": "PASS",
+    "history": "PASS",
+    "sdc": "PASS"
+  },
+  "generated_at_utc": "2026-07-20T03:25:22+00:00",
+  "limitations": [
+    "This is a short-time H2 ignition and heat-release consequence smoke report, not a calibrated fire model.",
+    "It does not validate flame speed, radiant heat flux, pool-fire feedback, deflagration overpressure, ventilation effects, or production-scale obstacle fires.",
+    "Ignition-delay evidence uses a homogeneous PelePhysics driver; history/SDC evidence uses the PeleLMeX hot-bubble engineering case."
+  ],
+  "logs": {
+    "delay": {
+      "pass_line": "h2_ignition_delay_validation PASS threshold_rise=400 mid_fine_rel=5.32379232e-04 n2500:n=2500:dt=4.000e-06:tign=4.54817219e-05:Tfinal=2819 n5000:n=5000:dt=2.000e-06:tign=4.52629081e-05:Tfinal=2819 n10000:n=10000:dt=1.000e-06:tign=4.52388239e-05:Tfinal=2819",
+      "path": "docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/delay/validation.log",
+      "sha256": "b27647b94d256a5afa0d002bd7ad5a0e63f8e076d521c7ad753bfbbef8f81ed0"
+    },
+    "history": {
+      "pass_line": "h2_ignition_history_validation PASS nplot=11 time0=0 timeN=1e-07 dt_min=1.00000000e-08 dt_max=1.00000000e-08 h2_consumed_mean=4.91515359e-09 o2_consumed_mean=7.92990513e-08 h2o_produced_mean=2.08024893e-09 temp_peak_min=1.99999562e+03 temp_peak_max=2.00000000e+03 temp_mean_change=-8.75933280e-02 max_hotspot_radius=9.88211769e-04 species_sum_err=2.33146835e-15 active_reaction_slices=11 max_reaction_rate=1.49553322e+07",
+      "path": "docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/history/validation.log",
+      "sha256": "619a389d9ecf278667933d630f2223e1c1c59d7ff91b013b196112c3385a8eed"
+    },
+    "sdc": {
+      "pass_line": "h2_ignition_sdc_compare PASS time=1e-07 nx=16 ny=16 temp_rel_linf=1.05111314e-04 h2_mean_abs=2.89337998e-12 o2_mean_abs=4.55075144e-11 h2o_mean_abs=8.11413421e-13 h2o_mean_sdc1=2.08024893e-09 h2o_mean_sdc2=2.08106035e-09 ir_h2_rel_linf=1.79002082e-04 ir_o2_rel_linf=1.20651220e-03 ir_h2o_rel_linf=1.20792835e-04 heat_rel_linf=1.25728742e-03",
+      "path": "docs/codex_audit/evidence/engineering_h2_ignition_consequence_20260720/sdc/sdc_compare.log",
+      "sha256": "f5e894fc36dd3cc41f6785d048d34bd98b3d46f174c77e825e8cfca51eb0a618"
+    }
+  },
+  "schema_version": 1,
+  "status": "PASS-SMOKE",
+  "summary": {
+    "delay_fine_ignition_time_s": 4.52388239e-05,
+    "delay_mid_fine_rel": 0.000532379232,
+    "delay_threshold_rise_K": 400.0,
+    "h2_consumed_mean": 4.91515359e-09,
+    "h2o_produced_mean": 2.08024893e-09,
+    "history_active_reaction_slices": 11,
+    "history_final_time_s": 1e-07,
+    "history_max_hotspot_radius": 0.000988211769,
+    "history_max_reaction_rate": 14955332.2,
+    "history_plotfiles": 11,
+    "history_species_sum_err": 2.33146835e-15,
+    "history_temp_mean_change": -0.087593328,
+    "history_temp_peak_max": 2000.0,
+    "history_temp_peak_min": 1999.99562,
+    "o2_consumed_mean": 7.92990513e-08,
+    "sdc_h2o_mean_sdc1": 2.08024893e-09,
+    "sdc_h2o_mean_sdc2": 2.08106035e-09,
+    "sdc_heat_release_rel_linf": 0.00125728742,
+    "sdc_temp_rel_linf": 0.000105111314
+  }
+}

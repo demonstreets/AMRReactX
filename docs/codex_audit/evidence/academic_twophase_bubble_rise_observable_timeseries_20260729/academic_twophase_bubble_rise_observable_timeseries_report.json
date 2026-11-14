@@ -1,0 +1,410 @@
+{
+  "evidence_files": [
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_twophase_bubble_rise_observables_report.py",
+      "sha256": "eb49157b8188d5ef8454895ca8c27a71db3e2b891c9e258913352a8b4c39dba5",
+      "size_bytes": 13132
+    },
+    {
+      "label": "bubble_rise_validation_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/academic_twophase_bubble_rise_mol_long_window_validation_report.json",
+      "sha256": "5408bd970570e996595b8c26c5ce526cd13436914914ace674c2aed52f4e5369",
+      "size_bytes": 8219
+    },
+    {
+      "label": "initial_plot_header",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt00000/Header",
+      "sha256": "290c43b57b45db772ed97183fd2cbe2c86d27ef87edff30bb5dfa39836144fe1",
+      "size_bytes": 275
+    },
+    {
+      "label": "final_plot_header",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt30000/Header",
+      "sha256": "bd021b77c27122652a2763b212a5a8345c78832754d1d5459710ebdb3bf6f00d",
+      "size_bytes": 323
+    }
+  ],
+  "generated_at_utc": "2026-07-30T01:42:48+00:00",
+  "limitations": [
+    "This report supplies observable extraction only; it does not make the current PeleC case physically equivalent to the Hysing benchmark.",
+    "Canonical time-series sampling is judged from center-of-mass, rise-velocity, and circularity histories; conservation drift remains a separate diagnostic gate.",
+    "Circularity is estimated from cell-edge alpha=0.5 crossings and is intended as a regression/preflight diagnostic, not a high-order geometric reference value."
+  ],
+  "quality_gates": [
+    {
+      "metric": [
+        "density",
+        "rho_adv_0",
+        "ymom"
+      ],
+      "name": "observable_fields_present",
+      "status": "PASS"
+    },
+    {
+      "metric": 16,
+      "name": "at_least_endpoint_observables",
+      "status": "PASS"
+    },
+    {
+      "metric": 16,
+      "name": "canonical_timeseries_sampling",
+      "status": "PASS",
+      "target": 16
+    },
+    {
+      "metric": [
+        0.10000011020238767,
+        0.1000003175173801
+      ],
+      "name": "center_of_mass_history_available",
+      "status": "PASS"
+    },
+    {
+      "metric": {
+        "max_fd_velocity": 0.0014761872612848942,
+        "min_fd_velocity": 0.0009632412473304209
+      },
+      "name": "rise_velocity_history_available",
+      "status": "PASS"
+    },
+    {
+      "metric": {
+        "max": 0.8615468485632067,
+        "min": 0.8615439736423774
+      },
+      "name": "circularity_history_available",
+      "status": "PASS"
+    },
+    {
+      "metric": 6.673847249048797e-06,
+      "name": "light_volume_conservation_diagnostic",
+      "status": "NOT_READY",
+      "target": 1e-08
+    }
+  ],
+  "records": [
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0358157999846484,
+      "center_of_mass_x": 0.09999999999999999,
+      "center_of_mass_y": 0.10000011020238767,
+      "circularity_estimate": 0.8615468485632067,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626964222144913,
+      "mean_rise_velocity_y": 0.0,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt00000",
+      "time": 0.0
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998464832,
+      "center_of_mass_x": 0.10000000000042357,
+      "center_of_mass_y": 0.10000012193739491,
+      "circularity_estimate": 0.8615467678180164,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0010003645860657683,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.002362695979345102,
+      "mean_rise_velocity_y": 6.515377048481102e-05,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt02000",
+      "time": 1.173073038287946e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998464804,
+      "center_of_mass_x": 0.09999999999980176,
+      "center_of_mass_y": 0.10000013327813145,
+      "circularity_estimate": 0.8615466062763381,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0009632412473304209,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626950933250913,
+      "mean_rise_velocity_y": 0.00012951531179319648,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt04000",
+      "time": 2.350424670158641e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998464807,
+      "center_of_mass_x": 0.09999999999976161,
+      "center_of_mass_y": 0.1000001467138565,
+      "circularity_estimate": 0.8615464671417795,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0011412204174766594,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626943302032595,
+      "mean_rise_velocity_y": 0.00019462239573467055,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt06000",
+      "time": 3.527736681113148e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998464805,
+      "center_of_mass_x": 0.0999999999976718,
+      "center_of_mass_y": 0.10000015952759124,
+      "circularity_estimate": 0.8615462977537649,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0010884265864616225,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626934011481767,
+      "mean_rise_velocity_y": 0.00025938192370822166,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt08000",
+      "time": 4.7050080652670643e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998465917,
+      "center_of_mass_x": 0.09999999999678136,
+      "center_of_mass_y": 0.10000017198208215,
+      "circularity_estimate": 0.8615461035698881,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0010579489705649456,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.002362692336093602,
+      "mean_rise_velocity_y": 0.00032382163433439677,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt10000",
+      "time": 5.8822378993446354e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998468776,
+      "center_of_mass_x": 0.09999999999549423,
+      "center_of_mass_y": 0.10000018348431755,
+      "circularity_estimate": 0.8615458697571123,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0009770944824297459,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626910536838136,
+      "mean_rise_velocity_y": 0.0003876918973806062,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt12000",
+      "time": 7.059425531358353e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998473468,
+      "center_of_mass_x": 0.09999999999408084,
+      "center_of_mass_y": 0.10000019643842302,
+      "circularity_estimate": 0.8615456586545219,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0011004683077700194,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626898958345145,
+      "mean_rise_velocity_y": 0.00045191675625213916,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt14000",
+      "time": 8.236570332112809e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998480674,
+      "center_of_mass_x": 0.10000000000010316,
+      "center_of_mass_y": 0.10000020928041656,
+      "circularity_estimate": 0.861545436732629,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0010909840660921443,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.002362688678644128,
+      "mean_rise_velocity_y": 0.0005158100445641474,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt16000",
+      "time": 9.41367217412364e-05
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.0358157999849114,
+      "center_of_mass_x": 0.09999999999986824,
+      "center_of_mass_y": 0.10000022356266011,
+      "circularity_estimate": 0.8615452390348944,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.001213384127343668,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626875943179256,
+      "mean_rise_velocity_y": 0.0005798928096221886,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt18000",
+      "time": 0.0001059073088394483
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998505567,
+      "center_of_mass_x": 0.09999999999972091,
+      "center_of_mass_y": 0.1000002379588391,
+      "circularity_estimate": 0.8615450329553762,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0012231088881236316,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626864640198504,
+      "mean_rise_velocity_y": 0.0006438394327619658,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt20000",
+      "time": 0.00011767746203251867
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.035815799985252875,
+      "center_of_mass_x": 0.09999999999954705,
+      "center_of_mass_y": 0.10000025322922851,
+      "circularity_estimate": 0.8615448270185488,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0012974310609264856,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626853345046703,
+      "mean_rise_velocity_y": 0.0007079353027423586,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt22000",
+      "time": 0.0001294471736350667
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998551195,
+      "center_of_mass_x": 0.099999999999324,
+      "center_of_mass_y": 0.10000026831839426,
+      "circularity_estimate": 0.8615446188079198,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.001282081579063744,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626841925184962,
+      "mean_rise_velocity_y": 0.0007718683617207556,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt24000",
+      "time": 0.00014121644479270557
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998584474,
+      "center_of_mass_x": 0.09999999999923499,
+      "center_of_mass_y": 0.10000028395328357,
+      "circularity_estimate": 0.8615444124938212,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.001328499469398746,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626830609346167,
+      "mean_rise_velocity_y": 0.0008358207732755932,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt26000",
+      "time": 0.00015298527848358535
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.035815799986263844,
+      "center_of_mass_x": 0.09999999999934694,
+      "center_of_mass_y": 0.10000030014571361,
+      "circularity_estimate": 0.8615442005695951,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0013759254413857386,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.002362681898580801,
+      "mean_rise_velocity_y": 0.000899931744913037,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt28000",
+      "time": 0.00016475367054078272
+    },
+    {
+      "alpha_max": 1.0,
+      "alpha_min": 0.03581579998678295,
+      "center_of_mass_x": 0.10000000000120324,
+      "center_of_mass_y": 0.1000003175173801,
+      "circularity_estimate": 0.8615439736423774,
+      "dx": 0.006250000000000001,
+      "dy": 0.006250000000000001,
+      "finite_difference_rise_velocity_y": 0.0014761872612848942,
+      "grid": [
+        32,
+        64
+      ],
+      "interface_perimeter_estimate": 0.20000000000000004,
+      "light_volume": 0.0023626806539394736,
+      "mean_rise_velocity_y": 0.0009642471260532105,
+      "plotfile": "docs/codex_audit/evidence/academic_twophase_bubble_rise_observable_timeseries_20260729/bubble_rise_buoyancy_mol_30000step_sampled_observables/run/plt30000",
+      "time": 0.0001765215992784016
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Extract Hysing-style center-of-mass, rise-velocity, and circularity diagnostics from maintained PeleC bubble-rise plotfiles.",
+  "status": "PASS-ACADEMIC-TWOPHASE-BUBBLE-RISE-OBSERVABLE-DIAGNOSTICS",
+  "summary": {
+    "center_of_mass_y0": 0.10000011020238767,
+    "center_of_mass_y1": 0.1000003175173801,
+    "center_of_mass_y_rise": 2.0731499243697993e-07,
+    "clears_canonical_observable_timeseries_gap": true,
+    "clears_qlt_03_canonical_long_time_bubble_rise_gap": false,
+    "light_volume_rel_drift": 6.673847249048797e-06,
+    "max_finite_difference_rise_velocity_y": 0.0014761872612848942,
+    "min_circularity_estimate": 0.8615439736423774,
+    "plot_count": 16,
+    "time0": 0.0,
+    "time1": 0.0001765215992784016,
+    "time_at_min_circularity_estimate": 0.0001765215992784016
+  },
+  "title": "Academic Bubble-Rise Canonical Observable Diagnostics"
+}

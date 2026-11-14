@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-20T10:11:07+00:00",
+  "status": "NOT_READY-ACADEMIC-TWOPHASE-BUBBLE-RISE-LONG-WINDOW-PROBE-GATE",
+  "title": "Academic Two-Phase Bubble-Rise Long-Window Probe Gate",
+  "scope": "Formal NOT_READY evidence for canonical long-window bubble-rise validation: the maintained 6000-step buoyancy-response gate passes, while longer source-coupled probe variants retain non-finite/negative-energy failure diagnostics.",
+  "summary": {
+    "main_short_time_bubble_rise_report": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/academic_twophase_bubble_rise_validation_report.json",
+    "formal_short_time_gate_status": "PASS-ACADEMIC-TWOPHASE-BUBBLE-RISE-VALIDATION",
+    "formal_short_time_gate_cleared": true,
+    "formal_centroid_rise": 2.52982693127e-09,
+    "energy_probe_status": "NOT_READY-ACADEMIC-TWOPHASE-BUBBLE-RISE-LONG-WINDOW-ENERGY-PROBE",
+    "energy_probe_case_count": 15,
+    "energy_probe_diagnosis": "No-source 12000-step run finalized, but buoyancy-source long-window variants either produced NaNs or finalized with negative rho_E/rho_e/Temp; the current maintained gate remains the 6000-step low-CFL source-coupled validation.",
+    "longer_window_probe_status": "NOT_READY-ACADEMIC-TWOPHASE-BUBBLE-RISE-LONGER-WINDOW-PROBE",
+    "stable_formal_gate_steps": 6000,
+    "nonfinite_boundary_observed_near_step": 6813,
+    "failed_long_case_count": 2,
+    "energy_correction_probe_root": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729",
+    "energy_correction_probe_case_count": 4,
+    "energy_correction_probe_nan_case_count": 2,
+    "energy_correction_probe_negative_energy_case_count": 2,
+    "energy_correction_probe_passing_case_count": 0,
+    "energy_correction_probe_diagnosis": "Disabling the second-order buoyancy energy correction is not sufficient: molecular-transport cases still stopped on NaNs, while inviscid cases finalized with negative rho_e.",
+    "positivity_probe_status": "NOT_READY-ACADEMIC-TWOPHASE-BUBBLE-RISE-POSITIVITY-LONG-WINDOW-PROBE",
+    "positivity_probe_case_count": 17,
+    "positivity_probe_passing_case_count": 1,
+    "positivity_probe_diagnosis": "Post-timestep rho_e/Temp positivity protection prevents several negative-energy terminal states, but long-window cases still fail canonical bubble-rise motion or viscous NaN stability; source sign and source magnitude probes do not clear the gap.",
+    "clears_qlt_03_short_time_bubble_response_gap": true,
+    "clears_qlt_03_canonical_long_time_bubble_rise_gap": false,
+    "clears_qlt_03_bubble_rise_gap": false
+  },
+  "energy_correction_probe": {
+    "root": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729",
+    "present": true,
+    "case_count": 4,
+    "nan_case_count": 2,
+    "finalized_case_count": 2,
+    "negative_energy_case_count": 2,
+    "passing_case_count": 0,
+    "all_cases_failed_or_nonphysical": true,
+    "diagnosis": "Disabling the second-order buoyancy energy correction is not sufficient: molecular-transport cases still stopped on NaNs, while inviscid cases finalized with negative rho_e.",
+    "cases": [
+      {
+        "case": "cfl001_terminal00075_ecorr0_mol_30000",
+        "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal00075_ecorr0_mol_30000/run.log",
+        "validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal00075_ecorr0_mol_30000/validation.log",
+        "amrex_finalized": false,
+        "nan_detected": true,
+        "negative_energy_detected": false,
+        "validation_passed": false,
+        "failure_line": "run_rc=1 final_plot_present=no"
+      },
+      {
+        "case": "cfl001_terminal0015_ecorr0_mol_30000",
+        "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_mol_30000/run.log",
+        "validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_mol_30000/validation.log",
+        "amrex_finalized": false,
+        "nan_detected": true,
+        "negative_energy_detected": false,
+        "validation_passed": false,
+        "failure_line": "run_rc=1 final_plot_present=no"
+      },
+      {
+        "case": "cfl001_terminal0015_ecorr0_nomol_30000",
+        "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_30000/run.log",
+        "validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_30000/validation.log",
+        "amrex_finalized": true,
+        "nan_detected": false,
+        "negative_energy_detected": true,
+        "validation_passed": false,
+        "failure_line": "academic_twophase_bubble_rise_validation FAIL nonphysical rho/rho_e minima rho=0.0973528 rho_e=-58670.8"
+      },
+      {
+        "case": "cfl001_terminal0015_ecorr0_nomol_g1_30000",
+        "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_g1_30000/run.log",
+        "validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_g1_30000/validation.log",
+        "amrex_finalized": true,
+        "nan_detected": false,
+        "negative_energy_detected": true,
+        "validation_passed": false,
+        "failure_line": "academic_twophase_bubble_rise_validation FAIL nonphysical rho/rho_e minima rho=0.0970936 rho_e=-46043.9"
+      }
+    ]
+  },
+  "quality_gates": [
+    {
+      "name": "formal_6000_step_gate_remains_stable",
+      "status": "PASS",
+      "metric": {
+        "main_status": "PASS-ACADEMIC-TWOPHASE-BUBBLE-RISE-VALIDATION",
+        "short_time_clear": true,
+        "centroid_rise": 2.52982693127e-09
+      }
+    },
+    {
+      "name": "energy_probe_cases_are_attached",
+      "status": "PASS",
+      "metric": {
+        "case_count": 15,
+        "energy_status": "NOT_READY-ACADEMIC-TWOPHASE-BUBBLE-RISE-LONG-WINDOW-ENERGY-PROBE"
+      }
+    },
+    {
+      "name": "longer_window_failure_boundary_is_reproducible",
+      "status": "PASS",
+      "metric": {
+        "stable_formal_gate_steps": 6000,
+        "nonfinite_boundary_observed_near_step": 6813
+      }
+    },
+    {
+      "name": "long_window_credit_remains_blocked",
+      "status": "PASS",
+      "metric": {
+        "main_long_clear": false,
+        "energy_long_clear": false,
+        "longer_long_clear": false
+      }
+    },
+    {
+      "name": "long_window_cases_include_failure_diagnostics",
+      "status": "PASS",
+      "metric": {
+        "failed_long_case_count": 2
+      }
+    },
+    {
+      "name": "energy_correction_probe_confirms_issue_is_not_single_switch",
+      "status": "PASS",
+      "metric": {
+        "case_count": 4,
+        "nan_case_count": 2,
+        "negative_energy_case_count": 2,
+        "passing_case_count": 0
+      }
+    },
+    {
+      "name": "positivity_probe_records_remaining_motion_gap",
+      "status": "PASS",
+      "metric": {
+        "case_count": 17,
+        "passing_case_count": 1,
+        "clears_canonical_long_window_bubble_rise": false
+      }
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_twophase_bubble_rise_long_window_probe_report.py",
+      "sha256": "c14415dfb7558808fbdf625974c2af7cd11d5438384a20b44c5f1cccc9155c84",
+      "size_bytes": 23648
+    },
+    {
+      "label": "energy_stability_probe_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/bubble_rise_long_window_energy_probe_report.json",
+      "sha256": "6510725cf6f621aacd2603c9f1c8f9f13daa7c617df52fc538c138ed6dcc10aa",
+      "size_bytes": 9680
+    },
+    {
+      "label": "longer_window_probe_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/bubble_rise_longer_window_probe_report.json",
+      "sha256": "b98c5e3e45a45694d0d9120705f9c9018e260db3b1aeaabe536e70f837080cd1",
+      "size_bytes": 2123
+    },
+    {
+      "label": "positivity_long_window_probe_report",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/positivity_long_window_probe_20260729/bubble_rise_positivity_long_window_probe_report.json",
+      "sha256": "ef0933f87e3f12f14bd3192869c6680143a54fb243cef1127140c90c89509011",
+      "size_bytes": 37452
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_0_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/cfl_001_terminal_15e4/input",
+      "sha256": "5bcd3272819f5a52043b7bea6a03d458810d1a712321c7314a3a37510807f429",
+      "size_bytes": 778
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_1_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/end_4p5e5/input",
+      "sha256": "c25eeedd1d2138eaf3b538e73eab732758851698bd6c6c2112102bd44ed61ef8",
+      "size_bytes": 778
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_2_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/no_source/input",
+      "sha256": "f8bdcb8ba2c50e0a0e7af46ea630c4845349bfc4f6e7359cf76c7a55384aa1fe",
+      "size_bytes": 779
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_3_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/terminal_5e4/input",
+      "sha256": "61881b114ce13222afee1ec32ded78d04fab1403dd2eb88e2fa664f279e78d2e",
+      "size_bytes": 779
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_4_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/cfl010_30000/input",
+      "sha256": "94a90255b2d90c4474ba838bfb82c67f993b065f4ab1f81c646b630e67d682da",
+      "size_bytes": 778
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_5_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/cfl015_12000/input",
+      "sha256": "6e61634ec2b53294236b8fcc80997e58557718cbdcc16869a9b989e0c7d4b8c2",
+      "size_bytes": 779
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_6_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/accel1_12000/input",
+      "sha256": "bac559eb3891888cbc9df824f7c4df97e4b1aa11a6b4262a64d4588579d3bb01",
+      "size_bytes": 776
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_7_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/accel1_20000/input",
+      "sha256": "3fd8e1fd855ea001482a44551bb15c02089550e45c7c0c8343370f06d8ee5004",
+      "size_bytes": 776
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_8_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/accel2_12000/input",
+      "sha256": "af18fa3f33f31a70b34fed53c44ecc5d95fb3424ccb1a5ce57cfa6e050f850d1",
+      "size_bytes": 776
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_9_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/nomol_g1_12000/input",
+      "sha256": "58a46fe4ba5b5b23588b0443dafe9db583485efd8fa414abb65cae4feac2e327",
+      "size_bytes": 844
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_10_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/nomol_g981_12000/input",
+      "sha256": "63808a3edf1cee157a29b2449e26c01ed2490e89251f7a8ba4d99ee5e9494aa8",
+      "size_bytes": 845
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_11_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/nomol_g981_20000/input",
+      "sha256": "012f92afa568a9844baa245f4438cbccdf27aa99d691651f882efbef4a20a57d",
+      "size_bytes": 845
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_12_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/p10_g981_12000/input",
+      "sha256": "aa1b07d31629d7f15534cfeb05b3177e84ffb3dceb12cc25bfd83cdd25f14113",
+      "size_bytes": 844
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_13_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/p50_g981_12000/input",
+      "sha256": "54b8689b9a60d5dc8766d33bb8199ac50e596f1d592035c77a0b0d5f22b5e206",
+      "size_bytes": 844
+    },
+    {
+      "label": "bubble_rise_long_window_energy_probe_report_case_14_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_stability_probe_20260729/p50_g981_20000/input",
+      "sha256": "836b137922b03033ae2c2a4020e8347b0bf1022ce86cbfd100d0045690e831cd",
+      "size_bytes": 844
+    },
+    {
+      "label": "run_12000_cfl_0.025_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/run_12000_cfl_0.025/input",
+      "sha256": "122d475c9a457531bce454ecc41e22ffc528a101cca86b83f76a11547bb995aa",
+      "size_bytes": 647
+    },
+    {
+      "label": "run_8000_cfl_0.025_input",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/longer_window_probe_20260729/run_8000_cfl_0.025/input",
+      "sha256": "d1a58664fc0869043d4a71835ce527933ed3485605cb92da483b5b5bcd1777e7",
+      "size_bytes": 645
+    },
+    {
+      "label": "energy_correction_cfl001_terminal00075_ecorr0_mol_30000_build.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal00075_ecorr0_mol_30000/build.log",
+      "sha256": "6b8f849cb5a2a86645bdacca99b04dc76ac23ddb327a0a945ac239ea8dddb8de",
+      "size_bytes": 18816
+    },
+    {
+      "label": "energy_correction_cfl001_terminal00075_ecorr0_mol_30000_run.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal00075_ecorr0_mol_30000/run.log",
+      "sha256": "3d35c7afcdb73099bfdcc24dec9366cd967f3d02dacad9775abd65feee1482f3",
+      "size_bytes": 683
+    },
+    {
+      "label": "energy_correction_cfl001_terminal00075_ecorr0_mol_30000_validation.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal00075_ecorr0_mol_30000/validation.log",
+      "sha256": "43d1e9c392f3cbf56f4baf8de9b5b683a8b7ddefec0b291c90b266f69d1e8c31",
+      "size_bytes": 31
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_mol_30000_build.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_mol_30000/build.log",
+      "sha256": "c0ed35342fba95687b34d76fed315d2b9167ba751ff20bfa832ae34397b80a9e",
+      "size_bytes": 123677
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_mol_30000_run.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_mol_30000/run.log",
+      "sha256": "00aa3146cad31d466525311b749b8d0cc481e3fe41f77fb69fee41c74d2f1a86",
+      "size_bytes": 684
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_mol_30000_validation.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_mol_30000/validation.log",
+      "sha256": "43d1e9c392f3cbf56f4baf8de9b5b683a8b7ddefec0b291c90b266f69d1e8c31",
+      "size_bytes": 31
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_nomol_30000_build.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_30000/build.log",
+      "sha256": "6b8f849cb5a2a86645bdacca99b04dc76ac23ddb327a0a945ac239ea8dddb8de",
+      "size_bytes": 18816
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_nomol_30000_run.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_30000/run.log",
+      "sha256": "ec53dd1cb421ddeb095d2cd1194daecb13d3ed008d738578c3528ea69445ead4",
+      "size_bytes": 507
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_nomol_30000_validation.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_30000/validation.log",
+      "sha256": "ae4d83815374326a10a1928e65e67b1c12c6463955712c3ccd6347f2665d27ec",
+      "size_bytes": 104
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_nomol_g1_30000_build.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_g1_30000/build.log",
+      "sha256": "6b8f849cb5a2a86645bdacca99b04dc76ac23ddb327a0a945ac239ea8dddb8de",
+      "size_bytes": 18816
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_nomol_g1_30000_run.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_g1_30000/run.log",
+      "sha256": "d63e915ba048335fa16c90f4e2aab3ddbcbc4cf4195c0c5f83f25cc7ac4c5687",
+      "size_bytes": 506
+    },
+    {
+      "label": "energy_correction_cfl001_terminal0015_ecorr0_nomol_g1_30000_validation.log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_validation_20260728/energy_correction_probe_20260729/cfl001_terminal0015_ecorr0_nomol_g1_30000/validation.log",
+      "sha256": "a977654e88eff72c8306c83e0abd3ee0f4ecc7b34fa36e977d8856116592cd5b",
+      "size_bytes": 104
+    }
+  ],
+  "limitations": [
+    "This is a formal negative-evidence gate: it preserves the short-time PASS while making long-window NOT_READY reproducible.",
+    "It does not attempt to repair the long-window instability; it prevents accidental broad QLT-03 credit until a stable long-window physical case exists.",
+    "Future work should replace this NOT_READY gate with a positive canonical bubble-rise benchmark once the non-finite/negative-energy failure mode is resolved."
+  ]
+}

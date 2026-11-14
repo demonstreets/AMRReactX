@@ -1,0 +1,49 @@
+{
+  "case": "/home/cj/my-pele/repair_validation/thermal_20260911/replay_coarse_cfl20_v1",
+  "captured_utc": "2026-09-11T02:57:43.776508+00:00",
+  "original_manifest_backup": "/home/cj/my-pele/repair_validation/thermal_20260911/metadata_history/replay_coarse_cfl20_v1/case_before_normalization_v1.json",
+  "original_manifest_sha256": "4a23ca3554f31f981acc21b2d8f3b642e011d8de563422d2d984cced45490d31",
+  "new_manifest_sha256": "45486e10f884e195dc6914d7f961e021ca1d1dd00f425b6b0bd1d166383eafcc",
+  "unchanged_input_sha256": "4683a62033b19bd94c68a02bce3b968d61afdfa2790f8521cba8906d4b6aff4e",
+  "changes": {
+    "transverse_boundary": {
+      "before": "slip walls",
+      "after": "lower y: SlipWall; upper y: SlipWall"
+    },
+    "history_scope": {
+      "before": "Full operator-stage thermal records over the coarse 40-to-50-us replay.",
+      "after": "thermal_stages.csv records the four split-operator stages; the legacy wave-history writer is disabled."
+    },
+    "boundary_conditions": {
+      "before": null,
+      "after": {
+        "lower": [
+          "FOExtrap",
+          "SlipWall"
+        ],
+        "upper": [
+          "FOExtrap",
+          "SlipWall"
+        ]
+      }
+    },
+    "thermal_probe_index": {
+      "before": null,
+      "after": [
+        1222,
+        0
+      ]
+    },
+    "cell_shape": {
+      "before": null,
+      "after": [
+        1400,
+        400
+      ]
+    },
+    "metadata_reconciled_from_actual_inputs": {
+      "before": null,
+      "after": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "actual_path": "Strang pure chemistry calls ReactorCvode::react",
+  "actual_parameters": {
+    "ode.rtol": 1e-08,
+    "ode.atol": 1e-18
+  },
+  "parsed_but_not_controlling_this_CVODE_path": {
+    "pelec.cell_chemistry_rtol": 1e-07,
+    "pelec.cell_chemistry_atol_y": 1e-14
+  },
+  "case_json_caveat": "Original case.json rtol/atol_y fields reflect parsed cell_* options, not effective CVODE settings. Original inputs and case metadata are retained unmodified.",
+  "source_evidence": {
+    "external/PeleC/Source/Advance.cpp": "cell_* passed only in wd6_extrapolated branch; cvode calls reactor->react",
+    "external/PeleC/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp": "lines 21-24 read ode.rtol and ode.atol"
+  },
+  "input_or_solver_changes_to_completed_or_running_cases": false
+}

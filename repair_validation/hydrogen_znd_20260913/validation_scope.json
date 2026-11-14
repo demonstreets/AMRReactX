@@ -1,0 +1,42 @@
+{
+  "model": "LiDryer 9 species / 21 reversible reactions; planar reactive Euler; native CPU Strang + CVODE",
+  "upstream": {
+    "T_K": 300,
+    "p_Pa": 101325,
+    "phi": 1
+  },
+  "length_m": 0.024,
+  "front_m": 0.008,
+  "end_time_s": 4e-06,
+  "nx": [
+    2400,
+    4800,
+    9600
+  ],
+  "dx_um": [
+    10,
+    5,
+    2.5
+  ],
+  "ny": 2,
+  "cfl": 0.3,
+  "time_check": {
+    "nx": 4800,
+    "cfl": 0.15
+  },
+  "comparison_window_m": [
+    5e-05,
+    0.003
+  ],
+  "speed_fit_start_s": 2e-06,
+  "targets": {
+    "fine_mean_speed_relative_error": 0.01,
+    "fine_flow_normalized_L1": 0.05,
+    "fine_fuel_half_relative_error": 0.1,
+    "fine_thermal_half_relative_error": 0.1,
+    "fine_species_mean_abs_Y_error": 0.005,
+    "max_nonfinite": 0,
+    "max_species_sum_error": 1e-08
+  },
+  "additional_checks": "CJ detailed balance, reference tolerance, reaction residence, late speed fit, transverse uniformity, boundary flux balance and spatial/temporal trends. No guaranteed pass and no GPU or spray validation."
+}

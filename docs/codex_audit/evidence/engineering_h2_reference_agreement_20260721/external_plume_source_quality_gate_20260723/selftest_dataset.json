@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "dataset_type": "external_h2_plume_shape_agreement",
+  "dataset_name": "source quality selftest, not production evidence",
+  "case": "engineering-h2-open-domain-plan-amr-hybrid-cfd-scout",
+  "source_type": "literature_digitized",
+  "source": {
+    "title": "Synthetic selftest values copied from observation report",
+    "url": "https://example.invalid/not-production-evidence"
+  },
+  "digitization": {
+    "source_figure": "selftest figure",
+    "method": "programmatic copy for validator selftest",
+    "tool": "python"
+  },
+  "case_alignment": {
+    "geometry": true,
+    "release_rate": true,
+    "release_direction": true,
+    "boundary_conditions": true
+  },
+  "metrics": [
+    {
+      "name": "max flammable x",
+      "metric_type": "plume_extent",
+      "simulation_summary_key": "observation_max_flammable_x",
+      "quantity": "maximum flammable x location",
+      "units": "m",
+      "reference_value": 0.984375,
+      "reference_basis": "selftest copy of observation summary",
+      "tolerance_abs": 1e-12
+    },
+    {
+      "name": "max cloud volume",
+      "metric_type": "flammable_cloud_volume",
+      "simulation_summary_key": "observation_max_cloud_volume",
+      "quantity": "maximum LFL cloud volume",
+      "units": "m3",
+      "reference_value": 0.0382080078125,
+      "reference_basis": "selftest copy of observation summary",
+      "tolerance_abs": 1e-12
+    },
+    {
+      "name": "sensor peak",
+      "metric_type": "sensor_concentration",
+      "simulation_summary_key": "observation_sensor_domain_line_25pct_peak_X",
+      "quantity": "sensor peak H2 mole fraction",
+      "units": "1",
+      "reference_value": 0.1405690665313,
+      "reference_basis": "selftest copy of sensor time series",
+      "tolerance_abs": 1e-12
+    }
+  ]
+}

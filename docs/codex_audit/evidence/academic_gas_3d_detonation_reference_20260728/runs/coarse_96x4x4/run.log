@@ -1,0 +1,1633 @@
+Initializing AMReX (0ec1056ff13b-dirty)...
+MPI initialized with 2 MPI processes
+MPI initialized with thread support level 0
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+
+Starting run at 02:55:14 UTC on 2026-07-28.
+Successfully read inputs file ... 
+
+PeleC git hash: 0ec1056-dirty
+AMReX git hash: 0ec1056-dirty
+PelePhysics git hash: 0ec1056-dirty
+
+0 Advected Variables: 
+
+9 Species: 
+H2  O2  H2O  H  O  OH  HO2  H2O2  N2  
+0 Auxiliary Variables: 
+
+Initializing EB2
+Successfully read inputs file ... 
+Starting to call amrex_probinit ... 
+Successfully run amrex_probinit
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+Initializing the data at level 0
+Done initializing level 0 data 
+...estimated hydro-limited timestep at level 0: 1.550812985e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550812985e-08
+... Initializing reactions, using interval dt = 1.550812985e-09
+
+TIME = 0 MASS        = 4.045833333e-07
+TIME = 0 XMOM        = 0
+TIME = 0 YMOM        = 0
+TIME = 0 ZMOM        = 0
+TIME = 0 RHO*e       = -1641.137397
+TIME = 0 RHO*K       = 0
+TIME = 0 RHO*E       = -1641.137397
+TIME = 0 FUEL PROD   = 0
+
+TIME = 0 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 0 x_velocity  MIN = 0                MAX = 0              
+TIME = 0 y_velocity  MIN = 0                MAX = 0              
+TIME = 0 z_velocity  MIN = 0                MAX = 0              
+TIME = 0 eint_e      MIN = -1.2877813e+10   MAX = -1.1601295e+09 
+TIME = 0 Temp        MIN = 300.38405        MAX = 2213.6713      
+TIME = 0 pressure    MIN = 1013000          MAX = 18000000       
+TIME = 0 massfrac    MIN = 0                MAX = 0.7453         
+TIME = 0 sumYminus1  MIN = 0                MAX = 0              
+INITIAL GRIDS 
+  Level 0   2 grids  1536 cells  100 % of domain
+            smallest grid: 32 x 4 x 4  biggest grid: 64 x 4 x 4
+
+PLOTFILE: file = plt00000
+Write plotfile time = 0.010977639  seconds
+
+...estimated hydro-limited timestep at level 0: 1.550812985e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550812985e-08
+[Level 0 step 1] ADVANCE at time 0 with dt = 1.550812985e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.550812985e-09
+[Level 0 step 1] Advanced 1536 cells
+
+TIME = 1.550812985e-09 MASS        = 4.045833333e-07
+TIME = 1.550812985e-09 XMOM        = 3.388131789e-21
+TIME = 1.550812985e-09 YMOM        = 0
+TIME = 1.550812985e-09 ZMOM        = 0
+TIME = 1.550812985e-09 RHO*e       = -1641.145862
+TIME = 1.550812985e-09 RHO*K       = 0.008465091741
+TIME = 1.550812985e-09 RHO*E       = -1641.137397
+TIME = 1.550812985e-09 FUEL PROD   = 0
+
+TIME = 1.550812985e-09 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 1.550812985e-09 x_velocity  MIN = -1011.9777       MAX = 1011.9467      
+TIME = 1.550812985e-09 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.550812985e-09 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.550812985e-09 eint_e      MIN = -1.2877813e+10   MAX = -1.1601295e+09 
+TIME = 1.550812985e-09 Temp        MIN = 300.38405        MAX = 2214.7467      
+TIME = 1.550812985e-09 pressure    MIN = 1013000          MAX = 17999993       
+TIME = 1.550812985e-09 massfrac    MIN = -4.5326545e-13   MAX = 0.7453         
+TIME = 1.550812985e-09 sumYminus1  MIN = -1.110223e-16    MAX = 0              
+
+[STEP 1] Coarse TimeStep time: 0.072045718
+[STEP 1] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 1 TIME = 1.550812985e-09 DT = 1.550812985e-09
+
+...estimated hydro-limited timestep at level 0: 1.55045032e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.55045032e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.55045032e-08
+ ... but limiting to: 1.705894283e-09 = 1.1 * 1.550812985e-09
+[Level 0 step 2] ADVANCE at time 1.550812985e-09 with dt = 1.705894283e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.705894283e-09
+[Level 0 step 2] Advanced 1536 cells
+
+TIME = 3.256707268e-09 MASS        = 4.045833333e-07
+TIME = 3.256707268e-09 XMOM        = 2.032879073e-20
+TIME = 3.256707268e-09 YMOM        = 0
+TIME = 3.256707268e-09 ZMOM        = 0
+TIME = 3.256707268e-09 RHO*e       = -1641.174724
+TIME = 3.256707268e-09 RHO*K       = 0.03732750773
+TIME = 3.256707268e-09 RHO*E       = -1641.137397
+TIME = 3.256707268e-09 FUEL PROD   = 0
+
+TIME = 3.256707268e-09 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 3.256707268e-09 x_velocity  MIN = -2154.0437       MAX = 2153.9559      
+TIME = 3.256707268e-09 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.256707268e-09 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.256707268e-09 eint_e      MIN = -1.2878093e+10   MAX = -1.1599553e+09 
+TIME = 3.256707268e-09 Temp        MIN = 300.38405        MAX = 2215.7177      
+TIME = 3.256707268e-09 pressure    MIN = 1013000          MAX = 17999986       
+TIME = 3.256707268e-09 massfrac    MIN = -1.0803984e-12   MAX = 0.7453         
+TIME = 3.256707268e-09 sumYminus1  MIN = 0                MAX = 0              
+
+[STEP 2] Coarse TimeStep time: 0.067635564
+[STEP 2] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 2 TIME = 3.256707268e-09 DT = 1.705894283e-09
+
+...estimated hydro-limited timestep at level 0: 1.550123069e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550123069e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550123069e-08
+ ... but limiting to: 1.876483712e-09 = 1.1 * 1.705894283e-09
+[Level 0 step 3] ADVANCE at time 3.256707268e-09 with dt = 1.876483712e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.876483712e-09
+[Level 0 step 3] Advanced 1536 cells
+
+TIME = 5.13319098e-09 MASS        = 4.045833333e-07
+TIME = 5.13319098e-09 XMOM        = -5.082197684e-21
+TIME = 5.13319098e-09 YMOM        = 0
+TIME = 5.13319098e-09 ZMOM        = 0
+TIME = 5.13319098e-09 RHO*e       = -1641.230134
+TIME = 5.13319098e-09 RHO*K       = 0.09273659641
+TIME = 5.13319098e-09 RHO*E       = -1641.137397
+TIME = 5.13319098e-09 FUEL PROD   = 0
+
+TIME = 5.13319098e-09 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 5.13319098e-09 x_velocity  MIN = -3442.2383       MAX = 3442.0926      
+TIME = 5.13319098e-09 y_velocity  MIN = 0                MAX = 0              
+TIME = 5.13319098e-09 z_velocity  MIN = 0                MAX = 0              
+TIME = 5.13319098e-09 eint_e      MIN = -1.2878735e+10   MAX = -1.1595424e+09 
+TIME = 5.13319098e-09 Temp        MIN = 300.38405        MAX = 2216.5484      
+TIME = 5.13319098e-09 pressure    MIN = 1013000          MAX = 17999978       
+TIME = 5.13319098e-09 massfrac    MIN = -6.7532144e-12   MAX = 0.7453         
+TIME = 5.13319098e-09 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 3] Coarse TimeStep time: 0.067131615
+[STEP 3] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 3 TIME = 5.13319098e-09 DT = 1.876483712e-09
+
+...estimated hydro-limited timestep at level 0: 1.549843255e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.549843255e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.549843255e-08
+ ... but limiting to: 2.064132083e-09 = 1.1 * 1.876483712e-09
+[Level 0 step 4] ADVANCE at time 5.13319098e-09 with dt = 2.064132083e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 2.064132083e-09
+[Level 0 step 4] Advanced 1536 cells
+
+TIME = 7.197323062e-09 MASS        = 4.045833333e-07
+TIME = 7.197323062e-09 XMOM        = 6.776263578e-21
+TIME = 7.197323062e-09 YMOM        = 0
+TIME = 7.197323062e-09 ZMOM        = 0
+TIME = 7.197323062e-09 RHO*e       = -1641.319732
+TIME = 7.197323062e-09 RHO*K       = 0.1823346611
+TIME = 7.197323062e-09 RHO*E       = -1641.137397
+TIME = 7.197323062e-09 FUEL PROD   = 0
+
+TIME = 7.197323062e-09 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 7.197323062e-09 x_velocity  MIN = -4893.9294       MAX = 4893.7255      
+TIME = 7.197323062e-09 y_velocity  MIN = 0                MAX = 0              
+TIME = 7.197323062e-09 z_velocity  MIN = 0                MAX = 0              
+TIME = 7.197323062e-09 eint_e      MIN = -1.2879834e+10   MAX = -1.1588038e+09 
+TIME = 7.197323062e-09 Temp        MIN = 300.38405        MAX = 2217.1752      
+TIME = 7.197323062e-09 pressure    MIN = 1013000          MAX = 17999969       
+TIME = 7.197323062e-09 massfrac    MIN = -2.3481971e-11   MAX = 0.74530001     
+TIME = 7.197323062e-09 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 4] Coarse TimeStep time: 0.067559349
+[STEP 4] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 4 TIME = 7.197323062e-09 DT = 2.064132083e-09
+
+...estimated hydro-limited timestep at level 0: 1.549632153e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.549632153e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.549632153e-08
+ ... but limiting to: 2.270545291e-09 = 1.1 * 2.064132083e-09
+[Level 0 step 5] ADVANCE at time 7.197323062e-09 with dt = 2.270545291e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 2.270545291e-09
+[Level 0 step 5] Advanced 1536 cells
+
+TIME = 9.467868353e-09 MASS        = 4.045833333e-07
+TIME = 9.467868353e-09 XMOM        = 7.792703115e-20
+TIME = 9.467868353e-09 YMOM        = 0
+TIME = 9.467868353e-09 ZMOM        = 0
+TIME = 9.467868353e-09 RHO*e       = -1641.452982
+TIME = 9.467868353e-09 RHO*K       = 0.3155854564
+TIME = 9.467868353e-09 RHO*E       = -1641.137397
+TIME = 9.467868353e-09 FUEL PROD   = 0
+
+TIME = 9.467868353e-09 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 9.467868353e-09 x_velocity  MIN = -6527.5588       MAX = 6527.2973      
+TIME = 9.467868353e-09 y_velocity  MIN = 0                MAX = 0              
+TIME = 9.467868353e-09 z_velocity  MIN = 0                MAX = 0              
+TIME = 9.467868353e-09 eint_e      MIN = -1.2881503e+10   MAX = -1.1576207e+09 
+TIME = 9.467868353e-09 Temp        MIN = 300.38405        MAX = 2217.5199      
+TIME = 9.467868353e-09 pressure    MIN = 1013000          MAX = 17999959       
+TIME = 9.467868353e-09 massfrac    MIN = -6.2389107e-11   MAX = 0.74530002     
+TIME = 9.467868353e-09 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 5] Coarse TimeStep time: 0.067093079
+[STEP 5] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 5 TIME = 9.467868353e-09 DT = 2.270545291e-09
+
+...estimated hydro-limited timestep at level 0: 1.549516037e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.549516037e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.549516037e-08
+ ... but limiting to: 2.49759982e-09 = 1.1 * 2.270545291e-09
+[Level 0 step 6] ADVANCE at time 9.467868353e-09 with dt = 2.49759982e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 2.49759982e-09
+[Level 0 step 6] Advanced 1536 cells
+
+TIME = 1.196546817e-08 MASS        = 4.045833333e-07
+TIME = 1.196546817e-08 XMOM        = -5.421010862e-20
+TIME = 1.196546817e-08 YMOM        = 0
+TIME = 1.196546817e-08 ZMOM        = 0
+TIME = 1.196546817e-08 RHO*e       = -1641.641551
+TIME = 1.196546817e-08 RHO*K       = 0.5041536814
+TIME = 1.196546817e-08 RHO*E       = -1641.137397
+TIME = 1.196546817e-08 FUEL PROD   = 0
+
+TIME = 1.196546817e-08 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 1.196546817e-08 x_velocity  MIN = -8362.2172       MAX = 8361.8997      
+TIME = 1.196546817e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.196546817e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.196546817e-08 eint_e      MIN = -1.2883874e+10   MAX = -1.1558274e+09 
+TIME = 1.196546817e-08 Temp        MIN = 300.38405        MAX = 2217.4875      
+TIME = 1.196546817e-08 pressure    MIN = 1013000          MAX = 17999947       
+TIME = 1.196546817e-08 massfrac    MIN = -1.4196538e-10   MAX = 0.74530002     
+TIME = 1.196546817e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 6] Coarse TimeStep time: 0.067158621
+[STEP 6] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 6 TIME = 1.196546817e-08 DT = 2.49759982e-09
+
+...estimated hydro-limited timestep at level 0: 1.549526813e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.549526813e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.549526813e-08
+ ... but limiting to: 2.747359802e-09 = 1.1 * 2.49759982e-09
+[Level 0 step 7] ADVANCE at time 1.196546817e-08 with dt = 2.747359802e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 2.747359802e-09
+[Level 0 step 7] Advanced 1536 cells
+
+TIME = 1.471282798e-08 MASS        = 4.045833333e-07
+TIME = 1.471282798e-08 XMOM        = 2.032879073e-20
+TIME = 1.471282798e-08 YMOM        = 0
+TIME = 1.471282798e-08 ZMOM        = 0
+TIME = 1.471282798e-08 RHO*e       = -1641.899724
+TIME = 1.471282798e-08 RHO*K       = 0.7623268619
+TIME = 1.471282798e-08 RHO*E       = -1641.137397
+TIME = 1.471282798e-08 FUEL PROD   = 0
+
+TIME = 1.471282798e-08 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 1.471282798e-08 x_velocity  MIN = -10417.012       MAX = 10416.642      
+TIME = 1.471282798e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.471282798e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.471282798e-08 eint_e      MIN = -1.2887101e+10   MAX = -1.1531904e+09 
+TIME = 1.471282798e-08 Temp        MIN = 300.38405        MAX = 2216.9649      
+TIME = 1.471282798e-08 pressure    MIN = 1013000          MAX = 17999935       
+TIME = 1.471282798e-08 massfrac    MIN = -2.9066931e-10   MAX = 0.74530003     
+TIME = 1.471282798e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 7] Coarse TimeStep time: 0.067330881
+[STEP 7] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 7 TIME = 1.471282798e-08 DT = 2.747359802e-09
+
+...estimated hydro-limited timestep at level 0: 1.549702516e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.549702516e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.549702516e-08
+ ... but limiting to: 3.022095782e-09 = 1.1 * 2.747359802e-09
+[Level 0 step 8] ADVANCE at time 1.471282798e-08 with dt = 3.022095782e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 3.022095782e-09
+[Level 0 step 8] Advanced 1536 cells
+
+TIME = 1.773492376e-08 MASS        = 4.045833333e-07
+TIME = 1.773492376e-08 XMOM        = -6.776263578e-21
+TIME = 1.773492376e-08 YMOM        = 0
+TIME = 1.773492376e-08 ZMOM        = 0
+TIME = 1.773492376e-08 RHO*e       = -1642.244856
+TIME = 1.773492376e-08 RHO*K       = 1.107459184
+TIME = 1.773492376e-08 RHO*E       = -1641.137397
+TIME = 1.773492376e-08 FUEL PROD   = 0
+
+TIME = 1.773492376e-08 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 1.773492376e-08 x_velocity  MIN = -12710.213       MAX = 12709.793      
+TIME = 1.773492376e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.773492376e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.773492376e-08 eint_e      MIN = -1.2891366e+10   MAX = -1.1493767e+09 
+TIME = 1.773492376e-08 Temp        MIN = 300.38405        MAX = 2215.8209      
+TIME = 1.773492376e-08 pressure    MIN = 1013000          MAX = 17999921       
+TIME = 1.773492376e-08 massfrac    MIN = -5.5054444e-10   MAX = 0.74530003     
+TIME = 1.773492376e-08 sumYminus1  MIN = -1.110223e-16    MAX = 0              
+
+[STEP 8] Coarse TimeStep time: 0.067823364
+[STEP 8] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 8 TIME = 1.773492376e-08 DT = 3.022095782e-09
+
+...estimated hydro-limited timestep at level 0: 1.550087504e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550087504e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550087504e-08
+ ... but limiting to: 3.324305361e-09 = 1.1 * 3.022095782e-09
+[Level 0 step 9] ADVANCE at time 1.773492376e-08 with dt = 3.324305361e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 3.324305361e-09
+[Level 0 step 9] Advanced 1536 cells
+
+TIME = 2.105922912e-08 MASS        = 4.045833333e-07
+TIME = 2.105922912e-08 XMOM        = -1.355252716e-20
+TIME = 2.105922912e-08 YMOM        = 0
+TIME = 2.105922912e-08 ZMOM        = 0
+TIME = 2.105922912e-08 RHO*e       = -1642.6978
+TIME = 2.105922912e-08 RHO*K       = 1.56040333
+TIME = 2.105922912e-08 RHO*E       = -1641.137397
+TIME = 2.105922912e-08 FUEL PROD   = 0
+
+TIME = 2.105922912e-08 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 2.105922912e-08 x_velocity  MIN = -15258.187       MAX = 15257.723      
+TIME = 2.105922912e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.105922912e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.105922912e-08 eint_e      MIN = -1.289688e+10    MAX = -1.1439121e+09 
+TIME = 2.105922912e-08 Temp        MIN = 300.38405        MAX = 2213.9074      
+TIME = 2.105922912e-08 pressure    MIN = 1013000          MAX = 17999905       
+TIME = 2.105922912e-08 massfrac    MIN = -9.82134e-10     MAX = 0.74530003     
+TIME = 2.105922912e-08 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 9] Coarse TimeStep time: 0.069379368
+[STEP 9] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 9 TIME = 2.105922912e-08 DT = 3.324305361e-09
+
+...estimated hydro-limited timestep at level 0: 1.550732163e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550732163e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550732163e-08
+ ... but limiting to: 3.656735897e-09 = 1.1 * 3.324305361e-09
+[Level 0 step 10] ADVANCE at time 2.105922912e-08 with dt = 3.656735897e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 3.656735897e-09
+[Level 0 step 10] Advanced 1536 cells
+
+TIME = 2.471596502e-08 MASS        = 4.045833333e-07
+TIME = 2.471596502e-08 XMOM        = 5.421010862e-20
+TIME = 2.471596502e-08 YMOM        = 0
+TIME = 2.471596502e-08 ZMOM        = 0
+TIME = 2.471596502e-08 RHO*e       = -1643.283284
+TIME = 2.471596502e-08 RHO*K       = 2.145887135
+TIME = 2.471596502e-08 RHO*E       = -1641.137397
+TIME = 2.471596502e-08 FUEL PROD   = 0
+
+TIME = 2.471596502e-08 density     MIN = 0.00085          MAX = 0.0024         
+TIME = 2.471596502e-08 x_velocity  MIN = -18074.204       MAX = 18073.701      
+TIME = 2.471596502e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.471596502e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.471596502e-08 eint_e      MIN = -1.2913713e+10   MAX = -1.1361267e+09 
+TIME = 2.471596502e-08 Temp        MIN = 300.38405        MAX = 2213.6553      
+TIME = 2.471596502e-08 pressure    MIN = 1013000          MAX = 17999888       
+TIME = 2.471596502e-08 massfrac    MIN = -1.6676884e-09   MAX = 0.7453         
+TIME = 2.471596502e-08 sumYminus1  MIN = -1.110223e-16    MAX = 0              
+
+[STEP 10] Coarse TimeStep time: 0.068207644
+[STEP 10] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 10 TIME = 2.471596502e-08 DT = 3.656735897e-09
+
+...estimated hydro-limited timestep at level 0: 1.550817396e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550817396e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550817396e-08
+ ... but limiting to: 4.022409486e-09 = 1.1 * 3.656735897e-09
+[Level 0 step 11] ADVANCE at time 2.471596502e-08 with dt = 4.022409486e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 4.022409486e-09
+[Level 0 step 11] Advanced 1536 cells
+
+TIME = 2.87383745e-08 MASS        = 4.045833333e-07
+TIME = 2.87383745e-08 XMOM        = -1.219727444e-19
+TIME = 2.87383745e-08 YMOM        = 0
+TIME = 2.87383745e-08 ZMOM        = 0
+TIME = 2.87383745e-08 RHO*e       = -1644.030193
+TIME = 2.87383745e-08 RHO*K       = 2.892796406
+TIME = 2.87383745e-08 RHO*E       = -1641.137397
+TIME = 2.87383745e-08 FUEL PROD   = 0
+
+TIME = 2.87383745e-08 density     MIN = 0.00085          MAX = 0.0023999999   
+TIME = 2.87383745e-08 x_velocity  MIN = -21167.257       MAX = 21166.722      
+TIME = 2.87383745e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.87383745e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.87383745e-08 eint_e      MIN = -1.2967665e+10   MAX = -1.125094e+09  
+TIME = 2.87383745e-08 Temp        MIN = 300.38405        MAX = 2213.6527      
+TIME = 2.87383745e-08 pressure    MIN = 1013000          MAX = 17999869       
+TIME = 2.87383745e-08 massfrac    MIN = -2.7120269e-09   MAX = 0.7453         
+TIME = 2.87383745e-08 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 11] Coarse TimeStep time: 0.067632747
+[STEP 11] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 11 TIME = 2.87383745e-08 DT = 4.022409486e-09
+
+...estimated hydro-limited timestep at level 0: 1.550818144e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550818144e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550818144e-08
+ ... but limiting to: 4.424650435e-09 = 1.1 * 4.022409486e-09
+[Level 0 step 12] ADVANCE at time 2.87383745e-08 with dt = 4.424650435e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 4.424650435e-09
+[Level 0 step 12] Advanced 1536 cells
+
+TIME = 3.316302494e-08 MASS        = 4.045833333e-07
+TIME = 3.316302494e-08 XMOM        = 3.252606517e-19
+TIME = 3.316302494e-08 YMOM        = 0
+TIME = 3.316302494e-08 ZMOM        = 0
+TIME = 3.316302494e-08 RHO*e       = -1644.971748
+TIME = 3.316302494e-08 RHO*K       = 3.834350625
+TIME = 3.316302494e-08 RHO*E       = -1641.137397
+TIME = 3.316302494e-08 FUEL PROD   = 0
+
+TIME = 3.316302494e-08 density     MIN = 0.00085          MAX = 0.0023999999   
+TIME = 3.316302494e-08 x_velocity  MIN = -24541.077       MAX = 24540.517      
+TIME = 3.316302494e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.316302494e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.316302494e-08 eint_e      MIN = -1.3038817e+10   MAX = -1.1095771e+09 
+TIME = 3.316302494e-08 Temp        MIN = 300.38405        MAX = 2213.6497      
+TIME = 3.316302494e-08 pressure    MIN = 1013000          MAX = 17999848       
+TIME = 3.316302494e-08 massfrac    MIN = -4.2383755e-09   MAX = 0.7453         
+TIME = 3.316302494e-08 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 12] Coarse TimeStep time: 0.068175561
+[STEP 12] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 12 TIME = 3.316302494e-08 DT = 4.424650435e-09
+
+...estimated hydro-limited timestep at level 0: 1.550818975e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550818975e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550818975e-08
+ ... but limiting to: 4.867115478e-09 = 1.1 * 4.424650435e-09
+[Level 0 step 13] ADVANCE at time 3.316302494e-08 with dt = 4.867115478e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 4.867115478e-09
+[Level 0 step 13] Advanced 1536 cells
+
+TIME = 3.803014041e-08 MASS        = 4.045833333e-07
+TIME = 3.803014041e-08 XMOM        = 5.421010862e-20
+TIME = 3.803014041e-08 YMOM        = 0
+TIME = 3.803014041e-08 ZMOM        = 0
+TIME = 3.803014041e-08 RHO*e       = -1646.14559
+TIME = 3.803014041e-08 RHO*K       = 5.008193177
+TIME = 3.803014041e-08 RHO*E       = -1641.137397
+TIME = 3.803014041e-08 FUEL PROD   = 0
+
+TIME = 3.803014041e-08 density     MIN = 0.00085          MAX = 0.0023999997   
+TIME = 3.803014041e-08 x_velocity  MIN = -28193.489       MAX = 28192.909      
+TIME = 3.803014041e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.803014041e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.803014041e-08 eint_e      MIN = -1.3129033e+10   MAX = -1.0880235e+09 
+TIME = 3.803014041e-08 Temp        MIN = 300.38405        MAX = 2213.6464      
+TIME = 3.803014041e-08 pressure    MIN = 1013000          MAX = 17999823       
+TIME = 3.803014041e-08 massfrac    MIN = -6.3776439e-09   MAX = 0.7453         
+TIME = 3.803014041e-08 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 13] Coarse TimeStep time: 0.069213878
+[STEP 13] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 13 TIME = 3.803014041e-08 DT = 4.867115478e-09
+
+...estimated hydro-limited timestep at level 0: 1.550819897e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550819897e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550819897e-08
+ ... but limiting to: 5.353827026e-09 = 1.1 * 4.867115478e-09
+[Level 0 step 14] ADVANCE at time 3.803014041e-08 with dt = 5.353827026e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 5.353827026e-09
+[Level 0 step 14] Advanced 1536 cells
+
+TIME = 4.338396744e-08 MASS        = 4.045833333e-07
+TIME = 4.338396744e-08 XMOM        = -2.710505431e-20
+TIME = 4.338396744e-08 YMOM        = 0
+TIME = 4.338396744e-08 ZMOM        = 0
+TIME = 4.338396744e-08 RHO*e       = -1647.593808
+TIME = 4.338396744e-08 RHO*K       = 6.456411123
+TIME = 4.338396744e-08 RHO*E       = -1641.137397
+TIME = 4.338396744e-08 FUEL PROD   = 0
+
+TIME = 4.338396744e-08 density     MIN = 0.00085          MAX = 0.0023999994   
+TIME = 4.338396744e-08 x_velocity  MIN = -32116.01        MAX = 32115.417      
+TIME = 4.338396744e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.338396744e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.338396744e-08 eint_e      MIN = -1.3239516e+10   MAX = -1.0587115e+09 
+TIME = 4.338396744e-08 Temp        MIN = 300.38405        MAX = 2213.6427      
+TIME = 4.338396744e-08 pressure    MIN = 1013000          MAX = 17999795       
+TIME = 4.338396744e-08 massfrac    MIN = -9.2518129e-09   MAX = 0.7453         
+TIME = 4.338396744e-08 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 14] Coarse TimeStep time: 0.069915766
+[STEP 14] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 14 TIME = 4.338396744e-08 DT = 5.353827026e-09
+
+...estimated hydro-limited timestep at level 0: 1.550820926e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550820926e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550820926e-08
+ ... but limiting to: 5.889209729e-09 = 1.1 * 5.353827026e-09
+[Level 0 step 15] ADVANCE at time 4.338396744e-08 with dt = 5.889209729e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 5.889209729e-09
+[Level 0 step 15] Advanced 1536 cells
+
+TIME = 4.927317717e-08 MASS        = 4.045833333e-07
+TIME = 4.927317717e-08 XMOM        = 3.794707604e-19
+TIME = 4.927317717e-08 YMOM        = 0
+TIME = 4.927317717e-08 ZMOM        = 0
+TIME = 4.927317717e-08 RHO*e       = -1649.362742
+TIME = 4.927317717e-08 RHO*K       = 8.225345076
+TIME = 4.927317717e-08 RHO*E       = -1641.137397
+TIME = 4.927317717e-08 FUEL PROD   = 0
+
+TIME = 4.927317717e-08 density     MIN = 0.00085          MAX = 0.0023999989   
+TIME = 4.927317717e-08 x_velocity  MIN = -36293.069       MAX = 36292.469      
+TIME = 4.927317717e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.927317717e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.927317717e-08 eint_e      MIN = -1.3370325e+10   MAX = -1.0202968e+09 
+TIME = 4.927317717e-08 Temp        MIN = 300.38405        MAX = 2213.6386      
+TIME = 4.927317717e-08 pressure    MIN = 1013000          MAX = 17999762       
+TIME = 4.927317717e-08 massfrac    MIN = -1.2957806e-08   MAX = 0.7453         
+TIME = 4.927317717e-08 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 15] Coarse TimeStep time: 0.071318951
+[STEP 15] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 15 TIME = 4.927317717e-08 DT = 5.889209729e-09
+
+...estimated hydro-limited timestep at level 0: 1.550822082e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550822082e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550822082e-08
+ ... but limiting to: 6.478130702e-09 = 1.1 * 5.889209729e-09
+[Level 0 step 16] ADVANCE at time 4.927317717e-08 with dt = 6.478130702e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 6.478130702e-09
+[Level 0 step 16] Advanced 1536 cells
+
+TIME = 5.575130787e-08 MASS        = 4.045833333e-07
+TIME = 5.575130787e-08 XMOM        = 1.626303259e-19
+TIME = 5.575130787e-08 YMOM        = 0
+TIME = 5.575130787e-08 ZMOM        = 0
+TIME = 5.575130787e-08 RHO*e       = -1651.50193
+TIME = 5.575130787e-08 RHO*K       = 10.3645334
+TIME = 5.575130787e-08 RHO*E       = -1641.137397
+TIME = 5.575130787e-08 FUEL PROD   = 0
+
+TIME = 5.575130787e-08 density     MIN = 0.00085          MAX = 0.0023999977   
+TIME = 5.575130787e-08 x_velocity  MIN = -40698.963       MAX = 40698.365      
+TIME = 5.575130787e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 5.575130787e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 5.575130787e-08 eint_e      MIN = -1.3519692e+10   MAX = -9.7308229e+08 
+TIME = 5.575130787e-08 Temp        MIN = 300.38405        MAX = 2213.6339      
+TIME = 5.575130787e-08 pressure    MIN = 1013000          MAX = 17999720       
+TIME = 5.575130787e-08 massfrac    MIN = -1.7561686e-08   MAX = 0.7453         
+TIME = 5.575130787e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 16] Coarse TimeStep time: 0.074395642
+[STEP 16] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 16 TIME = 5.575130787e-08 DT = 6.478130702e-09
+
+...estimated hydro-limited timestep at level 0: 1.550823392e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550823392e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550823392e-08
+ ... but limiting to: 7.125943772e-09 = 1.1 * 6.478130702e-09
+[Level 0 step 17] ADVANCE at time 5.575130787e-08 with dt = 7.125943772e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 7.125943772e-09
+[Level 0 step 17] Advanced 1536 cells
+
+TIME = 6.287725164e-08 MASS        = 4.045833333e-07
+TIME = 6.287725164e-08 XMOM        = 2.168404345e-19
+TIME = 6.287725164e-08 YMOM        = 0
+TIME = 6.287725164e-08 ZMOM        = 0
+TIME = 6.287725164e-08 RHO*e       = -1654.061069
+TIME = 6.287725164e-08 RHO*K       = 12.92367159
+TIME = 6.287725164e-08 RHO*E       = -1641.137397
+TIME = 6.287725164e-08 FUEL PROD   = 0
+
+TIME = 6.287725164e-08 density     MIN = 0.00085          MAX = 0.0023999956   
+TIME = 6.287725164e-08 x_velocity  MIN = -45291.326       MAX = 45290.741      
+TIME = 6.287725164e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 6.287725164e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 6.287725164e-08 eint_e      MIN = -1.3683209e+10   MAX = -9.2083887e+08 
+TIME = 6.287725164e-08 Temp        MIN = 300.38405        MAX = 2213.6286      
+TIME = 6.287725164e-08 pressure    MIN = 1013000          MAX = 17999666       
+TIME = 6.287725164e-08 massfrac    MIN = -2.3113727e-08   MAX = 0.7453         
+TIME = 6.287725164e-08 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 17] Coarse TimeStep time: 0.077152916
+[STEP 17] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 17 TIME = 6.287725164e-08 DT = 7.125943772e-09
+
+...estimated hydro-limited timestep at level 0: 1.550824904e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550824904e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550824904e-08
+ ... but limiting to: 7.838538149e-09 = 1.1 * 7.125943772e-09
+[Level 0 step 18] ADVANCE at time 6.287725164e-08 with dt = 7.838538149e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 7.838538149e-09
+[Level 0 step 18] Advanced 1536 cells
+
+TIME = 7.071578979e-08 MASS        = 4.045833333e-07
+TIME = 7.071578979e-08 XMOM        = -1.084202172e-19
+TIME = 7.071578979e-08 YMOM        = 0
+TIME = 7.071578979e-08 ZMOM        = 0
+TIME = 7.071578979e-08 RHO*e       = -1657.084145
+TIME = 7.071578979e-08 RHO*K       = 15.94674829
+TIME = 7.071578979e-08 RHO*E       = -1641.137397
+TIME = 7.071578979e-08 FUEL PROD   = 0
+
+TIME = 7.071578979e-08 density     MIN = 0.00085          MAX = 0.0023999917   
+TIME = 7.071578979e-08 x_velocity  MIN = -50002.03        MAX = 50001.474      
+TIME = 7.071578979e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 7.071578979e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 7.071578979e-08 eint_e      MIN = -1.3853403e+10   MAX = -8.7172432e+08 
+TIME = 7.071578979e-08 Temp        MIN = 300.38405        MAX = 2213.6224      
+TIME = 7.071578979e-08 pressure    MIN = 1013000          MAX = 17999592       
+TIME = 7.071578979e-08 massfrac    MIN = -2.9686319e-08   MAX = 0.7453         
+TIME = 7.071578979e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 18] Coarse TimeStep time: 0.074449373
+[STEP 18] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 18 TIME = 7.071578979e-08 DT = 7.838538149e-09
+
+...estimated hydro-limited timestep at level 0: 1.550826693e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550826693e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550826693e-08
+ ... but limiting to: 8.622391964e-09 = 1.1 * 7.838538149e-09
+[Level 0 step 19] ADVANCE at time 7.071578979e-08 with dt = 8.622391964e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 8.622391964e-09
+[Level 0 step 19] Advanced 1536 cells
+
+TIME = 7.933818176e-08 MASS        = 4.045833333e-07
+TIME = 7.933818176e-08 XMOM        = 2.168404345e-19
+TIME = 7.933818176e-08 YMOM        = 0
+TIME = 7.933818176e-08 ZMOM        = 0
+TIME = 7.933818176e-08 RHO*e       = -1660.603191
+TIME = 7.933818176e-08 RHO*K       = 19.46579358
+TIME = 7.933818176e-08 RHO*E       = -1641.137397
+TIME = 7.933818176e-08 FUEL PROD   = 0
+
+TIME = 7.933818176e-08 density     MIN = 0.00085          MAX = 0.0023999845   
+TIME = 7.933818176e-08 x_velocity  MIN = -54733.857       MAX = 54733.349      
+TIME = 7.933818176e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 7.933818176e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 7.933818176e-08 eint_e      MIN = -1.4020974e+10   MAX = -8.3686586e+08 
+TIME = 7.933818176e-08 Temp        MIN = 300.38405        MAX = 2213.6148      
+TIME = 7.933818176e-08 pressure    MIN = 1013000          MAX = 17999483       
+TIME = 7.933818176e-08 massfrac    MIN = -3.7415918e-08   MAX = 0.7453         
+TIME = 7.933818176e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 19] Coarse TimeStep time: 0.069024605
+[STEP 19] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 19 TIME = 7.933818176e-08 DT = 8.622391964e-09
+
+...estimated hydro-limited timestep at level 0: 1.550828885e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550828885e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550828885e-08
+ ... but limiting to: 9.48463116e-09 = 1.1 * 8.622391964e-09
+[Level 0 step 20] ADVANCE at time 7.933818176e-08 with dt = 9.48463116e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 9.48463116e-09
+[Level 0 step 20] Advanced 1536 cells
+
+TIME = 8.882281292e-08 MASS        = 4.045833333e-07
+TIME = 8.882281292e-08 XMOM        = -2.168404345e-19
+TIME = 8.882281292e-08 YMOM        = 0
+TIME = 8.882281292e-08 ZMOM        = 0
+TIME = 8.882281292e-08 RHO*e       = -1664.639579
+TIME = 8.882281292e-08 RHO*K       = 23.50218189
+TIME = 8.882281292e-08 RHO*E       = -1641.137397
+TIME = 8.882281292e-08 FUEL PROD   = 0
+
+TIME = 8.882281292e-08 density     MIN = 0.00085          MAX = 0.0023999714   
+TIME = 8.882281292e-08 x_velocity  MIN = -59376.807       MAX = 59376.355      
+TIME = 8.882281292e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 8.882281292e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 8.882281292e-08 eint_e      MIN = -1.417899e+10    MAX = -8.2767328e+08 
+TIME = 8.882281292e-08 Temp        MIN = 300.38405        MAX = 2213.6054      
+TIME = 8.882281292e-08 pressure    MIN = 1013000          MAX = 17999315       
+TIME = 8.882281292e-08 massfrac    MIN = -4.6502865e-08   MAX = 0.7453         
+TIME = 8.882281292e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 20] Coarse TimeStep time: 0.06967694
+[STEP 20] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 20 TIME = 8.882281292e-08 DT = 9.48463116e-09
+
+...estimated hydro-limited timestep at level 0: 1.550831693e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550831693e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550831693e-08
+ ... but limiting to: 1.043309428e-08 = 1.1 * 9.48463116e-09
+[Level 0 step 21] ADVANCE at time 8.882281292e-08 with dt = 1.043309428e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.043309428e-08
+[Level 0 step 21] Advanced 1536 cells
+
+TIME = 9.925590719e-08 MASS        = 4.045833333e-07
+TIME = 9.925590719e-08 XMOM        = -1.084202172e-19
+TIME = 9.925590719e-08 YMOM        = 0
+TIME = 9.925590719e-08 ZMOM        = 0
+TIME = 9.925590719e-08 RHO*e       = -1669.2154
+TIME = 9.925590719e-08 RHO*K       = 28.07800331
+TIME = 9.925590719e-08 RHO*E       = -1641.137397
+TIME = 9.925590719e-08 FUEL PROD   = 0
+
+TIME = 9.925590719e-08 density     MIN = 0.00085          MAX = 0.0023999478   
+TIME = 9.925590719e-08 x_velocity  MIN = -63835.479       MAX = 63835.086      
+TIME = 9.925590719e-08 y_velocity  MIN = 0                MAX = 0              
+TIME = 9.925590719e-08 z_velocity  MIN = 0                MAX = 0              
+TIME = 9.925590719e-08 eint_e      MIN = -1.4327862e+10   MAX = -8.5355965e+08 
+TIME = 9.925590719e-08 Temp        MIN = 300.38405        MAX = 2213.5929      
+TIME = 9.925590719e-08 pressure    MIN = 1013000          MAX = 17999045       
+TIME = 9.925590719e-08 massfrac    MIN = -5.7127133e-08   MAX = 0.7453         
+TIME = 9.925590719e-08 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 21] Coarse TimeStep time: 0.0691401
+[STEP 21] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 21 TIME = 9.925590719e-08 DT = 1.043309428e-08
+
+...estimated hydro-limited timestep at level 0: 1.550835485e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550835485e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550835485e-08
+ ... but limiting to: 1.14764037e-08 = 1.1 * 1.043309428e-08
+[Level 0 step 22] ADVANCE at time 9.925590719e-08 with dt = 1.14764037e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.14764037e-08
+[Level 0 step 22] Advanced 1536 cells
+
+TIME = 1.107323109e-07 MASS        = 4.045833333e-07
+TIME = 1.107323109e-07 XMOM        = 3.794707604e-19
+TIME = 1.107323109e-07 YMOM        = 0
+TIME = 1.107323109e-07 ZMOM        = 0
+TIME = 1.107323109e-07 RHO*e       = -1674.360265
+TIME = 1.107323109e-07 RHO*K       = 33.22286751
+TIME = 1.107323109e-07 RHO*E       = -1641.137397
+TIME = 1.107323109e-07 FUEL PROD   = 0
+
+TIME = 1.107323109e-07 density     MIN = 0.00085          MAX = 0.0023999059   
+TIME = 1.107323109e-07 x_velocity  MIN = -68034.46        MAX = 68034.123      
+TIME = 1.107323109e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.107323109e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.107323109e-07 eint_e      MIN = -1.4475883e+10   MAX = -9.1823363e+08 
+TIME = 1.107323109e-07 Temp        MIN = 300.38405        MAX = 2213.5755      
+TIME = 1.107323109e-07 pressure    MIN = 1013000          MAX = 17998598       
+TIME = 1.107323109e-07 massfrac    MIN = -6.9307894e-08   MAX = 0.7453         
+TIME = 1.107323109e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 22] Coarse TimeStep time: 0.069916491
+[STEP 22] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 22 TIME = 1.107323109e-07 DT = 1.14764037e-08
+
+...estimated hydro-limited timestep at level 0: 1.550840887e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550840887e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550840887e-08
+ ... but limiting to: 1.262404407e-08 = 1.1 * 1.14764037e-08
+[Level 0 step 23] ADVANCE at time 1.107323109e-07 with dt = 1.262404407e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.262404407e-08
+[Level 0 step 23] Advanced 1536 cells
+
+TIME = 1.23356355e-07 MASS        = 4.045833333e-07
+TIME = 1.23356355e-07 XMOM        = 3.252606517e-19
+TIME = 1.23356355e-07 YMOM        = 0
+TIME = 1.23356355e-07 ZMOM        = 0
+TIME = 1.23356355e-07 RHO*e       = -1680.102312
+TIME = 1.23356355e-07 RHO*K       = 38.96491503
+TIME = 1.23356355e-07 RHO*E       = -1641.137397
+TIME = 1.23356355e-07 FUEL PROD   = 0
+
+TIME = 1.23356355e-07 density     MIN = 0.00085          MAX = 0.0023998319   
+TIME = 1.23356355e-07 x_velocity  MIN = -71901.168       MAX = 71900.887      
+TIME = 1.23356355e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.23356355e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.23356355e-07 eint_e      MIN = -1.4635313e+10   MAX = -1.0244032e+09 
+TIME = 1.23356355e-07 Temp        MIN = 300.38405        MAX = 2213.5501      
+TIME = 1.23356355e-07 pressure    MIN = 1013000          MAX = 17997845       
+TIME = 1.23356355e-07 massfrac    MIN = -8.9972507e-08   MAX = 0.7453         
+TIME = 1.23356355e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 23] Coarse TimeStep time: 0.071640697
+[STEP 23] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 23 TIME = 1.23356355e-07 DT = 1.262404407e-08
+
+...estimated hydro-limited timestep at level 0: 1.550848973e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550848973e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550848973e-08
+ ... but limiting to: 1.388644848e-08 = 1.1 * 1.262404407e-08
+[Level 0 step 24] ADVANCE at time 1.23356355e-07 with dt = 1.388644848e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.388644848e-08
+[Level 0 step 24] Advanced 1536 cells
+
+TIME = 1.372428035e-07 MASS        = 4.045833333e-07
+TIME = 1.372428035e-07 XMOM        = 2.168404345e-19
+TIME = 1.372428035e-07 YMOM        = 0
+TIME = 1.372428035e-07 ZMOM        = 0
+TIME = 1.372428035e-07 RHO*e       = -1686.453364
+TIME = 1.372428035e-07 RHO*K       = 45.31596734
+TIME = 1.372428035e-07 RHO*E       = -1641.137397
+TIME = 1.372428035e-07 FUEL PROD   = 0
+
+TIME = 1.372428035e-07 density     MIN = 0.00085          MAX = 0.0023997022   
+TIME = 1.372428035e-07 x_velocity  MIN = -75326.829       MAX = 75326.608      
+TIME = 1.372428035e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.372428035e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.372428035e-07 eint_e      MIN = -1.4815226e+10   MAX = -1.0607404e+09 
+TIME = 1.372428035e-07 Temp        MIN = 300.38405        MAX = 2213.5111      
+TIME = 1.372428035e-07 pressure    MIN = 1013000          MAX = 17996566       
+TIME = 1.372428035e-07 massfrac    MIN = -3.3239805e-07   MAX = 0.7453         
+TIME = 1.372428035e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 24] Coarse TimeStep time: 0.070579835
+[STEP 24] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 24 TIME = 1.372428035e-07 DT = 1.388644848e-08
+
+...estimated hydro-limited timestep at level 0: 1.550861568e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550861568e-08
+PeleC::compute_new_dt : limiting dt at level 0
+ ... new dt computed: 1.550861568e-08
+ ... but limiting to: 1.527509333e-08 = 1.1 * 1.388644848e-08
+[Level 0 step 25] ADVANCE at time 1.372428035e-07 with dt = 1.527509333e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.527509333e-08
+[Level 0 step 25] Advanced 1536 cells
+
+TIME = 1.525178968e-07 MASS        = 4.045833333e-07
+TIME = 1.525178968e-07 XMOM        = -1.19262239e-18
+TIME = 1.525178968e-07 YMOM        = 0
+TIME = 1.525178968e-07 ZMOM        = 0
+TIME = 1.525178968e-07 RHO*e       = -1693.428551
+TIME = 1.525178968e-07 RHO*K       = 52.29115371
+TIME = 1.525178968e-07 RHO*E       = -1641.137397
+TIME = 1.525178968e-07 FUEL PROD   = 0
+
+TIME = 1.525178968e-07 density     MIN = 0.00085          MAX = 0.0023994773   
+TIME = 1.525178968e-07 x_velocity  MIN = -78148.222       MAX = 78148.068      
+TIME = 1.525178968e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.525178968e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.525178968e-07 eint_e      MIN = -1.5016933e+10   MAX = -9.9045995e+08 
+TIME = 1.525178968e-07 Temp        MIN = 300.38405        MAX = 2213.4495      
+TIME = 1.525178968e-07 pressure    MIN = 1013000          MAX = 17994390       
+TIME = 1.525178968e-07 massfrac    MIN = -7.2918572e-07   MAX = 0.7453         
+TIME = 1.525178968e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 25] Coarse TimeStep time: 0.070252388
+[STEP 25] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 25 TIME = 1.525178968e-07 DT = 1.527509333e-08
+
+...estimated hydro-limited timestep at level 0: 1.550881734e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550881734e-08
+[Level 0 step 26] ADVANCE at time 1.525178968e-07 with dt = 1.550881734e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.550881734e-08
+[Level 0 step 26] Advanced 1536 cells
+
+TIME = 1.680267141e-07 MASS        = 4.045833333e-07
+TIME = 1.680267141e-07 XMOM        = -3.252606517e-19
+TIME = 1.680267141e-07 YMOM        = 0
+TIME = 1.680267141e-07 ZMOM        = 0
+TIME = 1.680267141e-07 RHO*e       = -1700.46338
+TIME = 1.680267141e-07 RHO*K       = 59.32598321
+TIME = 1.680267141e-07 RHO*E       = -1641.137397
+TIME = 1.680267141e-07 FUEL PROD   = 0
+
+TIME = 1.680267141e-07 density     MIN = 0.00085          MAX = 0.0023991256   
+TIME = 1.680267141e-07 x_velocity  MIN = -80131.427       MAX = 80131.338      
+TIME = 1.680267141e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.680267141e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.680267141e-07 eint_e      MIN = -1.5226002e+10   MAX = -8.6932724e+08 
+TIME = 1.680267141e-07 Temp        MIN = 300.38405        MAX = 2213.359       
+TIME = 1.680267141e-07 pressure    MIN = 1013000          MAX = 17991028       
+TIME = 1.680267141e-07 massfrac    MIN = -1.0959628e-06   MAX = 0.7453         
+TIME = 1.680267141e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 26] Coarse TimeStep time: 0.070224369
+[STEP 26] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 26 TIME = 1.680267141e-07 DT = 1.550881734e-08
+
+...estimated hydro-limited timestep at level 0: 1.550911659e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550911659e-08
+[Level 0 step 27] ADVANCE at time 1.680267141e-07 with dt = 1.550911659e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.550911659e-08
+[Level 0 step 27] Advanced 1536 cells
+
+TIME = 1.835358307e-07 MASS        = 4.045833333e-07
+TIME = 1.835358307e-07 XMOM        = -4.33680869e-19
+TIME = 1.835358307e-07 YMOM        = 0
+TIME = 1.835358307e-07 ZMOM        = 0
+TIME = 1.835358307e-07 RHO*e       = -1707.373723
+TIME = 1.835358307e-07 RHO*K       = 66.2363262
+TIME = 1.835358307e-07 RHO*E       = -1641.137397
+TIME = 1.835358307e-07 FUEL PROD   = 0
+
+TIME = 1.835358307e-07 density     MIN = 0.00085          MAX = 0.0023986057   
+TIME = 1.835358307e-07 x_velocity  MIN = -81300.696       MAX = 81300.67       
+TIME = 1.835358307e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.835358307e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.835358307e-07 eint_e      MIN = -1.5439712e+10   MAX = -6.8741055e+08 
+TIME = 1.835358307e-07 Temp        MIN = 300.38405        MAX = 2213.2302      
+TIME = 1.835358307e-07 pressure    MIN = 1013000          MAX = 17986094       
+TIME = 1.835358307e-07 massfrac    MIN = -1.3566771e-06   MAX = 0.7453         
+TIME = 1.835358307e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 27] Coarse TimeStep time: 0.070561881
+[STEP 27] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 27 TIME = 1.835358307e-07 DT = 1.550911659e-08
+
+...estimated hydro-limited timestep at level 0: 1.550954485e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.550954485e-08
+[Level 0 step 28] ADVANCE at time 1.835358307e-07 with dt = 1.550954485e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.550954485e-08
+[Level 0 step 28] Advanced 1536 cells
+
+TIME = 1.990453756e-07 MASS        = 4.045833333e-07
+TIME = 1.990453756e-07 XMOM        = 1.084202172e-18
+TIME = 1.990453756e-07 YMOM        = 0
+TIME = 1.990453756e-07 ZMOM        = 0
+TIME = 1.990453756e-07 RHO*e       = -1714.1498
+TIME = 1.990453756e-07 RHO*K       = 73.01240344
+TIME = 1.990453756e-07 RHO*E       = -1641.137397
+TIME = 1.990453756e-07 FUEL PROD   = 0
+
+TIME = 1.990453756e-07 density     MIN = 0.00085          MAX = 0.0023978634   
+TIME = 1.990453756e-07 x_velocity  MIN = -81911.301       MAX = 81911.302      
+TIME = 1.990453756e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 1.990453756e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 1.990453756e-07 eint_e      MIN = -1.5657338e+10   MAX = -4.4502647e+08 
+TIME = 1.990453756e-07 Temp        MIN = 300.38405        MAX = 2213.051       
+TIME = 1.990453756e-07 pressure    MIN = 1013000          MAX = 17979083       
+TIME = 1.990453756e-07 massfrac    MIN = -1.6735709e-06   MAX = 0.7453         
+TIME = 1.990453756e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 28] Coarse TimeStep time: 0.07075056
+[STEP 28] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 28 TIME = 1.990453756e-07 DT = 1.550954485e-08
+
+...estimated hydro-limited timestep at level 0: 1.551014328e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.551014328e-08
+[Level 0 step 29] ADVANCE at time 1.990453756e-07 with dt = 1.551014328e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.551014328e-08
+[Level 0 step 29] Advanced 1536 cells
+
+TIME = 2.145555189e-07 MASS        = 4.045833333e-07
+TIME = 2.145555189e-07 XMOM        = -5.421010862e-19
+TIME = 2.145555189e-07 YMOM        = 0
+TIME = 2.145555189e-07 ZMOM        = 0
+TIME = 2.145555189e-07 RHO*e       = -1720.859162
+TIME = 2.145555189e-07 RHO*K       = 79.72176517
+TIME = 2.145555189e-07 RHO*E       = -1641.137397
+TIME = 2.145555189e-07 FUEL PROD   = 0
+
+TIME = 2.145555189e-07 density     MIN = 0.00085          MAX = 0.0023968342   
+TIME = 2.145555189e-07 x_velocity  MIN = -82289.932       MAX = 82289.95       
+TIME = 2.145555189e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.145555189e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.145555189e-07 eint_e      MIN = -1.5878001e+10   MAX = -1.781532e+08  
+TIME = 2.145555189e-07 Temp        MIN = 300.38405        MAX = 2212.8068      
+TIME = 2.145555189e-07 pressure    MIN = 1013000          MAX = 17969395       
+TIME = 2.145555189e-07 massfrac    MIN = -2.301776e-06    MAX = 0.7453         
+TIME = 2.145555189e-07 sumYminus1  MIN = -1.110223e-16    MAX = 0              
+
+[STEP 29] Coarse TimeStep time: 0.070940793
+[STEP 29] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 29 TIME = 2.145555189e-07 DT = 1.551014328e-08
+
+...estimated hydro-limited timestep at level 0: 1.551096115e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.551096115e-08
+[Level 0 step 30] ADVANCE at time 2.145555189e-07 with dt = 1.551096115e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.551096115e-08
+[Level 0 step 30] Advanced 1536 cells
+
+TIME = 2.3006648e-07 MASS        = 4.045833333e-07
+TIME = 2.3006648e-07 XMOM        = -1.084202172e-18
+TIME = 2.3006648e-07 YMOM        = 0
+TIME = 2.3006648e-07 ZMOM        = 0
+TIME = 2.3006648e-07 RHO*e       = -1727.56119
+TIME = 2.3006648e-07 RHO*K       = 86.42379258
+TIME = 2.3006648e-07 RHO*E       = -1641.137397
+TIME = 2.3006648e-07 FUEL PROD   = 0
+
+TIME = 2.3006648e-07 density     MIN = 0.00085          MAX = 0.0023954427   
+TIME = 2.3006648e-07 x_velocity  MIN = -82249.394       MAX = 82249.425      
+TIME = 2.3006648e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.3006648e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.3006648e-07 eint_e      MIN = -1.6099113e+10   MAX = 27825605       
+TIME = 2.3006648e-07 Temp        MIN = 300.38405        MAX = 2212.4807      
+TIME = 2.3006648e-07 pressure    MIN = 1013000          MAX = 17956327       
+TIME = 2.3006648e-07 massfrac    MIN = -3.6249191e-06   MAX = 0.7453         
+TIME = 2.3006648e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 30] Coarse TimeStep time: 0.071882288
+[STEP 30] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 30 TIME = 2.3006648e-07 DT = 1.551096115e-08
+
+...estimated hydro-limited timestep at level 0: 1.551205583e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.551205583e-08
+[Level 0 step 31] ADVANCE at time 2.3006648e-07 with dt = 1.551205583e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.551205583e-08
+[Level 0 step 31] Advanced 1536 cells
+
+TIME = 2.455785358e-07 MASS        = 4.045833333e-07
+TIME = 2.455785358e-07 XMOM        = 1.301042607e-18
+TIME = 2.455785358e-07 YMOM        = 0
+TIME = 2.455785358e-07 ZMOM        = 0
+TIME = 2.455785358e-07 RHO*e       = -1734.339547
+TIME = 2.455785358e-07 RHO*K       = 93.20215023
+TIME = 2.455785358e-07 RHO*E       = -1641.137397
+TIME = 2.455785358e-07 FUEL PROD   = 0
+
+TIME = 2.455785358e-07 density     MIN = 0.00085          MAX = 0.0023936024   
+TIME = 2.455785358e-07 x_velocity  MIN = -81972.851       MAX = 81972.884      
+TIME = 2.455785358e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.455785358e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.455785358e-07 eint_e      MIN = -1.6317073e+10   MAX = 92189252       
+TIME = 2.455785358e-07 Temp        MIN = 300.38405        MAX = 2212.0531      
+TIME = 2.455785358e-07 pressure    MIN = 1013000          MAX = 17939076       
+TIME = 2.455785358e-07 massfrac    MIN = -6.2121297e-06   MAX = 0.7453         
+TIME = 2.455785358e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 31] Coarse TimeStep time: 0.071167852
+[STEP 31] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 31 TIME = 2.455785358e-07 DT = 1.551205583e-08
+
+...estimated hydro-limited timestep at level 0: 1.551349309e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.551349309e-08
+[Level 0 step 32] ADVANCE at time 2.455785358e-07 with dt = 1.551349309e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.551349309e-08
+[Level 0 step 32] Advanced 1536 cells
+
+TIME = 2.610920289e-07 MASS        = 4.045833333e-07
+TIME = 2.610920289e-07 XMOM        = -8.67361738e-19
+TIME = 2.610920289e-07 YMOM        = 0
+TIME = 2.610920289e-07 ZMOM        = 0
+TIME = 2.610920289e-07 RHO*e       = -1741.137576
+TIME = 2.610920289e-07 RHO*K       = 100.0001793
+TIME = 2.610920289e-07 RHO*E       = -1641.137397
+TIME = 2.610920289e-07 FUEL PROD   = 0
+
+TIME = 2.610920289e-07 density     MIN = 0.00085          MAX = 0.0023912156   
+TIME = 2.610920289e-07 x_velocity  MIN = -81578.66        MAX = 81578.689      
+TIME = 2.610920289e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.610920289e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.610920289e-07 eint_e      MIN = -1.6529727e+10   MAX = -3737910.4     
+TIME = 2.610920289e-07 Temp        MIN = 300.38405        MAX = 2211.5023      
+TIME = 2.610920289e-07 pressure    MIN = 1013000          MAX = 17916737       
+TIME = 2.610920289e-07 massfrac    MIN = -1.0798095e-05   MAX = 0.7453         
+TIME = 2.610920289e-07 sumYminus1  MIN = -1.110223e-16    MAX = 0              
+
+[STEP 32] Coarse TimeStep time: 0.071906692
+[STEP 32] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 32 TIME = 2.610920289e-07 DT = 1.551349309e-08
+
+...estimated hydro-limited timestep at level 0: 1.551534699e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.551534699e-08
+[Level 0 step 33] ADVANCE at time 2.610920289e-07 with dt = 1.551534699e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.551534699e-08
+[Level 0 step 33] Advanced 1536 cells
+
+TIME = 2.766073759e-07 MASS        = 4.045833333e-07
+TIME = 2.766073759e-07 XMOM        = -8.67361738e-19
+TIME = 2.766073759e-07 YMOM        = 0
+TIME = 2.766073759e-07 ZMOM        = 0
+TIME = 2.766073759e-07 RHO*e       = -1747.889909
+TIME = 2.766073759e-07 RHO*K       = 106.7525119
+TIME = 2.766073759e-07 RHO*E       = -1641.137397
+TIME = 2.766073759e-07 FUEL PROD   = 0
+
+TIME = 2.766073759e-07 density     MIN = 0.00085          MAX = 0.0023881745   
+TIME = 2.766073759e-07 x_velocity  MIN = -81126.052       MAX = 81126.069      
+TIME = 2.766073759e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.766073759e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.766073759e-07 eint_e      MIN = -1.6736272e+10   MAX = -2.240204e+08  
+TIME = 2.766073759e-07 Temp        MIN = 300.38405        MAX = 2210.8042      
+TIME = 2.766073759e-07 pressure    MIN = 1013000          MAX = 17888313       
+TIME = 2.766073759e-07 massfrac    MIN = -1.8002744e-05   MAX = 0.7453         
+TIME = 2.766073759e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 33] Coarse TimeStep time: 0.071660672
+[STEP 33] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 33 TIME = 2.766073759e-07 DT = 1.551534699e-08
+
+...estimated hydro-limited timestep at level 0: 1.55176995e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.55176995e-08
+[Level 0 step 34] ADVANCE at time 2.766073759e-07 with dt = 1.55176995e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.55176995e-08
+[Level 0 step 34] Advanced 1536 cells
+
+TIME = 2.921250754e-07 MASS        = 4.045833333e-07
+TIME = 2.921250754e-07 XMOM        = 1.301042607e-18
+TIME = 2.921250754e-07 YMOM        = 0
+TIME = 2.921250754e-07 ZMOM        = 0
+TIME = 2.921250754e-07 RHO*e       = -1754.644022
+TIME = 2.921250754e-07 RHO*K       = 113.5066246
+TIME = 2.921250754e-07 RHO*E       = -1641.137397
+TIME = 2.921250754e-07 FUEL PROD   = 0
+
+TIME = 2.921250754e-07 density     MIN = 0.00085          MAX = 0.0023843665   
+TIME = 2.921250754e-07 x_velocity  MIN = -80679.557       MAX = 80679.557      
+TIME = 2.921250754e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 2.921250754e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 2.921250754e-07 eint_e      MIN = -1.6936421e+10   MAX = -4.5236417e+08 
+TIME = 2.921250754e-07 Temp        MIN = 300.38405        MAX = 2209.9334      
+TIME = 2.921250754e-07 pressure    MIN = 1013000          MAX = 17852765       
+TIME = 2.921250754e-07 massfrac    MIN = -2.7739409e-05   MAX = 0.7453         
+TIME = 2.921250754e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 34] Coarse TimeStep time: 0.071604402
+[STEP 34] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 34 TIME = 2.921250754e-07 DT = 1.55176995e-08
+
+...estimated hydro-limited timestep at level 0: 1.552063682e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.552063682e-08
+[Level 0 step 35] ADVANCE at time 2.921250754e-07 with dt = 1.552063682e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.552063682e-08
+[Level 0 step 35] Advanced 1536 cells
+
+TIME = 3.076457122e-07 MASS        = 4.045833333e-07
+TIME = 3.076457122e-07 XMOM        = -1.517883041e-18
+TIME = 3.076457122e-07 YMOM        = 0
+TIME = 3.076457122e-07 ZMOM        = 0
+TIME = 3.076457122e-07 RHO*e       = -1761.334481
+TIME = 3.076457122e-07 RHO*K       = 120.1970842
+TIME = 3.076457122e-07 RHO*E       = -1641.137397
+TIME = 3.076457122e-07 FUEL PROD   = 0
+
+TIME = 3.076457122e-07 density     MIN = 0.00085          MAX = 0.0023796909   
+TIME = 3.076457122e-07 x_velocity  MIN = -80268.617       MAX = 80268.599      
+TIME = 3.076457122e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.076457122e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.076457122e-07 eint_e      MIN = -1.7129968e+10   MAX = -2.1221412e+08 
+TIME = 3.076457122e-07 Temp        MIN = 300.38405        MAX = 2208.8668      
+TIME = 3.076457122e-07 pressure    MIN = 1013000          MAX = 17809169       
+TIME = 3.076457122e-07 massfrac    MIN = -3.8880519e-05   MAX = 0.7453         
+TIME = 3.076457122e-07 sumYminus1  MIN = -1.110223e-16    MAX = 0              
+
+[STEP 35] Coarse TimeStep time: 0.072198561
+[STEP 35] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 35 TIME = 3.076457122e-07 DT = 1.552063682e-08
+
+...estimated hydro-limited timestep at level 0: 1.552423812e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.552423812e-08
+[Level 0 step 36] ADVANCE at time 3.076457122e-07 with dt = 1.552423812e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.552423812e-08
+[Level 0 step 36] Advanced 1536 cells
+
+TIME = 3.231699504e-07 MASS        = 4.045833333e-07
+TIME = 3.231699504e-07 XMOM        = -1.95156391e-18
+TIME = 3.231699504e-07 YMOM        = 0
+TIME = 3.231699504e-07 ZMOM        = 0
+TIME = 3.231699504e-07 RHO*e       = -1767.909227
+TIME = 3.231699504e-07 RHO*K       = 126.7718304
+TIME = 3.231699504e-07 RHO*E       = -1641.137397
+TIME = 3.231699504e-07 FUEL PROD   = 0
+
+TIME = 3.231699504e-07 density     MIN = 0.00085          MAX = 0.0023740631   
+TIME = 3.231699504e-07 x_velocity  MIN = -79899.503       MAX = 79899.468      
+TIME = 3.231699504e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.231699504e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.231699504e-07 eint_e      MIN = -1.7316046e+10   MAX = 47465875       
+TIME = 3.231699504e-07 Temp        MIN = 300.38405        MAX = 2207.5843      
+TIME = 3.231699504e-07 pressure    MIN = 1013000          MAX = 17756746       
+TIME = 3.231699504e-07 massfrac    MIN = -4.9803355e-05   MAX = 0.7453         
+TIME = 3.231699504e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 36] Coarse TimeStep time: 0.073041696
+[STEP 36] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 36 TIME = 3.231699504e-07 DT = 1.552423812e-08
+
+...estimated hydro-limited timestep at level 0: 1.552857308e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.552857308e-08
+[Level 0 step 37] ADVANCE at time 3.231699504e-07 with dt = 1.552857308e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.552857308e-08
+[Level 0 step 37] Advanced 1536 cells
+
+TIME = 3.386985234e-07 MASS        = 4.045833333e-07
+TIME = 3.386985234e-07 XMOM        = 1.517883041e-18
+TIME = 3.386985234e-07 YMOM        = 0
+TIME = 3.386985234e-07 ZMOM        = 0
+TIME = 3.386985234e-07 RHO*e       = -1774.438695
+TIME = 3.386985234e-07 RHO*K       = 133.3012979
+TIME = 3.386985234e-07 RHO*E       = -1641.137397
+TIME = 3.386985234e-07 FUEL PROD   = 0
+
+TIME = 3.386985234e-07 density     MIN = 0.00085          MAX = 0.0023673785   
+TIME = 3.386985234e-07 x_velocity  MIN = -79548.393       MAX = 79548.345      
+TIME = 3.386985234e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.386985234e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.386985234e-07 eint_e      MIN = -1.749295e+10    MAX = 2.9287646e+08  
+TIME = 3.386985234e-07 Temp        MIN = 300.38405        MAX = 2206.0601      
+TIME = 3.386985234e-07 pressure    MIN = 1013000          MAX = 17694534       
+TIME = 3.386985234e-07 massfrac    MIN = -5.9194167e-05   MAX = 0.7453         
+TIME = 3.386985234e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 37] Coarse TimeStep time: 0.074682991
+[STEP 37] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 37 TIME = 3.386985234e-07 DT = 1.552857308e-08
+
+...estimated hydro-limited timestep at level 0: 1.553373092e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.553373092e-08
+[Level 0 step 38] ADVANCE at time 3.386985234e-07 with dt = 1.553373092e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.553373092e-08
+[Level 0 step 38] Advanced 1536 cells
+
+TIME = 3.542322544e-07 MASS        = 4.045833333e-07
+TIME = 3.542322544e-07 XMOM        = 4.33680869e-19
+TIME = 3.542322544e-07 YMOM        = 0
+TIME = 3.542322544e-07 ZMOM        = 0
+TIME = 3.542322544e-07 RHO*e       = -1780.978489
+TIME = 3.542322544e-07 RHO*K       = 139.8410922
+TIME = 3.542322544e-07 RHO*E       = -1641.137397
+TIME = 3.542322544e-07 FUEL PROD   = 0
+
+TIME = 3.542322544e-07 density     MIN = 0.00085          MAX = 0.002359467    
+TIME = 3.542322544e-07 x_velocity  MIN = -79194.722       MAX = 79194.663      
+TIME = 3.542322544e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.542322544e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.542322544e-07 eint_e      MIN = -1.7658782e+10   MAX = 4.8613277e+08  
+TIME = 3.542322544e-07 Temp        MIN = 300.38405        MAX = 2204.2518      
+TIME = 3.542322544e-07 pressure    MIN = 1013000          MAX = 17620955       
+TIME = 3.542322544e-07 massfrac    MIN = -6.6394495e-05   MAX = 0.7453         
+TIME = 3.542322544e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 38] Coarse TimeStep time: 0.072183954
+[STEP 38] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 38 TIME = 3.542322544e-07 DT = 1.553373092e-08
+
+...estimated hydro-limited timestep at level 0: 1.553985772e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.553985772e-08
+[Level 0 step 39] ADVANCE at time 3.542322544e-07 with dt = 1.553985772e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.553985772e-08
+[Level 0 step 39] Advanced 1536 cells
+
+TIME = 3.697721121e-07 MASS        = 4.045833333e-07
+TIME = 3.697721121e-07 XMOM        = 3.469446952e-18
+TIME = 3.697721121e-07 YMOM        = 0
+TIME = 3.697721121e-07 ZMOM        = 0
+TIME = 3.697721121e-07 RHO*e       = -1787.545927
+TIME = 3.697721121e-07 RHO*K       = 146.4085297
+TIME = 3.697721121e-07 RHO*E       = -1641.137397
+TIME = 3.697721121e-07 FUEL PROD   = 0
+
+TIME = 3.697721121e-07 density     MIN = 0.00085          MAX = 0.0023500375   
+TIME = 3.697721121e-07 x_velocity  MIN = -78816.123       MAX = 78816.058      
+TIME = 3.697721121e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.697721121e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.697721121e-07 eint_e      MIN = -1.7811975e+10   MAX = 5.8924086e+08  
+TIME = 3.697721121e-07 Temp        MIN = 300.38405        MAX = 2202.0873      
+TIME = 3.697721121e-07 pressure    MIN = 1013000          MAX = 17533309       
+TIME = 3.697721121e-07 massfrac    MIN = -7.1232438e-05   MAX = 0.7453         
+TIME = 3.697721121e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 39] Coarse TimeStep time: 0.071893794
+[STEP 39] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 39 TIME = 3.697721121e-07 DT = 1.553985772e-08
+
+...estimated hydro-limited timestep at level 0: 1.554720251e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.554720251e-08
+[Level 0 step 40] ADVANCE at time 3.697721121e-07 with dt = 1.554720251e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.554720251e-08
+[Level 0 step 40] Advanced 1536 cells
+
+TIME = 3.853193146e-07 MASS        = 4.045833333e-07
+TIME = 3.853193146e-07 XMOM        = 0
+TIME = 3.853193146e-07 YMOM        = 0
+TIME = 3.853193146e-07 ZMOM        = 0
+TIME = 3.853193146e-07 RHO*e       = -1794.153635
+TIME = 3.853193146e-07 RHO*K       = 153.0162381
+TIME = 3.853193146e-07 RHO*E       = -1641.137397
+TIME = 3.853193146e-07 FUEL PROD   = 0
+
+TIME = 3.853193146e-07 density     MIN = 0.00085          MAX = 0.0023386528   
+TIME = 3.853193146e-07 x_velocity  MIN = -78369.612       MAX = 78369.542      
+TIME = 3.853193146e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 3.853193146e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 3.853193146e-07 eint_e      MIN = -1.7949712e+10   MAX = 5.7200957e+08  
+TIME = 3.853193146e-07 Temp        MIN = 300.38405        MAX = 2199.4587      
+TIME = 3.853193146e-07 pressure    MIN = 1013000          MAX = 17427551       
+TIME = 3.853193146e-07 massfrac    MIN = -7.3759366e-05   MAX = 0.74530001     
+TIME = 3.853193146e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 40] Coarse TimeStep time: 0.071946014
+[STEP 40] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 40 TIME = 3.853193146e-07 DT = 1.554720251e-08
+
+...estimated hydro-limited timestep at level 0: 1.555613675e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.555613675e-08
+[Level 0 step 41] ADVANCE at time 3.853193146e-07 with dt = 1.555613675e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.555613675e-08
+[Level 0 step 41] Advanced 1536 cells
+
+TIME = 4.008754514e-07 MASS        = 4.045833333e-07
+TIME = 4.008754514e-07 XMOM        = -4.33680869e-19
+TIME = 4.008754514e-07 YMOM        = 0
+TIME = 4.008754514e-07 ZMOM        = 0
+TIME = 4.008754514e-07 RHO*e       = -1800.728144
+TIME = 4.008754514e-07 RHO*K       = 159.5907469
+TIME = 4.008754514e-07 RHO*E       = -1641.137397
+TIME = 4.008754514e-07 FUEL PROD   = 0
+
+TIME = 4.008754514e-07 density     MIN = 0.00085          MAX = 0.0023248292   
+TIME = 4.008754514e-07 x_velocity  MIN = -77931.682       MAX = 77931.602      
+TIME = 4.008754514e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.008754514e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.008754514e-07 eint_e      MIN = -1.8069559e+10   MAX = 4.13429e+08    
+TIME = 4.008754514e-07 Temp        MIN = 300.38405        MAX = 2196.2512      
+TIME = 4.008754514e-07 pressure    MIN = 1013000          MAX = 17299283       
+TIME = 4.008754514e-07 massfrac    MIN = -7.4119686e-05   MAX = 0.7453         
+TIME = 4.008754514e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 41] Coarse TimeStep time: 0.07249332
+[STEP 41] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 41 TIME = 4.008754514e-07 DT = 1.555613675e-08
+
+...estimated hydro-limited timestep at level 0: 1.556706107e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.556706107e-08
+[Level 0 step 42] ADVANCE at time 4.008754514e-07 with dt = 1.556706107e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.556706107e-08
+[Level 0 step 42] Advanced 1536 cells
+
+TIME = 4.164425124e-07 MASS        = 4.045833333e-07
+TIME = 4.164425124e-07 XMOM        = 1.301042607e-18
+TIME = 4.164425124e-07 YMOM        = 0
+TIME = 4.164425124e-07 ZMOM        = 0
+TIME = 4.164425124e-07 RHO*e       = -1807.265818
+TIME = 4.164425124e-07 RHO*K       = 166.1284207
+TIME = 4.164425124e-07 RHO*E       = -1641.137397
+TIME = 4.164425124e-07 FUEL PROD   = 0
+
+TIME = 4.164425124e-07 density     MIN = 0.00085          MAX = 0.0023081055   
+TIME = 4.164425124e-07 x_velocity  MIN = -77568.94        MAX = 77568.85       
+TIME = 4.164425124e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.164425124e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.164425124e-07 eint_e      MIN = -1.8170767e+10   MAX = 1.2449209e+08  
+TIME = 4.164425124e-07 Temp        MIN = 300.38405        MAX = 2192.3552      
+TIME = 4.164425124e-07 pressure    MIN = 1013000          MAX = 17144381       
+TIME = 4.164425124e-07 massfrac    MIN = -7.2483047e-05   MAX = 0.7453         
+TIME = 4.164425124e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 42] Coarse TimeStep time: 0.072467231
+[STEP 42] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 42 TIME = 4.164425124e-07 DT = 1.556706107e-08
+
+...estimated hydro-limited timestep at level 0: 1.558036246e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.558036246e-08
+[Level 0 step 43] ADVANCE at time 4.164425124e-07 with dt = 1.558036246e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.558036246e-08
+[Level 0 step 43] Advanced 1536 cells
+
+TIME = 4.320228749e-07 MASS        = 4.045833333e-07
+TIME = 4.320228749e-07 XMOM        = 3.035766083e-18
+TIME = 4.320228749e-07 YMOM        = 0
+TIME = 4.320228749e-07 ZMOM        = 0
+TIME = 4.320228749e-07 RHO*e       = -1813.803886
+TIME = 4.320228749e-07 RHO*K       = 172.6664893
+TIME = 4.320228749e-07 RHO*E       = -1641.137397
+TIME = 4.320228749e-07 FUEL PROD   = 0
+
+TIME = 4.320228749e-07 density     MIN = 0.00085          MAX = 0.0022880802   
+TIME = 4.320228749e-07 x_velocity  MIN = -77290.297       MAX = 77290.199      
+TIME = 4.320228749e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.320228749e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.320228749e-07 eint_e      MIN = -1.8253116e+10   MAX = 4.121753e+08   
+TIME = 4.320228749e-07 Temp        MIN = 300.38405        MAX = 2187.665       
+TIME = 4.320228749e-07 pressure    MIN = 1013000          MAX = 16959283       
+TIME = 4.320228749e-07 massfrac    MIN = -6.9013887e-05   MAX = 0.7453         
+TIME = 4.320228749e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 43] Coarse TimeStep time: 0.072334906
+[STEP 43] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 43 TIME = 4.320228749e-07 DT = 1.558036246e-08
+
+...estimated hydro-limited timestep at level 0: 1.559642142e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.559642142e-08
+[Level 0 step 44] ADVANCE at time 4.320228749e-07 with dt = 1.559642142e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.559642142e-08
+[Level 0 step 44] Advanced 1536 cells
+
+TIME = 4.476192963e-07 MASS        = 4.045833333e-07
+TIME = 4.476192963e-07 XMOM        = 2.168404345e-18
+TIME = 4.476192963e-07 YMOM        = 0
+TIME = 4.476192963e-07 ZMOM        = 0
+TIME = 4.476192963e-07 RHO*e       = -1820.409189
+TIME = 4.476192963e-07 RHO*K       = 179.2717917
+TIME = 4.476192963e-07 RHO*E       = -1641.137397
+TIME = 4.476192963e-07 FUEL PROD   = 0
+
+TIME = 4.476192963e-07 density     MIN = 0.00085          MAX = 0.0022645098   
+TIME = 4.476192963e-07 x_velocity  MIN = -77074.851       MAX = 77074.748      
+TIME = 4.476192963e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.476192963e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.476192963e-07 eint_e      MIN = -1.8316689e+10   MAX = 7.1712566e+08  
+TIME = 4.476192963e-07 Temp        MIN = 300.38405        MAX = 2182.1055      
+TIME = 4.476192963e-07 pressure    MIN = 1013000          MAX = 16741931       
+TIME = 4.476192963e-07 massfrac    MIN = -6.3859462e-05   MAX = 0.7453         
+TIME = 4.476192963e-07 sumYminus1  MIN = -2.220446e-16    MAX = 0              
+
+[STEP 44] Coarse TimeStep time: 0.072506619
+[STEP 44] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 44 TIME = 4.476192963e-07 DT = 1.559642142e-08
+
+...estimated hydro-limited timestep at level 0: 1.56155217e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.56155217e-08
+[Level 0 step 45] ADVANCE at time 4.476192963e-07 with dt = 1.56155217e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.56155217e-08
+[Level 0 step 45] Advanced 1536 cells
+
+TIME = 4.63234818e-07 MASS        = 4.045833333e-07
+TIME = 4.63234818e-07 XMOM        = 8.67361738e-19
+TIME = 4.63234818e-07 YMOM        = 0
+TIME = 4.63234818e-07 ZMOM        = 0
+TIME = 4.63234818e-07 RHO*e       = -1827.037075
+TIME = 4.63234818e-07 RHO*K       = 185.8996779
+TIME = 4.63234818e-07 RHO*E       = -1641.137397
+TIME = 4.63234818e-07 FUEL PROD   = 0
+
+TIME = 4.63234818e-07 density     MIN = 0.00085          MAX = 0.0022373059   
+TIME = 4.63234818e-07 x_velocity  MIN = -76892.747       MAX = 76892.641      
+TIME = 4.63234818e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.63234818e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.63234818e-07 eint_e      MIN = -1.8361949e+10   MAX = 9.6388309e+08  
+TIME = 4.63234818e-07 Temp        MIN = 300.38405        MAX = 2175.634       
+TIME = 4.63234818e-07 pressure    MIN = 1013000          MAX = 16491759       
+TIME = 4.63234818e-07 massfrac    MIN = -5.7171667e-05   MAX = 0.7453         
+TIME = 4.63234818e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 45] Coarse TimeStep time: 0.072372326
+[STEP 45] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 45 TIME = 4.63234818e-07 DT = 1.56155217e-08
+
+...estimated hydro-limited timestep at level 0: 1.563784412e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.563784412e-08
+[Level 0 step 46] ADVANCE at time 4.63234818e-07 with dt = 1.563784412e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.563784412e-08
+[Level 0 step 46] Advanced 1536 cells
+
+TIME = 4.788726621e-07 MASS        = 4.045833333e-07
+TIME = 4.788726621e-07 XMOM        = 3.035766083e-18
+TIME = 4.788726621e-07 YMOM        = 0
+TIME = 4.788726621e-07 ZMOM        = 0
+TIME = 4.788726621e-07 RHO*e       = -1833.669314
+TIME = 4.788726621e-07 RHO*K       = 192.5319167
+TIME = 4.788726621e-07 RHO*E       = -1641.137397
+TIME = 4.788726621e-07 FUEL PROD   = 0
+
+TIME = 4.788726621e-07 density     MIN = 0.00085          MAX = 0.0022065059   
+TIME = 4.788726621e-07 x_velocity  MIN = -76722.833       MAX = 76722.726      
+TIME = 4.788726621e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.788726621e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.788726621e-07 eint_e      MIN = -1.8389866e+10   MAX = 1.1435502e+09  
+TIME = 4.788726621e-07 Temp        MIN = 300.38405        MAX = 2168.2325      
+TIME = 4.788726621e-07 pressure    MIN = 1013000          MAX = 16209397       
+TIME = 4.788726621e-07 massfrac    MIN = -5.9233752e-05   MAX = 0.7453         
+TIME = 4.788726621e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 46] Coarse TimeStep time: 0.075141756
+[STEP 46] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 46 TIME = 4.788726621e-07 DT = 1.563784412e-08
+
+...estimated hydro-limited timestep at level 0: 1.566349223e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.566349223e-08
+[Level 0 step 47] ADVANCE at time 4.788726621e-07 with dt = 1.566349223e-08
+... Computing Godunov hydro advance
+... Computing reactions for dt = 1.566349223e-08
+[Level 0 step 47] Advanced 1536 cells
+
+TIME = 4.945361543e-07 MASS        = 4.045833333e-07
+TIME = 4.945361543e-07 XMOM        = 8.67361738e-19
+TIME = 4.945361543e-07 YMOM        = 0
+TIME = 4.945361543e-07 ZMOM        = 0
+TIME = 4.945361543e-07 RHO*e       = -1840.220729
+TIME = 4.945361543e-07 RHO*K       = 199.0833322
+TIME = 4.945361543e-07 RHO*E       = -1641.137397
+TIME = 4.945361543e-07 FUEL PROD   = 0
+
+TIME = 4.945361543e-07 density     MIN = 0.00085          MAX = 0.0021722494   
+TIME = 4.945361543e-07 x_velocity  MIN = -76556.969       MAX = 76556.862      
+TIME = 4.945361543e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 4.945361543e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 4.945361543e-07 eint_e      MIN = -1.8401878e+10   MAX = 1.2315029e+09  
+TIME = 4.945361543e-07 Temp        MIN = 300.38405        MAX = 2159.9027      
+TIME = 4.945361543e-07 pressure    MIN = 1013000          MAX = 15896441       
+TIME = 4.945361543e-07 massfrac    MIN = -6.7761655e-05   MAX = 0.74530001     
+TIME = 4.945361543e-07 sumYminus1  MIN = -1.110223e-16    MAX = 2.220446e-16   
+
+[STEP 47] Coarse TimeStep time: 0.073319169
+[STEP 47] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 47 TIME = 4.945361543e-07 DT = 1.566349223e-08
+
+...estimated hydro-limited timestep at level 0: 1.569250804e-08
+PeleC::estTimeStep (hydro-limited) at level 0:  estdt = 1.569250804e-08
+[Level 0 step 48] ADVANCE at time 4.945361543e-07 with dt = 5.463845652e-09
+... Computing Godunov hydro advance
+... Computing reactions for dt = 5.463845652e-09
+[Level 0 step 48] Advanced 1536 cells
+
+TIME = 5e-07 MASS        = 4.045833333e-07
+TIME = 5e-07 XMOM        = -8.67361738e-19
+TIME = 5e-07 YMOM        = 0
+TIME = 5e-07 ZMOM        = 0
+TIME = 5e-07 RHO*e       = -1842.467676
+TIME = 5e-07 RHO*K       = 201.330279
+TIME = 5e-07 RHO*E       = -1641.137397
+TIME = 5e-07 FUEL PROD   = 0
+
+TIME = 5e-07 density     MIN = 0.00085          MAX = 0.0021595119   
+TIME = 5e-07 x_velocity  MIN = -76488.887       MAX = 76488.78       
+TIME = 5e-07 y_velocity  MIN = 0                MAX = 0              
+TIME = 5e-07 z_velocity  MIN = 0                MAX = 0              
+TIME = 5e-07 eint_e      MIN = -1.8402831e+10   MAX = 1.2390976e+09  
+TIME = 5e-07 Temp        MIN = 300.38405        MAX = 2156.7801      
+TIME = 5e-07 pressure    MIN = 1013000          MAX = 15780382       
+TIME = 5e-07 massfrac    MIN = -7.0587169e-05   MAX = 0.74530001     
+TIME = 5e-07 sumYminus1  MIN = -2.220446e-16    MAX = 2.220446e-16   
+
+[STEP 48] Coarse TimeStep time: 0.071998416
+[STEP 48] FAB kilobyte spread across MPI nodes: [12629 ... 23664]
+
+STEP = 48 TIME = 5e-07 DT = 5.463845652e-09
+
+CHECKPOINT: file = chk00048
+checkPoint() time = 0.005470099 secs.
+PLOTFILE: file = plt00048
+Write plotfile time = 0.003457283  seconds
+
+
+Ending run at 02:55:17 UTC on 2026-07-28.
+Run time = 3.449676519
+Run time w/o init = 3.418721895
+Unused ParmParse Variables:
+  [TOP]::amr.ref_ratio(nvals = 1)  :: [2]
+  [TOP]::amr.regrid_int(nvals = 1)  :: [2]
+  [TOP]::cvode.atol(nvals = 1)  :: [1e-10]
+  [TOP]::cvode.rtol(nvals = 1)  :: [1e-6]
+
+AMReX (0ec1056ff13b-dirty) finalized

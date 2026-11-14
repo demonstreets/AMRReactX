@@ -1,0 +1,27 @@
+{
+  "command": [
+    "mpirun",
+    "-np",
+    "16",
+    "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+    "inputs"
+  ],
+  "binary": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+  "binary_sha256": "d4f03582a37563516954b14dbdd71f5eba204c3c724f8de6aa91dfc045180c9d",
+  "reference": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/reference_v1",
+  "profile_sha256": "e21e67926f015458b415540fc42d2402bd9e16bbda270200e870984c1bd83248",
+  "input_sha256": "c1303ac8665b67a21cb162a87698b637c0e01ad116502ca4e49c44d543a0ee82",
+  "nx": 4800,
+  "ny": 2,
+  "dx_m": 5e-06,
+  "front_m": 0.008,
+  "length_m": 0.024,
+  "cfl": 0.3,
+  "ode_rtol": 1e-08,
+  "ode_atol": 1e-18,
+  "stop_time_s": 4e-06,
+  "plot_root": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_4800_cfl30_v1",
+  "mapping": "ROUNDROBIN",
+  "physical_model": "Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+  "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+}

@@ -1,0 +1,19 @@
+ncells = 8
+max_grid_size  = 16
+plotfile = plt_nn
+fuel_name = CH4
+reactFormat = Array4
+chem_integrator = "ReactorNN"
+
+ode.dt  = 2.e-05
+ode.ndt = 30
+ode.ode_ncells = 1
+ode.reactor_type  = 1
+ode.verbose = 1
+ode.use_typ_vals = 0
+ode.rtol = 1e-10
+ode.atol = 1e-10
+
+amrex.fpe_trap_invalid = 1
+amrex.fpe_trap_zero = 1
+amrex.fpe_trap_overflow = 1

@@ -1,0 +1,302 @@
+Initializing AMReX (0ec1056ff13b-dirty)...
+MPI initialized with 2 MPI processes
+MPI initialized with thread support level 0
+Initializing CUDA...
+Multiple GPUs are visible to each MPI rank. This is usually not an issue. But this may lead to incorrect or suboptimal rank-to-GPU mapping.!
+CUDA initialized with 2 devices.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 0ec1056-dirty
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1, Velocity Z: 2 
+ Density: 3
+ First species: 4
+ Enthalpy: 13
+ Temperature: 14
+ thermo. pressure: 15
+ => Total number of state variables: 16
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using mixture-averaged transport 
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 0 0 0 
+	Density:  1.19998361
+	Temp:     293
+	H:        -5163.76942
+	Y_H2:     0
+	Y_O2:     0.233
+	Y_H2O:    0
+	Y_H:      0
+	Y_O:      0
+	Y_OH:     0
+	Y_HO2:    0
+	Y_H2O2:   0
+	Y_N2:     0.767
+ ==============================================================================
+ Initial dt: 0.0001
+
+ Doing initial projection(s) 
+
+ Initial velocity projection:   U: 0  V: 0  W: 0
+ >> After initial velocity projection:   U: 0  V: 0  W: 0
+ Initial dt: 0.0001
+ Initial velocity projection:   U: 0  V: 0  W: 0
+ >> After initial velocity projection:   U: 0  V: 0  W: 0
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ STEP [-1] - Time: 0, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.414244988
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [0] - Time: 0, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.409593705
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [1] - Time: 0.0001, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0001, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.410808637
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [2] - Time: 0.0002, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0002, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.38316781
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [3] - Time: 0.0003, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0003, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.402702373
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [4] - Time: 0.0004, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0004, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.408257079
+
+ Writing plotfile: plt00005
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [5] - Time: 0.0005, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0005, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.409564682
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [6] - Time: 0.0006, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0006, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.382134307
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [7] - Time: 0.0007, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0007, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.400244155
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [8] - Time: 0.0008, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0008, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.40812393
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [9] - Time: 0.0009, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0009, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.400279853
+
+ Writing plotfile: plt00010
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [10] - Time: 0.001, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.001, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.421301262
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [11] - Time: 0.0011, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0011, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.415869895
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [12] - Time: 0.0012, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0012, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.418434882
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [13] - Time: 0.0013, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0013, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.413062578
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [14] - Time: 0.0014, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0014, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.426995888
+
+ Writing plotfile: plt00015
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [15] - Time: 0.0015, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0015, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.413410123
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [16] - Time: 0.0016, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0016, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.420648709
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [17] - Time: 0.0017, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0017, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.415483367
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [18] - Time: 0.0018, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0018, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.415858035
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [19] - Time: 0.0019, dt 0.0001, Ncells 33408
+Applying H2 leak source: model=fixed_mass_flow, mdot=0.0009152681907, reference_leak_rate=0.0009152681907, radius=0.08, leak_count=1, pressure_driven_multihole=0, velocity=(0.5,0,0), species=H2
+H2 leak effective mass flow rate=0.0009152681907
+H2 leak source interval: time=0.0019, dt=0.0001, model=fixed_mass_flow, mdot=0.0009152681907, injected_interval=9.152681907e-08, valve_fraction_mid=1
+H2 leak source[0]: center=(0.5,0.45,0.7), radius=0.08, fraction=1, pressure_fraction=1, mdot=0.0009152681907, active_volume=0.001, mdot_vol=0.9152681907
+H2 leak discrete active volume=0.001, leak_count=1, fraction_sum=1
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.387631893
+
+ Writing plotfile: plt00020
+
+ >> Final simulation time: 0.002
+
+Total Time: 8.669942448
+Total GPU global memory (MB) spread across MPI: [16269 ... 16269]
+Free  GPU global memory (MB) spread across MPI: [3758 ... 3758]
+[The         Arena] max space (MB) allocated spread across MPI: [12201 ... 12201]
+[The         Arena] max space (MB) used      spread across MPI: [115 ... 155]
+[The Managed Arena] max space (MB) allocated spread across MPI: [8 ... 8]
+[The Managed Arena] max space (MB) used      spread across MPI: [0 ... 0]
+[The  Pinned Arena] max space (MB) allocated spread across MPI: [8 ... 8]
+[The  Pinned Arena] max space (MB) used      spread across MPI: [1 ... 1]
+AMReX (0ec1056ff13b-dirty) finalized

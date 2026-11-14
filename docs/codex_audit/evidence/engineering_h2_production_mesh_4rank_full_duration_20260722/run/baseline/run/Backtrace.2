@@ -1,0 +1,51 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x828986) [0x5e922898f986]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x82d741) [0x5e9228994741]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x66c449) [0x5e92287d3449]
+    amrex::Abort(char const*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:188
+ (inlined by) squeryarr<int> at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParmParse.cpp:1285
+
+ 3: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x6758b7) [0x5e92287dc8b7]
+    amrex::ParmParse::getarr(std::basic_string_view<char, std::char_traits<char> >, std::vector<int, std::allocator<int> >&, int, int) const at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParmParse.cpp:1346
+ (inlined by) amrex::ParmParse::getarr(std::basic_string_view<char, std::char_traits<char> >, std::vector<int, std::allocator<int> >&, int, int) const at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParmParse.cpp:2019
+
+ 4: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x9144d5) [0x5e9228a7b4d5]
+    std::_Vector_base<int, std::allocator<int> >::~_Vector_base() at /usr/include/c++/13/bits/stl_vector.h:370
+ (inlined by) std::vector<int, std::allocator<int> >::~vector() at /usr/include/c++/13/bits/stl_vector.h:738
+ (inlined by) amrex::Vector<int, std::allocator<int> >::~Vector() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_Vector.H:25
+ (inlined by) amrex::AmrMesh::InitAmrMesh(int, amrex::Vector<int, std::allocator<int> > const&, amrex::Vector<amrex::IntVectND<3>, std::allocator<amrex::IntVectND<3> > >, amrex::RealBox const*, int, int const*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrMesh.cpp:361
+
+ 5: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x9150ae) [0x5e9228a7c0ae]
+    amrex::AmrMesh::AmrMesh() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrMesh.cpp:23 (discriminator 1)
+
+ 6: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x888ffd) [0x5e92289efffd]
+    amrex::AmrCore::AmrCore() at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/AmrCore/AMReX_AmrCore.cpp:18 (discriminator 1)
+
+ 7: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x2764dd) [0x5e92283dd4dd]
+    PeleLM::PeleLM() at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX.cpp:17 (discriminator 1)
+
+ 8: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x55cab) [0x5e92281bccab]
+    main at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/main.cpp:49
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7a52afe2a1ca]
+
+10: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7a52afe2a28b]
+
+11: ./codex_h2_leak_plan_amr_mpi3d.gnu.MPI.ex(+0x5ec45) [0x5e92281c5c45]
+    ?? ??:0
+

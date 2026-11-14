@@ -1,0 +1,351 @@
+# Current Operator Command Inventory
+
+- Status: `PASS-CURRENT-OPERATOR-COMMAND-INVENTORY`
+- Commands: `341`
+- Missing tools: `0`
+- Syntax failures: `0`
+- Missing required snippets: `0`
+
+## Commands
+
+- `CODEX_ENGINEERING_H2_VERIFY_SKIP_CTEST=TRUE bash tools/verify_engineering_h2_production_evidence.sh` -> `tools/verify_engineering_h2_production_evidence.sh` exists=`True` syntax_rc=`0`
+- `CUDA_VISIBLE_DEVICES=0 bash tools/codex_smoke_academic_pelec_cuda.sh` -> `tools/codex_smoke_academic_pelec_cuda.sh` exists=`True` syntax_rc=`0`
+- `CUDA_VISIBLE_DEVICES=0 bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh` -> `tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh` exists=`True` syntax_rc=`0`
+- `CUDA_VISIBLE_DEVICES=0,1 MPI_RANKS=2 bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh` -> `tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh` exists=`True` syntax_rc=`0`
+- `MPI_RANKS=2 OMP_NUM_THREADS=2 bash tools/codex_smoke_academic_pelec_hybrid.sh` -> `tools/codex_smoke_academic_pelec_hybrid.sh` exists=`True` syntax_rc=`0`
+- `MPI_RANKS=2 bash tools/codex_smoke_academic_pelec_mpi.sh` -> `tools/codex_smoke_academic_pelec_mpi.sh` exists=`True` syntax_rc=`0`
+- `MPI_RANKS=2 bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh` exists=`True` syntax_rc=`0`
+- `MPI_RANKS=2 bash tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh` -> `tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh` exists=`True` syntax_rc=`0`
+- `MPI_RANKS=4 bash tools/codex_smoke_academic_pelec_mpi.sh` -> `tools/codex_smoke_academic_pelec_mpi.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_build_h2_leak_mpi_cuda_repro.sh` -> `tools/codex_build_h2_leak_mpi_cuda_repro.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_run_academic_gas_2d_detonation_reference.sh` -> `tools/codex_run_academic_gas_2d_detonation_reference.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_run_academic_gas_3d_detonation_reference.sh` -> `tools/codex_run_academic_gas_3d_detonation_reference.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_run_academic_gas_detonation_front_amr_validation.sh` -> `tools/codex_run_academic_gas_detonation_front_amr_validation.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_run_academic_gas_liquid_detonation_mpi_cuda_extended.sh` -> `tools/codex_run_academic_gas_liquid_detonation_mpi_cuda_extended.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_run_academic_gpu_environment_preflight.sh` -> `tools/codex_run_academic_gpu_environment_preflight.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_d2_law.sh` -> `tools/codex_smoke_academic_d2_law.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_detonation_wave.sh` -> `tools/codex_smoke_academic_detonation_wave.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_pelec.sh` -> `tools/codex_smoke_academic_pelec.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_pelec_cuda.sh` -> `tools/codex_smoke_academic_pelec_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_pelec_hybrid.sh` -> `tools/codex_smoke_academic_pelec_hybrid.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_pelec_plan_amr.sh` -> `tools/codex_smoke_academic_pelec_plan_amr.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_rayleigh_taylor.sh` -> `tools/codex_smoke_academic_rayleigh_taylor.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_shock_droplet_spray.sh` -> `tools/codex_smoke_academic_shock_droplet_spray.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_academic_vof_advection.sh` -> `tools/codex_smoke_academic_vof_advection.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh` -> `tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_open_domain.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh` -> `tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh` -> `tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh` -> `tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh` -> `tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh` -> `tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh` -> `tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh` -> `tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh` -> `tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh` -> `tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_smoke_engineering_pelelmex.sh` -> `tools/codex_smoke_engineering_pelelmex.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_verify_current_scope.sh` -> `tools/codex_verify_current_scope.sh` exists=`True` syntax_rc=`0`
+- `bash tools/codex_verify_current_scope.sh > "$log" 2>&1` -> `tools/codex_verify_current_scope.sh` exists=`True` syntax_rc=`0`
+- `bash tools/rebuild_engineering_h2_evidence_chain.sh` -> `tools/rebuild_engineering_h2_evidence_chain.sh` exists=`True` syntax_rc=`0`
+- `bash tools/run_current_scope_release_refresh.sh` -> `tools/run_current_scope_release_refresh.sh` exists=`True` syntax_rc=`0`
+- `bash tools/run_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh` -> `tools/run_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh` exists=`True` syntax_rc=`0`
+- `bash tools/run_strict_external_artifact_receiving_preflight.sh` -> `tools/run_strict_external_artifact_receiving_preflight.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_academic_current_priority_scope.sh` -> `tools/verify_academic_current_priority_scope.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_academic_evidence.sh` -> `tools/verify_academic_evidence.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_academic_gas_detonation_single_cuda.sh` -> `tools/verify_academic_gas_detonation_single_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh` -> `tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_complete_walkthrough_guide.sh` -> `tools/verify_complete_walkthrough_guide.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_case_output_cleanup_manifest.sh` -> `tools/verify_current_case_output_cleanup_manifest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_disk_cleanup_plan.sh` -> `tools/verify_current_disk_cleanup_plan.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_disk_usage_manifest.sh` -> `tools/verify_current_disk_usage_manifest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_operator_command_inventory.sh` -> `tools/verify_current_operator_command_inventory.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_operator_quickstart_smoke.sh` -> `tools/verify_current_operator_quickstart_smoke.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_parallel_capability_matrix.sh` -> `tools/verify_current_parallel_capability_matrix.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_phase_closure_certificate.sh` -> `tools/verify_current_phase_closure_certificate.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_phase_final_delivery_index.sh` -> `tools/verify_current_phase_final_delivery_index.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_phase_release_manifest.sh` -> `tools/verify_current_phase_release_manifest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_report_hash_cycle_guard.sh` -> `tools/verify_current_report_hash_cycle_guard.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scenario_readiness_matrix.sh` -> `tools/verify_current_scenario_readiness_matrix.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scope_delivery_package.sh` -> `tools/verify_current_scope_delivery_package.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scope_final_handoff_note.sh` -> `tools/verify_current_scope_final_handoff_note.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scope_operator_runbook.sh` -> `tools/verify_current_scope_operator_runbook.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scope_release_candidate_handoff.sh` -> `tools/verify_current_scope_release_candidate_handoff.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scope_release_refresh_entrypoint.sh` -> `tools/verify_current_scope_release_refresh_entrypoint.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_scope_state_snapshot.sh` -> `tools/verify_current_scope_state_snapshot.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_status_cli.sh` -> `tools/verify_current_status_cli.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_verification_chain_coverage.sh` -> `tools/verify_current_verification_chain_coverage.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_worktree_hygiene.sh` -> `tools/verify_current_worktree_hygiene.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_worktree_review_queue.sh` -> `tools/verify_current_worktree_review_queue.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_current_worktree_source_ledger.sh` -> `tools/verify_current_worktree_source_ledger.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_120s_calibration_diagnosis.sh` -> `tools/verify_dataverse_open_channel_120s_calibration_diagnosis.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_45s_calibration_r005_z08.sh` -> `tools/verify_dataverse_open_channel_45s_calibration_r005_z08.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_45s_calibration_sweep.sh` -> `tools/verify_dataverse_open_channel_45s_calibration_sweep.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_agreement_contract.sh` -> `tools/verify_dataverse_open_channel_agreement_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_amr_source_projection_contract.sh` -> `tools/verify_dataverse_open_channel_amr_source_projection_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_amr_source_projection_implementation.sh` -> `tools/verify_dataverse_open_channel_amr_source_projection_implementation.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_cfd_120s_agreement_attempt.sh` -> `tools/verify_dataverse_open_channel_cfd_120s_agreement_attempt.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_cfd_45s_agreement_attempt.sh` -> `tools/verify_dataverse_open_channel_cfd_45s_agreement_attempt.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_cfd_agreement_attempt.sh` -> `tools/verify_dataverse_open_channel_cfd_agreement_attempt.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_cfd_scout.sh` -> `tools/verify_dataverse_open_channel_cfd_scout.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_dataset_audit.sh` -> `tools/verify_dataverse_open_channel_dataset_audit.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_1000step_dt5em6.sh` -> `tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_1000step_dt5em6.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_500step.sh` -> `tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_500step.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_probe.sh` -> `tools/verify_dataverse_open_channel_full_channel_refined_source_dx025_probe.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_geometry_mapping.sh` -> `tools/verify_dataverse_open_channel_geometry_mapping.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_long_window_reconciliation.sh` -> `tools/verify_dataverse_open_channel_long_window_reconciliation.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_open_boundary_orifice_extended_01s.sh` -> `tools/verify_dataverse_open_channel_open_boundary_orifice_extended_01s.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_open_boundary_orifice_extended_1s.sh` -> `tools/verify_dataverse_open_channel_open_boundary_orifice_extended_1s.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_open_boundary_orifice_extended_2s.sh` -> `tools/verify_dataverse_open_channel_open_boundary_orifice_extended_2s.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_open_boundary_scout.sh` -> `tools/verify_dataverse_open_channel_open_boundary_scout.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_orifice_velocity_scout.sh` -> `tools/verify_dataverse_open_channel_orifice_velocity_scout.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_physics_alignment.sh` -> `tools/verify_dataverse_open_channel_physics_alignment.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_reference_package.sh` -> `tools/verify_dataverse_open_channel_reference_package.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_refined_source_projection_probe.sh` -> `tools/verify_dataverse_open_channel_refined_source_projection_probe.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_dataverse_open_channel_timeseries_index.sh` -> `tools/verify_dataverse_open_channel_timeseries_index.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh` -> `tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_ch4_cold_plume_cpu_probe.sh` -> `tools/verify_engineering_ch4_cold_plume_cpu_probe.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh` -> `tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi.sh` -> `tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda.sh` -> `tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step.sh` -> `tools/verify_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_external_vaporization_c3h8_timeseries_cuda.sh` -> `tools/verify_engineering_external_vaporization_c3h8_timeseries_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_external_vaporization_ch4_timeseries_cuda.sh` -> `tools/verify_engineering_external_vaporization_ch4_timeseries_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_external_vaporization_multifuel_source_matrix.sh` -> `tools/verify_engineering_external_vaporization_multifuel_source_matrix.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_external_vaporization_timeseries.sh` -> `tools/verify_engineering_external_vaporization_timeseries.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_external_vaporization_timeseries_cuda.sh` -> `tools/verify_engineering_external_vaporization_timeseries_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_fixed_mass_flow_valve_schedule.sh` -> `tools/verify_engineering_fixed_mass_flow_valve_schedule.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_fuel_species_guard.sh` -> `tools/verify_engineering_fuel_species_guard.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_gasified_lng_lpg_surrogate.sh` -> `tools/verify_engineering_gasified_lng_lpg_surrogate.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_fire_exp002_delayed_ignition_bridge.sh` -> `tools/verify_engineering_h2_fire_exp002_delayed_ignition_bridge.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_pipe_rack_delayed_ignition_cross_platform.sh` -> `tools/verify_engineering_h2_pipe_rack_delayed_ignition_cross_platform.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_pipe_rack_delayed_ignition_cuda.sh` -> `tools/verify_engineering_h2_pipe_rack_delayed_ignition_cuda.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_pipe_rack_delayed_ignition_mpi.sh` -> `tools/verify_engineering_h2_pipe_rack_delayed_ignition_mpi.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_production_evidence.sh` -> `tools/verify_engineering_h2_production_evidence.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_real_cad_handoff_contract.sh` -> `tools/verify_engineering_h2_real_cad_handoff_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_h2_real_cad_negative_selftest.sh` -> `tools/verify_engineering_h2_real_cad_negative_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_breach_preset_templates.sh` -> `tools/verify_engineering_liquefied_breach_preset_templates.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_breach_source_contract.sh` -> `tools/verify_engineering_liquefied_breach_source_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_external_vaporization_contract.sh` -> `tools/verify_engineering_liquefied_external_vaporization_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_external_vaporization_negative_selftest.sh` -> `tools/verify_engineering_liquefied_external_vaporization_negative_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_phase_change_overclaim_guard.sh` -> `tools/verify_engineering_liquefied_phase_change_overclaim_guard.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_release_source_balance.sh` -> `tools/verify_engineering_liquefied_release_source_balance.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_release_source_balance_negative_selftest.sh` -> `tools/verify_engineering_liquefied_release_source_balance_negative_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_release_thermal_plausibility.sh` -> `tools/verify_engineering_liquefied_release_thermal_plausibility.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_release_vaporization_source_model.sh` -> `tools/verify_engineering_liquefied_release_vaporization_source_model.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh` -> `tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_liquefied_release_vaporization_source_model_negative_selftest.sh` -> `tools/verify_engineering_liquefied_release_vaporization_source_model_negative_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_log_marker_compatibility.sh` -> `tools/verify_engineering_log_marker_compatibility.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_multi_fuel_capability_boundary.sh` -> `tools/verify_engineering_multi_fuel_capability_boundary.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_multi_fuel_operator_runbook.sh` -> `tools/verify_engineering_multi_fuel_operator_runbook.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_multi_fuel_template_catalog.sh` -> `tools/verify_engineering_multi_fuel_template_catalog.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_engineering_multifuel_liquefied_user_answer.sh` -> `tools/verify_engineering_multifuel_liquefied_user_answer.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_calibration_candidate_sources_20260805.sh` -> `tools/verify_h2_fire_calibration_candidate_sources_20260805.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_calibration_residual_budget.sh` -> `tools/verify_h2_fire_calibration_residual_budget.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_exp002_overpressure_calibration_table.sh` -> `tools/verify_h2_fire_exp002_overpressure_calibration_table.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_exp002_pressure_cfd_proxy.sh` -> `tools/verify_h2_fire_exp002_pressure_cfd_proxy.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_exp002_pressure_comparison_contract.sh` -> `tools/verify_h2_fire_exp002_pressure_comparison_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_mdpi_radiation_calibration_table.sh` -> `tools/verify_h2_fire_mdpi_radiation_calibration_table.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_mdpi_radiation_cfd_proxy.sh` -> `tools/verify_h2_fire_mdpi_radiation_cfd_proxy.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_mdpi_radiation_comparison_contract.sh` -> `tools/verify_h2_fire_mdpi_radiation_comparison_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_mdpi_radiation_integrated_cfd_proxy.sh` -> `tools/verify_h2_fire_mdpi_radiation_integrated_cfd_proxy.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_mdpi_radiation_screening_comparison.sh` -> `tools/verify_h2_fire_mdpi_radiation_screening_comparison.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_overpressure_dataverse_metadata.sh` -> `tools/verify_h2_fire_overpressure_dataverse_metadata.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_overpressure_reduced_exp002.sh` -> `tools/verify_h2_fire_overpressure_reduced_exp002.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_plotfile_sensor_sampling_contract.sh` -> `tools/verify_h2_fire_plotfile_sensor_sampling_contract.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_h2_fire_plotfile_sensor_sampling_negative_selftest.sh` -> `tools/verify_h2_fire_plotfile_sensor_sampling_negative_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_completion_audit.sh` -> `tools/verify_master_plan_completion_audit.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_cuda_revalidation.sh` -> `tools/verify_master_plan_cuda_revalidation.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_current_scope.sh` -> `tools/verify_master_plan_current_scope.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_current_scope_verification.sh` -> `tools/verify_master_plan_current_scope_verification.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_final_readiness.sh` -> `tools/verify_master_plan_final_readiness.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_gpu_runtime_recovery.sh` -> `tools/verify_master_plan_gpu_runtime_recovery.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_strict_artifact_drop_preflight.sh` -> `tools/verify_master_plan_strict_artifact_drop_preflight.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_strict_artifact_intake_manifest.sh` -> `tools/verify_master_plan_strict_artifact_intake_manifest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_strict_blocker_matrix.sh` -> `tools/verify_master_plan_strict_blocker_matrix.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_strict_external_source_update.sh` -> `tools/verify_master_plan_strict_external_source_update.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_strict_fire_calibration_update.sh` -> `tools/verify_master_plan_strict_fire_calibration_update.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_master_plan_strict_real_cad_update.sh` -> `tools/verify_master_plan_strict_real_cad_update.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_project_closeout_acceptance_gate.sh` -> `tools/verify_project_closeout_acceptance_gate.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_project_closeout_forecast.sh` -> `tools/verify_project_closeout_forecast.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_artifact_drop_contract_preflight.sh` -> `tools/verify_strict_artifact_drop_contract_preflight.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_artifact_drop_contract_selftest.sh` -> `tools/verify_strict_artifact_drop_contract_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_artifact_template_lint.sh` -> `tools/verify_strict_artifact_template_lint.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_cn_handoff.sh` -> `tools/verify_strict_external_artifact_cn_handoff.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_cross_benchmark_alias_selftest.sh` -> `tools/verify_strict_external_artifact_cross_benchmark_alias_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_drop_checklist.sh` -> `tools/verify_strict_external_artifact_drop_checklist.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_drop_index.sh` -> `tools/verify_strict_external_artifact_drop_index.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_drop_index_cli.sh` -> `tools/verify_strict_external_artifact_drop_index_cli.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_progress_selftest.sh` -> `tools/verify_strict_external_artifact_progress_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_receiving_preflight_entrypoint.sh` -> `tools/verify_strict_external_artifact_receiving_preflight_entrypoint.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_artifact_template_clone_selftest.sh` -> `tools/verify_strict_external_artifact_template_clone_selftest.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_evidence_receiving_pack.sh` -> `tools/verify_strict_external_evidence_receiving_pack.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_external_plume_source_separation_audit.sh` -> `tools/verify_strict_external_plume_source_separation_audit.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_fire_calibration_metadata_artifacts.sh` -> `tools/verify_strict_fire_calibration_metadata_artifacts.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_fire_calibration_metric_artifacts.sh` -> `tools/verify_strict_fire_calibration_metric_artifacts.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_fire_calibration_source_registry_artifact.sh` -> `tools/verify_strict_fire_calibration_source_registry_artifact.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_master_plan_closeout_action_pack.sh` -> `tools/verify_strict_master_plan_closeout_action_pack.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_master_plan_completion_gate.sh` -> `tools/verify_strict_master_plan_completion_gate.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_master_plan_unblock_runbook.sh` -> `tools/verify_strict_master_plan_unblock_runbook.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_strict_unblock_command_inventory.sh` -> `tools/verify_strict_unblock_command_inventory.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_sundials_local_link_audit.sh` -> `tools/verify_sundials_local_link_audit.sh` exists=`True` syntax_rc=`0`
+- `bash tools/verify_user_guides_index.sh` -> `tools/verify_user_guides_index.sh` exists=`True` syntax_rc=`0`
+- `python3 tools/check_machine_local_paths.py --strict` -> `tools/check_machine_local_paths.py` exists=`True` syntax_rc=`0`
+- `python3 tools/codex_make_external_vaporization_source_input.py --source-csv examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv --base-input examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke --time 2.0 --output-input docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/input.codex_lng_external_vaporization_source_t2s --output-json docs/codex_audit/evidence/engineering_liquefied_external_vaporization_contract_20260806/external_vaporization_source_mapping_t2s.json` -> `tools/codex_make_external_vaporization_source_input.py` exists=`True` syntax_rc=`0`
+- `python3 tools/codex_make_liquefied_release_vaporization_csv.py --fluid LNG_CH4 --inventory-kg 25.0 --initial-pressure-Pa 650000.0 --hole-diameter-m 0.020 --duration-s 8.0 --points 9 --liquid-T-K 125.0 --vapor-T-K 285.0 --output-csv docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source.csv --output-json docs/codex_audit/evidence/engineering_liquefied_release_vaporization_source_model_20260807/lng_ch4_screening_release/lng_ch4_screening_release_source_model.json` -> `tools/codex_make_liquefied_release_vaporization_csv.py` exists=`True` syntax_rc=`0`
+- `python3 tools/codex_print_current_status.py` -> `tools/codex_print_current_status.py` exists=`True` syntax_rc=`0`
+- `python3 tools/codex_print_current_status.py --json` -> `tools/codex_print_current_status.py` exists=`True` syntax_rc=`0`
+- `python3 tools/codex_print_strict_external_artifact_drop_index.py` -> `tools/codex_print_strict_external_artifact_drop_index.py` exists=`True` syntax_rc=`0`
+- `python3 tools/codex_print_strict_external_artifact_drop_index.py --json` -> `tools/codex_print_strict_external_artifact_drop_index.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_current_priority_scope_report.py` -> `tools/write_academic_current_priority_scope_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_gas_detonation_single_cuda_report.py` -> `tools/write_academic_gas_detonation_single_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_gas_liquid_detonation_certification_report.py` -> `tools/write_academic_gas_liquid_detonation_certification_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_gas_liquid_detonation_certification_report.py --verify-json docs/codex_audit/evidence/academic_gas_liquid_detonation_certification_20260731/academic_gas_liquid_detonation_certification_report.json` -> `tools/write_academic_gas_liquid_detonation_certification_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_readiness_qlt03_closure_delta_report.py` -> `tools/write_academic_readiness_qlt03_closure_delta_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_readiness_qlt03_closure_delta_report.py --verify-json docs/codex_audit/evidence/academic_readiness_qlt03_closure_delta_20260730/academic_readiness_qlt03_closure_delta_report.json` -> `tools/write_academic_readiness_qlt03_closure_delta_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_readiness_summary_report.py` -> `tools/write_academic_readiness_summary_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_readiness_summary_report.py --verify-json docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json` -> `tools/write_academic_readiness_summary_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_twophase_broader_matrix_report.py` -> `tools/write_academic_twophase_broader_matrix_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_academic_twophase_broader_matrix_report.py --verify-json docs/codex_audit/evidence/academic_twophase_broader_matrix_20260730/academic_twophase_broader_matrix_report.json` -> `tools/write_academic_twophase_broader_matrix_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_complete_walkthrough_guide_report.py` -> `tools/write_complete_walkthrough_guide_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_case_output_cleanup_manifest_report.py` -> `tools/write_current_case_output_cleanup_manifest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_disk_cleanup_plan_report.py` -> `tools/write_current_disk_cleanup_plan_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_disk_usage_manifest_report.py` -> `tools/write_current_disk_usage_manifest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_operator_command_inventory_report.py` -> `tools/write_current_operator_command_inventory_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_operator_quickstart_smoke_report.py` -> `tools/write_current_operator_quickstart_smoke_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_parallel_capability_matrix_report.py` -> `tools/write_current_parallel_capability_matrix_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_phase_closure_certificate_report.py` -> `tools/write_current_phase_closure_certificate_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_phase_final_delivery_index_report.py` -> `tools/write_current_phase_final_delivery_index_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_phase_release_manifest_report.py` -> `tools/write_current_phase_release_manifest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_report_hash_cycle_guard_report.py` -> `tools/write_current_report_hash_cycle_guard_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scenario_readiness_matrix_report.py` -> `tools/write_current_scenario_readiness_matrix_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scope_delivery_package_report.py` -> `tools/write_current_scope_delivery_package_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scope_final_handoff_note_report.py` -> `tools/write_current_scope_final_handoff_note_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scope_operator_runbook_report.py` -> `tools/write_current_scope_operator_runbook_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scope_release_candidate_handoff_report.py` -> `tools/write_current_scope_release_candidate_handoff_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scope_release_refresh_entrypoint_report.py` -> `tools/write_current_scope_release_refresh_entrypoint_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_scope_state_snapshot_report.py` -> `tools/write_current_scope_state_snapshot_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_status_cli_report.py` -> `tools/write_current_status_cli_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_verification_chain_coverage_report.py` -> `tools/write_current_verification_chain_coverage_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_worktree_hygiene_report.py` -> `tools/write_current_worktree_hygiene_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_worktree_review_queue_report.py` -> `tools/write_current_worktree_review_queue_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_current_worktree_source_ledger_report.py` -> `tools/write_current_worktree_source_ledger_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_agreement_contract_report.py` -> `tools/write_dataverse_open_channel_agreement_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_amr_source_projection_contract_report.py` -> `tools/write_dataverse_open_channel_amr_source_projection_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_amr_source_projection_implementation_report.py` -> `tools/write_dataverse_open_channel_amr_source_projection_implementation_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_cfd_agreement_attempt_report.py` -> `tools/write_dataverse_open_channel_cfd_agreement_attempt_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_cfd_scout_report.py` -> `tools/write_dataverse_open_channel_cfd_scout_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_dataset_audit_report.py` -> `tools/write_dataverse_open_channel_dataset_audit_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_geometry_mapping_report.py` -> `tools/write_dataverse_open_channel_geometry_mapping_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_long_window_reconciliation_report.py` -> `tools/write_dataverse_open_channel_long_window_reconciliation_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_reference_package_report.py` -> `tools/write_dataverse_open_channel_reference_package_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_dataverse_open_channel_timeseries_index_report.py` -> `tools/write_dataverse_open_channel_timeseries_index_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_c3h8_gas_phase_cpu_cuda_report.py` -> `tools/write_engineering_c3h8_gas_phase_cpu_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_ch4_cold_plume_cpu_probe_report.py` -> `tools/write_engineering_ch4_cold_plume_cpu_probe_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_cuda_report.py` -> `tools/write_engineering_ch4_pipe_rack_delayed_ignition_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_report.py` -> `tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_report.py` -> `tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_report.py` -> `tools/write_engineering_ch4_pipe_rack_delayed_ignition_mpi_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_external_vaporization_c3h8_timeseries_cuda_report.py` -> `tools/write_engineering_external_vaporization_c3h8_timeseries_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_external_vaporization_ch4_timeseries_cuda_report.py` -> `tools/write_engineering_external_vaporization_ch4_timeseries_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_external_vaporization_multifuel_source_matrix_report.py` -> `tools/write_engineering_external_vaporization_multifuel_source_matrix_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_external_vaporization_timeseries_cuda_report.py` -> `tools/write_engineering_external_vaporization_timeseries_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_external_vaporization_timeseries_report.py` -> `tools/write_engineering_external_vaporization_timeseries_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_fixed_mass_flow_valve_schedule_report.py` -> `tools/write_engineering_fixed_mass_flow_valve_schedule_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_fuel_species_guard_report.py` -> `tools/write_engineering_fuel_species_guard_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_gasified_lng_lpg_surrogate_report.py` -> `tools/write_engineering_gasified_lng_lpg_surrogate_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py` -> `tools/write_engineering_h2_external_plume_benchmark_readiness.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py --verify-json docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json` -> `tools/write_engineering_h2_external_plume_benchmark_readiness.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py` -> `tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/fire_calibration_dataset_ingestion_report.json` -> `tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_dataset_report.py` -> `tools/write_engineering_h2_fire_calibration_dataset_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_dataset_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_20260723/fire_calibration_dataset_report.json` -> `tools/write_engineering_h2_fire_calibration_dataset_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py` -> `tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_digitization_preflight_20260724/fire_calibration_digitization_preflight_report.json` -> `tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_literature_metric_preflight_report.py` -> `tools/write_engineering_h2_fire_calibration_literature_metric_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_literature_metric_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_literature_metric_preflight_20260724/fire_calibration_literature_metric_preflight_report.json` -> `tools/write_engineering_h2_fire_calibration_literature_metric_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_package_report.py` -> `tools/write_engineering_h2_fire_calibration_package_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_calibration_package_report.py --verify-json docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json` -> `tools/write_engineering_h2_fire_calibration_package_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_fire_exp002_delayed_ignition_bridge_report.py` -> `tools/write_engineering_h2_fire_exp002_delayed_ignition_bridge_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_pipe_rack_delayed_ignition_cross_platform_report.py` -> `tools/write_engineering_h2_pipe_rack_delayed_ignition_cross_platform_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_pipe_rack_delayed_ignition_cuda_report.py` -> `tools/write_engineering_h2_pipe_rack_delayed_ignition_cuda_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_pipe_rack_delayed_ignition_mpi_report.py` -> `tools/write_engineering_h2_pipe_rack_delayed_ignition_mpi_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py` -> `tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_boundary_tag_contract_20260724/real_cad_boundary_tag_contract_report.json` -> `tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py` -> `tools/write_engineering_h2_real_cad_cleanup_package_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json` -> `tools/write_engineering_h2_real_cad_cleanup_package_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_handoff_contract_report.py` -> `tools/write_engineering_h2_real_cad_handoff_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py` -> `tools/write_engineering_h2_real_cad_intake_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_real_cad_intake_preflight_20260724/real_cad_intake_preflight_report.json` -> `tools/write_engineering_h2_real_cad_intake_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_real_cad_negative_selftest_report.py` -> `tools/write_engineering_h2_real_cad_negative_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py` -> `tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/sbepv5_d27_dataset_ingestion_report.json` -> `tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py` -> `tools/write_engineering_h2_sbepv5_external_dataset_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py --verify-json docs/codex_audit/evidence/engineering_h2_sbepv5_d27_external_dataset_20260723/sbepv5_d27_external_dataset_report.json` -> `tools/write_engineering_h2_sbepv5_external_dataset_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_breach_preset_templates_report.py` -> `tools/write_engineering_liquefied_breach_preset_templates_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_breach_source_contract_report.py` -> `tools/write_engineering_liquefied_breach_source_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_external_vaporization_contract_report.py` -> `tools/write_engineering_liquefied_external_vaporization_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_external_vaporization_negative_selftest_report.py` -> `tools/write_engineering_liquefied_external_vaporization_negative_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_phase_change_overclaim_guard_report.py` -> `tools/write_engineering_liquefied_phase_change_overclaim_guard_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_release_source_balance_negative_selftest_report.py` -> `tools/write_engineering_liquefied_release_source_balance_negative_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_release_source_balance_report.py` -> `tools/write_engineering_liquefied_release_source_balance_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_release_thermal_plausibility_report.py` -> `tools/write_engineering_liquefied_release_thermal_plausibility_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.py` -> `tools/write_engineering_liquefied_release_vaporization_source_model_cuda_smoke_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_release_vaporization_source_model_negative_selftest_report.py` -> `tools/write_engineering_liquefied_release_vaporization_source_model_negative_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_liquefied_release_vaporization_source_model_report.py` -> `tools/write_engineering_liquefied_release_vaporization_source_model_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_log_marker_compatibility_report.py` -> `tools/write_engineering_log_marker_compatibility_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_multi_fuel_capability_boundary_report.py` -> `tools/write_engineering_multi_fuel_capability_boundary_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_multi_fuel_operator_runbook_report.py` -> `tools/write_engineering_multi_fuel_operator_runbook_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_multi_fuel_template_catalog_report.py` -> `tools/write_engineering_multi_fuel_template_catalog_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_engineering_multifuel_liquefied_user_answer_report.py` -> `tools/write_engineering_multifuel_liquefied_user_answer_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_calibration_candidate_sources_20260805_report.py` -> `tools/write_h2_fire_calibration_candidate_sources_20260805_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_calibration_residual_budget_report.py` -> `tools/write_h2_fire_calibration_residual_budget_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_exp002_overpressure_calibration_table_report.py` -> `tools/write_h2_fire_exp002_overpressure_calibration_table_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_exp002_pressure_cfd_proxy_report.py` -> `tools/write_h2_fire_exp002_pressure_cfd_proxy_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_exp002_pressure_comparison_contract_report.py` -> `tools/write_h2_fire_exp002_pressure_comparison_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_mdpi_radiation_calibration_table_report.py` -> `tools/write_h2_fire_mdpi_radiation_calibration_table_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_mdpi_radiation_cfd_proxy_report.py` -> `tools/write_h2_fire_mdpi_radiation_cfd_proxy_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_mdpi_radiation_comparison_contract_report.py` -> `tools/write_h2_fire_mdpi_radiation_comparison_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_mdpi_radiation_integrated_cfd_proxy_report.py` -> `tools/write_h2_fire_mdpi_radiation_integrated_cfd_proxy_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_mdpi_radiation_screening_comparison_report.py` -> `tools/write_h2_fire_mdpi_radiation_screening_comparison_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_overpressure_dataverse_metadata_report.py` -> `tools/write_h2_fire_overpressure_dataverse_metadata_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_overpressure_reduced_exp002_report.py` -> `tools/write_h2_fire_overpressure_reduced_exp002_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_plotfile_sensor_sampling_contract_report.py` -> `tools/write_h2_fire_plotfile_sensor_sampling_contract_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_h2_fire_plotfile_sensor_sampling_negative_selftest_report.py` -> `tools/write_h2_fire_plotfile_sensor_sampling_negative_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_completion_audit_report.py` -> `tools/write_master_plan_completion_audit_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_current_scope_verification_report.py` -> `tools/write_master_plan_current_scope_verification_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_final_readiness_report.py` -> `tools/write_master_plan_final_readiness_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_strict_artifact_drop_preflight_report.py` -> `tools/write_master_plan_strict_artifact_drop_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_strict_artifact_intake_manifest_report.py` -> `tools/write_master_plan_strict_artifact_intake_manifest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_strict_blocker_matrix_report.py` -> `tools/write_master_plan_strict_blocker_matrix_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_strict_external_source_update_report.py` -> `tools/write_master_plan_strict_external_source_update_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_strict_fire_calibration_update_report.py` -> `tools/write_master_plan_strict_fire_calibration_update_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_master_plan_strict_real_cad_update_report.py` -> `tools/write_master_plan_strict_real_cad_update_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_project_closeout_acceptance_gate_report.py` -> `tools/write_project_closeout_acceptance_gate_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_project_closeout_forecast_report.py` -> `tools/write_project_closeout_forecast_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_real_case_intake_guide_report.py` -> `tools/write_real_case_intake_guide_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_artifact_drop_contract_preflight_report.py` -> `tools/write_strict_artifact_drop_contract_preflight_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_artifact_drop_contract_selftest_report.py` -> `tools/write_strict_artifact_drop_contract_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_artifact_template_lint_report.py` -> `tools/write_strict_artifact_template_lint_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_cn_handoff_report.py` -> `tools/write_strict_external_artifact_cn_handoff_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_cross_benchmark_alias_selftest_report.py` -> `tools/write_strict_external_artifact_cross_benchmark_alias_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_drop_checklist_report.py` -> `tools/write_strict_external_artifact_drop_checklist_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_drop_index_cli_report.py` -> `tools/write_strict_external_artifact_drop_index_cli_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_drop_index_report.py` -> `tools/write_strict_external_artifact_drop_index_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_progress_selftest_report.py` -> `tools/write_strict_external_artifact_progress_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_receiving_preflight_entrypoint_report.py` -> `tools/write_strict_external_artifact_receiving_preflight_entrypoint_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_artifact_template_clone_selftest_report.py` -> `tools/write_strict_external_artifact_template_clone_selftest_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_evidence_receiving_pack_report.py` -> `tools/write_strict_external_evidence_receiving_pack_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_external_plume_source_separation_audit_report.py` -> `tools/write_strict_external_plume_source_separation_audit_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_fire_calibration_metadata_artifacts_report.py` -> `tools/write_strict_fire_calibration_metadata_artifacts_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_fire_calibration_metric_artifacts_report.py` -> `tools/write_strict_fire_calibration_metric_artifacts_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_fire_calibration_source_registry_artifact_report.py` -> `tools/write_strict_fire_calibration_source_registry_artifact_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_master_plan_closeout_action_pack_report.py` -> `tools/write_strict_master_plan_closeout_action_pack_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_master_plan_completion_gate_report.py` -> `tools/write_strict_master_plan_completion_gate_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_master_plan_unblock_runbook_report.py` -> `tools/write_strict_master_plan_unblock_runbook_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_strict_unblock_command_inventory_report.py` -> `tools/write_strict_unblock_command_inventory_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_sundials_local_link_audit_report.py` -> `tools/write_sundials_local_link_audit_report.py` exists=`True` syntax_rc=`0`
+- `python3 tools/write_user_guides_index_report.py` -> `tools/write_user_guides_index_report.py` exists=`True` syntax_rc=`0`

@@ -1,0 +1,35 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX2d.gnu.ex(+0x452186) [0x570b60b8d186]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleLMeX2d.gnu.ex(+0x456f34) [0x570b60b91f34]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleLMeX2d.gnu.ex(+0xa25fd) [0x570b607dd5fd]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) PeleLM::readParameters() at /home/cj/my-pele/examples/engineering/bfs_sink/../../../external/PeleLMeX/Source/PeleLMeX_Setup.cpp:491
+
+ 3: ./PeleLMeX2d.gnu.ex(+0xa4b78) [0x570b607dfb78]
+    PeleLM::Setup() at /home/cj/my-pele/examples/engineering/bfs_sink/../../../external/PeleLMeX/Source/PeleLMeX_Setup.cpp:91
+
+ 4: ./PeleLMeX2d.gnu.ex(+0x469de) [0x570b607819de]
+    main at /home/cj/my-pele/examples/engineering/bfs_sink/../../../external/PeleLMeX/Source/main.cpp:50
+
+ 5: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x78cb5902a1ca]
+
+ 6: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x78cb5902a28b]
+
+ 7: ./PeleLMeX2d.gnu.ex(+0x4f4c5) [0x570b6078a4c5]
+    ?? ??:0
+

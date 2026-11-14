@@ -1,0 +1,167 @@
+{
+  "campaign": "engineering-h2-production-full",
+  "cleanup_quality_record_validation_error": "",
+  "clears_real_cad_cleanup_blocker": false,
+  "data_room_index_validation_error": "",
+  "evidence_files": [
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "e227facfc24e049ebe4d2672e9060475e751bb7d629453ebb5a4b1635b73db82",
+      "size_bytes": 5093
+    },
+    {
+      "label": "real_cad_data_room_index_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index_template.csv",
+      "sha256": "b6ddc6e5c3f9f0f43dfb6cad7640ee396aab62fb31b2c6684e4f9719d3fdfe03",
+      "size_bytes": 317
+    },
+    {
+      "label": "real_cad_cleanup_quality_record_template",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record_template.csv",
+      "sha256": "8b9710b6c936c2e46ec630b87c9210802ebcfdae0c5625f7fc3bdd5cd9a5b2de",
+      "size_bytes": 227
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This report is an intake preflight; it does not fabricate real CAD or clear the production blocker by itself.",
+    "Production credit requires controlled source CAD, cleaned simulation geometry, exact hashes, provenance, and cleanup checks.",
+    "The real-CAD blocker remains open until the cleanup package report validates a large-layout non-synthetic manifest."
+  ],
+  "manifest_validation_error": "",
+  "missing_artifacts": [
+    {
+      "artifact": "real_cad_cleanup_manifest.json",
+      "required_action": "fill the package manifest from the template with controlled provenance and exact file hashes"
+    },
+    {
+      "artifact": "source_cad/*",
+      "required_action": "stage at least three real source CAD files for a tank/pipe large-layout campaign"
+    },
+    {
+      "artifact": "cleaned_geometry/*",
+      "required_action": "stage at least three cleaned simulation geometries derived from the source CAD files"
+    },
+    {
+      "artifact": "cleanup_quality_records",
+      "required_action": "record units, watertightness, degeneracy, positive volume/area, and meter-space bounding boxes per geometry"
+    },
+    {
+      "artifact": "real_cad_data_room_index.csv",
+      "required_action": "provide a controlled data-room index with source/cleaned file roles, labels, relative paths, hashes, source type, revision, and owner/supplier"
+    },
+    {
+      "artifact": "real_cad_cleanup_quality_record.csv",
+      "required_action": "provide cleanup quality records for at least three geometries with true cleanup checks, bbox fields, tool/method, and reviewer"
+    }
+  ],
+  "package_root": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package",
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package",
+      "gap": "",
+      "name": "package_scaffold_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index_template.csv",
+        "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record_template.csv"
+      ],
+      "gap": "",
+      "name": "data_room_templates_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": [],
+      "gap": "Provide real_cad_data_room_index.csv in the package root.",
+      "name": "controlled_data_room_index_present",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Data-room index must have at least three paired source/cleaned labels with valid hashes and provenance columns.",
+      "name": "controlled_data_room_index_validates",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Provide real_cad_cleanup_quality_record.csv in the package root.",
+      "name": "cleanup_quality_record_present",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Cleanup quality record must include at least three labels with true checks, bbox fields, tool/method, and reviewer.",
+      "name": "cleanup_quality_record_validates",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Provide at least three real source CAD files for large-layout evidence.",
+      "name": "source_cad_large_layout_files_local",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Provide at least three cleaned geometry files for large-layout evidence.",
+      "name": "cleaned_geometry_large_layout_files_local",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Provide real_cad_cleanup_manifest.json in the package root.",
+      "name": "controlled_manifest_present",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Manifest must pass campaign, provenance, hash, cleanup, bbox, and large-layout checks.",
+      "name": "controlled_manifest_validates",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "The validated manifest must declare large_layout_campaign=true and include at least three real geometries.",
+      "name": "large_layout_real_cad_coverage",
+      "status": "MISSING"
+    },
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "gap": "",
+      "name": "cleanup_package_blocks_or_clears_consistently",
+      "status": "PASS"
+    },
+    {
+      "evidence": [],
+      "gap": "The scorecard blocker stays open until the cleanup package clears a validated large-layout real-CAD manifest.",
+      "name": "ready_for_scorecard_blocker_clearance",
+      "status": "MISSING"
+    }
+  ],
+  "ready_for_cleanup_package_gate": false,
+  "real_cad_cleanup_manifest": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json",
+  "schema_version": 1,
+  "status": "PASS-H2-REAL-CAD-INTAKE-PREFLIGHT",
+  "summary": {
+    "cleaned_geometry_file_count": 0,
+    "cleanup_package_clears_blocker": false,
+    "cleanup_package_status": "NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE",
+    "cleanup_quality_record_present": false,
+    "cleanup_quality_record_row_count": 0,
+    "cleanup_quality_record_validates": false,
+    "data_room_index_paired_label_count": 0,
+    "data_room_index_present": false,
+    "data_room_index_row_count": 0,
+    "data_room_index_validates": false,
+    "data_room_templates_available": true,
+    "large_layout_valid": false,
+    "manifest_present": false,
+    "manifest_validates": false,
+    "missing_artifact_count": 6,
+    "package_scaffold_available": true,
+    "source_cad_file_count": 0
+  },
+  "title": "Engineering H2 Real-CAD Intake Preflight"
+}

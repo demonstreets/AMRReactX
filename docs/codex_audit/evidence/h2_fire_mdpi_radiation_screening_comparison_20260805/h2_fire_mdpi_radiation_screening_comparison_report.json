@@ -1,0 +1,118 @@
+{
+  "comparison_basis": {
+    "reference_basis": "MDPI radiation calibration target table",
+    "screening_flux_formula": "radiative_power_w / (4*pi*distance_m^2)",
+    "simulation_basis": "existing engineering H2 fire consequence screening point-source flux",
+    "strict_credit_policy": "does not clear strict fire calibration blocker without case-aligned CFD radiation and EXP002 pressure agreement"
+  },
+  "comparisons": [
+    {
+      "distance_m": 0.23,
+      "metric_id": "mdpi_jet_fire_1p5mm_0p6mpa_0p23m",
+      "passed": false,
+      "reference_flux_w_m2": 1360.5,
+      "screening_cloud_average_flux_w_m2": 6062.196576905598,
+      "screening_source_limited_flux_w_m2": 54161.584166539455,
+      "source_basis": "MDPI Applied Sciences 14(16):7098 hydrogen jet-fire radiation anchor; 1.5 mm leak diameter, 0.6 MPa, radial distance 0.23 m; tolerance uses 2x reported max optimized multi-point-source error (21.7%).",
+      "source_limited_abs_error_w_m2": 52801.084166539455,
+      "source_limited_rel_error": 38.81005818929765,
+      "source_limited_to_reference_ratio": 39.81005818929765,
+      "tolerance_abs_w_m2": 590.457,
+      "tolerance_rel": 0.434
+    },
+    {
+      "distance_m": 0.5,
+      "metric_id": "mdpi_jet_fire_1p5mm_0p6mpa_0p50m",
+      "passed": false,
+      "reference_flux_w_m2": 412.1,
+      "screening_cloud_average_flux_w_m2": 1282.7607956732245,
+      "screening_source_limited_flux_w_m2": 11460.59120963975,
+      "source_basis": "MDPI Applied Sciences 14(16):7098 hydrogen jet-fire radiation anchor; 1.5 mm leak diameter, 0.6 MPa, radial distance 0.50 m; tolerance uses 2x reported max optimized multi-point-source error (21.7%).",
+      "source_limited_abs_error_w_m2": 11048.49120963975,
+      "source_limited_rel_error": 26.810218902304655,
+      "source_limited_to_reference_ratio": 27.81021890230466,
+      "tolerance_abs_w_m2": 178.8514,
+      "tolerance_rel": 0.434
+    },
+    {
+      "distance_m": 0.23,
+      "metric_id": "mdpi_jet_fire_max_1p2mm_0p23m",
+      "passed": false,
+      "reference_flux_w_m2": 952.8,
+      "screening_cloud_average_flux_w_m2": 6062.196576905598,
+      "screening_source_limited_flux_w_m2": 54161.584166539455,
+      "source_basis": "MDPI Applied Sciences 14(16):7098 hydrogen jet-fire radiation anchor; maximum reported heat flux at 0.23 m for 1.2 mm leak diameter; tolerance uses 2x reported max optimized multi-point-source error (21.7%).",
+      "source_limited_abs_error_w_m2": 53208.78416653945,
+      "source_limited_rel_error": 55.84465172810606,
+      "source_limited_to_reference_ratio": 56.844651728106065,
+      "tolerance_abs_w_m2": 413.5152,
+      "tolerance_rel": 0.434
+    },
+    {
+      "distance_m": 0.23,
+      "metric_id": "mdpi_jet_fire_max_2p0mm_0p23m",
+      "passed": false,
+      "reference_flux_w_m2": 3378.1,
+      "screening_cloud_average_flux_w_m2": 6062.196576905598,
+      "screening_source_limited_flux_w_m2": 54161.584166539455,
+      "source_basis": "MDPI Applied Sciences 14(16):7098 hydrogen jet-fire radiation anchor; maximum reported heat flux at 0.23 m for 2.0 mm leak diameter; tolerance uses 2x reported max optimized multi-point-source error (21.7%).",
+      "source_limited_abs_error_w_m2": 50783.484166539456,
+      "source_limited_rel_error": 15.033150044859376,
+      "source_limited_to_reference_ratio": 16.033150044859376,
+      "tolerance_abs_w_m2": 1466.0954,
+      "tolerance_rel": 0.434
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "mdpi_radiation_table",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/h2_fire_mdpi_radiation_calibration_table_report.json",
+      "sha256": "26506a1e7e4d69bb668b74e5429e7aca4015853de14d745f91183c52e687a258",
+      "size_bytes": 3576
+    },
+    {
+      "label": "fire_consequence_screening",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "radiation_metrics_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    },
+    {
+      "label": "comparison_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_screening_comparison_20260805/mdpi_radiation_screening_comparison.csv",
+      "sha256": "aee73f4faac78377759a81bf32d6bbc09d91aa77958bc3e4687e57c90c702955",
+      "size_bytes": 869
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:57.168556+00:00",
+  "limitations": [
+    "This uses a screening point-source flux, not a resolved flame radiation model.",
+    "The current engineering H2 scenario is not case-aligned to each MDPI nozzle diameter and pressure.",
+    "This report quantifies the current gap and intentionally does not clear strict fire calibration credit."
+  ],
+  "output_files": {
+    "comparison_csv": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_screening_comparison_20260805/mdpi_radiation_screening_comparison.csv"
+  },
+  "schema_version": 1,
+  "status": "QUANTIFIED-H2-FIRE-MDPI-RADIATION-SCREENING-NOT-PASSING",
+  "summary": {
+    "all_screening_metrics_passed": false,
+    "case_aligned_cfd_radiation_agreement": false,
+    "cloud_average_radiative_power_w": 4029.911892,
+    "current_outputs_sufficient_for_mdpi_radiation_agreement": false,
+    "max_source_limited_to_reference_ratio": 56.844651728106065,
+    "mdpi_radiation_metric_count": 4,
+    "min_source_limited_to_reference_ratio": 16.033150044859376,
+    "screening_comparison_executed": true,
+    "screening_metric_fail_count": 4,
+    "screening_metric_pass_count": 0,
+    "source_limited_radiative_power_w": 36004.50915,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire MDPI Radiation Screening Comparison"
+}

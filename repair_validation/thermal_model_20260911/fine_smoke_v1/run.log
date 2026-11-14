@@ -1,0 +1,79 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Initializing AMReX (0ec1056ff13b-dirty)...
+MPI initialized with 2 MPI processes
+MPI initialized with thread support level 0
+Initializing CUDA...
+Multiple GPUs are visible to each MPI rank. This is usually not an issue. But this may lead to incorrect or suboptimal rank-to-GPU mapping.!
+CUDA initialized with 2 devices.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+
+Starting run at 09:46:29 UTC on 2026-09-11.
+Successfully read inputs file ... 
+
+PeleC git hash: 0ec1056-dirty
+AMReX git hash: 0ec1056-dirty
+PelePhysics git hash: 0ec1056-dirty
+SUNDIALS git hash: 0ec1056-dirty
+
+
+ Reading spray model parameters ...
+ Warning: Spray model in 2D assumes narrow domain in z-direction (Lz = dz)!
+0 Advected Variables: 
+
+6 Species: 
+nc7h16  o2  co  h2o  co2  n2  
+0 Auxiliary Variables: 
+
+Initializing EB2
+restarting calculation from file: /dev/shm/my_pele_thermal_model_20260911/checkpoint_refined_v1
+Starting to call amrex_probinit ... 
+WD6 concentration regularization epsilon = 1e-10 mol/m^3 (zero means original WD law).
+Finite-rate ZND initialization: 5001 rows, 6 species, 3 reactions; no imposed wave speed.
+Successfully run amrex_probinit
+Successfully read inputs file ... 
+read CPU time: 19219.62606
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+Restart time = 1.131385434 seconds.
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+  Level 0   56 grids  8960000 cells  100 % of domain
+            smallest grid: 400 x 400  biggest grid: 400 x 400
+
+PLOTFILE: file = /dev/shm/my_pele_thermal_model_20260911/fine_smoke_v1/plt15119
+Write plotfile time = 1.19466562  seconds
+
+[Level 0 step 15120] ADVANCE at time 4.800126356e-05 with dt = 1.415385336e-09
+[Level 0 step 15120] Advanced 8960000 cells
+
+[STEP 15120] Coarse TimeStep time: 3.479495229
+[STEP 15120] FAB kilobyte spread across MPI nodes: [7505023 ... 7505023]
+
+STEP = 15120 TIME = 4.800267895e-05 DT = 1.415385336e-09
+
+PLOTFILE: file = /dev/shm/my_pele_thermal_model_20260911/fine_smoke_v1/plt15120
+Write plotfile time = 1.026657401  seconds
+
+
+Ending run at 09:46:34 UTC on 2026-09-11.
+Run time = 5.645112423
+Run time w/o init = 4.513088858
+CPU(0): Heap Space (bytes) used by Coalescing FAB Arena: 7787398400
+Total GPU global memory (MB) spread across MPI: [16269 ... 16269]
+Free  GPU global memory (MB) spread across MPI: [8188 ... 8318]
+[The         Arena] max space (MB) allocated spread across MPI: [7426 ... 7533]
+[The         Arena] max space (MB) used      spread across MPI: [7351 ... 7450]
+[The Managed Arena] max space (MB) allocated spread across MPI: [8 ... 8]
+[The Managed Arena] max space (MB) used      spread across MPI: [0 ... 0]
+[The  Pinned Arena] max space (MB) allocated spread across MPI: [71 ... 169]
+[The  Pinned Arena] max space (MB) used      spread across MPI: [63 ... 98]
+AMReX (0ec1056ff13b-dirty) finalized

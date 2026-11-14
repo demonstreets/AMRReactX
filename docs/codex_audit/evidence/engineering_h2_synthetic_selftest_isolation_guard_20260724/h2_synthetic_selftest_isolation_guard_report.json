@@ -1,0 +1,193 @@
+{
+  "current_status": {
+    "dashboard_missing_external_artifact_count": 14,
+    "data_room_missing_artifact_count": null,
+    "functional_coverage_percent": null,
+    "production_credibility_percent": null,
+    "real_controlled_copy_copied_file_count": 0,
+    "real_controlled_copy_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-CONTROLLED-COPY",
+    "real_drop_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-DROP",
+    "real_drop_valid_artifact_count": 0,
+    "real_ingestion_ready_copy_action_count": 0,
+    "real_ingestion_status": "NOT_READY-H2-EXTERNAL-ARTIFACT-INGESTION-PLAN",
+    "remaining_blocker_count": 3,
+    "scorecard_status": "NOT_PRODUCTION_READY"
+  },
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_external_artifact_gate_selftest_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/h2_external_artifact_gate_selftest_report.json",
+      "sha256": "5d05db1ea9524f41a1c9058fc1e77c077575345ef2d7f6c8c7b61a51365c7753",
+      "size_bytes": 15033
+    },
+    {
+      "label": "scanned_production_report_01",
+      "path": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "sha256": "5d04d11b450a9b833b61959b0642ee0949935fcd6c1458e5a3fb28ccf905b1d8",
+      "size_bytes": 33300
+    },
+    {
+      "label": "scanned_production_report_02",
+      "path": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "sha256": "320fe14cf656f8171fec3f7d8f3f66a8c4a8ecb044d1cbf94b0fb9b14396fa52",
+      "size_bytes": 6627
+    },
+    {
+      "label": "scanned_production_report_03",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+      "sha256": "67c532294b2b054e347bf649097533b9fa3752608c9eff89cf459cef20f280df",
+      "size_bytes": 8998
+    },
+    {
+      "label": "scanned_production_report_04",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    },
+    {
+      "label": "scanned_production_report_05",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+      "sha256": "0108680ab41342c3dd859bc64c71a245c972089bf2b811e6e8f7665d5448bcb9",
+      "size_bytes": 13866
+    },
+    {
+      "label": "scanned_production_report_06",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_ingestion_plan_20260724/h2_external_artifact_ingestion_plan.json",
+      "sha256": "47ad401fe999fd65c0e38ec5c5ec13a4ecbf7ae172a4b42b75104581b9798a73",
+      "size_bytes": 17137
+    },
+    {
+      "label": "scanned_production_report_07",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_controlled_copy_20260724/h2_external_artifact_controlled_copy_report.json",
+      "sha256": "db32de0bbd795cbd8e0757f2c5b30b49c01ed27826e28899b1a2d9e7e0296b7a",
+      "size_bytes": 17424
+    },
+    {
+      "label": "scanned_production_report_08",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_operations_dashboard_20260724/h2_external_evidence_operations_dashboard.json",
+      "sha256": "1d744568de6afa2b883538f2569bb55861bee7a15fc390cc80cc9b8097816c19",
+      "size_bytes": 9264
+    }
+  ],
+  "external_artifact_gate_selftest_report": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/h2_external_artifact_gate_selftest_report.json",
+  "forbidden_fragments": [
+    "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_controlled_copy_apply_report.json",
+    "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_controlled_copy_dryrun_report.json",
+    "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_drop_validator_report.json",
+    "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_fixture/controlled_targets",
+    "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_fixture/drop",
+    "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_ingestion_plan.json",
+    "synthetic-selftest",
+    "synthetic_fixture",
+    "synthetic_selftest"
+  ],
+  "forbidden_hit_count": 0,
+  "generated_at_utc": "2026-08-20T10:07:16+00:00",
+  "limitations": [
+    "This guard checks evidence wiring and isolation; it does not validate physical fidelity.",
+    "Synthetic self-test evidence is allowed only as a verifier self-test and must not appear in production input reports.",
+    "When real external evidence is supplied, this guard should continue to pass as long as production reports do not reference the synthetic self-test fixture."
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/h2_external_artifact_gate_selftest_report.json",
+      "gap": "",
+      "name": "selftest_passes_but_is_synthetic_only",
+      "status": "PASS"
+    },
+    {
+      "evidence": "scanned_reports=8 forbidden_hits=0",
+      "gap": "",
+      "name": "production_reports_do_not_reference_selftest_artifacts",
+      "status": "PASS"
+    },
+    {
+      "evidence": "scorecard=NOT_PRODUCTION_READY remaining_blockers=3",
+      "gap": "",
+      "name": "scorecard_not_ready_while_real_blockers_remain",
+      "status": "PASS"
+    },
+    {
+      "evidence": "real_drop_root=docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/drop synthetic_drop_root=docs/codex_audit/evidence/engineering_h2_external_artifact_gate_selftest_20260724/synthetic_fixture/drop",
+      "gap": "",
+      "name": "real_drop_is_separate_from_synthetic_fixture",
+      "status": "PASS"
+    },
+    {
+      "evidence": "applied_copy_actions=False",
+      "gap": "",
+      "name": "real_controlled_copy_has_not_been_satisfied_by_selftest",
+      "status": "PASS"
+    },
+    {
+      "evidence": "dashboard_missing=14",
+      "gap": "",
+      "name": "dashboard_still_reports_real_missing_artifacts",
+      "status": "PASS"
+    }
+  ],
+  "scan_records": [
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "sha256": "5d04d11b450a9b833b61959b0642ee0949935fcd6c1458e5a3fb28ccf905b1d8",
+      "size_bytes": 33300
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "sha256": "320fe14cf656f8171fec3f7d8f3f66a8c4a8ecb044d1cbf94b0fb9b14396fa52",
+      "size_bytes": 6627
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_data_room_20260724/h2_production_blocker_data_room_report.json",
+      "sha256": "67c532294b2b054e347bf649097533b9fa3752608c9eff89cf459cef20f280df",
+      "size_bytes": 8998
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_production_blocker_closure_manifest_20260724/h2_production_blocker_closure_manifest_report.json",
+      "sha256": "b47a3c8ab3eceea468983d49563eff181ae708f799a48c0dca47ebf0e032b504",
+      "size_bytes": 10217
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_drop_20260724/h2_external_artifact_drop_validator_report.json",
+      "sha256": "0108680ab41342c3dd859bc64c71a245c972089bf2b811e6e8f7665d5448bcb9",
+      "size_bytes": 13866
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_ingestion_plan_20260724/h2_external_artifact_ingestion_plan.json",
+      "sha256": "47ad401fe999fd65c0e38ec5c5ec13a4ecbf7ae172a4b42b75104581b9798a73",
+      "size_bytes": 17137
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_external_artifact_controlled_copy_20260724/h2_external_artifact_controlled_copy_report.json",
+      "sha256": "db32de0bbd795cbd8e0757f2c5b30b49c01ed27826e28899b1a2d9e7e0296b7a",
+      "size_bytes": 17424
+    },
+    {
+      "forbidden_hit_count": 0,
+      "forbidden_hits": [],
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_operations_dashboard_20260724/h2_external_evidence_operations_dashboard.json",
+      "sha256": "1d744568de6afa2b883538f2569bb55861bee7a15fc390cc80cc9b8097816c19",
+      "size_bytes": 9264
+    }
+  ],
+  "scanned_report_count": 8,
+  "schema_version": 1,
+  "status": "PASS-H2-SYNTHETIC-SELFTEST-ISOLATION-GUARD",
+  "synthetic_selftest_only": true,
+  "title": "Engineering H2 Synthetic Self-Test Isolation Guard"
+}

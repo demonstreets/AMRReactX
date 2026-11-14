@@ -1,0 +1,137 @@
+{
+  "blocker_records": [
+    {
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "blocking_gaps": [
+        "case_matched_external_plume_dataset_not_ingested",
+        "external_plume_quality_gates_not_all_passed"
+      ],
+      "clear_key": "clears_reference_data_blocker",
+      "clears_blocker": false,
+      "domain": "external_plume_shape_reference",
+      "failed_quality_gates": [
+        "case_package_runnable",
+        "dataset_metadata_available",
+        "exact_sensor_coordinates_available",
+        "exact_baffle_geometry_available",
+        "digitized_experimental_timeseries_available",
+        "external_dataset_json_written",
+        "reference_agreement_uses_external_shape_dataset"
+      ],
+      "gate_report": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json",
+      "gate_report_status": "NOT_READY-EXTERNAL-PLUME-BENCHMARK",
+      "required_next_artifacts": [
+        "case-matched PeleLMeX input and geometry generated from the selected benchmark specification",
+        "exact SBEPV5 D27 baffle placement/wall attachment and sensor coordinates replacing the program-scout approximations",
+        "exact sensor and baffle coordinates digitized from source figures or original tabular data",
+        "program sensor probes compared against SBEPV5 Gas09/Gas10 literature arrival-time anchors",
+        "digitized or tabulated experimental dataset with source metadata and uncertainty/tolerances",
+        "official h2_reference_agreement_report regenerated with --external-plume-dataset-json"
+      ],
+      "scorecard_current_blocker": true,
+      "status": "NOT_READY"
+    },
+    {
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "blocking_gaps": [
+        "real_cad_cleanup_manifest_missing",
+        "source_cad_files_missing",
+        "cleaned_geometry_files_missing",
+        "large_layout_requires_at_least_three_real_geometries"
+      ],
+      "clear_key": "clears_real_cad_cleanup_blocker",
+      "clears_blocker": false,
+      "domain": "real_cad_cleanup",
+      "failed_quality_gates": [
+        "manifest_present",
+        "provenance_complete",
+        "real_cad_source_classified",
+        "source_cad_hashes_verified",
+        "cleaned_geometry_hashes_verified",
+        "large_layout_coverage",
+        "bbox_non_degenerate_m",
+        "scorecard_blocker_clearance"
+      ],
+      "gate_report": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "gate_report_status": "NOT_READY-H2-REAL-CAD-CLEANUP-PACKAGE",
+      "required_next_artifacts": [],
+      "scorecard_current_blocker": true,
+      "status": "NOT_READY"
+    },
+    {
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "blocking_gaps": [
+        "fire_calibration_dataset_ingestion_not_passed",
+        "fire_calibration_metadata_case_alignment_release_or_cloud_mass_not_true",
+        "fire_calibration_metadata_case_alignment_ignition_or_burn_basis_not_true",
+        "fire_calibration_metadata_case_alignment_boundary_conditions_not_true"
+      ],
+      "clear_key": "clears_fire_consequence_blocker",
+      "clears_blocker": false,
+      "domain": "calibrated_fire_radiation_overpressure",
+      "failed_quality_gates": [
+        "ingestion_report_passed",
+        "metadata_available",
+        "case_alignment_complete",
+        "package_ready_for_dataset_builder"
+      ],
+      "gate_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json",
+      "gate_report_status": "NOT_READY-H2-FIRE-CALIBRATION-PACKAGE",
+      "required_next_artifacts": [],
+      "scorecard_current_blocker": true,
+      "status": "NOT_READY"
+    }
+  ],
+  "cleared_blocker_count": 0,
+  "evidence_files": [
+    {
+      "label": "engineering_production_scorecard",
+      "path": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+      "sha256": "5d04d11b450a9b833b61959b0642ee0949935fcd6c1458e5a3fb28ccf905b1d8",
+      "size_bytes": 33300
+    },
+    {
+      "label": "real_cad_cleanup_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "sha256": "e227facfc24e049ebe4d2672e9060475e751bb7d629453ebb5a4b1635b73db82",
+      "size_bytes": 5093
+    },
+    {
+      "label": "fire_calibration_package_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json",
+      "sha256": "006e030e8b78b8ad3ce4256f454622a8b938c4ba2142bf6fa5e3f55099aad2be",
+      "size_bytes": 9636
+    },
+    {
+      "label": "external_plume_readiness_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json",
+      "sha256": "2739954d4f8b48e59d1a1fb086a2757862f076a1bbd2a8f171baff759b71ea0d",
+      "size_bytes": 16403
+    }
+  ],
+  "expected_blockers_not_currently_in_scorecard": [],
+  "generated_at_utc": "2026-08-20T10:07:09+00:00",
+  "limitations": [
+    "This preflight report coordinates blocker-clearance evidence; it does not run CFD and does not clear a blocker by itself.",
+    "A blocker is only considered cleared when its domain report reaches its PASS status and the production scorecard removes that blocker."
+  ],
+  "ready_for_production_scorecard_clearance": false,
+  "remaining_blocker_count": 3,
+  "schema_version": 1,
+  "scorecard": "docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json",
+  "scorecard_blocking_gaps": [
+    "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+    "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+    "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure"
+  ],
+  "scorecard_scores": {
+    "engineering_functional_coverage_percent": 96.9,
+    "engineering_initial_integrated_acceptance": true,
+    "engineering_production_credibility_percent": 82.2,
+    "interpretation": "Functional coverage tracks maintained workflow breadth; production credibility tracks evidence strength for production use."
+  },
+  "scorecard_status": "NOT_PRODUCTION_READY",
+  "status": "NOT_READY-H2-BLOCKER-CLEARANCE-PREFLIGHT",
+  "title": "Engineering H2 Production Blocker Clearance Preflight",
+  "uncovered_scorecard_blockers": []
+}

@@ -1,0 +1,139 @@
+{
+  "blocker_clearance_preflight_report": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+  "current_status": {
+    "cleared_blocker_count": 0,
+    "ctest_passed": true,
+    "ctest_tests": 22,
+    "functional_coverage_percent": 96.9,
+    "production_credibility_percent": 82.2,
+    "production_evidence_schema_version": 62,
+    "production_evidence_status": "PASS",
+    "ready_for_production_scorecard_clearance": false,
+    "remaining_blocker_count": 3,
+    "scorecard_status": "NOT_PRODUCTION_READY"
+  },
+  "evidence_files": [
+    {
+      "label": "production_evidence_verification_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json",
+      "sha256": "eebc2a5aa0d10b8cdaa9b979cca78ab6bbdbb40d8a07a1faa961729ac20ff159",
+      "size_bytes": 51968
+    },
+    {
+      "label": "blocker_clearance_preflight_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "sha256": "320fe14cf656f8171fec3f7d8f3f66a8c4a8ecb044d1cbf94b0fb9b14396fa52",
+      "size_bytes": 6627
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:26+00:00",
+  "handoff_decision": "continue_engineering_hardening_and_external_data_ingestion",
+  "limitations": [
+    "This handoff report is an index over verified evidence; it does not launch CFD or clear production blockers.",
+    "Production readiness still requires the scorecard to become PRODUCTION_READY with no blocking gaps."
+  ],
+  "next_data_requirements": [
+    {
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "blocking_gaps": [
+        "case_matched_external_plume_dataset_not_ingested",
+        "external_plume_quality_gates_not_all_passed"
+      ],
+      "domain": "external_plume_shape_reference",
+      "failed_quality_gates": [
+        "case_package_runnable",
+        "dataset_metadata_available",
+        "exact_sensor_coordinates_available",
+        "exact_baffle_geometry_available",
+        "digitized_experimental_timeseries_available",
+        "external_dataset_json_written",
+        "reference_agreement_uses_external_shape_dataset"
+      ],
+      "gate_report": "docs/codex_audit/evidence/engineering_h2_external_plume_benchmark_readiness_20260723/external_plume_benchmark_readiness_report.json",
+      "required_next_artifacts": [
+        "case-matched PeleLMeX input and geometry generated from the selected benchmark specification",
+        "exact SBEPV5 D27 baffle placement/wall attachment and sensor coordinates replacing the program-scout approximations",
+        "exact sensor and baffle coordinates digitized from source figures or original tabular data",
+        "program sensor probes compared against SBEPV5 Gas09/Gas10 literature arrival-time anchors",
+        "digitized or tabulated experimental dataset with source metadata and uncertainty/tolerances",
+        "official h2_reference_agreement_report regenerated with --external-plume-dataset-json"
+      ]
+    },
+    {
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "blocking_gaps": [
+        "real_cad_cleanup_manifest_missing",
+        "source_cad_files_missing",
+        "cleaned_geometry_files_missing",
+        "large_layout_requires_at_least_three_real_geometries"
+      ],
+      "domain": "real_cad_cleanup",
+      "failed_quality_gates": [
+        "manifest_present",
+        "provenance_complete",
+        "real_cad_source_classified",
+        "source_cad_hashes_verified",
+        "cleaned_geometry_hashes_verified",
+        "large_layout_coverage",
+        "bbox_non_degenerate_m",
+        "scorecard_blocker_clearance"
+      ],
+      "gate_report": "docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/real_cad_cleanup_package_report.json",
+      "required_next_artifacts": [
+        "real_cad_cleanup_manifest.json in the cleanup package root",
+        "source CAD/STL files for at least three representative large-layout geometries",
+        "complete source provenance, units, coordinate frame, and engineering simplification notes",
+        "sha256 hashes for every source CAD file and cleaned geometry file",
+        "cleaned watertight STL/geometry files with non-degenerate meter-scale bounding boxes",
+        "boundary tag map covering leak source, walls, vents/openings, outlets, and far-field regions",
+        "regenerated real CAD cleanup and boundary-tag contract reports showing scorecard blocker clearance"
+      ]
+    },
+    {
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "blocking_gaps": [
+        "fire_calibration_dataset_ingestion_not_passed",
+        "fire_calibration_metadata_case_alignment_release_or_cloud_mass_not_true",
+        "fire_calibration_metadata_case_alignment_ignition_or_burn_basis_not_true",
+        "fire_calibration_metadata_case_alignment_boundary_conditions_not_true"
+      ],
+      "domain": "calibrated_fire_radiation_overpressure",
+      "failed_quality_gates": [
+        "ingestion_report_passed",
+        "metadata_available",
+        "case_alignment_complete",
+        "package_ready_for_dataset_builder"
+      ],
+      "gate_report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_package_20260723/fire_calibration_package_report.json",
+      "required_next_artifacts": [
+        "calibration_metadata.json with source, scenario, fuel, geometry, wind, and uncertainty metadata",
+        "radiation_metrics.csv containing experimental or authoritative reference heat-flux metrics",
+        "overpressure_metrics.csv containing experimental or authoritative reference pressure metrics",
+        "case-alignment table mapping every metric to program inputs, probes, tolerances, and units",
+        "radiation and overpressure reference families covering the intended fire/consequence claim",
+        "regenerated fire calibration dataset-ingestion and package reports showing production gate clearance"
+      ]
+    }
+  ],
+  "production_evidence_report": "docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json",
+  "schema_version": 2,
+  "status": "NOT_READY-H2-PRODUCTION-HANDOFF",
+  "title": "Engineering H2 Production Handoff Index",
+  "verified_entrypoints": [
+    {
+      "command": "bash tools/verify_engineering_h2_production_evidence.sh",
+      "expected_current_result": "PASS with score below production-ready threshold until blockers clear.",
+      "purpose": "Full maintained engineering H2 production evidence gate."
+    },
+    {
+      "command": "python3 tools/write_engineering_h2_blocker_clearance_preflight_report.py --verify-json docs/codex_audit/evidence/engineering_h2_blocker_clearance_preflight_20260723/h2_blocker_clearance_preflight_report.json",
+      "expected_current_result": "VERIFY-PASS with NOT_READY status and remaining blockers.",
+      "purpose": "Verify all production blockers are covered by domain gates."
+    },
+    {
+      "command": "python3 tools/write_engineering_h2_production_evidence_verification_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json",
+      "expected_current_result": "VERIFY-PASS.",
+      "purpose": "Verify top-level evidence ledger hashes and summary invariants."
+    }
+  ]
+}

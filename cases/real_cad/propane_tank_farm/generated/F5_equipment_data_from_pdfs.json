@@ -1,0 +1,242 @@
+{
+  "status": "DRAFT-EQUIPMENT-DATA-EXTRACTED-FROM-F5-PDFS",
+  "source_folder": "C:\\Users\\demon\\Desktop\\F5 设备布置图 A3",
+  "extraction_method": [
+    "pdfplumber text/vector first-pass inspection",
+    "Poppler pdftoppm rendered PNG visual inspection at 150 dpi",
+    "manual transcription from rendered engineering drawings"
+  ],
+  "units": {
+    "drawing_dimensions": "mm unless explicitly marked otherwise",
+    "model_dimensions": "m",
+    "elevation": "m"
+  },
+  "equipment_groups": [
+    {
+      "group": "低温丙烷罐组",
+      "source_pdf": "T21025-44-511-PD03-01设备布置图-低温丙烷罐组_Rev.0.pdf",
+      "rendered_png": "generated/cad_extract/F5_pdf_renders/F5_02.png",
+      "equipment": [
+        {
+          "tag": "TK-51101",
+          "name": "低温丙烷罐",
+          "count": 1,
+          "medium": "propane",
+          "hazard_class_seen": "甲A",
+          "volume_m3": 85000,
+          "inner_tank_diameter_m": 58.2,
+          "inner_tank_height_m": 35.9,
+          "outer_tank_diameter_m": 60.0,
+          "outer_tank_height_m": 38.1,
+          "foundation_elevation_m": 2.5,
+          "confidence": "high"
+        },
+        {
+          "tag": "TK-51102",
+          "name": "低温丙烷罐",
+          "count": 1,
+          "medium": "propane",
+          "hazard_class_seen": "甲A",
+          "volume_m3": 85000,
+          "inner_tank_diameter_m": 58.2,
+          "inner_tank_height_m": 35.9,
+          "outer_tank_diameter_m": 60.0,
+          "outer_tank_height_m": 38.1,
+          "foundation_elevation_m": 2.5,
+          "confidence": "high"
+        }
+      ],
+      "other_features_seen": [
+        "两座矩形罐区/防火堤边界",
+        "罐顶平台和楼梯",
+        "低温丙烷输送泵 P-51101A/B/C 与 P-51102A/B/C",
+        "两套蒸发气/加热相关设备 HO-51101/HO-51102，标高表中设备基础标高需人工复核"
+      ]
+    },
+    {
+      "group": "低温丁烷罐组",
+      "source_pdf": "T21025-44-512-PD03-01 设备布置图-低温丁烷罐组_Rev.0.pdf",
+      "rendered_png": "generated/cad_extract/F5_pdf_renders/F5_03.png",
+      "equipment": [
+        {
+          "tag": "TK-51201",
+          "name": "低温丁烷罐",
+          "count": 1,
+          "medium": "butane",
+          "hazard_class_seen": "甲A",
+          "volume_m3": 60000,
+          "inner_tank_diameter_m": 52.3,
+          "inner_tank_height_m": 32.7,
+          "outer_tank_diameter_m": 53.6,
+          "outer_tank_height_m": 34.4,
+          "foundation_elevation_m": 2.5,
+          "confidence": "high"
+        }
+      ],
+      "other_features_seen": [
+        "一座矩形罐区/防火堤边界",
+        "罐顶平台和楼梯",
+        "低温丁烷输送泵 P-51201A/B/C",
+        "HO-51201 相关设备，标高需人工复核"
+      ]
+    },
+    {
+      "group": "BOG压缩及丙烷复热系统",
+      "source_pdfs": [
+        "T21025-44-520-PD03-01 BOG压缩及丙烷复热系统_Rev.0.pdf",
+        "T21025-44-520-PD03-02 BOG压缩及丙烷复热系统_Rev.0.pdf",
+        "T21025-44-520-PD03-03 BOG压缩及丙烷复热系统_Rev.0.pdf"
+      ],
+      "rendered_pngs": [
+        "generated/cad_extract/F5_pdf_renders/F5_04.png",
+        "generated/cad_extract/F5_pdf_renders/F5_05.png",
+        "generated/cad_extract/F5_pdf_renders/F5_06.png"
+      ],
+      "confirmed_layout_data": {
+        "main_ground_plan_elevation_m": 0.0,
+        "platform_elevations_m": [
+          5.0,
+          10.0
+        ],
+        "visible_grid_dimensions_m": {
+          "pd03_01_overall_x": 55.0,
+          "pd03_02_platform_module_x": 14.0,
+          "pd03_02_platform_module_y": 16.0
+        }
+      },
+      "equipment_seen": [
+        "C-52001A/B/C BOG压缩机组",
+        "HO-52001 BOG相关设备",
+        "E-52004A/B/C 与 E-52005A/B/C 换热/复热类卧式设备",
+        "V-52001 立式容器",
+        "P-52001A/B 泵"
+      ],
+      "confidence": "medium",
+      "notes": [
+        "设备名称和基础标高表可见，但部分小字需高分辨率复核。",
+        "可用于建立分层平台、压缩机基础、卧式换热器、立式容器和泵类障碍。"
+      ]
+    },
+    {
+      "group": "常温罐组",
+      "source_pdf": "T21025-44-530-PD03-01 设备布置图-常温罐组_Rev.0.pdf",
+      "rendered_png": "generated/cad_extract/F5_pdf_renders/F5_07.png",
+      "equipment": [
+        {
+          "tags": [
+            "TK53001",
+            "TK53002",
+            "TK53003",
+            "TK53004"
+          ],
+          "name": "常温立式储罐",
+          "count": 4,
+          "volume_m3_each": 4000,
+          "diameter_m": 19.1,
+          "height_m": null,
+          "foundation_elevation_m": 0.7,
+          "confidence": "medium"
+        },
+        {
+          "tags": [
+            "TK53005",
+            "TK53006"
+          ],
+          "name": "卧式储罐",
+          "count": 2,
+          "volume_m3_each": 150,
+          "diameter_m": 3.2,
+          "length_m": 17.5,
+          "foundation_elevation_m": 0.7,
+          "confidence": "medium"
+        }
+      ],
+      "other_features_seen": [
+        "管廊及平台",
+        "泵区 P53001/2/5/6/8 系列",
+        "HO53001 相关设备",
+        "围堰/罐区边界"
+      ]
+    },
+    {
+      "group": "槽车装车站",
+      "source_pdf": "T21025-44-540-PD03-01 设备布置图-槽车装车站_Rev.0.pdf",
+      "rendered_png": "generated/cad_extract/F5_pdf_renders/F5_08.png",
+      "confirmed_layout_data": {
+        "plan_elevation_m": -0.2,
+        "visible_loading_bays": 20,
+        "has_roof_or_pipe_rack_elevation_view": true
+      },
+      "features_seen": [
+        "多鹤位装车区",
+        "槽车停车/通行通道",
+        "长条钢棚或管廊",
+        "泵/装车臂/小设备密集布置"
+      ],
+      "confidence": "medium",
+      "notes": [
+        "该图矢量线数量极高，不建议全细节进入 CFD。",
+        "建议抽象为装车棚、车辆障碍、装车臂/立柱和局部管线障碍。"
+      ]
+    },
+    {
+      "group": "火炬系统",
+      "source_pdf": "T21025-44-550-PD03-01 设备布置图-火炬系统_ Rev.0.pdf",
+      "rendered_png": "generated/cad_extract/F5_pdf_renders/F5_09.png",
+      "confirmed_layout_data": {
+        "plan_elevation_m": 0.0,
+        "visible_circular_units": 2
+      },
+      "features_seen": [
+        "两套圆形火炬/燃烧器区域",
+        "连接管线",
+        "局部设备和围堰/排水坡向"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "group": "空压制氮站",
+      "source_pdf": "T21025-44-330-PD03-01 设备布置图-空压制氮站_Rev.0.pdf",
+      "rendered_png": "generated/cad_extract/F5_pdf_renders/F5_01.png",
+      "confirmed_layout_data": {
+        "plan_elevations_m": [
+          -0.2,
+          0.0
+        ],
+        "visible_building_grid_x_m": 24.0,
+        "visible_building_grid_y_m": 14.0,
+        "roof_or_section_height_seen_m": 5.5
+      },
+      "equipment_seen": [
+        "C-33001A/B 空压机",
+        "E-33001A/B 冷却/换热设备",
+        "V-33004/V-33005/V-33002 立式容器",
+        "X-33001/X-33002 相关设备",
+        "L-33001 起重或工艺设备"
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "modeling_policy": {
+    "use_F4_DXF_for": [
+      "global plant coordinates",
+      "area placement",
+      "wall/road/piperack/equipment footprint extraction"
+    ],
+    "use_F5_PDFs_for": [
+      "tank diameters",
+      "tank heights",
+      "foundation elevations",
+      "platform elevations",
+      "local equipment grouping and simplification"
+    ],
+    "remaining_required_for_leak_fire_case": [
+      "leak location tag and coordinates",
+      "leak hole diameter and orientation",
+      "propane/LPG composition and storage pressure/temperature",
+      "wind speed and direction",
+      "ignition location/time/energy or hot-surface model",
+      "which area is the target scenario: low-temperature propane tank group, BOG system, normal-temperature tank group, loading station, or flare system"
+    ]
+  }
+}

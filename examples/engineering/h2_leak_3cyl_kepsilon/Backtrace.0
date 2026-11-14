@@ -1,0 +1,38 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./PeleLMeX3d.gnu.ex(+0x7cd2f6) [0x5f578826c2f6]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: ./PeleLMeX3d.gnu.ex(+0x7d20a4) [0x5f57882710a4]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./PeleLMeX3d.gnu.ex(+0x60e80d) [0x5f57880ad80d]
+    std::_Vector_base<char, std::allocator<char> >::_M_deallocate(char*, unsigned long) at /usr/include/c++/13/bits/stl_vector.h:389
+ (inlined by) std::_Vector_base<char, std::allocator<char> >::~_Vector_base() at /usr/include/c++/13/bits/stl_vector.h:369
+ (inlined by) std::vector<char, std::allocator<char> >::~vector() at /usr/include/c++/13/bits/stl_vector.h:738
+ (inlined by) amrex::Assert_host(char const*, char const*, int, char const*, unsigned long) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.cpp:322
+
+ 3: ./PeleLMeX3d.gnu.ex(+0xe00af) [0x5f5787b7f0af]
+    amrex::Assert(char const*, char const*, int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX.H:211
+ (inlined by) PeleLM::Setup() at /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp:52
+
+ 4: ./PeleLMeX3d.gnu.ex(+0x5184e) [0x5f5787af084e]
+    main at /home/cj/my-pele/external/PeleLMeX/Source/main.cpp:50
+
+ 5: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x7296fd02a1ca]
+
+ 6: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x7296fd02a28b]
+
+ 7: ./PeleLMeX3d.gnu.ex(+0x5aaa5) [0x5f5787af9aa5]
+    ?? ??:0
+

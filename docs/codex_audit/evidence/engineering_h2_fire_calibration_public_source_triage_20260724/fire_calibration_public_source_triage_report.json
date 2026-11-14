@@ -1,0 +1,176 @@
+{
+  "clears_fire_consequence_blocker": false,
+  "generated_at_utc": "2026-07-24T01:49:08+00:00",
+  "limitations": [
+    "This report identifies candidate public calibration sources only; it does not digitize or ingest calibration data.",
+    "Radiation and overpressure data families may come from different experiments, but production credit requires explicit case-alignment metadata.",
+    "The fire-consequence blocker remains until calibrated radiation and overpressure agreement reports pass."
+  ],
+  "missing_artifacts": [
+    {
+      "artifact": "calibration_metadata.json",
+      "required_action": "select one radiation source and one overpressure source, record URL/DOI, source hashes, and case-alignment booleans"
+    },
+    {
+      "artifact": "radiation_metrics.csv",
+      "required_action": "digitize or obtain heat-flux measurements with distance, tolerance, and source basis"
+    },
+    {
+      "artifact": "overpressure_metrics.csv",
+      "required_action": "digitize or obtain peak overpressure measurements with distance, tolerance, and source basis"
+    },
+    {
+      "artifact": "calibrated_fire_consequence_report",
+      "required_action": "run the official fire consequence report against a generated calibration dataset JSON"
+    }
+  ],
+  "overpressure_candidates": [
+    {
+      "doi": "10.1016/j.ijhydene.2016.06.223",
+      "id": "hyindoor_low_strength_enclosure_2017",
+      "required_digitization": [
+        "test matrix with H2 concentration, vent configuration, ignition location",
+        "peak pressure gauge readings",
+        "pressure gauge coordinates and uncertainty"
+      ],
+      "source_type": "vented_deflagration_field_test",
+      "title": "Experimental studies on vented deflagrations in a low strength enclosure",
+      "url": "https://h2tools.org/bibcite/reference/3540",
+      "usable_measurements": [
+        "31 m3 enclosure",
+        "uniform and stratified H2 distributions",
+        "internal and external pressure measurements",
+        "maximum internal overpressure target 10 kPa"
+      ]
+    },
+    {
+      "id": "container_deflagration_2020",
+      "required_digitization": [
+        "case-specific mixture concentration and obstacle layout",
+        "peak overpressure time history or table",
+        "boundary/vent details matching a simulation case"
+      ],
+      "source_type": "vented_container_deflagration",
+      "title": "Experimental study of end-vented hydrogen deflagrations in a 40-foot container",
+      "url": "https://doi.org/10.1016/j.ijhydene.2020.04.036",
+      "usable_measurements": [
+        "40-foot ISO-container-scale enclosure",
+        "hydrogen concentration, ignition location, and obstacle effects",
+        "overpressure and structural response measurements"
+      ]
+    }
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": [
+        "https://www.mdpi.com/2076-3417/14/16/7098",
+        "https://doi.org/10.1016/j.ijhydene.2018.08.107",
+        "https://hysafejournal.org/en/articles/10.58895/hysafe.27"
+      ],
+      "gap": "",
+      "name": "radiation_public_source_candidates_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "https://h2tools.org/bibcite/reference/3540",
+        "https://doi.org/10.1016/j.ijhydene.2020.04.036"
+      ],
+      "gap": "",
+      "name": "overpressure_public_source_candidates_available",
+      "status": "PASS"
+    },
+    {
+      "evidence": [],
+      "gap": "No production calibration_metadata.json with source hashes and case-alignment booleans is local.",
+      "name": "calibration_metadata_local",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "No local radiation_metrics.csv has been ingested.",
+      "name": "radiation_metrics_local",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "No local overpressure_metrics.csv has been ingested.",
+      "name": "overpressure_metrics_local",
+      "status": "MISSING"
+    },
+    {
+      "evidence": [],
+      "gap": "Official fire consequence report has not been rerun with a calibration dataset JSON.",
+      "name": "calibrated_consequence_report",
+      "status": "MISSING"
+    }
+  ],
+  "radiation_candidates": [
+    {
+      "id": "mdpi_jet_fire_2024",
+      "required_digitization": [
+        "case-specific pressure/leak diameter/mass-flow table",
+        "radiometer heat-flux time average or peak values",
+        "instrument uncertainty and averaging window"
+      ],
+      "source_type": "field_test_or_laboratory_jet_fire",
+      "title": "Study on Thermal Radiation Characteristics and the Multi-Point Source Model of Hydrogen Jet Fire",
+      "url": "https://www.mdpi.com/2076-3417/14/16/7098",
+      "usable_measurements": [
+        "four radiometers along flame axial direction",
+        "radial distances 0.23 m and 0.50 m from flame axis",
+        "longitudinal radiometer positions 0.25 m, 0.50 m, 0.75 m, 1.00 m",
+        "leak diameter and pressure sensitivity"
+      ]
+    },
+    {
+      "id": "sandia_cryogenic_h2_jet_fire_2019",
+      "required_digitization": [
+        "local numeric heat-flux table or accepted figure digitization",
+        "release condition table including humidity/extraction-system assumptions",
+        "flame length table for geometry cross-check"
+      ],
+      "source_type": "cryogenic_field_test_literature",
+      "title": "Thermal radiation from cryogenic hydrogen jet fires",
+      "url": "https://doi.org/10.1016/j.ijhydene.2018.08.107",
+      "usable_measurements": [
+        "Sandia cryogenic hydrogen fire data used for CFD validation",
+        "radiative heat flux at different locations",
+        "flame length comparison",
+        "storage pressure up to 5 bar abs and 48-82 K release temperature range"
+      ]
+    },
+    {
+      "id": "bam_large_scale_h2_jet_flames_2025",
+      "required_digitization": [
+        "heat radiation sensor coordinates and time windows",
+        "mass-flow/release-angle matrix",
+        "radiant heat fraction or incident heat-flux table"
+      ],
+      "source_type": "large_scale_field_test",
+      "title": "Thermal Radiation Of Inclined Large Scale Hydrogen Jet Flames",
+      "url": "https://hysafejournal.org/en/articles/10.58895/hysafe.27",
+      "usable_measurements": [
+        "real-scale inclined hydrogen jet flame experiments",
+        "incident heat radiation at defined distances",
+        "release rates 0.0125 kg/s to 0.175 kg/s",
+        "30 mm orifice"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-CALIBRATION-PUBLIC-SOURCE-TRIAGE",
+  "summary": {
+    "clears_fire_consequence_blocker": false,
+    "local_overpressure_metrics_available": false,
+    "local_radiation_metrics_available": false,
+    "missing_artifact_count": 4,
+    "overpressure_candidate_available": true,
+    "overpressure_candidate_count": 2,
+    "public_source_registry_available": true,
+    "radiation_candidate_available": true,
+    "radiation_candidate_count": 3,
+    "ready_for_dataset_ingestion": false
+  },
+  "title": "Engineering H2 Fire Calibration Public Source Triage"
+}

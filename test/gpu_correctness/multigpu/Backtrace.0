@@ -1,0 +1,45 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x52c967) [0x5e6890982967]
+    ?? ??:0
+
+ 1: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x530313) [0x5e6890986313]
+    ?? ??:0
+
+ 2: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x5182cc) [0x5e689096e2cc]
+    ?? ??:0
+
+ 3: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x51a1cc) [0x5e68909701cc]
+    ?? ??:0
+
+ 4: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x521b45) [0x5e6890977b45]
+    ?? ??:0
+
+ 5: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x521e90) [0x5e6890977e90]
+    ?? ??:0
+
+ 6: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x51c87c) [0x5e689097287c]
+    ?? ??:0
+
+ 7: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x4611bb) [0x5e68908b71bb]
+    ?? ??:0
+
+ 8: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0xf5d8c) [0x5e689054bd8c]
+    ?? ??:0
+
+ 9: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x726d7a62a1ca]
+
+10: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x726d7a62a28b]
+
+11: /home/cj/my-pele/build-gpu-mpi/Exec/RegTests/EB_PipeFlow/PeleLMeX-EB_PipeFlow(+0x107e85) [0x5e689055de85]
+    ?? ??:0
+

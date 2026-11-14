@@ -1,0 +1,65 @@
+{
+  "case": "/home/cj/my-pele/repair_validation/thermal_20260911/lower_open_from48_v1",
+  "captured_utc": "2026-09-11T02:57:42.899268+00:00",
+  "original_manifest_backup": "/home/cj/my-pele/repair_validation/thermal_20260911/metadata_history/lower_open_from48_v1/case_before_normalization_v1.json",
+  "original_manifest_sha256": "d1395e5e263dc48dd8579345f19ef0ce0f87d5766aa82cdf3750b63f726234cb",
+  "new_manifest_sha256": "646f1b9300a0115d1fa449ceef0211108707dfe4ab0599676940e70c4cfef82e",
+  "unchanged_input_sha256": "9a3af8a8ff58f04ce4448ce48188d8d9a54083c59312c86c41a0042e07086a7a",
+  "changes": {
+    "binary": {
+      "before": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_stoich_v12d.gnu.MPI.CUDA.ex",
+      "after": "/home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_thermal_v12d.gnu.MPI.CUDA.ex"
+    },
+    "binary_sha256": {
+      "before": "bf81156edc44d138a4cd09cc520db98dd5bc8c3bee74b84563e6dec659738443",
+      "after": "14d0f7f573e8c8ea6dd9ea65f115ba868825bf8cd57da6e7a9ff0b1efe3236dc"
+    },
+    "transverse_boundary": {
+      "before": "slip walls",
+      "after": "lower y: FOExtrap; upper y: SlipWall"
+    },
+    "history_output_interval_s": {
+      "before": 1e-06,
+      "after": null
+    },
+    "previous_run": {
+      "before": "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_wet_2d_2800x800_cfl20_tol4_gpu_v2",
+      "after": "/home/cj/my-pele/repair_validation/thermal_20260911/replay_cfl20_v1"
+    },
+    "history_scope": {
+      "before": "New per-step maxima begin at restart; previous state trajectory retained separately.",
+      "after": "thermal_stages.csv records the four split-operator stages; the legacy wave-history writer is disabled."
+    },
+    "boundary_conditions": {
+      "before": null,
+      "after": {
+        "lower": [
+          "FOExtrap",
+          "FOExtrap"
+        ],
+        "upper": [
+          "FOExtrap",
+          "SlipWall"
+        ]
+      }
+    },
+    "thermal_probe_index": {
+      "before": null,
+      "after": [
+        2444,
+        1
+      ]
+    },
+    "cell_shape": {
+      "before": null,
+      "after": [
+        2800,
+        800
+      ]
+    },
+    "metadata_reconciled_from_actual_inputs": {
+      "before": null,
+      "after": true
+    }
+  }
+}

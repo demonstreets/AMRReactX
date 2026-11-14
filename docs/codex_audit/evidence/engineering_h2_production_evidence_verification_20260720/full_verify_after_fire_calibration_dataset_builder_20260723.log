@@ -1,0 +1,11 @@
+[engineering-h2-verify] verify_mpi_link_shim
+[engineering-h2-verify] MPI link shim PASS dir=/home/cj/my-pele/.codex/lib/mpi-link libs=libmpi_cxx.so libopen-rte.so libopen-pal.so libhwloc.so libevent_core.so libevent_pthreads.so
+[engineering-h2-verify] python3 tools/package_engineering_h2_release_evidence.py verify --pack-manifest docs/codex_audit/evidence/engineering_h2_production_full_20260720/release_pack/evidence_pack_manifest.json
+engineering_h2_release_evidence_pack VERIFY-PASS cases=16 manifest=docs/codex_audit/evidence/engineering_h2_production_full_20260720/release_pack/evidence_pack_manifest.json
+[engineering-h2-verify] python3 tools/write_engineering_h2_acceptance_matrix.py --verify-json docs/codex_audit/evidence/engineering_h2_acceptance_matrix_20260720/engineering_h2_acceptance_matrix.json
+engineering_h2_acceptance_matrix VERIFY-PASS json=docs/codex_audit/evidence/engineering_h2_acceptance_matrix_20260720/engineering_h2_acceptance_matrix.json status=PASS-PRODUCTION-MATRIX pass_like_rows=7 not_ready_rows=0
+[engineering-h2-verify] python3 tools/write_engineering_production_scorecard.py --verify-json docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json
+engineering_production_scorecard VERIFY-PASS json=docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json status=NOT_PRODUCTION_READY functional=94.1 production=76.0
+[engineering-h2-verify] python3 tools/write_engineering_h2_production_evidence_verification_report.py --verify-json docs/codex_audit/evidence/engineering_h2_production_evidence_verification_20260720/production_evidence_verification_report.json
+engineering_h2_production_evidence_verification_report FAIL evidence sha256 mismatch: docs/codex_audit/evidence/engineering_production_scorecard_20260720/engineering_production_scorecard.json
+FULL_VERIFY_RC:2

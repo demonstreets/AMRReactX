@@ -1,0 +1,275 @@
+name: PeleLMeX_linux
+
+on:
+   workflow_dispatch:
+   push:
+     branches: [ main, development ]
+   pull_request:
+     branches: [ main, development ]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.head_ref }}-PeleLMeX_linux
+  cancel-in-progress: true
+
+jobs:
+  # Build and Run the EB_FlowPastCylinder RegTest with GNU9.3 and MPI support
+  #FPC2D:
+  #  name: GNU@9.3 MPI Run [FPC2DDBG]
+  #  runs-on: ubuntu-latest
+  #  env:
+  #    {CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"}
+  #  steps:
+  #  - uses: actions/checkout@v6
+  #  - name: System Dependencies
+  #    run: .github/workflows/dependencies/dependencies_gcc10.sh
+  #  - name: Repo Dependencies
+  #    run: Utils/CloneDeps.sh
+  #  - name: Build
+  #    env:
+  #       AMREX_HOME: ${GITHUB_WORKSPACE}/build/amrex
+  #       PELE_PHYSICS_HOME: ${GITHUB_WORKSPACE}/build/PelePhysics
+  #       PELE_HOME: ${GITHUB_WORKSPACE}
+  #       AMREX_HYDRO_HOME: ${GITHUB_WORKSPACE}/build/AMReX-Hydro
+  #       SUNDIALS_HOME : ${GITHUB_WORKSPACE}/build/sundials
+  #    working-directory: ./Exec/RegTests/EB_FlowPastCylinder/
+  #    run: |
+  #      make TPL COMP=gnu USE_MPI=TRUE DEBUG=TRUE
+  #      make -j 2 COMP=gnu USE_MPI=TRUE DEBUG=TRUE
+  #  - name: Run
+  #    working-directory: ./Exec/RegTests/EB_FlowPastCylinder/
+  #    run: |
+  #      ./PeleLMeX2d.gnu.DEBUG.MPI.ex input.2d-regt amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.fpe_trap_invalid=1 amrex.fpe_trap_zero=1 amrex.fpe_trap_overflow=1
+  #      ./PeleLMeX2d.gnu.DEBUG.MPI.ex input.2d-regt_WallBump amr.max_step=2 amr.plot_int=-1 amr.check_int=-1
+
+  #      make -j 2 COMP=gnu USE_MPI=TRUE
+  #  - name: RunDNS
+  #    working-directory: ./Exec/RegTests/HITDecay/
+  #    run: |
+  #      ./PeleLMeX3d.gnu.MPI.ex input.3d amr.max_step=10 amr.plot_int=-1 amr.check_int=-1
+  #  - name: RunLES_Smago
+  #    working-directory: ./Exec/RegTests/HITDecay/
+  #    run: |
+  #      ./PeleLMeX3d.gnu.MPI.ex input.3d_les amr.max_step=10 amr.plot_int=-1 amr.check_int=-1
+  #  - name: RunLES_WALE
+  #    working-directory: ./Exec/RegTests/HITDecay/
+  #    run: |
+  #      ./PeleLMeX3d.gnu.MPI.ex input.3d_les peleLM.les_model="WALE" amr.max_step=10 amr.plot_int=-1 amr.check_int=-1
+
+  # Build and Run the EB_PipeFlow RegTest with GNU9.3 and MPI support
+  EBPF3D:
+    name: GNU@9.3 MPI Run [EBPF3D]
+    runs-on: ubuntu-latest
+    env:
+      {CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"}
+    steps:
+    - uses: actions/checkout@v6
+    - name: System Dependencies
+      run: .github/workflows/dependencies/dependencies_gcc10.sh
+    - name: Repo Dependencies
+      run: Utils/CloneDeps.sh
+    - name: Build
+      working-directory: ./Exec/RegTests/EB_PipeFlow/
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE
+        make -j 2 COMP=gnu USE_MPI=TRUE
+    - name: Run
+      working-directory: ./Exec/RegTests/EB_PipeFlow/
+      run: |
+        mpirun -n 2 ./PeleLMeX3d.gnu.MPI.ex input.3d-regt amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.abort_on_unused_inputs=1 amr.n_cell=128 32 32
+
+  # Build and Run the SootRadTest RegTest with GNU9.3 and MPI support
+  SOOTRAD:
+    name: GNU@9.3 MPI Run [SootRadTest]
+    runs-on: ubuntu-latest
+    env:
+      {CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"}
+    steps:
+    - uses: actions/checkout@v6
+    - name: Repo Dependencies
+      run: |
+        Utils/CloneDeps.sh
+    - name: System Dependencies
+      run: .github/workflows/dependencies/dependencies_gcc10.sh
+    - name: Build Release
+      working-directory: ./Exec/RegTests/SootRadTest/
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE TINY_PROFILE=FALSE
+        make -j 2 COMP=gnu USE_MPI=TRUE TINY_PROFILE=FALSE
+    - name: Run Release
+      working-directory: ./Exec/RegTests/SootRadTest/
+      run: |
+        mpirun -n 2 ./PeleLMeX2d.gnu.MPI.ex soot-rad-2d.inp amr.max_step=2 amr.plot_int=2 amr.check_int=2 amrex.abort_on_unused_inputs=1
+    - name: Build Debug
+      working-directory: ./Exec/RegTests/SootRadTest/
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE DEBUG=TRUE TINY_PROFILE=FALSE
+        make -j 2 COMP=gnu USE_MPI=TRUE DEBUG=TRUE TINY_PROFILE=FALSE
+    - name: Run Debug
+      working-directory: ./Exec/RegTests/SootRadTest/
+      run: |
+        mpirun -n 2 ./PeleLMeX2d.gnu.DEBUG.MPI.ex soot-rad-2d.inp amr.max_step=2 amr.plot_int=2 amr.check_int=2 amrex.abort_on_unused_inputs=1
+
+  # Build and Run the EB_BackwardStepFlame RegTest with GNU9.3 and MPI support
+  EBBFS:
+    name: GNU@9.3 MPI Run [EBBFS]
+    runs-on: ubuntu-latest
+    env:
+      {CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"}
+    steps:
+    - uses: actions/checkout@v6
+    - name: System Dependencies
+      run: .github/workflows/dependencies/dependencies_gcc10.sh
+    - name: Repo Dependencies
+      run: Utils/CloneDeps.sh
+    - name: Build
+      working-directory: ./Exec/RegTests/EB_BackwardStepFlame/
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE
+        make -j 2 COMP=gnu USE_MPI=TRUE
+    - name: Run
+      working-directory: ./Exec/RegTests/EB_BackwardStepFlame/
+      run: |
+        mpirun -n 2 ./PeleLMeX2d.gnu.MPI.ex eb_bfs.inp amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.abort_on_unused_inputs=1 mac_proj.verbose=2 mac_proj.atol=5e-11 mac_proj.rtol=5e-11
+
+  # Build and Run the Plasma flamesheet with GNU9.3 and MPI support
+  PLASMA:
+    name: GNU@9.3 MPI Run [PLASMA]
+    runs-on: ubuntu-latest
+    env:
+      {CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"}
+    steps:
+    - uses: actions/checkout@v6
+    - name: System Dependencies
+      run: .github/workflows/dependencies/dependencies_gcc10.sh
+    - name: Repo Dependencies
+      run: Utils/CloneDeps.sh
+    - name: Build
+      working-directory: ./Exec/Plasma/FlameSheetIons
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE
+        make -j 2 COMP=gnu USE_MPI=TRUE
+    - name: Run
+      working-directory: ./Exec/Plasma/FlameSheetIons
+      run: |
+        mpirun -n 2 ./PeleLMeX2d.gnu.MPI.PLASMA.ex input.2d-regt amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.abort_on_unused_inputs=1
+
+  # Build and Run the TurbInflow RegTest in DEBUG with GNU9.3 and MPI support
+  TI3D:
+    name: GNU@9.3 MPI Run [TI3DDBG]
+    runs-on: ubuntu-latest
+    env:
+      {CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"}
+    steps:
+    - uses: actions/checkout@v6
+    - name: System Dependencies
+      run: |
+        .github/workflows/dependencies/dependencies_gcc10.sh
+         sudo apt-get install -y python3-setuptools
+         python3 -m pip install --user scipy
+         python3 -m pip install --user matplotlib
+         python3 -m pip install --user numpy
+    - name: Repo Dependencies
+      run: Utils/CloneDeps.sh
+    - name: Build AMReX Tools
+      env:
+         AMREX_HOME: ${GITHUB_WORKSPACE}/Submodules/PelePhysics/Submodules/amrex
+      working-directory: ./Submodules/PelePhysics/Submodules/amrex/Tools/Plotfile
+      run: |
+        make -j 2
+    - name: GenerateTurbFile
+      working-directory: ./Submodules/PelePhysics/Support/TurbInflowGenerator
+      run: |
+        ./gen_hit_ic.py -k0 4 -N 32 -Nk 256
+        make -j 2 COMP=gnu
+        ./PeleTurb3d.gnu.ex input hit_file=hit_ic_4_32.dat input_ncell=32 amrex.abort_on_unused_inputs=1
+        mkdir ${GITHUB_WORKSPACE}/Exec/RegTests/TurbInflow/TurbFileHIT
+        cp -r TurbTEST ${GITHUB_WORKSPACE}/Exec/RegTests/TurbInflow/TurbFileHIT
+    - name: Build
+      working-directory: ./Exec/RegTests/TurbInflow/
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE DEBUG=TRUE
+        make -j 2 COMP=gnu USE_MPI=TRUE DEBUG=TRUE
+    - name: Run
+      working-directory: ./Exec/RegTests/TurbInflow/
+      run: |
+        mpirun -n 2 ./PeleLMeX3d.gnu.DEBUG.MPI.ex input.3d peleLM.num_init_iter=1 amr.n_cell=32 32 32 amr.max_step=2 amr.plot_int=2 amr.check_int=-1 amrex.abort_on_unused_inputs=1
+        mpirun -n 2 ./PeleLMeX3d.gnu.DEBUG.MPI.ex input.3d_twoInjs peleLM.num_init_iter=1 amr.n_cell=32 32 32 amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.abort_on_unused_inputs=1
+        mpirun -n 2 ./PeleLMeX3d.gnu.DEBUG.MPI.ex input.3d_posX peleLM.num_init_iter=1 amr.n_cell=32 32 32 amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.abort_on_unused_inputs=1
+        mpirun -n 2 ./PeleLMeX3d.gnu.DEBUG.MPI.ex input.3d_BoxLoZ peleLM.num_init_iter=1 amr.n_cell=32 32 32 amr.max_step=2 amr.plot_int=-1 amr.check_int=-1 amrex.abort_on_unused_inputs=1
+        mpirun -n 2 ./PeleLMeX3d.gnu.DEBUG.MPI.ex input.3d_twoInjsOverlap peleLM.num_init_iter=1 amr.n_cell=32 32 32 amr.max_step=2 amr.plot_int=2 amr.check_int=-1 amrex.abort_on_unused_inputs=0
+        ${GITHUB_WORKSPACE}/Submodules/PelePhysics/Submodules/amrex/Tools/Plotfile/fcompare.gnu.ex plt00002 pltoverlap00002
+    - name: Build Vortex Test
+      working-directory: ./Exec/RegTests/PeriodicCases/
+      run: |
+        make TPL DIM=3 COMP=gnu USE_MPI=TRUE
+        make -j 2 DIM=3 COMP=gnu USE_MPI=TRUE
+    - name: Periodic Vortex for Inflow
+      working-directory: ./Exec/RegTests/PeriodicCases/
+      run: |
+        mpirun -n 2 ./PeleLMeX3d.gnu.MPI.ex input.3d_CoVo_InflowGen amr.max_step=100 amrex.abort_on_unused_inputs=1
+    - name: Vortex Inflow Generation
+      working-directory: ./Exec/RegTests/PeriodicCases/
+      run: |
+        ${GITHUB_WORKSPACE}/Submodules/PelePhysics/Support/TurbInflowGenerator/PeleTurb3d.gnu.ex type=periodic_plt ofile=PltInflow ifile=plt00000 normal=0 level=1 periodicity="1 1 1"
+        ${GITHUB_WORKSPACE}/Submodules/PelePhysics/Support/TurbInflowGenerator/PeleTurb3d.gnu.ex type=diag_frame_planes ofile=PlaneInflow ifiles=$(ls -d oplane/plt*) normal=0 level=0 periodicity="1 1 1"
+    - name: Vortex Inflow Test
+      working-directory: ./Exec/RegTests/PeriodicCases/
+      run: |
+        mpirun -n 2 ./PeleLMeX3d.gnu.MPI.ex input.3d_CoVo_PlaneInput amr.max_step=80 amrex.abort_on_unused_inputs=0
+        mpirun -n 2 ./PeleLMeX3d.gnu.MPI.ex input.3d_CoVo_PltInput amr.max_step=120 amrex.abort_on_unused_inputs=0
+
+  # Build and Run the SprayTest RegTest with GNU9.3 and MPI support
+  SPRAY:
+    name: GNU@9.3 MPI Run [SPRAY]
+    runs-on: ubuntu-latest
+    env:
+      CXXFLAGS: "-Werror -Wshadow -Woverloaded-virtual -Wunreachable-code"
+      CMLM_VERSION: 0.0.1
+    steps:
+    - uses: actions/checkout@v6
+    - name: System Dependencies
+      run: |
+         .github/workflows/dependencies/dependencies_gcc10.sh
+    - name: Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.11'
+    - name: Repo Dependencies
+      run: |
+        Utils/CloneDeps.sh
+        # install CMLM (includes python dependencies needed for other scripts)
+        pip install -e git+https://github.com/NREL/cmlm.git@v${CMLM_VERSION}#egg=cmlm
+    - name: Build AMReX Tools
+      env:
+         AMREX_HOME: ${GITHUB_WORKSPACE}/Submodules/PelePhysics/Submodules/amrex
+      working-directory: ./Submodules/PelePhysics/Submodules/amrex/Tools/Plotfile
+      run: |
+        make
+    - name: Build PeleLMeX for Convergence
+      working-directory: ./Exec/RegTests/SprayTest/
+      run: |
+        make TPL COMP=gnu USE_MPI=TRUE
+        make -j 2 COMP=gnu USE_MPI=TRUE
+    - name: Run Convergence
+      working-directory: ./Exec/RegTests/SprayTest/
+      run: |
+        cp ${GITHUB_WORKSPACE}/Submodules/PelePhysics/Submodules/amrex/Tools/Plotfile/fcompare.gnu.ex .
+        sed -i "s/mpiexec -n 1/mpiexec -n 2/g" multiRuns.py
+        ./multiRuns.py
+        ./compareOutput.py
+    - name: Daif GCM Manifold
+      working-directory: ./Exec/RegTests/SingleDropEvap
+      run: |
+        python Validate.py -b -c Daif -m -n 2 --cmlm_path ${GITHUB_WORKSPACE}/src/cmlm
+    - name: Nomura GCM
+      working-directory: ./Exec/RegTests/SingleDropEvap
+      run: |
+        python Validate.py -b -c Nomura -n 2
+    - name: WongLin MP Antoine
+      working-directory: ./Exec/RegTests/SingleDropEvap
+      run: |
+        python Validate.py -b -c WongLin -l mp -p Antoine -n 2
+    - name: RungeJP8 GCM Many-to-One
+      working-directory: ./Exec/RegTests/SingleDropEvap
+      run: |
+        python Validate.py -b -c RungeJP8 -n 2 -r amr.max_step=1000

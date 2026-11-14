@@ -1,0 +1,468 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_3.10e_kepsilon_wallfn.md)
+tool read_file completed: # TASK 3.10e: k-ε 壁面函数 + 源项核心化
+
+## 背景
+
+3.10d 完成了 k-ε 运行时集成（扩散增强、面心插值修复、aux clipping）。
+`addKESourceTerms()` 已实现并正常工作。
+但 **壁面函数完全缺失**：`m_ke_wall_functions` 参数在 Setup.cpp:498 读取了，却全 PeleLMeX 源码从未使用。
+
+Phase 2.3 写了独立壁面函数库 `src/engineering/turbulence/wall_functions.H`（compute_utau, compute_k_wall, comp...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me read]0;🐋 CodeWhale the relevant source files to understand the current state before making changes.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: addKESourceTerms)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: m_ke_wall_functions)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp, pattern: fillPatchAux)
+
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhaleI see there's already a declaration in PeleLMeX.H. Let me read the current state]0;🐳 CodeWhale of all relevant files more carefully.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2342" shown_lines="1800-1829" truncated="true" next_start_line="1830">
+  1800│   getAuxVect(const PeleLM::TimeStamp a_time);
+  1801│   amrex::Vector<amrex::MultiFab*>
+  1802│   getAuxDiffusivityVect(const PeleLM::TimeS...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="340-389" truncated="true" next_start_line="390">
+   340│   if (m_verbose > 0) {
+   341│     amrex::Print() << "   SDC iter [" << sdcIter << "] \n";
+   342│   }
+   343│ 
+   344│   //---------...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2067" shown_lines="1880-2067" truncated="false">
+  1880│       m_cur_time, GetVecOfPtrs(advData->Forcing_aux),
+  1881│       advData->Forcing_aux[0].nGrow());
+  1882│   }
+  1883│ }
+  1884│ 
+  1885│ void
+  1...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me check if there's already an implementation of `applyKEWallFunctions` and understand]0;🐋 CodeWhale the existing wall functions library.]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele, pattern: applyKEWallFunctions)
+tool: read_file (path: /home/cj/my-pele/src/engineering/turbulence/wall_functions.H)
+
+tool read_file completed: #pragma once
+#include "k_epsilon_constants.H"
+
+namespace Turbulence {
+
+// ============================================================
+// y+ computation: y+ = y_p * u_tau / nu
+// ============================================================
+double compute_yplus(double y_p, double u_tau, double nu)...
+]0;🐋 CodeWhaletool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleLet me check the k-epsilon constants and how BCs are handled in PeleLMeX.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/src, pattern: k_epsilon_constants)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H, pattern: m_bcrec_aux)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H, pattern: m_phys_bc)
+
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/src/engineering/turbulence/k_epsilon_constants.H)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+tool read_file failed: Failed to execute tool: Failed to read /home/cj/my-pele/src/engineering/turbulence/k_epsilon_constants.H: No such file or directory (os error 2)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2342" shown_lines="1860-1889" truncated="true" next_start_line="1890">
+  1860│   amrex::IntVect m_max_grid_size_chem{AMREX_D_DECL(-1, -1, -1)};
+  1861│ 
+  1862│   // Times
+  1863│   amrex::Vector<amrex::Real> m_t_old;
+...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H" total_lines="2342" shown_lines="2150-2179" truncated="true" next_start_line="2180">
+  2150│ 
+  2151│   // k-epsilon model constants (RANS)
+  2152│   amrex::Real m_ke_C_mu = 0.09;
+  2153│   amrex::Real m_ke_C_eps1 = 1.44;
+  2154│   ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: file_search (path: /home/cj/my-pele, query: k_epsilon_constants)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Setup.cpp, pattern: m_bcrec_aux)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool file_search completed: <1 items>
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="1-40" truncated="true" next_start_line="41">
+     1│ #include <PeleLMeX.H>
+     2│ #include <PeleLMeX_Utils.H>
+     3│ #include <AMReX_MemProfiler.H>
+     4│ #include <memory>
+     5│ 
+     ...
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/k_epsilon_constants.H)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: m_bcrec_aux)
+tool read_file completed: #pragma once
+
+namespace Turbulence {
+
+struct KEpsilonConstants {
+    const double C_mu    = 0.09;
+    const double C_eps1  = 1.44;
+    const double C_eps2  = 1.92;
+    const double sigma_k = 1.0;
+    const double sigma_eps = 1.3;
+    const double kappa   = 0.41;    // von Karman constant
+    cons...
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp, pattern: k_epsilon_constants)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2067" shown_lines="1-30" truncated="true" next_start_line="31">
+     1│ 
+     2│ #include <PeleLMeX.H>
+     3│ #include <PeleLMeX_Utils.H>
+     4│ #include <PeleLMeX_K.H>
+     5│ #include <PeleLMeX_Diffusio...
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="200-259" truncated="true" next_start_line="260">
+   200│     checkMemory("MAC-Proj");
+   201│ 
+   202│   } else {
+   203│ 
+   204│     // SDC iterations
+   205│     for (m_sdcIter = 1; m_sdc...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H, pattern: getViscosityVect|m_visc)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp, pattern: calcDiffusivity)
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: calcDiffusivity|calcDiff)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: mu_lam|visc_mol|molecular_visc)
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_TransportProp.cpp, pattern: calcViscosity)
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_TransportProp.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_TransportProp.cpp" total_lines="551" shown_lines="239-278" truncated="true" next_start_line="279">
+   239│ PeleLM::calcViscosity(const TimeStamp a_time)
+   240│ {
+   241│   BL_PROFILE("PeleLMeX::calcViscosity()");
+   242│ 
+   243│   f...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_TransportProp.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_TransportProp.cpp" total_lines="551" shown_lines="273-352" truncated="true" next_start_line="353">
+   273│ PeleLM::calcDiffusivity(const TimeStamp a_time)
+   274│ {
+   275│   BL_PROFILE("PeleLMeX::calcDiffusivity()");
+   276│ 
+   277│...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="100-149" truncated="true" next_start_line="150">
+   100│ 
+   101│   // initialize temporals
+   102│   initTemporals();
+   103│ 
+   104│   // Reset velocity flux on boundary faces if doing cl...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: #define TEMP|const.*TEMP|enum.*TEMP)
+tool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Index.H, pattern: ^    TEMP|TEMP =|  TEMP)
+tool grep_files completed: <4 keys>
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/external/PeleLMeX/Source, pattern: calcViscosity\(AmrNewTime\))
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+]0;🐳 CodeWhaletool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="380-429" truncated="true" next_start_line="430">
+   380│           }
+   381│         }
+   382│        }
+   383│     }
+   384│ 
+   385│     calcDiffusivity(AmrNewTime);
+   386│     const amre...
+tool grep_files completed: <4 keys>
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="254-278" truncated="true" next_start_line="279">
+   254│   //----------------------------------------------------------------
+   255│   BL_PROFILE_VAR("PeleLMeX::advance::velocity", PLM_VEL)...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow I have a clear understanding of the codebase. Let me set up the checklist and implement.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <6 items>)
+
+tool checklist_write completed: Todo list updated (6 items, 0% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Change PeleLMeX.H declaration: applyKEWallFunctions() (no params)",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "content": "Add computeStrainRateSq static helper before addKESourceTerms ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleStarting implementation. Step 1: declaration change in PeleLMeX.H.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <6 items>)
+tool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H)
+
+tool checklist_write completed: Todo list updated (6 items, 0% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Change PeleLMeX.H declaration: applyKEWallFunctions() (no params)",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "content": "Add computeStrainRateSq static helper before addKESourceTe...
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX.H
+@@ -1803,7 +1803,7 @@
+ 
+   // k-epsilon turbulence model methods
+   void addKESourceTerms(const std::unique_ptr<AdvanceAdvData>& advData);
+-  void applyKEWallFunctions(int lev, co...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleStep 1 done. Now steps 2 & 3: add `computeStrainRateSq` and refactor `addKESourceTerms`.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <6 items>)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool checklist_write completed: Todo list updated (6 items, 17% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Change PeleLMeX.H declaration: applyKEWallFunctions() (no params)",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Add computeStrainRateSq static helper before addKESourceTer...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2067" shown_lines="1880-1949" truncated="true" next_start_line="1950">
+  1880│       m_cur_time, GetVecOfPtrs(advData->Forcing_aux),
+  1881│       advData->Forcing_aux[0].nGrow());
+  1882│   }
+  1883│ }
+  1...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -1882,6 +1882,35 @@
+   }
+ }
+ 
++// Static helper: compute strain rate squared S² = 2*S_ij*S_ij
++// from centered velocity differences on the AMReX state ...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow refactor `addKESourceTerms` to use the helper. Replace the strain rate calculation.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -1934,28 +1934,8 @@
+         amrex::Real epsv = amrex::max(aux_ma[box_no](i,j,k,1), 1e-14_rt);
+         amrex::Real mut  = C_mu * rho * kval * kval / ep...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleSteps 2 & 3 done. Now step 4: implement `applyKEWallFunctions]0;🐋 CodeWhale()`. Let me check current line positions.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2076" shown_lines="1955-1979" truncated="true" next_start_line="1980">
+  1955│ 
+  1956│ void
+  1957│ PeleLM::computeDivTau(
+  1958│   const TimeStamp a_time,
+  1959│   const amrex::Vector<amrex::MultiFab*>&...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2076" shown_lines="1935-1959" truncated="true" next_start_line="1960">
+  1935│         amrex::Real mut  = C_mu * rho * kval * kval / epsv;
+  1936│ 
+  1937│         // Strain rate S² from centered velocity d...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow step 4: implement `applyKEWallFunctions()` after `addKESourceTerms`.]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -1954,6 +1954,111 @@
+ }
+ 
+ void
++PeleLM::applyKEWallFunctions()
++{
++  if (m_ke_wall_functions == 0 || m_les_model != "kepsilon" || m_nAux < 2) return;
++...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleStep 4 done. Now step 5: add wall function calls in PeleLMeX_Advance.cpp.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <6 items>)
+
+tool checklist_write completed: Todo list updated (6 items, 67% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Change PeleLMeX.H declaration: applyKEWallFunctions() (no params)",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Add computeStrainRateSq static helper before addKESourceTer...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="209-238" truncated="true" next_start_line="239">
+   209│     // Post SDC
+   210│     averageDownScalars(AmrNewTime);
+   211│     fillPatchState(AmrNewTime);
+   212│ 
+   213│     if (m_nAux >...
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="557" shown_lines="363-390" truncated="true" next_start_line="391">
+   363│     if (m_nAux > 0) {
+   364│       averageDownAux(AmrNewTime);
+   365│       fillPatchAux(AmrNewTime);
+   366│       // k-epsilon au...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow I'll add the wall function calls in both locations — post-SDC and oneSDC.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp
+@@ -227,11 +227,15 @@
+             amrex::ParallelFor(bx, [aux_arr] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+               aux_arr(i, j, k, 0) = amrex...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me verify the edit didn]0;🐳 CodeWhale't break the brace nesting.tool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="561" shown_lines="209-253" truncated="true" next_start_line="254">
+   209│     // Post SDC
+   210│     averageDownScalars(AmrNewTime);
+   211│     fillPatchState(AmrNewTime);
+   212│ 
+   213│     if (m_nAux >...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleGood — the first call site (post]0;🐳 CodeWhale-SDC) looks correct structurally. Now add the second call site in `oneSDC`.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp
+@@ -380,11 +380,15 @@
+             amrex::ParallelFor(bx, [aux_arr] AMREX_GPU_DEVICE(int i, int j, int k) noexcept {
+               aux_arr(i, j, k, 0) = amrex...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me verify both call sites are structurally correct.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Advance.cpp" total_lines="565" shown_lines="367-401" truncated="true" next_start_line="402">
+   367│     if (m_nAux > 0) {
+   368│       averageDownAux(AmrNewTime);
+   369│       fillPatchAux(AmrNewTime);
+   370│       // k-epsilon au...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleBoth call sites are structurally correct. Now step 6: compile and verify.]0;🐳 CodeWhaletool: checklist_write (todos: <6 items>)
+
+tool checklist_write completed: Todo list updated (6 items, 83% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Change PeleLMeX.H declaration: applyKEWallFunctions() (no params)",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Add computeStrainRateSq static helper before addKESourceTer...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: list_dir (path: /home/cj/my-pele/examples/engineering/c3h8_flacs)
+tool list_dir completed: <20 items>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: ps aux | grep -E 'PeleLMeX|pelelmex' | grep -v grep)
+tool exec_shell completed
+--- stdout/stderr ---
+cj       2374382  0.0  0.0  23176  7620 ?        S    09:17   0:00 /home/cj/bin/codewhale exec --auto Read /home/cj/my-pele/TASK_3.10e_kepsilon_wallfn.md and implement all changes. This is Phase 3.10e: add wall function BC support to PeleLMeX k-epsilon model and clean up source term code. After implementation, compile in /home/cj/my-pele/examples/engineering/c3h8_flacs/ and verify the binary builds without errors.
+cj       2374383  1.3  0.0 4041820 59188 ?       Sl   09:17   0:04 /home/cj/bin/codewhale-tui exec --auto Read /home/cj/my-pele/TASK_3.10e_kepsilon_wallfn.md and implement all changes. This is Phase 3.10e: add wall function BC support to PeleLMeX k-epsilon model and clean up source term code. After implementation, compile in /home/cj/my-pele/examples/engineering/c3h8_flacs/ and verify the binary builds without errors.
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleNo simulation running — safe to compile. Let me check the build system and start the]0;🐋 CodeWhale compilation.tool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs/GNUmakefile)
+
+tool read_file completed: DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+USE_EB = TRUE
+USE_HYPRE = FALSE
+PROFILE = FALSE
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = FALSE
+DEBUG = FALSE
+Chemistry_Model = c3h8_mini
+Eos_Model = Fuego
+Transport_Model = Simple
+PELE_HOME := /home/cj/my-pele/external/PeleLMeX
+INCLUDE_LOCATIONS += /home/cj...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: task_shell_start (command: cd /home/cj/my-pele/examples/engineering/c3h8_flacs && make -j8 2>&1)
+tool task_shell_start completed: Background task started: shell_52a91559
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: task_shell_wait (task_id: shell_52a91559)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool task_shell_wait completed: fatal: not a git repository (or any of the parent directories): .git
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/comps/gnu.mak...
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/sites/Make.unknow...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleThe build failed on `PeleLMeX_Diffusion]0;🐋 CodeWhale.o`. Let me find the actual error message.]0;🐳 CodeWhaletool: exec_shell (command: <109 chars>)
+
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp:2004:43: error: no match for ‘operator[]’ (operand types are ‘const amrex::MultiArray4<const double>’ and ‘amrex::MFIter’)
+ 2004 |           auto const& state_arr = state_ma[mfi];
+      |                                           ^
+In file included from /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_MultiFab.H:9,
+                 from /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_MultiFabUtil.H:5,
+                 from /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Derive.H:8,
+--
+/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp:2005:39: error: no match for ‘operator[]’ (operand types are ‘const amrex::MultiArray4<double>’ and ‘amrex::MFIter’)
+ 2005 |           auto const& aux_arr = aux_ma[mfi];
+      |                                       ^
+/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_FabArray.H:157:22: note: candidate: ‘amrex::Array4<T>& amrex::MultiArray4<T>::operator[](int) const [with T = double; amrex::Array4<T> = amrex::ArrayND<double, 4, true>]’
+  157 |     Array4<T> const& operator[] (int li) const noexcept {
+      |                      ^~~~~~~~
+--
+make: *** [/home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/Make.rules:260: tmp_build_dir/o/3d.gnu.EXE/PeleLMeX_Diffusion.o] Error 1
+make: *** Waiting for unfinished jobs....
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleThe `MultiArray4` doesn't support `MFIter` indexing — need to use `MultiFab::const_array(mfi)` / `array(mfi)`. Let me fix.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -2001,8 +2001,8 @@
+ 
+           if (!tilebox.contains(wall_box)) continue;
+ 
+-          auto const& state_arr = state_ma[mfi];
+-          auto const& au...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleAlso need to remove the now-unused `state_ma` and `aux_ma` declarations.]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+
+tool read_file completed: <file path="/home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp" total_lines="2181" shown_lines="1975-2009" truncated="true" next_start_line="2010">
+  1975│   for (int lev = 0; lev <= finest_level; ++lev) {
+  1976│     auto* ldata_p = getLevelDataPtr(lev, AmrNewTime);
+  1977│     con...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp)
+tool edit_file completed: --- a//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
++++ b//home/cj/my-pele/external/PeleLMeX/Source/PeleLMeX_Diffusion.cpp
+@@ -1978,9 +1978,6 @@
+     const amrex::Real* dx = geom.CellSize();
+     const amrex::Box& domain = geom.Domain();
+ 
+-    auto const& state_ma = ldata_p->s...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleNow let me recompile.]0;🐳 CodeWhaletool: task_shell_start (command: cd /home/cj/my-pele/examples/engineering/c3h8_flacs && make -j8 2>&1)
+
+tool task_shell_start completed: Background task started: shell_fe45153a
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: task_shell_wait (task_id: shell_fe45153a)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool task_shell_wait completed: fatal: not a git repository (or any of the parent directories): .git
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/comps/gnu.mak...
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/sites/Make.unknow...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleBuild succeeded. Let me verify the binary]0;🐋 CodeWhale exists and update the checklist.tool: exec_shell (command: ls -la /home/cj/my-pele/examples/engineering/c3h8_flacs/PeleLMeX3d.gnu.ex)
+
+tool exec_shell completed
+--- stdout/stderr ---
+-rwxrwxr-x 1 cj cj 53134384 Jun 25 09:24 /home/cj/my-pele/examples/engineering/c3h8_flacs/PeleLMeX3d.gnu.ex
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhaleBinary built successfully (51MB). All changes]0;🐳 CodeWhale compiled without errors.]0;🐋 CodeWhaletool: checklist_write (todos: <6 items>)
+
+tool checklist_write completed: Todo list updated (6 items, 100% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Change PeleLMeX.H declaration: applyKEWallFunctions() (no params)",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Add computeStrainRateSq static helper before addKESourceTe...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhalePhase 3.10e implementation]0;🐋 CodeWhale complete. Here's a summary of all changes:
+
+### Files modified
+
+**`external/PeleLMeX/Source/PeleLMeX.H`** (line 1806)
+- Changed `applyKEWallFunctions` declaration from `(int lev, const TimeStamp a_time)` to `()` — the method now loops over all levels internally.
+
+**`external/PeleLMeX/Source/PeleLMeX_Diff]0;🐳 CodeWhaleusion.cpp`** — three changes:
+
+1. **`computeStrainRateSq` helper** (before `addKESourceTerms`): Extracted the 2D/3D velocity gradient computation (S² = 2·S_ij·S_ij from centered differences) into a `static AMREX_GPU_DEVICE` function,]0;🐋 CodeWhale removing ~22 lines of duplicated preprocessor-conditional code.
+
+2. **`addKESourceTerms` refactored**: The strain rate block replaced with a single call to `computeStrainRateSq(state_ma[box_no], i, j, k)`.
+
+3. **`applyKEWallFunctions()`** (~100 lines): New implementation using Launder-Spalding standard wall]0;🐳 CodeWhale functions:
+   - Iterates all levels and all 6 domain boundary faces, skipping periodic directions
+   - For each non-periodic wall face, processes the first interior cell layer
+   - Computes laminar viscosity via Sutherland's law from the state temperature (no dependency on pre-computed transport)
+   - Newton]0;🐋 CodeWhale-Raphson solver for friction velocity u_tau from the log-law (`u_par/u_tau = ln(y⁺)/κ + B`)
+   - Falls back to viscous sublayer scaling when y⁺ ≤ 11.225 or Newton fails to converge
+   - Sets `k = u_tau² / √C_μ]0;🐳 CodeWhale` and `ε = u_tau³ / (κ·y_p)` in auxiliaries
+
+**`external/PeleLMeX/Source/PeleLMeX_Advance.cpp`** — two call sites:
+
+1. **oneSDC** (~line 386): After aux floor clipping, before `calcDiffusivity` — wall functions applied before turbulent]0;🐋 CodeWhale diffusivity is computed from k/ε.
+
+2. **Post-SDC** (~line 233): Same pattern, ensuring wall-adjacent values are set before the velocity advance.
+
+### Behavior
+
+- Default `ke_wall_functions = 0` → wall]0;🐳 CodeWhale functions are no-ops; results identical to before.
+- Set `peleLM.ke_wall_functions = 1` → k and ε at wall-adjacent cells are overwritten with log-law wall function values each SDC iteration.

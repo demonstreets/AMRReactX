@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "dataset_type": "external_h2_plume_shape_agreement",
+  "dataset_name": "guard dataset, not production evidence",
+  "case": "engineering-h2-open-domain-plan-amr-hybrid-cfd-scout",
+  "source": {
+    "title": "Synthetic guard source",
+    "url": "https://example.invalid/not-production-evidence"
+  },
+  "case_alignment": {
+    "geometry": true,
+    "release_rate": true,
+    "release_direction": true,
+    "boundary_conditions": true
+  },
+  "metrics": [
+    {
+      "name": "peak",
+      "metric_type": "concentration_peak",
+      "simulation_summary_key": "amr_peak_x",
+      "quantity": "peak H2 volume fraction",
+      "units": "1",
+      "reference_value": 0.186431079,
+      "tolerance_rel": 1.5
+    },
+    {
+      "name": "volume",
+      "metric_type": "plume_extent",
+      "simulation_summary_key": "amr_lel_cloud_volume",
+      "quantity": "LEL cloud volume",
+      "units": "m3",
+      "reference_value": 0.0253408927,
+      "tolerance_rel": 0.1
+    }
+  ],
+  "source_type": "literature_digitized"
+}

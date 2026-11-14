@@ -1,0 +1,69 @@
+# Codex multi-hole 3D PeleLMeX H2 leak plume-history smoke.
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0 0.0 0.0
+geometry.prob_hi     = 1.0 0.5 0.5
+
+peleLM.lo_bc = Inflow SlipWallAdiab SlipWallAdiab
+peleLM.hi_bc = Outflow SlipWallAdiab SlipWallAdiab
+peleLM.v = 1
+peleLM.incompressible = 0
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 1
+peleLM.user_defined_ext_sources = 1
+peleLM.advection_scheme = Godunov_PLM
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorNull
+
+amr.n_cell = 16 8 8
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 4
+amr.max_grid_size = 16
+amr.max_step = 5
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-5
+amr.cfl = 0.5
+amr.plot_int = 1
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.wind_u = 0.2
+prob.wind_v = 0.0
+prob.leak_xc = 0.5
+prob.leak_yc = 0.25
+prob.leak_zc = 0.25
+prob.leak_rate = 1.0e-5
+prob.leak_radius = 0.105
+
+# Multi-hole source layout. The legacy leak_xc/yc/zc remains the
+# plume-reference center used by the validator; leak0..leak2 are the
+# actual injection spots and their fractions sum to the total leak_rate.
+prob.leak_count = 3
+prob.leak0_xc = 0.4375
+prob.leak0_yc = 0.1875
+prob.leak0_zc = 0.2500
+prob.leak0_radius = 0.105
+prob.leak0_fraction = 0.50
+prob.leak1_xc = 0.5000
+prob.leak1_yc = 0.2500
+prob.leak1_zc = 0.2500
+prob.leak1_radius = 0.105
+prob.leak1_fraction = 0.30
+prob.leak2_xc = 0.5625
+prob.leak2_yc = 0.3125
+prob.leak2_zc = 0.2500
+prob.leak2_radius = 0.105
+prob.leak2_fraction = 0.20
+prob.leak_vel_x = 1.0
+prob.leak_vel_y = 0.0
+prob.leak_vel_z = 0.0
+prob.leak_T = 300.0
+
+eb2.geom_type = all_regular
+
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

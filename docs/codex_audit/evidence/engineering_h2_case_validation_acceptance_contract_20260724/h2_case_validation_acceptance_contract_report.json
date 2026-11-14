@@ -1,0 +1,148 @@
+{
+  "campaign_contract_records": [
+    {
+      "boolean_or_status_metric_count": 6,
+      "campaign_id": "real_cad_large_layout_leak_dispersion",
+      "duplicate_metric_ids": [],
+      "gaps": [],
+      "metric_count": 10,
+      "quantitative_metric_count": 4,
+      "source_reports": [
+        "case_validation_runner_ledger",
+        "production_evidence_verification_report",
+        "real_cad_cleanup_package_report",
+        "real_cad_intake_preflight_report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "boolean_or_status_metric_count": 9,
+      "campaign_id": "sbepv5_d27_external_plume_validation",
+      "duplicate_metric_ids": [],
+      "gaps": [],
+      "metric_count": 13,
+      "quantitative_metric_count": 4,
+      "source_reports": [
+        "case_validation_runner_ledger",
+        "h2_reference_agreement_report",
+        "sbepv5_d27_dataset_ingestion_report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "boolean_or_status_metric_count": 9,
+      "campaign_id": "calibrated_fire_consequence_validation",
+      "duplicate_metric_ids": [],
+      "gaps": [],
+      "metric_count": 11,
+      "quantitative_metric_count": 2,
+      "source_reports": [
+        "case_validation_runner_ledger",
+        "fire_calibration_dataset_ingestion_report",
+        "fire_calibration_dataset_report",
+        "fire_consequence_metrics_report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "boolean_or_status_metric_count": 6,
+      "campaign_id": "integrated_engineering_production_replay",
+      "duplicate_metric_ids": [],
+      "gaps": [],
+      "metric_count": 10,
+      "quantitative_metric_count": 4,
+      "source_reports": [
+        "case_validation_runner_ledger",
+        "engineering_production_scorecard",
+        "h2_blocker_clearance_preflight_report",
+        "h2_external_artifact_controlled_copy_report",
+        "h2_external_artifact_drop_validator_report",
+        "production_evidence_verification_report"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "case_validation_plan_report": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json",
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "engineering_h2_external_evidence_case_validation_plan_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_case_validation_plan_20260724/h2_external_evidence_case_validation_plan.json",
+      "sha256": "c316765c026a3a8e6a9d036d0978de2f35479e33bf2c61562ebad23b085c2df3",
+      "size_bytes": 28847
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:10+00:00",
+  "limitations": [
+    "This report audits structured acceptance contracts only; it does not execute CFD validation campaigns.",
+    "Production credit still requires accepted external data, campaign execution, metric comparison, and the full verifier passing."
+  ],
+  "negative_contract_selftest": {
+    "failed_campaign_count": 1,
+    "gaps": [
+      "real_cad_large_layout_leak_dispersion:real_cad_source_file_count:missing_threshold",
+      "real_cad_large_layout_leak_dispersion:real_cad_source_file_count:>=_requires_numeric_threshold"
+    ],
+    "mutation": "removed threshold from first acceptance metric",
+    "negative_selftest_only": true,
+    "refused": true
+  },
+  "quality_gate_matrix": [
+    {
+      "evidence": "campaigns=4 failed=0",
+      "gap": "",
+      "name": "all_campaigns_have_acceptance_contracts",
+      "status": "PASS"
+    },
+    {
+      "evidence": "total=44 quantitative=14",
+      "gap": "",
+      "name": "contract_metric_count_is_production_sized",
+      "status": "PASS"
+    },
+    {
+      "evidence": "case_validation_runner_ledger,engineering_production_scorecard,fire_calibration_dataset_ingestion_report,fire_calibration_dataset_report,fire_consequence_metrics_report,h2_blocker_clearance_preflight_report,h2_external_artifact_controlled_copy_report,h2_external_artifact_drop_validator_report,h2_reference_agreement_report,production_evidence_verification_report,real_cad_cleanup_package_report,real_cad_intake_preflight_report,sbepv5_d27_dataset_ingestion_report",
+      "gap": "",
+      "name": "contract_sources_cover_domain_and_final_reports",
+      "status": "PASS"
+    },
+    {
+      "evidence": "failed_campaigns=1",
+      "gap": "real_cad_large_layout_leak_dispersion:real_cad_source_file_count:missing_threshold; real_cad_large_layout_leak_dispersion:real_cad_source_file_count:>=_requires_numeric_threshold",
+      "name": "negative_selftest_refuses_missing_threshold",
+      "status": "PASS"
+    },
+    {
+      "evidence": "acceptance contract is a future-real-data gate only",
+      "gap": "",
+      "name": "contract_report_does_not_clear_blockers",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "source_reports": [
+    "case_validation_runner_ledger",
+    "engineering_production_scorecard",
+    "fire_calibration_dataset_ingestion_report",
+    "fire_calibration_dataset_report",
+    "fire_consequence_metrics_report",
+    "h2_blocker_clearance_preflight_report",
+    "h2_external_artifact_controlled_copy_report",
+    "h2_external_artifact_drop_validator_report",
+    "h2_reference_agreement_report",
+    "production_evidence_verification_report",
+    "real_cad_cleanup_package_report",
+    "real_cad_intake_preflight_report",
+    "sbepv5_d27_dataset_ingestion_report"
+  ],
+  "status": "PASS-H2-CASE-VALIDATION-ACCEPTANCE-CONTRACT",
+  "summary": {
+    "acceptance_contract_metric_count": 44,
+    "campaign_count": 4,
+    "failed_contract_campaign_count": 0,
+    "negative_missing_threshold_refused": true,
+    "quantitative_metric_count": 14,
+    "source_report_count": 13
+  },
+  "title": "Engineering H2 Case Validation Acceptance Contract"
+}

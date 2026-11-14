@@ -1,0 +1,170 @@
+{
+  "cases": [
+    {
+      "input_file": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/input.shock_droplet_khrt_1000",
+      "metrics": {
+        "d32_max": 0.00499981357,
+        "gas_fuel_sum": -8.01161646e-25,
+        "particle_count0": 200.0,
+        "particle_count1": 2134.0,
+        "particle_growth": 10.67,
+        "spray_mass_loss_rel": 0.000283041623,
+        "spray_temp_max": 304.386794,
+        "spray_x_vel_absmax": 3066.97552,
+        "surface_area_ratio": 1.14071382,
+        "time": 8.90037487245e-06
+      },
+      "name": "shock_droplet_khrt_1000",
+      "plotfile_final": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt01000",
+      "plotfile_initial": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt00000",
+      "role": "spray_particle_khrt_breakup_motion_coupling",
+      "run_log": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000.log",
+      "validation_log": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/validation_shock_droplet_khrt_1000.log"
+    }
+  ],
+  "evidence_files": [
+    {
+      "label": "case_manifest",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/case_manifest.json",
+      "sha256": "41b19556fdd9f8024afad9c113862603c69ec3595ec4b881da5899d120c96a33"
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_droplet_euler_lagrange_validation.sh",
+      "sha256": "796ee6826b81040e6912a754831eca672ee4ce7ec7d43ece40fb139645b1478b"
+    },
+    {
+      "label": "validator",
+      "path": "tools/validate_academic_droplet_euler_lagrange.py",
+      "sha256": "76b9e114923e1a92888d939ed365e9bbb47aef49b4bb4f0852c11a3ee4cb4f30"
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_droplet_euler_lagrange_validation_report.py",
+      "sha256": "d1b5369c8dfc3cfe71d6249ca258ebdd14797d0f46f73fa3f5d2054f9cf3f683"
+    },
+    {
+      "label": "case_0_input",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/input.shock_droplet_khrt_1000",
+      "sha256": "024a679c92da7baaac86bd92100880dc84ac8a8f324d7920e9b5e9373c5815b2"
+    },
+    {
+      "label": "case_0_run_log",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000.log",
+      "sha256": "b0d0473208e799557d9efb298c9fc5e63e49d7530b169dd5638eb9aada17ff29"
+    },
+    {
+      "label": "case_0_validation_log",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/validation_shock_droplet_khrt_1000.log",
+      "sha256": "1bbc9f9a1a1725621bfbe5e9b00b878df38bd16c48af6931a95d31704f521dfa"
+    },
+    {
+      "label": "case_0_initial_plot_header",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt00000/Header",
+      "sha256": "036e624f7d3b3cb26091fbf69027a446735e5eb42a327fa30a1db9cb56a63a7c"
+    },
+    {
+      "label": "case_0_final_plot_header",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt01000/Header",
+      "sha256": "6a1a9f35b00902cd82332c6b2ac7740904019840e7034623f2c24441caa159b4"
+    },
+    {
+      "label": "case_0_initial_particles_header",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt00000/particles/Header",
+      "sha256": "af5b132b44c4ca970a025825478fd7406c027ee9556d552dbd103daba08e10a4"
+    },
+    {
+      "label": "case_0_final_particles_header",
+      "path": "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt01000/particles/Header",
+      "sha256": "d36f053e7df6dcbde41dd281094abb352a9e665db3661dac6e75924773fd6856"
+    }
+  ],
+  "generated_at_utc": "2026-07-29T02:45:37+00:00",
+  "limitations": [
+    "This validates a maintained shock-droplet spray-particle case; it is not yet an end-to-end gas-liquid detonation.",
+    "The gate proves KHRT breakup and Eulerian spray-field coupling through PeleC derived fields and particle headers, not an external experimental breakup benchmark.",
+    "The D2-law unit evidence remains the maintained analytic evaporation check; this gate adds motion, breakup, and two-way-coupling evidence for ACD-05.",
+    "The broad ACD-05 Euler-Lagrange validation gap remains open until a closed gas+particle mass, momentum, and total-energy budget or external reference comparison is attached."
+  ],
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/input.shock_droplet_khrt_1000"
+      ],
+      "gap": "",
+      "name": "spray_particle_path_enabled",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/validation_shock_droplet_khrt_1000.log"
+      ],
+      "gap": "",
+      "name": "khrt_breakup_particle_growth",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/validation_shock_droplet_khrt_1000.log"
+      ],
+      "gap": "",
+      "name": "droplet_motion_response",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/validation_shock_droplet_khrt_1000.log"
+      ],
+      "gap": "",
+      "name": "evaporation_heat_mass_response",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/shock_droplet_khrt_1000/plt01000"
+      ],
+      "gap": "",
+      "name": "eulerian_spray_fields_finite",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_droplet_euler_lagrange_validation_20260728/validation_shock_droplet_khrt_1000.log"
+      ],
+      "gap": "The maintained case proves finite response and scalar closure, but does not yet compute a closed gas+particle mass, momentum, and total-energy budget.",
+      "name": "closed_gas_particle_budget",
+      "status": "NOT_READY"
+    },
+    {
+      "evidence": [],
+      "gap": "No external shock-droplet breakup or evaporation reference comparison is attached.",
+      "name": "external_breakup_reference",
+      "status": "NOT_READY"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "PeleC spray-particle shock-droplet KHRT breakup, droplet motion, evaporation/thermal response, and Eulerian spray-field coupling gate",
+  "status": "PASS-ACADEMIC-DROPLET-EULER-LAGRANGE-VALIDATION",
+  "summary": {
+    "case_count": 1,
+    "clears_acd_05_closed_gas_particle_budget_gap": false,
+    "clears_acd_05_euler_lagrange_gap": false,
+    "clears_acd_05_external_reference_gap": false,
+    "clears_acd_05_response_gate": true,
+    "d32_max": 0.00499981357,
+    "gas_fuel_sum": -8.01161646e-25,
+    "main_case": "shock_droplet_khrt_1000",
+    "max_gas_fuel_abs_sum": 1e-12,
+    "min_mass_loss_rel": 1e-05,
+    "min_particle_growth": 2.0,
+    "min_spray_velocity": 100.0,
+    "particle_count0": 200.0,
+    "particle_count1": 2134.0,
+    "particle_growth_factor": 10.67,
+    "spray_mass_loss_rel": 0.000283041623,
+    "spray_temp_max": 304.386794,
+    "spray_x_vel_absmax": 3066.97552,
+    "surface_area_ratio": 1.14071382
+  },
+  "title": "Academic Droplet Euler-Lagrange Validation"
+}

@@ -1,0 +1,204 @@
+{
+  "case": {
+    "backend": "CPU-serial",
+    "bubble_center": [
+      0.5,
+      0.5
+    ],
+    "bubble_radius": 0.25,
+    "build_log": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/build.log",
+    "case_name": "canonical_bubble_rise_csf_viscosity_5000step_final_time_scout",
+    "cfl": 0.01,
+    "density_ratio_heavy_over_light": 10.0,
+    "dimension": 2,
+    "do_mol": 1,
+    "domain": [
+      1.0,
+      2.0
+    ],
+    "final_plot": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/run/plt05000",
+    "gravity": 0.98,
+    "grid": [
+      32,
+      64,
+      1
+    ],
+    "initial_plot": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/run/plt00000",
+    "input_file": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/run/input.canonical_bubble_rise_final_time_scout",
+    "interface_width": 0.03125,
+    "max_step": 5000,
+    "phase_viscosity_force_cap": 0.1,
+    "phase_viscosity_mu_heavy": 10.0,
+    "phase_viscosity_mu_light": 1.0,
+    "positivity_rhoe_floor": 1e-08,
+    "positivity_temp_floor": 1e-08,
+    "role": "academic_twophase_canonical_bubble_rise_final_time_scout",
+    "run_log": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/run.log",
+    "run_returncode": 0,
+    "solver": "PeleC",
+    "surface_tension_force_cap": 1.0,
+    "surface_tension_sigma": 24.5,
+    "target_stop_time": 3.0,
+    "validation_log": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/validation.log",
+    "validation_returncode": 0,
+    "wall_seconds": 14
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/case_summary.json",
+      "sha256": "45c2c59f7d2403f427f713a688cd71abc7ac745c04a93cd66c44cfd862685995",
+      "size_bytes": 1997
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/run/input.canonical_bubble_rise_final_time_scout",
+      "sha256": "002dd46588da40cf59c06de1a3b76b132d28957ff02504ead4e1fe17129d935f",
+      "size_bytes": 1134
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/build.log",
+      "sha256": "6b8f849cb5a2a86645bdacca99b04dc76ac23ddb327a0a945ac239ea8dddb8de",
+      "size_bytes": 18816
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/run.log",
+      "sha256": "b8adfac0161d46018f04b95d21063106474f234d273ee945260de89e3d553ae6",
+      "size_bytes": 507
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_canonical_bubble_rise_final_time_scout_20260730/canonical_bubble_rise_csf_viscosity_5000step_final_time_scout/validation.log",
+      "sha256": "f9dc58a9900bc4498b5573abfae68ca4d775bea14401277818bd9ac5134a99a1",
+      "size_bytes": 349
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_twophase_canonical_bubble_rise_final_time_scout.sh",
+      "sha256": "73730d5b84dff86a9e46de2abee95a174026b59fd044298b61c2f4e56a78360e",
+      "size_bytes": 7231
+    },
+    {
+      "label": "validator",
+      "path": "tools/validate_academic_twophase_bubble_rise.py",
+      "sha256": "85b7ffa62d71c62c236a1f841d2c26aa39b96d6f6a504c2336a98640166add96",
+      "size_bytes": 5610
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_twophase_canonical_bubble_rise_final_time_scout_report.py",
+      "sha256": "a38920d2ca867b0f1e6dd5bba51becc1def5df4c3cf687ce841dd863e61862b3",
+      "size_bytes": 14331
+    }
+  ],
+  "generated_at_utc": "2026-07-30T01:43:09+00:00",
+  "limitations": [
+    "This scout is intentionally not a t=3 benchmark validation unless the canonical_final_time_contract gate passes.",
+    "The estimate is based on the current low-CFL compressible PeleC path with capped explicit CSF and phase-viscosity source terms; a different low-Mach/incompressible formulation or larger stable timestep could change the projection.",
+    "Reference circularity and rise-velocity comparisons remain gated by the t=3 trajectory and final interface shape."
+  ],
+  "quality_gates": [
+    {
+      "metric": [],
+      "name": "final_time_scout_run_finalized",
+      "status": "PASS"
+    },
+    {
+      "metric": {
+        "adv_mass_rel_drift": 2.49622493539e-16,
+        "mass_rel_drift": 1.21934707339e-16,
+        "time1": 6.13050828568e-05
+      },
+      "name": "long_window_stability_probe",
+      "status": "PASS",
+      "target": "stable >=5e-5 physical time with mass drifts <=1e-10"
+    },
+    {
+      "metric": {
+        "average_physical_dt": 1.2261016571360001e-08,
+        "bubble_center_over_domain": [
+          0.5,
+          0.25
+        ],
+        "bubble_radius_over_domain_width": 0.25,
+        "density_ratio_heavy_over_light": 10.0,
+        "domain_aspect_height_over_width": 2.0,
+        "domain_height": 2.0,
+        "domain_width": 1.0,
+        "estimated_steps_to_t3_at_scout_dt": 244677918,
+        "estimated_wall_seconds_to_t3_at_scout_rate": 685098.1704,
+        "gravity": 0.98,
+        "max_step": 5000,
+        "phase_viscosity_mu_heavy": 10.0,
+        "phase_viscosity_mu_light": 1.0,
+        "plot_int": 5000,
+        "surface_tension_sigma": 24.5,
+        "target_stop_time": 3.0
+      },
+      "name": "canonical_contract_inputs_retained",
+      "status": "PASS"
+    },
+    {
+      "metric": 6.13050828568e-05,
+      "name": "canonical_final_time_contract",
+      "status": "NOT_READY",
+      "target": 3.0
+    },
+    {
+      "metric": {
+        "estimated_steps_to_t3": 244677918,
+        "estimated_wall_seconds_to_t3": 685098.1704
+      },
+      "name": "direct_t3_runtime_viability",
+      "status": "NOT_READY",
+      "target": "<=1e6 steps for direct scout-lineage run"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "Five-thousand-step canonical-input scout used to estimate whether the current compressible PeleC explicit CSF/phase-viscosity path can directly reach the Hysing t=3 final-time contract.",
+  "status": "PASS-ACADEMIC-TWOPHASE-CANONICAL-BUBBLE-RISE-FINAL-TIME-SCOUT",
+  "summary": {
+    "adv_mass_rel_drift": 2.49622493539e-16,
+    "blocking_reasons": [],
+    "centroid_rise": -5.89081028401e-09,
+    "clears_qlt_03_canonical_final_time_contract": false,
+    "derived_contract": {
+      "average_physical_dt": 1.2261016571360001e-08,
+      "bubble_center_over_domain": [
+        0.5,
+        0.25
+      ],
+      "bubble_radius_over_domain_width": 0.25,
+      "density_ratio_heavy_over_light": 10.0,
+      "domain_aspect_height_over_width": 2.0,
+      "domain_height": 2.0,
+      "domain_width": 1.0,
+      "estimated_steps_to_t3_at_scout_dt": 244677918,
+      "estimated_wall_seconds_to_t3_at_scout_rate": 685098.1704,
+      "gravity": 0.98,
+      "max_step": 5000,
+      "phase_viscosity_mu_heavy": 10.0,
+      "phase_viscosity_mu_light": 1.0,
+      "plot_int": 5000,
+      "surface_tension_sigma": 24.5,
+      "target_stop_time": 3.0
+    },
+    "direct_t3_runtime_viable_on_current_compressible_explicit_path": false,
+    "grid_nx": 32,
+    "grid_ny": 64,
+    "light_y0": 0.500000000895,
+    "light_y1": 0.499999995005,
+    "mass_rel_drift": 1.21934707339e-16,
+    "remaining_canonical_model_gaps": [
+      "canonical_final_time_contract"
+    ],
+    "stable_long_window_scout": true,
+    "time0": 0.0,
+    "time1": 6.13050828568e-05,
+    "ymom_absmax": 7.66723440075e-05,
+    "ymom_sum": -1.12298968234e-07
+  },
+  "title": "Academic Two-Phase Canonical Bubble-Rise Final-Time Scout"
+}

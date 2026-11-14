@@ -1,0 +1,59 @@
+max_step = 20000
+stop_time = -1
+geometry.is_periodic = 1 1
+geometry.coord_sys = 0
+geometry.prob_lo = 0 0
+geometry.prob_hi = 0.1 0.1
+amr.n_cell = 4 4
+amr.blocking_factor = 4
+amr.max_grid_size = 4
+amr.max_level = 0
+pelec.lo_bc = "Interior" "Interior"
+pelec.hi_bc = "Interior" "Interior"
+pelec.do_hydro = 0
+pelec.do_react = 0
+pelec.do_spray_particles = 1
+pelec.chem_integrator = "ReactorCvode"
+pelec.allow_negative_energy = 1
+pelec.fixed_dt = 1e-08
+amr.checkpoint_files_output = 0
+amr.plot_int = 1000
+amr.plot_vars = density Temp rho_E rho_nc7h16 rho_o2 rho_h2o rho_co2
+amr.derive_plot_vars = pressure x_velocity y_velocity
+pelec.plot_massfrac = 1
+amrex.the_arena_init_size = 0
+amrex.abort_on_unused_inputs = 1
+
+pelec.do_spray_particles = 1
+particles.v = 0
+particles.derive_plot_vars = 1
+particles.mom_transfer = 1
+particles.mass_transfer = 1
+particles.fixed_parts = 0
+
+particles.fuel_ref_temp = 300.0
+
+particles.fuel_species = NC7H16
+particles.NC7H16_crit_temp = 540.0
+particles.NC7H16_boil_temp = 371.6
+particles.NC7H16_latent = 3.63E9
+particles.NC7H16_cp = 2.2483E7
+particles.NC7H16_rho = 0.6814
+particles.NC7H16_psat = 4.02832 1268.636 -56.199 1.E6
+
+particles.NC7H16_mu = 0.004 0.0 0.0 0.0
+particles.NC7H16_lambda = 120.0 0.0 0.0 0.0
+
+particles.use_splash_model = false
+particles.use_breakup_model = None
+
+particles.dep_fuel_species = nc7h16
+particles.init_file = droplets.dat
+particles.plot_src = 1
+# Uniform upstream state: the profile front lies outside the domain.
+prob.profile = profile_SI.txt
+prob.front = -1
+prob.perturbation = 0
+prob.p0 = 1.e6
+prob.T0 = 1400
+prob.upstream_Y = 0 0 0 0.22408133071681655 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.038276374792422144 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.73764229449076113

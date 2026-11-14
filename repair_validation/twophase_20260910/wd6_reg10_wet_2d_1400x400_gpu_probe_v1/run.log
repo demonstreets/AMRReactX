@@ -1,0 +1,109 @@
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Initializing AMReX (0ec1056ff13b-dirty)...
+MPI initialized with 1 MPI processes
+MPI initialized with thread support level 0
+Initializing CUDA...
+CUDA initialized with 1 device.
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+
+Starting run at 07:32:26 UTC on 2026-09-10.
+Successfully read inputs file ... 
+
+PeleC git hash: 0ec1056-dirty
+AMReX git hash: 0ec1056-dirty
+PelePhysics git hash: 0ec1056-dirty
+SUNDIALS git hash: 0ec1056-dirty
+
+
+ Reading spray model parameters ...
+ Warning: Spray model in 2D assumes narrow domain in z-direction (Lz = dz)!
+0 Advected Variables: 
+
+6 Species: 
+nc7h16  o2  co  h2o  co2  n2  
+0 Auxiliary Variables: 
+
+Initializing EB2
+Successfully read inputs file ... 
+Starting to call amrex_probinit ... 
+WD6 concentration regularization epsilon = 1e-10 mol/m^3 (zero means original WD law).
+Finite-rate ZND initialization: 5001 rows, 6 species, 3 reactions; no imposed wave speed.
+Successfully run amrex_probinit
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+Wave history begins at time 0; pressure/heat maxima are sampled at every completed step.
+INITIAL GRIDS 
+  Level 0   4 grids  560000 cells  100 % of domain
+            smallest grid: 344 x 400  biggest grid: 352 x 400
+
+CHECKPOINT: file = chk00000
+checkPoint() time = 0.117979898 secs.
+PLOTFILE: file = plt00000
+Write plotfile time = 0.245559982  seconds
+
+[Level 0 step 1] ADVANCE at time 0 with dt = 9.70297929e-10
+[Level 0 step 1] Advanced 560000 cells
+
+[STEP 1] Coarse TimeStep time: 0.990631709
+[STEP 1] FAB kilobyte spread across MPI nodes: [892362 ... 892362]
+
+STEP = 1 TIME = 9.70297929e-10 DT = 9.70297929e-10
+
+[Level 0 step 2] ADVANCE at time 9.70297929e-10 with dt = 1.067327722e-09
+[Level 0 step 2] Advanced 560000 cells
+
+[STEP 2] Coarse TimeStep time: 1.608751279
+[STEP 2] FAB kilobyte spread across MPI nodes: [892362 ... 892362]
+
+STEP = 2 TIME = 2.037625651e-09 DT = 1.067327722e-09
+
+[Level 0 step 3] ADVANCE at time 2.037625651e-09 with dt = 1.174060494e-09
+[Level 0 step 3] Advanced 560000 cells
+
+[STEP 3] Coarse TimeStep time: 1.816692413
+[STEP 3] FAB kilobyte spread across MPI nodes: [892362 ... 892362]
+
+STEP = 3 TIME = 3.211686145e-09 DT = 1.174060494e-09
+
+[Level 0 step 4] ADVANCE at time 3.211686145e-09 with dt = 1.291466543e-09
+[Level 0 step 4] Advanced 560000 cells
+
+[STEP 4] Coarse TimeStep time: 2.316386056
+[STEP 4] FAB kilobyte spread across MPI nodes: [892362 ... 892362]
+
+STEP = 4 TIME = 4.503152688e-09 DT = 1.291466543e-09
+
+[Level 0 step 5] ADVANCE at time 4.503152688e-09 with dt = 1.420613198e-09
+[Level 0 step 5] Advanced 560000 cells
+
+[STEP 5] Coarse TimeStep time: 2.051570999
+[STEP 5] FAB kilobyte spread across MPI nodes: [892362 ... 892362]
+
+STEP = 5 TIME = 5.923765886e-09 DT = 1.420613198e-09
+
+CHECKPOINT: file = chk00005
+checkPoint() time = 0.118777964 secs.
+PLOTFILE: file = plt00005
+Write plotfile time = 0.167782542  seconds
+
+
+Ending run at 07:32:39 UTC on 2026-09-10.
+Run time = 12.77110354
+Run time w/o init = 9.073534882
+CPU(0): Heap Space (bytes) used by Coalescing FAB Arena: 1011170560
+Total GPU global memory (MB) spread across MPI: [16269 ... 16269]
+Free  GPU global memory (MB) spread across MPI: [14974 ... 14974]
+[The         Arena] max space (MB) allocated spread across MPI: [964 ... 964]
+[The         Arena] max space (MB) used      spread across MPI: [932 ... 932]
+[The Managed Arena] max space (MB) allocated spread across MPI: [8 ... 8]
+[The Managed Arena] max space (MB) used      spread across MPI: [0 ... 0]
+[The  Pinned Arena] max space (MB) allocated spread across MPI: [124 ... 124]
+[The  Pinned Arena] max space (MB) used      spread across MPI: [104 ... 104]
+AMReX (0ec1056ff13b-dirty) finalized

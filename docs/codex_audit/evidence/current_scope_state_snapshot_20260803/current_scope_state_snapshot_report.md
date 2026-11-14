@@ -1,0 +1,125 @@
+# Current-Scope State Snapshot
+
+- Status: `PASS-CURRENT-SCOPE-STATE-SNAPSHOT`
+- Key reports ready: `True`
+- Master current-scope gates: `15/15`
+- Final current-user priority ready: `True`
+- Parallel capability ready: `True`
+- Scenario readiness matrix ready: `True`
+- Operator runbook ready: `True`
+- Strict blocker set ok: `True`
+
+## Key Reports
+
+- `parallel_capability`: `PASS-CURRENT-PARALLEL-CAPABILITY-MATRIX`
+- `scenario_readiness_matrix`: `PASS-CURRENT-SCENARIO-READINESS-MATRIX`
+- `engineering_multi_fuel_capability_boundary`: `PASS-ENGINEERING-MULTI-FUEL-CAPABILITY-BOUNDARY`
+- `engineering_liquefied_external_vaporization_contract`: `PASS-ENGINEERING-LIQUEFIED-EXTERNAL-VAPORIZATION-CONTRACT`
+- `engineering_liquefied_release_vaporization_source_model`: `PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL`
+- `engineering_liquefied_release_vaporization_source_model_negative_selftest`: `PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL-NEGATIVE-SELFTEST`
+- `engineering_liquefied_release_vaporization_source_model_cuda_smoke`: `PASS-ENGINEERING-LIQUEFIED-RELEASE-VAPORIZATION-SOURCE-MODEL-CUDA-SMOKE`
+- `engineering_liquefied_release_source_balance`: `PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE`
+- `engineering_liquefied_release_source_balance_negative_selftest`: `PASS-ENGINEERING-LIQUEFIED-RELEASE-SOURCE-BALANCE-NEGATIVE-SELFTEST`
+- `engineering_liquefied_release_thermal_plausibility`: `PASS-ENGINEERING-LIQUEFIED-RELEASE-THERMAL-PLAUSIBILITY`
+- `engineering_liquefied_breach_source_contract`: `PASS-ENGINEERING-LIQUEFIED-BREACH-SOURCE-CONTRACT`
+- `engineering_liquefied_breach_preset_templates`: `PASS-ENGINEERING-LIQUEFIED-BREACH-PRESET-TEMPLATES`
+- `engineering_multifuel_liquefied_user_answer`: `PASS-ENGINEERING-MULTIFUEL-LIQUEFIED-USER-ANSWER`
+- `current_scope_release_candidate_handoff`: `PASS-CURRENT-SCOPE-RELEASE-CANDIDATE-HANDOFF`
+- `project_closeout_forecast`: `PASS-PROJECT-CLOSEOUT-FORECAST`
+- `project_closeout_acceptance_gate`: `PASS-PROJECT-CLOSEOUT-ACCEPTANCE-GATE`
+- `strict_master_plan_completion_gate`: `AWAITING-STRICT-MASTER-PLAN-COMPLETION-GATE-EXTERNAL-ARTIFACTS`
+- `strict_external_artifact_drop_index`: `PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX`
+- `strict_external_artifact_drop_index_cli`: `PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX-CLI`
+- `strict_external_artifact_drop_checklist`: `PASS-STRICT-EXTERNAL-ARTIFACT-DROP-CHECKLIST`
+- `strict_fire_calibration_source_registry_artifact`: `PASS-STRICT-FIRE-CALIBRATION-SOURCE-REGISTRY-ARTIFACT`
+- `strict_fire_calibration_metric_artifacts`: `PASS-STRICT-FIRE-CALIBRATION-METRIC-ARTIFACTS`
+- `strict_fire_calibration_metadata_artifacts`: `PASS-STRICT-FIRE-CALIBRATION-METADATA-ARTIFACTS`
+- `strict_external_evidence_receiving_pack`: `PASS-STRICT-EXTERNAL-EVIDENCE-RECEIVING-PACK`
+- `strict_external_artifact_template_clone_selftest`: `PASS-STRICT-EXTERNAL-ARTIFACT-TEMPLATE-CLONE-SELFTEST`
+- `strict_external_artifact_cross_benchmark_alias_selftest`: `PASS-STRICT-EXTERNAL-ARTIFACT-CROSS-BENCHMARK-ALIAS-SELFTEST`
+- `strict_external_plume_source_separation_audit`: `PASS-STRICT-EXTERNAL-PLUME-SOURCE-SEPARATION-AUDIT`
+- `strict_external_artifact_progress_selftest`: `PASS-STRICT-EXTERNAL-ARTIFACT-PROGRESS-SELFTEST`
+- `strict_master_plan_closeout_action_pack`: `PASS-STRICT-MASTER-PLAN-CLOSEOUT-ACTION-PACK`
+- `current_scope_delivery_package`: `PASS-CURRENT-SCOPE-DELIVERY-PACKAGE`
+- `complete_walkthrough_guide`: `PASS-COMPLETE-WALKTHROUGH-GUIDE`
+- `current_scope_final_handoff_note`: `PASS-CURRENT-SCOPE-FINAL-HANDOFF-NOTE`
+- `current_operator_quickstart_smoke`: `PASS-CURRENT-OPERATOR-QUICKSTART-SMOKE`
+- `current_phase_closure_certificate`: `PASS-CURRENT-PHASE-CLOSURE-CERTIFICATE`
+- `current_phase_release_manifest`: `PASS-CURRENT-PHASE-RELEASE-MANIFEST`
+- `current_scope_release_refresh_entrypoint`: `PASS-CURRENT-SCOPE-RELEASE-REFRESH-ENTRYPOINT`
+- `engineering_liquefied_external_vaporization_negative_selftest`: `PASS-ENGINEERING-LIQUEFIED-EXTERNAL-VAPORIZATION-NEGATIVE-SELFTEST`
+- `engineering_liquefied_phase_change_overclaim_guard`: `PASS-ENGINEERING-LIQUEFIED-PHASE-CHANGE-OVERCLAIM-GUARD`
+- `dataverse_open_channel_amr_source_projection_contract`: `PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-CONTRACT`
+- `dataverse_open_channel_amr_source_projection_implementation`: `PASS-DATAVERSE-OPEN-CHANNEL-AMR-SOURCE-PROJECTION-IMPLEMENTATION`
+- `engineering_fixed_mass_flow_valve_schedule`: `PASS-ENGINEERING-FIXED-MASS-FLOW-VALVE-SCHEDULE`
+- `engineering_external_vaporization_timeseries`: `PASS-ENGINEERING-EXTERNAL-VAPORIZATION-TIMESERIES`
+- `engineering_external_vaporization_timeseries_cuda`: `PASS-ENGINEERING-EXTERNAL-VAPORIZATION-TIMESERIES-CUDA`
+- `engineering_external_vaporization_multifuel_source_matrix`: `PASS-ENGINEERING-EXTERNAL-VAPORIZATION-MULTIFUEL-SOURCE-MATRIX`
+- `engineering_external_vaporization_ch4_timeseries_cuda`: `PASS-ENGINEERING-EXTERNAL-VAPORIZATION-CH4-TIMESERIES-CUDA`
+- `engineering_external_vaporization_c3h8_timeseries_cuda`: `PASS-ENGINEERING-EXTERNAL-VAPORIZATION-C3H8-TIMESERIES-CUDA`
+- `engineering_multi_fuel_operator_runbook`: `PASS-ENGINEERING-MULTI-FUEL-OPERATOR-RUNBOOK`
+- `engineering_multi_fuel_template_catalog`: `PASS-ENGINEERING-MULTI-FUEL-TEMPLATE-CATALOG`
+- `engineering_fuel_species_guard`: `PASS-ENGINEERING-FUEL-SPECIES-GUARD`
+- `engineering_log_marker_compatibility`: `PASS-ENGINEERING-LOG-MARKER-COMPATIBILITY`
+- `engineering_ch4_cold_plume_cpu_probe`: `PASS-ENGINEERING-CH4-COLD-PLUME-CPU-MPI-CUDA-PROBE`
+- `engineering_ch4_pipe_rack_delayed_ignition_cuda`: `PASS-CH4-PIPE-RACK-DELAYED-IGNITION-SINGLE-CUDA`
+- `engineering_ch4_pipe_rack_delayed_ignition_mpi`: `PASS-CH4-PIPE-RACK-DELAYED-IGNITION-CPU-MPI`
+- `engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda`: `PASS-CH4-PIPE-RACK-DELAYED-IGNITION-MPI-CUDA`
+- `engineering_ch4_pipe_rack_delayed_ignition_mpi_cuda_500step`: `PASS-CH4-PIPE-RACK-DELAYED-IGNITION-MPI-CUDA-500STEP`
+- `operator_runbook`: `PASS-CURRENT-SCOPE-OPERATOR-RUNBOOK`
+- `final_readiness`: `PASS-MASTER-PLAN-CURRENT-USER-SCOPE-READINESS`
+- `master_current_scope`: `PASS-MASTER-PLAN-CURRENT-SCOPE-VERIFICATION`
+- `strict_blocker_matrix`: `TRIAGED-MASTER-PLAN-STRICT-BLOCKER-MATRIX`
+- `engineering_h2_real_cad_handoff_contract`: `PASS-H2-REAL-CAD-HANDOFF-CONTRACT`
+- `h2_fire_overpressure_dataverse_metadata`: `PASS-H2-FIRE-OVERPRESSURE-DATAVERSE-METADATA`
+- `h2_fire_overpressure_reduced_exp002`: `PASS-H2-FIRE-OVERPRESSURE-REDUCED-EXP002`
+- `h2_fire_exp002_overpressure_calibration_table`: `PASS-H2-FIRE-EXP002-OVERPRESSURE-CALIBRATION-TABLE`
+- `h2_fire_exp002_pressure_comparison_contract`: `PASS-H2-FIRE-EXP002-PRESSURE-COMPARISON-CONTRACT`
+- `h2_fire_calibration_candidate_sources_20260805`: `PASS-H2-FIRE-CALIBRATION-CANDIDATE-SOURCES-20260805`
+- `h2_fire_mdpi_radiation_calibration_table`: `PASS-H2-FIRE-MDPI-RADIATION-CALIBRATION-TABLE`
+- `h2_fire_mdpi_radiation_comparison_contract`: `PASS-H2-FIRE-MDPI-RADIATION-COMPARISON-CONTRACT`
+- `h2_fire_mdpi_radiation_screening_comparison`: `QUANTIFIED-H2-FIRE-MDPI-RADIATION-SCREENING-NOT-PASSING`
+- `engineering_h2_pipe_rack_delayed_ignition_cuda`: `PASS-H2-PIPE-RACK-DELAYED-IGNITION-SINGLE-CUDA`
+- `engineering_h2_pipe_rack_delayed_ignition_mpi`: `PASS-H2-PIPE-RACK-DELAYED-IGNITION-CPU-MPI`
+- `engineering_h2_pipe_rack_delayed_ignition_cross_platform`: `PASS-H2-PIPE-RACK-DELAYED-IGNITION-CPU-GPU-PARITY`
+- `h2_fire_exp002_pressure_cfd_proxy`: `PASS-H2-FIRE-EXP002-PRESSURE-CFD-PROXY`
+- `h2_fire_plotfile_sensor_sampling_contract`: `PASS-H2-FIRE-PLOTFILE-SENSOR-SAMPLING-CONTRACT`
+- `h2_fire_plotfile_sensor_sampling_negative_selftest`: `PASS-H2-FIRE-PLOTFILE-SENSOR-SAMPLING-NEGATIVE-SELFTEST`
+- `h2_fire_mdpi_radiation_cfd_proxy`: `PASS-H2-FIRE-MDPI-RADIATION-CFD-PROXY`
+- `h2_fire_mdpi_radiation_integrated_cfd_proxy`: `PASS-H2-FIRE-MDPI-RADIATION-INTEGRATED-CFD-PROXY`
+- `h2_fire_calibration_residual_budget`: `TRIAGED-H2-FIRE-CALIBRATION-RESIDUAL-BUDGET`
+- `engineering_h2_fire_exp002_delayed_ignition_bridge`: `PASS-H2-FIRE-EXP002-DELAYED-IGNITION-BRIDGE`
+- `strict_unblock_runbook`: `PASS-STRICT-MASTER-PLAN-UNBLOCK-RUNBOOK`
+- `strict_unblock_command_inventory`: `PASS-STRICT-UNBLOCK-COMMAND-INVENTORY`
+- `strict_artifact_template_lint`: `PASS-STRICT-ARTIFACT-TEMPLATE-LINT`
+- `strict_artifact_drop_contract_preflight`: `PASS-STRICT-ARTIFACT-DROP-CONTRACT-PREFLIGHT`
+- `strict_artifact_drop_contract_selftest`: `PASS-STRICT-ARTIFACT-DROP-CONTRACT-SELFTEST`
+- `master_plan_completion_audit`: `AUDITED-MASTER-PLAN-CURRENT-SCOPE-PASS-STRICT-INCOMPLETE`
+- `current_status_cli`: `PASS-CURRENT-STATUS-CLI`
+- `current_worktree_hygiene`: `AUDITED-CURRENT-WORKTREE-HYGIENE`
+- `current_worktree_source_ledger`: `AUDITED-CURRENT-WORKTREE-SOURCE-LEDGER`
+- `current_case_output_cleanup_manifest`: `AUDITED-CURRENT-CASE-OUTPUT-CLEANUP-MANIFEST`
+- `current_disk_usage_manifest`: `AUDITED-CURRENT-DISK-USAGE-MANIFEST`
+- `current_disk_cleanup_plan`: `AUDITED-CURRENT-DISK-CLEANUP-PLAN`
+- `current_operator_command_inventory`: `PASS-CURRENT-OPERATOR-COMMAND-INVENTORY`
+- `current_verification_chain_coverage`: `PASS-CURRENT-VERIFICATION-CHAIN-COVERAGE`
+- `dataverse_open_channel_reference_package`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-REFERENCE-PACKAGE`
+- `dataverse_open_channel_agreement_contract`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-AGREEMENT-CONTRACT`
+- `dataverse_open_channel_cfd_scout`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-CFD-SCOUT-MPI-CUDA`
+- `dataverse_open_channel_cfd_agreement_attempt`: `QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING`
+- `dataverse_open_channel_cfd_45s_agreement_attempt`: `QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING`
+- `dataverse_open_channel_cfd_120s_agreement_attempt`: `QUANTIFIED-DATAVERSE-OPEN-CHANNEL-H2-CFD-AGREEMENT-NOT-PASSING`
+- `dataverse_open_channel_120s_calibration_diagnosis`: `DIAGNOSED-DATAVERSE-OPEN-CHANNEL-H2-120S-CALIBRATION-GAPS`
+- `dataverse_open_channel_45s_calibration_r005_z08`: `SCREENED-DATAVERSE-OPEN-CHANNEL-H2-45S-CALIBRATION-R005-Z08-NOT-PROMOTED`
+- `dataverse_open_channel_45s_calibration_sweep`: `SCREENED-DATAVERSE-OPEN-CHANNEL-H2-45S-CALIBRATION-SWEEP-NO-PROMOTION`
+- `dataverse_open_channel_physics_alignment`: `DIAGNOSED-DATAVERSE-OPEN-CHANNEL-H2-PHYSICS-ALIGNMENT-GAPS`
+- `dataverse_open_channel_orifice_velocity_scout`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-CFD-SCOUT-MPI-CUDA`
+- `dataverse_open_channel_open_boundary_scout`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-CFD-SCOUT-MPI-CUDA`
+- `dataverse_open_channel_open_boundary_orifice_extended_01s`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-CFD-SCOUT-MPI-CUDA`
+- `dataverse_open_channel_open_boundary_orifice_extended_1s`: `PASS-DATAVERSE-OPEN-CHANNEL-H2-CFD-SCOUT-MPI-CUDA`
+- `dataverse_open_channel_open_boundary_orifice_extended_2s`: `PASS-DATAVERSE-OPEN-CHANNEL-OPEN-BOUNDARY-ORIFICE-EXTENDED-2S-MPI-CUDA`
+- `dataverse_refined_source_projection_probe`: `PASS-DATAVERSE-REFINED-SOURCE-PROJECTION-PROBE-MPI-CUDA`
+- `dataverse_full_channel_refined_source_dx025_probe`: `PASS-DATAVERSE-FULL-CHANNEL-REFINED-SOURCE-DX025-PROBE-MPI-CUDA`
+- `dataverse_full_channel_refined_source_dx025_500step`: `PASS-DATAVERSE-FULL-CHANNEL-REFINED-SOURCE-DX025-500STEP-MPI-CUDA`
+- `dataverse_full_channel_refined_source_dx025_1000step_dt5em6`: `PASS-DATAVERSE-FULL-CHANNEL-REFINED-SOURCE-DX025-1000STEP-DT5EM6-MPI-CUDA`
+- `academic_gas_detonation_single_cuda`: `PASS-ACADEMIC-GAS-DETONATION-SINGLE-CUDA`

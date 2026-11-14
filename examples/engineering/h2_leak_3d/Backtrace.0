@@ -1,0 +1,57 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x78ef16) [0x645da8d71f16]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 1)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 1)
+
+ 1: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x793b81) [0x645da8d76b81]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x1057bb) [0x645da86e87bb]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const at /usr/include/c++/13/bits/basic_string.h:264
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() at /usr/include/c++/13/bits/basic_string.h:282
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) (anonymous namespace)::abortWithSTLMessage(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../src/geometry/eb2_factory.cpp:31
+
+ 3: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x1079fb) [0x645da86ea9fb]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const at /usr/include/c++/13/bits/basic_string.h:223
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const at /usr/include/c++/13/bits/basic_string.h:264
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() at /usr/include/c++/13/bits/basic_string.h:282
+ (inlined by) std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) (anonymous namespace)::looksLikeBinarySTL(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../src/geometry/eb2_factory.cpp:142
+
+ 4: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x10bd33) [0x645da86eed33]
+    (anonymous namespace)::readSTLBounds(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../src/geometry/eb2_factory.cpp:243 (discriminator 1)
+
+ 5: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x10c230) [0x645da86ef230]
+    pele::buildFromSTL(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, amrex::Geometry const&, int, double, std::array<double, 3ul> const&, int, int, int, bool, bool, int, bool, bool) at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../src/geometry/eb2_factory.cpp:455 (discriminator 1)
+
+ 6: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x20209c) [0x645da87e509c]
+    MyProblemSpecificFunctions::EBUserDefined(amrex::Geometry const&, int, int) at /home/cj/my-pele/examples/engineering/h2_leak_3d/pelelmex_prob.cpp:247 (discriminator 2)
+
+ 7: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x414bdf) [0x645da89f7bdf]
+    PeleLM::makeEBGeometry() at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX_EB.cpp:44 (discriminator 1)
+
+ 8: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0x29038e) [0x645da887338e]
+    PeleLM::Setup() at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/PeleLMeX_Setup.cpp:91
+
+ 9: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0xec7d5) [0x645da86cf7d5]
+    main at /home/cj/my-pele/examples/engineering/h2_leak_3d/../../../external/PeleLMeX/Source/main.cpp:50
+
+10: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x77bca142a1ca]
+
+11: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x77bca142a28b]
+
+12: ./codex_c3h8_leak_propane_fc_fire3d.gnu.MPI.CUDA.ex(+0xf7cf5) [0x645da86dacf5]
+    ?? ??:0
+

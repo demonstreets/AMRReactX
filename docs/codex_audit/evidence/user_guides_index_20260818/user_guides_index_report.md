@@ -1,0 +1,370 @@
+# User Guides Index
+
+Status: `PASS-USER-GUIDES-INDEX`
+
+## Documents
+- `PASS` `readme` `docs/user_guides/README.md`
+- `PASS` `main_manual` `docs/user_guides/Pele_CFD_中文使用手册.md`
+- `PASS` `complete_walkthrough` `docs/user_guides/从目录到排错_完整运行教程.md`
+- `PASS` `from_zero_case_tutorial` `docs/user_guides/从零设置完整算例_工程H2泄漏火灾与学术爆轰.md`
+- `PASS` `command_cheatsheet` `docs/user_guides/命令速查与场景矩阵.md`
+- `PASS` `engineering_tutorial` `docs/user_guides/工程场景_泄漏扩散火灾_Tutorial.md`
+- `PASS` `academic_tutorial` `docs/user_guides/学术场景_气相与两相爆轰_Tutorial.md`
+- `PASS` `real_case_intake` `docs/user_guides/真实工程资料交付与复验清单.md`
+- `PASS` `strict_external_artifact_cn_handoff` `docs/user_guides/真实资料投递清单_按文件路径.md`
+- `PASS` `engineering_h2_leak_quickstart` `examples/engineering/h2_leak_3d/README_中文快速教程.md`
+- `PASS` `academic_detonation_quickstart` `examples/academic/detonation_2D/README_中文快速教程.md`
+
+## Required Content
+- `PASS` `readme_lists_main_manual`
+- `PASS` `readme_lists_complete_walkthrough`
+- `PASS` `readme_lists_from_zero_case_tutorial`
+- `PASS` `readme_lists_command_cheatsheet`
+- `PASS` `readme_lists_engineering_tutorial`
+- `PASS` `readme_lists_academic_tutorial`
+- `PASS` `readme_lists_real_case_intake`
+- `PASS` `readme_lists_strict_external_artifact_cn_handoff`
+- `PASS` `readme_lists_engineering_case_quickstart`
+- `PASS` `readme_lists_academic_case_quickstart`
+- `PASS` `main_manual_has_directory_section`
+- `PASS` `main_manual_has_input_section`
+- `PASS` `main_manual_has_run_section`
+- `PASS` `main_manual_points_to_from_zero_case_tutorial`
+- `PASS` `complete_walkthrough_has_troubleshooting`
+- `PASS` `complete_walkthrough_has_case_output_cleanup`
+- `PASS` `complete_walkthrough_has_source_ledger_command`
+- `PASS` `complete_walkthrough_has_cleanup_manifest_command`
+- `PASS` `from_zero_has_engineering_case_dir`
+- `PASS` `from_zero_has_selected_case_walkthrough`
+- `PASS` `from_zero_has_minimal_file_types`
+- `PASS` `from_zero_has_first_run_checks`
+- `PASS` `from_zero_has_academic_case_dir`
+- `PASS` `from_zero_has_custom_engineering_input`
+- `PASS` `from_zero_has_custom_academic_input`
+- `PASS` `from_zero_has_engineering_cpu_command`
+- `PASS` `from_zero_has_engineering_mpi_command`
+- `PASS` `from_zero_has_engineering_gpu_fire_command`
+- `PASS` `from_zero_has_engineering_mpi_cuda_restart_command`
+- `PASS` `from_zero_has_academic_cpu_command`
+- `PASS` `from_zero_has_academic_mpi_command`
+- `PASS` `from_zero_has_academic_gpu_command`
+- `PASS` `from_zero_has_outputs_section`
+- `PASS` `command_cheatsheet_has_engineering_h2_section`
+- `PASS` `command_cheatsheet_has_academic_section`
+- `PASS` `command_cheatsheet_has_parallel_section`
+- `PASS` `command_cheatsheet_has_real_artifact_section`
+- `PASS` `command_cheatsheet_has_master_scope_command`
+- `PASS` `command_cheatsheet_has_gpu_fire_command`
+- `PASS` `command_cheatsheet_has_academic_cuda_command`
+- `PASS` `command_cheatsheet_has_receiving_preflight_command`
+- `PASS` `engineering_tutorial_has_h2`
+- `PASS` `engineering_tutorial_has_fire`
+- `PASS` `academic_tutorial_has_detonation`
+- `PASS` `academic_tutorial_has_two_phase`
+- `PASS` `real_case_intake_has_real_cad`
+- `PASS` `real_case_intake_has_fire_calibration`
+- `PASS` `real_case_intake_has_fire_residual_budget`
+- `PASS` `strict_external_artifact_cn_handoff_has_status`
+- `PASS` `strict_external_artifact_cn_handoff_has_drop_paths`
+- `PASS` `strict_external_artifact_cn_handoff_has_preflight`
+- `PASS` `strict_external_artifact_cn_handoff_has_receiving_preflight_wrapper`
+- `PASS` `readme_has_receiving_preflight_wrapper`
+- `PASS` `engineering_case_has_minimal_file_package`
+- `PASS` `engineering_case_has_copy_run_checklist`
+- `PASS` `engineering_case_explains_file_roles`
+- `PASS` `engineering_case_explains_real_case_parameters`
+- `PASS` `engineering_case_has_custom_input_copy`
+- `PASS` `engineering_case_has_cpu_command`
+- `PASS` `engineering_case_has_mpi_command`
+- `PASS` `engineering_case_has_gpu_fire_command`
+- `PASS` `engineering_case_has_mpi_cuda_restart_command`
+- `PASS` `academic_case_has_minimal_file_package`
+- `PASS` `academic_case_has_copy_run_checklist`
+- `PASS` `academic_case_explains_file_roles`
+- `PASS` `academic_case_explains_real_case_parameters`
+- `PASS` `academic_case_has_custom_input_copy`
+- `PASS` `academic_case_has_cpu_command`
+- `PASS` `academic_case_has_mpi_command`
+- `PASS` `academic_case_has_hybrid_command`
+- `PASS` `academic_case_has_gpu_command`
+
+## Documented Command Targets
+- `PASS` `main_manual` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `main_manual` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `main_manual` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `main_manual` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `main_manual` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `main_manual` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `main_manual` `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_open_domain.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_multi_fuel_capability_boundary.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_multi_fuel_template_catalog.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_gasified_lng_lpg_surrogate.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_ch4_cold_plume_cpu_probe.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_liquefied_breach_preset_templates.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_liquefied_release_vaporization_source_model.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_external_vaporization_timeseries_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_pelec_plan_amr.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_shock_droplet_spray.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_d2_law.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_vof_advection.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_pelelmex.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_pelec.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_academic_pelec_hybrid.sh`
+- `PASS` `complete_walkthrough` `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_engineering_h2_production_evidence.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_parallel_capability_matrix.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_worktree_source_ledger_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_worktree_source_ledger.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_case_output_cleanup_manifest_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_case_output_cleanup_manifest.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_phase_release_manifest_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_phase_release_manifest.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_verification_chain_coverage_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_verification_chain_coverage.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_scope_state_snapshot_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_scope_state_snapshot.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_status_cli_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_status_cli.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_current_report_hash_cycle_guard_report.py`
+- `PASS` `complete_walkthrough` `bash tools/verify_current_report_hash_cycle_guard.sh`
+- `PASS` `complete_walkthrough` `bash tools/verify_master_plan_current_scope.sh`
+- `PASS` `complete_walkthrough` `python3 tools/write_complete_walkthrough_guide_report.py`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_engineering_h2_leak_open_domain.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `from_zero_case_tutorial` `python3 tools/codex_print_current_status.py`
+- `PASS` `from_zero_case_tutorial` `bash tools/verify_master_plan_current_scope.sh`
+- `PASS` `from_zero_case_tutorial` `python3 tools/write_user_guides_index_report.py`
+- `PASS` `from_zero_case_tutorial` `bash tools/verify_user_guides_index.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_academic_pelec_hybrid.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/codex_smoke_academic_pelec_plan_amr.sh`
+- `PASS` `from_zero_case_tutorial` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_master_plan_current_scope.sh`
+- `PASS` `command_cheatsheet` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_user_guides_index_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_user_guides_index.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_open_domain.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_h2_production_evidence.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_multi_fuel_capability_boundary.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_multi_fuel_template_catalog.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_ch4_cold_plume_cpu_probe.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_gasified_lng_lpg_surrogate.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_liquefied_breach_preset_templates.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_engineering_external_vaporization_timeseries_cuda.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_pelec_plan_amr.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_academic_evidence.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_academic_current_priority_scope.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_shock_droplet_spray.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_d2_law.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_vof_advection.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_current_parallel_capability_matrix.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_master_plan_gpu_runtime_recovery.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_master_plan_cuda_revalidation.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh`
+- `PASS` `command_cheatsheet` `bash tools/codex_smoke_academic_pelec_hybrid.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_current_status_cli_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_current_status_cli.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_current_worktree_source_ledger_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_current_worktree_source_ledger.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_current_case_output_cleanup_manifest_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_current_case_output_cleanup_manifest.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_current_report_hash_cycle_guard_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_current_report_hash_cycle_guard.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_strict_external_artifact_cn_handoff_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_strict_external_artifact_cn_handoff.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_strict_artifact_drop_contract_preflight.sh`
+- `PASS` `command_cheatsheet` `bash tools/run_strict_external_artifact_receiving_preflight.sh`
+- `PASS` `command_cheatsheet` `python3 tools/write_strict_external_artifact_receiving_preflight_entrypoint_report.py`
+- `PASS` `command_cheatsheet` `bash tools/verify_strict_external_artifact_receiving_preflight_entrypoint.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_strict_artifact_template_lint.sh`
+- `PASS` `command_cheatsheet` `bash tools/verify_strict_external_artifact_template_clone_selftest.sh`
+- `PASS` `engineering_tutorial` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `engineering_tutorial` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `engineering_tutorial` `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh`
+- `PASS` `engineering_tutorial` `bash tools/verify_engineering_multi_fuel_capability_boundary.sh`
+- `PASS` `engineering_tutorial` `bash tools/verify_engineering_multi_fuel_template_catalog.sh`
+- `PASS` `engineering_tutorial` `bash tools/verify_engineering_gasified_lng_lpg_surrogate.sh`
+- `PASS` `engineering_tutorial` `bash tools/verify_engineering_liquefied_breach_source_contract.sh`
+- `PASS` `engineering_tutorial` `bash tools/verify_engineering_liquefied_release_source_balance.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_vof_advection.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_d2_law.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_shock_droplet_spray.sh`
+- `PASS` `academic_tutorial` `bash tools/codex_smoke_academic_rayleigh_taylor.sh`
+- `PASS` `real_case_intake` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `real_case_intake` `python3 tools/codex_print_strict_external_artifact_drop_index.py`
+- `PASS` `real_case_intake` `bash tools/verify_strict_artifact_drop_contract_preflight.sh`
+- `PASS` `real_case_intake` `bash tools/verify_strict_external_artifact_drop_checklist.sh`
+- `PASS` `real_case_intake` `bash tools/verify_master_plan_strict_artifact_intake_manifest.sh`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_fire_calibration_literature_metric_preflight_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_fire_calibration_package_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_engineering_h2_fire_calibration_dataset_report.py`
+- `PASS` `real_case_intake` `python3 tools/write_h2_fire_calibration_residual_budget_report.py`
+- `PASS` `real_case_intake` `bash tools/verify_h2_fire_calibration_residual_budget.sh`
+- `PASS` `real_case_intake` `bash tools/rebuild_engineering_h2_evidence_chain.sh`
+- `PASS` `real_case_intake` `bash tools/verify_master_plan_current_scope.sh`
+- `PASS` `strict_external_artifact_cn_handoff` `bash tools/run_strict_external_artifact_receiving_preflight.sh`
+- `PASS` `strict_external_artifact_cn_handoff` `python3 tools/write_strict_external_artifact_receiving_preflight_entrypoint_report.py`
+- `PASS` `strict_external_artifact_cn_handoff` `bash tools/verify_strict_external_artifact_receiving_preflight_entrypoint.sh`
+- `PASS` `strict_external_artifact_cn_handoff` `bash tools/verify_strict_artifact_drop_contract_preflight.sh`
+- `PASS` `strict_external_artifact_cn_handoff` `python3 tools/write_strict_external_artifact_cn_handoff_report.py`
+- `PASS` `strict_external_artifact_cn_handoff` `bash tools/verify_strict_external_artifact_cn_handoff.sh`
+- `PASS` `strict_external_artifact_cn_handoff` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `engineering_h2_leak_quickstart` `bash tools/codex_smoke_engineering_h2_leak_open_domain.sh`
+- `PASS` `engineering_h2_leak_quickstart` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `engineering_h2_leak_quickstart` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `engineering_h2_leak_quickstart` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh`
+- `PASS` `academic_detonation_quickstart` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `academic_detonation_quickstart` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `academic_detonation_quickstart` `bash tools/codex_smoke_academic_pelec_hybrid.sh`
+- `PASS` `academic_detonation_quickstart` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `academic_detonation_quickstart` `bash tools/codex_smoke_academic_pelec_plan_amr.sh`
+
+## Documented Command Syntax
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_open_domain_mpi.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh`
+- `PASS` `bash tools/codex_smoke_academic_detonation_wave.sh`
+- `PASS` `bash tools/codex_smoke_academic_pelec_mpi.sh`
+- `PASS` `bash tools/codex_smoke_academic_pelec_cuda.sh`
+- `PASS` `bash tools/run_current_scope_release_refresh.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_reacting_mpi_cuda.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_open_domain.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_open_domain_crosswind.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_open_domain_low_wind.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_open_domain_sensitivity.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_pipe_rack_reacting_mpi_cuda_restart.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_pipe_rack_delayed_ignition_mpi.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_obstacle_cylinder.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_open_domain_multibox.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_pipe_rack_obstacle.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_stl_obstacle.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_stl_composite_obstacle.sh`
+- `PASS` `bash tools/codex_smoke_engineering_h2_leak_stl_multifile_obstacle.sh`
+- `PASS` `bash tools/verify_engineering_multi_fuel_capability_boundary.sh`
+- `PASS` `bash tools/verify_engineering_multi_fuel_template_catalog.sh`
+- `PASS` `bash tools/verify_engineering_gasified_lng_lpg_surrogate.sh`
+- `PASS` `bash tools/verify_engineering_ch4_cold_plume_cpu_probe.sh`
+- `PASS` `bash tools/verify_engineering_ch4_pipe_rack_delayed_ignition_cuda.sh`
+- `PASS` `bash tools/verify_engineering_c3h8_gas_phase_cpu_cuda.sh`
+- `PASS` `bash tools/verify_engineering_liquefied_breach_preset_templates.sh`
+- `PASS` `bash tools/verify_engineering_liquefied_release_vaporization_source_model.sh`
+- `PASS` `bash tools/verify_engineering_liquefied_release_vaporization_source_model_cuda_smoke.sh`
+- `PASS` `bash tools/verify_engineering_external_vaporization_timeseries_cuda.sh`
+- `PASS` `bash tools/codex_smoke_academic_pelec_plan_amr.sh`
+- `PASS` `bash tools/codex_smoke_academic_shock_droplet_spray.sh`
+- `PASS` `bash tools/codex_smoke_academic_d2_law.sh`
+- `PASS` `bash tools/codex_smoke_academic_vof_advection.sh`
+- `PASS` `bash tools/verify_academic_gas_liquid_detonation_mpi_cuda_extended.sh`
+- `PASS` `bash tools/codex_smoke_engineering_pelelmex.sh`
+- `PASS` `bash tools/codex_smoke_academic_pelec.sh`
+- `PASS` `bash tools/codex_smoke_academic_pelec_hybrid.sh`
+- `PASS` `bash tools/verify_engineering_h2_production_evidence.sh`
+- `PASS` `bash tools/verify_current_parallel_capability_matrix.sh`
+- `PASS` `python3 tools/write_current_worktree_source_ledger_report.py`
+- `PASS` `bash tools/verify_current_worktree_source_ledger.sh`
+- `PASS` `python3 tools/write_current_case_output_cleanup_manifest_report.py`
+- `PASS` `bash tools/verify_current_case_output_cleanup_manifest.sh`
+- `PASS` `python3 tools/write_current_phase_release_manifest_report.py`
+- `PASS` `bash tools/verify_current_phase_release_manifest.sh`
+- `PASS` `python3 tools/write_current_verification_chain_coverage_report.py`
+- `PASS` `bash tools/verify_current_verification_chain_coverage.sh`
+- `PASS` `python3 tools/write_current_scope_state_snapshot_report.py`
+- `PASS` `bash tools/verify_current_scope_state_snapshot.sh`
+- `PASS` `python3 tools/write_current_status_cli_report.py`
+- `PASS` `bash tools/verify_current_status_cli.sh`
+- `PASS` `python3 tools/write_current_report_hash_cycle_guard_report.py`
+- `PASS` `bash tools/verify_current_report_hash_cycle_guard.sh`
+- `PASS` `bash tools/verify_master_plan_current_scope.sh`
+- `PASS` `python3 tools/write_complete_walkthrough_guide_report.py`
+- `PASS` `python3 tools/codex_print_current_status.py`
+- `PASS` `python3 tools/write_user_guides_index_report.py`
+- `PASS` `bash tools/verify_user_guides_index.sh`
+- `PASS` `bash tools/verify_academic_evidence.sh`
+- `PASS` `bash tools/verify_academic_current_priority_scope.sh`
+- `PASS` `bash tools/verify_master_plan_gpu_runtime_recovery.sh`
+- `PASS` `bash tools/verify_master_plan_cuda_revalidation.sh`
+- `PASS` `python3 tools/write_strict_external_artifact_cn_handoff_report.py`
+- `PASS` `bash tools/verify_strict_external_artifact_cn_handoff.sh`
+- `PASS` `bash tools/verify_strict_artifact_drop_contract_preflight.sh`
+- `PASS` `bash tools/run_strict_external_artifact_receiving_preflight.sh`
+- `PASS` `python3 tools/write_strict_external_artifact_receiving_preflight_entrypoint_report.py`
+- `PASS` `bash tools/verify_strict_external_artifact_receiving_preflight_entrypoint.sh`
+- `PASS` `bash tools/verify_strict_artifact_template_lint.sh`
+- `PASS` `bash tools/verify_strict_external_artifact_template_clone_selftest.sh`
+- `PASS` `bash tools/verify_engineering_liquefied_breach_source_contract.sh`
+- `PASS` `bash tools/verify_engineering_liquefied_release_source_balance.sh`
+- `PASS` `bash tools/codex_smoke_academic_rayleigh_taylor.sh`
+- `PASS` `python3 tools/codex_print_strict_external_artifact_drop_index.py`
+- `PASS` `bash tools/verify_strict_external_artifact_drop_checklist.sh`
+- `PASS` `bash tools/verify_master_plan_strict_artifact_intake_manifest.sh`
+- `PASS` `python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py`
+- `PASS` `python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py`
+- `PASS` `python3 tools/write_engineering_h2_real_cad_boundary_tag_contract_report.py`
+- `PASS` `python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py`
+- `PASS` `python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py`
+- `PASS` `python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py`
+- `PASS` `python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py`
+- `PASS` `python3 tools/write_engineering_h2_fire_calibration_digitization_preflight_report.py`
+- `PASS` `python3 tools/write_engineering_h2_fire_calibration_literature_metric_preflight_report.py`
+- `PASS` `python3 tools/write_engineering_h2_fire_calibration_package_report.py`
+- `PASS` `python3 tools/write_engineering_h2_fire_calibration_dataset_report.py`
+- `PASS` `python3 tools/write_h2_fire_calibration_residual_budget_report.py`
+- `PASS` `bash tools/verify_h2_fire_calibration_residual_budget.sh`
+- `PASS` `bash tools/rebuild_engineering_h2_evidence_chain.sh`

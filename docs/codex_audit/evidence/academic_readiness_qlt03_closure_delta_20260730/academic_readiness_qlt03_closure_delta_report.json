@@ -1,0 +1,136 @@
+{
+  "created_utc": "2026-08-20T10:11:08.144470Z",
+  "evidence": [
+    {
+      "exists": true,
+      "name": "readiness_summary",
+      "path": "docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json",
+      "sha256": "350350fa3d11bc3b2f65505c25235348945277aec2ae782297abe168c35ca2e5"
+    },
+    {
+      "exists": true,
+      "name": "qlt03_csf_stress_closure",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_closure_20260730/qlt03_lm_csf_stress_closure_report.json",
+      "sha256": "7797b6d3f4d30b4aaf55d2907109ca9fe7907a57b001f2e012fcaf849fa65ca8"
+    },
+    {
+      "exists": true,
+      "name": "legacy_path_decision",
+      "path": "docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json",
+      "sha256": "18860f92b6433a9090bf941d4b0541750758089f7398f67e00672101a1164cfa"
+    },
+    {
+      "exists": true,
+      "name": "delta_writer",
+      "path": "tools/write_academic_readiness_qlt03_closure_delta_report.py",
+      "sha256": "5d786d90aaacab14295600a7755773f5a32c7bc4f834b29ca4c9f6952efb5018"
+    }
+  ],
+  "gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json"
+      ],
+      "metric": {
+        "academic_initial_cpu_readiness": true,
+        "academic_twophase_canonical_bubble_ready": false,
+        "status": "PASS-ACADEMIC-INITIAL-CPU-READINESS"
+      },
+      "name": "historical_readiness_summary_preserved",
+      "status": "PASS",
+      "target": "old summary remains a verified historical rollup"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_closure_20260730/qlt03_lm_csf_stress_closure_report.json"
+      ],
+      "metric": {
+        "coarse_metrics": {
+          "center_y_final": 1.0503910888104113,
+          "mass_relative_drift": 0.0,
+          "max_mean_rise_velocity_y": 0.2310564282482914,
+          "min_circularity": 0.917080167499013,
+          "reference_errors": {
+            "center_of_mass_y_at_t3_abs_error": 0.030908911189588606,
+            "maximum_mean_rise_velocity_abs_error": 0.010643571751708603,
+            "minimum_circularity_abs_error": 0.01578016749901301
+          },
+          "sample_count": 12
+        },
+        "fine_metrics": {
+          "center_y_final": 1.0637061343565617,
+          "mass_relative_drift": 0.0,
+          "max_mean_rise_velocity_y": 0.23686349808815718,
+          "min_circularity": 0.8789368821476355,
+          "reference_errors": {
+            "center_of_mass_y_at_t3_abs_error": 0.017593865643438233,
+            "maximum_mean_rise_velocity_abs_error": 0.0048365019118428165,
+            "minimum_circularity_abs_error": 0.022363117852364445
+          },
+          "sample_count": 14
+        },
+        "grid_deltas": {
+          "center_y_final_abs_delta": 0.013315045546150373,
+          "max_mean_rise_velocity_abs_delta": 0.005807069839865786,
+          "min_circularity_abs_delta": 0.038143285351377454
+        },
+        "preferred_form": 3,
+        "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-CSF-STRESS-CLOSURE"
+      },
+      "name": "qlt03_low_mach_closure_consumed",
+      "status": "PASS",
+      "target": "QLT-03 low-Mach Hysing Case 1 current-grid blocker closed by CSF-stress closure"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json"
+      ],
+      "metric": {
+        "pelelmex_low_mach_t3_reference_agreement": false,
+        "qlt03_canonical_ready": false,
+        "status": "PASS-ACADEMIC-TWOPHASE-QLT03-PATH-DECISION"
+      },
+      "name": "legacy_path_decision_superseded",
+      "status": "PASS",
+      "target": "older pre-stress path-decision remains historical and is superseded for the QLT-03 low-Mach route"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_closure_20260730/qlt03_lm_csf_stress_closure_report.json"
+      ],
+      "metric": [
+        "Refresh higher-level readiness/path-decision rollups to consume this closure record.",
+        "Broaden beyond QLT-03 low-Mach Hysing Case 1 to the remaining two-phase academic matrix.",
+        "Gas-liquid detonation/spray production-readiness remains a separate gate."
+      ],
+      "name": "full_academic_twophase_not_over_promoted",
+      "status": "PASS",
+      "target": "closure is scoped to QLT-03 low-Mach Hysing Case 1, not the whole academic two-phase matrix"
+    }
+  ],
+  "input_reports": {
+    "legacy_path_decision": "docs/codex_audit/evidence/academic_twophase_qlt03_path_decision_20260730/academic_twophase_qlt03_path_decision_report.json",
+    "qlt03_csf_stress_closure": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_csf_stress_closure_20260730/qlt03_lm_csf_stress_closure_report.json",
+    "readiness_summary": "docs/codex_audit/evidence/academic_readiness_summary_20260729/academic_readiness_summary_report.json"
+  },
+  "schema_version": 1,
+  "scope": "High-level academic readiness delta after QLT-03 low-Mach CSF-stress closure.",
+  "status": "PASS-ACADEMIC-READINESS-QLT03-CSF-STRESS-DELTA",
+  "summary": {
+    "academic_full_master_plan_readiness": false,
+    "academic_initial_cpu_readiness_retained": true,
+    "academic_twophase_canonical_bubble_old_rollup_superseded": true,
+    "academic_twophase_full_matrix_ready": false,
+    "academic_twophase_qlt03_low_mach_hysing_case1_ready": true,
+    "old_blocking_gaps": [
+      "qlt_03_canonical_bubble_rise_reference",
+      "acd_07_full_gas_liquid_detonation"
+    ],
+    "progress_interpretation": "QLT-03 low-Mach Hysing Case 1 is closed at the current CSF-stress 32x64/64x128 confirmation level; remaining academic two-phase readiness is now broader-matrix coverage, not the old pre-stress QLT-03 blocker.",
+    "residual_blocking_gap_count_after_qlt03_closure": 2,
+    "residual_blocking_gaps_after_qlt03_closure": [
+      "acd_07_full_gas_liquid_detonation",
+      "academic_twophase_broader_non_qlt_matrix"
+    ]
+  }
+}

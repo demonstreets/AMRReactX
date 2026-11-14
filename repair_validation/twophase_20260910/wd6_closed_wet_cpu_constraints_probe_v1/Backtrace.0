@@ -1,0 +1,51 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x33cb76) [0x62cd93610b76]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x341931) [0x62cd93615931]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x110f7f) [0x62cd933e4f7f]
+    pele::physics::reactions::ReactorCvode::react(amrex::BoxND<2> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<int, 4, true> const&, double&, double&) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp:1463
+ (inlined by) call_f_intvect_inner<pele::physics::reactions::ReactorCvode::react(const amrex::Box&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<int>&, amrex::Real&, amrex::Real&)::<lambda(int, int, int)>, 0, 1> at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:43
+ (inlined by) call_f_intvect_handler<pele::physics::reactions::ReactorCvode::react(const amrex::Box&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<int>&, amrex::Real&, amrex::Real&)::<lambda(int, int, int)>, 2> at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:79
+ (inlined by) ParallelFor_impND<2, pele::physics::reactions::ReactorCvode::react(const amrex::Box&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<int>&, amrex::Real&, amrex::Real&)::<lambda(int, int, int)>, 2> at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:271
+ (inlined by) ParallelFor<pele::physics::reactions::ReactorCvode::react(const amrex::Box&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<double>&, amrex::Array4<int>&, amrex::Real&, amrex::Real&)::<lambda(int, int, int)>, 2> at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_GpuLaunchFunctsC.H:297
+ (inlined by) pele::physics::reactions::ReactorCvode::react(amrex::BoxND<2> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<double, 4, true> const&, amrex::ArrayND<int, 4, true> const&, double&, double&) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Source/Reactions/ReactorCvode.cpp:1435
+
+ 3: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x5e6c21) [0x62cd938bac21]
+    PeleC::advance(double, double, int, int)::{lambda(amrex::MultiFab&, double)#1}::operator()(amrex::MultiFab&, double) const at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Advance.cpp:79 (discriminator 1)
+
+ 4: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x5edc35) [0x62cd938c1c35]
+    std::__uniq_ptr_impl<amrex::MultiFab, std::default_delete<amrex::MultiFab> >::_M_ptr() const at /usr/include/c++/13/bits/unique_ptr.h:199 (discriminator 1)
+ (inlined by) std::unique_ptr<amrex::MultiFab, std::default_delete<amrex::MultiFab> >::get() const at /usr/include/c++/13/bits/unique_ptr.h:470 (discriminator 1)
+ (inlined by) std::unique_ptr<amrex::MultiFab, std::default_delete<amrex::MultiFab> >::operator*() const at /usr/include/c++/13/bits/unique_ptr.h:454 (discriminator 1)
+ (inlined by) amrex::StateData::oldData() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_StateData.H:387 (discriminator 1)
+ (inlined by) amrex::AmrLevel::get_old_data(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_AmrLevel.H:461 (discriminator 1)
+ (inlined by) PeleC::advance(double, double, int, int) at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/Advance.cpp:119 (discriminator 1)
+
+ 5: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x392a0e) [0x62cd93666a0e]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2077 (discriminator 1)
+ (inlined by) amrex::Amr::coarseTimeStep(double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2182 (discriminator 1)
+
+ 6: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x4ceae) [0x62cd93320eae]
+    main at /home/cj/my-pele/examples/academic/spray_detonation/../../../external/PeleC/Source/main.cpp:215
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x71f717e2a1ca]
+
+ 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x71f717e2a28b]
+
+ 9: /home/cj/my-pele/examples/academic/spray_detonation/spatial_wd6_constraints_target2d.gnu.MPI.ex(+0x4e1f5) [0x62cd933221f5]
+    ?? ??:0
+

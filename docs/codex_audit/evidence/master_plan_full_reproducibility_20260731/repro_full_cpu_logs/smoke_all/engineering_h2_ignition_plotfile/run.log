@@ -1,0 +1,105 @@
+Initializing AMReX (0ec1056ff13b-dirty)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (0ec1056ff13b-dirty) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 0ec1056-dirty
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+ Simulation performed with the closed chamber algorithm 
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1 
+ Density: 2
+ First species: 3
+ Enthalpy: 12
+ Temperature: 13
+ thermo. pressure: 14
+ => Total number of state variables: 15
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using mixture-averaged transport 
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorCvode
+Initializing CVODE:
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 0 0 
+	Density:  0.4894964606
+	Temp:     1150
+	H:        348670.8036
+	Y_H2:     0.0283
+	Y_O2:     0.2264
+	Y_H2O:    0
+	Y_H:      0
+	Y_O:      0
+	Y_OH:     0
+	Y_HO2:    0
+	Y_H2O2:   0
+	Y_N2:     0.7453
+ ==============================================================================
+ Initial dt: 2e-08
+
+ Doing initial projection(s) 
+
+ Initial velocity projection:   U: 0  V: 0
+ >> After initial velocity projection:   U: 0.5377740505  V: 0.5377740505
+ Initial dt: 2e-08
+ Initial velocity projection:   U: 0.5377740505  V: 0.5377740505
+ >> After initial velocity projection:   U: 0.5297494208  V: 0.5297494208
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ STEP [-1] - Time: 0, dt 2e-08, Ncells 256
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.016454163
+
+ Writing plotfile: plt00000
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [0] - Time: 0, dt 2e-08, Ncells 256
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.015491357
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [1] - Time: 2e-08, dt 2e-08, Ncells 256
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.013549077
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [2] - Time: 4e-08, dt 2e-08, Ncells 256
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.013224112
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [3] - Time: 6e-08, dt 2e-08, Ncells 256
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.012974956
+
+ ====================   NEW TIME STEP   ==================== 
+ STEP [4] - Time: 8e-08, dt 2e-08, Ncells 256
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.013322548
+
+ Writing plotfile: plt00005
+
+ >> Final simulation time: 1e-07
+
+Total Time: 0.104733329
+AMReX (0ec1056ff13b-dirty) finalized

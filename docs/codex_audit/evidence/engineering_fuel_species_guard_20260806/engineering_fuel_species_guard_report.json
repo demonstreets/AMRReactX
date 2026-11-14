@@ -1,0 +1,64 @@
+{
+  "evidence_files": [
+    {
+      "label": "engineering_h2_leak_prob_h",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "engineering_h2_leak_prob_cpp",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.cpp",
+      "sha256": "e75c504b2ca2973e37e6977677b90cbfc9e9cf6b4b37f99f96da64b66f71fc78",
+      "size_bytes": 24604
+    },
+    {
+      "label": "invalid_fuel_species_input",
+      "path": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/input.invalid_fuel_species",
+      "sha256": "69a770db4bd976ac1cb5a8eb40e1ad2c194b6da28b3956724fc4e47c64a7e9e9",
+      "size_bytes": 1168
+    },
+    {
+      "label": "invalid_fuel_species_run_log",
+      "path": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/invalid_fuel_species_run.log",
+      "sha256": "b49628aec3185b68a083f8bd462015be051cd6d4f626bb955406ff8e8453daa9",
+      "size_bytes": 1214
+    },
+    {
+      "label": "invalid_fuel_species_rc",
+      "path": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/invalid_fuel_species_rc.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    {
+      "label": "engineering_multi_fuel_operator_runbook_report",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_operator_runbook_20260806/engineering_multi_fuel_operator_runbook_report.json",
+      "sha256": "c98a3a0cc8b0bcec0f06327fb04841d4e5941933e4575b1aceb3fe44e116ce60",
+      "size_bytes": 23406
+    },
+    {
+      "label": "engineering_multi_fuel_capability_boundary_report",
+      "path": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+      "sha256": "f4128fea19ade36f29d4513c3a3bdd7a92cc8e6d2b35e0935af3009197a95a9c",
+      "size_bytes": 19158
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:46+00:00",
+  "runtime_probe": {
+    "expected_abort_marker": "prob.fuel_species was not found in the compiled chemistry mechanism",
+    "input": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/input.invalid_fuel_species",
+    "return_code_file": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/invalid_fuel_species_rc.txt",
+    "run_log": "docs/codex_audit/evidence/engineering_fuel_species_guard_20260806/invalid_fuel_species_run.log"
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-FUEL-SPECIES-GUARD",
+  "summary": {
+    "invalid_species_return_code": 1,
+    "invalid_species_runtime_abort_passed": true,
+    "prevents_unknown_fuel_silent_fallback": true,
+    "source_lookup_guard_ready": true,
+    "unknown_species_silent_h2_fallback_detected": false,
+    "unknown_species_source_applied_detected": false,
+    "upstream_multifuel_reports_ready": true
+  }
+}

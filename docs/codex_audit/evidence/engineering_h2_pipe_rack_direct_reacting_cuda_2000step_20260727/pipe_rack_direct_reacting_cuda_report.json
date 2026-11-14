@@ -1,0 +1,284 @@
+{
+  "decision": "direct_engineering_pipe_rack_leak_obstacle_reacting_ignition_single_gpu_pass",
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run.log",
+      "sha256": "82f26e1e814d57f10bd42bd09208f0a9390b42c0540161fc6416efa510d8db02",
+      "size_bytes": 1505221
+    },
+    {
+      "label": "input",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/input.codex_pipe_rack_reacting_single_cuda_20step",
+      "sha256": "73e62a79509083e13c9c8ab06a34c76f7e543c8807a496a5fe836fb2d0858ea8",
+      "size_bytes": 2070
+    },
+    {
+      "label": "plt00000_header",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/plt00000/Header",
+      "sha256": "4b23d01dd113faf1a1f619853053756e3db291881121acc3967d3bb71d183d00",
+      "size_bytes": 387
+    },
+    {
+      "label": "plt02000_header",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/plt02000/Header",
+      "sha256": "14d5ae7add7e2153681ecd9f7ced5ef87bb1f584145d8dc6a5bc74ab461a3973",
+      "size_bytes": 435
+    },
+    {
+      "label": "cube_obstacle_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/codex_cube_block.stl",
+      "sha256": "592fa3d7fb200f836370bd2acad3348b1cae57a58b22b65c93af7be0649a1dc0",
+      "size_bytes": 684
+    },
+    {
+      "label": "vertical_cylinder_obstacle_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/codex_vertical_cylinder.stl",
+      "sha256": "63c597dcedd3c2e0b2bc922285caf2f2d32bbd3e919534971aec84dc4316a563",
+      "size_bytes": 4884
+    },
+    {
+      "label": "pipe_rack_obstacle_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/codex_pipe_rack.stl",
+      "sha256": "9b165dd4047a06d991ac6e91d7b4a1a6e0e894111c94b3fc541006ec39f9cf45",
+      "size_bytes": 51284
+    },
+    {
+      "label": "merged_pipe_rack_obstacles_stl",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run/codex_merged_pipe_rack_obstacles.stl",
+      "sha256": "7862d8d94760cffec12db46628b483f9a4cd57a0b34f9a2c9628200885c50f05",
+      "size_bytes": 56684
+    },
+    {
+      "label": "run_summary",
+      "path": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/summary.json",
+      "sha256": "4e7f70b9def5463f18da79cb417a6f7e5f2c957854721bff19b9d41770ca7a87",
+      "size_bytes": 5820
+    },
+    {
+      "label": "reproducible_smoke_script",
+      "path": "tools/codex_smoke_engineering_h2_pipe_rack_reacting_cuda.sh",
+      "sha256": "5775a41a957358e2ab57e0724aa15a2687054a832ba2f23ef11727e09bbbacb8",
+      "size_bytes": 14994
+    }
+  ],
+  "generated_at_utc": "2026-07-27T07:54:46+00:00",
+  "input_summary": {
+    "chem_integrator": "ReactorCvode",
+    "cvode_solve_type": "GMRES",
+    "ignition_hotspot": true,
+    "initial_flammable_cloud": true,
+    "max_step": 2000,
+    "n_cell": "32 16 16",
+    "obstacle_geometry": "stl",
+    "obstacle_stl_files": "codex_cube_block.stl codex_vertical_cylinder.stl codex_pipe_rack.stl",
+    "plot_int": 250
+  },
+  "limitations": [
+    "2000-step single-GPU direct reacting sustained-fire case, not full-duration calibrated fire spread.",
+    "Uses synthetic cube/cylinder/pipe-rack STL geometry, not real plant CAD.",
+    "This gate proves the integrated engineering path starts, reacts, writes plotfiles, and finalizes cleanly on CUDA; it does not replace calibrated radiation/overpressure validation."
+  ],
+  "plotfile_checks": {
+    "final_time": 2.000000000000062e-05,
+    "initial_time": 0.0,
+    "plotfiles": [
+      "plt00000",
+      "plt00250",
+      "plt00500",
+      "plt00750",
+      "plt01000",
+      "plt01250",
+      "plt01500",
+      "plt01750",
+      "plt02000"
+    ],
+    "reaction_history": [
+      {
+        "heat_release_abs_max": 14531384.878463496,
+        "heat_release_max": 0.029635488045118515,
+        "heat_release_min": -14531384.878463496,
+        "ir_h2_abs_max": 0.12410068164075971,
+        "ir_h2_max": 2.7755575615628914e-09,
+        "ir_h2_min": -0.12410068164075971,
+        "plotfile": "plt00000",
+        "temp_max": 2000.0,
+        "time": 0.0,
+        "y_h2o_max": 0.0
+      },
+      {
+        "heat_release_abs_max": 1304743715.4674013,
+        "heat_release_max": 1304743715.4674013,
+        "heat_release_min": -0.1624264899452447,
+        "ir_h2_abs_max": 259.29464154707773,
+        "ir_h2_max": 6.938893903907228e-10,
+        "ir_h2_min": -259.29464154707773,
+        "plotfile": "plt00250",
+        "temp_max": 2001.8108950082733,
+        "time": 2.4999999999999862e-06,
+        "y_h2o_max": 0.004151830073765091
+      },
+      {
+        "heat_release_abs_max": 12147553747.463095,
+        "heat_release_max": 12147553747.463095,
+        "heat_release_min": -787.3957924893698,
+        "ir_h2_abs_max": 72.74239353509762,
+        "ir_h2_max": 3.1225022567582528e-09,
+        "ir_h2_min": -72.74239353509762,
+        "plotfile": "plt00500",
+        "temp_max": 2114.875490284625,
+        "time": 4.999999999999962e-06,
+        "y_h2o_max": 0.13230707374198358
+      },
+      {
+        "heat_release_abs_max": 8960277743.721912,
+        "heat_release_max": 8960277743.721912,
+        "heat_release_min": -0.3573692468325595,
+        "ir_h2_abs_max": 1.1927676648347578,
+        "ir_h2_max": 1.1927676648347578,
+        "ir_h2_min": -0.46658415568362877,
+        "plotfile": "plt00750",
+        "temp_max": 2242.5039412656406,
+        "time": 7.499999999999938e-06,
+        "y_h2o_max": 0.1373139866933244
+      },
+      {
+        "heat_release_abs_max": 6944042189.077116,
+        "heat_release_max": 6944042189.077116,
+        "heat_release_min": -0.18652315030138616,
+        "ir_h2_abs_max": 0.6644281792957075,
+        "ir_h2_max": 1.942890293094024e-08,
+        "ir_h2_min": -0.6644281792957075,
+        "plotfile": "plt01000",
+        "temp_max": 2342.185230927505,
+        "time": 9.999999999999914e-06,
+        "y_h2o_max": 0.14053497954325037
+      },
+      {
+        "heat_release_abs_max": 5614611822.376889,
+        "heat_release_max": 5614611822.376889,
+        "heat_release_min": -0.10748138286821401,
+        "ir_h2_abs_max": 1.5617741852822553,
+        "ir_h2_max": 1.5265566588595902e-08,
+        "ir_h2_min": -1.5617741852822553,
+        "plotfile": "plt01250",
+        "temp_max": 2423.387072441061,
+        "time": 1.249999999999989e-05,
+        "y_h2o_max": 0.14336638487701192
+      },
+      {
+        "heat_release_abs_max": 4673601199.920054,
+        "heat_release_max": 4673601199.920054,
+        "heat_release_min": -0.0638887641244421,
+        "ir_h2_abs_max": 2.007869612643185,
+        "ir_h2_max": 1.1102230246251565e-08,
+        "ir_h2_min": -2.007869612643185,
+        "plotfile": "plt01500",
+        "temp_max": 2491.5247142345306,
+        "time": 1.4999999999999867e-05,
+        "y_h2o_max": 0.14589204283085808
+      },
+      {
+        "heat_release_abs_max": 3971606773.7141294,
+        "heat_release_max": 3971606773.7141294,
+        "heat_release_min": -0.028467316696976802,
+        "ir_h2_abs_max": 2.220034917618459,
+        "ir_h2_max": 7.979727989493313e-09,
+        "ir_h2_min": -2.220034917618459,
+        "plotfile": "plt01750",
+        "temp_max": 2549.899604324839,
+        "time": 1.7500000000000222e-05,
+        "y_h2o_max": 0.14816849255919318
+      },
+      {
+        "heat_release_abs_max": 3425631207.4593678,
+        "heat_release_max": 3425631207.4593678,
+        "heat_release_min": -7.548991999043666e-05,
+        "ir_h2_abs_max": 2.3007318354296213,
+        "ir_h2_max": 5.551115123125783e-09,
+        "ir_h2_min": -2.3007318354296213,
+        "plotfile": "plt02000",
+        "temp_max": 2600.6528359661565,
+        "time": 2.000000000000062e-05,
+        "y_h2o_max": 0.1502349990492146
+      }
+    ],
+    "required_reacting_fire_variables_present": true,
+    "sustained_reaction_checks": {
+      "final_time": 2.000000000000062e-05,
+      "final_y_h2o_max": 0.1502349990492146,
+      "initial_y_h2o_max": 0.0,
+      "min_h2o_growth": 1e-07,
+      "min_heat_release_abs": 1000.0,
+      "min_ir_h2_abs": 0.001,
+      "min_sustained_outputs": 6,
+      "sustained_output_count": 8
+    },
+    "variables": [
+      "x_velocity",
+      "y_velocity",
+      "z_velocity",
+      "density",
+      "rhoh",
+      "temp",
+      "RhoRT",
+      "divu",
+      "gradpx",
+      "gradpy",
+      "gradpz",
+      "I_R(H2)",
+      "I_R(O2)",
+      "I_R(H2O)",
+      "I_R(H)",
+      "I_R(O)",
+      "I_R(OH)",
+      "I_R(HO2)",
+      "I_R(H2O2)",
+      "I_R(N2)",
+      "FunctCall",
+      "HeatRelease",
+      "volFrac",
+      "Y(H2)",
+      "Y(O2)",
+      "Y(H2O)",
+      "Y(H)",
+      "Y(O)",
+      "Y(OH)",
+      "Y(HO2)",
+      "Y(H2O2)",
+      "Y(N2)",
+      "avg_pressure"
+    ]
+  },
+  "run_dir": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate/run",
+  "run_log_checks": {
+    "amrex_finalized": true,
+    "cuda_devices": 1,
+    "cvode_marker": true,
+    "mpi_ranks": 1,
+    "reactor_marker": true,
+    "solver_failure_marker_count": 0
+  },
+  "run_root": "/tmp/codex_h2_pipe_rack_reacting_single_cuda_20260727_2000step_long_gate",
+  "schema_version": 1,
+  "status": "PASS-H2-PIPE-RACK-DIRECT-REACTING-SINGLE-CUDA-SUSTAINED",
+  "title": "H2 Pipe-Rack Direct Reacting Single-CUDA Evidence",
+  "validated_capabilities": {
+    "calibrated_fire_or_blast_model": false,
+    "cube_obstacle_stl": true,
+    "cvode_gmres": true,
+    "direct_engineering_obstacle_reacting_smoke": true,
+    "full_duration_fire_propagation": false,
+    "h2_leak_source": true,
+    "ignition_hotspot": true,
+    "initial_flammable_cloud": true,
+    "mpi_cuda_2rank_2device": false,
+    "multi_pipe_rack_stl": true,
+    "pipe_rack_stl_obstacles": true,
+    "reacting_heat_release_variables": true,
+    "reactor_cvode": true,
+    "single_gpu_cuda": true,
+    "sustained_reacting_fire_development": true,
+    "vertical_cylinder_obstacle_stl": true
+  }
+}

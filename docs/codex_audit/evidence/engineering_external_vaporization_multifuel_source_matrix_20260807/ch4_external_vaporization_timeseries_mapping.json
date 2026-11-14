@@ -1,0 +1,136 @@
+{
+  "applied_replacements": {
+    "prob.fuel_species": "CH4",
+    "prob.leak_T": "315",
+    "prob.leak_model": "fixed_mass_flow",
+    "prob.leak_radius": "0.12",
+    "prob.leak_rate": "0.00045",
+    "prob.leak_schedule_count": "4",
+    "prob.leak_schedule_radius": "0.08 0.095 0.12 0.1",
+    "prob.leak_schedule_rates": "0 0.0002 0.00045 0.0003",
+    "prob.leak_schedule_temperatures": "285 300 315 295",
+    "prob.leak_schedule_times": "0 0.25 0.75 1.5",
+    "prob.leak_schedule_vel_x": "0.2 0.6 0.35 0.1",
+    "prob.leak_schedule_vel_y": "0 0.05 -0.02 0.02",
+    "prob.leak_schedule_vel_z": "0 0 0.04 0.02",
+    "prob.leak_schedule_x": "0.42 0.46 0.51 0.57",
+    "prob.leak_schedule_y": "0.25 0.27 0.24 0.26",
+    "prob.leak_schedule_z": "0.2 0.21 0.23 0.22",
+    "prob.leak_vel_x": "0.35",
+    "prob.leak_vel_y": "-0.02",
+    "prob.leak_vel_z": "0.04",
+    "prob.leak_xc": "0.51",
+    "prob.leak_yc": "0.24",
+    "prob.leak_zc": "0.23"
+  },
+  "base_input": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+  "evidence_files": [
+    {
+      "label": "source_csv",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_source_matrix_20260807/ch4_external_vaporization_timeseries.csv",
+      "sha256": "2b67e1c9a6f5f56eeef2074a08c4161af085263c1656f88b2c2db6724b0afa91"
+    },
+    {
+      "label": "base_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke",
+      "sha256": "639f22b5006f42c36ff3d112cbca721c07092f2dceb13b754c923aac1d48a435"
+    },
+    {
+      "label": "output_input",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_source_matrix_20260807/input.codex_ch4_external_vaporization_timeseries",
+      "sha256": "094879c8f6872b336642a08964ecfb4f3892573183c921aea44bc81bc0d40c2f"
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:41+00:00",
+  "limitations": {
+    "cfd_solves_flashing_discharge": false,
+    "cfd_solves_liquid_phase_change": false,
+    "cfd_solves_pool_spread_evaporation": false,
+    "mapping": "external vaporization/blowdown model supplies gas-phase mdot(t)/T/species"
+  },
+  "output_input": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_source_matrix_20260807/input.codex_ch4_external_vaporization_timeseries",
+  "sample": {
+    "fuel_species": "CH4",
+    "leak_vel_x_m_s": 0.35,
+    "leak_vel_y_m_s": -0.020000000000000004,
+    "leak_vel_z_m_s": 0.04,
+    "mdot_kg_s": 0.00045,
+    "source_pressure_Pa": 101325.0,
+    "source_radius_m": 0.12,
+    "source_x_m": 0.51,
+    "source_y_m": 0.24,
+    "source_z_m": 0.23,
+    "time_s": 0.75,
+    "vapor_T_K": 315.0
+  },
+  "sample_time_s": 0.75,
+  "schema_version": 1,
+  "source_csv": "docs/codex_audit/evidence/engineering_external_vaporization_multifuel_source_matrix_20260807/ch4_external_vaporization_timeseries.csv",
+  "source_time_series": {
+    "emitted_to_input": true,
+    "fuel_species": "CH4",
+    "interpolation": "PeleLMeX linearly interpolates prob.leak_schedule_rates and prob.leak_schedule_temperatures at the step midpoint for fixed_mass_flow",
+    "leak_vel_x_m_s": [
+      0.2,
+      0.6,
+      0.35,
+      0.1
+    ],
+    "leak_vel_y_m_s": [
+      0.0,
+      0.05,
+      -0.02,
+      0.02
+    ],
+    "leak_vel_z_m_s": [
+      0.0,
+      0.0,
+      0.04,
+      0.02
+    ],
+    "mdot_kg_s": [
+      0.0,
+      0.0002,
+      0.00045,
+      0.0003
+    ],
+    "point_count": 4,
+    "source_radius_m": [
+      0.08,
+      0.095,
+      0.12,
+      0.1
+    ],
+    "source_x_m": [
+      0.42,
+      0.46,
+      0.51,
+      0.57
+    ],
+    "source_y_m": [
+      0.25,
+      0.27,
+      0.24,
+      0.26
+    ],
+    "source_z_m": [
+      0.2,
+      0.21,
+      0.23,
+      0.22
+    ],
+    "time_s": [
+      0.0,
+      0.25,
+      0.75,
+      1.5
+    ],
+    "vapor_T_K": [
+      285.0,
+      300.0,
+      315.0,
+      295.0
+    ]
+  },
+  "status": "PASS-EXTERNAL-VAPORIZATION-SOURCE-INPUT"
+}

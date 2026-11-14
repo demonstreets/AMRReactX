@@ -1,0 +1,1726 @@
+{
+  "case": {
+    "command": [
+      "mpirun",
+      "-np",
+      "16",
+      "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+      "inputs"
+    ],
+    "binary": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/build_source/hydrogen_znd_v1",
+    "binary_sha256": "d4f03582a37563516954b14dbdd71f5eba204c3c724f8de6aa91dfc045180c9d",
+    "reference": "/home/cj/my-pele/repair_validation/hydrogen_znd_20260913/reference_v1",
+    "profile_sha256": "e21e67926f015458b415540fc42d2402bd9e16bbda270200e870984c1bd83248",
+    "input_sha256": "fc8e465e3d8468c3b64bf407a9b2bd168c2a769ba2e95588a0643ded81f61c9c",
+    "nx": 2400,
+    "ny": 2,
+    "dx_m": 1e-05,
+    "front_m": 0.008,
+    "length_m": 0.024,
+    "cfl": 0.3,
+    "ode_rtol": 1e-08,
+    "ode_atol": 1e-18,
+    "stop_time_s": 4e-06,
+    "plot_root": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1",
+    "mapping": "ROUNDROBIN",
+    "physical_model": "Single-phase inviscid reactive Euler, LiDryer, transverse uniform periodic strip; no droplets, diffusion or transverse perturbation.",
+    "initialization": "Near-CJ finite-rate ZND at 1.00001 D_CJ; no forcing or imposed wave speed after initialization."
+  },
+  "exit_code": 0,
+  "partial": false,
+  "end_time_s": 4e-06,
+  "CJ_m_s": 1977.042362679259,
+  "initial_ZND_speed_m_s": 1977.0621331028858,
+  "front_threshold_Pa": 1453560.1238171947,
+  "comparison_window_m": [
+    5e-05,
+    0.003
+  ],
+  "comparison_method": "Shock-aligned cell-center samples; errors normalized by fixed reference jumps, same physical window at every resolution.",
+  "wave_speed_fits": {
+    "0.0": {
+      "speed_m_s": 2054.322370355517,
+      "relative_error_vs_CJ": 0.0390886958899197,
+      "rms_position_residual_m": 9.995546715105894e-05
+    },
+    "2e-06": {
+      "speed_m_s": 1885.9646874572836,
+      "relative_error_vs_CJ": -0.04606763969313643,
+      "rms_position_residual_m": 6.255658180762689e-05
+    },
+    "3e-06": {
+      "speed_m_s": 1722.7624446036846,
+      "relative_error_vs_CJ": -0.1286163224803023,
+      "rms_position_residual_m": 1.0738521028843979e-05
+    }
+  },
+  "boundary_balance": {
+    "mass": {
+      "inventory_change": 0.0054713759352706184,
+      "integrated_boundary_influx": 0.005471375933088341,
+      "residual": 2.1822777959701334e-12,
+      "relative_to_initial_inventory": 8.102884788824579e-11
+    },
+    "energy": {
+      "inventory_change": 9614.33123313729,
+      "integrated_boundary_influx": 9614.330562724674,
+      "residual": 0.0006704126171825919,
+      "relative_to_initial_inventory": 6.314209936002577e-08
+    }
+  },
+  "history": [
+    {
+      "time_s": 0.0,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt00000",
+      "shock_m": 0.008000000000397257,
+      "shock_minus_expected_m": 3.9725688016911676e-13,
+      "Tmin_K": 300.0,
+      "Tmax_K": 2975.5452371313804,
+      "pmax_Pa": 2805795.744004351,
+      "frozen_peak_pressure_Pa": 2805795.744004351,
+      "fuel_half_distance_m": 0.0001873162369716024,
+      "thermal_half_distance_m": 0.00020244880184201096,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 6.640121736509139e-07,
+          "max_absolute": 5.503264877360081e-05,
+          "normalized_L1": 1.780214831490723e-07
+        },
+        "p": {
+          "mean_absolute": 0.00015917270112845858,
+          "max_absolute": 0.003979031462222338,
+          "normalized_L1": 5.885540847331841e-11
+        },
+        "T": {
+          "mean_absolute": 1.9348440989649704e-07,
+          "max_absolute": 7.574828487122431e-06,
+          "normalized_L1": 7.231588054031797e-11
+        },
+        "u": {
+          "mean_absolute": 9.477611826495977e-08,
+          "max_absolute": 2.3692343802395044e-06,
+          "normalized_L1": 4.793785520347511e-11
+        },
+        "Y_fuel": {
+          "mean_absolute": 3.4927129514854626e-12,
+          "max_absolute": 2.1851382508986106e-10
+        },
+        "Y_o2": {
+          "mean_absolute": 2.865522058102692e-11,
+          "max_absolute": 1.7168227117725365e-09
+        },
+        "Y_oh": {
+          "mean_absolute": 4.634466450528433e-12,
+          "max_absolute": 2.2667712845647614e-10
+        },
+        "Y_h2o": {
+          "mean_absolute": 2.975524354727496e-11,
+          "max_absolute": 1.600201998686046e-09
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 4.326663352724778e-06,
+          "max_absolute": 5.503264877360081e-05,
+          "normalized_L1": 1.1599772680428817e-06
+        },
+        "p": {
+          "mean_absolute": 0.0007962108124047518,
+          "max_absolute": 0.003979031462222338,
+          "normalized_L1": 2.944054618834134e-10
+        },
+        "T": {
+          "mean_absolute": 1.2027619201641451e-06,
+          "max_absolute": 7.574828487122431e-06,
+          "normalized_L1": 4.4953899584758483e-10
+        },
+        "u": {
+          "mean_absolute": 4.740875990844668e-07,
+          "max_absolute": 2.3692343802395044e-06,
+          "normalized_L1": 2.3979398074880603e-10
+        },
+        "Y_fuel": {
+          "mean_absolute": 2.202351994831961e-11,
+          "max_absolute": 2.1851382508986106e-10
+        },
+        "Y_o2": {
+          "mean_absolute": 1.8234705828623633e-10,
+          "max_absolute": 1.7168227117725365e-09
+        },
+        "Y_oh": {
+          "mean_absolute": 2.6363551345701895e-11,
+          "max_absolute": 2.2667712845647614e-10
+        },
+        "Y_h2o": {
+          "mean_absolute": 1.8301845092174158e-10,
+          "max_absolute": 1.600201998686046e-09
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 0.0,
+      "max_species_sum_error": 4.440892098500626e-16,
+      "mass_per_area_kg_m2": 0.02693210940108528,
+      "total_energy_per_area_J_m2": 10617.5218115573,
+      "net_mass_influx_kg_m2_s": 1367.8422701029615,
+      "net_energy_influx_W_m2": 2403529463.462717
+    },
+    {
+      "time_s": 2.5032966169758164e-07,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt00220",
+      "shock_m": 0.008498803109129842,
+      "shock_minus_expected_m": 3.8858141950971065e-06,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 2975.545183212248,
+      "pmax_Pa": 2802553.1589278993,
+      "frozen_peak_pressure_Pa": 2802553.1589278993,
+      "fuel_half_distance_m": 0.00020551667651188914,
+      "thermal_half_distance_m": 0.00022672137631754967,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.018146673758573435,
+          "max_absolute": 0.4614203597363158,
+          "normalized_L1": 0.004865118298903265
+        },
+        "p": {
+          "mean_absolute": 10335.616322328502,
+          "max_absolute": 174742.70023385575,
+          "normalized_L1": 0.0038216786934036732
+        },
+        "T": {
+          "mean_absolute": 10.769480464936175,
+          "max_absolute": 324.127169145366,
+          "normalized_L1": 0.004025153567671048
+        },
+        "u": {
+          "mean_absolute": 4.570608075453857,
+          "max_absolute": 67.14752986884355,
+          "normalized_L1": 0.002311818125958717
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00013807649300078735,
+          "max_absolute": 0.00688693687486364
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0011917960784547281,
+          "max_absolute": 0.05857380535792568
+        },
+        "Y_oh": {
+          "mean_absolute": 0.00018013978017566293,
+          "max_absolute": 0.009430185455055251
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.0011411947395046625,
+          "max_absolute": 0.052643402973748074
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.11602060609079508,
+          "max_absolute": 0.4614203597363158,
+          "normalized_L1": 0.03110509293613642
+        },
+        "p": {
+          "mean_absolute": 64492.89907214448,
+          "max_absolute": 174742.70023385575,
+          "normalized_L1": 0.023846777064216798
+        },
+        "T": {
+          "mean_absolute": 69.65077072319137,
+          "max_absolute": 324.127169145366,
+          "normalized_L1": 0.02603236518050116
+        },
+        "u": {
+          "mean_absolute": 28.06747520442059,
+          "max_absolute": 67.14752986884355,
+          "normalized_L1": 0.014196556969289727
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.000896575479875194,
+          "max_absolute": 0.00688693687486364
+        },
+        "Y_o2": {
+          "mean_absolute": 0.007757858015933461,
+          "max_absolute": 0.05857380535792568
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0011425926407199105,
+          "max_absolute": 0.009430185455055251
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.007362524658072394,
+          "max_absolute": 0.052643402973748074
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 1.7100552553358928e-56,
+      "max_species_sum_error": 5.995204332975845e-15,
+      "mass_per_area_kg_m2": 0.027274520933108157,
+      "total_energy_per_area_J_m2": 11219.199913170612,
+      "net_mass_influx_kg_m2_s": 1367.8426019753028,
+      "net_energy_influx_W_m2": 2403554196.843768
+    },
+    {
+      "time_s": 5.004981091223542e-07,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt00433",
+      "shock_m": 0.008989193737824256,
+      "shock_minus_expected_m": -3.2212141114727755e-07,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 2975.5451932991946,
+      "pmax_Pa": 3472495.2703972603,
+      "frozen_peak_pressure_Pa": 2911269.530560448,
+      "fuel_half_distance_m": 0.00014878759976866968,
+      "thermal_half_distance_m": 0.00015303451962290885,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.035831496886925086,
+          "max_absolute": 0.8898994604868453,
+          "normalized_L1": 0.00960641456946426
+        },
+        "p": {
+          "mean_absolute": 35964.95841332002,
+          "max_absolute": 676726.3321979563,
+          "normalized_L1": 0.013298337611507727
+        },
+        "T": {
+          "mean_absolute": 22.661545300385267,
+          "max_absolute": 875.9721376805526,
+          "normalized_L1": 0.008469879323498585
+        },
+        "u": {
+          "mean_absolute": 8.634486613406818,
+          "max_absolute": 130.11559417854346,
+          "normalized_L1": 0.004367331946141462
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00029783169154808174,
+          "max_absolute": 0.017720321444395913
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0025300482739254115,
+          "max_absolute": 0.14608365684942426
+        },
+        "Y_oh": {
+          "mean_absolute": 0.000483814111326637,
+          "max_absolute": 0.021678930842895357
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.002505864934428501,
+          "max_absolute": 0.13321281404499577
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.20442161191496114,
+          "max_absolute": 0.8898994604868453,
+          "normalized_L1": 0.05480537855313063
+        },
+        "p": {
+          "mean_absolute": 195367.94767786775,
+          "max_absolute": 676726.3321979563,
+          "normalized_L1": 0.07223889700718907
+        },
+        "T": {
+          "mean_absolute": 134.1785281252984,
+          "max_absolute": 875.9721376805526,
+          "normalized_L1": 0.05014997547438291
+        },
+        "u": {
+          "mean_absolute": 36.12801284591576,
+          "max_absolute": 130.11559417854346,
+          "normalized_L1": 0.018273584952646336
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00193812938797828,
+          "max_absolute": 0.017720321444395913
+        },
+        "Y_o2": {
+          "mean_absolute": 0.016545496629978767,
+          "max_absolute": 0.14608365684942426
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0030141248148526064,
+          "max_absolute": 0.021678930842895357
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.016276816959025626,
+          "max_absolute": 0.13321281404499577
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 7.733570357985868e-56,
+      "max_species_sum_error": 9.992007221626409e-15,
+      "mass_per_area_kg_m2": 0.027616712033372192,
+      "total_energy_per_area_J_m2": 11820.495286843532,
+      "net_mass_influx_kg_m2_s": 1367.8429178727624,
+      "net_energy_influx_W_m2": 2403568543.3597393
+    },
+    {
+      "time_s": 7.507818225694863e-07,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt00657",
+      "shock_m": 0.009496021510156941,
+      "shock_minus_expected_m": 1.1679198532840024e-05,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3011.0922038802632,
+      "pmax_Pa": 3254110.760666661,
+      "frozen_peak_pressure_Pa": 3254110.760666661,
+      "fuel_half_distance_m": 0.0001725199764730309,
+      "thermal_half_distance_m": 0.00018021903932082626,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.041161323912477975,
+          "max_absolute": 0.8697481046641844,
+          "normalized_L1": 0.011035339745338747
+        },
+        "p": {
+          "mean_absolute": 34740.97711972028,
+          "max_absolute": 287527.9850950674,
+          "normalized_L1": 0.012845760514506805
+        },
+        "T": {
+          "mean_absolute": 20.684156925690104,
+          "max_absolute": 413.1302021399788,
+          "normalized_L1": 0.007730819357050829
+        },
+        "u": {
+          "mean_absolute": 14.627292727977853,
+          "max_absolute": 111.42777755906695,
+          "normalized_L1": 0.007398499259616669
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.00015958470951290171,
+          "max_absolute": 0.009360976641537157
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0013045681196916985,
+          "max_absolute": 0.0779285462403326
+        },
+        "Y_oh": {
+          "mean_absolute": 0.000372391701187802,
+          "max_absolute": 0.011698301657701173
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.001674369543204679,
+          "max_absolute": 0.0715126468069827
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.1562392548795824,
+          "max_absolute": 0.8697481046641844,
+          "normalized_L1": 0.041887701737214844
+        },
+        "p": {
+          "mean_absolute": 85163.23760612935,
+          "max_absolute": 287527.9850950674,
+          "normalized_L1": 0.03148980384628818
+        },
+        "T": {
+          "mean_absolute": 94.95996580078203,
+          "max_absolute": 413.1302021399788,
+          "normalized_L1": 0.03549181841904235
+        },
+        "u": {
+          "mean_absolute": 27.838072475543747,
+          "max_absolute": 111.42777755906695,
+          "normalized_L1": 0.014080524840083547
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0009588740200574038,
+          "max_absolute": 0.009360976641537157
+        },
+        "Y_o2": {
+          "mean_absolute": 0.00814505877730961,
+          "max_absolute": 0.0779285462403326
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0017264717012374833,
+          "max_absolute": 0.011698301657701173
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.009675876891454023,
+          "max_absolute": 0.0715126468069827
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 1.8738946454845356e-55,
+      "max_species_sum_error": 1.554312234475219e-14,
+      "mass_per_area_kg_m2": 0.02795906087356732,
+      "total_energy_per_area_J_m2": 12422.070502859238,
+      "net_mass_influx_kg_m2_s": 1367.8431952678409,
+      "net_energy_influx_W_m2": 2403577046.19502
+    },
+    {
+      "time_s": 1.0008078924835345e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt00873",
+      "shock_m": 0.010009043654660123,
+      "shock_minus_expected_m": 3.0384267920423313e-05,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3030.101668857611,
+      "pmax_Pa": 2665203.7575696097,
+      "frozen_peak_pressure_Pa": 2665203.7575696097,
+      "fuel_half_distance_m": 0.00025921380437383127,
+      "thermal_half_distance_m": 0.0002834362701295522,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.0897517649368444,
+          "max_absolute": 1.2792312730293682,
+          "normalized_L1": 0.024062423767706106
+        },
+        "p": {
+          "mean_absolute": 56074.04907144691,
+          "max_absolute": 408542.88246614113,
+          "normalized_L1": 0.020733838399773524
+        },
+        "T": {
+          "mean_absolute": 47.998279259655234,
+          "max_absolute": 948.7533072924161,
+          "normalized_L1": 0.017939625373118454
+        },
+        "u": {
+          "mean_absolute": 30.439109716689433,
+          "max_absolute": 170.72670295092144,
+          "normalized_L1": 0.015396132072448828
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0006809706397177727,
+          "max_absolute": 0.021125058593277016
+        },
+        "Y_o2": {
+          "mean_absolute": 0.005467920351657802,
+          "max_absolute": 0.17144485949149563
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0009666676287795058,
+          "max_absolute": 0.022486837659282412
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.005569519331641155,
+          "max_absolute": 0.15893221560610585
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.4307818594843978,
+          "max_absolute": 1.2792312730293682,
+          "normalized_L1": 0.11549249935806837
+        },
+        "p": {
+          "mean_absolute": 170517.76609434088,
+          "max_absolute": 408542.88246614113,
+          "normalized_L1": 0.06305033906122408
+        },
+        "T": {
+          "mean_absolute": 254.10685912790558,
+          "max_absolute": 948.7533072924161,
+          "normalized_L1": 0.09497386005931488
+        },
+        "u": {
+          "mean_absolute": 89.35649952081458,
+          "max_absolute": 170.72670295092144,
+          "normalized_L1": 0.04519660663399317
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0042726178066624845,
+          "max_absolute": 0.021125058593277016
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0350094711161334,
+          "max_absolute": 0.17144485949149563
+        },
+        "Y_oh": {
+          "mean_absolute": 0.004966926554895899,
+          "max_absolute": 0.022486837659282412
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.03397321497299462,
+          "max_absolute": 0.15893221560610585
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 3.4939364633054004e-55,
+      "max_species_sum_error": 1.9761969838327786e-14,
+      "mass_per_area_kg_m2": 0.028301057362972195,
+      "total_energy_per_area_J_m2": 13023.028114058452,
+      "net_mass_influx_kg_m2_s": 1367.8434396072014,
+      "net_energy_influx_W_m2": 2403582125.9760346
+    },
+    {
+      "time_s": 1.2503270406702978e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt01092",
+      "shock_m": 0.010495057293307795,
+      "shock_minus_expected_m": 2.3083047203957888e-05,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3129.0089286650204,
+      "pmax_Pa": 3409926.4192908923,
+      "frozen_peak_pressure_Pa": 3409926.4192908923,
+      "fuel_half_distance_m": 9.565718819390747e-05,
+      "thermal_half_distance_m": 0.00010038946495837609,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.11854520055678214,
+          "max_absolute": 1.584620082346075,
+          "normalized_L1": 0.031781936025795245
+        },
+        "p": {
+          "mean_absolute": 108733.07643905345,
+          "max_absolute": 617946.913874185,
+          "normalized_L1": 0.040204944585418415
+        },
+        "T": {
+          "mean_absolute": 82.46180213208588,
+          "max_absolute": 1393.1145292758715,
+          "normalized_L1": 0.030820559833804075
+        },
+        "u": {
+          "mean_absolute": 41.27870114234389,
+          "max_absolute": 253.23524774264513,
+          "normalized_L1": 0.020878808233284675
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0008273171271046589,
+          "max_absolute": 0.02286885194345542
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0067994067779974295,
+          "max_absolute": 0.1921021420327989
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0013107576696689948,
+          "max_absolute": 0.02771053879913091
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.007268512137034112,
+          "max_absolute": 0.18082392687272258
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.503491379596392,
+          "max_absolute": 1.584620082346075,
+          "normalized_L1": 0.13498590192360535
+        },
+        "p": {
+          "mean_absolute": 360590.97300767835,
+          "max_absolute": 604259.562853442,
+          "normalized_L1": 0.1333314623531498
+        },
+        "T": {
+          "mean_absolute": 433.0701755400291,
+          "max_absolute": 1393.1145292758715,
+          "normalized_L1": 0.16186240067962332
+        },
+        "u": {
+          "mean_absolute": 83.00484015600924,
+          "max_absolute": 230.09122315669822,
+          "normalized_L1": 0.04198393098841962
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.005144105752791523,
+          "max_absolute": 0.02286885194345542
+        },
+        "Y_o2": {
+          "mean_absolute": 0.04343173853599602,
+          "max_absolute": 0.1921021420327989
+        },
+        "Y_oh": {
+          "mean_absolute": 0.006531200133703501,
+          "max_absolute": 0.02771053879913091
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.04425296728044741,
+          "max_absolute": 0.18082392687272258
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 5.637586725052245e-55,
+      "max_species_sum_error": 2.353672812205332e-14,
+      "mass_per_area_kg_m2": 0.02864236052021011,
+      "total_energy_per_area_J_m2": 13622.768292283634,
+      "net_mass_influx_kg_m2_s": 1367.8436553699723,
+      "net_energy_influx_W_m2": 2403585188.6089783
+    },
+    {
+      "time_s": 1.5004954575423116e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt01318",
+      "shock_m": 0.011028645419658145,
+      "shock_minus_expected_m": 6.20726696583529e-05,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3166.1937529536153,
+      "pmax_Pa": 3319876.8360386803,
+      "frozen_peak_pressure_Pa": 3319876.8360386803,
+      "fuel_half_distance_m": 0.00012200365331671239,
+      "thermal_half_distance_m": 0.00012942365449196766,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.10442947705505888,
+          "max_absolute": 1.6325371632282581,
+          "normalized_L1": 0.027997514394362807
+        },
+        "p": {
+          "mean_absolute": 93768.29300825282,
+          "max_absolute": 517787.97439204645,
+          "normalized_L1": 0.03467159348130093
+        },
+        "T": {
+          "mean_absolute": 71.61788814003727,
+          "max_absolute": 1037.3770628952693,
+          "normalized_L1": 0.02676758631899756
+        },
+        "u": {
+          "mean_absolute": 43.48121079583205,
+          "max_absolute": 239.66621558979375,
+          "normalized_L1": 0.02199283981408858
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0006494959741863151,
+          "max_absolute": 0.02163074254107186
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0052260072191079344,
+          "max_absolute": 0.17764669231758537
+        },
+        "Y_oh": {
+          "mean_absolute": 0.001045337365292904,
+          "max_absolute": 0.023559282453677548
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.005862732065788271,
+          "max_absolute": 0.16812274940523822
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.28496512206278063,
+          "max_absolute": 1.6325371632282581,
+          "normalized_L1": 0.07639907171648104
+        },
+        "p": {
+          "mean_absolute": 127511.94407587552,
+          "max_absolute": 449065.68701053737,
+          "normalized_L1": 0.0471485845286746
+        },
+        "T": {
+          "mean_absolute": 322.38974840209863,
+          "max_absolute": 1037.3770628952693,
+          "normalized_L1": 0.12049497189639681
+        },
+        "u": {
+          "mean_absolute": 53.39231641246368,
+          "max_absolute": 143.48826059796693,
+          "normalized_L1": 0.027005886926106615
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0038770092214600576,
+          "max_absolute": 0.02163074254107186
+        },
+        "Y_o2": {
+          "mean_absolute": 0.032424785112465694,
+          "max_absolute": 0.17764669231758537
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0047132730241314655,
+          "max_absolute": 0.023559282453677548
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.034399600290917626,
+          "max_absolute": 0.16812274940523822
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 8.318091761140714e-55,
+      "max_species_sum_error": 2.6423307986078726e-14,
+      "mass_per_area_kg_m2": 0.028984551826390363,
+      "total_energy_per_area_J_m2": 14224.06964751264,
+      "net_mass_influx_kg_m2_s": 1367.8438473868855,
+      "net_energy_influx_W_m2": 2403587067.167783
+    },
+    {
+      "time_s": 1.7501145465361103e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt01565",
+      "shock_m": 0.01159734717621064,
+      "shock_minus_expected_m": 0.0001372619776615694,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3135.7480060178677,
+      "pmax_Pa": 5013270.5457253475,
+      "frozen_peak_pressure_Pa": 5013270.5457253475,
+      "fuel_half_distance_m": 1.4964190525450093e-05,
+      "thermal_half_distance_m": 8.867492002591962e-06,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.14130231865133047,
+          "max_absolute": 1.71514203014429,
+          "normalized_L1": 0.037883113197164274
+        },
+        "p": {
+          "mean_absolute": 118843.712409137,
+          "max_absolute": 1092186.4798643165,
+          "normalized_L1": 0.043943434952959846
+        },
+        "T": {
+          "mean_absolute": 113.07776420402674,
+          "max_absolute": 1432.787300594187,
+          "normalized_L1": 0.04226344692225608
+        },
+        "u": {
+          "mean_absolute": 44.723140662100555,
+          "max_absolute": 212.39876198007505,
+          "normalized_L1": 0.022621009179873443
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0012041092924640637,
+          "max_absolute": 0.02357637831962635
+        },
+        "Y_o2": {
+          "mean_absolute": 0.010055885792919784,
+          "max_absolute": 0.1981433696306216
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0019064866784130991,
+          "max_absolute": 0.03136271975068883
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.010439908466054328,
+          "max_absolute": 0.18743969940919422
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.5485766853607206,
+          "max_absolute": 1.71514203014429,
+          "normalized_L1": 0.1470732601361292
+        },
+        "p": {
+          "mean_absolute": 327428.0580019311,
+          "max_absolute": 1092186.4798643165,
+          "normalized_L1": 0.12106920321579936
+        },
+        "T": {
+          "mean_absolute": 572.1854650003745,
+          "max_absolute": 1432.787300594187,
+          "normalized_L1": 0.2138575183189605
+        },
+        "u": {
+          "mean_absolute": 58.33822294785405,
+          "max_absolute": 212.39876198007505,
+          "normalized_L1": 0.029507531387643112
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.007448451152754687,
+          "max_absolute": 0.02357637831962635
+        },
+        "Y_o2": {
+          "mean_absolute": 0.06380398899873115,
+          "max_absolute": 0.1981433696306216
+        },
+        "Y_oh": {
+          "mean_absolute": 0.009545852182622522,
+          "max_absolute": 0.03136271975068883
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.06274111474525743,
+          "max_absolute": 0.18743969940919422
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 1.152383796846411e-54,
+      "max_species_sum_error": 2.930988785010413e-14,
+      "mass_per_area_kg_m2": 0.02932599178304396,
+      "total_energy_per_area_J_m2": 14824.05101827053,
+      "net_mass_influx_kg_m2_s": 1367.8440177105783,
+      "net_energy_influx_W_m2": 2403588233.885115
+    },
+    {
+      "time_s": 2.0001297449961595e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt01821",
+      "shock_m": 0.012210994788707196,
+      "shock_minus_expected_m": 0.00025661400858255703,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3302.8971131926205,
+      "pmax_Pa": 3558059.6091308966,
+      "frozen_peak_pressure_Pa": 3558059.6091308966,
+      "fuel_half_distance_m": 1.7929158638563447e-05,
+      "thermal_half_distance_m": 1.5768593471836343e-05,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.18322637386636553,
+          "max_absolute": 2.209222640625263,
+          "normalized_L1": 0.04912294099726092
+        },
+        "p": {
+          "mean_absolute": 113681.70802423288,
+          "max_absolute": 363759.73419818934,
+          "normalized_L1": 0.04203474160001232
+        },
+        "T": {
+          "mean_absolute": 137.55031179535996,
+          "max_absolute": 1699.1260930360522,
+          "normalized_L1": 0.051410198482646996
+        },
+        "u": {
+          "mean_absolute": 53.19934441233223,
+          "max_absolute": 180.94063626172658,
+          "normalized_L1": 0.026908281495857143
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0011845311394073899,
+          "max_absolute": 0.023613219139160924
+        },
+        "Y_o2": {
+          "mean_absolute": 0.010098631049191531,
+          "max_absolute": 0.20101933556552576
+        },
+        "Y_oh": {
+          "mean_absolute": 0.002194968931958118,
+          "max_absolute": 0.0322888754346245
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.010316622887253237,
+          "max_absolute": 0.18716822274907288
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.7023820997401958,
+          "max_absolute": 2.209222640625263,
+          "normalized_L1": 0.18830844989725318
+        },
+        "p": {
+          "mean_absolute": 142875.92454080924,
+          "max_absolute": 321267.3368101455,
+          "normalized_L1": 0.05282954200209204
+        },
+        "T": {
+          "mean_absolute": 712.6243357540803,
+          "max_absolute": 1699.1260930360522,
+          "normalized_L1": 0.2663473318707345
+        },
+        "u": {
+          "mean_absolute": 100.73407202034329,
+          "max_absolute": 161.12929698903486,
+          "normalized_L1": 0.05095139415889117
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.007302488179482524,
+          "max_absolute": 0.023613219139160924
+        },
+        "Y_o2": {
+          "mean_absolute": 0.06392331095556358,
+          "max_absolute": 0.20101933556552576
+        },
+        "Y_oh": {
+          "mean_absolute": 0.01086986488581721,
+          "max_absolute": 0.0322888754346245
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.06128309039858218,
+          "max_absolute": 0.18716822274907288
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 1.5266907838271867e-54,
+      "max_species_sum_error": 2.9753977059954195e-14,
+      "mass_per_area_kg_m2": 0.029667973595884745,
+      "total_energy_per_area_J_m2": 15424.984707400174,
+      "net_mass_influx_kg_m2_s": 1367.8441697204273,
+      "net_energy_influx_W_m2": 2403588978.891016
+    },
+    {
+      "time_s": 2.2503983238500827e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt02055",
+      "shock_m": 0.012765636475843091,
+      "shock_minus_expected_m": 0.0003164591653608863,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3262.7709385298845,
+      "pmax_Pa": 3208534.3658568393,
+      "frozen_peak_pressure_Pa": 3208534.3658568393,
+      "fuel_half_distance_m": 2.3368509037773485e-05,
+      "thermal_half_distance_m": 2.5928118677981874e-05,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.166053668529465,
+          "max_absolute": 2.1991450238009715,
+          "normalized_L1": 0.04451894336729545
+        },
+        "p": {
+          "mean_absolute": 87376.91826122851,
+          "max_absolute": 270217.0423716386,
+          "normalized_L1": 0.03230833037917775
+        },
+        "T": {
+          "mean_absolute": 145.01116710120874,
+          "max_absolute": 1502.9135894638607,
+          "normalized_L1": 0.0541987348888359
+        },
+        "u": {
+          "mean_absolute": 51.31723748655505,
+          "max_absolute": 234.2650635940322,
+          "normalized_L1": 0.02595630993448627
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0012480119709516735,
+          "max_absolute": 0.0238710139545682
+        },
+        "Y_o2": {
+          "mean_absolute": 0.010345439033893752,
+          "max_absolute": 0.19995739490616524
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0023331625976719026,
+          "max_absolute": 0.029522853811124395
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.011010455112917362,
+          "max_absolute": 0.19086005696090771
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.751185153486219,
+          "max_absolute": 2.1991450238009715,
+          "normalized_L1": 0.20139253533246748
+        },
+        "p": {
+          "mean_absolute": 150108.01951671593,
+          "max_absolute": 270217.0423716386,
+          "normalized_L1": 0.05550366828698374
+        },
+        "T": {
+          "mean_absolute": 752.9364792612182,
+          "max_absolute": 1502.9135894638607,
+          "normalized_L1": 0.28141422101051483
+        },
+        "u": {
+          "mean_absolute": 105.30403960932567,
+          "max_absolute": 234.2650635940322,
+          "normalized_L1": 0.05326288832615342
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.007636067276341321,
+          "max_absolute": 0.0238710139545682
+        },
+        "Y_o2": {
+          "mean_absolute": 0.06517681513860786,
+          "max_absolute": 0.19995739490616524
+        },
+        "Y_oh": {
+          "mean_absolute": 0.011241705156499977,
+          "max_absolute": 0.029522853811124395
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.06465263526768907,
+          "max_absolute": 0.19086005696090771
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 1.954756482584195e-54,
+      "max_species_sum_error": 3.197442310920451e-14,
+      "mass_per_area_kg_m2": 0.030010302029575362,
+      "total_energy_per_area_J_m2": 16026.52757065336,
+      "net_mass_influx_kg_m2_s": 1367.8443055298865,
+      "net_energy_influx_W_m2": 2403589468.8984146
+    },
+    {
+      "time_s": 2.5003285871281735e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt02280",
+      "shock_m": 0.013295842292712282,
+      "shock_minus_expected_m": 0.00035253732278653013,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3235.6411128604013,
+      "pmax_Pa": 3035258.918767433,
+      "frozen_peak_pressure_Pa": 3035258.918767433,
+      "fuel_half_distance_m": 3.083362785870655e-05,
+      "thermal_half_distance_m": 3.74235959074176e-05,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.15206179666495134,
+          "max_absolute": 2.242596410920877,
+          "normalized_L1": 0.04076772632611212
+        },
+        "p": {
+          "mean_absolute": 73865.10647850178,
+          "max_absolute": 381216.22280928586,
+          "normalized_L1": 0.027312227429054498
+        },
+        "T": {
+          "mean_absolute": 141.19383701750215,
+          "max_absolute": 1413.1358844062345,
+          "normalized_L1": 0.05277198641610902
+        },
+        "u": {
+          "mean_absolute": 49.87681456811231,
+          "max_absolute": 277.5483248298169,
+          "normalized_L1": 0.02522774258481877
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0012950008371676368,
+          "max_absolute": 0.023777264340580587
+        },
+        "Y_o2": {
+          "mean_absolute": 0.010428676666872739,
+          "max_absolute": 0.19926787821464143
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0024716813192398146,
+          "max_absolute": 0.028052192110075067
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.01167807306211884,
+          "max_absolute": 0.19095354266683381
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.7408946511185187,
+          "max_absolute": 2.242596410920877,
+          "normalized_L1": 0.19863365444663283
+        },
+        "p": {
+          "mean_absolute": 163490.45255348293,
+          "max_absolute": 381216.22280928586,
+          "normalized_L1": 0.060451932387309
+        },
+        "T": {
+          "mean_absolute": 650.0895814342812,
+          "max_absolute": 1413.1358844062345,
+          "normalized_L1": 0.2429746176276186
+        },
+        "u": {
+          "mean_absolute": 108.96499693875104,
+          "max_absolute": 277.5483248298169,
+          "normalized_L1": 0.05511460419695395
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.007645128976294721,
+          "max_absolute": 0.023777264340580587
+        },
+        "Y_o2": {
+          "mean_absolute": 0.06523432550053215,
+          "max_absolute": 0.19926787821464143
+        },
+        "Y_oh": {
+          "mean_absolute": 0.009063902116582265,
+          "max_absolute": 0.028052192110075067
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.06427876451596913,
+          "max_absolute": 0.19095354266683381
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 2.4355378450886158e-54,
+      "max_species_sum_error": 3.1530333899354446e-14,
+      "mass_per_area_kg_m2": 0.030352167732344164,
+      "total_energy_per_area_J_m2": 16627.257363642802,
+      "net_mass_influx_kg_m2_s": 1367.8444267915772,
+      "net_energy_influx_W_m2": 2403589803.2088003
+    },
+    {
+      "time_s": 2.751083006565846e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt02496",
+      "shock_m": 0.013802771557456055,
+      "shock_minus_expected_m": 0.0003637095201518836,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3218.291214746651,
+      "pmax_Pa": 2691149.8864820595,
+      "frozen_peak_pressure_Pa": 2691149.8864820595,
+      "fuel_half_distance_m": 5.803352863218771e-05,
+      "thermal_half_distance_m": 6.623778909038556e-05,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.14929346245811556,
+          "max_absolute": 2.321532314822543,
+          "normalized_L1": 0.04002553667822728
+        },
+        "p": {
+          "mean_absolute": 73777.08598337464,
+          "max_absolute": 519732.8678121469,
+          "normalized_L1": 0.027279681130863886
+        },
+        "T": {
+          "mean_absolute": 134.34038251447194,
+          "max_absolute": 1332.8574827152863,
+          "normalized_L1": 0.05021046945774136
+        },
+        "u": {
+          "mean_absolute": 49.38497979359645,
+          "max_absolute": 299.4907678339457,
+          "normalized_L1": 0.02497897206502537
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0012335392790212654,
+          "max_absolute": 0.02361562346737531
+        },
+        "Y_o2": {
+          "mean_absolute": 0.009691405098947935,
+          "max_absolute": 0.19750664878453666
+        },
+        "Y_oh": {
+          "mean_absolute": 0.002500031494580615,
+          "max_absolute": 0.026504432260552383
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.01143010848948253,
+          "max_absolute": 0.18943608334096296
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.7339191643936605,
+          "max_absolute": 2.321532314822543,
+          "normalized_L1": 0.19676352835298266
+        },
+        "p": {
+          "mean_absolute": 187696.71951418265,
+          "max_absolute": 519732.8678121469,
+          "normalized_L1": 0.06940239763345953
+        },
+        "T": {
+          "mean_absolute": 548.4844323489799,
+          "max_absolute": 1332.8574827152863,
+          "normalized_L1": 0.2049991247831852
+        },
+        "u": {
+          "mean_absolute": 107.06005229685414,
+          "max_absolute": 299.4907678339457,
+          "normalized_L1": 0.054151081295978044
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.007080102698666231,
+          "max_absolute": 0.02361562346737531
+        },
+        "Y_o2": {
+          "mean_absolute": 0.05964963081510699,
+          "max_absolute": 0.19750664878453666
+        },
+        "Y_oh": {
+          "mean_absolute": 0.007886953028642637,
+          "max_absolute": 0.026504432260552383
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.06018628994577154,
+          "max_absolute": 0.18943608334096296
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 2.9714295509417105e-54,
+      "max_species_sum_error": 3.019806626980426e-14,
+      "mass_per_area_kg_m2": 0.030695160781312854,
+      "total_energy_per_area_J_m2": 17229.96816090981,
+      "net_mass_influx_kg_m2_s": 1367.8445357481555,
+      "net_energy_influx_W_m2": 2403590041.597731
+    },
+    {
+      "time_s": 3.001088104522106e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt02700",
+      "shock_m": 0.014278161861687708,
+      "shock_minus_expected_m": 0.0003448242121315368,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3206.7555690614427,
+      "pmax_Pa": 2400725.2879084987,
+      "frozen_peak_pressure_Pa": 2400725.2879084987,
+      "fuel_half_distance_m": 0.00011058159215550335,
+      "thermal_half_distance_m": 0.00011979935127778007,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.12466855875734517,
+          "max_absolute": 2.303568223420461,
+          "normalized_L1": 0.03342360669385494
+        },
+        "p": {
+          "mean_absolute": 57555.28315200124,
+          "max_absolute": 673535.7750784592,
+          "normalized_L1": 0.021281536819399316
+        },
+        "T": {
+          "mean_absolute": 105.37273303743645,
+          "max_absolute": 1132.0173657121506,
+          "normalized_L1": 0.039383648422208255
+        },
+        "u": {
+          "mean_absolute": 41.988979663387674,
+          "max_absolute": 306.8123880817491,
+          "normalized_L1": 0.021238067818075284
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.000851683928353897,
+          "max_absolute": 0.022438672289477806
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0064302893650267385,
+          "max_absolute": 0.18697649106332642
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0022058848837541787,
+          "max_absolute": 0.025113289467508113
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.00861380640964309,
+          "max_absolute": 0.17603782792001121
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.6283350117269572,
+          "max_absolute": 2.303568223420461,
+          "normalized_L1": 0.1684564457412018
+        },
+        "p": {
+          "mean_absolute": 251990.0447176075,
+          "max_absolute": 673535.7750784592,
+          "normalized_L1": 0.09317538062695427
+        },
+        "T": {
+          "mean_absolute": 360.42223267251734,
+          "max_absolute": 1132.0173657121506,
+          "normalized_L1": 0.13470982564416079
+        },
+        "u": {
+          "mean_absolute": 104.52206345028107,
+          "max_absolute": 306.8123880817491,
+          "normalized_L1": 0.052867364004508886
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0044311271840775865,
+          "max_absolute": 0.022438672289477806
+        },
+        "Y_o2": {
+          "mean_absolute": 0.03732701689385203,
+          "max_absolute": 0.18697649106332642
+        },
+        "Y_oh": {
+          "mean_absolute": 0.005350526284739294,
+          "max_absolute": 0.025113289467508113
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.03954110511816715,
+          "max_absolute": 0.17603782792001121
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 3.5590956445813484e-54,
+      "max_species_sum_error": 3.019806626980426e-14,
+      "mass_per_area_kg_m2": 0.031037128900797503,
+      "total_energy_per_area_J_m2": 17830.877947938396,
+      "net_mass_influx_kg_m2_s": 1367.844633155741,
+      "net_energy_influx_W_m2": 2403590218.457606
+    },
+    {
+      "time_s": 3.2503337873083055e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt02897",
+      "shock_m": 0.014728786282958279,
+      "shock_minus_expected_m": 0.00030267443212613973,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3195.407634554208,
+      "pmax_Pa": 2207837.013429492,
+      "frozen_peak_pressure_Pa": 2207837.013429492,
+      "fuel_half_distance_m": 0.00017578967958208546,
+      "thermal_half_distance_m": 0.0001858256714379676,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.10474492215720992,
+          "max_absolute": 1.177242942956886,
+          "normalized_L1": 0.028082085140450602
+        },
+        "p": {
+          "mean_absolute": 68272.78740957392,
+          "max_absolute": 750821.917918399,
+          "normalized_L1": 0.025244421701178778
+        },
+        "T": {
+          "mean_absolute": 74.23464163072597,
+          "max_absolute": 315.787966125803,
+          "normalized_L1": 0.02774561257412237
+        },
+        "u": {
+          "mean_absolute": 41.31083019750443,
+          "max_absolute": 232.44563241097012,
+          "normalized_L1": 0.02089505914144916
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0003575983166270548,
+          "max_absolute": 0.007703383394109104
+        },
+        "Y_o2": {
+          "mean_absolute": 0.0022825032835394952,
+          "max_absolute": 0.06389544659809969
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0017703911535183984,
+          "max_absolute": 0.009309232807657698
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.0047333114301255355,
+          "max_absolute": 0.06008676668443182
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.4362808810478462,
+          "max_absolute": 1.177242942956886,
+          "normalized_L1": 0.11696678554353289
+        },
+        "p": {
+          "mean_absolute": 358122.241316176,
+          "max_absolute": 750821.917918399,
+          "normalized_L1": 0.13241862861291484
+        },
+        "T": {
+          "mean_absolute": 170.03996572379748,
+          "max_absolute": 315.787966125803,
+          "normalized_L1": 0.06355338838379726
+        },
+        "u": {
+          "mean_absolute": 102.04758930580647,
+          "max_absolute": 232.44563241097012,
+          "normalized_L1": 0.0516157725127478
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0010826569443239098,
+          "max_absolute": 0.007703383394109104
+        },
+        "Y_o2": {
+          "mean_absolute": 0.009073532810143064,
+          "max_absolute": 0.06389544659809969
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0020770560564517034,
+          "max_absolute": 0.008925465076233645
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.01211669781511827,
+          "max_absolute": 0.06008676668443182
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 4.1980257776565956e-54,
+      "max_species_sum_error": 2.9976021664879227e-14,
+      "mass_per_area_kg_m2": 0.03137805828134277,
+      "total_energy_per_area_J_m2": 18429.96245092996,
+      "net_mass_influx_kg_m2_s": 1367.8447203898359,
+      "net_energy_influx_W_m2": 2403590355.1497073
+    },
+    {
+      "time_s": 3.500043477537951e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt03090",
+      "shock_m": 0.015164053969470324,
+      "shock_minus_expected_m": 0.0002442505458162998,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3182.649190935875,
+      "pmax_Pa": 2075475.088299805,
+      "frozen_peak_pressure_Pa": 2075475.088299805,
+      "fuel_half_distance_m": 0.0002469859987611602,
+      "thermal_half_distance_m": 0.0002578692159334657,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.11487346094904645,
+          "max_absolute": 1.0359945843494867,
+          "normalized_L1": 0.03079754363564919
+        },
+        "p": {
+          "mean_absolute": 97670.68591681286,
+          "max_absolute": 841263.5345133864,
+          "normalized_L1": 0.03611453518567852
+        },
+        "T": {
+          "mean_absolute": 86.08268198997986,
+          "max_absolute": 1164.2207284844128,
+          "normalized_L1": 0.03217388393570137
+        },
+        "u": {
+          "mean_absolute": 44.56149545519848,
+          "max_absolute": 273.18860110918695,
+          "normalized_L1": 0.022539248872903032
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.000735698860287559,
+          "max_absolute": 0.022317202513711484
+        },
+        "Y_o2": {
+          "mean_absolute": 0.005327509951253923,
+          "max_absolute": 0.18392577377895036
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0021394164482074745,
+          "max_absolute": 0.02432301717691571
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.007376738640986963,
+          "max_absolute": 0.17137011382283307
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.3921331149460736,
+          "max_absolute": 1.0359945843494867,
+          "normalized_L1": 0.10513078145953597
+        },
+        "p": {
+          "mean_absolute": 430617.1179866746,
+          "max_absolute": 841263.5345133864,
+          "normalized_L1": 0.1592242023602726
+        },
+        "T": {
+          "mean_absolute": 274.62367214620616,
+          "max_absolute": 1164.2207284844128,
+          "normalized_L1": 0.10264213369486595
+        },
+        "u": {
+          "mean_absolute": 100.55712062142308,
+          "max_absolute": 273.18860110918695,
+          "normalized_L1": 0.05086189196472265
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0034959813557296623,
+          "max_absolute": 0.022317202513711484
+        },
+        "Y_o2": {
+          "mean_absolute": 0.028338296694642665,
+          "max_absolute": 0.18392577377895036
+        },
+        "Y_oh": {
+          "mean_absolute": 0.004323563903637884,
+          "max_absolute": 0.02432301717691571
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.028151580627019727,
+          "max_absolute": 0.17137011382283307
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 4.8912597405813835e-54,
+      "max_species_sum_error": 3.108624468950438e-14,
+      "mass_per_area_kg_m2": 0.03171962237268259,
+      "total_energy_per_area_J_m2": 19030.162268445536,
+      "net_mass_influx_kg_m2_s": 1367.844798943267,
+      "net_energy_influx_W_m2": 2403590466.3806443
+    },
+    {
+      "time_s": 3.751093271792702e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt03281",
+      "shock_m": 0.015588674336798532,
+      "shock_minus_expected_m": 0.00017252987140017016,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3173.9852283545024,
+      "pmax_Pa": 1975043.4124159531,
+      "frozen_peak_pressure_Pa": 1975043.4124159531,
+      "fuel_half_distance_m": 0.00032178361614946063,
+      "thermal_half_distance_m": 0.00033312480954695613,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.16587936258081135,
+          "max_absolute": 1.3531554028619244,
+          "normalized_L1": 0.044472211989871425
+        },
+        "p": {
+          "mean_absolute": 136502.94669706066,
+          "max_absolute": 918689.6509722825,
+          "normalized_L1": 0.05047308130546465
+        },
+        "T": {
+          "mean_absolute": 121.25136926806476,
+          "max_absolute": 1456.2000069922701,
+          "normalized_L1": 0.045318377537652464
+        },
+        "u": {
+          "mean_absolute": 55.15220375707757,
+          "max_absolute": 306.05846543169446,
+          "normalized_L1": 0.027896039701351898
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0013362364676491997,
+          "max_absolute": 0.023868299147276006
+        },
+        "Y_o2": {
+          "mean_absolute": 0.010357568333251462,
+          "max_absolute": 0.19873979766130015
+        },
+        "Y_oh": {
+          "mean_absolute": 0.0026788184387443507,
+          "max_absolute": 0.02514325108729959
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.012137598927918287,
+          "max_absolute": 0.19132765128627624
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.5786106240448219,
+          "max_absolute": 1.3531554028619244,
+          "normalized_L1": 0.1551253509283123
+        },
+        "p": {
+          "mean_absolute": 499652.34092511353,
+          "max_absolute": 918689.6509722825,
+          "normalized_L1": 0.18475054083592207
+        },
+        "T": {
+          "mean_absolute": 539.1196566204804,
+          "max_absolute": 1456.2000069922701,
+          "normalized_L1": 0.20149898746860098
+        },
+        "u": {
+          "mean_absolute": 125.52777089511432,
+          "max_absolute": 306.05846543169446,
+          "normalized_L1": 0.06349207179346744
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.007368194454794361,
+          "max_absolute": 0.023868299147276006
+        },
+        "Y_o2": {
+          "mean_absolute": 0.06082809814598856,
+          "max_absolute": 0.19873979766130015
+        },
+        "Y_oh": {
+          "mean_absolute": 0.007728496453557831,
+          "max_absolute": 0.02514325108729959
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.05861117968446171,
+          "max_absolute": 0.19132765128627624
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 5.641804866199244e-54,
+      "max_species_sum_error": 3.108624468950438e-14,
+      "mass_per_area_kg_m2": 0.03206301953706276,
+      "total_energy_per_area_J_m2": 19633.583172575123,
+      "net_mass_influx_kg_m2_s": 1367.8448700297793,
+      "net_energy_influx_W_m2": 2403590558.8274035
+    },
+    {
+      "time_s": 4e-06,
+      "plot": "/dev/shm/my_pele_hydrogen_znd_20260913/hydrogen_2400_cfl30_v1/plt03469",
+      "shock_m": 0.016000462755409225,
+      "shock_minus_expected_m": 9.221422299767953e-05,
+      "Tmin_K": 299.9999999999999,
+      "Tmax_K": 3165.183711949318,
+      "pmax_Pa": 1896840.642952643,
+      "frozen_peak_pressure_Pa": 1896840.642952643,
+      "fuel_half_distance_m": 0.00039907124054871737,
+      "thermal_half_distance_m": 0.0004109212868420602,
+      "thermal_half_level_K": 2254.066186298586,
+      "errors_0p05_to_3_mm": {
+        "rho": {
+          "mean_absolute": 0.21947449540765826,
+          "max_absolute": 1.4126558367130893,
+          "normalized_L1": 0.05884105252324211
+        },
+        "p": {
+          "mean_absolute": 172937.9510381521,
+          "max_absolute": 978840.3733878867,
+          "normalized_L1": 0.06394522224432736
+        },
+        "T": {
+          "mean_absolute": 162.91253879305384,
+          "max_absolute": 1575.2868315348476,
+          "normalized_L1": 0.060889472697984504
+        },
+        "u": {
+          "mean_absolute": 66.57371442662362,
+          "max_absolute": 332.09506579007257,
+          "normalized_L1": 0.03367305119649426
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.0019677190170577586,
+          "max_absolute": 0.02441892620833344
+        },
+        "Y_o2": {
+          "mean_absolute": 0.015634691541809694,
+          "max_absolute": 0.2029830731871854
+        },
+        "Y_oh": {
+          "mean_absolute": 0.003198917205389089,
+          "max_absolute": 0.02514590448010662
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.017241301963507993,
+          "max_absolute": 0.1999005357781674
+        }
+      },
+      "supplemental_core_errors_0p05_to_0p5_mm": {
+        "rho": {
+          "mean_absolute": 0.7912567652036504,
+          "max_absolute": 1.4126558367130893,
+          "normalized_L1": 0.21213572353470847
+        },
+        "p": {
+          "mean_absolute": 544563.873996462,
+          "max_absolute": 978840.3733878867,
+          "normalized_L1": 0.20135694762136655
+        },
+        "T": {
+          "mean_absolute": 844.3430454868757,
+          "max_absolute": 1575.2868315348476,
+          "normalized_L1": 0.31557793646082605
+        },
+        "u": {
+          "mean_absolute": 143.91292344606393,
+          "max_absolute": 332.09506579007257,
+          "normalized_L1": 0.07279130030182755
+        },
+        "Y_fuel": {
+          "mean_absolute": 0.011538734488813235,
+          "max_absolute": 0.02441892620833344
+        },
+        "Y_o2": {
+          "mean_absolute": 0.09552039423917881,
+          "max_absolute": 0.2029830731871854
+        },
+        "Y_oh": {
+          "mean_absolute": 0.011312310084104604,
+          "max_absolute": 0.02514590448010662
+        },
+        "Y_h2o": {
+          "mean_absolute": 0.09255739757896703,
+          "max_absolute": 0.1999005357781674
+        }
+      },
+      "nonfinite_fields": 0,
+      "transverse_relative_spread": 0.0,
+      "min_Y": 6.43898995932231e-54,
+      "max_species_sum_error": 3.1530333899354446e-14,
+      "mass_per_area_kg_m2": 0.0324034853363559,
+      "total_energy_per_area_J_m2": 20231.85304469459,
+      "net_mass_influx_kg_m2_s": 1367.8449335545158,
+      "net_energy_influx_W_m2": 2403590637.64825
+    }
+  ],
+  "max_nonfinite": 0,
+  "max_transverse_relative_spread": 0.0,
+  "minimum_Y_all_plots": 0.0,
+  "maximum_species_sum_error": 3.197442310920451e-14
+}

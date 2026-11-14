@@ -1,0 +1,40 @@
+{
+  "status": "PASS-ACADEMIC-SPRAY-SOURCE-PLOT-DIAGNOSTICS",
+  "date": "2026-07-29",
+  "scope": "PeleC spray plotfile diagnostics for gas-particle source terms",
+  "code_changes": [
+    "external/PeleC/Source/PeleC.H: add read-only spraySourceForPlot accessor",
+    "external/PeleC/Source/PeleCAmr.cpp: write new_sources[spray_src] fields when particles.plot_src=1",
+    "external/PeleC/Submodules/PelePhysics/Source/Spray/Drag.H: remove unconditional DEBUG_SPRAY printf output"
+  ],
+  "smoke_case": {
+    "case": "examples/academic/shock_droplet",
+    "executable": "PeleC2d.gnu.ex",
+    "steps": 2,
+    "plotfile": "plt00002",
+    "particles_plot_src": true,
+    "amrex_finalized": true,
+    "debug_spray_noise_present": false,
+    "source_fields": [
+      "spray_rho_src",
+      "spray_xmom_src",
+      "spray_ymom_src",
+      "spray_eng_src",
+      "spray_rhoY_NC7H16_src"
+    ],
+    "required_source_fields": [
+      "spray_rho_src",
+      "spray_xmom_src",
+      "spray_ymom_src",
+      "spray_eng_src",
+      "spray_rhoY_NC7H16_src"
+    ],
+    "missing_source_fields": []
+  },
+  "readiness_impact": {
+    "clears_plot_src_dead_switch": true,
+    "enables_acd_05_source_history_budget": true,
+    "clears_acd_05_full_budget_gap": false,
+    "reason_full_gap_remains": "This adds auditable source-term plot output; the next gate must integrate source fields over time and compare against gas plus particle budget changes."
+  }
+}

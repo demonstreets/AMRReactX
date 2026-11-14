@@ -1,0 +1,31 @@
+{'state': 0, 'T_K': 700, 'P_Pa': 100000.0, 'rtol': 1e-06, 'exit': 0, 'wall_s': 0.018971681594848633, 'max_T_error_K': 1.3301360013429075e-11, 'max_Y_error': 1.3600232051658168e-15, 'passed': True}
+{'state': 0, 'T_K': 700, 'P_Pa': 100000.0, 'rtol': 1e-07, 'exit': 0, 'wall_s': 0.03456234931945801, 'max_T_error_K': 1.3301360013429075e-11, 'max_Y_error': 1.3600232051658168e-15, 'passed': True}
+{'state': 1, 'T_K': 1000, 'P_Pa': 100000.0, 'rtol': 1e-06, 'exit': 0, 'wall_s': 0.035814523696899414, 'max_T_error_K': 8.193865141947754e-09, 'max_Y_error': 9.536737718973676e-13, 'passed': True}
+{'state': 1, 'T_K': 1000, 'P_Pa': 100000.0, 'rtol': 1e-07, 'exit': 0, 'wall_s': 0.033408403396606445, 'max_T_error_K': 1.3168914847483393e-08, 'max_Y_error': 1.2150835893010026e-12, 'passed': True}
+{'state': 2, 'T_K': 1800, 'P_Pa': 100000.0, 'rtol': 1e-06, 'exit': 0, 'wall_s': 0.05617690086364746, 'max_T_error_K': 0.0005436260125861736, 'max_Y_error': 7.840101380607312e-08, 'passed': True}
+{'state': 2, 'T_K': 1800, 'P_Pa': 100000.0, 'rtol': 1e-07, 'exit': 0, 'wall_s': 0.12030768394470215, 'max_T_error_K': 5.811926530441269e-05, 'max_Y_error': 9.019891278327918e-09, 'passed': True}
+{'state': 3, 'T_K': 2500, 'P_Pa': 100000.0, 'rtol': 1e-06, 'exit': 0, 'wall_s': 0.053664207458496094, 'max_T_error_K': 0.00048556398223809083, 'max_Y_error': 7.998284388965882e-08, 'passed': True}
+{'state': 3, 'T_K': 2500, 'P_Pa': 100000.0, 'rtol': 1e-07, 'exit': 0, 'wall_s': 0.11211395263671875, 'max_T_error_K': 5.1434798933769343e-05, 'max_Y_error': 9.086037547345605e-09, 'passed': True}
+Traceback (most recent call last):
+  File "/home/cj/my-pele/repair_validation/twophase_20260910/wd6_cell_state_validation_v1/driver.py", line 16, in <module>
+    for row in a:net.advance(row[0]);terr=max(terr,abs(row[1]-react.T));yerr=max(yerr,max(abs(row[2:8]-react.phase.Y)))
+                 ^^^^^^^^^^^^^^^^^^^
+  File "cantera/reactor.pyx", line 1686, in cantera.reactor.ReactorNet.advance
+cantera._utils.CanteraError: 
+*******************************************************************************
+CanteraError thrown by CVodesIntegrator::integrate:
+CVodes error encountered. Error code: -3
+cvHandleFailure: At t = 4.37052439647903e-06 and h = 2.92652401187726e-16, the error test failed repeatedly or with |h| = hmin.
+
+Components with largest weighted error estimates:
+3: 617.4170638577381
+5: -0.0003819675391138165
+4: 5.886903654920027e-06
+6: -5.795219315946636e-06
+2: -1.8843695118014132e-06
+7: 1.8229304980149944e-10
+0: 0
+1: 0
+8: 0
+*******************************************************************************
+

@@ -1,0 +1,113 @@
+{
+  "evidence_files": [
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/dataverse_refined_source_projection_probe_mpi_cuda_20260807/run.log",
+      "sha256": "289115512a95ca38bfa61a98220d1185d3bd6a481cd8d6abcff72b30cf3b26cf",
+      "size_bytes": 822253
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/dataverse_refined_source_projection_probe_mpi_cuda_20260807/validation.log",
+      "sha256": "22e50d0f9e529ed107f35806bdd6ae60cfd9620aafa88323bff5d35adc307975",
+      "size_bytes": 484
+    },
+    {
+      "label": "input_deck",
+      "path": "docs/codex_audit/evidence/dataverse_refined_source_projection_probe_mpi_cuda_20260807/input.dataverse_refined_source_projection_probe_3d",
+      "sha256": "e29b558eb30e1a8a4194ec8b5a8db6221ffb5c46d524368818d47e5604b79bdd",
+      "size_bytes": 1356
+    },
+    {
+      "label": "status_txt",
+      "path": "docs/codex_audit/evidence/dataverse_refined_source_projection_probe_mpi_cuda_20260807/status.txt",
+      "sha256": "8221ac66be71558c921fb44cfb66f7997699aea754d917763882d6d9eddc836e",
+      "size_bytes": 5
+    },
+    {
+      "label": "run_status",
+      "path": "docs/codex_audit/evidence/dataverse_refined_source_projection_probe_mpi_cuda_20260807/run.status",
+      "sha256": "548b9825af0ee92dc8deabb50763e48402f01285da0aca55e1912f9c9d724546",
+      "size_bytes": 9
+    }
+  ],
+  "generated_at_utc": "2026-08-07T04:33:32+00:00",
+  "limitations": [
+    "This is a near-source refined projection stability probe, not a full-channel Dataverse plume-shape agreement case.",
+    "The experimental 2.3 mm radius is represented by one cell-centered source cell at dx=0.0125 m; longer full-domain refinement or source projection is still required for production agreement.",
+    "This evidence reduces the source/grid mismatch risk but does not clear the strict external plume-shape blocker."
+  ],
+  "schema_version": 1,
+  "status": "PASS-DATAVERSE-REFINED-SOURCE-PROJECTION-PROBE-MPI-CUDA",
+  "summary": {
+    "active_volume_equals_single_cell": true,
+    "active_volume_m3": 1.953125e-06,
+    "cell_center_indices": [
+      8,
+      7,
+      3
+    ],
+    "center_alignment_error_cells": 2.220446049250313e-15,
+    "clears_external_plume_reference_blocker": false,
+    "cuda_initialized": true,
+    "dx_m": [
+      0.012499999999999999,
+      0.0125,
+      0.012500000000000011
+    ],
+    "equivalent_orifice_velocity_m_s": 656.7687631723,
+    "experimental_orifice_diameter_m": 0.0046,
+    "experimental_orifice_radius_m": 0.0023,
+    "fixed_dt_s": 1e-07,
+    "leak_center_m": [
+      0.5,
+      0.45,
+      0.775
+    ],
+    "leak_radius_m": 0.0023,
+    "max_step": 1000,
+    "mdot_kg_s": 0.0009152681907312,
+    "mdot_vol_kg_m3_s": 468.6173137,
+    "mpi_rank_count": 2,
+    "n_cell": [
+      32,
+      16,
+      8
+    ],
+    "plotfile_count": 5,
+    "production_agreement_completed": false,
+    "refined_source_projection_probe_ready": true,
+    "run_bad_markers": [],
+    "run_finalized": true,
+    "run_log_has_no_abort_nan_or_cuda_error": true,
+    "run_returncode_zero": true,
+    "single_cell_volume_m3": 1.9531250000000017e-06,
+    "source_cfl": 0.0052541501053784,
+    "strict_blocker_still_open": true,
+    "target_dx_m": 0.0125,
+    "time_end_s": 9.999999999999999e-05,
+    "validation_downstream_fraction": 0.949807746,
+    "validation_mass_ratio_final": 1.0,
+    "validation_max_yh2": 0.0505563747
+  },
+  "validation": {
+    "centroid": "(4.99936083e-01,4.50001184e-01,7.75005383e-01)",
+    "downstream_fraction": 0.949807746,
+    "grid_shapes": "[(32,",
+    "injectedN": 9.15268191e-08,
+    "lateral_offset": 5.51197959e-06,
+    "mass0": 0.0,
+    "mass1": 2.28817048e-08,
+    "massN": 9.15268191e-08,
+    "mass_growth_ratio": 4.0,
+    "mass_ratioN": 1.0,
+    "max_YH2": 0.0505563747,
+    "max_mass_drop": -2.28817048e-08,
+    "max_mass_drop_ratio": -0.25,
+    "nplot": 5.0,
+    "pass_line": "h2_leak_plume_history_validation PASS nplot=5 time0=0 timeN=0.0001 mass0=0.00000000e+00 mass1=2.28817048e-08 massN=9.15268191e-08 injectedN=9.15268191e-08 mass_ratioN=1.00000000e+00 mass_growth_ratio=4.00000000e+00 max_mass_drop=-2.28817048e-08 max_mass_drop_ratio=-2.50000000e-01 max_YH2=5.05563747e-02 grid_shapes=[(32, 16, 8)] centroid=(4.99936083e-01,4.50001184e-01,7.75005383e-01) lateral_offset=5.51197959e-06 downstream_fraction=9.49807746e-01 upstream_fraction=5.01922545e-02",
+    "time0": 0.0,
+    "timeN": 0.0001,
+    "upstream_fraction": 0.0501922545
+  }
+}

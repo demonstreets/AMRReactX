@@ -1,0 +1,113 @@
+{
+  "evidence_files": [
+    {
+      "label": "geometry_mapping_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_geometry_mapping_20260803/dataverse_open_channel_geometry_mapping_report.json",
+      "sha256": "23f4c54b5e03da715e8c9ca49d10a34a655585cb40fdc37bdbbfa1f7e8bd8c95",
+      "size_bytes": 15294
+    },
+    {
+      "label": "reference_package_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_reference_package_20260803/dataverse_open_channel_reference_package_report.json",
+      "sha256": "1a22b8c0dc839122e9b1b895f8059e698c5c25266af30dbd62a09b735d284476",
+      "size_bytes": 8831
+    },
+    {
+      "label": "baseline_120s_input",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_cfd_120s_peak_window_mpi_cuda_20260804/input.dataverse_open_channel_h2_scout_3d",
+      "sha256": "9e757d047e3fc15595aaf6bddcddb434a907d74e9081b0897cc72642aa6dc800",
+      "size_bytes": 1511
+    },
+    {
+      "label": "calibration_diagnosis_report",
+      "path": "docs/codex_audit/evidence/dataverse_open_channel_120s_calibration_diagnosis_20260804/dataverse_open_channel_120s_calibration_diagnosis_report.json",
+      "sha256": "887e03d0ddf2571dbcf9dc42e8d4f3fafec85fc6921a140efa59d7393544005d",
+      "size_bytes": 32004
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:02+00:00",
+  "interpretation": [
+    "The current coarse-grid source conserves injected mass but cannot directly represent the 4.6 mm experimental orifice radius with cell-centered spherical support.",
+    "The current Dataverse runner injects the measured mass flow with a low 0.5 m/s momentum velocity; the equivalent physical orifice velocity is orders of magnitude larger.",
+    "The previous radius sweep was stable but insensitive, so the next useful screen should vary momentum/BC/source projection rather than only coarse numerical radius."
+  ],
+  "recommended_next_screens": [
+    {
+      "label": "orifice_velocity_short_mpi_cuda_scout",
+      "leak_radius_m": 0.04330127018922188,
+      "leak_vel_x_m_s": 656.7687631723272,
+      "leak_zc_m": 0.775,
+      "purpose": "prove whether a momentum-aligned source remains stable before any long 45-120 s campaign"
+    },
+    {
+      "hi_bc": [
+        "Outflow",
+        "NoSlipWallAdiab",
+        "NoSlipWallAdiab"
+      ],
+      "label": "open_end_boundary_parity_screen",
+      "lo_bc": [
+        "Outflow",
+        "NoSlipWallAdiab",
+        "NoSlipWallAdiab"
+      ],
+      "purpose": "separate boundary-condition bias from source calibration bias for the open-ended channel"
+    },
+    {
+      "label": "refined_source_projection_screen",
+      "purpose": "reduce the radius/grid mismatch before judging peak and arrival-time agreement",
+      "target_dx_m": 0.0125
+    }
+  ],
+  "schema_version": 1,
+  "status": "DIAGNOSED-DATAVERSE-OPEN-CHANNEL-H2-PHYSICS-ALIGNMENT-GAPS",
+  "summary": {
+    "article_doi": "10.1016/j.jlp.2025.105669",
+    "baseline_boundary_hi_bc": [
+      "Outflow",
+      "NoSlipWallAdiab",
+      "NoSlipWallAdiab"
+    ],
+    "baseline_boundary_lo_bc": [
+      "NoSlipWallAdiab",
+      "NoSlipWallAdiab",
+      "NoSlipWallAdiab"
+    ],
+    "baseline_numerical_leak_radius_m": 0.08,
+    "baseline_numerical_leak_velocity_m_s": 0.5,
+    "baseline_to_experiment_area_ratio": 1209.8298676748582,
+    "baseline_to_experiment_radius_ratio": 34.78260869565217,
+    "choked_exit_velocity_estimate_m_s": 1188.1978387247234,
+    "current_grid_active_cell_count_for_baseline_radius": 8,
+    "current_grid_active_cell_count_for_experimental_radius": 0,
+    "current_grid_active_volume_for_baseline_radius_m3": 0.001,
+    "current_grid_active_volume_for_experimental_radius_m3": 0.0,
+    "current_grid_cell_size_m": [
+      0.049999999999999996,
+      0.05,
+      0.05
+    ],
+    "current_grid_n_cell": [
+      116,
+      18,
+      16
+    ],
+    "dataset_doi": "10.23642/USN.26117989",
+    "equivalent_orifice_velocity_m_s": 656.7687631723272,
+    "equivalent_to_baseline_velocity_ratio": 1313.5375263446545,
+    "experimental_orifice_area_m2": 1.6619025137490005e-05,
+    "experimental_orifice_diameter_m": 0.0046,
+    "experimental_orifice_radius_m": 0.0023,
+    "geometry_obstacle_exact_bounds_available": false,
+    "h2_density_at_release_kg_m3": 0.08385526494374063,
+    "minimum_active_radius_at_reference_source_on_current_grid_m": 0.04330127018922188,
+    "ready_for_boundary_parity_screen": true,
+    "ready_for_orifice_velocity_scout": true,
+    "ready_for_refined_source_projection": true,
+    "recommended_orifice_velocity_scout_m_s": 656.7687631723272,
+    "reference_mass_flow_rate_kg_s": 0.0009152681907312,
+    "reference_report_mass_flow_rate_kg_s": null,
+    "strict_external_plume_blocker_cleared": false
+  },
+  "title": "DataverseNO Open-Channel H2 Physics Alignment Diagnosis"
+}

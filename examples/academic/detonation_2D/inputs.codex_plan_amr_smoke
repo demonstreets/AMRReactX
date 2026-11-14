@@ -1,0 +1,53 @@
+# Codex PeleC plan-AMR detonation smoke: verifies opt-in density/species tagging creates level 1.
+# Runs long enough to move the thermal/reaction front but stays cheap for quick gates.
+max_step = 2
+stop_time = 5.0e-5
+geometry.is_periodic = 0 0 0
+geometry.prob_lo = 0.0 0.0 0.0
+geometry.prob_hi = 5.0 2.5 0.01
+amr.n_cell = 64 32 1
+pelec.lo_bc = "SlipWall" "SlipWall" "SlipWall"
+pelec.hi_bc = "FOExtrap" "SlipWall" "SlipWall"
+pelec.do_hydro = 1
+pelec.do_react = 1
+pelec.do_mol = 1
+pelec.chem_integrator = "ReactorCvode"
+pelec.cfl = 0.3
+pelec.init_shrink = 0.01
+pelec.change_max = 1.05
+pelec.plm_iorder = 2
+pelec.ppm_type = 1
+pelec.use_hybrid_weno = 1
+pelec.weno_scheme = 1
+pelec.sum_interval = 100
+pelec.v = 1
+amr.v = 1
+amr.max_level = 1
+amr.blocking_factor = 16
+amr.max_grid_size = 32
+amr.checkpoint_files_output = 0
+amr.plot_files_output = 1
+amr.plot_file = plt
+amr.plot_int = 2
+
+amr.regrid_int = 1
+amr.n_error_buf = 1 1
+amr.grid_eff = 0.7
+amr.plan_tagging = 1
+amr.plan_max_level = 0
+amr.plan_density_gradient = 1.0e-6
+amr.plan_temperature_gradient = 1.0e-6
+amr.plan_species_gradient = 1.0e-8
+amr.plan_interface_curvature = 1.0e-8
+amr.plan_species_name = H2O
+prob.x_split = 0.5
+prob.p_l = 2.0e7
+prob.rho_l = 2.4e-3
+prob.p_r = 1.0e6
+prob.rho_r = 8.5e-4
+prob.T_r = 300.0
+cvode.solve_type = GMRES
+
+amr.plot_vars = density Temp rho_H2 rho_O2 rho_H2O rho_N2
+amr.derive_plot_vars = pressure
+amrex.abort_on_unused_inputs = 1

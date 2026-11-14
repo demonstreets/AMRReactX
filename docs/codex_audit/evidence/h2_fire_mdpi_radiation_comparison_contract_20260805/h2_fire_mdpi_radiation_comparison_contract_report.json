@@ -1,0 +1,89 @@
+{
+  "acceptance_contract": {
+    "acceptance_criteria": {
+      "all_radiation_metrics_present": true,
+      "cpu_or_gpu_parallel_run_required": true,
+      "flux_tolerance_source": "per-row tolerance_abs_w_m2 and tolerance_rel in radiation_metrics.csv",
+      "no_nan_inf_solver_abort": true,
+      "strict_credit_requires_exp002_pressure_comparison_too": true
+    },
+    "required_cfd_outputs": [
+      "case_aligned_radiative_heat_flux_w_m2_at_each_mdpi_radiometer_distance",
+      "release_pressure_or_mass_flow_matching_target_case",
+      "orifice_diameter_matching_target_case",
+      "radiometer_distance_and_height_mapping",
+      "radiation_model_basis_and_radiative_fraction"
+    ],
+    "required_reference_metric_count": 4,
+    "required_reference_metrics": [
+      "mdpi_jet_fire_1p5mm_0p6mpa_0p23m",
+      "mdpi_jet_fire_1p5mm_0p6mpa_0p50m",
+      "mdpi_jet_fire_max_1p2mm_0p23m",
+      "mdpi_jet_fire_max_2p0mm_0p23m"
+    ]
+  },
+  "current_gap": {
+    "current_cfd_radiation_comparison_executed": false,
+    "current_fire_consequence_available_flux_distances_m": [
+      1.0,
+      3.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "current_fire_consequence_is_screening_only": true,
+    "current_outputs_sufficient_for_mdpi_radiation_agreement": false,
+    "mdpi_target_distances_m": [
+      0.23,
+      0.5
+    ],
+    "mdpi_target_distances_missing_from_screening_report_m": [
+      0.23,
+      0.5
+    ],
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "evidence_files": [
+    {
+      "label": "radiation_table_report",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/h2_fire_mdpi_radiation_calibration_table_report.json",
+      "sha256": "26506a1e7e4d69bb668b74e5429e7aca4015853de14d745f91183c52e687a258",
+      "size_bytes": 3576
+    },
+    {
+      "label": "fire_consequence_screening",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_consequence_metrics_20260720/fire_consequence_metrics_report.json",
+      "sha256": "f1e4bb21fb6166d3a8e0b9cf9140d8008b312cf9b93073c9c52a1954afd3e7a6",
+      "size_bytes": 5969
+    },
+    {
+      "label": "strict_fire_update",
+      "path": "docs/codex_audit/evidence/master_plan_strict_fire_calibration_update_20260731/master_plan_strict_fire_calibration_update_report.json",
+      "sha256": "2c10760f348aad4d160c8c355dce42a6826a73b3ca131eed2b8250bdade5ad23",
+      "size_bytes": 13639
+    },
+    {
+      "label": "radiation_metrics_csv",
+      "path": "docs/codex_audit/evidence/h2_fire_mdpi_radiation_calibration_table_20260805/radiation_metrics.csv",
+      "sha256": "7adc1b777badaea0df20c911d9ad249de8e0ee206eef4ee8947587c6845931a1",
+      "size_bytes": 1143
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:01:57.029307+00:00",
+  "limitations": [
+    "This is an acceptance contract and preflight, not an MDPI CFD radiation agreement result.",
+    "The current fire consequence report is screening-only and does not provide direct 0.23 m / 0.50 m MDPI radiometer comparisons.",
+    "Strict fire credit still requires case-aligned CFD radiation comparison and EXP002 pressure comparison."
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-MDPI-RADIATION-COMPARISON-CONTRACT",
+  "summary": {
+    "current_cfd_radiation_comparison_executed": false,
+    "current_outputs_sufficient_for_mdpi_radiation_agreement": false,
+    "mdpi_radiation_metric_count": 4,
+    "mdpi_radiation_table_ready": true,
+    "radiation_comparison_contract_ready": true,
+    "strict_fire_calibration_blocker_cleared": false
+  },
+  "title": "H2 Fire MDPI Radiation Comparison Acceptance Contract"
+}

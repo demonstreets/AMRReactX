@@ -1,0 +1,42 @@
+Host Name: xiaochun-4028
+=== If no file names and line numbers are shown below, one can run
+            addr2line -Cpfie my_exefile my_line_address
+    to convert `my_line_address` (e.g., 0x4a6b) into file name and line number.
+    Or one can use amrex/Tools/Backtrace/parse_bt.py.
+
+=== Please note that the line number reported by addr2line may not be accurate.
+    One can use
+            readelf -wl my_exefile | grep my_line_address'
+    to find out the offset for that line.
+
+ 0: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x25a256) [0x5973f7801256]
+    amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /usr/include/x86_64-linux-gnu/bits/unistd.h:145 (discriminator 7)
+ (inlined by) amrex::BLBackTrace::print_backtrace_info(_IO_FILE*) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:215 (discriminator 7)
+
+ 1: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x25f004) [0x5973f7806004]
+    amrex::BLBackTrace::handler(int) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_BLBackTrace.cpp:103
+
+ 2: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x4df043) [0x5973f7a86043]
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() at /usr/include/c++/13/bits/basic_string.h:804
+ (inlined by) amrex::ParmParse::~ParmParse() at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Base/AMReX_ParmParse.H:348
+ (inlined by) PeleC::construct_hydro_source(amrex::MultiFab const&, double, double, int, int, int, int) at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/Hydro.cpp:151
+
+ 3: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x4bb52e) [0x5973f7a6252e]
+    PeleC::construct_Snew(amrex::MultiFab&, amrex::MultiFab const&, double) at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/Advance.cpp:384
+ (inlined by) PeleC::do_sdc_iteration(double, double, int, int, int, int) at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/Advance.cpp:331
+ (inlined by) PeleC::do_sdc_advance(double, double, int, int) at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/Advance.cpp:233
+
+ 4: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x2a6264) [0x5973f784d264]
+    amrex::Amr::timeStep(int, double, int, int, double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2077 (discriminator 1)
+ (inlined by) amrex::Amr::coarseTimeStep(double) at /home/cj/my-pele/external/PeleC/Submodules/PelePhysics/Submodules/amrex/Src/Amr/AMReX_Amr.cpp:2182 (discriminator 1)
+
+ 5: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x4250a) [0x5973f75e950a]
+    main at /home/cj/my-pele/examples/academic/bubble_rise/../../../external/PeleC/Source/main.cpp:215
+
+ 6: /lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca) [0x735d64e2a1ca]
+
+ 7: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b) [0x735d64e2a28b]
+
+ 8: /home/cj/my-pele/examples/academic/bubble_rise/repair_20260909_vof2d.gnu.ex(+0x43745) [0x5973f75ea745]
+    ?? ??:0
+

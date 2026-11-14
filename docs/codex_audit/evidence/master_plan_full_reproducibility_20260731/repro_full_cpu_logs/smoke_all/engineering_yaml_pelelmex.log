@@ -1,0 +1,223 @@
+[codex-smoke-yaml] configuring converter
+[codex-smoke-yaml] generating ParmParse input from true YAML
+[codex-smoke-yaml] generating log-law wind-profile input from true YAML
+[codex-smoke-yaml] building PeleLMeX bfs_kepsilon CPU baseline
+fatal: not a git repository (or any of the parent directories): .git
+[codex-smoke-yaml] running generated-input PeleLMeX bfs_kepsilon baseline
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1 
+ Density: 2
+ First species: 3
+ Enthalpy: 5
+ Temperature: 6
+ thermo. pressure: 7
+ => Total number of state variables: 8
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1 - Schmidt number: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1 - Schmidt number: 1.3
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 2 0 
+	Density:  1.19998361
+	Temp:     293
+	H:        -5163.76942
+	Y_O2:     0.233
+	Y_N2:     0.767
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 0.001875, divu: 1e+20
+ Initial dt: 0.0001875
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 2  V: 0
+ >> After initial velocity projection:   U: 2  V: 0
+ Est. time step - Conv: 0.001875, divu: 3.308214736e+16
+ Initial dt: 0.0001875
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 2  V: 0
+ >> After initial velocity projection:   U: 2  V: 0
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 0.001875, divu: 3.308214736e+16
+ STEP [-1] - Time: 0, dt 0.0001875, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.010421906
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 0.001875, divu: 3.308214736e+16
+ STEP [-1] - Time: 0, dt 0.0001875, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.009080091
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 0.001875, divu: 3.308214736e+16
+ STEP [-1] - Time: 0, dt 0.0001875, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.009039972
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.001875, divu: 3.308214736e+16
+ STEP [0] - Time: 0, dt 0.0001875, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.009386863
+
+ >> Final simulation time: 0.0001875
+
+Total Time: 0.043642021
+AMReX (26.05) finalized
+[codex-smoke-yaml] running log-law wind-profile PeleLMeX bfs_kepsilon baseline
+Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 0ec1056-dirty
+ AMReX       git hash: 0ec1056-dirty
+ PelePhysics git hash: 
+ AMReX-Hydro git hash: 
+ SUNDIALS    git hash: 
+ ===============================================
+ Initialization of Eos ... 
+
+ ==============================================================================
+ State components 
+ ==============================================================================
+ Velocity X: 0, Velocity Y: 1 
+ Density: 2
+ First species: 3
+ Enthalpy: 5
+ Temperature: 6
+ thermo. pressure: 7
+ => Total number of state variables: 8
+ Auxiliary 1: k
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1 - Schmidt number: 1
+ Auxiliary 2: epsilon
+   Advective: 1
+   Conservative: 1
+   Diffusive: 1 - Schmidt number: 1.3
+ => Total number of auxiliary variables: 2
+ ==============================================================================
+
+ Initialization of Transport ... 
+    Using LES in transport with Sc = 0.7 and Pr = 0.7
+ Initialization of chemical reactor ... 
+Creating ReactorBase instance: ReactorNull
+ Initializing data for 1 levels 
+Creating new distribution map on level: 0
+ Making new level 0 from scratch 
+ Resetting fine-covered cells mask 
+ ==============================================================================
+ Typical values: 
+	Velocity: 0.3922899764 0 
+	Density:  1.19998361
+	Temp:     293
+	H:        -5163.76942
+	Y_O2:     0.233
+	Y_N2:     0.767
+ ==============================================================================
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Est. time step - Conv: 0.009559255209, divu: 1e+20
+ Initial dt: 0.0009559255209
+
+ Doing initial projection(s) 
+
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 0.3922899764  V: 0
+ >> After initial velocity projection:   U: 0.3922899764  V: 0
+ Est. time step - Conv: 0.009559255209, divu: 1.623229784e+17
+ Initial dt: 0.0009559255209
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+ Initial velocity projection:   U: 0.3922899764  V: 0
+ >> After initial velocity projection:   U: 0.3922899764  V: 0
+ ==============================================================================
+
+ Doing initial pressure iteration(s) 
+
+ ================   INITIAL ITERATION [0]   ================ 
+ Est. time step - Conv: 0.009559255209, divu: 1.623229784e+17
+ STEP [-1] - Time: 0, dt 0.0009559255209, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.008193245
+
+ ================   INITIAL ITERATION [1]   ================ 
+ Est. time step - Conv: 0.009559255209, divu: 1.623229784e+17
+ STEP [-1] - Time: 0, dt 0.0009559255209, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.007429406
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 0.009559255209, divu: 1.623229784e+17
+ STEP [-1] - Time: 0, dt 0.0009559255209, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.007290855
+ ==============================================================================
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.009559255209, divu: 1.623229784e+17
+ STEP [0] - Time: 0, dt 0.0009559255209, Ncells 640
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   SDC iter [1] 
+ >> PeleLMeX::Advance() --> Time: 0.00762818
+
+ >> Final simulation time: 0.0009559255209
+
+Total Time: 0.035051512
+AMReX (26.05) finalized

@@ -1,0 +1,69 @@
+{
+  "cases": [
+    {
+      "blocking_gaps": [],
+      "label": "positive_literature_digitized",
+      "report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_literature_digitized_ingestion_report.json",
+      "report_sha256": "fe48b203c4484db17824d3d50b877828df2ccf1d6114b1ad979802eff4b4acb2",
+      "status": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION"
+    },
+    {
+      "blocking_gaps": [],
+      "label": "positive_wind_tunnel",
+      "report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel_ingestion_report.json",
+      "report_sha256": "c6a332105c83a7e827e2f5c971da99ffa62bf281232bb7664fdd928dcbdc8142",
+      "status": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION"
+    },
+    {
+      "blocking_gaps": [
+        "fire_calibration_metadata_contains_synthetic_or_selftest_marker",
+        "fire_calibration_metadata_contains_placeholder_marker",
+        "radiation_calibration_contains_placeholder_marker",
+        "overpressure_calibration_duplicate_metric_id:op_far"
+      ],
+      "label": "negative_placeholder_duplicate_metric",
+      "report": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/negative_placeholder_duplicate_metric_ingestion_report.json",
+      "report_sha256": "1f49f46d8866cee27c6278d4a81e302578d7056b25b09651f5712b79874e8525",
+      "status": "NOT_READY-H2-FIRE-CALIBRATION-DATASET-INGESTION"
+    }
+  ],
+  "does_not_clear_production_blockers": true,
+  "evidence_files": [
+    {
+      "label": "positive_literature_digitized_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_literature_digitized_ingestion_report.json",
+      "sha256": "fe48b203c4484db17824d3d50b877828df2ccf1d6114b1ad979802eff4b4acb2",
+      "size_bytes": 6111
+    },
+    {
+      "label": "positive_wind_tunnel_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/positive_wind_tunnel_ingestion_report.json",
+      "sha256": "c6a332105c83a7e827e2f5c971da99ffa62bf281232bb7664fdd928dcbdc8142",
+      "size_bytes": 6010
+    },
+    {
+      "label": "negative_placeholder_duplicate_metric_ingestion_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures/negative_placeholder_duplicate_metric_ingestion_report.json",
+      "sha256": "1f49f46d8866cee27c6278d4a81e302578d7056b25b09651f5712b79874e8525",
+      "size_bytes": 5376
+    }
+  ],
+  "fixture_root": "docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_selftest_20260727/fixtures",
+  "generated_at_utc": "2026-08-20T10:07:08+00:00",
+  "limitations": [
+    "This is synthetic gate-validation evidence only and cannot clear production blockers.",
+    "Production credit requires controlled external fire calibration files and official consequence agreement."
+  ],
+  "schema_version": 1,
+  "status": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION-SELFTEST",
+  "summary": {
+    "duplicate_metric_negative_refused": true,
+    "negative_case_count": 1,
+    "negative_refused_count": 1,
+    "placeholder_negative_refused": true,
+    "positive_case_count": 2,
+    "positive_passed_count": 2
+  },
+  "synthetic_selftest_only": true,
+  "title": "Engineering H2 Fire Calibration Dataset Ingestion Selftest"
+}

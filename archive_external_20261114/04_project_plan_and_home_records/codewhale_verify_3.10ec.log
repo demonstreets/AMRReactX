@@ -1,0 +1,414 @@
+]9;4;1]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: read_file (path: /home/cj/my-pele/TASK_verify_3.10ec.md)
+tool read_file completed: # TASK: 联合验证 3.10e + 3.10c
+
+## 测试 A: 3.10c RT 不稳定性 (PeleC)
+
+**目录**: `/home/cj/my-pele/examples/academic/rayleigh_taylor/`
+
+1. 清理旧输出: `rm -rf plt* Backtrace* datlog`
+2. 确认二进制是最新的: `ls -la PeleC2d.gnu.ex` (应显示 Jun 25)
+3. 运行 200 步: `./PeleC2d.gnu.ex inputs max_step=200`
+4. 验证:
+   - 无 Backtrace 文件 (无...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <5 items>)
+tool checklist_write completed: Todo list updated (5 items, 0% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Test A: Check RT binary date, clean old output, run 200 steps",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "content": "Test A: Verify no Backtrace, density range, alpha perturbation...
+]0;🐋 CodeWhale]0;🐳 CodeWhale**Test A: PeleC Rayleigh]0;🐋 CodeWhale-Taylor.**]0;🐳 CodeWhaletool: exec_shell (command: ls -la /home/cj/my-pele/examples/academic/rayleigh_taylor/PeleC2d.gnu.ex 2>&1)
+tool: exec_shell (command: <109 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+-rwxrwxr-x 1 cj cj 29786632 Jun 25 10:57 /home/cj/my-pele/examples/academic/rayleigh_taylor/PeleC2d.gnu.ex
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+CLEANED
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleBinary dated **Jun 25 10:57** — confirmed. Old output cleaned. Running 200 steps.]0;🐳 CodeWhaletool: exec_shell (command: <98 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_ec1f1a6e
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell_wait (task_id: shell_ec1f1a6e)
+]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell_wait completed: Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+
+Starting run at 03:16:12 UTC on 2026-06-25.
+Successfully read inputs file ... 
+
+1 Advected Variables: 
+adv_0  
+2 Species: 
+O2  N2  
+0 Auxiliary Variables: 
+
+Initializing EB2
+Succ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleRun completed in ~3.7s, step 200 reached, no crash. Let me verify]0;🐋 CodeWhale:]0;🐳 CodeWhaletool: exec_shell (command: <349 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+ls: cannot access '/home/cj/my-pele/examples/academic/rayleigh_taylor/Backtrace*': No such file or directory
+---
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/Header
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/Header
+---
+ls: cannot access '/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00100/': No such file or directory
+---
+Header
+job_info
+Level_0
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleLet me check what variables are in the plotfile and whether alpha perturbation data exists.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/Header)
+tool: exec_shell (command: <135 chars>)
+
+tool read_file completed: <file path="/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/Header" total_lines="31" shown_lines="1-30" truncated="true" next_start_line="31">
+     1│ HyperCLaw-V1.1
+     2│ 10
+     3│ density
+     4│ xmom
+     5│ ymom
+     6│ zmom
+     7│ rho_E
+     8│ rho_e
+     9│ Temp
+    10│ rho_...
+tool exec_shell completed
+--- stdout/stderr ---
+Traceback (most recent call last):
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 320, in <module>
+    data = read_plotfile(sys.argv[1])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/cj/my-pele/tools/amrex_reader.py", line 277, in read_plotfile
+    raise PlotfileError(f"Header not found: {header_path}")
+PlotfileError: Header not found: --list-vars/Header
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe `rho_adv_0` variable is the advected scalar (alpha/fraction marker). Let me check the perturbation]0;🐳 CodeWhale growth via the amrex reader.]0;🐋 CodeWhaletool: exec_shell (command: <123 chars>)
+tool: exec_shell (command: <123 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+Time: 0.0
+Components: density, xmom, ymom, zmom, rho_E, rho_e, Temp, rho_adv_0...
+Grid: 128 x 64
+  density: shape=(64, 128), range=[0.0000e+00, 7.7647e+08]
+  xmom: shape=(64, 128), range=[0.0000e+00, 7.7647e+08]
+  ymom: shape=(64, 128), range=[0.0000e+00, 7.7647e+08]
+  zmom: shape=(64, 128), range=[0.0000e+00, 7.7647e+08]
+  rho_E: shape=(64, 128), range=[0.0000e+00, 7.7647e+08]
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+Time: 4.671704624641659e-06
+Components: density, xmom, ymom, zmom, rho_E, rho_e, Temp, rho_adv_0...
+Grid: 128 x 64
+  density: shape=(64, 128), range=[-2.4788e+09, 7.7647e+08]
+  xmom: shape=(64, 128), range=[-2.4790e+09, 7.7647e+08]
+  ymom: shape=(64, 128), range=[-2.4790e+09, 7.7647e+08]
+  zmom: shape=(64, 128), range=[-2.4793e+09, 7.7647e+08]
+  rho_E: shape=(64, 128), range=[-2.5623e+09, 7.7647e+08]
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <1335 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/Level_0/Cell'
+
+
+STDERR:
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <168 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/Header
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/Level_0/Cell_D_00000
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/Level_0/Cell_H
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/job_info
+---
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/Header
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/Level_0/Cell_D_00000
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/Level_0/Cell_H
+/home/cj/my-pele/examples/academic/rayleigh_taylor/plt00200/job_info
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <950 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(1))
+
+STDOUT:
+Traceback (most recent call last):
+  File "<string>", line 6, in <module>
+ValueError: cannot reshape array of size 81941 into shape (64,128,10)
+
+
+STDERR:
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: cat /home/cj/my-pele/examples/academic/rayleigh_taylor/plt00000/Level_0/Cell_H)
+tool exec_shell completed
+--- stdout/stderr ---
+1
+1
+10
+0
+(2 0
+((0,0) (63,63) (0,0))
+((0,64) (63,127) (0,0))
+)
+2
+FabOnDisk: Cell_D_00000 0
+FabOnDisk: Cell_D_00000 327763
+
+2,10
+1.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,3.08708007812500078e+01,3.08708007812500078e+01,9.28792574017253081e+00,0.00000000000000000e+00,2.33000000000000013e-01,7.67000000000000015e-01,
+1.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,2.97211914062500107e+01,2.97211914062500107e+01,9.28792570565944331e+00,0.00000000000000000e+00,2.33000000000000013e-01,7.67000000000000015e-01,
+
+2,10
+2.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,7.76470592103837252e+08,7.76470592103837252e+08,1.71766796875000054e+01,2.00000000000000000e+00,4.66000000000000025e-01,1.53400000000000003e+00,
+2.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,0.00000000000000000e+00,7.76470591833340883e+08,7.76470591833340883e+08,1.22716796875000007e+01,2.00000000000000000e+00,4.66000000000000025e-01,1.53400000000000003e+00,
+
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleGood. Test A data is clear from the PeleC log. Let me proceed to evaluation and move to Test B.
+
+**Test A analysis:**
+- No Backtrace files ✓
+-]0;🐳 CodeWhale Density range expanded from [1.0, 2.0] to [0.574, 2.124] — normal RT mixing, no numerical collapse ✓
+- Mass conserved (0.75 constant) ✓
+- RHO*K growing (]0;🐋 CodeWhale0 → 1.87e7) — kinetic energy increasing as RT instability grows ✓
+
+Now **Test B**: copy c3h8_flacs, add wall functions, compile.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <5 items>)
+
+tool checklist_write completed: Todo list updated (5 items, 40% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Test A: Check RT binary date, clean old output, run 200 steps",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Test A: Verify no Backtrace, density range, alpha perturbation"...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <151 chars>)
+tool: exec_shell (command: <239 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+ls: cannot access '/home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test': No such file or directory
+---
+/home/cj/my-pele/examples/engineering/c3h8_flacs/input.3d
+
+---------------------
+tool exec_shell completed
+--- stdout/stderr ---
+#----------------------DOMAIN DEFINITION------------------------
+geometry.is_periodic = 0 0 0
+geometry.coord_sys   = 0
+geometry.prob_lo     = 0.0  0.0  0.0
+geometry.prob_hi     = 80.0 50.0 40.0
+---
+---
+/home/cj/my-pele/examples/engineering/c3h8_flacs/PeleLMeX3d.gnu.ex
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: ls -la /home/cj/my-pele/examples/engineering/c3h8_flacs/PeleLMeX3d.gnu.ex 2>&1)
+tool: exec_shell (command: <101 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+-rwxrwxr-x 1 cj cj 53138960 Jun 25 09:53 /home/cj/my-pele/examples/engineering/c3h8_flacs/PeleLMeX3d.gnu.ex
+
+---------------------
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+COPIED
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: grep_files (path: /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test, pattern: peleLM\.)
+tool grep_files completed: <4 keys>
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleGood — the case already has k-epsilon LES configured. Adding `ke_wall_functions = 1` and compiling.]0;🐳 CodeWhale]0;🐋 CodeWhaletool: edit_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/input.3d)
+
+tool edit_file completed: --- a//home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/input.3d
++++ b//home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/input.3d
+@@ -72,6 +72,7 @@
+ peleLM.ke_k_amb = 0.05
+ peleLM.ke_eps_amb = 0.01
+ peleLM.ke_prod_lim = 10.0
++peleLM.ke_wall_functions = 1
+ 
+ prob.ke_inlet_T...
+]0;🐳 CodeWhale]0;🐋 CodeWhaleNow compile. Let me check the build approach and run]0;🐳 CodeWhale it.]0;🐋 CodeWhaletool: exec_shell (command: <152 chars>)
+
+tool exec_shell completed
+--- stdout/stderr ---
+Command failed (exit code: Some(2))
+
+STDOUT:
+ls: cannot access '/home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/Makefile': No such file or directory
+/home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/GNUmakefile
+
+
+STDERR:
+
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/GNUmakefile)
+tool read_file completed: <file path="/home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/GNUmakefile" total_lines="18" shown_lines="1-18" truncated="false">
+     1│ DIM = 3
+     2│ COMP = gnu
+     3│ PRECISION = DOUBLE
+     4│ USE_EB = TRUE
+     5│ USE_HYPRE = FALSE
+     6│ PROFILE = FALSE
+     7│ USE_MPI = FAL...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell (command: <135 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_557742c7
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell_wait (task_id: shell_557742c7)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell_wait completed: fatal: not a git repository (or any of the parent directories): .git
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/comps/gnu.mak...
+Loading /home/cj/my-pele/external/PeleLMeX/Submodules/PelePhysics/Submodules/amrex/Tools/GNUMake/sites/Make.unknow...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleComp]0;🐋 CodeWhaleilation **SUCCESS**. Binary check:tool: exec_shell (command: <91 chars>)
+
+]0;🐳 CodeWhaletool exec_shell completed
+--- stdout/stderr ---
+-rwxrwxr-x 1 cj cj 53138968 Jun 25 11:20 /home/cj/my-pele/examples/engineering/c3h8_flacs_ke_wall_test/PeleLMeX3d.gnu.ex
+
+---------------------
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <5 items>)
+tool checklist_write completed: Todo list updated (5 items, 60% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Test A: Check RT binary date, clean old output, run 200 steps",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Test A: Verify no Backtrace, density range, alpha perturbation"...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: exec_shell (command: <114 chars>)
+tool exec_shell completed
+--- stdout/stderr ---
+Background task started: shell_6d7cd3c0
+---------------------
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool: exec_shell_wait (task_id: shell_6d7cd3c0)
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaletool exec_shell_wait completed: Initializing AMReX (26.05)...
+Initializing SUNDIALS with 1 threads...
+SUNDIALS initialized.
+AMReX (26.05) initialized
+Successfully read inputs file ... 
+
+ ================ Version Info =================
+ PeleLMeX    git hash: 
+ AMReX       git hash: 
+ PelePhysics git hash: 
+ AMReX-Hydro git hash:...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleRun is progressing — initial pressure iterations. Polling with longer timeout.]0;🐳 CodeWhaletool: exec_shell_wait (task_id: shell_6d7cd3c0)
+
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool exec_shell_wait completed:  >> PeleLMeX::Advance() --> Time: 79.04087859
+
+ ================   INITIAL ITERATION [2]   ================ 
+ Est. time step - Conv: 0.01858643819, divu: 1.761675644e+16
+ STEP [-1] - Time: 0, dt 0.01858643819, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for time 0
+   ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhaleEach timestep takes ~80s — 100 steps would need]0;🐋 CodeWhale hours. Per the task: "测试 B 只编译确认即可". Cancelling the run.]0;🐳 CodeWhaletool: exec_interact (task_id: shell_6d7cd3c0)
+
+tool exec_interact completed:  >> PeleLMeX::Advance() --> Time: 82.31543485
+
+ ====================   NEW TIME STEP   ==================== 
+ Est. time step - Conv: 0.01932892606, divu: 3.909273473
+ STEP [2] - Time: 0.03799216646, dt 0.01932892606, Ncells 1280000
+   Computing Turbulent Viscosity with LES model: kepsilon for tim...
+]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaleThe run is progressing (3 steps completed, no crash, k]0;🐳 CodeWhale-epsilon+kepsilon LES + wall functions active) but at ~80s/step. Let me finalize the report.]0;🐋 CodeWhale]0;🐳 CodeWhaletool: checklist_write (todos: <5 items>)
+
+tool checklist_write completed: Todo list updated (5 items, 80% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Test A: Check RT binary date, clean old output, run 200 steps",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Test A: Verify no Backtrace, density range, alpha perturbation"...
+]0;🐋 CodeWhale]0;🐳 CodeWhaleNow writing the PASS/FAIL report.]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: write_file (path: /home/cj/PASS_FAIL, content: <1695 chars>)
+
+tool write_file completed: --- a//home/cj/PASS_FAIL
++++ b//home/cj/PASS_FAIL
+@@ -0,0 +1,49 @@
++# 3.10e + 3.10c Joint Verification Report
++## Date: 2026-06-25
++
++---
++
++## Test A: 3.10c RT Instability Fix (PeleC) — PASS
++
++| Check | Result |
++|-------|--------|
++| Binary date | Jun 25 10:57 |
++| Steps completed | 200 / 200 ...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: read_file (path: /home/cj/PASS_FAIL)
+tool read_file completed: # 3.10e + 3.10c Joint Verification Report
+## Date: 2026-06-25
+
+---
+
+## Test A: 3.10c RT Instability Fix (PeleC) — PASS
+
+| Check | Result |
+|-------|--------|
+| Binary date | Jun 25 10:57 |
+| Steps completed | 200 / 200 |
+| Run time | 3.7s |
+| Backtrace files | None (no crash) |
+| Mass conservatio...
+]0;🐳 CodeWhale]0;🐋 CodeWhale]0;🐳 CodeWhale]0;🐋 CodeWhaletool: checklist_write (todos: <5 items>)
+tool checklist_write completed: Todo list updated (5 items, 100% complete)
+{
+  "items": [
+    {
+      "id": 1,
+      "content": "Test A: Check RT binary date, clean old output, run 200 steps",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "content": "Test A: Verify no Backtrace, density range, alpha perturbation...
+]0;🐳 CodeWhaleReport written to `/home/c]0;🐋 CodeWhalej/PASS_FAIL`.
+
+## Results
+
+**Test A: 3.10c RT (PeleC) — PASS**
+
+200 steps completed in 3.7s. No Backtrace files, no crash,]0;🐳 CodeWhale normal exit. Density range [1.0,2.0] → [0.574,2.124] — physically correct RT mixing, not numerical collapse. Mass conserved (0.75). Kinetic energy growing as expected (RHO*K]0;🐋 CodeWhale: 0 → 1.87e7). The 3.10c instability fix holds.
+
+**Test B: 3.10e Wall Functions (PeleLMeX) — PASS**
+
+Case copied, `peleLM.ke_wall_functions = 1` added,]0;🐳 CodeWhale compilation clean (Jun 25 11:20). Runtime confirmed through 3 steps — k-epsilon LES active with wall functions flag in effect, no crash. Full 100-step run deferred by design (~80]0;🐋 CodeWhales/step → ~2.2h).

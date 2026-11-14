@@ -1,0 +1,203 @@
+{
+  "conversion": {
+    "command": "/usr/bin/python3 tools/codex_make_external_vaporization_source_input.py --source-csv examples/engineering/h2_leak_3d/codex_lng_external_vaporization_source_template.csv --base-input examples/engineering/h2_leak_3d/input.codex_gasified_lng_ch4_surrogate_smoke --time 2.0 --output-input docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/input.codex_lng_external_vaporization_timeseries --output-json docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/external_vaporization_timeseries_mapping.json",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "external_vaporization_source_input PASS input=docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/input.codex_lng_external_vaporization_timeseries json=docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/external_vaporization_timeseries_mapping.json"
+  },
+  "evidence_files": [
+    {
+      "label": "problem_cpp",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.cpp",
+      "sha256": "e75c504b2ca2973e37e6977677b90cbfc9e9cf6b4b37f99f96da64b66f71fc78",
+      "size_bytes": 24604
+    },
+    {
+      "label": "problem_header",
+      "path": "examples/engineering/h2_leak_3d/pelelmex_prob.H",
+      "sha256": "987f87b49f3e17177a773ca03a809682d70b1ef4a42aeed3a76aab8ae913eeb5",
+      "size_bytes": 37518
+    },
+    {
+      "label": "converter",
+      "path": "tools/codex_make_external_vaporization_source_input.py",
+      "sha256": "d93abe566025a5aa50881b4f5c9e34cfc2e4cc35c0df4b917e9b422dde448172",
+      "size_bytes": 11494
+    },
+    {
+      "label": "smoke_input",
+      "path": "examples/engineering/h2_leak_3d/input.codex_fixed_mass_flow_timeseries_smoke",
+      "sha256": "4a9be3e042435ec58d67da7c8765e0daf4ed02241a30cf12bc4551db791a9de8",
+      "size_bytes": 1828
+    },
+    {
+      "label": "smoke_log",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/fixed_mass_flow_timeseries_smoke.log",
+      "sha256": "47796ce6216bb739661c9e19caa2dbe661d09e3943ee810ee66b87163c5afdb1",
+      "size_bytes": 10828
+    },
+    {
+      "label": "converter_output_input",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/input.codex_lng_external_vaporization_timeseries",
+      "sha256": "9a108aba11fda3cc58a96b9daab8db5862c5fdda40c658775f71c6c96ddc6fe7",
+      "size_bytes": 2800
+    },
+    {
+      "label": "converter_output_json",
+      "path": "docs/codex_audit/evidence/engineering_external_vaporization_timeseries_20260806/external_vaporization_timeseries_mapping.json",
+      "sha256": "1d9e21ac7ddf68abf5ec7f80af6c1159b76ac3a426d7aa1fac6a2f2e6cb1fb41",
+      "size_bytes": 3723
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:39+00:00",
+  "log_samples": {
+    "effective_mdots": [
+      5e-06,
+      5e-06,
+      1.5e-05,
+      1.75e-05,
+      1.25e-05,
+      1.125e-05,
+      1.375e-05
+    ],
+    "first_schedule_line": "H2 leak fixed-mass-flow schedule: time=0, dt=1e-05, reference_leak_rate=1e-05, schedule_count=4, scheduled_reference_mdot=5e-06, scheduled_leak_T=290, scheduled_velocity=(0.75,0.05,0), scheduled_radius=0.1275, scheduled_center=(0.4625,0.255,0.25), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=5e-06",
+    "last_schedule_line": "H2 leak fixed-mass-flow schedule: time=5e-05, dt=1e-05, reference_leak_rate=1e-05, schedule_count=4, scheduled_reference_mdot=1.375e-05, scheduled_leak_T=290, scheduled_velocity=(0.8125,-0.025,0.025), scheduled_radius=0.1225, scheduled_center=(0.5875,0.245,0.2575), valve_scheduled=0, valve_open_time=0, valve_ramp_time=0, valve_fraction_start=1, valve_fraction_mid=1, valve_fraction_end=1, effective_mdot=1.375e-05",
+    "scheduled_center_x": [
+      0.4625,
+      0.4625,
+      0.4875,
+      0.5125,
+      0.5375,
+      0.5625,
+      0.5875
+    ],
+    "scheduled_center_y": [
+      0.255,
+      0.255,
+      0.265,
+      0.26,
+      0.24,
+      0.235,
+      0.245
+    ],
+    "scheduled_center_z": [
+      0.25,
+      0.25,
+      0.25,
+      0.2575,
+      0.2725,
+      0.2725,
+      0.2575
+    ],
+    "scheduled_leak_Ts": [
+      290.0,
+      290.0,
+      310.0,
+      305.0,
+      275.0,
+      270.0,
+      290.0
+    ],
+    "scheduled_radius": [
+      0.1275,
+      0.1275,
+      0.1425,
+      0.1375,
+      0.1125,
+      0.1075,
+      0.1225
+    ],
+    "scheduled_reference_mdots": [
+      5e-06,
+      5e-06,
+      1.5e-05,
+      1.75e-05,
+      1.25e-05,
+      1.125e-05,
+      1.375e-05
+    ],
+    "scheduled_velocity_x": [
+      0.75,
+      0.75,
+      1.25,
+      1.1875,
+      0.5625,
+      0.4375,
+      0.8125
+    ],
+    "scheduled_velocity_y": [
+      0.05,
+      0.05,
+      0.15,
+      0.125,
+      -0.025,
+      -0.075,
+      -0.025
+    ],
+    "scheduled_velocity_z": [
+      0.0,
+      0.0,
+      0.0,
+      0.025,
+      0.075,
+      0.075,
+      0.025
+    ]
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-EXTERNAL-VAPORIZATION-TIMESERIES",
+  "summary": {
+    "applied_mdot_matches_effective_mdot": true,
+    "bad_log_tokens": [],
+    "converter_emits_schedule": true,
+    "converter_location_x_point_count": 4,
+    "converter_location_y_point_count": 4,
+    "converter_location_z_point_count": 4,
+    "converter_radius_point_count": 4,
+    "converter_schedule_point_count": 4,
+    "converter_temperature_point_count": 4,
+    "converter_velocity_x_point_count": 4,
+    "converter_velocity_y_point_count": 4,
+    "converter_velocity_z_point_count": 4,
+    "external_vaporization_timeseries_ready": true,
+    "input_uses_schedule": true,
+    "log_has_no_abort_or_nan": true,
+    "mapping_emits_time_series": true,
+    "parser_validates_schedule": true,
+    "runtime_interpolates_schedule": true,
+    "schedule_count_ok": true,
+    "schedule_log_line_count": 7,
+    "scheduled_center_x_max": 0.5875,
+    "scheduled_center_x_min": 0.4625,
+    "scheduled_center_x_varies": true,
+    "scheduled_center_y_max": 0.265,
+    "scheduled_center_y_min": 0.235,
+    "scheduled_center_y_varies": true,
+    "scheduled_center_z_max": 0.2725,
+    "scheduled_center_z_min": 0.25,
+    "scheduled_center_z_varies": true,
+    "scheduled_leak_T_has_falling_segment": true,
+    "scheduled_leak_T_has_rising_segment": true,
+    "scheduled_leak_T_max": 310.0,
+    "scheduled_leak_T_min": 270.0,
+    "scheduled_leak_T_varies": true,
+    "scheduled_radius_max": 0.1425,
+    "scheduled_radius_min": 0.1075,
+    "scheduled_radius_varies": true,
+    "scheduled_reference_mdot_has_falling_segment": true,
+    "scheduled_reference_mdot_has_rising_segment": true,
+    "scheduled_reference_mdot_max": 1.75e-05,
+    "scheduled_reference_mdot_min": 5e-06,
+    "scheduled_reference_mdot_varies": true,
+    "scheduled_velocity_x_max": 1.25,
+    "scheduled_velocity_x_min": 0.4375,
+    "scheduled_velocity_x_varies": true,
+    "scheduled_velocity_y_max": 0.15,
+    "scheduled_velocity_y_min": -0.075,
+    "scheduled_velocity_y_varies": true,
+    "scheduled_velocity_z_max": 0.075,
+    "scheduled_velocity_z_min": 0.0,
+    "scheduled_velocity_z_varies": true,
+    "source_has_schedule_storage": true
+  }
+}

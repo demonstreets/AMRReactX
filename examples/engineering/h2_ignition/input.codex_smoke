@@ -1,0 +1,42 @@
+# Codex 1-step PeleLMeX H2 hot-bubble engineering ignition smoke.
+geometry.is_periodic = 1 1
+geometry.coord_sys   = 0
+geometry.prob_lo     = -0.005 -0.005
+geometry.prob_hi     =  0.005  0.005
+
+peleLM.lo_bc = Interior Interior
+peleLM.hi_bc = Interior Interior
+peleLM.incompressible = 0
+peleLM.v = 1
+peleLM.do_react = 1
+peleLM.chem_integrator = ReactorCvode
+peleLM.sdc_iterMax = 1
+peleLM.num_init_iter = 1
+peleLM.floor_species = 0
+
+amr.n_cell = 16 16
+amr.v = 1
+amr.max_level = 0
+amr.blocking_factor = 8
+amr.max_grid_size = 32
+amr.max_step = 1
+amr.stop_time = -1.0
+amr.fixed_dt = 1.0e-8
+amr.cfl = 0.5
+amr.plot_int = -1
+amr.check_int = -1
+amr.derive_plot_vars = mass_fractions avg_pressure
+
+prob.P_mean = 101325.0
+prob.T_mean = 300.0
+prob.T_bubble = 2000.0
+prob.bubble_radius = 0.001
+prob.bubble_y0 = 0.0
+prob.use_symmetry = 0
+prob.use_mix_bubble = 0
+
+cvode.solve_type = dense_direct
+cvode.max_order = 4
+
+mac_proj.verbose = 0
+nodal_proj.verbose = 0

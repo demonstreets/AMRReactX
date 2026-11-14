@@ -1,0 +1,63 @@
+{
+  "cases": {
+    "pressure_residual_buoyant": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.892037388117947,
+      "alpha_min": 3.3232762933438685e-113,
+      "center_x_drift": 0.008494522111554659,
+      "center_x_final": 0.5084945221115547,
+      "center_x_initial": 0.5,
+      "center_y_drift": 0.06573114168111183,
+      "center_y_final": 0.5657311416918314,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 0.8434993000568247,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pressure_residual_csf_short_20260730/pressure_residual_buoyant/run/plt00800",
+      "final_time": 0.15566580940023028,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pressure_residual_csf_short_20260730/pressure_residual_buoyant/run/plt00000",
+      "interface_length": 1.8699473127156678,
+      "log_bad_tokens": [],
+      "mean_rise_velocity_y": -0.03376965723582348,
+      "plot_step": "plt00800"
+    },
+    "pressure_residual_no_gravity": {
+      "alpha_mass_relative_drift": 0.0,
+      "alpha_max": 0.892037388117947,
+      "alpha_min": 3.3232762933438685e-113,
+      "center_x_drift": 0.008494522111554659,
+      "center_x_final": 0.5084945221115547,
+      "center_x_initial": 0.5,
+      "center_y_drift": 0.06573114168111183,
+      "center_y_final": 0.5657311416918314,
+      "center_y_initial": 0.5000000000107195,
+      "circularity": 0.8434993000568247,
+      "final_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pressure_residual_csf_short_20260730/pressure_residual_no_gravity/run/plt00800",
+      "final_time": 0.15566580940023028,
+      "initial_plot": "/home/cj/my-pele/docs/codex_audit/evidence/academic_twophase_qlt03_lm_pressure_residual_csf_short_20260730/pressure_residual_no_gravity/run/plt00000",
+      "interface_length": 1.8699473127156678,
+      "log_bad_tokens": [],
+      "mean_rise_velocity_y": -0.03376965723582348,
+      "plot_step": "plt00800"
+    }
+  },
+  "contracts": {
+    "alpha_bounded": true,
+    "alpha_mass_conserved": true,
+    "buoyant_mean_rise_not_positive": true,
+    "candidate_compiled": true,
+    "candidate_had_no_log_failure_tokens": true,
+    "pressure_residual_prototype_not_retained": true,
+    "short_window_failed_time_gate": true
+  },
+  "decision": {
+    "next_route": "Do not use the alpha*grad(kappa) pressure-residual shortcut. Continue with a proper pressure-coupled balanced-force discretization or geometric/height-function curvature.",
+    "promote_pressure_residual_csf": false,
+    "rejection_reasons": [
+      "800-step short-window run did not reach t>=0.45",
+      "buoyant short-window alpha-weighted mean rise velocity was not positive"
+    ]
+  },
+  "scope": "Machine-checkable rejection guard for a default-off QLT-03 pressure-residual CSF force-form candidate.",
+  "short_trial_status": "REJECT-ACADEMIC-TWOPHASE-QLT03-LM-PRESSURE-RESIDUAL-CSF-SHORT",
+  "source_summary": "docs/codex_audit/evidence/academic_twophase_qlt03_lm_pressure_residual_csf_short_20260730/pressure_residual_short_summary.json",
+  "status": "PASS-ACADEMIC-TWOPHASE-QLT03-LM-PRESSURE-RESIDUAL-CSF-TRIAL-REJECTION"
+}

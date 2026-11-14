@@ -1,0 +1,112 @@
+{
+  "evidence_files": [
+    {
+      "label": "current_parallel_capability_matrix",
+      "path": "docs/codex_audit/evidence/current_parallel_capability_matrix_20260803/current_parallel_capability_matrix_report.json",
+      "sha256": "e192974526f1722986c78987504c9e83aedc60602bfafc40848ebd6c1cccbb20",
+      "size_bytes": 18858
+    },
+    {
+      "label": "master_plan_final_readiness",
+      "path": "docs/codex_audit/evidence/master_plan_final_readiness_20260731/master_plan_final_readiness_report.json",
+      "sha256": "7d458499bd904a4c37258d8d2ea864ed0809947a0c9d28b24c2da3f323044f62",
+      "size_bytes": 8579
+    },
+    {
+      "label": "current_scope_state_snapshot",
+      "path": "docs/codex_audit/evidence/current_scope_state_snapshot_20260803/current_scope_state_snapshot_report.json",
+      "sha256": "6ab2eed8cb639e40caea3127c2fa530bb1b669bd10bc8e29dc52a5be79de226b",
+      "size_bytes": 191706
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:06:45.202777+00:00",
+  "scenarios": {
+    "academic_gas_detonation": {
+      "answer_for_current_use": "yes_current_priority_scope",
+      "evidence_paths": {
+        "cpu_mpi": "docs/codex_audit/evidence/academic_gas_detonation_priority_matrix_20260731/academic_gas_detonation_priority_matrix_report.json",
+        "multi_gpu_mpi_cuda": "docs/codex_audit/evidence/academic_gas_detonation_mpi_cuda_20260731/academic_gas_detonation_mpi_cuda_report.json",
+        "single_gpu": "docs/codex_audit/evidence/academic_gas_detonation_single_cuda_20260803/academic_gas_detonation_single_cuda_report.json"
+      },
+      "label": "Academic gas-phase detonation",
+      "limitation": "The gate demonstrates current runtime capability and stability, not final publication-grade grid convergence for every mechanism/domain variant.",
+      "modes": {
+        "cpu_mpi": true,
+        "multi_gpu_mpi_cuda": true,
+        "single_gpu": true
+      },
+      "progress_estimate_percent": "85-90",
+      "ready": true
+    },
+    "academic_gas_liquid_twophase_detonation": {
+      "answer_for_current_use": "yes_current_priority_scope",
+      "evidence_paths": {
+        "cpu_mpi": "docs/codex_audit/evidence/academic_twophase_broader_matrix_20260730/academic_twophase_broader_matrix_report.json",
+        "multi_gpu_mpi_cuda": "docs/codex_audit/evidence/academic_gas_liquid_detonation_mpi_cuda_extended_20260803/academic_gas_liquid_detonation_mpi_cuda_extended_report.json",
+        "single_gpu": "docs/codex_audit/evidence/academic_gas_liquid_detonation_cuda_scout_20260731/academic_gas_liquid_detonation_cuda_scout_report.json"
+      },
+      "label": "Academic gas-liquid / two-phase detonation",
+      "limitation": "The 1000-step MPI+CUDA gate is a reduced-resolution stability proof for reacting spray coupling; final quantitative two-phase detonation validation still needs case-specific grid convergence and external comparison.",
+      "modes": {
+        "cpu_mpi": true,
+        "multi_gpu_mpi_cuda": true,
+        "single_gpu": true
+      },
+      "progress_estimate_percent": "92-94",
+      "ready": true
+    },
+    "engineering_h2_leak_diffusion_fire": {
+      "answer_for_current_use": "yes_current_priority_scope",
+      "evidence_paths": {
+        "cpu_mpi": "docs/codex_audit/evidence/engineering_h2_production_mesh_campaign_20260722/production_mesh_campaign_report.json",
+        "multi_gpu_mpi_cuda": "docs/codex_audit/evidence/engineering_h2_pipe_rack_mpi_cuda_long_revalidation_20260731/pipe_rack_direct_reacting_mpi_cuda_report.json",
+        "single_gpu": "docs/codex_audit/evidence/engineering_h2_pipe_rack_direct_reacting_cuda_2000step_20260727/pipe_rack_direct_reacting_cuda_report.json"
+      },
+      "label": "Engineering H2 leak / dispersion / ignition / fire",
+      "limitation": "Current engineering production credibility excludes strict external plume-shape agreement, real CAD cleanup, and calibrated radiation/overpressure closure until controlled artifacts are supplied.",
+      "modes": {
+        "cpu_mpi": true,
+        "multi_gpu_mpi_cuda": true,
+        "single_gpu": true
+      },
+      "progress_estimate_percent": "90-92",
+      "ready": true
+    },
+    "engineering_multifuel_lng_lpg_surrogate_sources": {
+      "answer_for_current_use": "yes_current_priority_scope",
+      "evidence_paths": {
+        "cpu_mpi": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+        "multi_gpu_mpi_cuda": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json",
+        "single_gpu": "docs/codex_audit/evidence/engineering_multi_fuel_capability_boundary_20260806/engineering_multi_fuel_capability_boundary_report.json"
+      },
+      "label": "Engineering multi-fuel gas sources / gasified LNG-LPG surrogate workflows",
+      "limitation": "This is evidence for gas-phase configurable-source and screening vaporization workflows; it does not claim CFD-internal flashing discharge, liquid pool spread, boiling, or pool evaporation.",
+      "modes": {
+        "cpu_mpi": true,
+        "multi_gpu_mpi_cuda": true,
+        "single_gpu": true
+      },
+      "progress_estimate_percent": "90-92",
+      "ready": true
+    }
+  },
+  "schema_version": 1,
+  "status": "PASS-CURRENT-SCENARIO-READINESS-MATRIX",
+  "summary": {
+    "cpu_mpi_ready_for_all_current_scenarios": true,
+    "current_user_priority_ready": true,
+    "deferred_strict_master_plan_blocker_count": 3,
+    "deferred_strict_master_plan_blockers": [
+      "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure"
+    ],
+    "multi_gpu_mpi_cuda_ready_for_all_current_scenarios": true,
+    "overall_progress_estimate_percent": "90-92",
+    "ready_scenario_count": 4,
+    "scenario_count": 4,
+    "single_gpu_ready_for_all_current_scenarios": true,
+    "source_snapshot_status": "PASS-CURRENT-SCOPE-STATE-SNAPSHOT",
+    "strict_master_plan_complete": false
+  }
+}

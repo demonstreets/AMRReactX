@@ -1,0 +1,121 @@
+{
+  "closeout_decision": {
+    "can_claim_for_current_scope": [
+      "current engineering and academic priority scenarios are verified by the current-scope chain",
+      "CPU/MPI, single GPU, and MPI+CUDA readiness are represented in the current parallel matrix",
+      "H2, CH4, and C3H8 gas-source workflows are represented by current templates",
+      "LNG_CH4 and LPG_C3H8 liquefied release workflows are screening/external-source ready"
+    ],
+    "do_not_claim": [
+      "full strict master-plan completion",
+      "production CFD-internal liquid flashing or pool evaporation",
+      "calibrated fire radiation/overpressure consequence prediction",
+      "validated real-CAD cleanup and boundary tagging on user-provided plant geometry",
+      "external plume-shape agreement against a passing public dataset"
+    ],
+    "recommended_current_action": "close the current user-priority release candidate as usable, with strict caveats recorded"
+  },
+  "evidence_files": [
+    {
+      "label": "current_scope_release_candidate_handoff",
+      "path": "docs/codex_audit/evidence/current_scope_release_candidate_handoff_20260812/current_scope_release_candidate_handoff_report.json",
+      "sha256": "54f3bf4f4818b2db516540a406637ff827e92f6bb96235df325bcba6a9690a17",
+      "size_bytes": 5917
+    },
+    {
+      "label": "master_plan_final_readiness",
+      "path": "docs/codex_audit/evidence/master_plan_final_readiness_20260731/master_plan_final_readiness_report.json",
+      "sha256": "59d6b63dc770a99d9aeee8f15ba3be6adb842e462a150278df8e6b6a08846f65",
+      "size_bytes": 8579
+    },
+    {
+      "label": "master_plan_completion_audit",
+      "path": "docs/codex_audit/evidence/master_plan_completion_audit_20260803/master_plan_completion_audit_report.json",
+      "sha256": "54efceb34985d86703cad94c067d413236302fe1a5a777bedd29e7bd67308d05",
+      "size_bytes": 3784
+    },
+    {
+      "label": "master_plan_strict_blocker_matrix",
+      "path": "docs/codex_audit/evidence/master_plan_strict_blocker_matrix_20260731/master_plan_strict_blocker_matrix_report.json",
+      "sha256": "2ff48f62352d95937461b015293559744f96639b19d83d2774305bead25f1d0c",
+      "size_bytes": 7100
+    },
+    {
+      "label": "strict_master_plan_unblock_runbook",
+      "path": "docs/codex_audit/evidence/strict_master_plan_unblock_runbook_20260803/strict_master_plan_unblock_runbook_report.json",
+      "sha256": "d805cb57928e0fbe2a2f7ebdde38e7e663085a87ad9a3715e25ff7161fbf7b98",
+      "size_bytes": 1429
+    },
+    {
+      "label": "master_plan_strict_artifact_intake_manifest",
+      "path": "docs/codex_audit/evidence/master_plan_strict_artifact_intake_manifest_20260731/master_plan_strict_artifact_intake_manifest_report.json",
+      "sha256": "e39fb1be1032611c01cfdcf37d71aaadd67dd5b84dee201955cca6d1251c54a1",
+      "size_bytes": 8507
+    },
+    {
+      "label": "master_plan_strict_artifact_drop_preflight",
+      "path": "docs/codex_audit/evidence/master_plan_strict_artifact_drop_preflight_20260731/master_plan_strict_artifact_drop_preflight_report.json",
+      "sha256": "e7d95a3a9a3f424e116beb31133f02d512d6523858e990aa62b0f54bf0aee54d",
+      "size_bytes": 17616
+    },
+    {
+      "label": "h2_fire_calibration_residual_budget",
+      "path": "docs/codex_audit/evidence/h2_fire_calibration_residual_budget_20260811/h2_fire_calibration_residual_budget_report.json",
+      "sha256": "9f03b6b32e6024171d250d471cf6dea189e00efd9f525d48ba1941adbe7895ff",
+      "size_bytes": 6227
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:07:06.975995+00:00",
+  "remaining_strict_blockers": [
+    {
+      "blocker": "reference_agreement_is_threshold_only_not_external_plume_shape_dataset",
+      "closure_evidence_required": "passing plume shape or sensor time-series agreement report against external reference data",
+      "state": "open",
+      "why_open": "existing Dataverse/open-channel runs are stable but agreement attempts are quantified as not passing"
+    },
+    {
+      "blocker": "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "closure_evidence_required": "real CAD intake, cleanup, boundary tags, mesh/EB parity, and negative selftests",
+      "state": "open",
+      "why_open": "current geometry evidence uses synthetic tank-farm/pipe-rack STL rather than user real CAD"
+    },
+    {
+      "blocker": "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "closure_evidence_required": "case-aligned calibrated radiation and overpressure comparisons with acceptance metrics",
+      "state": "open",
+      "why_open": "fire residual budget keeps production calibration claims disabled"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "closeout forecast for current release candidate versus strict master-plan completion",
+  "status": "PASS-PROJECT-CLOSEOUT-FORECAST",
+  "summary": {
+    "artifact_drop_preflight_status": "AWAITING-MASTER-PLAN-STRICT-ARTIFACT-DROP-PREFLIGHT-EXTERNAL-ARTIFACTS",
+    "completion_audit_status": "AUDITED-MASTER-PLAN-CURRENT-SCOPE-PASS-STRICT-INCOMPLETE",
+    "current_release_candidate_ready": true,
+    "current_scope_can_be_closed_now": true,
+    "current_scope_closeout_estimate": "0.5-1 day for final handoff notes and optional fresh smoke reruns",
+    "engineering_progress_estimate_percent": "90-92",
+    "fire_residual_budget_status": "TRIAGED-H2-FIRE-CALIBRATION-RESIDUAL-BUDGET",
+    "open_strict_blocker_count": 3,
+    "open_strict_blockers": [
+      "fire_consequence_evidence_is_screening_not_calibrated_radiation_overpressure",
+      "geometry_evidence_is_synthetic_tank_farm_stl_not_real_cad_cleanup",
+      "reference_agreement_is_threshold_only_not_external_plume_shape_dataset"
+    ],
+    "overall_progress_estimate_percent": "90-92",
+    "release_candidate_status": "PASS-CURRENT-SCOPE-RELEASE-CANDIDATE-HANDOFF",
+    "strict_artifact_intake_ready": true,
+    "strict_blocker_matrix_status": "TRIAGED-MASTER-PLAN-STRICT-BLOCKER-MATRIX",
+    "strict_blocker_set_matches_expected": true,
+    "strict_closeout_estimate_after_artifacts": "3-7 days after real CAD/reference/fire calibration artifacts are available",
+    "strict_closeout_requires_external_artifacts": true,
+    "strict_external_artifact_awaiting_domain_count": 2,
+    "strict_external_artifact_complete_domain_count": 1,
+    "strict_external_artifacts_missing": true,
+    "strict_fire_calibration_requires_external_case_aligned_data": true,
+    "strict_goal_complete": false,
+    "strict_master_plan_can_be_closed_now": false,
+    "strict_master_plan_complete": false
+  }
+}

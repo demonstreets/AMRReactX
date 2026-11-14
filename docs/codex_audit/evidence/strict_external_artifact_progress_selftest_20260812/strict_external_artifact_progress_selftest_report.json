@@ -1,0 +1,92 @@
+{
+  "command_runs": {
+    "checklist_run": {
+      "argv": [
+        "python3",
+        "tools/write_strict_external_artifact_drop_checklist_report.py",
+        "--index",
+        "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_index.json",
+        "--output-json",
+        "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json",
+        "--output-md",
+        "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.md"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stderr_head": "",
+      "stdout": "strict_external_artifact_drop_checklist PASS json=docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json md=docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.md status=PASS-STRICT-EXTERNAL-ARTIFACT-DROP-CHECKLIST\n",
+      "stdout_head": "strict_external_artifact_drop_checklist PASS json=docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json md=docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.md status=PASS-STRICT-EXTERNAL-ARTIFACT-DROP-CHECKLIST\n"
+    },
+    "checklist_verify": {
+      "argv": [
+        "bash",
+        "tools/verify_strict_external_artifact_drop_checklist.sh",
+        "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stderr_head": "",
+      "stdout": "strict_external_artifact_drop_checklist VERIFY-PASS json=docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json status=PASS-STRICT-EXTERNAL-ARTIFACT-DROP-CHECKLIST\n",
+      "stdout_head": "strict_external_artifact_drop_checklist VERIFY-PASS json=docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json status=PASS-STRICT-EXTERNAL-ARTIFACT-DROP-CHECKLIST\n"
+    },
+    "cli_json": {
+      "argv": [
+        "python3",
+        "tools/codex_print_strict_external_artifact_drop_index.py",
+        "--index",
+        "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_index.json",
+        "--json"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stderr_head": "",
+      "stdout": "{\n  \"domain_count\": 3,\n  \"domains\": [\n    {\n      \"currently_present_artifact_count\": 1,\n      \"domain\": \"external_plume\",\n      \"missing_artifact_count\": 4,\n      \"required_artifact_count\": 5,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates_template.csv\"\n      ]\n    },\n    {\n      \"currently_present_artifact_count\": 1,\n      \"domain\": \"fire_calibration\",\n      \"missing_artifact_count\": 4,\n      \"required_artifact_count\": 5,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv\"\n      ]\n    },\n    {\n      \"currently_present_artifact_count\": 1,\n      \"domain\": \"real_cad\",\n      \"missing_artifact_count\": 3,\n      \"required_artifact_count\": 4,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index_template.csv\"\n      ]\n    }\n  ],\n  \"missing_file_count\": 11,\n  \"operator_next_steps\": [\n    \"Copy each *_template file to the matching non-template target path listed in domain_drop_index.\",\n    \"Fill JSON required keys and CSV headers without renaming columns.\",\n    \"Run bash tools/verify_strict_artifact_drop_contract_preflight.sh before asking for strict closeout.\",\n    \"Then run bash tools/run_current_scope_release_refresh.sh to rebuild all closure evidence.\"\n  ],\n  \"present_file_count\": 3,\n  \"required_file_count\": 14,\n  \"status\": \"PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX\",\n  \"strict_completion_allowed\": false,\n  \"template_count\": 16\n}\n",
+      "stdout_head": "{\n  \"domain_count\": 3,\n  \"domains\": [\n    {\n      \"currently_present_artifact_count\": 1,\n      \"domain\": \"external_plume\",\n      \"missing_artifact_count\": 4,\n      \"required_artifact_count\": 5,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata.json\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/baffle_geometry_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/dataset_metadata_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/digitization_uncertainty_record_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/experimental_timeseries_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_sbepv5_d27_dataset_ingestion_20260723/dataset/sensor_coordinates_template.csv\"\n      ]\n    },\n    {\n      \"currently_present_artifact_count\": 1,\n      \"domain\": \"fire_calibration\",\n      \"missing_artifact_count\": 4,\n      \"required_artifact_count\": 5,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata.json\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/calibration_metadata_template.json\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_digitization_uncertainty_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/fire_calibration_source_registry_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/overpressure_metrics_template.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_fire_calibration_dataset_ingestion_20260723/dataset/radiation_metrics_template.csv\"\n      ]\n    },\n    {\n      \"currently_present_artifact_count\": 1,\n      \"domain\": \"real_cad\",\n      \"missing_artifact_count\": 3,\n      \"required_artifact_count\": 4,\n      \"target_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_manifest.json\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_cleanup_quality_record.csv\",\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_data_room_index.csv\"\n      ],\n      \"template_paths\": [\n        \"docs/codex_audit/evidence/engineering_h2_real_cad_cleanup_package_20260723/package/real_cad_boundary_tags_te"
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "source_strict_external_artifact_drop_index",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_drop_index_20260812/strict_external_artifact_drop_index_report.json",
+      "sha256": "19237e2158bc59f9df0e466a4b76ecca166ea0c06541dfac6b953a11dceec858",
+      "size_bytes": 14242
+    },
+    {
+      "label": "simulated_partial_drop_index",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_index.json",
+      "sha256": "79b5a45c5d36c8de74f39ac5e58fee42527f5e3acde37ebcdd3ad80d8b5fd5b8",
+      "size_bytes": 14245
+    },
+    {
+      "label": "simulated_partial_drop_checklist",
+      "path": "docs/codex_audit/evidence/strict_external_artifact_progress_selftest_20260812/simulated_partial_drop_checklist_report.json",
+      "sha256": "2cef5ec91129dbecfeb3e6cc059cf107a789f17d03434f9b88a062f259f68164",
+      "size_bytes": 9472
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:11:28.878119+00:00",
+  "schema_version": 1,
+  "status": "PASS-STRICT-EXTERNAL-ARTIFACT-PROGRESS-SELFTEST",
+  "summary": {
+    "checklist_run_returncode": 0,
+    "checklist_verify_returncode": 0,
+    "cli_json_returncode": 0,
+    "simulated_checklist_done_count": 3,
+    "simulated_checklist_missing_file_count": 11,
+    "simulated_domain_missing_counts": {
+      "external_plume": 4,
+      "fire_calibration": 4,
+      "real_cad": 3
+    },
+    "simulated_domain_required_counts": {
+      "external_plume": 5,
+      "fire_calibration": 5,
+      "real_cad": 4
+    },
+    "simulated_missing_file_count": 11,
+    "simulated_present_file_count": 3,
+    "simulated_required_file_count": 14,
+    "source_index_status": "PASS-STRICT-EXTERNAL-ARTIFACT-DROP-INDEX",
+    "strict_external_artifact_progress_selftest_ready": true
+  }
+}

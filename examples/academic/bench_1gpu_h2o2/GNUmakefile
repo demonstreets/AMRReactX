@@ -1,0 +1,24 @@
+REPO_ROOT ?= $(shell git rev-parse --show-toplevel 2>/dev/null || pwd)
+CUDA_HOME ?= /usr/local/cuda
+SUNDIALS_HOME ?= $(or $(SUNDIALS_CUDA_DIR),$(SUNDIALS_DIR))
+DIM = 3
+COMP = gnu
+PRECISION = DOUBLE
+PROFILE = FALSE
+USE_MPI = FALSE
+USE_OMP = FALSE
+USE_CUDA = TRUE
+CUDA_ARCH = 60
+CUDA_HOME ?= /usr/local/cuda
+DEBUG = FALSE
+PELE_CVODE_FORCE_YCORDER = TRUE
+USE_EXPLICIT_REACT = TRUE
+Eos_Model := Fuego
+Chemistry_Model := h2o2
+Transport_Model := Simple
+INCLUDE_LOCATIONS += $(SUNDIALS_HOME)/include
+LIBRARY_LOCATIONS += $(SUNDIALS_HOME)/lib
+Bpack := ./Make.package
+Blocs := .
+PELE_HOME := ../../../external/PeleC
+include $(PELE_HOME)/Exec/Make.PeleC

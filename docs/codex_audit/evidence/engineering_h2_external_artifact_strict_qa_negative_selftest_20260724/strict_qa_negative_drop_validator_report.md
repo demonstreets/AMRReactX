@@ -1,0 +1,60 @@
+# Engineering H2 External Artifact Drop Validator
+
+Status: `NOT_READY-H2-EXTERNAL-ARTIFACT-DROP`
+Drop root: `docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop`
+Content QA: `strict-v5-placeholder-free`
+Allow test fixture data: `False`
+Expected artifacts: `14`
+Valid artifacts: `0`
+Missing or invalid artifacts: `14`
+Domain quality gaps: `4`
+Ready for controlled ingestion: `False`
+
+## Domain Records
+
+### real_cad_cleanup
+- Artifacts: `0/6`
+- Domain quality gaps: `2`
+- Ready: `False`
+- Domain gap: `cad_index_manifest_path_mismatch:pipe_b:cleaned_geometry:cleaned_geometry/pipe_b_index_mismatch.stl!=cleaned_geometry/pipe_b.stl`
+- Domain gap: `cad_unreferenced_file:cleaned_geometry/pipe_b_index_mismatch.stl`
+- `real_cad_cleanup_manifest.json`: valid=`False` gaps=`synthetic_or_selftest_marker_present_without_allow_synthetic_selftest;placeholder_or_template_marker_present_without_replacement`
+- `source_cad/*`: valid=`False` gaps=`source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/dike_c.stp;source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/dike_c.stp;source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/pipe_b.stp;source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/pipe_b.stp;source_cad_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/tank_a.stp;source_cad_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/source_cad/tank_a.stp`
+- `cleaned_geometry/*`: valid=`False` gaps=`cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/dike_c.stl;cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/dike_c.stl;cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b.stl;cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b.stl;cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b_index_mismatch.stl;cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/pipe_b_index_mismatch.stl;cleaned_geometry_synthetic_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/tank_a.stl;cleaned_geometry_placeholder_marker:docs/codex_audit/evidence/engineering_h2_external_artifact_strict_qa_negative_selftest_20260724/strict_qa_negative_fixture/drop/real_cad_cleanup/cleaned_geometry/tank_a.stl`
+- `cleanup_quality_records`: valid=`False` gaps=`cleanup_quality_units_not_m:tank_a;cleanup_quality_boolean_not_true:tank_a:watertight_or_closed_surface;cleanup_quality_boolean_not_true:tank_a:positive_volume_or_area;cleanup_quality_bbox_not_positive:tank_a;cleanup_quality_units_not_m:pipe_b;cleanup_quality_boolean_not_true:pipe_b:watertight_or_closed_surface;cleanup_quality_boolean_not_true:pipe_b:positive_volume_or_area;cleanup_quality_bbox_not_positive:pipe_b;cleanup_quality_units_not_m:dike_c;cleanup_quality_boolean_not_true:dike_c:watertight_or_closed_surface;cleanup_quality_boolean_not_true:dike_c:positive_volume_or_area;cleanup_quality_bbox_not_positive:dike_c;placeholder_or_template_marker_present_without_replacement`
+- `real_cad_data_room_index.csv`: valid=`False` gaps=`data_room_index_sha256_mismatch:source_cad/tank_a.stp;data_room_index_sha256_mismatch:source_cad/pipe_b.stp;data_room_index_sha256_mismatch:source_cad/dike_c.stp;data_room_index_sha256_mismatch:cleaned_geometry/tank_a.stl;data_room_index_sha256_mismatch:cleaned_geometry/pipe_b_index_mismatch.stl;data_room_index_sha256_mismatch:cleaned_geometry/dike_c.stl;synthetic_or_selftest_marker_present_without_allow_synthetic_selftest;placeholder_or_template_marker_present_without_replacement`
+- `real_cad_cleanup_quality_record.csv`: valid=`False` gaps=`cleanup_quality_units_not_m:tank_a;cleanup_quality_boolean_not_true:tank_a:watertight_or_closed_surface;cleanup_quality_boolean_not_true:tank_a:positive_volume_or_area;cleanup_quality_bbox_not_positive:tank_a;cleanup_quality_units_not_m:pipe_b;cleanup_quality_boolean_not_true:pipe_b:watertight_or_closed_surface;cleanup_quality_boolean_not_true:pipe_b:positive_volume_or_area;cleanup_quality_bbox_not_positive:pipe_b;cleanup_quality_units_not_m:dike_c;cleanup_quality_boolean_not_true:dike_c:watertight_or_closed_surface;cleanup_quality_boolean_not_true:dike_c:positive_volume_or_area;cleanup_quality_bbox_not_positive:dike_c;placeholder_or_template_marker_present_without_replacement`
+
+### external_plume_shape_reference
+- Artifacts: `0/4`
+- Domain quality gaps: `0`
+- Ready: `False`
+- `dataset_metadata.json`: valid=`False` gaps=`synthetic_or_selftest_marker_present_without_allow_synthetic_selftest;placeholder_or_template_marker_present_without_replacement`
+- `sensor_coordinates.csv`: valid=`False` gaps=`invalid_float:Gas01:x_m:bad-number;sensor_coordinates_uncertainty_gt_0p02m:Gas01:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas02:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas03:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas04:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas05:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas06:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas07:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas08:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas09:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas10:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas11:0.5;sensor_coordinates_uncertainty_gt_0p02m:Gas12:0.5;placeholder_or_template_marker_present_without_replacement`
+- `baffle_geometry.csv`: valid=`False` gaps=`baffle_geometry_nonpositive_extent:B1:x;baffle_geometry_nonpositive_extent:B1:y;baffle_geometry_nonpositive_extent:B1:z;baffle_geometry_uncertainty_gt_0p02m:B1:0.5;baffle_geometry_nonpositive_extent:B2:x;baffle_geometry_nonpositive_extent:B2:y;baffle_geometry_nonpositive_extent:B2:z;baffle_geometry_uncertainty_gt_0p02m:B2:0.5;baffle_geometry_nonpositive_extent:B3:x;baffle_geometry_nonpositive_extent:B3:y;baffle_geometry_nonpositive_extent:B3:z;baffle_geometry_uncertainty_gt_0p02m:B3:0.5;baffle_geometry_nonpositive_extent:B4:x;baffle_geometry_nonpositive_extent:B4:y;baffle_geometry_nonpositive_extent:B4:z;baffle_geometry_uncertainty_gt_0p02m:B4:0.5;placeholder_or_template_marker_present_without_replacement`
+- `experimental_timeseries.csv`: valid=`False` gaps=`timeseries_concentration_out_of_range:1:Gas01_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas02_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas03_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas04_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas05_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas06_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas07_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas08_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas09_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas10_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas11_vol_percent:150.0;timeseries_concentration_out_of_range:1:Gas12_vol_percent:150.0;timeseries_time_not_strictly_increasing;timeseries_first_time_after_zero:10.0;timeseries_does_not_reach_120s:5.0`
+
+### fire_consequence_calibration
+- Artifacts: `0/4`
+- Domain quality gaps: `2`
+- Ready: `False`
+- Domain gap: `fire_radiation_metric_duplicate_id:q001`
+- Domain gap: `fire_overpressure_metric_duplicate_id:p001`
+- `calibration_metadata.json`: valid=`False` gaps=`calibration_metadata_case_alignment_not_all_true;synthetic_or_selftest_marker_present_without_allow_synthetic_selftest;placeholder_or_template_marker_present_without_replacement`
+- `radiation_metrics.csv`: valid=`False` gaps=`radiation_metric_distance_not_positive:q001:-5.0;radiation_metric_flux_not_positive:q001:0.0;radiation_metric_abs_tolerance_not_positive:q001:-1.0;radiation_metric_rel_tolerance_out_of_range:q001:2.0;radiation_metric_distance_not_positive:q001:-4.0;radiation_metric_flux_not_positive:q001:0.0;radiation_metric_abs_tolerance_not_positive:q001:-1.0;radiation_metric_rel_tolerance_out_of_range:q001:2.0;placeholder_or_template_marker_present_without_replacement`
+- `overpressure_metrics.csv`: valid=`False` gaps=`overpressure_metric_distance_not_positive:p001:-5.0;overpressure_metric_pressure_not_positive:p001:0.0;overpressure_metric_abs_tolerance_not_positive:p001:-1.0;overpressure_metric_rel_tolerance_out_of_range:p001:2.0;overpressure_metric_distance_not_positive:p001:-4.0;overpressure_metric_pressure_not_positive:p001:0.0;overpressure_metric_abs_tolerance_not_positive:p001:-1.0;overpressure_metric_rel_tolerance_out_of_range:p001:2.0;placeholder_or_template_marker_present_without_replacement`
+- `calibrated_fire_consequence_report`: valid=`False` gaps=`calibrated_fire_consequence_report_status_not_pass_calibrated;synthetic_or_selftest_marker_present_without_allow_synthetic_selftest;placeholder_or_template_marker_present_without_replacement`
+
+## Quality Gates
+
+- `closure_manifest_attached`: `PASS`
+- `drop_scaffold_exists`: `PASS`
+- `artifact_count_matches_closure_manifest`: `PASS`
+- `not_ready_state_preserves_missing_external_data`: `PASS`
+- `does_not_clear_production_blockers`: `PASS`
+- `strict_content_quality_checks_enabled`: `PASS`
+
+## Limitations
+
+- This validator checks an external artifact drop before ingestion; it does not copy files into the controlled evidence tree.
+- A PASS drop still requires domain ingestion reports, scorecard, blocker preflight, rebuild manifest, and final verifier to pass before production readiness can change.

@@ -1,0 +1,668 @@
+{
+  "case_validation_campaigns": [
+    {
+      "acceptance_contract": [
+        {
+          "comparator": ">=",
+          "description": "At least three real source CAD files must be staged.",
+          "metric_id": "real_cad_source_file_count",
+          "required_for_production_credit": true,
+          "source_field": "summary.source_cad_file_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "threshold": 3,
+          "units": "files"
+        },
+        {
+          "comparator": ">=",
+          "description": "At least three cleaned simulation geometries must be paired with source CAD.",
+          "metric_id": "real_cad_cleaned_geometry_count",
+          "required_for_production_credit": true,
+          "source_field": "summary.cleaned_geometry_file_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "threshold": 3,
+          "units": "files"
+        },
+        {
+          "comparator": ">=",
+          "description": "The data-room index must pair source and cleaned geometry labels.",
+          "metric_id": "real_cad_paired_label_count",
+          "required_for_production_credit": true,
+          "source_field": "summary.data_room_index_paired_label_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "threshold": 3,
+          "units": "labels"
+        },
+        {
+          "comparator": ">=",
+          "description": "Cleanup quality records must cover each real geometry.",
+          "metric_id": "real_cad_cleanup_quality_rows",
+          "required_for_production_credit": true,
+          "source_field": "summary.cleanup_quality_record_row_count",
+          "source_report": "real_cad_intake_preflight_report",
+          "threshold": 3,
+          "units": "rows"
+        },
+        {
+          "comparator": "==",
+          "description": "Manifest provenance, hashes, cleanup, bbox, and campaign declarations must validate.",
+          "metric_id": "real_cad_manifest_validates",
+          "required_for_production_credit": true,
+          "source_field": "summary.manifest_validates",
+          "source_report": "real_cad_intake_preflight_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "The accepted geometry package must declare and validate a large-layout campaign.",
+          "metric_id": "real_cad_large_layout_valid",
+          "required_for_production_credit": true,
+          "source_field": "summary.large_layout_valid",
+          "source_report": "real_cad_intake_preflight_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "The real-CAD cleanup blocker must be cleared by the domain package report.",
+          "metric_id": "real_cad_cleanup_blocker_cleared",
+          "required_for_production_credit": true,
+          "source_field": "clears_real_cad_cleanup_blocker",
+          "source_report": "real_cad_cleanup_package_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "The full production verifier must pass after rebuilding with the accepted CAD evidence.",
+          "metric_id": "real_cad_rebuild_verifier_pass",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "production_evidence_verification_report",
+          "threshold": "PASS",
+          "units": "status"
+        },
+        {
+          "comparator": "==",
+          "description": "The guarded external-evidence case runner must record a successful execution ledger.",
+          "metric_id": "real_cad_large_layout_leak_dispersion_runner_ledger_pass",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "units": "status"
+        },
+        {
+          "comparator": "contains_any",
+          "description": "The runner ledger must include executed command records for this campaign.",
+          "metric_id": "real_cad_large_layout_leak_dispersion_runner_command_recorded",
+          "required_for_production_credit": true,
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": [
+            "real_cad_large_layout_leak_dispersion"
+          ],
+          "units": "campaign_ids"
+        }
+      ],
+      "acceptance_metrics": [
+        "real CAD package PASS and clears_real_cad_cleanup_blocker true",
+        "large_layout_campaign true",
+        "at least three source CAD files paired with cleaned simulation geometries",
+        "full production verifier PASS after rebuild"
+      ],
+      "blocking_gaps": [
+        "real_cad_cleanup:missing_or_invalid=6"
+      ],
+      "campaign_id": "real_cad_large_layout_leak_dispersion",
+      "commands_after_external_artifacts_pass": [
+        "python3 tools/write_engineering_h2_real_cad_intake_preflight_report.py",
+        "python3 tools/write_engineering_h2_real_cad_cleanup_package_report.py",
+        "bash tools/rebuild_engineering_h2_evidence_chain.sh"
+      ],
+      "does_not_clear_production_blockers": true,
+      "expected_evidence_outputs": [
+        "engineering_h2_real_cad_intake_preflight_report",
+        "engineering_h2_real_cad_cleanup_package_report",
+        "engineering_h2_production_evidence_verification_report"
+      ],
+      "ready_to_execute_after_controlled_copy": false,
+      "required_domains": [
+        "real_cad_cleanup"
+      ],
+      "title": "Real-CAD tank/pipe large-layout H2 leak dispersion validation"
+    },
+    {
+      "acceptance_contract": [
+        {
+          "comparator": "==",
+          "description": "The SBEPV5 D27 external dataset ingestion must pass.",
+          "metric_id": "sbepv5_dataset_ingestion_ready",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": "PASS-SBEPV5-D27-DATASET-INGESTION",
+          "units": "status"
+        },
+        {
+          "comparator": "==",
+          "description": "Gas01..Gas12 sensor coordinates must be accepted with required uncertainty metadata.",
+          "metric_id": "sbepv5_exact_sensor_coordinates",
+          "required_for_production_credit": true,
+          "source_field": "current_inputs.exact_sensor_coordinates_available",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "Baffle bounds must be accepted with required uncertainty metadata.",
+          "metric_id": "sbepv5_exact_baffle_geometry",
+          "required_for_production_credit": true,
+          "source_field": "current_inputs.exact_baffle_geometry_available",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "Experimental concentration histories must be present.",
+          "metric_id": "sbepv5_experimental_timeseries",
+          "required_for_production_credit": true,
+          "source_field": "current_inputs.experimental_timeseries_available",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "count>=",
+          "description": "All expected Gas01..Gas12 sensors must be represented.",
+          "metric_id": "sbepv5_sensor_count",
+          "required_for_production_credit": true,
+          "source_field": "sensor_coordinate_summary.sensor_ids",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": 12,
+          "units": "sensors"
+        },
+        {
+          "comparator": "count>=",
+          "description": "All four baffles must be represented.",
+          "metric_id": "sbepv5_baffle_count",
+          "required_for_production_credit": true,
+          "source_field": "baffle_geometry_summary.baffle_ids",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": 4,
+          "units": "baffles"
+        },
+        {
+          "comparator": ">=",
+          "description": "Reference time histories must cover at least 120 seconds.",
+          "metric_id": "sbepv5_timeseries_duration",
+          "required_for_production_credit": true,
+          "source_field": "timeseries_summary.max_time_s",
+          "source_report": "sbepv5_d27_dataset_ingestion_report",
+          "threshold": 120.0,
+          "units": "s"
+        },
+        {
+          "comparator": ">=",
+          "description": "External plume comparison must include at least two declared metrics.",
+          "metric_id": "external_plume_metric_count",
+          "required_for_production_credit": true,
+          "source_field": "summary.external_plume_metric_count",
+          "source_report": "h2_reference_agreement_report",
+          "threshold": 2,
+          "units": "metrics"
+        },
+        {
+          "comparator": "contains_any",
+          "description": "At least one accepted metric must be a plume-shape metric.",
+          "metric_id": "external_plume_shape_metric_present",
+          "required_for_production_credit": true,
+          "source_field": "external_plume_shape_comparison.metric_types",
+          "source_report": "h2_reference_agreement_report",
+          "threshold": [
+            "plume_extent",
+            "sensor_concentration",
+            "arrival_time"
+          ],
+          "units": "metric_types"
+        },
+        {
+          "comparator": "==",
+          "description": "All accepted external plume metrics must pass declared tolerances.",
+          "metric_id": "external_plume_all_metrics_passed",
+          "required_for_production_credit": true,
+          "source_field": "summary.external_plume_all_metrics_passed",
+          "source_report": "h2_reference_agreement_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "External plume agreement must clear the reference-data blocker.",
+          "metric_id": "external_plume_reference_blocker_cleared",
+          "required_for_production_credit": true,
+          "source_field": "clears_reference_data_blocker",
+          "source_report": "h2_reference_agreement_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "The guarded external-evidence case runner must record a successful execution ledger.",
+          "metric_id": "sbepv5_d27_external_plume_validation_runner_ledger_pass",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "units": "status"
+        },
+        {
+          "comparator": "contains_any",
+          "description": "The runner ledger must include executed command records for this campaign.",
+          "metric_id": "sbepv5_d27_external_plume_validation_runner_command_recorded",
+          "required_for_production_credit": true,
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": [
+            "sbepv5_d27_external_plume_validation"
+          ],
+          "units": "campaign_ids"
+        }
+      ],
+      "acceptance_metrics": [
+        "SBEPV5 dataset ingestion PASS",
+        "external plume dataset JSON written",
+        "sensor concentration histories cover at least 120 s",
+        "case-specific plume-shape agreement replaces threshold-only reference evidence"
+      ],
+      "blocking_gaps": [
+        "external_plume_shape_reference:missing_or_invalid=4"
+      ],
+      "campaign_id": "sbepv5_d27_external_plume_validation",
+      "commands_after_external_artifacts_pass": [
+        "python3 tools/write_engineering_h2_sbepv5_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_sbepv5_external_dataset_report.py",
+        "python3 tools/write_engineering_h2_reference_agreement_report.py --external-plume-dataset-json <generated_external_plume_dataset_json>",
+        "python3 tools/write_engineering_h2_external_plume_benchmark_readiness.py",
+        "bash tools/rebuild_engineering_h2_evidence_chain.sh"
+      ],
+      "does_not_clear_production_blockers": true,
+      "expected_evidence_outputs": [
+        "sbepv5_d27_dataset_ingestion_report",
+        "sbepv5_d27_external_dataset_report",
+        "h2_reference_agreement_report",
+        "external_plume_benchmark_readiness_report"
+      ],
+      "ready_to_execute_after_controlled_copy": false,
+      "required_domains": [
+        "external_plume_shape_reference"
+      ],
+      "title": "HySafe SBEPV5 D27 external plume-shape validation"
+    },
+    {
+      "acceptance_contract": [
+        {
+          "comparator": "==",
+          "description": "Fire calibration dataset ingestion must pass.",
+          "metric_id": "fire_calibration_ingestion_ready",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "fire_calibration_dataset_ingestion_report",
+          "threshold": "PASS-H2-FIRE-CALIBRATION-DATASET-INGESTION",
+          "units": "status"
+        },
+        {
+          "comparator": ">=",
+          "description": "At least one radiation calibration metric must be accepted.",
+          "metric_id": "fire_radiation_metric_count",
+          "required_for_production_credit": true,
+          "source_field": "radiation_metrics_summary.row_count",
+          "source_report": "fire_calibration_dataset_ingestion_report",
+          "threshold": 1,
+          "units": "metrics"
+        },
+        {
+          "comparator": ">=",
+          "description": "At least one overpressure calibration metric must be accepted.",
+          "metric_id": "fire_overpressure_metric_count",
+          "required_for_production_credit": true,
+          "source_field": "overpressure_metrics_summary.row_count",
+          "source_report": "fire_calibration_dataset_ingestion_report",
+          "threshold": 1,
+          "units": "metrics"
+        },
+        {
+          "comparator": "==",
+          "description": "The generated calibration dataset JSON must pass.",
+          "metric_id": "fire_calibration_dataset_ready",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "fire_calibration_dataset_report",
+          "threshold": "PASS-H2-FIRE-CALIBRATION-DATASET",
+          "units": "status"
+        },
+        {
+          "comparator": "contains_all",
+          "description": "The calibration dataset must include both radiation and overpressure families.",
+          "metric_id": "fire_calibration_metric_families",
+          "required_for_production_credit": true,
+          "source_field": "dataset.metrics.family",
+          "source_report": "fire_calibration_dataset_report",
+          "threshold": [
+            "radiation",
+            "overpressure"
+          ],
+          "units": "families"
+        },
+        {
+          "comparator": "==",
+          "description": "The consequence report must be upgraded from screening to calibrated agreement.",
+          "metric_id": "fire_consequence_calibrated_status",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "fire_consequence_metrics_report",
+          "threshold": "PASS-CALIBRATED-CONSEQUENCE-AGREEMENT",
+          "units": "status"
+        },
+        {
+          "comparator": "==",
+          "description": "Radiation model calibration must pass accepted metrics.",
+          "metric_id": "fire_radiation_model_calibrated",
+          "required_for_production_credit": true,
+          "source_field": "radiation_model_calibrated",
+          "source_report": "fire_consequence_metrics_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "Overpressure model calibration must pass accepted metrics.",
+          "metric_id": "fire_overpressure_model_calibrated",
+          "required_for_production_credit": true,
+          "source_field": "overpressure_model_calibrated",
+          "source_report": "fire_consequence_metrics_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "The calibrated fire consequence blocker must be cleared.",
+          "metric_id": "fire_consequence_blocker_cleared",
+          "required_for_production_credit": true,
+          "source_field": "clears_calibrated_fire_consequence_blocker",
+          "source_report": "fire_consequence_metrics_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "The guarded external-evidence case runner must record a successful execution ledger.",
+          "metric_id": "calibrated_fire_consequence_validation_runner_ledger_pass",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "units": "status"
+        },
+        {
+          "comparator": "contains_any",
+          "description": "The runner ledger must include executed command records for this campaign.",
+          "metric_id": "calibrated_fire_consequence_validation_runner_command_recorded",
+          "required_for_production_credit": true,
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": [
+            "calibrated_fire_consequence_validation"
+          ],
+          "units": "campaign_ids"
+        }
+      ],
+      "acceptance_metrics": [
+        "fire calibration package PASS and clears fire consequence blocker",
+        "radiation metrics calibrated against accepted source data",
+        "overpressure metrics calibrated against accepted source data",
+        "screening-only fire consequence status replaced by calibrated evidence tier"
+      ],
+      "blocking_gaps": [
+        "fire_consequence_calibration:missing_or_invalid=4"
+      ],
+      "campaign_id": "calibrated_fire_consequence_validation",
+      "commands_after_external_artifacts_pass": [
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_ingestion_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_package_report.py",
+        "python3 tools/write_engineering_h2_fire_calibration_dataset_report.py",
+        "python3 tools/write_engineering_h2_fire_consequence_metrics_report.py --calibration-dataset-json <generated_fire_calibration_dataset_json>",
+        "bash tools/rebuild_engineering_h2_evidence_chain.sh"
+      ],
+      "does_not_clear_production_blockers": true,
+      "expected_evidence_outputs": [
+        "fire_calibration_dataset_ingestion_report",
+        "fire_calibration_package_report",
+        "fire_calibration_dataset_report",
+        "fire_consequence_metrics_report"
+      ],
+      "ready_to_execute_after_controlled_copy": false,
+      "required_domains": [
+        "fire_consequence_calibration"
+      ],
+      "title": "Calibrated fire radiation and overpressure consequence validation"
+    },
+    {
+      "acceptance_contract": [
+        {
+          "comparator": "==",
+          "description": "All 14 external artifact rows must pass the strict drop validator.",
+          "metric_id": "external_artifact_drop_ready",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "h2_external_artifact_drop_validator_report",
+          "threshold": "PASS-H2-EXTERNAL-ARTIFACT-DROP",
+          "units": "status"
+        },
+        {
+          "comparator": "==",
+          "description": "The drop validator must accept every expected external artifact row.",
+          "metric_id": "external_artifact_drop_valid_count",
+          "required_for_production_credit": true,
+          "source_field": "valid_artifact_count",
+          "source_report": "h2_external_artifact_drop_validator_report",
+          "threshold": 14,
+          "units": "artifacts"
+        },
+        {
+          "comparator": "==",
+          "description": "Validated external evidence must be copied with explicit operator confirmation.",
+          "metric_id": "controlled_copy_applied",
+          "required_for_production_credit": true,
+          "source_field": "controlled_copy_applied",
+          "source_report": "h2_external_artifact_controlled_copy_report",
+          "threshold": true,
+          "units": "boolean"
+        },
+        {
+          "comparator": "==",
+          "description": "All external artifact copy actions must be ready.",
+          "metric_id": "controlled_copy_ready_count",
+          "required_for_production_credit": true,
+          "source_field": "ready_copy_action_count",
+          "source_report": "h2_external_artifact_controlled_copy_report",
+          "threshold": 14,
+          "units": "actions"
+        },
+        {
+          "comparator": "==",
+          "description": "No production blocker may remain before scorecard clearance.",
+          "metric_id": "blocker_clearance_zero_remaining",
+          "required_for_production_credit": true,
+          "source_field": "remaining_blocker_count",
+          "source_report": "h2_blocker_clearance_preflight_report",
+          "threshold": 0,
+          "units": "blockers"
+        },
+        {
+          "comparator": "==",
+          "description": "The engineering scorecard must be production-ready after real-data rebuild.",
+          "metric_id": "scorecard_production_ready",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "engineering_production_scorecard",
+          "threshold": "PRODUCTION_READY",
+          "units": "status"
+        },
+        {
+          "comparator": "==",
+          "description": "The top-level production evidence verifier must pass.",
+          "metric_id": "production_verifier_pass",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "production_evidence_verification_report",
+          "threshold": "PASS",
+          "units": "status"
+        },
+        {
+          "comparator": "==",
+          "description": "The smoke-test suite must still pass during final verification.",
+          "metric_id": "production_verifier_ctest_count",
+          "required_for_production_credit": true,
+          "source_field": "summary.ctest_tests",
+          "source_report": "production_evidence_verification_report",
+          "threshold": 22,
+          "units": "tests"
+        },
+        {
+          "comparator": "==",
+          "description": "The guarded external-evidence case runner must record a successful execution ledger.",
+          "metric_id": "integrated_engineering_production_replay_runner_ledger_pass",
+          "required_for_production_credit": true,
+          "source_field": "status",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": "PASS-H2-CASE-VALIDATION-RUNNER-LEDGER",
+          "units": "status"
+        },
+        {
+          "comparator": "contains_any",
+          "description": "The runner ledger must include executed command records for this campaign.",
+          "metric_id": "integrated_engineering_production_replay_runner_command_recorded",
+          "required_for_production_credit": true,
+          "source_field": "command_results.campaign_id",
+          "source_report": "case_validation_runner_ledger",
+          "threshold": [
+            "integrated_engineering_production_replay"
+          ],
+          "units": "campaign_ids"
+        }
+      ],
+      "acceptance_metrics": [
+        "external artifact drop PASS 14/14",
+        "controlled copy PASS and applied",
+        "blocker clearance preflight PASS with zero remaining blockers",
+        "engineering production scorecard PRODUCTION_READY",
+        "top-level production evidence verifier PASS"
+      ],
+      "blocking_gaps": [
+        "real_cad_cleanup:missing_or_invalid=6",
+        "external_plume_shape_reference:missing_or_invalid=4",
+        "fire_consequence_calibration:missing_or_invalid=4"
+      ],
+      "campaign_id": "integrated_engineering_production_replay",
+      "commands_after_external_artifacts_pass": [
+        "python3 tools/write_engineering_h2_external_artifact_drop_validator.py",
+        "python3 tools/write_engineering_h2_external_artifact_controlled_copy_report.py --apply --confirm-controlled-copy H2_EXTERNAL_ARTIFACTS_READY",
+        "bash tools/rebuild_engineering_h2_evidence_chain.sh",
+        "bash tools/verify_engineering_h2_production_evidence.sh"
+      ],
+      "does_not_clear_production_blockers": true,
+      "expected_evidence_outputs": [
+        "h2_external_artifact_drop_validator_report",
+        "h2_external_artifact_controlled_copy_report",
+        "h2_blocker_clearance_preflight_report",
+        "engineering_production_scorecard",
+        "production_evidence_verification_report"
+      ],
+      "ready_to_execute_after_controlled_copy": false,
+      "required_domains": [
+        "real_cad_cleanup",
+        "external_plume_shape_reference",
+        "fire_consequence_calibration"
+      ],
+      "title": "Integrated production replay after all real external evidence is accepted"
+    }
+  ],
+  "does_not_clear_production_blockers": true,
+  "domain_readiness": {
+    "external_plume_shape_reference": {
+      "all_artifacts_valid": false,
+      "artifact_row_count": 4,
+      "missing_or_invalid_artifact_row_count": 4,
+      "valid_artifact_row_count": 0
+    },
+    "fire_consequence_calibration": {
+      "all_artifacts_valid": false,
+      "artifact_row_count": 4,
+      "missing_or_invalid_artifact_row_count": 4,
+      "valid_artifact_row_count": 0
+    },
+    "real_cad_cleanup": {
+      "all_artifacts_valid": false,
+      "artifact_row_count": 6,
+      "missing_or_invalid_artifact_row_count": 6,
+      "valid_artifact_row_count": 0
+    }
+  },
+  "evidence_files": [
+    {
+      "label": "engineering_h2_external_evidence_acceptance_worksheet_report",
+      "path": "docs/codex_audit/evidence/engineering_h2_external_evidence_acceptance_worksheet_20260724/h2_external_evidence_acceptance_worksheet.json",
+      "sha256": "1ffebc3a498904915bddbe60764a9eab0591ed30072f596b6133b59d8b03fde3",
+      "size_bytes": 51775
+    }
+  ],
+  "external_evidence_acceptance_worksheet_report": "docs/codex_audit/evidence/engineering_h2_external_evidence_acceptance_worksheet_20260724/h2_external_evidence_acceptance_worksheet.json",
+  "generated_at_utc": "2026-08-20T10:07:10+00:00",
+  "limitations": [
+    "This plan converts accepted external evidence into explicit validation campaigns; it does not launch long CFD runs.",
+    "No validation campaign may clear production blockers until its commands run on accepted controlled evidence and the full verifier passes."
+  ],
+  "quality_gate_matrix": [
+    {
+      "evidence": "docs/codex_audit/evidence/engineering_h2_external_evidence_acceptance_worksheet_20260724/h2_external_evidence_acceptance_worksheet.json",
+      "gap": "",
+      "name": "acceptance_worksheet_attached",
+      "status": "PASS"
+    },
+    {
+      "evidence": "campaigns=4",
+      "gap": "",
+      "name": "campaign_plan_complete",
+      "status": "PASS"
+    },
+    {
+      "evidence": "case validation plan is planning evidence only",
+      "gap": "",
+      "name": "campaigns_do_not_clear_blockers",
+      "status": "PASS"
+    },
+    {
+      "evidence": "contract_metrics=44",
+      "gap": "",
+      "name": "campaign_acceptance_contracts_are_structured",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS-H2-EXTERNAL-EVIDENCE-CASE-VALIDATION-PLAN",
+  "summary": {
+    "acceptance_contract_metric_count": 44,
+    "case_validation_campaign_count": 4,
+    "domain_count": 3,
+    "integrated_replay_ready": false,
+    "ready_case_validation_campaign_count": 0,
+    "worksheet_missing_or_invalid_artifact_row_count": 14,
+    "worksheet_ready_for_external_evidence_acceptance": false,
+    "worksheet_row_count": 14,
+    "worksheet_valid_artifact_row_count": 0
+  },
+  "title": "Engineering H2 External Evidence Case Validation Plan"
+}

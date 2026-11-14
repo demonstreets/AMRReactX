@@ -1,0 +1,194 @@
+{
+  "cold_plume": {
+    "fuel_species_index": 2,
+    "max_step": 10,
+    "mechanism": "c3h8_mini",
+    "mechanism_species_count": 3,
+    "status": "PASS-C3H8-COLD-PLUME-CPU"
+  },
+  "cpu_fire": {
+    "final_y_co2_max": 1.9530896984e-08,
+    "final_y_h2o_max": 2.2060851141e-06,
+    "fuel_species_index": 31,
+    "max_step": 120,
+    "mechanism": "propane_fc",
+    "mechanism_species_count": 34,
+    "min_ir_c3h8": -85.391143994,
+    "peak_heat_release_abs": 402292142.56,
+    "peak_temperature": 2715.9098368,
+    "status": "PASS-C3H8-PROPANE-FC-FIRE-CPU"
+  },
+  "cuda_fire": {
+    "final_y_co2_max": 1.9437369203e-08,
+    "final_y_h2o_max": 2.2010314193e-06,
+    "fuel_species_index": 31,
+    "max_step": 120,
+    "mechanism": "propane_fc",
+    "mechanism_species_count": 34,
+    "min_ir_c3h8": -85.391448061,
+    "peak_heat_release_abs": 402293884.01,
+    "peak_temperature": 2715.9098433,
+    "status": "PASS-C3H8-PROPANE-FC-FIRE-CUDA"
+  },
+  "evidence": [
+    {
+      "label": "cold_cpu_run_log",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/cold_cpu/run.log",
+      "sha256": "03ec8160bbf08eeace2dffd714768adb8e7722ec00c1c64ef346ca2f6a459782",
+      "size_bytes": 10529
+    },
+    {
+      "label": "cold_cpu_input",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/cold_cpu/input.c3h8_cold_plume_10step",
+      "sha256": "8825ce2aac8e7b9912d4e9391a3646d3d0adcb778dd6dd94432ff1f827a38eef",
+      "size_bytes": 1219
+    },
+    {
+      "label": "cpu_fire_run_log",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cpu/run.log",
+      "sha256": "04ed976602577fb9b2a5d96f89161ad2f1034351ea6909047fab34744c49f9df",
+      "size_bytes": 116206
+    },
+    {
+      "label": "cpu_fire_input",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cpu/input.codex_c3h8_pipe_rack_delayed_ignition_cpu_120step",
+      "sha256": "821416aa6e05a6681586047480d2bfd8a9cb98ba9ffb310a31013c1b123bed05",
+      "size_bytes": 2098
+    },
+    {
+      "label": "cpu_fire_fextrema",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cpu/fextrema_selected.log",
+      "sha256": "54138c10d317c35533c2e3bb4634f046d0b6c4f8d05514e3c5b2eb19c09e0ed6",
+      "size_bytes": 3883
+    },
+    {
+      "label": "mpi_fire_run_log",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpi/run.log",
+      "sha256": "d6d4e0f3e3e914fca2fa8e0566df87b4663109425a279b4029e1bd5b455aa973",
+      "size_bytes": 116295
+    },
+    {
+      "label": "mpi_fire_input",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpi/input.codex_c3h8_pipe_rack_delayed_ignition_mpi_120step",
+      "sha256": "72e8fd9d44c3952309153e4dcfd9b84769e712d3c4a4bd1d2cb53aabc1e169ae",
+      "size_bytes": 2102
+    },
+    {
+      "label": "mpi_fire_fextrema",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpi/fextrema_selected.log",
+      "sha256": "d44f04d80ea5cf8ca8c71d46eac6d23c87bd9200c4894d5fe05a964c12b900ab",
+      "size_bytes": 3883
+    },
+    {
+      "label": "cuda_fire_run_log",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cuda/run.log",
+      "sha256": "922c4589842652680a14dcc8f1696c31f278a25b644cc52a014d2c2b52d36c72",
+      "size_bytes": 116612
+    },
+    {
+      "label": "cuda_fire_input",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cuda/input.codex_c3h8_pipe_rack_delayed_ignition_cuda_120step",
+      "sha256": "bfd2a7419dacbcf74405885e3f4bd7a566d260ba90790d5ff77614e5c18951dc",
+      "size_bytes": 2110
+    },
+    {
+      "label": "cuda_fire_fextrema",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cuda/fextrema_selected.log",
+      "sha256": "324476c78ec8a669cdcb77a1674076c3d513988927e5191cc1c197dc5b8ca4f1",
+      "size_bytes": 3883
+    },
+    {
+      "label": "mpicuda_fire_run_log",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpicuda/run.log",
+      "sha256": "86781ac2df11abfb0ca5a3f0513a59104dfbabb25988f8e3de310dd8576690c7",
+      "size_bytes": 117021
+    },
+    {
+      "label": "mpicuda_fire_input",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpicuda/input.codex_c3h8_pipe_rack_delayed_ignition_mpicuda_rankmapped_120step",
+      "sha256": "3337d5d15e4aea617d4fffafc028f9a7261f0f803e1f175e5445080d9bf16f20",
+      "size_bytes": 2115
+    },
+    {
+      "label": "mpicuda_fire_fextrema",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpicuda/fextrema_selected.log",
+      "sha256": "90d690925a598473d461239d3a349497a0c62e77304a5ebb6b5e37cf2689c278",
+      "size_bytes": 3883
+    },
+    {
+      "label": "mpicuda_rank_gpu_wrapper",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpicuda/rank_gpu_wrapper.sh",
+      "sha256": "4fe1a317eb3055d2be75a0b37994573abc533931c19284e8ae66dec760d92fd0",
+      "size_bytes": 225
+    },
+    {
+      "label": "propane_fc_cpu_clean_build",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cpu/propane_fc_cpu_clean_build.log",
+      "sha256": "608190e93bf965bfdcd080d6817e603f63475e6262f27536dfffd8c817fab569",
+      "size_bytes": 1110353
+    },
+    {
+      "label": "propane_fc_mpi_clean_build",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpi/propane_fc_mpi_clean_build.log",
+      "sha256": "e94e0fc4e63a7c8f44c1b25379c671907441a8e6b712f7c7732216015feedf68",
+      "size_bytes": 1151065
+    },
+    {
+      "label": "propane_fc_cuda_clean_build",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_cuda/propane_fc_cuda_clean_build.log",
+      "sha256": "f6d42fe81b043c35bdf46f2f30a3f84eab9bfb5009add0cd359376a66e992c88",
+      "size_bytes": 3894560
+    },
+    {
+      "label": "propane_fc_mpicuda_clean_build",
+      "path": "docs/codex_audit/evidence/engineering_c3h8_gas_phase_cpu_cuda_20260806/runtime_evidence/fire_mpicuda/propane_fc_mpicuda_clean_build.log",
+      "sha256": "3a3f5b3c14f53b95c42669da0127874159f4c449adeef5c4a4cfb13f80e9d4a8",
+      "size_bytes": 4318247
+    }
+  ],
+  "generated_at_utc": "2026-08-20T10:00:28+00:00",
+  "limitations": [
+    "This validates gas-phase C3H8 source injection and reduced pipe-rack ignition/fire probes only.",
+    "It does not validate LPG tank rupture, flashing, liquid-pool evaporation, droplet breakup, or cold dense-gas ground slumping.",
+    "External propane fire/plume comparison thresholds remain required before a production propane safety claim."
+  ],
+  "mpi_fire": {
+    "final_y_co2_max": 1.953099682e-08,
+    "final_y_h2o_max": 2.2060888099e-06,
+    "fuel_species_index": 31,
+    "max_step": 120,
+    "mechanism": "propane_fc",
+    "mechanism_species_count": 34,
+    "min_ir_c3h8": -85.391127976,
+    "peak_heat_release_abs": 402292058.05,
+    "peak_temperature": 2715.9098368,
+    "status": "PASS-C3H8-PROPANE-FC-FIRE-MPI"
+  },
+  "mpicuda_fire": {
+    "final_y_co2_max": 1.9440140101e-08,
+    "final_y_h2o_max": 2.2011021483e-06,
+    "fuel_species_index": 31,
+    "max_step": 120,
+    "mechanism": "propane_fc",
+    "mechanism_species_count": 34,
+    "min_ir_c3h8": -85.391058137,
+    "peak_heat_release_abs": 402290810.3,
+    "peak_temperature": 2715.9098434,
+    "status": "PASS-C3H8-PROPANE-FC-FIRE-MPICUDA"
+  },
+  "schema_version": 1,
+  "status": "PASS-ENGINEERING-C3H8-GAS-PHASE-CPU-CPU-MPI-SINGLE-CUDA-MPI-CUDA",
+  "summary": {
+    "c3h8_cold_plume_cpu_passed": true,
+    "c3h8_propane_fc_fire_cpu_mpi_passed": true,
+    "c3h8_propane_fc_fire_cpu_passed": true,
+    "c3h8_propane_fc_fire_cuda_passed": true,
+    "c3h8_propane_fc_fire_mpi_cuda_passed": true,
+    "c3h8_rank_mapped_two_gpu_mpi_cuda_passed": true,
+    "gas_phase_propane_initial_engineering_probe_ready": true,
+    "liquefied_propane_or_lpg_phase_change_ready": false,
+    "prevents_liquefied_gas_overclaim": true,
+    "propane_gas_phase_production_ready": false
+  },
+  "title": "Engineering C3H8 Gas-Phase CPU/MPI/CUDA Evidence"
+}

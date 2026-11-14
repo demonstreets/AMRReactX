@@ -1,0 +1,181 @@
+{
+  "case": {
+    "backend": "CPU-serial",
+    "build_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/build.log",
+    "buoyancy_accel": 9.81,
+    "buoyancy_terminal_speed": -1.0,
+    "case_name": "bubble_rise_buoyancy_mol_30000step_smooth_interface",
+    "cfl": 0.025,
+    "dimension": 2,
+    "do_mol": 1,
+    "final_plot": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run/plt30000",
+    "initial_plot": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run/plt00000",
+    "input_file": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run/input.codex_bubble_rise_mol_long",
+    "interface_width": 0.0125,
+    "max_step": 30000,
+    "p0": 1.0,
+    "positivity_rhoe_floor": 1e-08,
+    "positivity_temp_floor": 1e-08,
+    "role": "academic_twophase_bubble_rise_mol_long_window",
+    "run_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run.log",
+    "run_returncode": 0,
+    "solver": "PeleC",
+    "validation_log": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/validation.log",
+    "validation_returncode": 0
+  },
+  "evidence_files": [
+    {
+      "label": "case_summary",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/case_summary.json",
+      "sha256": "faa3da1e196957db0a0d184df706f0074a767d71218eb053d691cb232e99085f",
+      "size_bytes": 1550
+    },
+    {
+      "label": "input_file",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run/input.codex_bubble_rise_mol_long",
+      "sha256": "9df019819c3e98a474ae7a8004307da63aba92bb2904bdba272e337517835cc5",
+      "size_bytes": 917
+    },
+    {
+      "label": "build_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/build.log",
+      "sha256": "57bf3bb7a9c1658c541943f53563892896a502065aa0940ec6741f68148dcba3",
+      "size_bytes": 16929
+    },
+    {
+      "label": "run_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run.log",
+      "sha256": "3c0550adfed11ba19f4d4279b1aa1c24aa685d220c4e0db9447fdf901dccfda4",
+      "size_bytes": 507
+    },
+    {
+      "label": "validation_log",
+      "path": "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/validation.log",
+      "sha256": "fcaa65feb61d296979a0b5e84b21830a2af53887193a76f72a16ee6c8783afc0",
+      "size_bytes": 342
+    },
+    {
+      "label": "runner",
+      "path": "tools/codex_run_academic_twophase_bubble_rise_mol_long_window_validation.sh",
+      "sha256": "494b06f24f34cf5854f1173458fb4ed1436120c0dd1e286679757e8ba2ee1552",
+      "size_bytes": 5489
+    },
+    {
+      "label": "validator",
+      "path": "tools/validate_academic_twophase_bubble_rise.py",
+      "sha256": "85b7ffa62d71c62c236a1f841d2c26aa39b96d6f6a504c2336a98640166add96",
+      "size_bytes": 5610
+    },
+    {
+      "label": "report_writer",
+      "path": "tools/write_academic_twophase_bubble_rise_mol_long_window_validation_report.py",
+      "sha256": "9936717b48f6b753a02568b816a2df2d29bef3f30a957642e19edb333076e167",
+      "size_bytes": 15295
+    },
+    {
+      "label": "prob_H",
+      "path": "examples/academic/bubble_rise/prob.H",
+      "sha256": "696e5bead6f342f0082cf0c425e7d4ddd0f1c500922e15830164155508f1aca0",
+      "size_bytes": 12894
+    },
+    {
+      "label": "prob_cpp",
+      "path": "examples/academic/bubble_rise/prob.cpp",
+      "sha256": "e400cbbd6d9dce3ce930e6a78b61b0e7a90c42f0af896f8fd8d7cd26c8d1f4f5",
+      "size_bytes": 3954
+    },
+    {
+      "label": "prob_parm_H",
+      "path": "examples/academic/bubble_rise/prob_parm.H",
+      "sha256": "6c0c1fc3213544f1ee1d0f948a0571fc1ba3208db16632da5bb495e0e8e14ca4",
+      "size_bytes": 1067
+    }
+  ],
+  "generated_at_utc": "2026-07-30T01:41:29+00:00",
+  "limitations": [
+    "This evidence clears the maintained PeleC do_mol=1 long-window stability gate, but it is still an in-repository smooth-interface numerical gate rather than an external canonical bubble-rise benchmark.",
+    "The maintained 6000-step short-time gate, inviscid long-window gate, and formal historical NOT_READY probes remain separate evidence."
+  ],
+  "quality_gates": [
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run.log"
+      ],
+      "gap": "",
+      "name": "run_finalized_without_failure_tokens",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/validation.log"
+      ],
+      "gap": "",
+      "name": "positive_finite_state",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/validation.log"
+      ],
+      "gap": "",
+      "name": "bounded_vof_alpha",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/validation.log"
+      ],
+      "gap": "",
+      "name": "mass_and_advected_scalar_conservation",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/validation.log"
+      ],
+      "gap": "",
+      "name": "upward_light_phase_centroid_motion",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "docs/codex_audit/evidence/academic_twophase_bubble_rise_mol_long_window_validation_20260729/bubble_rise_buoyancy_mol_30000step_smooth_interface/run/input.codex_bubble_rise_mol_long"
+      ],
+      "gap": "",
+      "name": "scope_limited_to_mol_long_window",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "PeleC two-phase VOF bubble-rise long-window stability gate with problem-specific buoyancy source and PeleC do_mol=1 hydro path and a smooth phase-consistent initial interface; this proves extended positive, finite, conservative MOL-hydro source-coupled behavior but not canonical viscous bubble-rise validation.",
+  "status": "PASS-ACADEMIC-TWOPHASE-BUBBLE-RISE-MOL-LONG-WINDOW-VALIDATION",
+  "summary": {
+    "adv_mass_rel_drift": 8.31766543588e-15,
+    "alpha_max": 1.0,
+    "alpha_min": 0.0358158,
+    "blocking_reasons": [],
+    "buoyancy_accel": 9.81,
+    "centroid_rise": 2.07314992437e-07,
+    "cfl": 0.025,
+    "clears_mol_long_window_bubble_rise_stability": true,
+    "clears_qlt_03_bubble_rise_gap": false,
+    "clears_qlt_03_canonical_viscous_long_time_bubble_rise_gap": false,
+    "clears_qlt_03_short_time_bubble_response_gap": false,
+    "do_mol": 1,
+    "grid_nx": 32,
+    "grid_ny": 64,
+    "interface_width": 0.0125,
+    "light_y0": 0.100000110202,
+    "light_y1": 0.100000317517,
+    "mass_rel_drift": 8.55404198409e-15,
+    "max_step": 30000,
+    "p0": 1.0,
+    "rho_max": 1.0,
+    "rho_min": 0.13223424,
+    "time0": 0.0,
+    "time1": 0.000176521599278,
+    "ymom_absmax": 0.00156659021951,
+    "ymom_sum": 1.14914209789e-06
+  },
+  "title": "Academic Two-Phase Bubble-Rise MOL Long-Window Validation"
+}
